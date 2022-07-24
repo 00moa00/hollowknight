@@ -22,25 +22,19 @@
     <Filter Include="PreCompile">
       <UniqueIdentifier>{439c0504-814e-4f90-8507-3f4dacd0226c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\Com">
-      <UniqueIdentifier>{d376050c-9962-43e7-82bd-36fd5f2ad011}</UniqueIdentifier>
+    <Filter Include="Level\Levels">
+      <UniqueIdentifier>{ea4cb837-0eaf-4be6-a86c-eb638d05e597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Master">
+      <UniqueIdentifier>{3d44b222-4a41-4fe3-ac20-705f50ec38b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="LoginLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="Knight.h">
       <Filter>Actor\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="LoginUI.h">
-      <Filter>Actor\Title</Filter>
     </ClInclude>
     <ClInclude Include="Enums.h">
       <Filter>Global</Filter>
@@ -52,25 +46,31 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreTestComponent.h">
-      <Filter>Actor\Play\Com</Filter>
+    <ClInclude Include="HollowKnightLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel.h">
+      <Filter>Level\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="KingsPassLevel.h">
+      <Filter>Level\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterActor.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterMap.h">
+      <Filter>Actor\Master</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
-    <ClCompile Include="LoginLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Knight.cpp">
       <Filter>Actor\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="LoginUI.cpp">
-      <Filter>Actor\Title</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Play</Filter>
@@ -79,8 +79,23 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreTestComponent.cpp">
-      <Filter>Actor\Play\Com</Filter>
+    <ClCompile Include="HollowKnightLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroLevel.cpp">
+      <Filter>Level\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="KingsPassLevel.cpp">
+      <Filter>Level\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterActor.cpp">
+      <Filter>Actor\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterMap.cpp">
+      <Filter>Actor\Master</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

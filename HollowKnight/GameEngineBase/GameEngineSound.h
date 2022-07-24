@@ -4,7 +4,7 @@
 #include "GameEngineFile.h"
 #include <map>
 
-class GameEngineSoundPlayer;
+class GameEngineSoundHollowKnight;
 // 설명 :
 class GameEngineSound : public GameEngineNameObject
 {
@@ -29,7 +29,7 @@ private:
 	///////////////////////////////////////// 매니지먼트 사운드 기능
 public:
 	// 그냥 사운드 재생1회 절대로 멈추거나 이런건 못합니다.
-	static GameEngineSoundPlayer SoundPlayControl(const std::string& _Name, unsigned int LoopCount = 0);
+	static GameEngineSoundHollowKnight SoundPlayControl(const std::string& _Name, unsigned int LoopCount = 0);
 
 	static void SoundPlayOneShot(const std::string& _Name, int LoopCount = 0);
 	static void Update();
@@ -52,7 +52,7 @@ private:
 
 // 사운드 재생을 제어할수 있는 기능들을 넣을겁니다.
 class GameEngineSound;
-class GameEngineSoundPlayer 
+class GameEngineSoundHollowKnight 
 {
 	friend GameEngineSound;
 
@@ -61,16 +61,16 @@ public:
 	void PlaySpeed(float _Speed);
 	void Volume(float _Value);
 
-	GameEngineSoundPlayer(const GameEngineSoundPlayer& _Other);
+	GameEngineSoundHollowKnight(const GameEngineSoundHollowKnight& _Other);
 
 private:
 	GameEngineSound* Sound_;
 	FMOD::Channel* ControlHandle_;
 
 
-	GameEngineSoundPlayer(GameEngineSound* Sound, FMOD::Channel* ControlHandle);
+	GameEngineSoundHollowKnight(GameEngineSound* Sound, FMOD::Channel* ControlHandle);
 
 public:
-	GameEngineSoundPlayer();
-	~GameEngineSoundPlayer();
+	GameEngineSoundHollowKnight();
+	~GameEngineSoundHollowKnight();
 };

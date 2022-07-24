@@ -1,10 +1,24 @@
 #pragma once
-#include "Player.h"
+#include "Knight.h"
 #include "Monster.h"
 
 enum class OBJECTORDER
 {
-	Player = 10,
+	Background,
+	Background_Object,
+	Terrain,
+	Knight,
+	FrontObject,
+	Monster,
+};
+
+enum class RENDERORDER
+{
+	Background,
+	Background_Object,
+	Terrain,
+	Knight,
+	FrontObject,
 	Monster,
 };
 

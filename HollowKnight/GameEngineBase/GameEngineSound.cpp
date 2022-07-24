@@ -55,7 +55,7 @@ bool GameEngineSound::Load(const std::string& _Path)
 
 /// /////////////////////////////////////////////////////////////// 기능 매니지먼트
 
-GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string& _Name, unsigned int LoopCount)
+GameEngineSoundHollowKnight GameEngineSound::SoundPlayControl(const std::string& _Name, unsigned int LoopCount)
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
 
@@ -64,7 +64,7 @@ GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string& _Name
 	if (nullptr == FindSound)
 	{
 		MsgBoxAssertString("존재하지 않는 사운드를 재생하려고 했습니다.\n 이름 : " + UpperName);
-		return GameEngineSoundPlayer();
+		return GameEngineSoundHollowKnight();
 	}
 
 	FMOD::Channel* PlayControl = nullptr;
@@ -72,7 +72,7 @@ GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string& _Name
 	SoundSystem_->playSound(FindSound->Sound, nullptr, false, &PlayControl);
 	PlayControl->setLoopCount(LoopCount);
 
-	return GameEngineSoundPlayer(FindSound, PlayControl);
+	return GameEngineSoundHollowKnight(FindSound, PlayControl);
 }
 
 void GameEngineSound::SoundPlayOneShot(const std::string& _Name, int LoopCount /*= 1*/)
@@ -171,7 +171,7 @@ void GameEngineSound::AllResourcesDestroy()
 
 ////////////////////////////////////////////////////////// 사운드 플레이어
 
-void GameEngineSoundPlayer::Stop() 
+void GameEngineSoundHollowKnight::Stop() 
 {
 	if (nullptr == ControlHandle_)
 	{
@@ -181,7 +181,7 @@ void GameEngineSoundPlayer::Stop()
 	ControlHandle_->stop();
 }
 
-void GameEngineSoundPlayer::PlaySpeed(float _Speed)
+void GameEngineSoundHollowKnight::PlaySpeed(float _Speed)
 {
 	if (nullptr == ControlHandle_)
 	{
@@ -192,35 +192,35 @@ void GameEngineSoundPlayer::PlaySpeed(float _Speed)
 	ControlHandle_->setPitch(_Speed);
 }
 
-void GameEngineSoundPlayer::Volume(float _Value) 
+void GameEngineSoundHollowKnight::Volume(float _Value) 
 {
 	ControlHandle_->setVolume(_Value);
 }
 
 
 
-GameEngineSoundPlayer::GameEngineSoundPlayer() 
+GameEngineSoundHollowKnight::GameEngineSoundHollowKnight() 
 	: Sound_(nullptr)
 	, ControlHandle_(nullptr)
 {
 
 }
 
-GameEngineSoundPlayer::GameEngineSoundPlayer(const GameEngineSoundPlayer& _Other) 
+GameEngineSoundHollowKnight::GameEngineSoundHollowKnight(const GameEngineSoundHollowKnight& _Other) 
 	: Sound_(_Other.Sound_)
 	, ControlHandle_(_Other.ControlHandle_)
 {
 
 }
 
-GameEngineSoundPlayer::GameEngineSoundPlayer(GameEngineSound* _Sound, FMOD::Channel* _ControlHandle)
+GameEngineSoundHollowKnight::GameEngineSoundHollowKnight(GameEngineSound* _Sound, FMOD::Channel* _ControlHandle)
 	: Sound_(_Sound)
 	, ControlHandle_(_ControlHandle)
 {
 	
 }
 
-GameEngineSoundPlayer::~GameEngineSoundPlayer() 
+GameEngineSoundHollowKnight::~GameEngineSoundHollowKnight() 
 {
 
 }

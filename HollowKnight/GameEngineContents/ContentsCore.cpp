@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "ContentsCore.h"
-#include "GameEngineContents/LoginLevel.h"
-#include "GameEngineContents/PlayLevel.h"
+#include "GameEngineContents/TitleLevel.h"
+#include "GameEngineContents/KingsPassLevel.h"
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -22,7 +22,8 @@ void ContentsCore::Start()
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
-		Dir.Move("Login");
+		Dir.Move("Map");
+		Dir.Move("KingsPass_Background");
 
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 
@@ -31,14 +32,15 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Shaders[i].GetFullPath());
 		}
 	}
+
 
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
-
-		// std::vector<GameEngineDirectory> DirList = Dir.GetRecursiveAllDirectory();
+		Dir.Move("Map");
+		Dir.Move("KingsPass_Background_Object");
 
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 
@@ -48,11 +50,62 @@ void ContentsCore::Start()
 		}
 	}
 
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("KingsPass_FrontObject");
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("KingsPass_Terrain");
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Kinght");
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+
+
 	//Dir.Move("BlackSet");
 	//GameEngineFolderTexture::Load(Dir.GetFullPath());
 
 	// 이걸 해줘야 합니다.
-	// GameEngineTexture::Cut("Boss_Left.bmp", 5, 7);
+	GameEngineTexture::Cut("Knight_idle_still_020000-Sheet.png", 9, 1);
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
@@ -60,30 +113,20 @@ void ContentsCore::Start()
 		GameEngineInput::GetInst()->CreateKey("LevelChangeKey", 'P');
 	}
 
-	// 리소스를 로드하는데.
 
-	// RTTI 런 타임 타입 인포메이션
-	CreateLevel<LoginLevel>("Title");
-	CreateLevel<PlayLevel>("Play");
-	//CreateLevel<State0>("Title");
-	//CreateLevel<State1>("Title");
-	ChangeLevel("Play");
+	CreateLevel<TitleLevel>("TitleLevel");
+	CreateLevel<KingsPassLevel>("KingsPassLevel");
 
-	// 게임컨텐츠 정의
-	// 이 게임에는 타이틀화면
-	//            스테이지1
-	//            스테이지2
+	ChangeLevel("KingsPassLevel");
+
 }
 
 void ContentsCore::Update(float _DeltaTime)
 {
-	// 서버가 종료되었어.
-	// 무조건 경고 메세지창을 띄워줘야한다.
-	
 	
 }
 
 void ContentsCore::End()
 {
-	int a = 0;
+
 }

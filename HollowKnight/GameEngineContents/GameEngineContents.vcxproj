@@ -166,15 +166,31 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MasterActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="HollowKnightLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MasterMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="IntroLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Monster.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="Knight.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
+    <ClInclude Include="KingsPassLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -182,15 +198,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ScoreTestComponent.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="LoginLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="LoginUI.h">
+    <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -204,15 +212,31 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MasterActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="HollowKnightLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MasterMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="IntroLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Knight.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
+    <ClCompile Include="KingsPassLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -222,15 +246,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ScoreTestComponent.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="LoginLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="LoginUI.cpp">
+    <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
