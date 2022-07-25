@@ -28,6 +28,11 @@ GameEngineCamera::~GameEngineCamera()
 {
 }
 
+bool ZSort(GameEngineRenderer* _Left, GameEngineRenderer* _Right)
+{
+	return _Left->GetTransform().GetWorldPosition().z > _Right->GetTransform().GetWorldPosition().z;
+}
+
 void GameEngineCamera::Render(float _DeltaTime)
 {
 	// 순서적으로보면 레스터라이저 단계이지만 변경이 거의 없을거기 때문에.
