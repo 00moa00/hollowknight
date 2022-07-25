@@ -118,7 +118,7 @@ void ContentsCore::Start()
 	CreateLevel<KingsPassLevel>("KingsPassLevel");
 
 	ChangeLevel("KingsPassLevel");
-
+	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);
 }
 
 void ContentsCore::Update(float _DeltaTime)
