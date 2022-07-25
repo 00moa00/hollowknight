@@ -31,6 +31,8 @@ void MasterMap::CreateBackGround(std::string _FileName, float4 _MapSize, int _in
 			std::string fileName = _FileName;
 			fileName += std::to_string(fileIndex);
 			fileName += ".png";
+			GameEngineTextureRenderer* BackGroundRenderer_;
+
 			BackGroundRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 			BackGroundRenderer_->SetTexture(fileName);
 			BackGroundRenderer_->GetTransform().SetLocalScale({ _MapSize.x, _MapSize.y, _MapSize.z });

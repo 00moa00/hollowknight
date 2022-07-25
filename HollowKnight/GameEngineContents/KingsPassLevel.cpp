@@ -35,7 +35,9 @@ void KingsPassLevel::Start()
 	MasterMap_ = CreateActor<MasterMap>();
 	MasterMap_->CreateBackGround("King's-Pass_Background_", float4{1859,1774}, 6, 3);
 	MasterMap_->CreateBackGroundObject("King's-Pass_Background_Object_", float4{ 1859,1774 }, 6, 3);
+
 	Knight_ = CreateActor<Knight>();
+
 	MasterMap_->CreateTerrain("King's-Pass_Terrain_", float4{ 1859,1774 }, 6, 3);
 	MasterMap_->CreateFrontObject("King's-Pass_FrontObject_", float4{ 1859,1774 }, 6, 3);
 	
