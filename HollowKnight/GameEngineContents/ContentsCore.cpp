@@ -90,6 +90,23 @@ void ContentsCore::Start()
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("KingsPass_CollMap");
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
 		Dir.Move("Kinght");
 
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
@@ -99,6 +116,8 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Shaders[i].GetFullPath());
 		}
 	}
+
+
 
 
 	//Dir.Move("BlackSet");
