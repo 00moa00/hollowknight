@@ -27,7 +27,7 @@ private:
 	GameEngineTextureRenderer* FrontObjectRenderer_;
 	GameEngineTextureRenderer* TerrainRenderer_;
 	//GameEngineTextureRenderer* CollisionMap_;
-
+public:
 	std::vector<GameEngineTextureRenderer*> CollisionMap_;
 	
 
@@ -38,7 +38,7 @@ public:
 	void CreateTerrain(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
 	void CreateMapCollision(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
 
-	std::vector<GameEngineTextureRenderer*> GetCollisionMap()
+	std::vector<GameEngineTextureRenderer*> GetCollisionMap() 
 	{
 		return CollisionMap_;
 	}

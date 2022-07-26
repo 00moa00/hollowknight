@@ -31,12 +31,13 @@ void KingsPassLevel::Start()
 	CraateMasterMapActor();
 	GetMasterMap()->CreateBackGround("King's-Pass_Background_", float4{1859,1774}, 6, 3);
 	GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_", float4{ 1859,1774 }, 6, 3);
-
-	
-	CreateKnightActor();
-	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_", float4{ 1859,1774 }, 6, 3);
-	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_", float4{ 1859,1774 }, 6, 3);
 	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_", float4{ 1859,1774 }, 6, 3);
+
+	CreateKnightActor();
+	GetKnight()->InsertMapCollisionTexture(GetMasterMap()->GetCollisionMap());
+
+	//GetMasterMap()->CreateTerrain("King's-Pass_Terrain_", float4{ 1859,1774 }, 6, 3);
+	//GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_", float4{ 1859,1774 }, 6, 3);
 
 
 }

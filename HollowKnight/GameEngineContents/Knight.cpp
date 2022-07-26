@@ -19,7 +19,7 @@ Knight::Knight()
 	:
 	Speed_(200.0f),
 	MoveDirection_(float4::RIGHT),
-	MapCollisionColor_()
+	MapCollisionColorList_()
 {
 }
 
@@ -64,6 +64,8 @@ void Knight::Start()
 	GetTransform().SetLocalPosition({300, -1500});
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
 	
+
+
 }
 
 void Knight::Update(float _DeltaTime)
@@ -84,48 +86,46 @@ void Knight::Update(float _DeltaTime)
 	{
 		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed_ * _DeltaTime);
 		GetRenderer()->GetTransform().PixLocalPositiveX();
-		Move += float4::LEFT;
+		MoveDirection_ += float4::LEFT;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed_ * _DeltaTime);
 		GetRenderer()->GetTransform().PixLocalNegativeX();
-		Move += float4::RIGHT;
+		MoveDirection_ += float4::RIGHT;
 
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed_ * _DeltaTime);
-		//Move += = float4::UP;
+		MoveDirection_ +=  float4::UP;
 
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed_ * _DeltaTime);
-		//Move += float4::DOWN;
+		MoveDirection_ += float4::DOWN;
 	}
 
-	Move.Normalize();
+	MoveDirection_.Normalize();
+	NextPos = GetTransform().GetLocalPosition() + (MoveDirection_ * _DeltaTime * Speed_);
 
-	NextPos = GetTransform().GetLocalPosition() + (Move * _DeltaTime);
 
+	for (std::vector<GameEngineTextureRenderer*>::iterator Start = MapCollTexture_.begin(); Start != MapCollTexture_.end(); ++Start)
+	{
 
-	//std::vector<GameEngineTextureRenderer*> MapCollTexture = GetLevel<MasterMap>()->GetCollisionMap();
+		float4 Color = (*Start)->GetCurTexture()->GetPixel(NextPos.ix(), NextPos.iy());
 
-	//for (std::vector<GameEngineTextureRenderer*>::iterator Start = MapCollTexture.begin(); Start != MapCollTexture.end(); ++Start)
-	//{
-	//	MapCollisionColor_.push_back((*Start)->GetCurTexture()->GetPixel(GetTransform().GetWorldPosition().ix(), -GetTransform().GetWorldPosition().iy()));
+		//bgra
+		if (Color.CompareInt4D(float4(0.0f, 0.0f, 255.0f, 1.f)))
+		{
+			int a = 0;
+		}
 
-	//	if (false == MapCollisionColor_.begin()->CompareInt4D(float4::ZERO))
-	//	{
-	//		int a = 0;
-	//	}
-
-	//	return true;
-	//}
+	}
 
 
 
@@ -133,6 +133,19 @@ void Knight::Update(float _DeltaTime)
 
 	GetLevel()->GetMainCameraActorTransform().SetLocalPosition(GetTransform().GetLocalPosition());
 }
+
+void Knight::MapCollisionLoad()
+{
+
+
+}
+
+void Knight::InsertMapCollisionTexture(std::vector<GameEngineTextureRenderer*> _VectorList)
+{
+	MapCollTexture_.resize(_VectorList.size());
+	std::copy(_VectorList.begin(), _VectorList.end(), MapCollTexture_.begin());
+}
+
 
 //bool Knight::CheckMapCollision()
 //{

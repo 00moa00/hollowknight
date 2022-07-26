@@ -205,25 +205,25 @@ void GameEngineTexture::TextureCreate(const D3D11_TEXTURE2D_DESC& _Desc)
 
 float4 GameEngineTexture::GetPixel(int _x, int _y)
 {
-	if (0 > _x)
-	{
-		return float4::ZERO;
-	}
+	//if (0 > _x)
+	//{
+	//	return float4::ZERO;
+	//}
 
-	if (0 > _y)
-	{
-		return float4::ZERO;
-	}
+	//if (0 > _y)
+	//{
+	//	return float4::ZERO;
+	//}
 
-	if (Image.GetMetadata().width <= _x)
-	{
-		return float4::ZERO;
-	}
+	//if (Image.GetMetadata().width <= _x)
+	//{
+	//	return float4::ZERO;
+	//}
 
-	if (Image.GetMetadata().height <= _y)
-	{
-		return float4::ZERO;
-	}
+	//if (Image.GetMetadata().height <= _y)
+	//{
+	//	return float4::ZERO;
+	//}
 
 	// 여러분들이 생각하기에 색깔이 이상하다고 생각하면
 	DXGI_FORMAT Fmt = Image.GetMetadata().format;

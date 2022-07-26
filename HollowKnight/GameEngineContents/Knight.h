@@ -25,11 +25,17 @@ private:
 	float Speed_;
 	float4 MoveDirection_;
 
-	std::vector<float4> MapCollisionColor_;
+	std::vector<GameEngineTextureRenderer*> MapCollTexture_;
+	std::vector<float4> MapCollisionColorList_;
 
 private:
 	//float4 
 	//bool CheckMapCollision();
+
+	void MapCollisionLoad();
+
+public:
+	void InsertMapCollisionTexture(std::vector<GameEngineTextureRenderer*> _VectorList);
 
 }; 
 

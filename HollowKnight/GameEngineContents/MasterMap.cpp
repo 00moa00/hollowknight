@@ -108,7 +108,6 @@ void MasterMap::CreateTerrain(std::string _FileName, float4 _MapSize, int _index
 			TerrainRenderer_->SetTexture(fileName);
 			TerrainRenderer_->GetTransform().SetLocalScale({ _MapSize.x, _MapSize.y, _MapSize.z });
 			TerrainRenderer_->GetTransform().SetLocalPosition({ _MapSize.x * x , _MapSize.y * -y });
-			TerrainRenderer_->SetOrder(static_cast<int>(RENDERORDER::Terrain));
 
 			++fileIndex;
 			fileName = "";
@@ -119,7 +118,7 @@ void MasterMap::CreateTerrain(std::string _FileName, float4 _MapSize, int _index
 
 void MasterMap::CreateMapCollision(std::string _FileName, float4 _MapSize, int _indexX, int _indexY)
 {
-	CollisionMap_.reserve(_indexX* _indexY);
+	CollisionMap_.reserve(_indexX * _indexY);
 
 	int fileIndex = 1;
 
@@ -138,7 +137,9 @@ void MasterMap::CreateMapCollision(std::string _FileName, float4 _MapSize, int _
 			(*Iter)->SetTexture(fileName);
 			(*Iter)->GetTransform().SetLocalScale({ _MapSize.x, _MapSize.y, _MapSize.z });
 			(*Iter)->GetTransform().SetLocalPosition({ _MapSize.x * x , _MapSize.y * -y });
-			(*Iter)->SetOrder(static_cast<int>(RENDERORDER::Terrain));
+			(*Iter)->SetOrder(static_cast<int>(RENDERORDER::Monster));
+			(*Iter)->SetPivot(PIVOTMODE::LEFTTOP);
+
 
 			++fileIndex;
 			fileName = "";
