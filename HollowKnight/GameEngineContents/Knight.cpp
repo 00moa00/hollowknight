@@ -65,7 +65,7 @@ void Knight::Start()
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
 	
 
-
+	//SetCollisionMap(GetLevel<MasterMap>()->GetCollisionMap());
 }
 
 void Knight::Update(float _DeltaTime)
@@ -100,7 +100,7 @@ void Knight::Update(float _DeltaTime)
 	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed_ * _DeltaTime);
-		MoveDirection_ +=  float4::UP;
+		MoveDirection_ += float4::UP;
 
 	}
 
@@ -111,25 +111,14 @@ void Knight::Update(float _DeltaTime)
 	}
 
 	MoveDirection_.Normalize();
-	NextPos = GetTransform().GetLocalPosition() + (MoveDirection_ * _DeltaTime * Speed_);
+	//NextPos.x = + (MoveDirection_ * _DeltaTime * Speed_);
 
-
-	for (std::vector<GameEngineTextureRenderer*>::iterator Start = MapCollTexture_.begin(); Start != MapCollTexture_.end(); ++Start)
+	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix(), -GetTransform().GetLocalPosition().iy());
+	//bgra
+	if (false == Color.CompareInt4D(float4(0, 0, 1, 1)))
 	{
-
-		float4 Color = (*Start)->GetCurTexture()->GetPixel(NextPos.ix(), NextPos.iy());
-
-		//bgra
-		if (Color.CompareInt4D(float4(0.0f, 0.0f, 255.0f, 1.f)))
-		{
-			int a = 0;
-		}
-
+		int a = 0;
 	}
-
-
-
-
 
 	GetLevel()->GetMainCameraActorTransform().SetLocalPosition(GetTransform().GetLocalPosition());
 }
@@ -140,11 +129,6 @@ void Knight::MapCollisionLoad()
 
 }
 
-void Knight::InsertMapCollisionTexture(std::vector<GameEngineTextureRenderer*> _VectorList)
-{
-	MapCollTexture_.resize(_VectorList.size());
-	std::copy(_VectorList.begin(), _VectorList.end(), MapCollTexture_.begin());
-}
 
 
 //bool Knight::CheckMapCollision()

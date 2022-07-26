@@ -16,10 +16,12 @@ HollowKnightLevel::~HollowKnightLevel()
 void HollowKnightLevel::CraateMasterMapActor()
 {
 	MasterMap_ = CreateActor<MasterMap>();
+
 }
 
 void HollowKnightLevel::CreateKnightActor()
 {
 	Knight_ = CreateActor<Knight>();
+
 }
 

@@ -26,21 +26,26 @@ private:
 	GameEngineTextureRenderer* BackGroundObjectRenderer_;
 	GameEngineTextureRenderer* FrontObjectRenderer_;
 	GameEngineTextureRenderer* TerrainRenderer_;
-	//GameEngineTextureRenderer* CollisionMap_;
+	GameEngineTextureRenderer* CollisionMap_;
 public:
-	std::vector<GameEngineTextureRenderer*> CollisionMap_;
-	
+
 
 public:
-	void CreateBackGround(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
-	void CreateBackGroundObject(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
-	void CreateFrontObject(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
-	void CreateTerrain(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
-	void CreateMapCollision(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
+	void CreateBackGround(std::string _FileName);
+	void CreateBackGroundObject(std::string _FileName);
+	void CreateFrontObject(std::string _FileName);
+	void CreateTerrain(std::string _FileName);
+	void CreateMapCollision(std::string _FileName);
 
-	std::vector<GameEngineTextureRenderer*> GetCollisionMap() 
+	GameEngineTextureRenderer* GetCollisionMap() const
 	{
-		return CollisionMap_;
+
+		if (CollisionMap_ != nullptr)
+		{
+			return CollisionMap_;
+
+		}
 	}
+
 };
 

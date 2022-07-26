@@ -16,16 +16,30 @@ public:
 	MasterActor& operator=(MasterActor&& _Other) noexcept = delete;
 
 private:
-	GameEngineTextureRenderer* Renderer_;
+	GameEngineTextureRenderer* MainRenderer_;
+	GameEngineTextureRenderer* CollisionMap_;
 
-protected:
+public:
 	GameEngineTextureRenderer* GetRenderer() const
 	{
-		return Renderer_;
+		return MainRenderer_;
 	}
 
-	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
+	GameEngineTextureRenderer* GetCollisionMap() const
+	{
+		return CollisionMap_;
+	}
 
+
+	void SetCollisionMap(GameEngineTextureRenderer* _MapColl)
+	{
+		CollisionMap_ = _MapColl;
+	}
+
+
+protected:
+
+	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
 
 };
 

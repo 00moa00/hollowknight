@@ -23,7 +23,8 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Map");
-		Dir.Move("KingsPass_Background");
+		Dir.Move("KingsPass");
+		Dir.Move("level1");
 
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 
@@ -40,7 +41,8 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Map");
-		Dir.Move("KingsPass_Background_Object");
+		Dir.Move("KingsPass");
+		Dir.Move("level2");
 
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 
@@ -57,7 +59,8 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Map");
-		Dir.Move("KingsPass_FrontObject");
+		Dir.Move("KingsPass");
+		Dir.Move("level3");
 
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 
@@ -74,7 +77,8 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Map");
-		Dir.Move("KingsPass_Terrain");
+		Dir.Move("KingsPass");
+		Dir.Move("level4");
 
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 
@@ -85,21 +89,8 @@ void ContentsCore::Start()
 	}
 
 
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExitsChildDirectory("ConstantResources");
-		Dir.Move("ConstantResources");
-		Dir.Move("Texture");
-		Dir.Move("Map");
-		Dir.Move("KingsPass_CollMap");
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
-		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
-		}
-	}
 
 
 	{

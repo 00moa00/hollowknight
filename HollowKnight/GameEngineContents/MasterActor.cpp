@@ -3,7 +3,8 @@
 
 MasterActor::MasterActor() 
 	:
-	Renderer_(nullptr)
+	MainRenderer_(nullptr),
+	CollisionMap_(nullptr)
 {
 }
 
@@ -13,11 +14,11 @@ MasterActor::~MasterActor()
 
 void MasterActor::CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order)
 {
-	Renderer_ = CreateComponent<GameEngineTextureRenderer>();
-	Renderer_->GetTransform().SetLocalScale({ _LocalScale.x, _LocalScale.y, _LocalScale.z });
-	Renderer_->SetTexture(_FileName, _Index);
-	Renderer_->SetOrder(_Order);
-
+	MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	MainRenderer_->GetTransform().SetLocalScale({ _LocalScale.x, _LocalScale.y, _LocalScale.z });
+	MainRenderer_->SetTexture(_FileName, _Index);
+	MainRenderer_->SetOrder(_Order);
+	//MainRenderer_->SetPivot(PIVOTMODE");
 
 }
 
