@@ -1,7 +1,10 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
+
+#include <vector>
+
+// 설명 : 맵관리
 class GameEngineTextureRenderer;
-// 설명 :
 class MasterMap : public GameEngineActor
 {
 public:
@@ -23,12 +26,21 @@ private:
 	GameEngineTextureRenderer* BackGroundObjectRenderer_;
 	GameEngineTextureRenderer* FrontObjectRenderer_;
 	GameEngineTextureRenderer* TerrainRenderer_;
+	//GameEngineTextureRenderer* CollisionMap_;
+
+	std::vector<GameEngineTextureRenderer*> CollisionMap_;
+	
 
 public:
 	void CreateBackGround(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
 	void CreateBackGroundObject(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
 	void CreateFrontObject(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
 	void CreateTerrain(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
+	void CreateMapCollision(std::string _FileName, float4 _MapSize, int _indexX, int _indexY);
 
+	std::vector<GameEngineTextureRenderer*> GetCollisionMap()
+	{
+		return CollisionMap_;
+	}
 };
 

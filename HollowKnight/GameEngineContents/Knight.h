@@ -22,6 +22,14 @@ protected:
 	void End()  {}
 
 private:
-	float Speed;
-};
+	float Speed_;
+	float4 MoveDirection_;
+
+	std::vector<float4> MapCollisionColor_;
+
+private:
+	//float4 
+	//bool CheckMapCollision();
+
+}; 
 

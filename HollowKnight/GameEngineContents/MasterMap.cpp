@@ -117,3 +117,33 @@ void MasterMap::CreateTerrain(std::string _FileName, float4 _MapSize, int _index
 	}
 }
 
+void MasterMap::CreateMapCollision(std::string _FileName, float4 _MapSize, int _indexX, int _indexY)
+{
+	CollisionMap_.reserve(_indexX* _indexY);
+
+	int fileIndex = 1;
+
+	for (int y = 0; y < _indexY; ++y)
+	{
+		for (int x = 0; x < _indexX; ++x)
+		{
+			std::string fileName = _FileName;
+			fileName += std::to_string(fileIndex);
+			fileName += ".png";
+
+
+			CollisionMap_.push_back(CreateComponent<GameEngineTextureRenderer>());
+
+			std::vector<GameEngineTextureRenderer*>::iterator Iter = --CollisionMap_.end();
+			(*Iter)->SetTexture(fileName);
+			(*Iter)->GetTransform().SetLocalScale({ _MapSize.x, _MapSize.y, _MapSize.z });
+			(*Iter)->GetTransform().SetLocalPosition({ _MapSize.x * x , _MapSize.y * -y });
+			(*Iter)->SetOrder(static_cast<int>(RENDERORDER::Terrain));
+
+			++fileIndex;
+			fileName = "";
+
+		}
+	}
+}
+

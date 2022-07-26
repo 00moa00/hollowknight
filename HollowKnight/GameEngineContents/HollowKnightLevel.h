@@ -17,10 +17,24 @@ public:
 	HollowKnightLevel& operator=(HollowKnightLevel&& _Other) noexcept = delete;
 
 protected:
-	void Start() override;
 
 private:
+	MasterMap* MasterMap_;
+	Knight* Knight_;
 
+protected:
+	void CraateMasterMapActor();
+	void CreateKnightActor();
+
+	MasterMap* GetMasterMap() const
+	{
+		return MasterMap_;
+	}
+
+	Knight* GetKnight() const
+	{
+		return Knight_;
+	}
 
 };
 

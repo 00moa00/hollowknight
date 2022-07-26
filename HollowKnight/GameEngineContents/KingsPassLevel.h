@@ -23,7 +23,6 @@ protected:
 	void End() override;
 
 private:
-	MasterMap* MasterMap_;
-	Knight* Knight_;
+
 };
 
