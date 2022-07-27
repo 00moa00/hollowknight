@@ -58,10 +58,14 @@ void GameEngineCamera::Render(float _DeltaTime)
 
 	float4 WindowSize = GameEngineWindow::GetInst()->GetScale();
 
-
-	for (const std::pair<int, std::list<GameEngineRenderer*>>& Group : AllRenderer_)
+	// 랜더링 하기 전에
+	for (std::pair<const int, std::list<GameEngineRenderer*>>& Group : AllRenderer_)
 	{
 		float ScaleTime = GameEngineTime::GetInst()->GetDeltaTime(Group.first);
+
+		std::list<GameEngineRenderer*>& RenderList = Group.second;
+		RenderList.sort(ZSort);
+
 		for (GameEngineRenderer* const Renderer : Group.second)
 		{
 			if (false == Renderer->IsUpdate())
@@ -77,9 +81,14 @@ void GameEngineCamera::Render(float _DeltaTime)
 	}
 }
 
+void GameEngineCamera::SetCameraOrder(CAMERAORDER _Order)
+{
+	GetActor()->GetLevel()->PushCamera(this, _Order);
+}
+
 void GameEngineCamera::Start()
 {
-	GetActor()->GetLevel()->PushCamera(this);
+	// GetActor()->GetLevel()->PushCamera(this);
 }
 
 void GameEngineCamera::PushRenderer(GameEngineRenderer* _Renderer)

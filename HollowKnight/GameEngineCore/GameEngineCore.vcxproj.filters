@@ -138,6 +138,9 @@
     <ClInclude Include="GameEngineStatusWindow.h">
       <Filter>GUI\EngineGUIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineUIRenderer.h">
+      <Filter>Object\Component\Rendering\Content</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -270,6 +273,9 @@
     <ClCompile Include="GameEngineStatusWindow.cpp">
       <Filter>GUI\EngineGUIWindow</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineUIRenderer.cpp">
+      <Filter>Object\Component\Rendering\Content</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -342,7 +348,7 @@
       <UniqueIdentifier>{5d9990d3-68b8-450e-b5b8-9fbfd75b92da}</UniqueIdentifier>
     </Filter>
     <Filter Include="GUI\EngineGUIWindow">
-      <UniqueIdentifier>{74043648-77e6-400b-8fc5-8df8bf02cf1e}</UniqueIdentifier>
+      <UniqueIdentifier>{09480c4d-1007-4c4c-bffb-819bcf06a933}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

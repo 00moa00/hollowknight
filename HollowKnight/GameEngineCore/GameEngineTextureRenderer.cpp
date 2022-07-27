@@ -9,8 +9,7 @@ void FrameAnimation::Reset()
 	Info.CurFrame = Info.Start;
 }
 
-
-void FrameAnimation::Update(float _Delta)
+void FrameAnimation::Update(float _Delta) 
 {
 
 	Info.FrameTime += _Delta;
@@ -20,11 +19,13 @@ void FrameAnimation::Update(float _Delta)
 		Time(Info, _Delta);
 	}
 
-	if (false == bOnceStart
-		&& Info.CurFrame == Info.Start
-		&& nullptr != Start)
+	if (false == bOnceStart 
+		&& Info.CurFrame == Info.Start)
 	{
-		Start(Info);
+		if (nullptr != Start)
+		{
+			Start(Info);
+		}
 		bOnceStart = true;
 		bOnceEnd = false;
 	}
@@ -50,7 +51,7 @@ void FrameAnimation::Update(float _Delta)
 			{
 				Info.CurFrame = Info.Start;
 			}
-			else
+			else 
 			{
 				Info.CurFrame = Info.End;
 			}
@@ -79,20 +80,20 @@ void FrameAnimation::Update(float _Delta)
 	}
 }
 
-GameEngineTextureRenderer::GameEngineTextureRenderer()
+GameEngineTextureRenderer::GameEngineTextureRenderer() 
 	: CurAni(nullptr)
 	, CurTex(nullptr)
-	, PivotMode(PIVOTMODE::CENTER)
+	, PivotMode(PIVOTMODE::CUSTOM)
 {
 }
 
-GameEngineTextureRenderer::~GameEngineTextureRenderer()
+GameEngineTextureRenderer::~GameEngineTextureRenderer() 
 {
 }
 
-void GameEngineTextureRenderer::Start()
+void GameEngineTextureRenderer::SetTextureRendererSetting()
 {
-	GameEngineDefaultRenderer::Start();
+
 	SetPipeLine("TextureAtlas");
 
 	FrameData.PosX = 0.0f;
@@ -101,6 +102,15 @@ void GameEngineTextureRenderer::Start()
 	FrameData.SizeY = 1.0f;
 
 	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
+}
+
+void GameEngineTextureRenderer::Start() 
+{
+	GameEngineDefaultRenderer::Start();
+
+	PushRendererToMainCamera();
+
+	SetTextureRendererSetting();
 }
 
 void GameEngineTextureRenderer::SetSamplingModePoint()
@@ -138,7 +148,7 @@ void GameEngineTextureRenderer::SetPivot(PIVOTMODE _Mode)
 	PivotMode = _Mode;
 }
 
-void GameEngineTextureRenderer::SetPivotToVector(const float4& _Value)
+void GameEngineTextureRenderer::SetPivotToVector(const float4& _Value) 
 {
 	GetTransform().SetLocalPosition(_Value);
 }
@@ -244,7 +254,7 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(const std::string& _Animati
 		{
 			SetTexture(CurAni->Texture, CurAni->Info.CurFrame);
 		}
-		else if (nullptr != CurAni->FolderTexture)
+		else if(nullptr != CurAni->FolderTexture)
 		{
 			SetTexture(CurAni->FolderTexture->GetTexture(CurAni->Info.CurFrame));
 		}
@@ -253,7 +263,7 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(const std::string& _Animati
 
 void GameEngineTextureRenderer::FrameDataReset()
 {
-	FrameData = { 0.0f , 0.0f, 1.0f, 1.0f };
+	FrameData = { 0.0f , 0.0f, 1.0f, 1.0f};
 }
 
 

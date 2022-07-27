@@ -2,7 +2,6 @@
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
-
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineString.h>
 
@@ -13,13 +12,13 @@ class GameEngineGUIWindow : public GameEngineNameObject
 private:
 	bool IsOpen;
 
-	void Begin()
+	void Begin() 
 	{
 		std::string Name = GameEngineString::AnsiToUTF8Return(GetNameConstPtr());
 		ImGui::Begin(Name.c_str());
 	}
 
-	void End()
+	void End() 
 	{
 		ImGui::End();
 	}
@@ -29,11 +28,9 @@ public:
 	virtual void OnGUI(GameEngineLevel* _Level, float _DeltaTime) = 0;
 };
 
-
 // Ό³Έν :
 class GameEngineCore;
 class GameEngineLevel;
-
 class GameEngineGUI
 {
 	friend GameEngineCore;
@@ -70,3 +67,4 @@ private:
 
 	static void GUIDestroy();
 };
+

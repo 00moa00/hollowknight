@@ -21,23 +21,24 @@ void KingsPassLevel::Start()
 	//	GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
 	//}
 
-	{
+	/*{
 		GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
 		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
 		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
 
-	}
+	}*/
 
 	CraateMasterMapActor();
 
+	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_1.png");
 	GetMasterMap()->CreateBackGround("King's-Pass_Background_1.png");
 	GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
 
+	CreateKnightActor();
 
 	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_1.png");
 	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_1.png");
-	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_1.png");
-	CreateKnightActor();
+
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 

@@ -6,9 +6,10 @@ enum class PIVOTMODE
 	CENTER,
 	LEFTTOP,
 	BOT,
+	CUSTOM,
 };
 
-class FrameAnimation_DESC
+class FrameAnimation_DESC 
 {
 public:
 	std::string TextureName;
@@ -247,6 +248,8 @@ public:
 
 protected:
 	void Start() override;
+
+	void SetTextureRendererSetting();
 
 	void Update(float _Delta) override;
 

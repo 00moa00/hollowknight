@@ -60,7 +60,7 @@ public:
 
 		return CutData[_Index];
 	}
-
+	
 	void TextureLoad(const std::string& _Path);
 
 	float4 GetScale()
