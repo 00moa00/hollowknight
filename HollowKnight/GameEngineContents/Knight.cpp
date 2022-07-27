@@ -61,7 +61,7 @@ void Knight::Start()
 	}
 
 	GetTransform().SetLocalScale({1, 1, 1});
-	GetTransform().SetLocalPosition({300, -1500});
+	GetTransform().SetLocalPosition({500, -5000});
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
 	
 
@@ -120,7 +120,6 @@ void Knight::Update(float _DeltaTime)
 		int a = 0;
 	}
 
-	GetLevel()->GetMainCameraActorTransform().SetLocalPosition(GetTransform().GetLocalPosition());
 }
 
 void Knight::MapCollisionLoad()

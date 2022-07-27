@@ -14,7 +14,7 @@ KingsPassLevel::~KingsPassLevel()
 {
 }
 
-void KingsPassLevel::Start() 
+void KingsPassLevel::Start()
 {
 	//if (false == GameEngineInput::GetInst()->IsKey("FreeCameraOnOff"))
 	//{
@@ -41,6 +41,8 @@ void KingsPassLevel::Start()
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
+	SetMainMapSize({7099, 5323});
+
 
 }
 void KingsPassLevel::Update(float _DeltaTime) 
@@ -50,6 +52,9 @@ void KingsPassLevel::Update(float _DeltaTime)
 	//	// ;
 	//	GetMainCameraActor()->FreeCameraModeOnOff();
 	//}
+
+	CameraMoveWindowLimit();
 }
 
 void KingsPassLevel::End() {}
+

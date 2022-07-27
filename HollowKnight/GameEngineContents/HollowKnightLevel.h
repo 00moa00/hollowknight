@@ -22,9 +22,14 @@ private:
 	MasterMap* MasterMap_;
 	Knight* Knight_;
 
+	float4 MainCameraPosition_;
+	float4 MainMapSize_;
+
 protected:
 	void CraateMasterMapActor();
 	void CreateKnightActor();
+
+	void CameraMoveWindowLimit();
 
 	MasterMap* GetMasterMap() const
 	{
@@ -35,6 +40,8 @@ protected:
 	{
 		return Knight_;
 	}
+
+	void SetMainMapSize(float4 _MapSize);
 
 };
 
