@@ -19,7 +19,8 @@ Knight::Knight()
 	:
 	Speed_(200.0f),
 	MoveDirection_(float4::RIGHT),
-	MapCollisionColorList_()
+	MapCollisionColorList_(),
+	isMove_(true)
 {
 }
 
@@ -61,7 +62,7 @@ void Knight::Start()
 	}
 
 	GetTransform().SetLocalScale({1, 1, 1});
-	GetTransform().SetLocalPosition({500, -5000});
+	GetTransform().SetLocalPosition({500, -4500});
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
 	
 
@@ -84,14 +85,13 @@ void Knight::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
-		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed_ * _DeltaTime);
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 		MoveDirection_ += float4::LEFT;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+	if (true == GameEngineInput::GetInst()->IsPress("KnightRight") )
 	{
-		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed_ * _DeltaTime);
+		//GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed_ * _DeltaTime);
 		GetRenderer()->GetTransform().PixLocalNegativeX();
 		MoveDirection_ += float4::RIGHT;
 
@@ -99,26 +99,29 @@ void Knight::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
 	{
-		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed_ * _DeltaTime);
-		MoveDirection_ += float4::UP;
+		//GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed_ * _DeltaTime);
+		MoveDirection_ += -float4::UP;
 
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
+	if (true == GameEngineInput::GetInst()->IsPress("KnightDown") )
 	{
-		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed_ * _DeltaTime);
-		MoveDirection_ += float4::DOWN;
+		//GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed_ * _DeltaTime);
+		MoveDirection_ += -float4::DOWN;
 	}
 
 	MoveDirection_.Normalize();
-	//NextPos.x = + (MoveDirection_ * _DeltaTime * Speed_);
+	NextPos =(MoveDirection_ * _DeltaTime * Speed_);
 
-	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix(), -GetTransform().GetLocalPosition().iy());
+	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix()+ NextPos.x, -(GetTransform().GetLocalPosition().iy() + NextPos.y));
 	//bgra
-	if (false == Color.CompareInt4D(float4(0, 0, 1, 1)))
+	if (false == Color.CompareInt4D(float4(0, 0, 1, 1)) && true == GetisPlayerMove())
 	{
-		int a = 0;
+		GetTransform().SetWorldMove(MoveDirection_ * Speed_ * _DeltaTime);
+
 	}
+
+
 
 }
 
@@ -126,6 +129,33 @@ void Knight::MapCollisionLoad()
 {
 
 
+}
+
+bool Knight::GetisPlayerMove()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+	{
+		return true;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+	{
+		return true;
+
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
+	{
+		return true;
+
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
+	{
+		return true;
+	}
+
+	return false;
 }
 
 
