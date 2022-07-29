@@ -29,8 +29,8 @@ void TitleLevel::Start()
 
 	LogoRenderer_ = CreateActor<RendererActor>();
 	LogoRenderer_->CreateRenderer("TitleLogo.png");
-	//LogoRenderer_->GetTransform().SetLocalPosition({0, -100 });
-	//LogoRenderer_->GetRenderer()->GetTransform().SetLocalPosition({GameEngineWindow::GetInst()->GetScale().hx(), -100});
+	//LogoRenderer_->GetTransform().SetLocalPosition({0, 0 });
+	LogoRenderer_->GetRenderer()->GetTransform().SetLocalPosition({0, 200, 0});
 
 }
 
