@@ -1,8 +1,9 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
-
+#include "HollowKnightLevel.h"
+#include "RendererActor.h"
 // Ό³Έν :
-class TitleLevel : public GameEngineLevel
+class TitleLevel : public HollowKnightLevel
 {
 public:
 	// constrcuter destructer
@@ -21,6 +22,7 @@ protected:
 	void End() override;
 
 private:
-
+	RendererActor* Background_;
+	RendererActor* LogoRenderer_;
 };
 

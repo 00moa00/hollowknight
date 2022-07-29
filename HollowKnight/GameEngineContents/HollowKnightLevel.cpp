@@ -2,9 +2,11 @@
 #include "HollowKnightLevel.h"
 #include "GlobalContentsValue.h"
 #include <GameEngineCore/GameEngineCameraActor.h>
+
 HollowKnightLevel::HollowKnightLevel() 
 	:
 	MasterMap_(nullptr),
+	BackgroundRenderer_(nullptr),
 	Knight_(nullptr),
 	MainCameraPosition_()
 {
@@ -25,6 +27,7 @@ void HollowKnightLevel::CreateKnightActor()
 	Knight_ = CreateActor<Knight>();
 
 }
+
 
 void HollowKnightLevel::CameraMoveWindowLimit()
 {

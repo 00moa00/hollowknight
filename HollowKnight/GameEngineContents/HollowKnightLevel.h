@@ -3,6 +3,7 @@
 #include "Knight.h"
 #include "MasterMap.h"
 // Ό³Έν :
+class GameEngineTextureRenderer;
 class HollowKnightLevel : public GameEngineLevel
 {
 public:
@@ -25,9 +26,12 @@ private:
 	float4 MainCameraPosition_;
 	float4 MainMapSize_;
 
+	GameEngineRenderer* BackgroundRenderer_;
+
 protected:
 	void CraateMasterMapActor();
 	void CreateKnightActor();
+	void CreateBackgroundRenderer(std::string _FileName);
 
 	void CameraMoveWindowLimit();
 

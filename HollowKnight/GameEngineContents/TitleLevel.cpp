@@ -6,6 +6,9 @@
 #include <GameEngineBase/GameEngineInput.h>
 
 TitleLevel::TitleLevel()
+	:
+	Background_(nullptr),
+	LogoRenderer_(nullptr)
 {
 }
 
@@ -21,11 +24,13 @@ void TitleLevel::Start()
 		GameEngineInput::GetInst()->CreateKey("LevelChange", 'P');
 	}
 
-	// 카메라를 먼저 만들어서 세계를 볼 준비를 하고
-	GameEngineCameraActor* CameraActor = CreateActor<GameEngineCameraActor>();
-	CameraActor->GetTransform().SetLocalPosition({0.0f, 0.0f, -100.0f});
-	CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+	Background_ = CreateActor<RendererActor>();
+	Background_->CreateRenderer("Title.png");
 
+	LogoRenderer_ = CreateActor<RendererActor>();
+	LogoRenderer_->CreateRenderer("TitleLogo.png");
+	//LogoRenderer_->GetTransform().SetLocalPosition({0, -100 });
+	//LogoRenderer_->GetRenderer()->GetTransform().SetLocalPosition({GameEngineWindow::GetInst()->GetScale().hx(), -100});
 
 }
 
@@ -33,7 +38,7 @@ void TitleLevel::Update(float _DeltaTime)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
 	{
-		GEngine::ChangeLevel("Play");
+		GEngine::ChangeLevel("KingsPassLevel");
 	}
 }
 

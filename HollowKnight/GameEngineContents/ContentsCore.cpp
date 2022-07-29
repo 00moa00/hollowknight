@@ -22,6 +22,22 @@ void ContentsCore::Start()
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
+		Dir.Move("Title");
+
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
 		Dir.Move("Map");
 		Dir.Move("KingsPass");
 		Dir.Move("level1");
@@ -127,7 +143,7 @@ void ContentsCore::Start()
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<KingsPassLevel>("KingsPassLevel");
 
-	ChangeLevel("KingsPassLevel");
+	ChangeLevel("TitleLevel");
 	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);
 }
 
