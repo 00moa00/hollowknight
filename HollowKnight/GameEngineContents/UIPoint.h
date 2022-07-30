@@ -26,8 +26,6 @@ private:
 
 	float4 PointScale_;
 
-
-
 public:
 	void SetPointChangeUpdateAnimation();
 	void SetPointChangeIdleAnimation();

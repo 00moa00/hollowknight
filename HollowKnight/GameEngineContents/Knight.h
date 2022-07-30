@@ -22,22 +22,36 @@ protected:
 	void End()  {}
 
 private:
-	float Speed_;
-	float4 MoveDirection_;
-	bool isMove_;
 
-	std::vector<GameEngineTextureRenderer*> MapCollTexture_;
-	std::vector<float4> MapCollisionColorList_;
+	GameEngineStateManager KnightManager_;
+	float GravityY;
+	float4 JumpPower_;
+	float4 Jumpping_;
+	float4 FallDownDirection_;
+	float4 CollisionSize_;
 
 private:
 	//float4 
 	//bool CheckMapCollision();
 
-	void MapCollisionLoad();
+	bool GetPixelRed(float4 _NextDir);
+
 	bool GetisPlayerMove();
 
-public:
-	void InsertMapCollisionTexture(std::vector<GameEngineTextureRenderer*> _VectorList);
+	float4 GetKnightNextPos(float4 _DeltaTime);
 
+	void KnightStillStart( const StateInfo& _Info);
+	void KnightStillUpdate(float _DeltaTime, const StateInfo& _Info);
+
+	void KnightWalkStart(const StateInfo& _Info);
+	void KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info);
+
+	void KnightJumpStart(const StateInfo& _Info);
+	void KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightJumpEnd(const StateInfo& _Info);
+
+	void KnightFallStart(const StateInfo& _Info);
+	void KnightFallUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightFallEnd(const StateInfo& _Info);
 }; 
 

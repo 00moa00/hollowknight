@@ -47,6 +47,9 @@ void ContentsCore::Start()
 		{
 			GameEngineTexture::Load(Shaders[i].GetFullPath());
 		}
+
+		GameEngineTexture::Cut("main_menu_pointer_anim0000-Sheet.png", 11, 1);
+
 	}
 
 	{
@@ -134,6 +137,16 @@ void ContentsCore::Start()
 		{
 			GameEngineTexture::Load(Shaders[i].GetFullPath());
 		}
+
+		GameEngineTexture::Cut("Knight_idle_still_020000-Sheet.png", 9, 1);
+		GameEngineTexture::Cut("Knight_shadow_dash0000-Sheet.png", 12, 1);
+		GameEngineTexture::Cut("Knight_jump_01-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Knight_fall_01-Sheet.png", 6, 1);
+
+
+
+
+
 	}
 
 
@@ -142,10 +155,7 @@ void ContentsCore::Start()
 	//Dir.Move("BlackSet");
 	//GameEngineFolderTexture::Load(Dir.GetFullPath());
 
-	// 이걸 해줘야 합니다.
-	GameEngineTexture::Cut("Knight_idle_still_020000-Sheet.png", 9, 1);
-	GameEngineTexture::Cut("main_menu_pointer_anim0000-Sheet.png", 11, 1);
-	GameEngineTexture::Cut("Knight_shadow_dash0000-Sheet.png", 12, 1);
+	// Knight
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
