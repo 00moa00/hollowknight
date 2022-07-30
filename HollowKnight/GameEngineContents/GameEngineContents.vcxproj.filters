@@ -67,6 +67,9 @@
     <ClInclude Include="RendererActor.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="MasterTitleUI.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -102,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="RendererActor.cpp">
       <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterTitleUI.cpp">
+      <Filter>Actor\Master</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

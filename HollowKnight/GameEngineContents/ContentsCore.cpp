@@ -38,6 +38,22 @@ void ContentsCore::Start()
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
+		Dir.Move("UI");
+
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
 		Dir.Move("Map");
 		Dir.Move("KingsPass");
 		Dir.Move("level1");
@@ -105,10 +121,6 @@ void ContentsCore::Start()
 	}
 
 
-
-
-
-
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -132,6 +144,8 @@ void ContentsCore::Start()
 
 	// 이걸 해줘야 합니다.
 	GameEngineTexture::Cut("Knight_idle_still_020000-Sheet.png", 9, 1);
+	GameEngineTexture::Cut("main_menu_pointer_anim0000-Sheet.png", 11, 1);
+	GameEngineTexture::Cut("Knight_shadow_dash0000-Sheet.png", 12, 1);
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))

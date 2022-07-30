@@ -63,7 +63,7 @@ void Knight::Start()
 
 	GetTransform().SetLocalScale({1, 1, 1});
 	GetTransform().SetLocalPosition({500, -4500});
-	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
+	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
 	
 
 	//SetCollisionMap(GetLevel<MasterMap>()->GetCollisionMap());

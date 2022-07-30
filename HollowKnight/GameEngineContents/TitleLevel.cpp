@@ -32,6 +32,11 @@ void TitleLevel::Start()
 	//LogoRenderer_->GetTransform().SetLocalPosition({0, 0 });
 	LogoRenderer_->GetRenderer()->GetTransform().SetLocalPosition({0, 200, 0});
 
+
+	MasterTitleUI_ = CreateActor<MasterTitleUI>();
+	//MasterTitleUI_->GetTransform().SetLocalPosition({ 0, 200, 0 });
+
+	
 }
 
 void TitleLevel::Update(float _DeltaTime)
