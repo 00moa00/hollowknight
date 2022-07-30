@@ -9,7 +9,7 @@ void FrameAnimation::Reset()
 	Info.CurFrame = Info.Start;
 }
 
-void FrameAnimation::Update(float _Delta) 
+void FrameAnimation::Update(float _Delta)
 {
 
 	Info.FrameTime += _Delta;
@@ -19,7 +19,7 @@ void FrameAnimation::Update(float _Delta)
 		Time(Info, _Delta);
 	}
 
-	if (false == bOnceStart 
+	if (false == bOnceStart
 		&& Info.CurFrame == Info.Start)
 	{
 		if (nullptr != Start)
@@ -51,7 +51,7 @@ void FrameAnimation::Update(float _Delta)
 			{
 				Info.CurFrame = Info.Start;
 			}
-			else 
+			else
 			{
 				Info.CurFrame = Info.End;
 			}
@@ -80,14 +80,14 @@ void FrameAnimation::Update(float _Delta)
 	}
 }
 
-GameEngineTextureRenderer::GameEngineTextureRenderer() 
+GameEngineTextureRenderer::GameEngineTextureRenderer()
 	: CurAni(nullptr)
 	, CurTex(nullptr)
 	, PivotMode(PIVOTMODE::CUSTOM)
 {
 }
 
-GameEngineTextureRenderer::~GameEngineTextureRenderer() 
+GameEngineTextureRenderer::~GameEngineTextureRenderer()
 {
 }
 
@@ -104,7 +104,7 @@ void GameEngineTextureRenderer::SetTextureRendererSetting()
 	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
 }
 
-void GameEngineTextureRenderer::Start() 
+void GameEngineTextureRenderer::Start()
 {
 	GameEngineDefaultRenderer::Start();
 
@@ -148,7 +148,7 @@ void GameEngineTextureRenderer::SetPivot(PIVOTMODE _Mode)
 	PivotMode = _Mode;
 }
 
-void GameEngineTextureRenderer::SetPivotToVector(const float4& _Value) 
+void GameEngineTextureRenderer::SetPivotToVector(const float4& _Value)
 {
 	GetTransform().SetLocalPosition(_Value);
 }
@@ -254,7 +254,7 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(const std::string& _Animati
 		{
 			SetTexture(CurAni->Texture, CurAni->Info.CurFrame);
 		}
-		else if(nullptr != CurAni->FolderTexture)
+		else if (nullptr != CurAni->FolderTexture)
 		{
 			SetTexture(CurAni->FolderTexture->GetTexture(CurAni->Info.CurFrame));
 		}
@@ -263,7 +263,7 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(const std::string& _Animati
 
 void GameEngineTextureRenderer::FrameDataReset()
 {
-	FrameData = { 0.0f , 0.0f, 1.0f, 1.0f};
+	FrameData = { 0.0f , 0.0f, 1.0f, 1.0f };
 }
 
 
@@ -290,5 +290,5 @@ void GameEngineTextureRenderer::CurAnimationReset()
 
 void GameEngineTextureRenderer::CurAnimationSetStartPivotFrame(int SetFrame)
 {
-	CurAni->Info.CurFrame += CurAni->Info.Start + SetFrame;
+	CurAni->Info.CurFrame = CurAni->Info.Start + SetFrame;
 }

@@ -53,7 +53,6 @@ void MasterTitleUI::Start()
 	LeftPointMapEditor_->SetTexture("main_menu_pointer_anim0009.png");
 	LeftPointMapEditor_->GetTransform().SetLocalScale(PointScale_);
 	LeftPointMapEditor_->GetTransform().SetLocalPosition({ 400, 0, 0 });
-
 	LeftPointMapEditor_->SetSamplingModeLiner();
 
 
