@@ -29,6 +29,7 @@ private:
 	float4 Jumpping_;
 	float4 FallDownDirection_;
 	float4 CollisionSize_;
+	float FallSpeed_;
 
 private:
 	//float4 
@@ -37,6 +38,9 @@ private:
 	bool GetPixelRed(float4 _NextDir);
 
 	bool GetisPlayerMove();
+
+	void KnightDirectionCheck();
+	void KnightisOnGroundCheck(float _DeltaTime);
 
 	float4 GetKnightNextPos(float4 _DeltaTime);
 

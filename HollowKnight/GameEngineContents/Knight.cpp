@@ -55,17 +55,17 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightUp", 'W');
 		GameEngineInput::GetInst()->CreateKey("KnightDown", 'S');
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
-
-
 	}
 
 	GetTransform().SetLocalScale({1, 1, 1});
 	GetTransform().SetLocalPosition({500, -4500});
 
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
+
 	GetRenderer()->CreateFrameAnimation("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
-	GetRenderer()->CreateFrameAnimation("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f));
-	GetRenderer()->CreateFrameAnimation("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f));
+	GetRenderer()->CreateFrameAnimation("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->CreateFrameAnimation("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->CreateFrameAnimation("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
 
@@ -82,23 +82,16 @@ void Knight::Start()
 
 	KnightManager_.ChangeState("STILL");
 
-	GravityY = 50.f;
+	GravityY = 320.f;
 	JumpPower_ = { 150, 0 };
 	FallDownDirection_ = { 0, -1, 0 };
 	CollisionSize_ = { 349/2, 186/2, 0 };
-	//SetCollisionMap(GetLevel<MasterMap>()->GetCollisionMap());
+	FallSpeed_ = 300.f;
 }
 
 void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
-
-	//CheckMapCollision();
-	//float4 Test1 = GetLevel()->GetMainCamera()->GetScreenPosition();
-	//float4 Test2 = GetLevel()->GetMainCamera()->GetMouseWorldPosition();
-
-
-
 
 }
 
@@ -143,46 +136,8 @@ bool Knight::GetisPlayerMove()
 	return false;
 }
 
-float4 Knight::GetKnightNextPos(float4 _DeltaTime)
+void Knight::KnightDirectionCheck()
 {
-	this->SetMoveDirectionNormalize();
-	return (GetMoveDirection() * _DeltaTime * GetSpeed());
-}
-
-void Knight::KnightStillStart(const StateInfo& _Info)
-{
-	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
-
-}
-
-void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	if (GetisPlayerMove() == true)
-	{
-		KnightManager_.ChangeState("WALK");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
-	{
-		KnightManager_.ChangeState("JUMP");
-	}
-
-	if (GetisOnGround() == false)
-	{
-		KnightManager_.ChangeState("FALL");
-	}
-
-}
-
-void Knight::KnightWalkStart(const StateInfo& _Info)
-{
-	//GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
-
-}
-
-void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
@@ -205,7 +160,10 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		this->AddMoveDirection(float4::UP);
 	}
+}
 
+void Knight::KnightisOnGroundCheck(float _DeltaTime)
+{
 	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
 	{
 		this->SetisGround(true);
@@ -217,65 +175,13 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		this->SetisGround(false);
 	}
 
-
-
-	{
-		if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
-		{
-			KnightManager_.ChangeState("JUMP");
-		}
-
-		if (GetisPlayerMove() == false)
-		{
-			KnightManager_.ChangeState("STILL");
-		}
-	}
 }
 
-
-void Knight::KnightJumpStart(const StateInfo& _Info)
+float4 Knight::GetKnightNextPos(float4 _DeltaTime)
 {
-	JumpPower_ = { 0, 100, 0 };
+	this->SetMoveDirectionNormalize();
+	return (GetMoveDirection() * _DeltaTime * GetSpeed());
 }
-
-void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	JumpPower_ -= (float4::UP * GravityY * _DeltaTime);
-	GetTransform().SetWorldMove(JumpPower_ * _DeltaTime);
-
-	if (JumpPower_.y <=0.f)
-	{
-		KnightManager_.ChangeState("STILL");
-	}
-}
-
-void Knight::KnightJumpEnd(const StateInfo& _Info)
-{
-	this->SetisGround(false);
-}
-
-// ³«ÇÏ
-void Knight::KnightFallStart(const StateInfo& _Info)
-{
-	GetRenderer()->ChangeFrameAnimation("FAll_ANIMATION");
-}
-
-void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	GetTransform().SetWorldMove(FallDownDirection_ * GetSpeed() * _DeltaTime);
-
-	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
-	{
-		this->SetisGround(true);
-		KnightManager_.ChangeState("STILL");
-	}
-}
-
-void Knight::KnightFallEnd(const StateInfo& _Info)
-{
-
-}
-
 
 
 //bool Knight::CheckMapCollision()

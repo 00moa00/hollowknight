@@ -115,5 +115,8 @@
     <ClCompile Include="UIPoint.cpp">
       <Filter>Actor\Title</Filter>
     </ClCompile>
+    <ClCompile Include="KnightState.cpp">
+      <Filter>Actor\Play</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

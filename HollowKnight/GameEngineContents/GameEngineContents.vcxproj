@@ -224,6 +224,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="KnightState.cpp" />
     <ClCompile Include="MasterActor.cpp">
       <SubType>
       </SubType>
