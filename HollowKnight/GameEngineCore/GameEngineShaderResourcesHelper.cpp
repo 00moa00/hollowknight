@@ -230,15 +230,16 @@ bool GameEngineShaderResourcesHelper::IsSampler(const std::string& _Name)
 GameEngineSampler* GameEngineShaderResourcesHelper::SetSampler(const std::string& _Name, const std::string& _TextureName)
 {
 
-	if (false == IsSampler(_Name))
+	std::string Name = GameEngineString::ToUpperReturn(_Name);
+
+	if (false == IsSampler(Name))
 	{
 		MsgBox("쉐이더에서 이러한 이름의 텍스처세팅를 사용한 적이 없습니다.");
 		return nullptr;
 	}
 
-	std::string Name = GameEngineString::ToUpperReturn(_Name);
 
-	return SetSampler(_Name, GameEngineSampler::Find(_TextureName));
+	return SetSampler(Name, GameEngineSampler::Find(_TextureName));
 
 }
 
@@ -246,7 +247,7 @@ GameEngineSampler* GameEngineShaderResourcesHelper::SetSampler(const std::string
 {
 	std::string Name = GameEngineString::ToUpperReturn(_Name);
 
-	if (false == IsSampler(_Name))
+	if (false == IsSampler(Name))
 	{
 		MsgBox("쉐이더에서 이러한 이름의 텍스처세팅를 사용한 적이 없습니다.");
 		return nullptr;

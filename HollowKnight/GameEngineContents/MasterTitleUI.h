@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
-
+#include "UIPoint.h"
 //#pragma comment(lib, "DirectXTex.lib")
 
 class GameEngineUIRenderer;
@@ -21,20 +21,14 @@ public:
 
 protected:
 	void Start();
-	void Update();
+	void Update(float _DeltaTime);
 
 private:
-	GameEngineUIRenderer* LeftPointGameStart_;
-	GameEngineUIRenderer* RightPointGameStart_;
+	UIPoint* UIPointGameStart_;
+	UIPoint* UIPointMapEditor_;
+	UIPoint* UIPointGameExit_;
 
-	GameEngineUIRenderer* LeftPointMapEditor_;
-	GameEngineUIRenderer* RightPointMapEditor_;
-
-	GameEngineUIRenderer* LeftPointGameExit_;
-	GameEngineUIRenderer* RightPointGameExit_;
-
-
-	float4 PointScale_;
+	GameEngineStateManager TitleStateManager_;
 
 private:
 
@@ -42,7 +36,11 @@ private:
 	void EventOffMapEditor();
 	void EventOffGameExit();
 
-	void GameStartAnimationEnd(const FrameAnimation_DESC& _Info);
+	//void GameStartAnimationEnd(const FrameAnimation_DESC& _Info);
+
+	void GameStartUpdate(float _DeltaTime, const StateInfo& _Info);
+	void MapEditorUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GameExitUpdate(float _DeltaTime, const StateInfo& _Info);
 
 };
 

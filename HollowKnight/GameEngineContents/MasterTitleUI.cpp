@@ -3,14 +3,9 @@
 
 MasterTitleUI::MasterTitleUI() 
 	:
-	LeftPointGameStart_(nullptr),
-	RightPointGameStart_(nullptr),
-	LeftPointMapEditor_(nullptr),
-	RightPointMapEditor_(nullptr),
-	LeftPointGameExit_(nullptr),
-	RightPointGameExit_(nullptr),
-
-	PointScale_({ 99, 72 })
+	UIPointGameStart_(nullptr),
+	UIPointMapEditor_(nullptr),
+	UIPointGameExit_(nullptr)
 {
 }
 
@@ -20,64 +15,40 @@ MasterTitleUI::~MasterTitleUI()
 
 void MasterTitleUI::Start()
 {
-	LeftPointGameStart_ = CreateComponent<GameEngineUIRenderer>();
-	LeftPointGameStart_->CreateFrameAnimation("POINTER_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 0, 10, 0.05f));
-	LeftPointGameStart_->CreateFrameAnimation("POINTER_IDLE", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 10, 10, 0.05f));
+	UIPointGameStart_ = GetLevel()->CreateActor<UIPoint>();
+	UIPointGameStart_->GetTransform().SetLocalPosition({ 0, -100, 0 });
 
-	
-	LeftPointGameStart_->GetTransform().SetLocalScale(PointScale_);
-	LeftPointGameStart_->ChangeFrameAnimation("POINTER_ANIMATION");
-	LeftPointGameStart_->GetTransform().SetLocalPosition({-100, 0, 0});
-	//LeftPointGameStart_->ScaleToTexture();
+	UIPointMapEditor_ = GetLevel()->CreateActor<UIPoint>();
+	UIPointMapEditor_->GetTransform().SetLocalPosition({ 0, -200, 0 });
+	UIPointMapEditor_->SetPointChangeIdleAnimation();
 
-	LeftPointGameStart_->AnimationBindEnd("POINTER_ANIMATION", &MasterTitleUI::GameStartAnimationEnd, this);
+	UIPointGameExit_ = GetLevel()->CreateActor<UIPoint>();
+	UIPointGameExit_->GetTransform().SetLocalPosition({ 0, -300, 0 });
+	UIPointGameExit_->SetPointChangeIdleAnimation();
 
-
-	RightPointGameStart_ = CreateComponent<GameEngineUIRenderer>();
-	RightPointGameStart_->CreateFrameAnimation("POINTER_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 0, 10, 0.05f));
-	RightPointGameStart_->CreateFrameAnimation("POINTER_IDLE", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 10, 10, 0.05f));
-
-	RightPointGameStart_->GetTransform().SetLocalScale(PointScale_);
-	RightPointGameStart_->ChangeFrameAnimation("POINTER_ANIMATION");
-	RightPointGameStart_->GetTransform().SetLocalPosition({ 100, 0, 0 });
-	RightPointGameStart_->GetTransform().PixLocalNegativeX();
+	TitleStateManager_.CreateStateMember("GameStart", this, &MasterTitleUI::GameStartUpdate);
+	TitleStateManager_.CreateStateMember("MapEditor", this, &MasterTitleUI::MapEditorUpdate);
+	TitleStateManager_.CreateStateMember("GameExit", this, &MasterTitleUI::GameExitUpdate);
+	TitleStateManager_.ChangeState("GameStart");
 
 
-
-
-
-
-
-	//단일
-	LeftPointMapEditor_ = CreateComponent<GameEngineUIRenderer>();
-	LeftPointMapEditor_->SetTexture("main_menu_pointer_anim0009.png");
-	LeftPointMapEditor_->GetTransform().SetLocalScale(PointScale_);
-	LeftPointMapEditor_->GetTransform().SetLocalPosition({ 400, 0, 0 });
-	LeftPointMapEditor_->SetSamplingModeLiner();
-
-
-	//시트에서 자른거
-	RightPointMapEditor_ = CreateComponent<GameEngineUIRenderer>();
-	RightPointMapEditor_->SetTexture("main_menu_pointer_anim0000-Sheet.png", 10);
-	RightPointMapEditor_->GetTransform().SetLocalScale(PointScale_);
-	RightPointMapEditor_->GetTransform().SetLocalPosition({ 500, 0, 0 });
-
-
-	LeftPointGameExit_ = CreateComponent<GameEngineUIRenderer>();
-	RightPointGameExit_ = CreateComponent<GameEngineUIRenderer>();
-
-
-
+	if (false == GameEngineInput::GetInst()->IsKey("PressDown"))
+	{
+		GameEngineInput::GetInst()->CreateKey("PressDown", VK_DOWN);
+		GameEngineInput::GetInst()->CreateKey("PressUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("PressEnter", VK_RETURN);
+	}
 }
 
-void MasterTitleUI::Update()
+void MasterTitleUI::Update(float _DeltaTime)
 {
+	TitleStateManager_.Update(_DeltaTime);
+
 }
 
 void MasterTitleUI::EventOffGameStart()
 {
-	LeftPointGameStart_->Off();
-	RightPointGameStart_->Off();
+
 }
 
 void MasterTitleUI::EventOffMapEditor()
@@ -88,9 +59,47 @@ void MasterTitleUI::EventOffGameExit()
 {
 }
 
-void MasterTitleUI::GameStartAnimationEnd(const FrameAnimation_DESC& _Info)
+void MasterTitleUI::GameStartUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	LeftPointGameStart_->ChangeFrameAnimation("POINTER_IDLE");
-	RightPointGameStart_->ChangeFrameAnimation("POINTER_IDLE");
+	if (true == GameEngineInput::GetInst()->IsDown("PressUp"))
+	{
+		UIPointGameExit_->SetPointChangeUpdateAnimation();
+		TitleStateManager_.ChangeState("GameExit");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("PressDown"))
+	{
+		UIPointMapEditor_->SetPointChangeUpdateAnimation();
+		TitleStateManager_.ChangeState("MapEditor");
+	}
 }
 
+void MasterTitleUI::MapEditorUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (true == GameEngineInput::GetInst()->IsDown("PressUp"))
+	{
+		UIPointGameStart_->SetPointChangeUpdateAnimation();
+		TitleStateManager_.ChangeState("GameStart");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("PressDown"))
+	{
+		UIPointGameExit_->SetPointChangeUpdateAnimation();
+		TitleStateManager_.ChangeState("GameExit");
+	}
+}
+
+void MasterTitleUI::GameExitUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (true == GameEngineInput::GetInst()->IsDown("PressUp"))
+	{
+		UIPointMapEditor_->SetPointChangeUpdateAnimation();
+		TitleStateManager_.ChangeState("MapEditor");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("PressDown"))
+	{
+		UIPointGameStart_->SetPointChangeUpdateAnimation();
+		TitleStateManager_.ChangeState("GameStart");
+	}
+}

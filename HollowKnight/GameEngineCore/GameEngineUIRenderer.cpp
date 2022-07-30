@@ -12,7 +12,7 @@ GameEngineUIRenderer::~GameEngineUIRenderer()
 void GameEngineUIRenderer::Start() 
 {
 
-	GameEngineDefaultRenderer::Start();
+	//GameEngineDefaultRenderer::Start();
 
 
 	PushRendererToUICamera();
