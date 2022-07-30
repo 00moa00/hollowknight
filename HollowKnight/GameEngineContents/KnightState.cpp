@@ -53,15 +53,16 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightJumpStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("JUMP_ANIMATION");
-	JumpPower_ = { 0, 300, 0 };
+	SetJumpPower({ 0, 300, 0 });
 }
 
 void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	JumpPower_ -= (float4::UP * GravityY * _DeltaTime);
-	GetTransform().SetWorldMove(JumpPower_ * _DeltaTime);
+	SubJumpPower(float4::UP * GetGravity() * _DeltaTime);
+	//JumpPower_ -= (float4::UP * GravityY * _DeltaTime);
+	GetTransform().SetWorldMove(GetJumpPower() * _DeltaTime);
 
-	if (JumpPower_.y <= 0.f)
+	if (GetJumpPower().y <= 0.f)
 	{
 		KnightManager_.ChangeState("STILL");
 	}
@@ -80,7 +81,7 @@ void Knight::KnightFallStart(const StateInfo& _Info)
 
 void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	GetTransform().SetWorldMove(FallDownDirection_ * FallSpeed_ * _DeltaTime);
+	GetTransform().SetWorldMove(GetFallDownDirection() * GetFallSpeed() * _DeltaTime);
 
 	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
 	{

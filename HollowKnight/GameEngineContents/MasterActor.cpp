@@ -6,8 +6,15 @@ MasterActor::MasterActor()
 	MainRenderer_(nullptr),
 	CollisionMap_(nullptr),
 
+	GravityY(),
+	JumpPower_(),
+	FallDownDirection_(),
+	CollisionSize_(),
+	FallSpeed_(),
+	Speed_ (),
+
 	MoveDirection_(float4::ZERO),
-	Speed_ (0),
+
 	isMove_(true),
 	isOnGround_(false)
 {

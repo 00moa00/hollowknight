@@ -82,11 +82,11 @@ void Knight::Start()
 
 	KnightManager_.ChangeState("STILL");
 
-	GravityY = 320.f;
-	JumpPower_ = { 150, 0 };
-	FallDownDirection_ = { 0, -1, 0 };
-	CollisionSize_ = { 349/2, 186/2, 0 };
-	FallSpeed_ = 300.f;
+	SetGravity(320.f);
+	SetJumpPower ({ 150, 0 });
+	SetallDownDirection ({ 0, -1, 0 });
+	SetCollisionSize ({ 349 / 2, 186 / 2, 0 });
+	SetFallSpeed(300.f);
 }
 
 void Knight::Update(float _DeltaTime)
@@ -98,8 +98,8 @@ void Knight::Update(float _DeltaTime)
 
 bool Knight::GetPixelRed(float4 _NextDir)
 {
-	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + CollisionSize_.x, 
-		-(GetTransform().GetLocalPosition().iy() + _NextDir.y -  CollisionSize_.y));
+	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetCollisionSize().x,
+		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 
 	if (Color.CompareInt4D(float4(0, 0, 1, 1)) == true)
 	{

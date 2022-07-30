@@ -27,6 +27,12 @@ private:
 	bool isOnGround_;
 
 
+	float GravityY;
+	float4 JumpPower_;
+	float4 FallDownDirection_;
+	float4 CollisionSize_;
+	float FallSpeed_;
+
 protected:
 
 	//================================
@@ -41,6 +47,31 @@ protected:
 	GameEngineTextureRenderer* GetCollisionMap() const
 	{
 		return CollisionMap_;
+	}
+
+	float GetGravity() const
+	{
+		return GravityY;
+	}
+
+	float4 GetJumpPower() const
+	{
+		return JumpPower_;
+	}
+
+	float4 GetFallDownDirection() const
+	{
+		return FallDownDirection_;
+	}
+
+	float4 GetCollisionSize() const
+	{
+		return CollisionSize_;
+	}
+
+	float GetFallSpeed() const
+	{
+		return FallSpeed_;
 	}
 
 	float4 GetMoveDirection() const
@@ -69,6 +100,37 @@ protected:
 	//================================
 
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
+
+
+	void SetGravity(float _GravityY)
+	{
+		GravityY = _GravityY;
+	}
+
+	void SetJumpPower(float4 _JumpPower)
+	{
+		JumpPower_ = _JumpPower;
+	}
+
+	void SubJumpPower(float4 _JumpPower)
+	{
+		JumpPower_ -= _JumpPower;
+	}
+
+	void SetallDownDirection(float4 _FallDownDirection)
+	{
+		FallDownDirection_ = _FallDownDirection;
+	}
+
+	void SetCollisionSize(float4 _CollisionSize)
+	{
+		CollisionSize_ = _CollisionSize;
+	}
+
+	void SetFallSpeed(float _FallSpeed)
+	{
+		FallSpeed_ = _FallSpeed;
+	}
 
 	void SetMoveDirectionNormalize()
 	{
