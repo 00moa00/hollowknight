@@ -33,4 +33,3 @@ void MasterActor::CreateRendererComponent(float4 _LocalScale, std::string _FileN
 	//MainRenderer_->SetPivot(PIVOTMODE");
 
 }
-

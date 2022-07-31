@@ -35,17 +35,29 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	this->KnightDirectionCheck();
 	this->KnightisOnGroundCheck(_DeltaTime);
 
+	if (GetisOnGround() == true)
 	{
-		if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
-		{
-			KnightManager_.ChangeState("JUMP");
-		}
+		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 
-		if (GetisKnightMove() == false)
-		{
-			KnightManager_.ChangeState("STILL");
-		}
 	}
+
+	else
+	{
+		KnightManager_.ChangeState("FALL");
+	}
+
+	
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
+	{
+		KnightManager_.ChangeState("JUMP");
+	}
+
+	if (GetisKnightMove() == false)
+	{
+		KnightManager_.ChangeState("STILL");
+
+	}
+	
 }
 
 
@@ -55,23 +67,38 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 	ActtingMoveDirection_ = float4::ZERO;
 
 	GetRenderer()->ChangeFrameAnimation("JUMP_ANIMATION");
-	SetJumpPower({ 0, 200, 0 });
+	SetJumpPower({ 0, 250, 0 });
 }
 
 void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	isKnihgtActtingMoveChack();
-	KnightActtingDirectionCheck();
-	KnightIsActtingCheck();
-	ActtingMoveDirection_.Normalize();
-	//KnightDirectionCheck();
-	SubJumpPower((float4::UP+ -ActtingMoveDirection_/2)  * GetGravity()  * _DeltaTime);
-	
-	GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
-
-	if (GetJumpPower().y <= 0.f)
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
 	{
-		KnightManager_.ChangeState("STILL");
+		isKnihgtActtingMoveChack();
+		KnightActtingDirectionCheck();
+		KnightIsActtingCheck();
+		ActtingMoveDirection_.Normalize();
+		//KnightDirectionCheck();
+		SubJumpPower((float4::UP + -ActtingMoveDirection_ / 2) * GetGravity() * _DeltaTime);
+
+		GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
+
+		if (GetJumpPower().y <= 0.f)
+		{
+			KnightManager_.ChangeState("FALL");
+		}
+	}
+
+	else
+	{
+		KnightManager_.ChangeState("FALL");
+	}
+
+
+	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
+	{
+		KnightManager_.ChangeState("FALL");
+
 	}
 }
 
@@ -96,7 +123,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	KnightIsActtingCheck();
 	ActtingMoveDirection_.Normalize();
 
-	GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_/2) * GetFallSpeed() * _DeltaTime);
+	GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_/2) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
 	{

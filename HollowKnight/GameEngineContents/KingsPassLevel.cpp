@@ -30,18 +30,18 @@ void KingsPassLevel::Start()
 
 	CraateMasterMapActor();
 
-	GetMasterMap()->CreateBackGround("King's-Pass_Background_1.png");
-	GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
+	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_1.png");
+	//GetMasterMap()->CreateBackGround("King's-Pass_Background_1.png");
+	//GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
 
-	CreateKnightActor();
 
 	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_1.png");
 	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_1.png");
-	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_1.png");
+	CreateKnightActor();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-
-	SetMainMapSize({7099, 5323});
+	//GetMainCameraActorTransform().SetLocalPosition(GetKnight()->GetTransform().GetLocalPosition());
+	SetMainMapSize({7099, 4889});
 
 
 }

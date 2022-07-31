@@ -31,9 +31,9 @@ private:
 protected:
 	void CraateMasterMapActor();
 	void CreateKnightActor();
-	void CreateBackgroundRenderer(std::string _FileName);
 
 	void CameraMoveWindowLimit();
+	void CameraMoveKnightLimit();
 
 	MasterMap* GetMasterMap() const
 	{
