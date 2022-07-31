@@ -27,10 +27,14 @@ MasterActor::~MasterActor()
 void MasterActor::CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order)
 {
 	MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	MainRenderer_->GetTransform().SetLocalScale({ _LocalScale.x, _LocalScale.y, _LocalScale.z });
 	MainRenderer_->SetTexture(_FileName, _Index);
-	MainRenderer_->SetOrder(_Order);
-	//MainRenderer_->SetPivot(PIVOTMODE");
+	MainRenderer_->GetTransform().SetLocalScale({ _LocalScale.x, _LocalScale.y, 1});
+	MainRenderer_->GetTransform().SetWorldPosition({ 0, _LocalScale.y/2 });
 
+	//MainRenderer_->GetTransform().SetWorldScale({ _LocalScale.x, _LocalScale.y });
+	//MainRenderer_->SetOrder(_Order);
+	//MainRenderer_->SetPivot(PIVOTMODE::BOT);
+	//MainRenderer_->GetTransform().SetLocalPosition({ MainRenderer_->GetTransform().GetLocalPosition().x, MainRenderer_->GetTransform().GetLocalPosition().y, 0.1 });
+	
 }
 

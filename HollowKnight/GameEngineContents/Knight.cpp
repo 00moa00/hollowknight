@@ -60,9 +60,9 @@ void Knight::Start()
 
 
 	//GetTransform().SetLocalScale({ 1, 1, 1 });
-	GetTransform().SetLocalPosition({ 500, -4500 });
 
-	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
+	CreateRendererComponent(float4{ 349, 186, 0 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
+	GetTransform().SetWorldPosition({ 500, -4000, 0 });
 
 	GetRenderer()->CreateFrameAnimation("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
 	GetRenderer()->CreateFrameAnimation("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
@@ -85,12 +85,12 @@ void Knight::Start()
 	this->SetMoveDirection(float4::RIGHT);
 	this->SetSpeed(300.f);
 	this->SetisMove(true);
-	SetGravity(400.f);
-	SetJumpPower({ 300, 0 });
-	SetJumpSpeed(5);
-	SetallDownDirection({ 0, -1, 0 });
-	SetCollisionSize({ 349 / 2, 186 / 2, 0 });
-	SetFallSpeed(2);
+	this->SetGravity(400.f);
+	this->SetJumpPower({ 300, 0 });
+	this->SetJumpSpeed(5);
+	this->SetallDownDirection({ 0, -1, 0 });
+	this->SetCollisionSize({ 0, 0, 0 });
+	this->SetFallSpeed(2);
 }
 
 void Knight::Update(float _DeltaTime)

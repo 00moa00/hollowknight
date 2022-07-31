@@ -16,10 +16,10 @@ KingsPassLevel::~KingsPassLevel()
 
 void KingsPassLevel::Start()
 {
-	//if (false == GameEngineInput::GetInst()->IsKey("FreeCameraOnOff"))
-	//{
-	//	GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
-	//}
+	if (false == GameEngineInput::GetInst()->IsKey("FreeCameraOnOff"))
+	{
+		GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
+	}
 
 	/*{
 		GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
@@ -30,14 +30,14 @@ void KingsPassLevel::Start()
 
 	CraateMasterMapActor();
 
-	GetMasterMap()->CreateBackGround("King's-Pass_Background_1.png");
-	GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
-
-	CreateKnightActor();
-
-	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_1.png");
-	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_1.png");
+	//GetMasterMap()->CreateBackGround("King's-Pass_Background_1.png");
+	//GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
 	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_1.png");
+
+
+	CreateKnightActor(); // 플레이어
+	//GetMasterMap()->CreateTerrain("King's-Pass_Terrain_1.png");
+	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_1.png");
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
@@ -47,11 +47,11 @@ void KingsPassLevel::Start()
 }
 void KingsPassLevel::Update(float _DeltaTime) 
 {
-	//if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
-	//{
-	//	// ;
-	//	GetMainCameraActor()->FreeCameraModeOnOff();
-	//}
+	if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
+	{
+		// ;
+		GetMainCameraActor()->FreeCameraModeOnOff();
+	}
 
 	CameraMoveWindowLimit();
 }
