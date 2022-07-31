@@ -28,6 +28,8 @@ private:
 
 
 	float GravityY;
+	float JumpSpeed_;
+
 	float4 JumpPower_;
 	float4 FallDownDirection_;
 	float4 CollisionSize_;
@@ -54,6 +56,11 @@ protected:
 		return GravityY;
 	}
 
+	float GetJumpSpeed() const
+	{
+		return JumpSpeed_;
+	}
+
 	float4 GetJumpPower() const
 	{
 		return JumpPower_;
@@ -68,6 +75,7 @@ protected:
 	{
 		return CollisionSize_;
 	}
+
 
 	float GetFallSpeed() const
 	{
@@ -101,6 +109,11 @@ protected:
 
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
 
+
+	void SetJumpSpeed(float _JumpSpeed)
+	{
+		JumpSpeed_ = _JumpSpeed;
+	}
 
 	void SetGravity(float _GravityY)
 	{

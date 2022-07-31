@@ -23,17 +23,24 @@ protected:
 
 private:
 
+	bool isKnightActtingMove_;
+
+	float4 ActtingMoveDirection_;
+
+
 	GameEngineStateManager KnightManager_;
-
-
 
 private:
 	float4 GetKnightNextPos(float4 _DeltaTime);
 
 	bool GetPixelRed(float4 _NextDir);
-	bool GetisPlayerMove();
+	bool GetisKnightMove();
+	void isKnihgtActtingMoveChack();
 
 	void KnightDirectionCheck();
+	void KnightActtingDirectionCheck();
+	void KnightIsActtingCheck();
+
 	void KnightisOnGroundCheck(float _DeltaTime);
 
 	//================================

@@ -17,7 +17,8 @@
 
 Knight::Knight() 
 	:
-	KnightManager_()
+	KnightManager_(),
+	isKnightActtingMove_(false)
 {
 }
 
@@ -82,11 +83,12 @@ void Knight::Start()
 
 	KnightManager_.ChangeState("STILL");
 
-	SetGravity(320.f);
+	SetGravity(300.f);
 	SetJumpPower ({ 150, 0 });
+	SetJumpSpeed(4);
 	SetallDownDirection ({ 0, -1, 0 });
 	SetCollisionSize ({ 349 / 2, 186 / 2, 0 });
-	SetFallSpeed(300.f);
+	SetFallSpeed(400.f);
 }
 
 void Knight::Update(float _DeltaTime)
@@ -111,7 +113,7 @@ bool Knight::GetPixelRed(float4 _NextDir)
 	}
 }
 
-bool Knight::GetisPlayerMove()
+bool Knight::GetisKnightMove()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
@@ -134,6 +136,31 @@ bool Knight::GetisPlayerMove()
 	}
 
 	return false;
+}
+
+void Knight::isKnihgtActtingMoveChack()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+	{
+		isKnightActtingMove_ = true;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+	{
+		isKnightActtingMove_ = true;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
+	{
+		isKnightActtingMove_ = true;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
+	{
+		isKnightActtingMove_ = true;
+	}
+
+	isKnightActtingMove_ = false;
 }
 
 void Knight::KnightDirectionCheck()
@@ -159,6 +186,42 @@ void Knight::KnightDirectionCheck()
 	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
 	{
 		this->AddMoveDirection(float4::UP);
+	}
+}
+
+void Knight::KnightActtingDirectionCheck()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+		ActtingMoveDirection_ = float4::LEFT;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+		ActtingMoveDirection_ = float4::RIGHT;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
+	{
+		ActtingMoveDirection_ = float4::DOWN;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
+	{
+		ActtingMoveDirection_ = float4::UP;
+	}
+}
+
+void Knight::KnightIsActtingCheck()
+{
+	if (false == GameEngineInput::GetInst()->IsPress("KnightLeft")
+		&& false == GameEngineInput::GetInst()->IsPress("KnightRight")
+		&& false == GameEngineInput::GetInst()->IsPress("KnightDown")
+		&& false == GameEngineInput::GetInst()->IsPress("KnightUp"))
+	{
+		ActtingMoveDirection_ = float4::ZERO;
 	}
 }
 
