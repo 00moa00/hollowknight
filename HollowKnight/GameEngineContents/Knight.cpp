@@ -15,18 +15,18 @@
 #include "Knight.h"
 #include "MasterMap.h"
 
-Knight::Knight() 
+Knight::Knight()
 	:
 	KnightManager_(),
 	isKnightActtingMove_(false)
 {
 }
 
-Knight::~Knight() 
+Knight::~Knight()
 {
 }
 
-void Test2Start(const FrameAnimation_DESC& _Info) 
+void Test2Start(const FrameAnimation_DESC& _Info)
 {
 	GameEngineDebug::OutPutString("½ºÅ¸Æ®\n");
 }
@@ -58,8 +58,9 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
 	}
 
-	GetTransform().SetLocalScale({1, 1, 1});
-	GetTransform().SetLocalPosition({500, -4500});
+
+	//GetTransform().SetLocalScale({ 1, 1, 1 });
+	GetTransform().SetLocalPosition({ 500, -4500 });
 
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
 
@@ -70,9 +71,7 @@ void Knight::Start()
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
 
-	this->SetMoveDirection(float4::RIGHT);
-	this->SetSpeed(200.f);
-	this->SetisMove(true);
+
 
 	KnightManager_.CreateStateMember("STILL", this, &Knight::KnightStillUpdate, &Knight::KnightStillStart);
 	KnightManager_.CreateStateMember("WALK", this, &Knight::KnightWalkUpdate, &Knight::KnightWalkStart);
@@ -83,12 +82,15 @@ void Knight::Start()
 
 	KnightManager_.ChangeState("STILL");
 
-	SetGravity(300.f);
-	SetJumpPower ({ 150, 0 });
-	SetJumpSpeed(4);
-	SetallDownDirection ({ 0, -1, 0 });
-	SetCollisionSize ({ 349 / 2, 186 / 2, 0 });
-	SetFallSpeed(400.f);
+	this->SetMoveDirection(float4::RIGHT);
+	this->SetSpeed(300.f);
+	this->SetisMove(true);
+	SetGravity(400.f);
+	SetJumpPower({ 300, 0 });
+	SetJumpSpeed(5);
+	SetallDownDirection({ 0, -1, 0 });
+	SetCollisionSize({ 349 / 2, 186 / 2, 0 });
+	SetFallSpeed(2);
 }
 
 void Knight::Update(float _DeltaTime)
@@ -230,7 +232,6 @@ void Knight::KnightisOnGroundCheck(float _DeltaTime)
 	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
 	{
 		this->SetisGround(true);
-		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 	}
 
 	else

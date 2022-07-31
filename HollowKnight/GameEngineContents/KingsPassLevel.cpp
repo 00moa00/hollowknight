@@ -41,7 +41,7 @@ void KingsPassLevel::Start()
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
-	SetMainMapSize({7099, 5323});
+	SetMainMapSize({7099, 4889});
 
 
 }
