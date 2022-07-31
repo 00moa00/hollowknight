@@ -37,4 +37,3 @@ void MasterActor::CreateRendererComponent(float4 _LocalScale, std::string _FileN
 	//MainRenderer_->GetTransform().SetLocalPosition({ MainRenderer_->GetTransform().GetLocalPosition().x, MainRenderer_->GetTransform().GetLocalPosition().y, 0.1 });
 	
 }
-

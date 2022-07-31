@@ -39,6 +39,9 @@ void HollowKnightLevel::CameraMoveWindowLimit()
 	}
 
 	//카메라는 플레이어를 따라간다.
+	//GetMainCameraActorTransform().SetLocalPosition(Knight_->GetTransform().GetLocalPosition());
+	//MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
+
 	GetMainCameraActorTransform().SetLocalPosition(Knight_->GetTransform().GetLocalPosition());
 	MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
 
@@ -55,20 +58,49 @@ void HollowKnightLevel::CameraMoveWindowLimit()
 		GetMainCameraActorTransform().SetLocalPosition(MainCameraPosition_);
 	}
 
-
-
 	if (0 < MainCameraPosition_.y + GameEngineWindow::GetInst()->GetScale().hiy())
 	{
 		MainCameraPosition_.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
 		GetMainCameraActorTransform().SetLocalPosition(MainCameraPosition_);
 	}
 
-
 	if (-MainMapSize_.y > MainCameraPosition_.y - GameEngineWindow::GetInst()->GetScale().hiy())
 	{
-		MainCameraPosition_.y = -(MainMapSize_.y - GameEngineWindow::GetInst()->GetScale().hiy());
+		MainCameraPosition_.y = -(MainMapSize_.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
 		GetMainCameraActorTransform().SetLocalPosition(MainCameraPosition_);
 	}
+
+}
+
+
+void HollowKnightLevel::CameraMoveKnightLimit()
+{
+	if (GetMainCameraActor() == nullptr)
+	{
+		return;
+	}
+
+	GetMainCameraActorTransform().SetLocalPosition(Knight_->GetTransform().GetLocalPosition());
+	MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
+	//MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
+
+//	float4 KnightPosition = Knight_->GetTransform().GetLocalPosition();
+//
+//
+//	float DOWNY = -(MainMapSize_.y - (GameEngineWindow::GetInst()->GetScale().hiy()+100));
+//	float UPY = GameEngineWindow::GetInst()->GetScale().hiy();
+//	float RIGHTX = (MainMapSize_.x - GameEngineWindow::GetInst()->GetScale().hix());
+//	float LEFTX = GameEngineWindow::GetInst()->GetScale().hix();
+//
+//	if (KnightPosition.y < UPY
+//		&& KnightPosition.y  > DOWNY
+///*		&& KnightPosition.x < RIGHTX
+//		&& KnightPosition.x > LEFTX*/)
+//	{
+//		GetMainCameraActorTransform().SetLocalPosition(KnightPosition);
+//		MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
+//	}
+
 
 }
 

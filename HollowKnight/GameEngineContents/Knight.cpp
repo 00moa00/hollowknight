@@ -59,10 +59,7 @@ void Knight::Start()
 	}
 
 
-	//GetTransform().SetLocalScale({ 1, 1, 1 });
-
-	CreateRendererComponent(float4{ 349, 186, 0 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
-	GetTransform().SetWorldPosition({ 500, -4000, 0 });
+	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
 
 	GetRenderer()->CreateFrameAnimation("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
 	GetRenderer()->CreateFrameAnimation("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
