@@ -84,6 +84,18 @@ void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
 
+	std::string a = "";
+	if (isJumpping_ == true)
+	{
+		a = "true";
+	}
+	else
+	{
+		a = "false";
+
+	}
+
+	GameEngineDebug::OutPutString(a);
 }
 
 

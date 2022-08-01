@@ -8,20 +8,22 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (GetisKnightMove() == true)
+ 	if (GetisKnightMove() == true)
 	{
 		KnightManager_.ChangeState("WALK");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isJumpping_ == false)
-	{
-		KnightManager_.ChangeState("JUMP");
 	}
 
 	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") && isJumpping_ == true)
 	{
 		isJumpping_ = false;
 	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isJumpping_ == false)
+	{
+		KnightManager_.ChangeState("JUMP");
+	}
+
+
 
 	if (GetisOnGround() == false)
 	{
@@ -56,7 +58,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("JUMP");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") && isJumpping_ == true)
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") )
 	{
 		isJumpping_ = false;
 	}
@@ -107,15 +109,17 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
-	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
-	{
-		KnightManager_.ChangeState("FALL");
+	//if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
+	//{
+	//	KnightManager_.ChangeState("FALL");
 
-	}
+	//}
 }
 
 void Knight::KnightJumpEnd(const StateInfo& _Info)
 {
+	SetJumpPower({ 0, KnightJumpPower_, 0 });
+
 	this->SetisGround(false);
 }
 
@@ -154,11 +158,7 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("FALL");
 	}
 
-	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
-	{
-		KnightManager_.ChangeState("FALL");
 
-	}
 }
 
 void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
