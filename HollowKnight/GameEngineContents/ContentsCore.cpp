@@ -143,10 +143,9 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_jump_01-Sheet.png", 6, 1);
 		GameEngineTexture::Cut("Knight_fall_01-Sheet.png", 6, 1);
 		GameEngineTexture::Cut("Knight_walk0000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 11, 1);
 
-
-
-
+	
 
 	}
 

@@ -25,6 +25,8 @@ private:
 
 	bool isKnightActtingMove_;
 	bool isJumpping_;
+	float KnightJumpPower_;
+	float KnightDoubleJumpPower_;
 
 	float4 ActtingMoveDirection_;
 
@@ -56,6 +58,13 @@ private:
 	void KnightJumpStart(const StateInfo& _Info);
 	void KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightJumpEnd(const StateInfo& _Info);
+
+	//void KnightoubleJumpCheckUpdate(float _DeltaTime, const StateInfo& _Info);
+
+
+	void KnightDoubleJumpStart(const StateInfo& _Info);
+	void KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightDoubleJumpEnd(const StateInfo& _Info);
 
 	void KnightFallStart(const StateInfo& _Info);
 	void KnightFallUpdate(float _DeltaTime, const StateInfo& _Info);

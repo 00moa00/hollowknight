@@ -18,6 +18,7 @@
 Knight::Knight()
 	:
 	KnightManager_(),
+	KnightJumpPower_(),
 	isKnightActtingMove_(false),
 	isJumpping_(false)
 {
@@ -47,6 +48,7 @@ void Knight::Start()
 
 	GetRenderer()->CreateFrameAnimation("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
 	GetRenderer()->CreateFrameAnimation("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->CreateFrameAnimation("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 0, 10, 0.030f, false));
 	GetRenderer()->CreateFrameAnimation("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimation("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 
@@ -57,11 +59,15 @@ void Knight::Start()
 	KnightManager_.CreateStateMember("STILL", this, &Knight::KnightStillUpdate, &Knight::KnightStillStart);
 	KnightManager_.CreateStateMember("WALK", this, &Knight::KnightWalkUpdate, &Knight::KnightWalkStart);
 	KnightManager_.CreateStateMember("JUMP", this, &Knight::KnightJumpUpdate, &Knight::KnightJumpStart, &Knight::KnightJumpEnd);
+	KnightManager_.CreateStateMember("DOUBLE_JUMP", this, &Knight::KnightDoubleJumpUpdate, &Knight::KnightDoubleJumpStart, &Knight::KnightDoubleJumpEnd);
 	KnightManager_.CreateStateMember("FALL", this, &Knight::KnightFallUpdate, &Knight::KnightFallStart, &Knight::KnightFallEnd);
 
 
 
 	KnightManager_.ChangeState("STILL");
+
+	KnightJumpPower_ = 250.f;
+	KnightDoubleJumpPower_ = 180.f;
 
 	this->SetMoveDirection(float4::RIGHT);
 	this->SetSpeed(300.f);
