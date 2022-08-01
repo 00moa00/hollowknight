@@ -13,9 +13,14 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("WALK");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isJumpping_ == false)
 	{
 		KnightManager_.ChangeState("JUMP");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") && isJumpping_ == true)
+	{
+		isJumpping_ = false;
 	}
 
 	if (GetisOnGround() == false)
@@ -47,10 +52,16 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isJumpping_ == false)
 	{
 		KnightManager_.ChangeState("JUMP");
 	}
+
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") && isJumpping_ == true)
+	{
+		isJumpping_ = false;
+	}
+
 
 	if (GetisKnightMove() == false)
 	{
@@ -65,6 +76,7 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 {
 	isKnightActtingMove_ = false;
 	ActtingMoveDirection_ = float4::ZERO;
+	isJumpping_ = true;
 
 	GetRenderer()->ChangeFrameAnimation("JUMP_ANIMATION");
 	SetJumpPower({ 0, 250, 0 });

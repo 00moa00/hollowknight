@@ -18,7 +18,8 @@
 Knight::Knight()
 	:
 	KnightManager_(),
-	isKnightActtingMove_(false)
+	isKnightActtingMove_(false),
+	isJumpping_(false)
 {
 }
 
@@ -26,25 +27,7 @@ Knight::~Knight()
 {
 }
 
-void Test2Start(const FrameAnimation_DESC& _Info)
-{
-	GameEngineDebug::OutPutString("스타트\n");
-}
 
-void Test2End(const FrameAnimation_DESC& _Info)
-{
-	GameEngineDebug::OutPutString("앤드\n");
-}
-
-void Test2Frame(const FrameAnimation_DESC& _Info)
-{
-	// GameEngineDebug::OutPutString("프레임\n");
-}
-
-void Test2Time(const FrameAnimation_DESC& _Info, float _Time)
-{
-	// GameEngineDebug::OutPutString("타임\n");
-}
 
 
 void Knight::Start()

@@ -24,6 +24,7 @@ protected:
 private:
 
 	bool isKnightActtingMove_;
+	bool isJumpping_;
 
 	float4 ActtingMoveDirection_;
 
