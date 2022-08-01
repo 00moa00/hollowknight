@@ -25,7 +25,7 @@ private:
 
 	bool isMove_;
 	bool isOnGround_;
-
+	bool isWall_;
 
 	float GravityY;
 	float JumpSpeed_;
@@ -102,6 +102,11 @@ protected:
 		return isOnGround_;
 	}
 
+	bool GetisWall() const
+	{
+		return isWall_;
+	}
+
 
 	//================================
 	//    Setter
@@ -173,6 +178,11 @@ protected:
 	void SetisGround(bool _b)
 	{
 		isOnGround_ = _b;
+	}
+
+	void SetisWall(bool _b)
+	{
+		isWall_ = _b;
 	}
 
 public:

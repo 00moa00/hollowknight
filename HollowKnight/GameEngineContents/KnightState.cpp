@@ -41,16 +41,25 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	this->KnightDirectionCheck();
 	this->KnightisOnGroundCheck(_DeltaTime);
+	this->KnightisWallCheck(_DeltaTime);
 
-	if (GetisOnGround() == true)
+	if (GetisWall() == true)
+	{
+		SetMoveDirection(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+
+	}
+	else if (GetisOnGround() == true)
 	{
 		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 	}
+
 
 	else
 	{
 		KnightManager_.ChangeState("FALL");
 	}
+
 
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isJumpping_ == false)

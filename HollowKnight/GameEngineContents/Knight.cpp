@@ -114,6 +114,21 @@ bool Knight::GetPixelRed(float4 _NextDir)
 	}
 }
 
+bool Knight::GetPixelBlue(float4 _NextDir)
+{
+	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetCollisionSize().x,
+		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
+
+	if (Color.CompareInt4D(float4(1, 0, 0, 1)) == true)
+	{
+ 		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool Knight::GetisKnightMove()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
@@ -238,6 +253,19 @@ void Knight::KnightisOnGroundCheck(float _DeltaTime)
 		this->SetisGround(false);
 	}
 
+}
+
+void Knight::KnightisWallCheck(float _DeltaTime)
+{
+	if (GetPixelBlue(GetKnightNextPos(_DeltaTime)) == true)
+	{
+		this->SetisWall(true);
+	}
+
+	else
+	{
+		this->SetisWall(false);
+	}
 }
 
 float4 Knight::GetKnightNextPos(float4 _DeltaTime)

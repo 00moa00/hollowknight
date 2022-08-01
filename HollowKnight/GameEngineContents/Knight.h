@@ -36,7 +36,14 @@ private:
 private:
 	float4 GetKnightNextPos(float4 _DeltaTime);
 
+	//bgr
 	bool GetPixelRed(float4 _NextDir);
+	bool GetPixelBlue(float4 _NextDir);
+
+	//픽셀 충돌 체크
+	void KnightisOnGroundCheck(float _DeltaTime);
+	void KnightisWallCheck(float _DeltaTime);
+
 	bool GetisKnightMove();
 	void isKnihgtActtingMoveChack();
 
@@ -44,7 +51,7 @@ private:
 	void KnightActtingDirectionCheck();
 	void KnightIsActtingCheck();
 
-	void KnightisOnGroundCheck(float _DeltaTime);
+
 
 	//================================
 	//    Bind State
