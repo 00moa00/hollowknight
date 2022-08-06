@@ -16,6 +16,7 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
+	//GameEngineWindow::GetInst()->SetWindowScaleAndPosition(float4{1920,1080}, float4{0,0});
 
 	{
 		GameEngineDirectory Dir;

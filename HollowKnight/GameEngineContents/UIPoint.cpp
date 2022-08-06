@@ -18,25 +18,36 @@ UIPoint::~UIPoint()
 void UIPoint::Start()
 {
 	LeftPoint_ = CreateComponent<GameEngineUIRenderer>();
-	LeftPoint_->CreateFrameAnimation("POINTER_UPDATE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 0, 10, 0.070f));
-	LeftPoint_->CreateFrameAnimation("POINTER_IDLE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 10, 10, 0.f));
+	LeftPoint_->CreateFrameAnimationCutTexture("POINTER_UPDATE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 0, 10, 0.070f));
+	LeftPoint_->CreateFrameAnimationCutTexture("POINTER_IDLE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 10, 10, 0.f));
 
 	LeftPoint_->GetTransform().SetLocalScale(PointScale_);
 	LeftPoint_->ChangeFrameAnimation("POINTER_UPDATE_ANIMATION");
 	LeftPoint_->GetTransform().SetLocalPosition({ -120, 0, 0 });
-	LeftPoint_->AnimationBindEnd("POINTER_UPDATE_ANIMATION", &UIPoint::PointAnimationLeftEnd, this);
+
+	//ftPoint_->AnimationBindEnd("POINTER_UPDATE_ANIMATION", &UIPoint::PointAnimationLeftEnd, this);
+
+	LeftPoint_->AnimationBindEnd("POINTER_UPDATE_ANIMATION"
+		, std::bind(&UIPoint::PointAnimationLeftEnd, this, std::placeholders::_1));
+
+
+
+
 	LeftPoint_->SetSamplingModeLiner();
 
 
 	RightPoint_ = CreateComponent<GameEngineUIRenderer>();
-	RightPoint_->CreateFrameAnimation("POINTER_UPDATE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 0, 10, 0.070f));
-	RightPoint_->CreateFrameAnimation("POINTER_IDLE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 10, 10, 0.f));
+	RightPoint_->CreateFrameAnimationCutTexture("POINTER_UPDATE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 0, 10, 0.070f));
+	RightPoint_->CreateFrameAnimationCutTexture("POINTER_IDLE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 10, 10, 0.f));
 
 	RightPoint_->GetTransform().SetLocalScale(PointScale_);
 	RightPoint_->ChangeFrameAnimation("POINTER_UPDATE_ANIMATION");
 	RightPoint_->GetTransform().SetLocalPosition({ 120, 0, 0 });
 	RightPoint_->GetTransform().PixLocalNegativeX();
-	RightPoint_->AnimationBindEnd("POINTER_UPDATE_ANIMATION", &UIPoint::PointAnimationRightEnd, this);
+
+//ightPoint_->AnimationBindEnd("POINTER_UPDATE_ANIMATION", &UIPoint::PointAnimationRightEnd, this);
+	RightPoint_->AnimationBindEnd("POINTER_UPDATE_ANIMATION"
+		, std::bind(&UIPoint::PointAnimationRightEnd, this, std::placeholders::_1));
 	RightPoint_->SetSamplingModeLiner();
 
 }

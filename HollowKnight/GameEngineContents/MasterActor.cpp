@@ -31,7 +31,6 @@ void MasterActor::CreateRendererComponent(float4 _LocalScale, std::string _FileN
 	MainRenderer_->SetTexture(_FileName, _Index);
 	MainRenderer_->GetTransform().SetLocalScale({ _LocalScale.x, _LocalScale.y, 1});
 	MainRenderer_->GetTransform().SetWorldPosition({ 0, _LocalScale.y/2 });
-
 	//MainRenderer_->GetTransform().SetWorldScale({ _LocalScale.x, _LocalScale.y });
 	//MainRenderer_->SetOrder(_Order);
 	//MainRenderer_->SetPivot(PIVOTMODE::BOT);

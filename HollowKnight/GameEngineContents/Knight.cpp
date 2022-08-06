@@ -46,21 +46,53 @@ void Knight::Start()
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
 	GetTransform().SetLocalPosition({500,-4000,0});
 
-	GetRenderer()->CreateFrameAnimation("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
-	GetRenderer()->CreateFrameAnimation("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
-	GetRenderer()->CreateFrameAnimation("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 0, 10, 0.030f, false));
-	GetRenderer()->CreateFrameAnimation("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
-	GetRenderer()->CreateFrameAnimation("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
+
+	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 0, 10, 0.030f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
 
 
 
-	KnightManager_.CreateStateMember("STILL", this, &Knight::KnightStillUpdate, &Knight::KnightStillStart);
-	KnightManager_.CreateStateMember("WALK", this, &Knight::KnightWalkUpdate, &Knight::KnightWalkStart);
-	KnightManager_.CreateStateMember("JUMP", this, &Knight::KnightJumpUpdate, &Knight::KnightJumpStart, &Knight::KnightJumpEnd);
-	KnightManager_.CreateStateMember("DOUBLE_JUMP", this, &Knight::KnightDoubleJumpUpdate, &Knight::KnightDoubleJumpStart, &Knight::KnightDoubleJumpEnd);
-	KnightManager_.CreateStateMember("FALL", this, &Knight::KnightFallUpdate, &Knight::KnightFallStart, &Knight::KnightFallEnd);
+	//KnightManager_.CreateStateMember("STILL", this, &Knight::KnightStillUpdate, &Knight::KnightStillStart);
+
+	KnightManager_.CreateStateMember("STILL"
+		, std::bind(&Knight::KnightStillUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightStillStart, this, std::placeholders::_1));
+
+
+	//KnightManager_.CreateStateMember("WALK", this, &Knight::KnightWalkUpdate, &Knight::KnightWalkStart);
+
+
+	KnightManager_.CreateStateMember("WALK"
+		, std::bind(&Knight::KnightWalkUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWalkStart, this, std::placeholders::_1));
+
+
+
+	//KnightManager_.CreateStateMember("JUMP", this, &Knight::KnightJumpUpdate, &Knight::KnightJumpStart, &Knight::KnightJumpEnd);
+
+
+	KnightManager_.CreateStateMember("JUMP"
+		, std::bind(&Knight::KnightJumpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightJumpEnd, this, std::placeholders::_1));
+
+
+
+	//KnightManager_.CreateStateMember("DOUBLE_JUMP", this, &Knight::KnightDoubleJumpUpdate, &Knight::KnightDoubleJumpStart, &Knight::KnightDoubleJumpEnd);
+	
+	
+	KnightManager_.CreateStateMember("DOUBLE_JUMP"
+		, std::bind(&Knight::KnightDoubleJumpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightDoubleJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightDoubleJumpEnd, this, std::placeholders::_1));
+
+	
+	
+	
+	
+	//KnightManager_.CreateStateMember("FALL", this, &Knight::KnightFallUpdate, &Knight::KnightFallStart, &Knight::KnightFallEnd);
+
+	KnightManager_.CreateStateMember("FALL"
+		, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightFallStart, this, std::placeholders::_1), std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));
 
 
 
@@ -257,6 +289,7 @@ void Knight::KnightisOnGroundCheck(float _DeltaTime)
 
 void Knight::KnightisWallCheck(float _DeltaTime)
 {
+	//GetRenderer()->GetCurTexture()->
 	if (GetPixelBlue(GetKnightNextPos(_DeltaTime)) == true)
 	{
 		this->SetisWall(true);

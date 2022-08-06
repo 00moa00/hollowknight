@@ -26,9 +26,20 @@ void MasterTitleUI::Start()
 	UIPointGameExit_->GetTransform().SetLocalPosition({ 0, -300, 0 });
 	UIPointGameExit_->SetPointChangeIdleAnimation();
 
-	TitleStateManager_.CreateStateMember("GameStart", this, &MasterTitleUI::GameStartUpdate);
-	TitleStateManager_.CreateStateMember("MapEditor", this, &MasterTitleUI::MapEditorUpdate);
-	TitleStateManager_.CreateStateMember("GameExit", this, &MasterTitleUI::GameExitUpdate);
+	//TitleStateManager_.CreateStateMember("GameStart", this, &MasterTitleUI::GameStartUpdate);
+
+	TitleStateManager_.CreateStateMember("GameStart"
+		, std::bind(&MasterTitleUI::GameStartUpdate, this, std::placeholders::_1, std::placeholders::_2));
+
+	TitleStateManager_.CreateStateMember("MapEditor"
+		, std::bind(&MasterTitleUI::MapEditorUpdate, this, std::placeholders::_1, std::placeholders::_2));
+
+	//TitleStateManager_.CreateStateMember("MapEditor", this, &MasterTitleUI::MapEditorUpdate);
+
+	TitleStateManager_.CreateStateMember("GameExit"
+		, std::bind(&MasterTitleUI::GameExitUpdate, this, std::placeholders::_1, std::placeholders::_2));
+
+	//TitleStateManager_.CreateStateMember("GameExit", this, &MasterTitleUI::GameExitUpdate);
 	TitleStateManager_.ChangeState("GameStart");
 
 
