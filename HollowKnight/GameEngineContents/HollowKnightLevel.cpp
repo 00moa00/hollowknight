@@ -28,6 +28,11 @@ void HollowKnightLevel::CreateKnightActor()
 
 }
 
+void HollowKnightLevel::CreateKingsPass1Monster()
+{
+	Crawlid_ = CreateActor<Crawlid>();
+}
+
 
 void HollowKnightLevel::CameraMoveWindowLimit()
 {

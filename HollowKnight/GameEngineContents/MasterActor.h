@@ -42,7 +42,7 @@ protected:
 	//================================
 	//     Getter
 	//================================
-	// 
+
 	//bgr
 	bool GetPixelRed(float4 _NextDir);
 	bool GetPixelBlue(float4 _NextDir);

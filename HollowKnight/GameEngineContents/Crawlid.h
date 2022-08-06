@@ -1,7 +1,7 @@
 #pragma once
-
+#include "Monster.h"
 // Ό³Έν :
-class Crawlid
+class Crawlid : public Monster
 {
 public:
 	// constrcuter destructer
@@ -15,8 +15,26 @@ public:
 	Crawlid& operator=(Crawlid&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 private:
+	GameEngineStateManager CrawlidManager_;
+
+private:
+	//================================
+	//    Bind State
+	//================================
+	void CrawlidStillStart(const StateInfo& _Info);
+	void CrawlidStillUpdate(float _DeltaTime, const StateInfo& _Info);
+
+
+	void CrawlidWalkStart(const StateInfo& _Info);
+	void CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info);
+
+	void CrawlidFallStart(const StateInfo& _Info);
+	void CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info);
+	void CrawlidFallEnd(const StateInfo& _Info);
 
 };
 

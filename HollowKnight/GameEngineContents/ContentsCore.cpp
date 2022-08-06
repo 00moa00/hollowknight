@@ -58,6 +58,35 @@ void ContentsCore::Start()
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
+		Dir.Move("Monster");
+
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Buzzer_death0000-Sheet.png", 3, 1);
+		GameEngineTexture::Cut("Buzzer_fly0000-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Buzzer_idle_01-Sheet.png", 3, 1);
+		GameEngineTexture::Cut("Buzzer_startle_01-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Buzzer_turn001-Sheet.png", 2, 1);
+
+		GameEngineTexture::Cut("Crawler_goomba_death0000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Crawler_goomba_turn_r_0000-Sheet.png", 2, 1);
+		GameEngineTexture::Cut("Crawler_goomba_turn0000-Sheet.png", 2, 1);
+		GameEngineTexture::Cut("Crawler_goomba_walk0000-Sheet.png", 4, 1);
+
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
 		Dir.Move("Map");
 		Dir.Move("KingsPass");
 		Dir.Move("level1");

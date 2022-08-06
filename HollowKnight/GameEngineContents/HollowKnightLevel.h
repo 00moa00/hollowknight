@@ -2,6 +2,9 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include "Knight.h"
 #include "MasterMap.h"
+#include "Monster.h"
+#include "Crawlid.h"
+
 // Ό³Έν :
 class GameEngineTextureRenderer;
 class HollowKnightLevel : public GameEngineLevel
@@ -22,6 +25,7 @@ protected:
 private:
 	MasterMap* MasterMap_;
 	Knight* Knight_;
+	Monster* Crawlid_;
 
 	float4 MainCameraPosition_;
 	float4 MainMapSize_;
@@ -31,6 +35,7 @@ private:
 protected:
 	void CraateMasterMapActor();
 	void CreateKnightActor();
+	void CreateKingsPass1Monster();
 
 	void CameraMoveWindowLimit();
 	void CameraMoveKnightLimit();
@@ -43,6 +48,11 @@ protected:
 	Knight* GetKnight() const
 	{
 		return Knight_;
+	}
+
+	Monster* GetCrawlid() const
+	{
+		return Crawlid_;
 	}
 
 	void SetMainMapSize(float4 _MapSize);
