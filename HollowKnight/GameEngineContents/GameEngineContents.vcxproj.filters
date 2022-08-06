@@ -28,13 +28,16 @@
     <Filter Include="Actor\Master">
       <UniqueIdentifier>{3d44b222-4a41-4fe3-ac20-705f50ec38b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\Knight">
+      <UniqueIdentifier>{008b30a6-3400-49c4-8aab-0cb852ec74ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Mionster">
+      <UniqueIdentifier>{e71467e9-a601-4aab-ae6c-9e383ede19dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
       <Filter>Contents</Filter>
-    </ClInclude>
-    <ClInclude Include="Knight.h">
-      <Filter>Actor\Play</Filter>
     </ClInclude>
     <ClInclude Include="Enums.h">
       <Filter>Global</Filter>
@@ -73,13 +76,22 @@
     <ClInclude Include="UIPoint.h">
       <Filter>Actor\Title</Filter>
     </ClInclude>
+    <ClInclude Include="Knight.h">
+      <Filter>Actor\Play\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="KinghtData.h">
+      <Filter>Actor\Play\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="Crawlid.h">
+      <Filter>Actor\Play\Mionster</Filter>
+    </ClInclude>
+    <ClInclude Include="Vengefly.h">
+      <Filter>Actor\Play\Mionster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
       <Filter>Contents</Filter>
-    </ClCompile>
-    <ClCompile Include="Knight.cpp">
-      <Filter>Actor\Play</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Play</Filter>
@@ -115,8 +127,20 @@
     <ClCompile Include="UIPoint.cpp">
       <Filter>Actor\Title</Filter>
     </ClCompile>
+    <ClCompile Include="Knight.cpp">
+      <Filter>Actor\Play\Knight</Filter>
+    </ClCompile>
     <ClCompile Include="KnightState.cpp">
-      <Filter>Actor\Play</Filter>
+      <Filter>Actor\Play\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KinghtData.cpp">
+      <Filter>Actor\Play\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="Crawlid.cpp">
+      <Filter>Actor\Play\Mionster</Filter>
+    </ClCompile>
+    <ClCompile Include="Vengefly.cpp">
+      <Filter>Actor\Play\Mionster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

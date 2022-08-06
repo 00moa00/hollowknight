@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 class GameEngineTextureRenderer;
 class MasterActor : public GameEngineActor
@@ -18,6 +19,7 @@ public:
 private:
 	GameEngineTextureRenderer* MainRenderer_;
 	GameEngineTextureRenderer* CollisionMap_;
+	GameEngineCollision* MainCollision_;
 
 	float4 MoveDirection_;
 
@@ -40,6 +42,15 @@ protected:
 	//================================
 	//     Getter
 	//================================
+	// 
+	//bgr
+	bool GetPixelRed(float4 _NextDir);
+	bool GetPixelBlue(float4 _NextDir);
+
+	//픽셀 충돌 체크
+	void isOnGroundCheck(float _DeltaTime);
+	void isWallCheck(float _DeltaTime);
+	float4 GetNextPos(float4 _DeltaTime);
 
 	GameEngineTextureRenderer* GetRenderer() const
 	{
@@ -49,6 +60,11 @@ protected:
 	GameEngineTextureRenderer* GetCollisionMap() const
 	{
 		return CollisionMap_;
+	}
+
+	GameEngineCollision* GetCollision() const
+	{
+		return MainCollision_;
 	}
 
 	float GetGravity() const
@@ -75,7 +91,6 @@ protected:
 	{
 		return CollisionSize_;
 	}
-
 
 	float GetFallSpeed() const
 	{
@@ -113,7 +128,7 @@ protected:
 	//================================
 
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
-
+	void CreateCollisionComponent(float4 _LocalScale, int _Order);
 
 	void SetJumpSpeed(float _JumpSpeed)
 	{

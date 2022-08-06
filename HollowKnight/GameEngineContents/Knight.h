@@ -28,21 +28,12 @@ private:
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
 
-	float4 ActtingMoveDirection_;
+	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
 
 
 	GameEngineStateManager KnightManager_;
 
 private:
-	float4 GetKnightNextPos(float4 _DeltaTime);
-
-	//bgr
-	bool GetPixelRed(float4 _NextDir);
-	bool GetPixelBlue(float4 _NextDir);
-
-	//픽셀 충돌 체크
-	void KnightisOnGroundCheck(float _DeltaTime);
-	void KnightisWallCheck(float _DeltaTime);
 
 	bool GetisKnightMove();
 	void isKnihgtActtingMoveChack();

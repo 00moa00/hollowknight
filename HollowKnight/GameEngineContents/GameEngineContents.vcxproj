@@ -161,8 +161,16 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Crawlid.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Enums.h" />
     <ClInclude Include="GlobalContentsValue.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KinghtData.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -214,13 +222,25 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Vengefly.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Crawlid.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GlobalContentsValue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KinghtData.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -272,6 +292,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="UIPoint.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Vengefly.cpp">
       <SubType>
       </SubType>
     </ClCompile>

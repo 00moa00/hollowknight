@@ -8,6 +8,7 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
  	if (GetisKnightMove() == true)
 	{
 		KnightManager_.ChangeState("WALK");
@@ -40,8 +41,8 @@ void Knight::KnightWalkStart(const StateInfo& _Info)
 void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	this->KnightDirectionCheck();
-	this->KnightisOnGroundCheck(_DeltaTime);
-	this->KnightisWallCheck(_DeltaTime);
+	this->isOnGroundCheck(_DeltaTime);
+	this->isWallCheck(_DeltaTime);
 
 	if (GetisWall() == true)
 	{
@@ -118,7 +119,7 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
-	//if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
+	//if (GetPixelRed(GetNextPos(_DeltaTime)) == true)
 	//{
 	//	KnightManager_.ChangeState("FALL");
 
@@ -137,7 +138,6 @@ void Knight::KnightJumpEnd(const StateInfo& _Info)
 void Knight::KnightDoubleJumpStart(const StateInfo& _Info)
 {
 	GetRenderer()->GetTransform().SetLocalScale({ 503,300,1 });
-
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_JUMP_ANIMATION");
 
 	SetJumpPower({ 0, KnightDoubleJumpPower_, 0 });
@@ -196,7 +196,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
-	if (GetPixelRed(GetKnightNextPos(_DeltaTime)) == true)
+	if (GetPixelRed(GetNextPos(_DeltaTime)) == true)
 	{
 		this->SetisGround(true);
 		KnightManager_.ChangeState("STILL");

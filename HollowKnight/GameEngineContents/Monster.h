@@ -1,8 +1,9 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include "MasterActor.h"
 
 // Ό³Έν :
-class Monster : public GameEngineActor
+class Monster : public MasterActor
 {
 public:
 	// constrcuter destructer
@@ -16,9 +17,9 @@ public:
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
 protected:
-	void Start() override;
-	void Update(float _DeltaTime) {}
-	void End() {}
+	//void Start() override;
+	//void Update(float _DeltaTime) {}
+	//void End() {}
 
 private:
 
