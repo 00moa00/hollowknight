@@ -8,13 +8,12 @@ MasterActor::MasterActor()
 	MainCollision_(nullptr),
 	GravityY(),
 	JumpPower_(),
-	FallDownDirection_(),
 	CollisionSize_(),
 	FallSpeed_(),
 	Speed_ (),
 
+	FallDownDirection_(float4::DOWN),
 	MoveDirection_(float4::ZERO),
-
 	isMove_(true),
 	isOnGround_(false),
 	isWall_(false)
