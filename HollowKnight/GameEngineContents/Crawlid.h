@@ -21,6 +21,8 @@ protected:
 private:
 	GameEngineStateManager CrawlidManager_;
 
+	GameEngineRenderer* GameEngineRenderer_;
+
 private:
 	//================================
 	//    Bind State
@@ -35,6 +37,8 @@ private:
 	void CrawlidFallStart(const StateInfo& _Info);
 	void CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info);
 	void CrawlidFallEnd(const StateInfo& _Info);
+
+
 
 };
 

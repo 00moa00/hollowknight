@@ -20,7 +20,8 @@ Knight::Knight()
 	KnightManager_(),
 	KnightJumpPower_(),
 	isKnightActtingMove_(false),
-	isJumpping_(false)
+	isPressJumppingKey_(false),
+	isSlashEnd_(false)
 {
 }
 
@@ -40,10 +41,15 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightUp", 'W');
 		GameEngineInput::GetInst()->CreateKey("KnightDown", 'S');
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
+
+		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
 	}
 
 	CreateCollisionComponent(float4{349, 186, 1}, static_cast<int>(OBJECTORDER::Knight));
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
+	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
+	KnightSlashEffect_->SetAnimationStill();
+
 	GetTransform().SetLocalPosition({500,-4000,0});
 
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
@@ -51,6 +57,17 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 0, 10, 0.030f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
+
+
+	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 0, 5, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 6, 10, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("UP_SLASH_ANIMATION", FrameAnimation_DESC("Knight_up_slash0000-Sheet.png", 0, 4, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH_ANIMATION", FrameAnimation_DESC("Knight_down_slash_v02000-Sheet.png", 0, 4, 0.100f));
+
+	GetRenderer()->AnimationBindEnd("SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isSlashEnd_ = true;
+		});
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
 
@@ -69,6 +86,17 @@ void Knight::Start()
 	KnightManager_.CreateStateMember("FALL"
 		, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightFallStart, this, std::placeholders::_1), std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));
 
+	KnightManager_.CreateStateMember("SLASH"
+		, std::bind(&Knight::KnightSlashUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightSlashStart, this, std::placeholders::_1), std::bind(&Knight::KnightSlashEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("DOUBLE_SLASH"
+		, std::bind(&Knight::KnightDoubleSlashUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightDoubleSlashStart, this, std::placeholders::_1), std::bind(&Knight::KnightDoubleSlashEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("UP_SLASH"
+		, std::bind(&Knight::KnightUpSlashUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightUpSlashStart, this, std::placeholders::_1), std::bind(&Knight::KnightUpSlashEnd, this, std::placeholders::_1));
+	
+	KnightManager_.CreateStateMember("DOWN_SLASH"
+		, std::bind(&Knight::KnightDownSlashUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightDownSlashStart, this, std::placeholders::_1), std::bind(&Knight::KnightDownSlashEnd, this, std::placeholders::_1));
 
 
 	KnightManager_.ChangeState("STILL");
@@ -85,14 +113,21 @@ void Knight::Start()
 	this->SetallDownDirection({ 0, -1, 0 });
 	this->SetCollisionSize({ 0, 0, 0 });
 	this->SetFallSpeed(2);
+
+
+	//변수를 왼쪽 오른쪽 콜리전 사이즈를 만들어서
+	// 왼쪽 -> 체크, 오른쪽 -> 체크
 }
 
 void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
 
+
+
+
 	std::string a = "";
-	if (isJumpping_ == true)
+	if (isPressJumppingKey_ == true)
 	{
 		a = "true";
 	}
@@ -163,24 +198,23 @@ void Knight::KnightDirectionCheck()
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
-		this->AddMoveDirection(float4::LEFT);
+		this->SetMoveDirection(float4::LEFT);
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
-		this->AddMoveDirection(float4::RIGHT);
-
+		this->SetMoveDirection(float4::RIGHT);
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
 	{
-		this->AddMoveDirection(float4::DOWN);
+		this->SetMoveDirection(float4::DOWN);
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
 	{
-		this->AddMoveDirection(float4::UP);
+		this->SetMoveDirection(float4::UP);
 	}
 }
 

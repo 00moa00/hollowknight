@@ -51,7 +51,7 @@ public:
 	{
 		if (nullptr != Parent)
 		{
-			return IsDeath_ || true == Parent->IsDeath();
+			return IsDeath_  || true == Parent->IsDeath();
 		}
 		else {
 			return IsDeath_;

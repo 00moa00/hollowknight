@@ -8,8 +8,9 @@ enum class OBJECTORDER
 	Background_Object,
 	Terrain,
 	Knight,
-	FrontObject,
+	Knight_Slash,
 	Monster,
+	FrontObject,
 };
 
 enum class RENDERORDER
@@ -17,9 +18,12 @@ enum class RENDERORDER
 	Background,
 	Background_Object,
 	Terrain,
+
 	Knight,
-	FrontObject,
 	Monster,
+
+	FrontObject,
+
 };
 
 

@@ -13,14 +13,16 @@ Crawlid::~Crawlid()
 
 void Crawlid::Start()
 {
+	SetName("Crawlid");
+
 
 	SetMoveDirection(float4::ZERO);
 
-	CreateCollisionComponent(float4{ 349, 186, 1 }, static_cast<int>(OBJECTORDER::Monster));
+	CreateCollisionComponent(float4{ 349, 186, 10000 }, static_cast<int>(OBJECTORDER::Monster));
 	CreateRendererComponent(float4{ 303, 177, 1 }, "Crawler_goomba_death0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
-	GetTransform().SetLocalPosition({ 500,-4000,0 });
+	GetTransform().SetLocalPosition({ 700,-4000,0 });
 
-
+	GameEngineRenderer_ = GetRenderer();
 	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Crawler_goomba_death0000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Crawler_goomba_turn_r_0000-Sheet.png", 0, 1, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("TURN_LEFT_ANIMATION", FrameAnimation_DESC("Crawler_goomba_turn0000-Sheet.png", 0, 1, 0.100f));

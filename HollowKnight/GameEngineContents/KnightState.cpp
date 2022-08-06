@@ -9,26 +9,38 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
+	//this->isWallCheck(_DeltaTime);
+
+	//if (GetisWall() == true)
+	//{
+	//	SetMoveDirection(float4::ZERO);
+	//	GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+
+	//}
+
  	if (GetisKnightMove() == true)
 	{
 		KnightManager_.ChangeState("WALK");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") && isJumpping_ == true)
+	if (GetisOnGround() == false)
 	{
-		isJumpping_ = false;
+		KnightManager_.ChangeState("FALL");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isJumpping_ == false)
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") && isPressJumppingKey_ == true)
+	{
+		isPressJumppingKey_ = false;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPressJumppingKey_ == false)
 	{
 		KnightManager_.ChangeState("JUMP");
 	}
 
-
-
-	if (GetisOnGround() == false)
+	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash"))
 	{
-		KnightManager_.ChangeState("FALL");
+		KnightManager_.ChangeState("SLASH");
 	}
 
 }
@@ -63,14 +75,14 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isJumpping_ == false)
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
 	{
 		KnightManager_.ChangeState("JUMP");
 	}
 
 	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") )
 	{
-		isJumpping_ = false;
+		isPressJumppingKey_ = false;
 	}
 
 
@@ -89,7 +101,7 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 
 	isKnightActtingMove_ = false;
 	ActtingMoveDirection_ = float4::ZERO;
-	isJumpping_ = true;
+	isPressJumppingKey_ = true;
 
 	SetJumpPower({ 0, KnightJumpPower_, 0 });
 }
@@ -132,8 +144,6 @@ void Knight::KnightJumpEnd(const StateInfo& _Info)
 
 	this->SetisGround(false);
 }
-
-
 
 void Knight::KnightDoubleJumpStart(const StateInfo& _Info)
 {
@@ -196,7 +206,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
-	if (GetPixelRed(GetNextPos(_DeltaTime)) == true)
+	if (GetPixelRed(GetNextPos(_DeltaTime)) == true || GetPixelBlue(GetNextPos(_DeltaTime)) == true)
 	{
 		this->SetisGround(true);
 		KnightManager_.ChangeState("STILL");
@@ -214,5 +224,63 @@ void Knight::KnightFallEnd(const StateInfo& _Info)
 	{
 		SetMoveDirection(ActtingMoveDirection_);
 	}
+}
+
+void Knight::KnightSlashStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("SLASH_ANIMATION");
+	KnightSlashEffect_->SetAnimationSlash();
+}
+
+void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+
+	if (isSlashEnd_ == true)
+	{
+		isSlashEnd_ = false;
+		KnightManager_.ChangeState("STILL");
+	}
+
+}
+
+void Knight::KnightSlashEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightDoubleSlashEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightUpSlashStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightUpSlashEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightDownSlashStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightDownSlashEnd(const StateInfo& _Info)
+{
 }
 

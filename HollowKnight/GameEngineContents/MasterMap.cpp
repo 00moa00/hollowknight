@@ -24,9 +24,7 @@ void MasterMap::CreateBackGround(std::string _FileName)
 	BackGroundRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	BackGroundRenderer_->SetTexture(_FileName);
 	BackGroundRenderer_->GetTransform().SetLocalScale(BackGroundRenderer_->GetCurTexture()->GetScale());
-	//BackGroundRenderer_->SetOrder(static_cast<int>(RENDERORDER::Background));
 	BackGroundRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
-	//BackGroundRenderer_->GetTransform().SetLocalPosition({ BackGroundRenderer_->GetTransform().GetLocalPosition().x,BackGroundRenderer_->GetTransform().GetLocalPosition().y, 1 });
 
 }
 
@@ -35,10 +33,7 @@ void MasterMap::CreateBackGroundObject(std::string _FileName)
 	BackGroundObjectRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	BackGroundObjectRenderer_->SetTexture(_FileName);
 	BackGroundObjectRenderer_->GetTransform().SetLocalScale(BackGroundObjectRenderer_->GetCurTexture()->GetScale());
-	//BackGroundObjectRenderer_->SetOrder(static_cast<int>(RENDERORDER::Background_Object));
 	BackGroundObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
-	//BackGroundObjectRenderer_->GetTransform().SetLocalPosition({ BackGroundObjectRenderer_->GetTransform().GetLocalPosition().x,BackGroundObjectRenderer_->GetTransform().GetLocalPosition().y, 1 });
-	BackGroundObjectRenderer_;
 }
 
 
@@ -47,10 +42,7 @@ void MasterMap::CreateTerrain(std::string _FileName)
 	TerrainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	TerrainRenderer_->SetTexture(_FileName);
 	TerrainRenderer_->GetTransform().SetLocalScale(TerrainRenderer_->GetCurTexture()->GetScale());
-	//TerrainRenderer_->SetOrder(static_cast<int>(RENDERORDER::Terrain));
 	TerrainRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
-	//TerrainRenderer_->GetTransform().SetLocalPosition({ TerrainRenderer_->GetTransform().GetLocalPosition().x,TerrainRenderer_->GetTransform().GetLocalPosition().y, 0.5});
-
 }
 
 void MasterMap::CreateFrontObject(std::string _FileName)
@@ -58,9 +50,7 @@ void MasterMap::CreateFrontObject(std::string _FileName)
 	FrontObjectRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	FrontObjectRenderer_->SetTexture(_FileName);
 	FrontObjectRenderer_->GetTransform().SetLocalScale(FrontObjectRenderer_->GetCurTexture()->GetScale());
-	//FrontObjectRenderer_->SetOrder(static_cast<int>(RENDERORDER::FrontObject));
 	FrontObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
-	//FrontObjectRenderer_->GetTransform().SetLocalPosition({ FrontObjectRenderer_->GetTransform().GetLocalPosition().x,FrontObjectRenderer_->GetTransform().GetLocalPosition().y, 0.5 });
 }
 
 
@@ -69,7 +59,6 @@ void MasterMap::CreateMapCollision(std::string _FileName)
 	CollisionMap_ = CreateComponent<GameEngineTextureRenderer>();
 	CollisionMap_->SetTexture(_FileName);
 	CollisionMap_->GetTransform().SetLocalScale(CollisionMap_->GetCurTexture()->GetScale());
-	//CollisionMap_->SetOrder(static_cast<int>(RENDERORDER::Terrain));
 	CollisionMap_->SetPivot(PIVOTMODE::LEFTTOP);
 	//CollisionMap_->GetTransform().SetLocalPosition({ CollisionMap_->GetTransform().GetLocalPosition().x,CollisionMap_->GetTransform().GetLocalPosition().y, 1 });
 

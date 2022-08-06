@@ -1,5 +1,6 @@
 #pragma once
 #include "MasterActor.h"
+#include "KnightSlashEffect.h"
 
 // Ό³Έν :
 class GameEngineTextureRenderer;
@@ -23,8 +24,9 @@ protected:
 
 private:
 
+	bool isSlashEnd_;
 	bool isKnightActtingMove_;
-	bool isJumpping_;
+	bool isPressJumppingKey_;
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
 
@@ -32,7 +34,7 @@ private:
 
 
 	GameEngineStateManager KnightManager_;
-
+	KnightSlashEffect* KnightSlashEffect_;
 private:
 
 	bool GetisKnightMove();
@@ -56,9 +58,6 @@ private:
 	void KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightJumpEnd(const StateInfo& _Info);
 
-	//void KnightoubleJumpCheckUpdate(float _DeltaTime, const StateInfo& _Info);
-
-
 	void KnightDoubleJumpStart(const StateInfo& _Info);
 	void KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightDoubleJumpEnd(const StateInfo& _Info);
@@ -66,5 +65,29 @@ private:
 	void KnightFallStart(const StateInfo& _Info);
 	void KnightFallUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightFallEnd(const StateInfo& _Info);
+
+	void KnightSlashStart(const StateInfo& _Info);
+	void KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightSlashEnd(const StateInfo& _Info);
+
+	void KnightDoubleSlashStart(const StateInfo& _Info);
+	void KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightDoubleSlashEnd(const StateInfo& _Info);
+
+	void KnightUpSlashStart(const StateInfo& _Info);
+	void KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightUpSlashEnd(const StateInfo& _Info);
+
+	void KnightDownSlashStart(const StateInfo& _Info);
+	void KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightDownSlashEnd(const StateInfo& _Info);
+
+	//================================
+	//    Bind Animation
+	//================================
+
+
+
+
 }; 
 

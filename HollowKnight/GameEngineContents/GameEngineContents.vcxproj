@@ -174,11 +174,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="KnightSlashEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MasterActor.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="HollowKnightLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MasterEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -244,12 +252,20 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="KnightSlashEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="KnightState.cpp" />
     <ClCompile Include="MasterActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="HollowKnightLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MasterEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>
