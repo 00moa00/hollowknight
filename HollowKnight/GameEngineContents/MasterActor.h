@@ -3,6 +3,58 @@
 #include <GameEngineCore/GameEngineCollision.h>
 
 class GameEngineTextureRenderer;
+
+class PixelPOINT
+{
+public:
+	float RightBottom_;
+	float LeftBottom_;
+	float RightTop_;
+	float LeftTop_;
+
+	float GetRightBottom() 
+	{
+		return RightBottom_;
+	}
+
+	float GetLeftBottom() 
+	{
+		return LeftBottom_;
+	}
+
+	float GetRightTop() 
+	{
+		return RightTop_;
+	}
+
+	float GetLeftTop() 
+	{
+		return LeftTop_;
+	}
+
+	void SetRightBottom(float _f)
+	{
+		RightBottom_ = _f;
+	}
+
+	void SetLeftBottom(float _f)
+	{
+		LeftBottom_ = _f;
+	}
+
+	void SetRightTop(float _f)
+	{
+		RightTop_ = _f;
+	}
+
+	void SetLeftTop(float _f)
+	{
+		LeftTop_ = _f;
+	}
+
+};
+
+
 class MasterActor : public GameEngineActor
 {
 public:
@@ -16,7 +68,7 @@ public:
 	MasterActor& operator=(const MasterActor& _Other) = delete;
 	MasterActor& operator=(MasterActor&& _Other) noexcept = delete;
 
-private:
+protected:
 	GameEngineTextureRenderer* MainRenderer_;
 	GameEngineTextureRenderer* CollisionMap_;
 	GameEngineCollision* MainCollision_;
@@ -31,11 +83,17 @@ private:
 
 	float GravityY;
 	float JumpSpeed_;
+	float FallSpeed_;
+
 
 	float4 JumpPower_;
 	float4 FallDownDirection_;
 	float4 CollisionSize_;
-	float FallSpeed_;
+
+protected:
+protected:
+
+	PixelPOINT Point_;
 
 protected:
 
@@ -67,6 +125,19 @@ protected:
 		return MainCollision_;
 	}
 
+	PixelPOINT GetPoint() 
+	{
+		return Point_;
+	}
+
+	float4 GetJumpPower() const
+	{
+		return JumpPower_;
+	}
+
+
+
+
 	float GetGravity() const
 	{
 		return GravityY;
@@ -77,10 +148,6 @@ protected:
 		return JumpSpeed_;
 	}
 
-	float4 GetJumpPower() const
-	{
-		return JumpPower_;
-	}
 
 	float4 GetFallDownDirection() const
 	{

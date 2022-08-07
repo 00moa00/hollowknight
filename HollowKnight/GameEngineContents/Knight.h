@@ -32,9 +32,9 @@ private:
 
 	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
 
-
 	GameEngineStateManager KnightManager_;
 	KnightSlashEffect* KnightSlashEffect_;
+
 private:
 
 	bool GetisKnightMove();

@@ -43,20 +43,39 @@ void MasterActor::CreateCollisionComponent(float4 _LocalScale, int _Order)
 
 bool MasterActor::GetPixelRed(float4 _NextDir)
 {
-	float DirSize = 0;
+	//float DirSize = 0;
+	//if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	//{
+	//	DirSize = 50.f;
+	//}
+
+	//if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	//{
+	//	DirSize = -50.f;
+	//}
+
+	//float DirColorCheck = 0.f;
+	float4 DirColor = {};
+	GetMoveDirection().Normalize();
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
-		DirSize = 50.f;
+		DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + (_NextDir.x + GetPoint().GetRightBottom()) + GetCollisionSize().x,
+			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 	}
 
 	if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
-		DirSize = -50.f;
+		DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + (_NextDir.x + GetPoint().GetLeftBottom()) + GetCollisionSize().x,
+			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 	}
+
+
+
 	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetCollisionSize().x,
 		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 
-	if (Color.CompareInt4D(float4(0, 0, 1, 1)) == true)
+
+	if (Color.CompareInt4D(float4(0, 0, 1, 1)) == true && DirColor.CompareInt2D(float4(0, 0, 1 ,1)) == true)
 	{
 		return true;
 	}
@@ -69,25 +88,39 @@ bool MasterActor::GetPixelRed(float4 _NextDir)
 bool MasterActor::GetPixelBlue(float4 _NextDir)
 {
 
-	float DirSize = 0;
+	//float DirSize = 0;
+	//if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	//{
+	//	DirSize = 50.f;
+	//}
+
+	//if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	//{
+	//	DirSize = -50.f;
+	//}
+
+	float4 DirColor = {};
+	GetMoveDirection().Normalize();
+
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
-		DirSize = 50.f;
+		DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + (_NextDir.x + GetPoint().GetRightBottom()) + GetCollisionSize().x,
+			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 	}
 
 	if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
-		DirSize = -50.f;
+		DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + (_NextDir.x + GetPoint().GetLeftBottom()) + GetCollisionSize().x,
+			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 	}
 
 
 
 
-
-	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + DirSize,
+	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x ,
 		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 
-	if (Color.CompareInt4D(float4(1, 0, 0, 1)) == true)
+	if (Color.CompareInt4D(float4(1, 0, 0, 1)) == true && DirColor.CompareInt2D(float4(1, 0, 0, 1)) == true)
 	{
 		return true;
 	}

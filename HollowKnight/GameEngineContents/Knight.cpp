@@ -114,6 +114,10 @@ void Knight::Start()
 	this->SetCollisionSize({ 0, 0, 0 });
 	this->SetFallSpeed(2);
 
+	GetPoint().SetLeftBottom(-50.f);
+	GetPoint().SetRightBottom(50.f);
+
+
 
 	//변수를 왼쪽 오른쪽 콜리전 사이즈를 만들어서
 	// 왼쪽 -> 체크, 오른쪽 -> 체크
