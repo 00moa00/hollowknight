@@ -229,7 +229,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	ActtingMoveDirection_.Normalize();
 
-	if (GetisWall() == false)
+	if (GetisWall() == true)
 	{
 		ActtingMoveDirection_ = float4::ZERO;
 	}
