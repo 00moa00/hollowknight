@@ -185,7 +185,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_double_slashes_effect-Sheet.png", 3, 1);
 		GameEngineTexture::Cut("Knight_slashes_effect0001-Sheet.png", 2, 1);
 		GameEngineTexture::Cut("Knight_up_slash_effect0000-Sheet.png", 2, 1);
-		GameEngineTexture::Cut("Knight_down_slash_effect0000-Sheet.png", 2, 1);
+		GameEngineTexture::Cut("Knight_down_slash_effect0001-Sheet.png", 2, 1);
 
 		//ªÁ∏∂±Õ ¿Ã∆Â∆Æ
 		GameEngineTexture::Cut("Knight_mantis_slash_left0005-Sheet.png", 2, 1);

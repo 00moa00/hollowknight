@@ -10,6 +10,10 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	DoubleSlashTimer(_DeltaTime);
 
+	if (GameEngineInput::GetInst()->IsFree("KnightJump") == true && isPressJumppingKey_ == true)
+	{
+		isPressJumppingKey_ = false;
+	}
 	// ========== 스테이트 변경 ==========
 
  	if (GetisKnightMove() == true)
@@ -22,25 +26,37 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("FALL");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") && isPressJumppingKey_ == true)
-	{
-		isPressJumppingKey_ = false;
-	}
-
-	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPressJumppingKey_ == false)
+	// 점프
+	if (GameEngineInput::GetInst()->IsDown("KnightJump") == true && isPressJumppingKey_ == false)
 	{
 		KnightManager_.ChangeState("JUMP");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
+	// 위 공격
+	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsPress("KnightUp") == true)
+	{
+		KnightManager_.ChangeState("UP_SLASH");
+	}
+
+	// 기본 공격
+	if  (GameEngineInput::GetInst()->IsDown("KnightSlash") == true 
+		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
+
+		&& isPossibleDoubleSlash_ == false)
 	{
 		KnightManager_.ChangeState("SLASH");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
+	 //콤보 공격
+	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true 
+		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
+		&& isPossibleDoubleSlash_ == true)
 	{
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 	}
+
+
 
 }
 
@@ -168,12 +184,34 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("FALL");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
+	// 위 공격
+	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsPress("KnightUp") == true)
+	{
+		KnightManager_.ChangeState("UP_SLASH");
+	}
+
+	// 아래 공격
+	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsPress("KnightDown") == true)
+	{
+		KnightManager_.ChangeState("DOWN_SLASH");
+	}
+
+	// 기본 공격
+	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
+		&& GameEngineInput::GetInst()->IsFree("KnightDown") == true
+
+		&& isPossibleDoubleSlash_ == false)
 	{
 		KnightManager_.ChangeState("SLASH");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
+	//콤보 공격
+	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
+		&& isPossibleDoubleSlash_ == true)
 	{
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 	}
@@ -272,15 +310,38 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STILL");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
+	// 위 공격
+	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsPress("KnightUp") == true)
+	{
+		KnightManager_.ChangeState("UP_SLASH");
+	}
+
+	// 아래 공격
+	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsPress("KnightDown") == true)
+	{
+		KnightManager_.ChangeState("DOWN_SLASH");
+	}
+
+	// 기본 공격
+	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
+		&& GameEngineInput::GetInst()->IsFree("KnightDown") == true
+
+		&& isPossibleDoubleSlash_ == false)
 	{
 		KnightManager_.ChangeState("SLASH");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
+	//콤보 공격
+	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
+		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
+		&& isPossibleDoubleSlash_ == true)
 	{
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 	}
+
 
 	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true)
 	{
@@ -358,8 +419,6 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-
-
 	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
 
 
@@ -387,7 +446,6 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightSlashEnd(const StateInfo& _Info)
 {
 	isPossibleDoubleSlash_ = true;
-
 }
 
 void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
@@ -398,7 +456,6 @@ void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
 
 void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
 
 	//애니메이션이 끝나면 
@@ -410,20 +467,97 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 }
 
-
-
 void Knight::KnightDoubleSlashEnd(const StateInfo& _Info)
 {
 	isPossibleDoubleSlash_ = false;
-
 }
 
 void Knight::KnightUpSlashStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("UP_SLASH_ANIMATION");
+	KnightSlashEffect_->SetAnimationUpSlash();
 }
 
 void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	//KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+
+
+	KnightDirectionCheck();
+	isOnGroundCheck(_DeltaTime);
+	isWallCheck(_DeltaTime);
+
+	if (GetisWall() == true)
+	{
+		SetMoveDirection(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		//KnightManager_.ChangeState("FALL");
+	}
+
+	else if (GetisOnGround() == true)
+	{
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		{
+			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		{
+			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+		}
+	}
+
+	// 낙하중에 공격한다면 애니메이션이 끝날 떄까지 낙하 스테이트로 이동하면 안된다. => 이유 : 애니메이션 처리
+	// 그렇기 때문에 여기서 중력처리를 따로 하는중
+	else if (GetisOnGround() == false && GetisWall() == false)
+	{
+		isKnihgtActtingMoveChack();
+		KnightActtingDirectionCheck();
+		KnightIsActtingCheck();
+
+		DoubleSlashTimer(_DeltaTime);
+
+		ActtingMoveDirection_.Normalize();
+
+		if (GetisWall() == true)
+		{
+			ActtingMoveDirection_ = float4::ZERO;
+		}
+
+		GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+
+		if (isUpSlashEnd_ == true)
+		{
+			KnightManager_.ChangeState("FALL");
+
+		}
+
+	}
+
+	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+
+
+	// ========== 스테이트 변경 ==========
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	{
+		KnightManager_.ChangeState("JUMP");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
+	{
+		isPressJumppingKey_ = false;
+	}
+
+
+	//애니메이션이 끝나면 
+	if (isUpSlashEnd_ == true)
+	{
+		isUpSlashEnd_ = false;
+		KnightManager_.ChangeState("STILL");
+	}
 }
 
 void Knight::KnightUpSlashEnd(const StateInfo& _Info)
@@ -432,10 +566,87 @@ void Knight::KnightUpSlashEnd(const StateInfo& _Info)
 
 void Knight::KnightDownSlashStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("DOWN_SLASH_ANIMATION");
+	KnightSlashEffect_->SetAnimationDownSlash();
 }
 
 void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	KnightDirectionCheck();
+	isOnGroundCheck(_DeltaTime);
+	isWallCheck(_DeltaTime);
+
+	if (GetisWall() == true)
+	{
+		SetMoveDirection(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		//KnightManager_.ChangeState("FALL");
+	}
+
+	else if (GetisOnGround() == true)
+	{
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		{
+			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		{
+			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+		}
+	}
+
+	// 낙하중에 공격한다면 애니메이션이 끝날 떄까지 낙하 스테이트로 이동하면 안된다. => 이유 : 애니메이션 처리
+	// 그렇기 때문에 여기서 중력처리를 따로 하는중
+	else if (GetisOnGround() == false && GetisWall() == false)
+	{
+		isKnihgtActtingMoveChack();
+		KnightActtingDirectionCheck();
+		KnightIsActtingCheck();
+
+		DoubleSlashTimer(_DeltaTime);
+
+		ActtingMoveDirection_.Normalize();
+
+		if (GetisWall() == true)
+		{
+			ActtingMoveDirection_ = float4::ZERO;
+		}
+
+		GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+
+		if (isDownSlashEnd_ == true)
+		{
+			KnightManager_.ChangeState("FALL");
+
+		}
+
+	}
+
+	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+
+
+	// ========== 스테이트 변경 ==========
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	{
+		KnightManager_.ChangeState("JUMP");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
+	{
+		isPressJumppingKey_ = false;
+	}
+
+
+	//애니메이션이 끝나면 
+	if (isDownSlashEnd_ == true)
+	{
+		isDownSlashEnd_ = false;
+		KnightManager_.ChangeState("STILL");
+	}
 }
 
 void Knight::KnightDownSlashEnd(const StateInfo& _Info)

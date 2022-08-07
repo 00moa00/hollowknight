@@ -26,6 +26,8 @@ private:
 
 	bool isSlashEnd_;		// 공격 애니메이션 종료
 	bool isDoubleSlashEnd_; // 더블 공격 애니메이션 종료
+	bool isUpSlashEnd_;
+	bool isDownSlashEnd_;
 	bool isDoubleJumpEnd_;
 
 	bool isKnightActtingMove_;

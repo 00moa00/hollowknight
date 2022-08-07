@@ -26,7 +26,9 @@ Knight::Knight()
 	isSlashEnd_(false),
 	isDoubleSlashEnd_(false),
 	isPossibleDoubleJump_(false),
-	isDoubleJumpEnd_(false)
+	isDoubleJumpEnd_(false),
+	isUpSlashEnd_(false),
+	isDownSlashEnd_(false)
 {
 }
 
@@ -84,6 +86,16 @@ void Knight::Start()
 		{
 			isDoubleJumpEnd_ = true;
 		});
+
+	GetRenderer()->AnimationBindEnd("UP_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isUpSlashEnd_ = true;
+		});
+	GetRenderer()->AnimationBindEnd("DOWN_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isDownSlashEnd_ = true;
+		});
+
 
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
