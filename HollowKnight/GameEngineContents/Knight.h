@@ -24,11 +24,18 @@ protected:
 
 private:
 
-	bool isSlashEnd_;
+	bool isSlashEnd_;		// 공격 애니메이션 종료
+	bool isDoubleSlashEnd_; // 더블 공격 애니메이션 종료
+	bool isDoubleJumpEnd_;
+
 	bool isKnightActtingMove_;
 	bool isPressJumppingKey_;
+	bool isPossibleDoubleSlash_;
+	bool isPossibleDoubleJump_;
+
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
+	float KnightAttackTimer_;
 
 	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
 
@@ -44,6 +51,13 @@ private:
 	void KnightActtingDirectionCheck();
 	void KnightIsActtingCheck();
 
+	//================================
+	//    State
+	//================================
+
+	void Jumpping();
+	void Walkking(float _DeltaTime);
+	void DoubleSlashTimer(float _DeltaTime); //더블 공격(콤보) 타이머
 
 	//================================
 	//    Bind State

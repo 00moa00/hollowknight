@@ -21,8 +21,10 @@ void KnightSlashEffect::Start()
 
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL", FrameAnimation_DESC("Knight_double_slashes_effect-Sheet.png", 2, 2, 0.100f, false));
 
-	GetRenderer()->CreateFrameAnimationCutTexture("SLASH", FrameAnimation_DESC("Knight_double_slashes_effect-Sheet.png", 0, 1, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SLASH", FrameAnimation_DESC("Knight_slashes_effect0001-Sheet.png", 0, 1, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_SLASH", FrameAnimation_DESC("Knight_double_slashes_effect-Sheet.png", 0, 1, 0.100f, false));
+
+
 	GetRenderer()->CreateFrameAnimationCutTexture("UP_SLASH", FrameAnimation_DESC("Knight_up_slash_effect0000-Sheet.png", 0, 1, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH", FrameAnimation_DESC("Knight_down_slash_effect0000-Sheet.png", 0, 1, 0.100f, false));
 

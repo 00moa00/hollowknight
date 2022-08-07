@@ -19,9 +19,14 @@ Knight::Knight()
 	:
 	KnightManager_(),
 	KnightJumpPower_(),
+	KnightAttackTimer_(),
+	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
 	isPressJumppingKey_(false),
-	isSlashEnd_(false)
+	isSlashEnd_(false),
+	isDoubleSlashEnd_(false),
+	isPossibleDoubleJump_(false),
+	isDoubleJumpEnd_(false)
 {
 }
 
@@ -54,7 +59,7 @@ void Knight::Start()
 
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 0, 10, 0.030f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 
@@ -68,6 +73,18 @@ void Knight::Start()
 		{
 			isSlashEnd_ = true;
 		});
+
+	GetRenderer()->AnimationBindEnd("DOUBLE_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isDoubleSlashEnd_ = true;
+		});
+
+
+	GetRenderer()->AnimationBindEnd("DOUBLE_JUMP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isDoubleJumpEnd_ = true;
+		});
+
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
 
@@ -121,11 +138,6 @@ void Knight::Start()
 	this->SetLeftTop({ -15.f, 20.f, 0, 0 });
 	this->SetCenterTop({ 0, 20.f, 0, 0 });
 
-	//Point_.SetRightBottom(50.f);
-
-
-	//변수를 왼쪽 오른쪽 콜리전 사이즈를 만들어서
-	// 왼쪽 -> 체크, 오른쪽 -> 체크
 }
 
 void Knight::Update(float _DeltaTime)
@@ -258,6 +270,60 @@ void Knight::KnightIsActtingCheck()
 	{
 		ActtingMoveDirection_ = float4::ZERO;
 	}
+}
+
+void Knight::Jumpping()
+{
+}
+
+void Knight::Walkking(float _DeltaTime)
+{
+	this->KnightDirectionCheck();
+	this->isOnGroundCheck(_DeltaTime);
+	this->isWallCheck(_DeltaTime);
+
+	if (GetisWall() == true)
+	{
+		SetMoveDirection(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		//KnightManager_.ChangeState("FALL");
+	}
+
+	else if (GetisOnGround() == true)
+	{
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		{
+			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		{
+			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+		}
+	}
+
+
+	else
+	{
+		KnightManager_.ChangeState("FALL");
+	}
+
+}
+
+void Knight::DoubleSlashTimer(float _DeltaTime)
+{
+
+	if (isPossibleDoubleSlash_ == true)
+	{
+		KnightAttackTimer_ += _DeltaTime;
+
+		if (KnightAttackTimer_ > 0.5f)
+		{
+			KnightAttackTimer_ = 0.f;
+			isPossibleDoubleSlash_ = false;
+		}
+	}{}
 }
 
 
