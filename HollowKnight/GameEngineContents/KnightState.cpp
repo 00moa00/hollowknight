@@ -62,9 +62,30 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
 
 	}
+
 	else if (GetisOnGround() == true)
 	{
-		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		{
+			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		{
+			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+		}
+
+		//if (GetMoveDirection().CompareInt2D(float4::RIGHT) || GetMoveDirection().CompareInt2D(float4::LEFT))
+		//{
+		//	GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
+		//}
+
+		//else
+		//{
+		//	SetMoveDirection(float4::ZERO);
+		//	GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		//}
 	}
 
 

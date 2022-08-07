@@ -12,45 +12,7 @@ public:
 	float RightTop_;
 	float LeftTop_;
 
-	float GetRightBottom() 
-	{
-		return RightBottom_;
-	}
 
-	float GetLeftBottom() 
-	{
-		return LeftBottom_;
-	}
-
-	float GetRightTop() 
-	{
-		return RightTop_;
-	}
-
-	float GetLeftTop() 
-	{
-		return LeftTop_;
-	}
-
-	void SetRightBottom(float _f)
-	{
-		RightBottom_ = _f;
-	}
-
-	void SetLeftBottom(float _f)
-	{
-		LeftBottom_ = _f;
-	}
-
-	void SetRightTop(float _f)
-	{
-		RightTop_ = _f;
-	}
-
-	void SetLeftTop(float _f)
-	{
-		LeftTop_ = _f;
-	}
 
 };
 
@@ -125,17 +87,58 @@ protected:
 		return MainCollision_;
 	}
 
-	PixelPOINT GetPoint() 
+
+
+	float GetRightBottom()
 	{
-		return Point_;
+		return Point_.RightBottom_;
 	}
+
+	float GetLeftBottom()
+	{
+		return Point_.LeftBottom_;
+	}
+
+	float GetRightTop()
+	{
+		return Point_.RightTop_;
+	}
+
+	float GetLeftTop()
+	{
+		return Point_.LeftTop_;
+	}
+
+	void SetRightBottom(float _f)
+	{
+		Point_.RightBottom_ = _f;
+	}
+
+	void SetLeftBottom(float _f)
+	{
+		Point_.LeftBottom_ = _f;
+	}
+
+	void SetRightTop(float _f)
+	{
+		Point_.RightTop_ = _f;
+	}
+
+	void SetLeftTop(float _f)
+	{
+		Point_.LeftTop_ = _f;
+	}
+
 
 	float4 GetJumpPower() const
 	{
 		return JumpPower_;
 	}
 
-
+	PixelPOINT dfdf()
+	{
+		return Point_;
+	}
 
 
 	float GetGravity() const

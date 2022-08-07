@@ -114,9 +114,13 @@ void Knight::Start()
 	this->SetCollisionSize({ 0, 0, 0 });
 	this->SetFallSpeed(2);
 
-	GetPoint().SetLeftBottom(-50.f);
-	GetPoint().SetRightBottom(50.f);
+	//Point_.SetLeftBottom(-50.f);
+	this->SetLeftBottom(-15.f);
+	this->SetRightBottom(15.f);
 
+	//int a = 0;
+
+	//Point_.SetRightBottom(50.f);
 
 
 	//변수를 왼쪽 오른쪽 콜리전 사이즈를 만들어서
@@ -159,15 +163,15 @@ bool Knight::GetisKnightMove()
 		return true;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
-	{
-		return true;
-	}
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
+	//{
+	//	return true;
+	//}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
-	{
-		return true;
-	}
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
+	//{
+	//	return true;
+	//}
 
 	return false;
 }

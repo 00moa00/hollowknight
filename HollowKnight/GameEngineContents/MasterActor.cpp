@@ -43,39 +43,34 @@ void MasterActor::CreateCollisionComponent(float4 _LocalScale, int _Order)
 
 bool MasterActor::GetPixelRed(float4 _NextDir)
 {
-	//float DirSize = 0;
-	//if (GetMoveDirection().CompareInt2D(float4::RIGHT))
-	//{
-	//	DirSize = 50.f;
-	//}
 
-	//if (GetMoveDirection().CompareInt2D(float4::LEFT))
-	//{
-	//	DirSize = -50.f;
-	//}
-
-	//float DirColorCheck = 0.f;
-	float4 DirColor = {};
-	GetMoveDirection().Normalize();
-	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
-	{
-		DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + (_NextDir.x + GetPoint().GetRightBottom()) + GetCollisionSize().x,
-			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
-	}
-
-	if (GetMoveDirection().CompareInt2D(float4::LEFT))
-	{
-		DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + (_NextDir.x + GetPoint().GetLeftBottom()) + GetCollisionSize().x,
-			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
-	}
-
-
-
-	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetCollisionSize().x,
+	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x,
 		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 
 
-	if (Color.CompareInt4D(float4(0, 0, 1, 1)) == true && DirColor.CompareInt2D(float4(0, 0, 1 ,1)) == true)
+	//float4 DirColor = {};
+
+	//GetMoveDirection().Normalize();
+	//if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	//{
+	//	float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetRightBottom(),
+	//		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
+	//}
+
+	////else if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	////{
+	////	float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetLeftBottom(),
+	////		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
+	////}
+
+	//else
+	//{
+	//	DirColor = Color;
+	//}
+
+
+
+	if (Color.CompareInt4D(float4(0, 0, 1, 1)) == true /*&& DirColor.CompareInt2D(float4(0, 0, 1 ,1)) == true*/)
 	{
 		return true;
 	}
@@ -99,28 +94,32 @@ bool MasterActor::GetPixelBlue(float4 _NextDir)
 	//	DirSize = -50.f;
 	//}
 
-	float4 DirColor = {};
-	GetMoveDirection().Normalize();
 
+	float4 Color = 0;
+
+	GetMoveDirection().Normalize();
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
-		DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + (_NextDir.x + GetPoint().GetRightBottom()) + GetCollisionSize().x,
+		Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetRightBottom() ,
 			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 	}
 
-	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
-		DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + (_NextDir.x + GetPoint().GetLeftBottom()) + GetCollisionSize().x,
+		Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetLeftBottom(),
+			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
+	}
+
+	else
+	{
+		Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x,
 			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 	}
 
 
 
 
-	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x ,
-		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
-
-	if (Color.CompareInt4D(float4(1, 0, 0, 1)) == true && DirColor.CompareInt2D(float4(1, 0, 0, 1)) == true)
+	if (Color.CompareInt4D(float4(1, 0, 0, 1)) == true/* && DirColor.CompareInt4D(float4(1, 0, 0, 1)) == true*/)
 	{
 		return true;
 	}
