@@ -7,12 +7,11 @@ class GameEngineTextureRenderer;
 class PixelPOINT
 {
 public:
-	float RightBottom_;
-	float LeftBottom_;
-	float RightTop_;
-	float LeftTop_;
-
-
+	float4 RightBottom_;
+	float4 LeftBottom_;
+	float4 RightTop_;
+	float4 LeftTop_;
+	float4 CenterTop_;
 
 };
 
@@ -40,8 +39,10 @@ protected:
 	float Speed_;
 
 	bool isMove_;
+
 	bool isOnGround_;
 	bool isWall_;
+	bool isUpBlock_; // 위에 지형 지물이 있는지
 
 	float GravityY;
 	float JumpSpeed_;
@@ -70,6 +71,8 @@ protected:
 	//픽셀 충돌 체크
 	void isOnGroundCheck(float _DeltaTime);
 	void isWallCheck(float _DeltaTime);
+	void isUpBlockCheck(float _DeltaTime);
+
 	float4 GetNextPos(float4 _DeltaTime);
 
 	GameEngineTextureRenderer* GetRenderer() const
@@ -87,46 +90,55 @@ protected:
 		return MainCollision_;
 	}
 
-
-
-	float GetRightBottom()
+	float4 GetRightBottom()
 	{
 		return Point_.RightBottom_;
 	}
 
-	float GetLeftBottom()
+	float4 GetLeftBottom()
 	{
 		return Point_.LeftBottom_;
 	}
 
-	float GetRightTop()
+	float4 GetRightTop()
 	{
 		return Point_.RightTop_;
 	}
 
-	float GetLeftTop()
+	float4 GetLeftTop()
 	{
 		return Point_.LeftTop_;
 	}
 
-	void SetRightBottom(float _f)
+	float4 GetCenterTop()
+	{
+		return Point_.CenterTop_;
+	}
+
+
+	void SetRightBottom(float4 _f)
 	{
 		Point_.RightBottom_ = _f;
 	}
 
-	void SetLeftBottom(float _f)
+	void SetLeftBottom(float4 _f)
 	{
 		Point_.LeftBottom_ = _f;
 	}
 
-	void SetRightTop(float _f)
+	void SetRightTop(float4 _f)
 	{
 		Point_.RightTop_ = _f;
 	}
 
-	void SetLeftTop(float _f)
+	void SetLeftTop(float4 _f)
 	{
 		Point_.LeftTop_ = _f;
+	}
+
+	void SetCenterTop(float4 _f)
+	{
+		Point_.CenterTop_ = _f;
 	}
 
 
@@ -135,10 +147,6 @@ protected:
 		return JumpPower_;
 	}
 
-	PixelPOINT dfdf()
-	{
-		return Point_;
-	}
 
 
 	float GetGravity() const
@@ -192,6 +200,11 @@ protected:
 		return isWall_;
 	}
 
+
+	bool GetisUpBlock() const
+	{
+		return isUpBlock_;
+	}
 
 	//================================
 	//    Setter
@@ -268,6 +281,11 @@ protected:
 	void SetisWall(bool _b)
 	{
 		isWall_ = _b;
+	}
+
+	void SetisUpBlock(bool _b)
+	{
+		isUpBlock_ = _b;
 	}
 
 public:

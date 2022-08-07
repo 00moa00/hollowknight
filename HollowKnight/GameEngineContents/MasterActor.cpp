@@ -16,7 +16,8 @@ MasterActor::MasterActor()
 	MoveDirection_(float4::ZERO),
 	isMove_(true),
 	isOnGround_(false),
-	isWall_(false)
+	isWall_(false),
+	isUpBlock_(false)
 {
 }
 
@@ -48,28 +49,6 @@ bool MasterActor::GetPixelRed(float4 _NextDir)
 		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
 
 
-	//float4 DirColor = {};
-
-	//GetMoveDirection().Normalize();
-	//if (GetMoveDirection().CompareInt2D(float4::RIGHT))
-	//{
-	//	float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetRightBottom(),
-	//		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
-	//}
-
-	////else if (GetMoveDirection().CompareInt2D(float4::LEFT))
-	////{
-	////	float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetLeftBottom(),
-	////		-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
-	////}
-
-	//else
-	//{
-	//	DirColor = Color;
-	//}
-
-
-
 	if (Color.CompareInt4D(float4(0, 0, 1, 1)) == true /*&& DirColor.CompareInt2D(float4(0, 0, 1 ,1)) == true*/)
 	{
 		return true;
@@ -83,40 +62,23 @@ bool MasterActor::GetPixelRed(float4 _NextDir)
 bool MasterActor::GetPixelBlue(float4 _NextDir)
 {
 
-	//float DirSize = 0;
-	//if (GetMoveDirection().CompareInt2D(float4::RIGHT))
-	//{
-	//	DirSize = 50.f;
-	//}
 
-	//if (GetMoveDirection().CompareInt2D(float4::LEFT))
-	//{
-	//	DirSize = -50.f;
-	//}
+	float4 GetPixelPos = { GetTransform().GetLocalPosition().ix() + _NextDir.x ,
+		-(GetTransform().GetLocalPosition().iy() + _NextDir.y )};
 
-
-	float4 Color = 0;
 
 	GetMoveDirection().Normalize();
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
-		Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetRightBottom() ,
-			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
+		GetPixelPos += GetRightBottom();
 	}
 
 	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
-		Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x + GetLeftBottom(),
-			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
+		GetPixelPos += GetLeftBottom();
 	}
 
-	else
-	{
-		Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetTransform().GetLocalPosition().ix() + _NextDir.x,
-			-(GetTransform().GetLocalPosition().iy() + _NextDir.y - GetCollisionSize().y));
-	}
-
-
+	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixel(GetPixelPos.ix(), GetPixelPos.iy());
 
 
 	if (Color.CompareInt4D(float4(1, 0, 0, 1)) == true/* && DirColor.CompareInt4D(float4(1, 0, 0, 1)) == true*/)
@@ -154,6 +116,23 @@ void MasterActor::isWallCheck(float _DeltaTime)
 	else
 	{
 		this->SetisWall(false);
+	}
+}
+
+void MasterActor::isUpBlockCheck(float _DeltaTime)
+{
+	float4 NextPos = GetNextPos(_DeltaTime);
+	NextPos += GetCenterTop();
+
+
+	if (GetPixelBlue(NextPos) == true || GetPixelRed(NextPos) == true)
+	{
+		this->SetisUpBlock(true);
+	}
+
+	else
+	{
+		this->SetisUpBlock(false);
 	}
 }
 

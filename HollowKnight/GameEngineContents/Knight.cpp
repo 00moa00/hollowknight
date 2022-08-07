@@ -115,10 +115,11 @@ void Knight::Start()
 	this->SetFallSpeed(2);
 
 	//Point_.SetLeftBottom(-50.f);
-	this->SetLeftBottom(-15.f);
-	this->SetRightBottom(15.f);
-
-	//int a = 0;
+	this->SetLeftBottom({ -15.f, 0 , 0,  0});
+	this->SetRightBottom({ 15.f, 0, 0, 0 });
+	this->SetRightTop({ 15.f, 20.f, 0, 0  });
+	this->SetLeftTop({ -15.f, 20.f, 0, 0 });
+	this->SetCenterTop({ 0, 20.f, 0, 0 });
 
 	//Point_.SetRightBottom(50.f);
 
@@ -130,9 +131,6 @@ void Knight::Start()
 void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
-
-
-
 
 	std::string a = "";
 	if (isPressJumppingKey_ == true)
