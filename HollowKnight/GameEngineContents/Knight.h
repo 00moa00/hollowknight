@@ -41,6 +41,7 @@ private:
 
 	bool isLookMap_;
 	bool isRunMode_;
+	bool isLowHealth_;
 
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;

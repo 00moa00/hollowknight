@@ -35,7 +35,8 @@ Knight::Knight()
 	isLookMap_(false),
 	isWalkTurnEnd_(false),
 	isRunMode_(false),
-	isFocusEnd_(false)
+	isFocusEnd_(false),
+	isLowHealth_(false)
 {
 }
 
@@ -128,6 +129,8 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("DASH_ANIMATION", FrameAnimation_DESC("Knight_dash_v020000-Sheet.png", 0, 11, 0.070f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("FOCUS_ANIMATION", FrameAnimation_DESC("Knight_focus_v020000-Sheet.png", 0, 11, 0.100f, false));
+
+	GetRenderer()->CreateFrameAnimationCutTexture("LOW_HEALTH_ANIMATION", FrameAnimation_DESC("Knight_idle_low_health000-Sheet.png", 0, 9, 0.100f));
 
 
 	// ---- ´Þ¸®±â ----
