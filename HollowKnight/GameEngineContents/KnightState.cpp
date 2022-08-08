@@ -3,7 +3,15 @@
 
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
-	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
+	if (_Info.PrevState == "RUN")
+	{
+		GetRenderer()->ChangeFrameAnimation("RUN_TO_IDLE_ANIMATION");
+
+	}
+	else
+	{
+		GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
+	}
 }
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -28,12 +36,23 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightLookDownTimer_ = 0.f; // 타이머 초기화
 	}
 
+	if (GameEngineInput::GetInst()->IsDown("KnightRunMode") == true)
+	{
+		isRunMode_ = !isRunMode_;
+	}
+
 	// ========== 스테이트 변경 ==========
 
- 	if (GetisKnightMove() == true)
+ 	if (GetisKnightMove() == true && isRunMode_ == false)
 	{
 		KnightManager_.ChangeState("WALK");
 	}
+
+	if (GetisKnightMove() == true && isRunMode_ == true)
+	{
+		KnightManager_.ChangeState("RUN");
+	}
+
 
 	if (GetisOnGround() == false)
 	{
@@ -159,6 +178,13 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
+	if (GameEngineInput::GetInst()->IsDown("KnightRunMode") == true)
+	{
+		isRunMode_ = !isRunMode_;
+	}
+
+
+
 	// ========== 스테이트 변경 ==========
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
@@ -186,7 +212,6 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		isLookMap_ = true;
 		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
 		KnightManager_.ChangeState("MAP_WALKING");
-
 	}
 
 	if (GetisKnightMove() == false)
@@ -200,16 +225,18 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("DASH");
 	}
 
+	if (isRunMode_ == true)
+	{
+		KnightManager_.ChangeState("RUN");
+	}
+
 }
 
 void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 {
-	//GetRenderer()->ChangeFrameAnimation("WALK_TURN_ANIMATION");
-
 	if (PrevDirection_.CompareInt2D(float4::LEFT) == true)
 	{
 		GetRenderer()->ChangeFrameAnimation("WALK_TURN_RIGHT_ANIMATION");
-
 	}
 
 	if (PrevDirection_.CompareInt2D(float4::RIGHT) == true)
@@ -223,7 +250,19 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (isWalkTurnEnd_ == true)
 	{
 		isWalkTurnEnd_ = false;
-		KnightManager_.ChangeState("WALK");
+
+		if (isRunMode_ == true)
+		{
+			KnightManager_.ChangeState("RUN");
+
+		}
+
+		else if (isRunMode_ == false)
+		{
+			KnightManager_.ChangeState("WALK");
+
+		}
+
 	}
 }
 
@@ -557,6 +596,118 @@ void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightDashEnd(const StateInfo& _Info)
 {
 	SetSpeed(300.f);
+}
+
+void Knight::KnightRunStart(const StateInfo& _Info)
+{
+	if (_Info.PrevState == "STILL" || _Info.PrevState == "WALK")
+	{
+		GetRenderer()->ChangeFrameAnimation("IDLE_TO_RUN_ANIMATION");
+	}
+
+	else
+	{
+		GetRenderer()->ChangeFrameAnimation("RUN_ANIMATION");
+
+	}
+
+}
+
+void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	DoubleSlashTimer(_DeltaTime);
+
+	this->KnightDirectionCheck();
+	this->isOnGroundCheck(_DeltaTime);
+	this->isWallCheck(_DeltaTime);
+
+	if (GetisWall() == true)
+	{
+		SetMoveDirection(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		//KnightManager_.ChangeState("FALL");
+	}
+
+	else if (GetisOnGround() == true)
+	{
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		{
+
+			if (PrevDirection_.CompareInt2D(float4::LEFT) == false)
+			{
+				PrevDirection_ = float4::LEFT;
+				KnightManager_.ChangeState("WALK_TURN");
+			}
+
+			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+			PrevDirection_ = float4::LEFT;
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		{
+
+			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
+			{
+				PrevDirection_ = float4::RIGHT;
+				KnightManager_.ChangeState("WALK_TURN");
+			}
+
+			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+			PrevDirection_ = float4::RIGHT;
+		}
+	}
+
+
+	else
+	{
+		KnightManager_.ChangeState("FALL");
+	}
+
+
+	// ========== 스테이트 변경 ==========
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	{
+		KnightManager_.ChangeState("JUMP");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
+	{
+		isPressJumppingKey_ = false;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
+	{
+		KnightManager_.ChangeState("SLASH");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
+	{
+		KnightManager_.ChangeState("DOUBLE_SLASH");
+	}
+
+	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
+	{
+		isLookMap_ = true;
+		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
+		KnightManager_.ChangeState("MAP_WALKING");
+	}
+
+	if (GetisKnightMove() == false)
+	{
+		KnightManager_.ChangeState("STILL");
+	}
+
+	// 대쉬
+	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
+	{
+		KnightManager_.ChangeState("DASH");
+	}
+}
+
+void Knight::KnightRunEnd(const StateInfo& _Info)
+{
 }
 
 

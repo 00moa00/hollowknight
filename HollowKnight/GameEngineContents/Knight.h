@@ -24,6 +24,7 @@ protected:
 
 private:
 
+
 	bool isSlashEnd_;		// 공격 애니메이션 종료
 	bool isDoubleSlashEnd_; // 더블 공격 애니메이션 종료
 	bool isUpSlashEnd_;
@@ -38,6 +39,7 @@ private:
 	bool isPossibleDoubleJump_;
 
 	bool isLookMap_;
+	bool isRunMode_;
 
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
@@ -113,6 +115,14 @@ private:
 	void KnightDashStart(const StateInfo& _Info);
 	void KnightDashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightDashEnd(const StateInfo& _Info);
+
+	// ---- 달리기 ----
+
+	void KnightRunStart(const StateInfo& _Info);
+	void KnightRunUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightRunEnd(const StateInfo& _Info);
+
+
 
 	// ---- 공격 ----
 

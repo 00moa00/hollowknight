@@ -33,7 +33,8 @@ Knight::Knight()
 	isUpSlashEnd_(false),
 	isDownSlashEnd_(false),
 	isLookMap_(false),
-	isWalkTurnEnd_(false)
+	isWalkTurnEnd_(false),
+	isRunMode_(false)
 {
 }
 
@@ -89,6 +90,8 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightUp", 'W');
 		GameEngineInput::GetInst()->CreateKey("KnightDown", 'S');
 
+		GameEngineInput::GetInst()->CreateKey("KnightRunMode", 'R');
+
 		GameEngineInput::GetInst()->CreateKey("KnightLookMap", VK_TAB);
 		GameEngineInput::GetInst()->CreateKey("KnightDash", VK_SHIFT);
 
@@ -121,6 +124,12 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("DASH_ANIMATION", FrameAnimation_DESC("Knight_dash_v020000-Sheet.png", 0, 11, 0.070f, false));
+
+	// ---- 달리기 ----
+
+	GetRenderer()->CreateFrameAnimationCutTexture("RUN_ANIMATION", FrameAnimation_DESC("Knight_run0000-Sheet.png", 0, 7, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_TO_RUN_ANIMATION", FrameAnimation_DESC("Knight_idle_to_run0000-Sheet.png", 0, 4, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("RUN_TO_IDLE_ANIMATION", FrameAnimation_DESC("Knight_run_to_idle000-Sheet.png", 0, 5, 0.100f, false));
 
 	// ---- 지도 보기 ----
 
@@ -209,6 +218,16 @@ void Knight::Start()
 			isWalkTurnEnd_ = true;
 		});
 
+	GetRenderer()->AnimationBindEnd("IDLE_TO_RUN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("RUN_ANIMATION"); 
+		});
+
+	GetRenderer()->AnimationBindEnd("RUN_TO_IDLE_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
+		});
+
 
 	//================================
 	//    Create State
@@ -258,6 +277,13 @@ void Knight::Start()
 	
 	KnightManager_.CreateStateMember("DOWN_SLASH"
 		, std::bind(&Knight::KnightDownSlashUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightDownSlashStart, this, std::placeholders::_1), std::bind(&Knight::KnightDownSlashEnd, this, std::placeholders::_1));
+
+
+	// ---- 달리기 ----
+
+	KnightManager_.CreateStateMember("RUN"
+		, std::bind(&Knight::KnightRunUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightRunStart, this, std::placeholders::_1), std::bind(&Knight::KnightRunEnd, this, std::placeholders::_1));
+
 
 	// ---- 지도 보기 ----
 

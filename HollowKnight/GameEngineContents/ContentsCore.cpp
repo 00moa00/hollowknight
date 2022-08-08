@@ -180,6 +180,9 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_turn000-Sheet.png", 2, 1);
 		GameEngineTexture::Cut("Knight_dash_v020000-Sheet.png", 12, 1);
 
+		GameEngineTexture::Cut("Knight_run0000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("Knight_idle_to_run0000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Knight_run_to_idle000-Sheet.png", 6, 1);
 
 
 
