@@ -187,6 +187,11 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_focus_v020000-Sheet.png", 12, 1);
 		GameEngineTexture::Cut("Knight_idle_low_health000-Sheet.png", 10, 1);
 
+		GameEngineTexture::Cut("Knight_wake_up_ground0000-Sheet.png", 21, 1);
+
+		// 스킬
+		GameEngineTexture::Cut("Knight_cast_v030002-Sheet.png", 12, 1);
+
 
 		// 지도보기
 		GameEngineTexture::Cut("Knight_sit_map_look0026-Sheet.png", 4, 1);
@@ -217,16 +222,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_mantis_down_slash0001-Sheet.png", 2, 1);
 		GameEngineTexture::Cut("Knight_mantis_slash_left0001-Sheet.png", 2, 1);
 
-
 	}
-
-
-
-
-	//Dir.Move("BlackSet");
-	//GameEngineFolderTexture::Load(Dir.GetFullPath());
-
-	// Knight
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))

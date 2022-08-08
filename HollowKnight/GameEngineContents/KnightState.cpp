@@ -1153,7 +1153,6 @@ void Knight::KnightMapWalkingTurnlStart(const StateInfo& _Info)
 	if (PrevDirection_.CompareInt2D(float4::LEFT) == true)
 	{
 		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_TURN_RIGHT_ANIMATION");
-
 	}
 
 	if (PrevDirection_.CompareInt2D(float4::RIGHT) == true)
