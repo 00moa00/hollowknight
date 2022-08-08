@@ -177,19 +177,17 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Knight_double_jump_v020000-Sheet.png", 8, 1);
 
-		// ∏  æ…æ∆º≠ ∫∏±‚
+		GameEngineTexture::Cut("Knight_turn000-Sheet.png", 2, 1);
+		GameEngineTexture::Cut("Knight_dash_v020000-Sheet.png", 12, 1);
+
+
+
+
+		// ¡ˆµµ∫∏±‚
 		GameEngineTexture::Cut("Knight_sit_map_look0026-Sheet.png", 4, 1);
-
-		// ∏  ∫∏∏Èº≠ ∞»±‚
 		GameEngineTexture::Cut("Knight_walk_map0000-Sheet.png", 10, 1);
-
-		// ∏  ∫∏¥Ÿ∞° πÊ«‚ µπ∏Æ±‚
 		GameEngineTexture::Cut("Knight_walk_map_turn0000-Sheet.png", 2, 1);
-
-		// ∏  ±‚∑œ
 		GameEngineTexture::Cut("Knight_sit_map_write0000-Sheet.png", 4, 1);
-
-		// ∏  ∫∏∏Èº≠ º≠¿÷±‚
 		GameEngineTexture::Cut("Knight_idle_map0000-Sheet.png", 9, 1);
 
 

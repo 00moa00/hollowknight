@@ -43,6 +43,7 @@ private:
 	float KnightSlashTimer_; // 더블 공격 체크 타이머
 	float KnightLookUpTimer_;
 	float KnightLookDownTimer_;
+	float KnightDashTimer_; // 대쉬 타이머
 
 	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
 
@@ -74,6 +75,9 @@ private:
 	//================================
 	//    Bind State
 	//================================
+
+	// ---- 기본 ----
+
 	void KnightStillStart( const StateInfo& _Info);
 	void KnightStillUpdate(float _DeltaTime, const StateInfo& _Info);
 
@@ -100,6 +104,12 @@ private:
 	void KnightFallUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightFallEnd(const StateInfo& _Info);
 
+	void KnightDashStart(const StateInfo& _Info);
+	void KnightDashUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightDashEnd(const StateInfo& _Info);
+
+	// ---- 공격 ----
+
 	void KnightSlashStart(const StateInfo& _Info);
 	void KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightSlashEnd(const StateInfo& _Info);
@@ -117,7 +127,7 @@ private:
 	void KnightDownSlashEnd(const StateInfo& _Info);
 
 
-	//맵
+	// ---- 지도 보기 ----
 
 	void KnightMapStillStart(const StateInfo& _Info);
 	void KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info);

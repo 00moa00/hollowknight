@@ -18,16 +18,14 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		isPressJumppingKey_ = false;
 	}
 
-
-	// 타이머 초기화
 	if (GameEngineInput::GetInst()->IsFree("KnightUp") == true)
 	{
-		KnightLookUpTimer_ = 0.f;
+		KnightLookUpTimer_ = 0.f; // 타이머 초기화
 	}
 
 	if (GameEngineInput::GetInst()->IsFree("KnightDown") == true)
 	{
-		KnightLookDownTimer_ = 0.f;
+		KnightLookDownTimer_ = 0.f; // 타이머 초기화
 	}
 
 	// ========== 스테이트 변경 ==========
@@ -41,6 +39,8 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightManager_.ChangeState("FALL");
 	}
+
+
 
 	// 점프
 	if (GameEngineInput::GetInst()->IsDown("KnightJump") == true && isPressJumppingKey_ == false)
@@ -84,15 +84,22 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		LookUpTimerAndChangeState(_DeltaTime);
 	}
 
-
 	// 맵 보기
-	if (GameEngineInput::GetInst()->IsDown("LookMap") == true)
+	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
 	{
 		isLookMap_ = true;
 		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_ANIMATION");
 		KnightManager_.ChangeState("MAP_STILL");
 
 	}
+
+	// 대쉬
+	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
+	{
+		KnightManager_.ChangeState("DASH");
+	}
+
+
 }
 
 void Knight::KnightWalkStart(const StateInfo& _Info)
@@ -158,7 +165,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 	}
 
-	if (GameEngineInput::GetInst()->IsDown("LookMap") == true)
+	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
 	{
 		isLookMap_ = true;
 		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
@@ -169,7 +176,12 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GetisKnightMove() == false)
 	{
 		KnightManager_.ChangeState("STILL");
+	}
 
+	// 대쉬
+	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
+	{
+		KnightManager_.ChangeState("DASH");
 	}
 
 }
@@ -430,6 +442,82 @@ void Knight::KnightFallEnd(const StateInfo& _Info)
 		SetMoveDirection(ActtingMoveDirection_);
 	}
 }
+
+
+void Knight::KnightDashStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("DASH_ANIMATION");
+	KnightDashTimer_ = 0.f;
+	SetSpeed(1200.f);
+
+}
+
+void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+	KnightDashTimer_ += _DeltaTime;
+	//DoubleSlashTimer(_DeltaTime);
+
+	this->KnightDirectionCheck();
+	this->isOnGroundCheck(_DeltaTime);
+	this->isWallCheck(_DeltaTime);
+
+	if (GetisWall() == true)
+	{
+		SetMoveDirection(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		//KnightManager_.ChangeState("FALL");
+	}
+
+	else if (GetisOnGround() == true)
+	{
+		GetMoveDirection().Normalize();
+		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
+
+	}
+
+	else
+	{
+		KnightManager_.ChangeState("FALL");
+	}
+
+
+	// ========== 스테이트 변경 ==========
+
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	//{
+	//	KnightManager_.ChangeState("JUMP");
+	//}
+
+	//if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
+	//{
+	//	isPressJumppingKey_ = false;
+	//}
+
+	//if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
+	//{
+	//	KnightManager_.ChangeState("SLASH");
+	//}
+
+	//if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
+	//{
+	//	KnightManager_.ChangeState("DOUBLE_SLASH");
+	//}
+
+
+
+	if (KnightDashTimer_ > 0.4f)
+	{
+		KnightManager_.ChangeState("STILL");
+	}
+}
+
+void Knight::KnightDashEnd(const StateInfo& _Info)
+{
+	SetSpeed(300.f);
+
+}
+
 
 void Knight::KnightSlashStart(const StateInfo& _Info)
 {
@@ -734,7 +822,7 @@ void Knight::KnightMapStillStart(const StateInfo& _Info)
 void Knight::KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
-	if (GameEngineInput::GetInst()->IsDown("LookMap") == true)
+	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
 	{
 		isLookMap_ = false;
 		KnightManager_.ChangeState("STILL");
@@ -803,7 +891,7 @@ void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("MAP_STILL");
 	}
 
-	if (GameEngineInput::GetInst()->IsDown("LookMap") == true)
+	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
 	{
 		isLookMap_ = false;
 		KnightManager_.ChangeState("WALK");
