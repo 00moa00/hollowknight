@@ -35,6 +35,8 @@ private:
 	bool isPossibleDoubleSlash_;
 	bool isPossibleDoubleJump_;
 
+	bool isLookMap_;
+
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
 
@@ -56,16 +58,18 @@ private:
 	void KnightActtingDirectionCheck();
 	void KnightIsActtingCheck();
 
+	void DoubleSlashTimer(float _DeltaTime); //더블 공격(콤보) 타이머
+
+	void LookUpTimerAndChangeState(float _DeltaTime);
+	void LookDownTimerAndChangeState(float _DeltaTime);
+
 	//================================
 	//    State
 	//================================
 
-	void Jumpping();
 	void Walkking(float _DeltaTime);
 
-	void DoubleSlashTimer(float _DeltaTime); //더블 공격(콤보) 타이머
-	void LookUpTimerAndChangeState(float _DeltaTime);
-	void LookDownTimerAndChangeState(float _DeltaTime);
+
 
 	//================================
 	//    Bind State
@@ -76,7 +80,6 @@ private:
 	void KnightWalkStart(const StateInfo& _Info);
 	void KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info);
 
-
 	void KnightLookDownStart(const StateInfo& _Info);
 	void KnightLookDownUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightLookDownEnd(const StateInfo& _Info);
@@ -84,7 +87,6 @@ private:
 	void KnightLookUpStart(const StateInfo& _Info);
 	void KnightLookUpUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightLookUpEnd(const StateInfo& _Info);
-
 
 	void KnightJumpStart(const StateInfo& _Info);
 	void KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info);
@@ -113,6 +115,29 @@ private:
 	void KnightDownSlashStart(const StateInfo& _Info);
 	void KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightDownSlashEnd(const StateInfo& _Info);
+
+
+	//맵
+
+	void KnightMapStillStart(const StateInfo& _Info);
+	void KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightMapStillEnd(const StateInfo& _Info);
+
+	void KnightMapWalkinglStart(const StateInfo& _Info);
+	void KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightMapWalkinglEnd(const StateInfo& _Info);
+
+	void KnightMapWalkingTurnlStart(const StateInfo& _Info);
+	void KnightMapWalkingTurnlUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightMapWalkingTurnlEnd(const StateInfo& _Info);
+
+	void KnightMapSitLooklStart(const StateInfo& _Info);
+	void KnightMapSitLooklUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightMapSitLooklEnd(const StateInfo& _Info);
+
+	void KnightMapSitWritelStart(const StateInfo& _Info);
+	void KnightMapSitWritelUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightMapSitWritelEnd(const StateInfo& _Info);
 
 	//================================
 	//    Bind Animation

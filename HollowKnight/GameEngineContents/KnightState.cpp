@@ -81,6 +81,12 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightLookDownTimer_ = 0.f;
 	}
 
+	// 맵 보기
+	if (GameEngineInput::GetInst()->IsFree("LookMap") == true)
+	{
+		KnightLookDownTimer_ = 0.f;
+	}
+
 }
 
 void Knight::KnightWalkStart(const StateInfo& _Info)
@@ -387,7 +393,6 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
 		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
 		&& GameEngineInput::GetInst()->IsFree("KnightDown") == true
-
 		&& isPossibleDoubleSlash_ == false)
 	{
 		KnightManager_.ChangeState("SLASH");
@@ -401,7 +406,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 	}
 
-
+	//더블 점프
 	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true)
 	{
 		KnightManager_.ChangeState("DOUBLE_JUMP");
@@ -709,6 +714,66 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Knight::KnightDownSlashEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapStillStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapStillEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapWalkinglStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapWalkinglEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapWalkingTurnlStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapWalkingTurnlUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapWalkingTurnlEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapSitLooklStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapSitLooklUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapSitLooklEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapSitWritelStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapSitWritelUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightMapSitWritelEnd(const StateInfo& _Info)
 {
 }
 

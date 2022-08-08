@@ -168,6 +168,7 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Shaders[i].GetFullPath());
 		}
 
+		//기본
 		GameEngineTexture::Cut("Knight_idle_still_020000-Sheet.png", 9, 1);
 		GameEngineTexture::Cut("Knight_shadow_dash0000-Sheet.png", 12, 1);
 		GameEngineTexture::Cut("Knight_jump_01-Sheet.png", 6, 1);
@@ -176,14 +177,25 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Knight_double_jump_v020000-Sheet.png", 8, 1);
 
-		// 맵 보기
+		// 맵 앉아서 보기
 		GameEngineTexture::Cut("Knight_sit_map_look0026-Sheet.png", 4, 1);
+
+		// 맵 보면서 걷기
+		GameEngineTexture::Cut("Knight_walk_map0000-Sheet.png", 10, 1);
+
+		// 맵 보다가 방향 돌리기
+		GameEngineTexture::Cut("Knight_walk_map_turn0000-Sheet.png", 2, 1);
+
+		// 맵 기록
+		GameEngineTexture::Cut("Knight_sit_map_write0000-Sheet.png", 4, 1);
+
+		// 맵 보면서 서있기
+		GameEngineTexture::Cut("Knight_idle_map0000-Sheet.png", 9, 1);
+
 
 		// 살펴보기
 		GameEngineTexture::Cut("Knight_look_down0000-Sheet.png", 6, 1);
 		GameEngineTexture::Cut("Knight_look_up0000-Sheet.png", 6, 1);
-
-
 
 		//공격
 		GameEngineTexture::Cut("Knight_slash_left_longer0000-Sheet.png", 11, 1);
