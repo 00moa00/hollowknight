@@ -119,6 +119,11 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
+	// 집중
+	if (GameEngineInput::GetInst()->IsDown("KnightFocus") == true)
+	{
+		KnightManager_.ChangeState("FOCUS");
+	}
 }
 
 void Knight::KnightWalkStart(const StateInfo& _Info)
@@ -171,7 +176,6 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 	}
 
-
 	else
 	{
 		KnightManager_.ChangeState("FALL");
@@ -182,8 +186,6 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		isRunMode_ = !isRunMode_;
 	}
-
-
 
 	// ========== 스테이트 변경 ==========
 
@@ -254,15 +256,12 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 		if (isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
-
 		}
 
 		else if (isRunMode_ == false)
 		{
 			KnightManager_.ChangeState("WALK");
-
 		}
-
 	}
 }
 
@@ -524,7 +523,6 @@ void Knight::KnightFallEnd(const StateInfo& _Info)
 	}
 }
 
-
 void Knight::KnightDashStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("DASH_ANIMATION");
@@ -598,6 +596,31 @@ void Knight::KnightDashEnd(const StateInfo& _Info)
 	SetSpeed(300.f);
 }
 
+void Knight::KnightFocusStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("FOCUS_ANIMATION");
+}
+
+void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+	if (GameEngineInput::GetInst()->IsFree("KnightFocus") == true)
+	{
+		KnightManager_.ChangeState("STILL");
+	}
+
+	if (isFocusEnd_ == true)
+	{
+		isFocusEnd_ = false;
+		KnightManager_.ChangeState("STILL");
+	}
+
+}
+
+void Knight::KnightFocusEnd(const StateInfo& _Info)
+{
+}
+
 void Knight::KnightRunStart(const StateInfo& _Info)
 {
 	if (_Info.PrevState == "STILL" || _Info.PrevState == "WALK")
@@ -608,7 +631,6 @@ void Knight::KnightRunStart(const StateInfo& _Info)
 	else
 	{
 		GetRenderer()->ChangeFrameAnimation("RUN_ANIMATION");
-
 	}
 
 }
@@ -709,7 +731,6 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightRunEnd(const StateInfo& _Info)
 {
 }
-
 
 void Knight::KnightSlashStart(const StateInfo& _Info)
 {
@@ -1139,11 +1160,11 @@ void Knight::KnightMapWalkingTurnlStart(const StateInfo& _Info)
 	{
 		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_TURN_LEFT_ANIMATION");
 	}
-
 }
 
 void Knight::KnightMapWalkingTurnlUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
 	if (isMapWalkTurnEnd_ == true)
 	{
 		isMapWalkTurnEnd_ = false;

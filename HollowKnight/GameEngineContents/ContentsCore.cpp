@@ -184,6 +184,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_idle_to_run0000-Sheet.png", 5, 1);
 		GameEngineTexture::Cut("Knight_run_to_idle000-Sheet.png", 6, 1);
 
+		GameEngineTexture::Cut("Knight_focus_v020000-Sheet.png", 12, 1);
 
 
 		// 지도보기

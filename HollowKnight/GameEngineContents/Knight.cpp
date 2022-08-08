@@ -34,7 +34,8 @@ Knight::Knight()
 	isDownSlashEnd_(false),
 	isLookMap_(false),
 	isWalkTurnEnd_(false),
-	isRunMode_(false)
+	isRunMode_(false),
+	isFocusEnd_(false)
 {
 }
 
@@ -94,6 +95,7 @@ void Knight::Start()
 
 		GameEngineInput::GetInst()->CreateKey("KnightLookMap", VK_TAB);
 		GameEngineInput::GetInst()->CreateKey("KnightDash", VK_SHIFT);
+		GameEngineInput::GetInst()->CreateKey("KnightFocus", 'Q');
 
 		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
 
@@ -124,6 +126,9 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("DASH_ANIMATION", FrameAnimation_DESC("Knight_dash_v020000-Sheet.png", 0, 11, 0.070f, false));
+
+	GetRenderer()->CreateFrameAnimationCutTexture("FOCUS_ANIMATION", FrameAnimation_DESC("Knight_focus_v020000-Sheet.png", 0, 11, 0.100f, false));
+
 
 	// ---- 달리기 ----
 
@@ -228,6 +233,13 @@ void Knight::Start()
 			GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
 		});
 
+	GetRenderer()->AnimationBindEnd("FOCUS_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isFocusEnd_ = true;
+		});
+
+
+	
 
 	//================================
 	//    Create State
@@ -262,6 +274,9 @@ void Knight::Start()
 
 	KnightManager_.CreateStateMember("DASH"
 		, std::bind(&Knight::KnightDashUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightDashStart, this, std::placeholders::_1), std::bind(&Knight::KnightDashEnd, this, std::placeholders::_1));
+	
+	KnightManager_.CreateStateMember("FOCUS"
+		, std::bind(&Knight::KnightFocusUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1), std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
 
 
 	// ---- 공격 ----

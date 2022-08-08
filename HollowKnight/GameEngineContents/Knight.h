@@ -32,6 +32,7 @@ private:
 	bool isDoubleJumpEnd_;
 	bool isWalkTurnEnd_;
 	bool isMapWalkTurnEnd_;
+	bool isFocusEnd_;
 
 	bool isKnightActtingMove_;
 	bool isPressJumppingKey_;
@@ -115,6 +116,10 @@ private:
 	void KnightDashStart(const StateInfo& _Info);
 	void KnightDashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightDashEnd(const StateInfo& _Info);
+
+	void KnightFocusStart(const StateInfo& _Info);
+	void KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightFocusEnd(const StateInfo& _Info);
 
 	// ---- ´Þ¸®±â ----
 
