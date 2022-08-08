@@ -29,6 +29,8 @@ private:
 	bool isUpSlashEnd_;
 	bool isDownSlashEnd_;
 	bool isDoubleJumpEnd_;
+	bool isWalkTurnEnd_;
+	bool isMapWalkTurnEnd_;
 
 	bool isKnightActtingMove_;
 	bool isPressJumppingKey_;
@@ -46,6 +48,7 @@ private:
 	float KnightDashTimer_; // 대쉬 타이머
 
 	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
+	float4 PrevDirection_;
 
 	GameEngineStateManager KnightManager_;
 	KnightSlashEffect* KnightSlashEffect_;
@@ -83,6 +86,9 @@ private:
 
 	void KnightWalkStart(const StateInfo& _Info);
 	void KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info);
+
+	void KnightWalkTurnStart(const StateInfo& _Info);
+	void KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info);
 
 	void KnightLookDownStart(const StateInfo& _Info);
 	void KnightLookDownUpdate(float _DeltaTime, const StateInfo& _Info);

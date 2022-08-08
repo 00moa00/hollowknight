@@ -32,7 +32,8 @@ Knight::Knight()
 	isDoubleJumpEnd_(false),
 	isUpSlashEnd_(false),
 	isDownSlashEnd_(false),
-	isLookMap_(false)
+	isLookMap_(false),
+	isWalkTurnEnd_(false)
 {
 }
 
@@ -112,7 +113,9 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.100f));
+	
+	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 0, 0.050f, false ));
+	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 1, 1, 0.050f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_DOWN_ANIMATION", FrameAnimation_DESC("Knight_look_down0000-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));
@@ -127,8 +130,9 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_OPEN_WALKING_ANIMATION", FrameAnimation_DESC("Knight_walk_map0000-Sheet.png", 0, 1, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_WALKING_ANIMATION", FrameAnimation_DESC("Knight_walk_map0000-Sheet.png", 2, 9, 0.100f));
 
-	GetRenderer()->CreateFrameAnimationCutTexture("MAP_WALKING_TURN_ANIMATION", FrameAnimation_DESC("Knight_walk_map_turn0000-Sheet.png", 0, 1, 0.100f, false));
-	
+	GetRenderer()->CreateFrameAnimationCutTexture("MAP_WALKING_TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Knight_walk_map_turn0000-Sheet.png", 0, 0, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("MAP_WALKING_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_walk_map_turn0000-Sheet.png", 1, 1, 0.100f, false));
+
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_SIT_WRITE_ANIMATION", FrameAnimation_DESC("Knight_sit_map_write0000-Sheet.png", 0, 3, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_SIT_LOOK_ANIMATION", FrameAnimation_DESC("Knight_sit_map_look0026-Sheet.png", 0, 3, 0.100f));
 
@@ -184,6 +188,27 @@ void Knight::Start()
 			GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
 		});
 
+	GetRenderer()->AnimationBindEnd("MAP_WALKING_TURN_RIGHT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isMapWalkTurnEnd_ = true;
+		});
+
+
+	GetRenderer()->AnimationBindEnd("MAP_WALKING_TURN_LEFT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isMapWalkTurnEnd_ = true;
+		});
+
+	GetRenderer()->AnimationBindEnd("WALK_TURN_RIGHT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isWalkTurnEnd_ = true;
+		});
+
+	GetRenderer()->AnimationBindEnd("WALK_TURN_LEFT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isWalkTurnEnd_ = true;
+		});
+
 
 	//================================
 	//    Create State
@@ -196,6 +221,10 @@ void Knight::Start()
 	
 	KnightManager_.CreateStateMember("WALK"
 		, std::bind(&Knight::KnightWalkUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWalkStart, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("WALK_TURN"
+		, std::bind(&Knight::KnightWalkTurnUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWalkTurnStart, this, std::placeholders::_1));
+
 
 	KnightManager_.CreateStateMember("LOOK_UP"
 		, std::bind(&Knight::KnightLookUpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightLookUpStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookUpEnd, this, std::placeholders::_1));

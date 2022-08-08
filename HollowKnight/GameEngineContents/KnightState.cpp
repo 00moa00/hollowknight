@@ -88,7 +88,7 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
 	{
 		isLookMap_ = true;
-		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_ANIMATION");
+		//GetRenderer()->ChangeFrameAnimation("MAP_OPEN_ANIMATION");
 		KnightManager_.ChangeState("MAP_STILL");
 
 	}
@@ -126,13 +126,29 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 		{
+
+			if (PrevDirection_.CompareInt2D( float4::LEFT) == false)
+			{
+				PrevDirection_ = float4::LEFT;
+				KnightManager_.ChangeState("WALK_TURN");
+			}
+
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+			PrevDirection_ = float4::LEFT;
 		}
 
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
+
+			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
+			{
+				PrevDirection_ = float4::RIGHT;
+				KnightManager_.ChangeState("WALK_TURN");
+			}
+
 			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+			PrevDirection_ = float4::RIGHT;
 		}
 	}
 
@@ -185,6 +201,32 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 }
+
+void Knight::KnightWalkTurnStart(const StateInfo& _Info)
+{
+	//GetRenderer()->ChangeFrameAnimation("WALK_TURN_ANIMATION");
+
+	if (PrevDirection_.CompareInt2D(float4::LEFT) == true)
+	{
+		GetRenderer()->ChangeFrameAnimation("WALK_TURN_RIGHT_ANIMATION");
+
+	}
+
+	if (PrevDirection_.CompareInt2D(float4::RIGHT) == true)
+	{
+		GetRenderer()->ChangeFrameAnimation("WALK_TURN_LEFT_ANIMATION");
+	}
+}
+
+void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isWalkTurnEnd_ == true)
+	{
+		isWalkTurnEnd_ = false;
+		KnightManager_.ChangeState("WALK");
+	}
+}
+
 
 
 void Knight::KnightLookDownStart(const StateInfo& _Info)
@@ -515,7 +557,6 @@ void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightDashEnd(const StateInfo& _Info)
 {
 	SetSpeed(300.f);
-
 }
 
 
@@ -817,6 +858,16 @@ void Knight::KnightDownSlashEnd(const StateInfo& _Info)
 
 void Knight::KnightMapStillStart(const StateInfo& _Info)
 {
+	if (_Info.PrevState == "STILL")
+	{
+		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_ANIMATION");
+
+	}
+
+	if (_Info.PrevState == "MAP_WALKING")
+	{
+		GetRenderer()->ChangeFrameAnimation("MAP_STILL_ANIMATION");
+	}
 }
 
 void Knight::KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -830,7 +881,7 @@ void Knight::KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisKnightMove() == true)
 	{
-		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
+		//GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
 		KnightManager_.ChangeState("MAP_WALKING");
 	}
 
@@ -843,8 +894,15 @@ void Knight::KnightMapStillEnd(const StateInfo& _Info)
 
 void Knight::KnightMapWalkinglStart(const StateInfo& _Info)
 {
-	//KnightManager_.Get
+	if (_Info.PrevState == "MAP_STILL")
+	{
+		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
+	}
 
+	if (_Info.PrevState == "MAP_WALKING_TURN")
+	{
+		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
+	}
 }
 
 void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -864,13 +922,29 @@ void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 		{
+
+			if (PrevDirection_.CompareInt2D(float4::LEFT) == false)
+			{
+				PrevDirection_ = float4::LEFT;
+				KnightManager_.ChangeState("MAP_WALKING_TURN");
+			}
+
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+			PrevDirection_ = float4::LEFT;
 		}
 
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
+
+			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
+			{
+				PrevDirection_ = float4::RIGHT;
+				KnightManager_.ChangeState("MAP_WALKING_TURN");
+			}
+
 			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+			PrevDirection_ = float4::RIGHT;
 		}
 	}
 
@@ -887,7 +961,6 @@ void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisKnightMove() == false)
 	{
-		GetRenderer()->ChangeFrameAnimation("MAP_STILL_ANIMATION");
 		KnightManager_.ChangeState("MAP_STILL");
 	}
 
@@ -905,10 +978,26 @@ void Knight::KnightMapWalkinglEnd(const StateInfo& _Info)
 
 void Knight::KnightMapWalkingTurnlStart(const StateInfo& _Info)
 {
+	if (PrevDirection_.CompareInt2D(float4::LEFT) == true)
+	{
+		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_TURN_RIGHT_ANIMATION");
+
+	}
+
+	if (PrevDirection_.CompareInt2D(float4::RIGHT) == true)
+	{
+		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_TURN_LEFT_ANIMATION");
+	}
+
 }
 
 void Knight::KnightMapWalkingTurnlUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isMapWalkTurnEnd_ == true)
+	{
+		isMapWalkTurnEnd_ = false;
+		KnightManager_.ChangeState("MAP_WALKING");
+	}
 }
 
 void Knight::KnightMapWalkingTurnlEnd(const StateInfo& _Info)
