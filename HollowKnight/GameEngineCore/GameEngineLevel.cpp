@@ -7,8 +7,9 @@
 #include "GameEngineCollision.h"
 #include "GameEngineGUI.h"
 #include "GameEngineCoreDebug.h"
+#include "GEngine.h"
 
-GameEngineLevel::GameEngineLevel() 
+GameEngineLevel::GameEngineLevel()
 {
 	Cameras.resize(static_cast<unsigned int>(CAMERAORDER::UICAMERA));
 
@@ -27,7 +28,7 @@ GameEngineLevel::GameEngineLevel()
 	}
 }
 
-GameEngineLevel::~GameEngineLevel() 
+GameEngineLevel::~GameEngineLevel()
 {
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
 	{
@@ -61,7 +62,7 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 	}
 }
 
-void GameEngineLevel::ActorOnEvent() 
+void GameEngineLevel::ActorOnEvent()
 {
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
 	{
@@ -72,7 +73,8 @@ void GameEngineLevel::ActorOnEvent()
 			{
 				continue;
 			}
-			Actor->OnEvent();
+			// 루트 액터만 뭔가를 하는거죠?
+			Actor->AllOnEvent();
 		}
 	}
 }
@@ -88,7 +90,7 @@ void GameEngineLevel::ActorOffEvent()
 			{
 				continue;
 			}
-			Actor->OffEvent();
+			Actor->AllOffEvent();
 		}
 	}
 }
@@ -137,6 +139,27 @@ GameEngineCameraActor* GameEngineLevel::GetUICameraActor()
 
 void GameEngineLevel::Render(float _DelataTime)
 {
+	{
+		if (true == GEngine::IsCollisionDebug())
+		{
+			std::map<int, std::list<GameEngineCollision*>>::iterator StartGroupIter = AllCollisions.begin();
+			std::map<int, std::list<GameEngineCollision*>>::iterator EndGroupIter = AllCollisions.end();
+			for (; StartGroupIter != EndGroupIter; ++StartGroupIter)
+			{
+				std::list<GameEngineCollision*>& Group = StartGroupIter->second;
+				std::list<GameEngineCollision*>::iterator GroupStart = Group.begin();
+				std::list<GameEngineCollision*>::iterator GroupEnd = Group.end();
+				for (; GroupStart != GroupEnd; ++GroupStart)
+				{
+					if (true == (*GroupStart)->IsUpdate())
+					{
+						(*GroupStart)->DebugRender();
+					}
+				}
+			}
+		}
+	}
+
 	GameEngineDevice::RenderStart();
 
 	// 이 사이에서 무언가를 해야 합니다.
@@ -218,11 +241,11 @@ void GameEngineLevel::Release(float _DelataTime)
 			{
 				GroupStart = Group.erase(GroupStart);
 			}
-			else 
+			else
 			{
 				++GroupStart;
 			}
-			
+
 		}
 	}
 
@@ -264,7 +287,7 @@ void GameEngineLevel::PushCollision(GameEngineCollision* _Collision, int _Order)
 void GameEngineLevel::OverChildMove(GameEngineLevel* _NextLevel)
 {
 	// 플레이 레벨
-	
+
 	// 로그인 레벨
 	// _NextLevel
 	{

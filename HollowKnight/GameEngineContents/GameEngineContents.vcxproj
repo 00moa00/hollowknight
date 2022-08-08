@@ -178,6 +178,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MapEditorLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MasterActor.h">
       <SubType>
       </SubType>
@@ -226,6 +230,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TitleMapRenderer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="UIPoint.h">
       <SubType>
       </SubType>
@@ -257,6 +265,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="KnightState.cpp" />
+    <ClCompile Include="MapEditorLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MasterActor.cpp">
       <SubType>
       </SubType>
@@ -304,6 +316,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleMapRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>

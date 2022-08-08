@@ -37,6 +37,9 @@
     <Filter Include="Actor\Effect">
       <UniqueIdentifier>{4c71ab7d-c0fd-407f-b3ac-e6f1e4e001d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{e2ff85b3-9293-4a0a-82c4-e32bd43c091b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -97,6 +100,12 @@
     <ClInclude Include="KnightSlashEffect.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="TitleMapRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -156,6 +165,12 @@
     </ClCompile>
     <ClCompile Include="KnightSlashEffect.cpp">
       <Filter>Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleMapRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

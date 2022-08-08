@@ -1,8 +1,10 @@
 #include "PreCompile.h"
 #include "GameEngineStatusWindow.h"
 #include "GameEngineRenderTarget.h"
+#include "GameEngineCameraActor.h"
+#include "GEngine.h"
 
-void GameEngineImageShotWindow::RenderTextureSetting(ImTextureID _RenderTexture, ImVec2 _Size) 
+void GameEngineImageShotWindow::RenderTextureSetting(ImTextureID _RenderTexture, ImVec2 _Size)
 {
 	RenderTexture = _RenderTexture;
 	Size = _Size;
@@ -18,11 +20,11 @@ void GameEngineImageShotWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 }
 
 
-GameEngineStatusWindow::GameEngineStatusWindow() 
+GameEngineStatusWindow::GameEngineStatusWindow()
 {
 }
 
-GameEngineStatusWindow::~GameEngineStatusWindow() 
+GameEngineStatusWindow::~GameEngineStatusWindow()
 {
 }
 
@@ -32,13 +34,25 @@ void GameEngineStatusWindow::Initialize(class GameEngineLevel* _Level)
 
 }
 
-void GameEngineStatusWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime) 
+void GameEngineStatusWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
 	int FPS = static_cast<int>(1.0f / _DeltaTime);
 	// printf 형식인데 안씀.
 
 	std::string Name = "FPS : " + std::to_string(FPS);
 	ImGui::Text(Name.c_str());
+
+	if (true == ImGui::Button("CollisionDebugSwtich"))
+	{
+		GEngine::CollisionDebugSwitch();
+	}
+
+	if (true == ImGui::Button("FreeCameaOnOff"))
+	{
+		// ;
+		GEngine::GetCurrentLevel()->GetMainCameraActor()->FreeCameraModeOnOff();
+	}
+
 
 	std::string AllRenderTarget = "AllRenderTarget";
 	ImGui::Text(AllRenderTarget.c_str());
@@ -58,7 +72,7 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 				if (true == ImGui::ImageButton(static_cast<ImTextureID>(_View), { Scale.x, Scale.y }))
 				{
 					GameEngineImageShotWindow* NewWindow = GameEngineGUI::CreateGUIWindow<GameEngineImageShotWindow>("ImageShot", nullptr);
-					NewWindow->RenderTextureSetting(static_cast<ImTextureID>(_View), { GameEngineWindow::GetScale().x ,GameEngineWindow::GetScale().y } );
+					NewWindow->RenderTextureSetting(static_cast<ImTextureID>(_View), { GameEngineWindow::GetScale().x ,GameEngineWindow::GetScale().y });
 				}
 			}
 
