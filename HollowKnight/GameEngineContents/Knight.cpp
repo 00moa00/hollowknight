@@ -19,7 +19,9 @@ Knight::Knight()
 	:
 	KnightManager_(),
 	KnightJumpPower_(),
-	KnightAttackTimer_(),
+	KnightSlashTimer_(),
+	KnightLookUpTimer_(),
+	KnightLookDownTimer_(),
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
 	isPressJumppingKey_(false),
@@ -64,7 +66,10 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
-
+	
+	//GetRenderer()->CreateFrameAnimationCutTexture("MAP_LOOK_ANIMATION", FrameAnimation_DESC("Knight_sit_map_look0026-Sheet.png", 0, 3, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_DOWN_ANIMATION", FrameAnimation_DESC("Knight_look_down0000-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 0, 5, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 6, 10, 0.100f));
@@ -105,6 +110,13 @@ void Knight::Start()
 	
 	KnightManager_.CreateStateMember("WALK"
 		, std::bind(&Knight::KnightWalkUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWalkStart, this, std::placeholders::_1));
+
+
+	KnightManager_.CreateStateMember("LOOK_UP"
+		, std::bind(&Knight::KnightLookUpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightLookUpStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookUpEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("LOOK_DOWN"
+		, std::bind(&Knight::KnightLookDownUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightLookDownStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookDownEnd, this, std::placeholders::_1));
 
 	KnightManager_.CreateStateMember("JUMP"
 		, std::bind(&Knight::KnightJumpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightJumpEnd, this, std::placeholders::_1));
@@ -325,17 +337,39 @@ void Knight::Walkking(float _DeltaTime)
 
 void Knight::DoubleSlashTimer(float _DeltaTime)
 {
-
 	if (isPossibleDoubleSlash_ == true)
 	{
-		KnightAttackTimer_ += _DeltaTime;
+		KnightSlashTimer_ += _DeltaTime;
 
-		if (KnightAttackTimer_ > 0.5f)
+		if (KnightSlashTimer_ > 0.5f)
 		{
-			KnightAttackTimer_ = 0.f;
+			KnightSlashTimer_ = 0.f;
 			isPossibleDoubleSlash_ = false;
 		}
-	}{}
+	}
+}
+
+void Knight::LookUpTimerAndChangeState(float _DeltaTime)
+{
+	KnightLookUpTimer_ += _DeltaTime;
+
+	if (KnightLookUpTimer_ > 0.5f)
+	{
+		KnightLookUpTimer_ = 0.f;
+		KnightManager_.ChangeState("LOOK_UP");
+	}
+}
+
+void Knight::LookDownTimerAndChangeState(float _DeltaTime)
+{
+
+	KnightLookDownTimer_ += _DeltaTime;
+
+	if (KnightLookDownTimer_ > 0.5f)
+	{
+		KnightLookDownTimer_ = 0.f;
+		KnightManager_.ChangeState("LOOK_DOWN");
+	}
 }
 
 

@@ -37,7 +37,10 @@ private:
 
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
-	float KnightAttackTimer_;
+
+	float KnightSlashTimer_; // 더블 공격 체크 타이머
+	float KnightLookUpTimer_;
+	float KnightLookDownTimer_;
 
 	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
 
@@ -59,7 +62,10 @@ private:
 
 	void Jumpping();
 	void Walkking(float _DeltaTime);
+
 	void DoubleSlashTimer(float _DeltaTime); //더블 공격(콤보) 타이머
+	void LookUpTimerAndChangeState(float _DeltaTime);
+	void LookDownTimerAndChangeState(float _DeltaTime);
 
 	//================================
 	//    Bind State
@@ -69,6 +75,16 @@ private:
 
 	void KnightWalkStart(const StateInfo& _Info);
 	void KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info);
+
+
+	void KnightLookDownStart(const StateInfo& _Info);
+	void KnightLookDownUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightLookDownEnd(const StateInfo& _Info);
+
+	void KnightLookUpStart(const StateInfo& _Info);
+	void KnightLookUpUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightLookUpEnd(const StateInfo& _Info);
+
 
 	void KnightJumpStart(const StateInfo& _Info);
 	void KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info);

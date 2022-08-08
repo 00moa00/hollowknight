@@ -57,6 +57,29 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
+	// 아래 바라보기
+	if (GameEngineInput::GetInst()->IsPress("KnightDown") == true )
+	{
+		LookDownTimerAndChangeState(_DeltaTime);
+	}
+
+
+	// 위 바라보기
+	if (GameEngineInput::GetInst()->IsPress("KnightUp") == true)
+	{
+		LookUpTimerAndChangeState(_DeltaTime);
+	}
+
+	// 타이머 초기화
+	if (GameEngineInput::GetInst()->IsFree("KnightUp") == true )
+	{
+		KnightLookUpTimer_ = 0.f;
+	}
+
+	if ( GameEngineInput::GetInst()->IsFree("KnightDown") == true)
+	{
+		KnightLookDownTimer_ = 0.f;
+	}
 
 }
 
@@ -132,6 +155,41 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 }
 
+
+void Knight::KnightLookDownStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("LOOK_DOWN_ANIMATION");
+}
+
+void Knight::KnightLookDownUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (GameEngineInput::GetInst()->IsFree("KnightDown") == true)
+	{
+		KnightManager_.ChangeState("STILL");
+	}
+}
+
+void Knight::KnightLookDownEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightLookUpStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("LOOK_UP_ANIMATION");
+
+}
+
+void Knight::KnightLookUpUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (GameEngineInput::GetInst()->IsFree("KnightUp") == true)
+	{
+		KnightManager_.ChangeState("STILL");
+	}
+}
+
+void Knight::KnightLookUpEnd(const StateInfo& _Info)
+{
+}
 
 void Knight::KnightJumpStart(const StateInfo& _Info)
 {
@@ -228,8 +286,7 @@ void Knight::KnightDoubleJumpStart(const StateInfo& _Info)
 {
 	isPossibleDoubleJump_ = false;
 	isDoubleJumpEnd_ = false;
-	//GetRenderer()->GetTransform().SetLocalScale({ 503,300,1 });
-	//GetRenderer()->SetPivotToVector({0,-500});
+
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_JUMP_ANIMATION");
 
 	SetJumpPower({ 0, KnightDoubleJumpPower_, 0 });
@@ -273,6 +330,8 @@ void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
 	this->SetisGround(false);
 
 }
+
+
 
 // 낙하
 void Knight::KnightFallStart(const StateInfo& _Info)
@@ -360,7 +419,7 @@ void Knight::KnightFallEnd(const StateInfo& _Info)
 void Knight::KnightSlashStart(const StateInfo& _Info)
 {
 	isPossibleDoubleSlash_ = false;
-	KnightAttackTimer_ = 0.f;
+	KnightSlashTimer_ = 0.f;
 	GetRenderer()->ChangeFrameAnimation("SLASH_ANIMATION");
 	KnightSlashEffect_->SetAnimationSlash();
 }

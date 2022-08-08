@@ -176,6 +176,15 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight DJump Cutscene Cln_collect_double_jump0000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Knight_double_jump_v020000-Sheet.png", 8, 1);
 
+		// 맵 보기
+		GameEngineTexture::Cut("Knight_sit_map_look0026-Sheet.png", 4, 1);
+
+		// 살펴보기
+		GameEngineTexture::Cut("Knight_look_down0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Knight_look_up0000-Sheet.png", 6, 1);
+
+
+
 		//공격
 		GameEngineTexture::Cut("Knight_slash_left_longer0000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Knight_up_slash0000-Sheet.png", 5, 1);
