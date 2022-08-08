@@ -106,8 +106,16 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 	
-	GetRenderer()->CreateFrameAnimationCutTexture("MAP_STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_map0000-Sheet.png", 0, 8, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("MAP_WALKING_ANIMATION", FrameAnimation_DESC("Knight_walk_map0000-Sheet.png", 0, 9, 0.100f));
+
+	GetRenderer()->CreateFrameAnimationCutTexture("MAP_OPEN_ANIMATION", FrameAnimation_DESC("Knight_idle_map0000-Sheet.png", 0, 1, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("MAP_STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_map0000-Sheet.png", 2, 8, 0.100f));
+	
+	
+	GetRenderer()->CreateFrameAnimationCutTexture("MAP_OPEN_WALKING_ANIMATION", FrameAnimation_DESC("Knight_walk_map0000-Sheet.png", 0, 1, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("MAP_WALKING_ANIMATION", FrameAnimation_DESC("Knight_walk_map0000-Sheet.png", 2, 9, 0.100f));
+
+	//GetRenderer()->CreateFrameAnimationCutTexture("MAP_START_WALKING_ANIMATION", FrameAnimation_DESC("Knight_walk_map0000-Sheet.png", 2, 9, 0.100f));
+
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_WALKING_TURN_ANIMATION", FrameAnimation_DESC("Knight_walk_map_turn0000-Sheet.png", 0, 1, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_SIT_WRITE_ANIMATION", FrameAnimation_DESC("Knight_sit_map_write0000-Sheet.png", 0, 3, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_SIT_LOOK_ANIMATION", FrameAnimation_DESC("Knight_sit_map_look0026-Sheet.png", 0, 3, 0.100f));
@@ -136,7 +144,6 @@ void Knight::Start()
 			isDoubleSlashEnd_ = true;
 		});
 
-
 	GetRenderer()->AnimationBindEnd("DOUBLE_JUMP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isDoubleJumpEnd_ = true;
@@ -146,12 +153,21 @@ void Knight::Start()
 		{
 			isUpSlashEnd_ = true;
 		});
+
 	GetRenderer()->AnimationBindEnd("DOWN_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isDownSlashEnd_ = true;
 		});
 
+	GetRenderer()->AnimationBindEnd("MAP_OPEN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("MAP_STILL_ANIMATION");
+		});
 
+	GetRenderer()->AnimationBindEnd("MAP_OPEN_WALKING_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
+		});
 
 	//================================
 	//    Create State

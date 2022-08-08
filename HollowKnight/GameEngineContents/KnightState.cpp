@@ -8,12 +8,28 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	// ========== UPDATE ==========
+
 	DoubleSlashTimer(_DeltaTime);
 
 	if (GameEngineInput::GetInst()->IsFree("KnightJump") == true && isPressJumppingKey_ == true)
 	{
 		isPressJumppingKey_ = false;
 	}
+
+
+	// 타이머 초기화
+	if (GameEngineInput::GetInst()->IsFree("KnightUp") == true)
+	{
+		KnightLookUpTimer_ = 0.f;
+	}
+
+	if (GameEngineInput::GetInst()->IsFree("KnightDown") == true)
+	{
+		KnightLookDownTimer_ = 0.f;
+	}
+
 	// ========== 스테이트 변경 ==========
 
  	if (GetisKnightMove() == true)
@@ -56,13 +72,11 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 	}
 
-
 	// 아래 바라보기
 	if (GameEngineInput::GetInst()->IsPress("KnightDown") == true )
 	{
 		LookDownTimerAndChangeState(_DeltaTime);
 	}
-
 
 	// 위 바라보기
 	if (GameEngineInput::GetInst()->IsPress("KnightUp") == true)
@@ -70,23 +84,15 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		LookUpTimerAndChangeState(_DeltaTime);
 	}
 
-	// 타이머 초기화
-	if (GameEngineInput::GetInst()->IsFree("KnightUp") == true )
-	{
-		KnightLookUpTimer_ = 0.f;
-	}
-
-	if ( GameEngineInput::GetInst()->IsFree("KnightDown") == true)
-	{
-		KnightLookDownTimer_ = 0.f;
-	}
 
 	// 맵 보기
-	if (GameEngineInput::GetInst()->IsFree("LookMap") == true)
+	if (GameEngineInput::GetInst()->IsDown("LookMap") == true)
 	{
-		KnightLookDownTimer_ = 0.f;
-	}
+		isLookMap_ = true;
+		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_ANIMATION");
+		KnightManager_.ChangeState("MAP_STILL");
 
+	}
 }
 
 void Knight::KnightWalkStart(const StateInfo& _Info)
@@ -152,6 +158,13 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 	}
 
+	if (GameEngineInput::GetInst()->IsDown("LookMap") == true)
+	{
+		isLookMap_ = true;
+		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
+		KnightManager_.ChangeState("MAP_WALKING");
+
+	}
 
 	if (GetisKnightMove() == false)
 	{
@@ -337,9 +350,6 @@ void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
 
 }
 
-
-
-// 낙하
 void Knight::KnightFallStart(const StateInfo& _Info)
 {
 	isKnightActtingMove_ = false;
@@ -723,6 +733,20 @@ void Knight::KnightMapStillStart(const StateInfo& _Info)
 
 void Knight::KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (GameEngineInput::GetInst()->IsDown("LookMap") == true)
+	{
+		isLookMap_ = false;
+		KnightManager_.ChangeState("STILL");
+	}
+
+	if (GetisKnightMove() == true)
+	{
+		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
+		KnightManager_.ChangeState("MAP_WALKING");
+	}
+
+
 }
 
 void Knight::KnightMapStillEnd(const StateInfo& _Info)
@@ -731,10 +755,60 @@ void Knight::KnightMapStillEnd(const StateInfo& _Info)
 
 void Knight::KnightMapWalkinglStart(const StateInfo& _Info)
 {
+	//KnightManager_.Get
+
 }
 
 void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	this->KnightDirectionCheck();
+	this->isOnGroundCheck(_DeltaTime);
+	this->isWallCheck(_DeltaTime);
+
+	if (GetisWall() == true)
+	{
+		SetMoveDirection(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		//KnightManager_.ChangeState("FALL");
+	}
+
+	else if (GetisOnGround() == true)
+	{
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		{
+			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		{
+			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+		}
+	}
+
+
+	else
+	{
+		isLookMap_ = false;
+		KnightManager_.ChangeState("FALL");
+	}
+
+
+	// ========== 스테이트 변경 ==========
+
+
+	if (GetisKnightMove() == false)
+	{
+		GetRenderer()->ChangeFrameAnimation("MAP_STILL_ANIMATION");
+		KnightManager_.ChangeState("MAP_STILL");
+	}
+
+	if (GameEngineInput::GetInst()->IsDown("LookMap") == true)
+	{
+		isLookMap_ = false;
+		KnightManager_.ChangeState("WALK");
+
+	}
 }
 
 void Knight::KnightMapWalkinglEnd(const StateInfo& _Info)
