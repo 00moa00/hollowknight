@@ -327,31 +327,27 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		this->isOnGroundCheck(_DeltaTime);
 		this->isWallCheck(_DeltaTime);
 
-		if (GetJumpPower().y <= 0.f || GetisUpBlock() == true || GetisWall() == true )
-		{
-   			KnightManager_.ChangeState("FALL");
-		}
-
-		else
-		{
-			
-			KnightActtingDirectionCheck();
-
-		}
-
 		ActtingMoveDirection_.Normalize();
 		SubJumpPower((float4::UP + -ActtingMoveDirection_ / 2) * GetGravity() * _DeltaTime);
 
 		GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
 
+
+		if (GetJumpPower().y <= 0.f || GetisUpBlock() == true || GetisWall() == true)
+		{
+			KnightManager_.ChangeState("FALL");
+		}
+
+		else
+		{
+			KnightActtingDirectionCheck();
+		}
+
+
 	}
 
 	// ========== 스테이트 변경 ==========
 
-	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
-	{
-		KnightManager_.ChangeState("FALL");
-	}
 
 	// 위 공격
 	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
@@ -382,7 +378,14 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
 		&& isPossibleDoubleSlash_ == true)
 	{
+
 		KnightManager_.ChangeState("DOUBLE_SLASH");
+	}
+
+
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
+	{
+		KnightManager_.ChangeState("FALL");
 	}
 }
 
@@ -442,6 +445,25 @@ void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
 
 }
 
+void Knight::KnightLandStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("LAND_ANIMATION");
+}
+
+void Knight::KnightLandUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isLandEnd_ == true)
+	{
+		isLandEnd_ = false;
+		KnightManager_.ChangeState("STILL");
+	}
+
+}
+
+void Knight::KnightLandEnd(const StateInfo& _Info)
+{
+}
+
 void Knight::KnightFallStart(const StateInfo& _Info)
 {
 	isKnightActtingMove_ = false;
@@ -474,7 +496,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GetisOnGround() == true)
 	{
 		this->SetisGround(true);
-		KnightManager_.ChangeState("STILL");
+		KnightManager_.ChangeState("LAND");
 	}
 
 	// 위 공격

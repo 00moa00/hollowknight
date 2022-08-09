@@ -36,7 +36,8 @@ Knight::Knight()
 	isWalkTurnEnd_(false),
 	isRunMode_(false),
 	isFocusEnd_(false),
-	isLowHealth_(false)
+	isLowHealth_(false),
+	isLandEnd_(false)
 {
 }
 
@@ -117,7 +118,8 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.100f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
-	
+	GetRenderer()->CreateFrameAnimationCutTexture("LAND_ANIMATION", FrameAnimation_DESC("Knight_land0000-Sheet.png", 0, 2, 0.100f, false));
+
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 0, 0.050f, false ));
@@ -241,6 +243,10 @@ void Knight::Start()
 			isFocusEnd_ = true;
 		});
 
+	GetRenderer()->AnimationBindEnd("LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isLandEnd_ = true;
+		});
 
 	
 
@@ -271,6 +277,10 @@ void Knight::Start()
 
 	KnightManager_.CreateStateMember("DOUBLE_JUMP"
 		, std::bind(&Knight::KnightDoubleJumpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightDoubleJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightDoubleJumpEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("LAND"
+		, std::bind(&Knight::KnightLandUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightLandStart, this, std::placeholders::_1), std::bind(&Knight::KnightLandEnd, this, std::placeholders::_1));
+
 
 	KnightManager_.CreateStateMember("FALL"
 		, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightFallStart, this, std::placeholders::_1), std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));

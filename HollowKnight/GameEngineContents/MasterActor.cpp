@@ -129,7 +129,7 @@ void MasterActor::isUpBlockCheck(float _DeltaTime)
 	NextPos += GetCenterTop();
 
 
-	if (GetPixelBlue(NextPos) == true || GetPixelRed(NextPos) == true)
+	if (GetPixelBlue(NextPos) == true)
 	{
 		this->SetisUpBlock(true);
 	}
