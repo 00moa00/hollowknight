@@ -25,6 +25,7 @@ void MasterMap::CreateBackGround(std::string _FileName)
 	BackGroundRenderer_->SetTexture(_FileName);
 	BackGroundRenderer_->GetTransform().SetLocalScale(BackGroundRenderer_->GetCurTexture()->GetScale());
 	BackGroundRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
+	//BackGroundRenderer_->Set
 
 }
 

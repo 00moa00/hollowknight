@@ -36,7 +36,6 @@ void HollowKnightLevel::CreateKingsPass1Monster()
 
 void HollowKnightLevel::CameraMoveWindowLimit()
 {
-
 	//카메라가 없다면
 	if (GetMainCameraActor() == nullptr)
 	{
@@ -80,6 +79,10 @@ void HollowKnightLevel::CameraMoveWindowLimit()
 
 void HollowKnightLevel::CameraMoveKnightLimit()
 {
+
+	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
+
+
 	if (GetMainCameraActor() == nullptr)
 	{
 		return;
