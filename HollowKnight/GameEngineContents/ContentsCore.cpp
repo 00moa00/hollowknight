@@ -195,6 +195,11 @@ void ContentsCore::Start()
 		// 스킬
 		GameEngineTexture::Cut("Knight_cast_v030002-Sheet.png", 12, 1);
 
+		// 벽타기
+		GameEngineTexture::Cut("Knight_wall_slide0000-Sheet.png", 4, 1);
+
+
+
 
 		// 지도보기
 		GameEngineTexture::Cut("Knight_sit_map_look0026-Sheet.png", 4, 1);
