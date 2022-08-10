@@ -16,6 +16,7 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
 
 	// ========== UPDATE ==========
 
@@ -217,7 +218,6 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisKnightMove() == false)
 	{
-	//	GetTransform().SetWorldMove(GetMoveDirection()  * _DeltaTime);
 		KnightManager_.ChangeState("STILL");
 	}
 
@@ -330,6 +330,7 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		ActtingMoveDirection_.Normalize();
 		SubJumpPower((float4::UP + -ActtingMoveDirection_ / 2) * GetGravity() * _DeltaTime);
 
+
 		GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
 
 
@@ -439,7 +440,7 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
 {
 	//GetRenderer()->GetTransform().SetLocalScale({ 349, 186, 1 });
-	GetRenderer()->SetPivot(PIVOTMODE::BOT);
+	//GetRenderer()->SetPivot(PIVOTMODE::BOT);
 
 	this->SetisGround(false);
 
