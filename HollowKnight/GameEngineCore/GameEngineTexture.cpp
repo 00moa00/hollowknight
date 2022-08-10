@@ -447,7 +447,7 @@ PixelColor GameEngineTexture::GetPixelToPixelColor(int _x, int _y)
 	}
 
 
-		break;
+	break;
 	case DXGI_FORMAT_B8G8R8X8_UNORM:
 
 		break;
@@ -525,6 +525,7 @@ PixelColor GameEngineTexture::GetPixelToPixelColor(int _x, int _y)
 
 	return ReturnColor;
 }
+
 
 float4 GameEngineTexture::GetPixelToFloat4(int _x, int _y)
 {

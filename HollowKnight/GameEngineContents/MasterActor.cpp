@@ -47,13 +47,13 @@ bool MasterActor::GetPixelRed(float4 _NextDir)
 	float4 GetPixelPos = { GetTransform().GetLocalPosition().ix() + _NextDir.x ,
 	-(GetTransform().GetLocalPosition().iy() + _NextDir.y) };
 
-	GetPixelPos += GetLeftBottom().y;
+	//GetPixelPos += GetLeftBottom().y;
 
 	float4 Color = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetPixelPos.ix(), GetPixelPos.iy());
 
 
 
-	if (Color.CompareInt4D(float4(1, 0, 0, 1)) == true /*&& DirColor.CompareInt2D(float4(0, 0, 1 ,1)) == true*/)
+	if (Color.CompareInt4D(float4(1.f, 0, 0, 1.f)) == true /*&& DirColor.CompareInt2D(float4(0, 0, 1 ,1)) == true*/)
 	{
 		return true;
 	}

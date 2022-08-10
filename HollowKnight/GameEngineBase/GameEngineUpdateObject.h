@@ -19,6 +19,11 @@ public:
 	GameEngineUpdateObject& operator=(GameEngineUpdateObject&& _Other) noexcept = delete;
 
 
+	inline bool& IsUpdateRef()
+	{
+		return IsUpdate_;
+	}
+
 	inline void On()
 	{
 		IsUpdate_ = true;
@@ -169,7 +174,7 @@ protected:
 	virtual void ReleaseObject(std::list<GameEngineUpdateObject*>& _RelaseList);
 
 	template<typename ConvertType>
-	std::list<ConvertType*> GetConvertChilds()
+	std::list<ConvertType*> GetConvertChilds() 
 	{
 		std::list<ConvertType*> NewList;
 
