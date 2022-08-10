@@ -65,8 +65,8 @@ void Knight::Start()
 	SetCollisionSize({ 0, 0, 0 });
 	SetFallSpeed(2);
 
-	SetLeftBottom({ -15.f, 15.f , 0,  0 });
-	SetRightBottom({ 15.f, 15.f, 0, 0 });
+	SetLeftBottom({ -15.f, 0 , 0,  0 });
+	SetRightBottom({ 15.f, 0, 0, 0 });
 	SetRightTop({ 15.f, 20.f, 0, 0 });
 	SetLeftTop({ -15.f, 20.f, 0, 0 });
 	SetCenterTop({ 0, 20.f, 0, 0 });

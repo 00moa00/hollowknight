@@ -12,6 +12,8 @@ public:
 	float4 RightTop_;
 	float4 LeftTop_;
 	float4 CenterTop_;
+	float4 RightCenter_;
+	float4 LeftCenter_;
 
 };
 
@@ -139,6 +141,17 @@ protected:
 	void SetCenterTop(float4 _f)
 	{
 		Point_.CenterTop_ = _f;
+	}
+
+	void SetLeftCenter(float4 _f)
+	{
+		Point_.LeftCenter_ = _f;
+	}
+
+
+	void SetRightCenter(float4 _f)
+	{
+		Point_.RightCenter_ = _f;
 	}
 
 

@@ -141,7 +141,6 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisWall() == true)
 	{
-		SetMoveDirection(float4::ZERO);
 		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
 		//KnightManager_.ChangeState("FALL");
 	}
@@ -218,6 +217,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisKnightMove() == false)
 	{
+	//	GetTransform().SetWorldMove(GetMoveDirection()  * _DeltaTime);
 		KnightManager_.ChangeState("STILL");
 	}
 
@@ -468,6 +468,8 @@ void Knight::KnightFallStart(const StateInfo& _Info)
 {
 	isKnightActtingMove_ = false;
 	ActtingMoveDirection_ = float4::ZERO;
+	
+	SetMoveDirection(float4::DOWN);
 
 	GetRenderer()->ChangeFrameAnimation("FAll_ANIMATION");
 }
@@ -488,16 +490,22 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		ActtingMoveDirection_ = float4::ZERO;
 	}
 
-	GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+	else if (GetisOnGround() == true)
+	{
+		KnightManager_.ChangeState("LAND");
+	}
+
+	else
+	{
+		GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+
+	}
+
+
 
 
 	// ========== 스테이트 변경 ==========
 
-	if (GetisOnGround() == true)
-	{
-		this->SetisGround(true);
-		KnightManager_.ChangeState("LAND");
-	}
 
 	// 위 공격
 	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
