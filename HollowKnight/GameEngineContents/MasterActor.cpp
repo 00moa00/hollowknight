@@ -42,10 +42,10 @@ void MasterActor::CreateCollisionComponent(float4 _LocalScale, int _Order)
 	MainCollision_->ChangeOrder(_Order);
 }
 
-bool MasterActor::GetPixelRed(float4 _NextDir)
+bool MasterActor::GetPixelRed(float4 _NextPos)
 {
-	float4 GetPixelPos = { GetTransform().GetLocalPosition().ix() + _NextDir.x ,
-	-(GetTransform().GetLocalPosition().iy() + _NextDir.y) };
+	float4 GetPixelPos = { GetTransform().GetWorldPosition().ix() + _NextPos.x ,
+	-(GetTransform().GetWorldPosition().iy() + _NextPos.y) };
 
 	//GetPixelPos += GetLeftBottom().y;
 
@@ -63,12 +63,12 @@ bool MasterActor::GetPixelRed(float4 _NextDir)
 	}
 }
 
-bool MasterActor::GetPixelBlue(float4 _NextDir)
+bool MasterActor::GetPixelBlue(float4 _NextPos)
 {
 
 
-	float4 GetPixelPos = { GetTransform().GetLocalPosition().ix() + _NextDir.x ,
-		-(GetTransform().GetLocalPosition().iy() + _NextDir.y )};
+	float4 GetPixelPos = { GetTransform().GetLocalPosition().ix() + _NextPos.x ,
+		-(GetTransform().GetLocalPosition().iy() + _NextPos.y )};
 
 
 	GetMoveDirection().Normalize();
@@ -142,6 +142,9 @@ void MasterActor::isUpBlockCheck(float _DeltaTime)
 
 float4 MasterActor::GetNextPos(float4 _DeltaTime)
 {
-	this->SetMoveDirectionNormalize();
+	//this->SetMoveDirectionNormalize();
+
+	GetMoveDirection().Normalize();
+
 	return (GetMoveDirection() * _DeltaTime * GetSpeed());
 }

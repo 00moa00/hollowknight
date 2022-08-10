@@ -67,8 +67,8 @@ protected:
 	//================================
 
 	//bgr
-	bool GetPixelRed(float4 _NextDir);
-	bool GetPixelBlue(float4 _NextDir);
+	bool GetPixelRed(float4 _NextPos);
+	bool GetPixelBlue(float4 _NextPos);
 
 	//픽셀 충돌 체크
 	void isOnGroundCheck(float _DeltaTime);

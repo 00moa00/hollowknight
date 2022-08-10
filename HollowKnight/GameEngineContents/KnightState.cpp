@@ -16,7 +16,12 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+	this->isOnGroundCheck(_DeltaTime);
+
+	if (GetisOnGround() == false)
+	{
+		KnightManager_.ChangeState("FALL");
+	}
 
 	// ========== UPDATE ==========
 
@@ -323,9 +328,9 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		isKnihgtActtingMoveChack();
 		KnightIsActtingCheck();
 
-		this->isUpBlockCheck(_DeltaTime);
-		this->isOnGroundCheck(_DeltaTime);
-		this->isWallCheck(_DeltaTime);
+		isUpBlockCheck(_DeltaTime);
+		isOnGroundCheck(_DeltaTime);
+		isWallCheck(_DeltaTime);
 
 		ActtingMoveDirection_.Normalize();
 		SubJumpPower((float4::UP + -ActtingMoveDirection_ / 2) * GetGravity() * _DeltaTime);
@@ -477,30 +482,45 @@ void Knight::KnightFallStart(const StateInfo& _Info)
 
 void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	isKnihgtActtingMoveChack();
-	KnightActtingDirectionCheck();
-	KnightIsActtingCheck();
-	isWallCheck(_DeltaTime);
+	//isKnihgtActtingMoveChack();
+	//KnightActtingDirectionCheck();
+	//KnightIsActtingCheck();
+	//isWallCheck(_DeltaTime);
 	isOnGroundCheck(_DeltaTime);
-	DoubleSlashTimer(_DeltaTime);
+	//DoubleSlashTimer(_DeltaTime);
 
-	ActtingMoveDirection_.Normalize();
-
-	if (GetisWall() == true)
-	{
-		ActtingMoveDirection_ = float4::ZERO;
-	}
-
-	else if (GetisOnGround() == true)
+	if (GetisOnGround() == true)
 	{
 		KnightManager_.ChangeState("LAND");
+		return;
 	}
 
 	else
 	{
-		GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+		GetTransform().SetWorldMove(float4::DOWN * 800 * _DeltaTime);
 
 	}
+
+
+
+	//ActtingMoveDirection_.Normalize();
+
+	//if (GetisWall() == true)
+	//{
+	//	ActtingMoveDirection_ = float4::ZERO;
+	//}
+
+	//else if (GetisOnGround() == true)
+	//{
+	//	KnightManager_.ChangeState("LAND");
+	//	return;
+	//}
+
+	//else
+	//{
+	//	GetTransform().SetWorldMove(float4::DOWN/* + ActtingMoveDirection_ / 2*/ * 800 * _DeltaTime);
+
+	//}
 
 
 
@@ -508,42 +528,42 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	// ========== 스테이트 변경 ==========
 
 
-	// 위 공격
-	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
-		&& GameEngineInput::GetInst()->IsPress("KnightUp") == true)
-	{
-		KnightManager_.ChangeState("UP_SLASH");
-	}
+	//// 위 공격
+	//if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
+	//	&& GameEngineInput::GetInst()->IsPress("KnightUp") == true)
+	//{
+	//	KnightManager_.ChangeState("UP_SLASH");
+	//}
 
-	// 아래 공격
-	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
-		&& GameEngineInput::GetInst()->IsPress("KnightDown") == true)
-	{
-		KnightManager_.ChangeState("DOWN_SLASH");
-	}
+	//// 아래 공격
+	//if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
+	//	&& GameEngineInput::GetInst()->IsPress("KnightDown") == true)
+	//{
+	//	KnightManager_.ChangeState("DOWN_SLASH");
+	//}
 
-	// 기본 공격
-	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
-		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
-		&& GameEngineInput::GetInst()->IsFree("KnightDown") == true
-		&& isPossibleDoubleSlash_ == false)
-	{
-		KnightManager_.ChangeState("SLASH");
-	}
+	//// 기본 공격
+	//if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
+	//	&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
+	//	&& GameEngineInput::GetInst()->IsFree("KnightDown") == true
+	//	&& isPossibleDoubleSlash_ == false)
+	//{
+	//	KnightManager_.ChangeState("SLASH");
+	//}
 
-	//콤보 공격
-	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
-		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
-		&& isPossibleDoubleSlash_ == true)
-	{
-		KnightManager_.ChangeState("DOUBLE_SLASH");
-	}
+	////콤보 공격
+	//if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
+	//	&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
+	//	&& isPossibleDoubleSlash_ == true)
+	//{
+	//	KnightManager_.ChangeState("DOUBLE_SLASH");
+	//}
 
-	//더블 점프
-	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true)
-	{
-		KnightManager_.ChangeState("DOUBLE_JUMP");
-	}
+	////더블 점프
+	//if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true)
+	//{
+	//	KnightManager_.ChangeState("DOUBLE_JUMP");
+	//}
 }
 
 void Knight::KnightFallEnd(const StateInfo& _Info)
