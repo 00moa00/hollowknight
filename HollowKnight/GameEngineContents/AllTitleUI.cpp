@@ -1,19 +1,22 @@
 #include "PreCompile.h"
-#include "MasterTitleUI.h"
+#include "AllTitleUI.h"
 
-MasterTitleUI::MasterTitleUI() 
+AllTitleUI::AllTitleUI() 
 	:
 	UIPointGameStart_(nullptr),
 	UIPointMapEditor_(nullptr),
-	UIPointGameExit_(nullptr)
+	UIPointGameExit_(nullptr),
+	GameStartFont_(nullptr),
+	MapEditorFont_(nullptr),
+	GameExitFont_(nullptr)
 {
 }
 
-MasterTitleUI::~MasterTitleUI() 
+AllTitleUI::~AllTitleUI() 
 {
 }
 
-void MasterTitleUI::Start()
+void AllTitleUI::Start()
 {
 	UIPointGameStart_ = GetLevel()->CreateActor<UIPoint>();
 	UIPointGameStart_->GetTransform().SetLocalPosition({ 0, -100, 0 });
@@ -26,20 +29,43 @@ void MasterTitleUI::Start()
 	UIPointGameExit_->GetTransform().SetLocalPosition({ 0, -300, 0 });
 	UIPointGameExit_->SetPointChangeIdleAnimation();
 
-	//TitleStateManager_.CreateStateMember("GameStart", this, &MasterTitleUI::GameStartUpdate);
+	GameStartFont_ = CreateComponent<GameEngineFontRenderer>();
+	
+	GameStartFont_->SetText("게임 시작", "Noto Serif KR");
+	GameStartFont_->SetColor({ 1.0f, 1.0f, 1.0f });
+	GameStartFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 100.0f)});
+	GameStartFont_->SetSize(35);
+
+
+	MapEditorFont_ = CreateComponent<GameEngineFontRenderer>();
+
+	MapEditorFont_->SetText("멥 에디터", "Noto Serif KR");
+	MapEditorFont_->SetColor({ 1.0f, 1.0f, 1.0f });
+	MapEditorFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 200.0f) });
+	MapEditorFont_->SetSize(35);
+
+
+	GameExitFont_ = CreateComponent<GameEngineFontRenderer>();
+
+	GameExitFont_->SetText("게임 종료", "Noto Serif KR");
+	GameExitFont_->SetColor({ 1.0f, 1.0f, 1.0f });
+	GameExitFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 300.0f) });
+	GameExitFont_->SetSize(35);
+
+	
+	//GameStartFont_->GetTransform().SetWorldPosition({ 500.0f, 100.0f,0 });
+
 
 	TitleStateManager_.CreateStateMember("GameStart"
-		, std::bind(&MasterTitleUI::GameStartUpdate, this, std::placeholders::_1, std::placeholders::_2));
+		, std::bind(&AllTitleUI::GameStartUpdate, this, std::placeholders::_1, std::placeholders::_2));
 
 	TitleStateManager_.CreateStateMember("MapEditor"
-		, std::bind(&MasterTitleUI::MapEditorUpdate, this, std::placeholders::_1, std::placeholders::_2));
+		, std::bind(&AllTitleUI::MapEditorUpdate, this, std::placeholders::_1, std::placeholders::_2));
 
-	//TitleStateManager_.CreateStateMember("MapEditor", this, &MasterTitleUI::MapEditorUpdate);
 
 	TitleStateManager_.CreateStateMember("GameExit"
-		, std::bind(&MasterTitleUI::GameExitUpdate, this, std::placeholders::_1, std::placeholders::_2));
+		, std::bind(&AllTitleUI::GameExitUpdate, this, std::placeholders::_1, std::placeholders::_2));
 
-	//TitleStateManager_.CreateStateMember("GameExit", this, &MasterTitleUI::GameExitUpdate);
 	TitleStateManager_.ChangeState("GameStart");
 
 
@@ -51,26 +77,26 @@ void MasterTitleUI::Start()
 	}
 }
 
-void MasterTitleUI::Update(float _DeltaTime)
+void AllTitleUI::Update(float _DeltaTime)
 {
 	TitleStateManager_.Update(_DeltaTime);
 
 }
 
-void MasterTitleUI::EventOffGameStart()
+void AllTitleUI::EventOffGameStart()
 {
 
 }
 
-void MasterTitleUI::EventOffMapEditor()
+void AllTitleUI::EventOffMapEditor()
 {
 }
 
-void MasterTitleUI::EventOffGameExit()
+void AllTitleUI::EventOffGameExit()
 {
 }
 
-void MasterTitleUI::GameStartUpdate(float _DeltaTime, const StateInfo& _Info)
+void AllTitleUI::GameStartUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("PressUp"))
 	{
@@ -85,7 +111,7 @@ void MasterTitleUI::GameStartUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 }
 
-void MasterTitleUI::MapEditorUpdate(float _DeltaTime, const StateInfo& _Info)
+void AllTitleUI::MapEditorUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("PressUp"))
 	{
@@ -100,7 +126,7 @@ void MasterTitleUI::MapEditorUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 }
 
-void MasterTitleUI::GameExitUpdate(float _DeltaTime, const StateInfo& _Info)
+void AllTitleUI::GameExitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("PressUp"))
 	{

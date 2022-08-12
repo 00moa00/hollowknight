@@ -8,6 +8,7 @@ HollowKnightLevel::HollowKnightLevel()
 	MasterMap_(nullptr),
 	BackgroundRenderer_(nullptr),
 	Knight_(nullptr),
+	HUD_(nullptr),
 	MainCameraPosition_()
 {
 }
@@ -31,6 +32,11 @@ void HollowKnightLevel::CreateKnightActor()
 void HollowKnightLevel::CreateKingsPass1Monster()
 {
 	Crawlid_ = CreateActor<Crawlid>();
+}
+
+void HollowKnightLevel::CreateUIActor()
+{
+	HUD_ = CreateActor<HUD>();
 }
 
 

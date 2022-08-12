@@ -4,6 +4,7 @@
 #include "MasterMap.h"
 #include "Monster.h"
 #include "Crawlid.h"
+#include "HUD.h"
 
 // Ό³Έν :
 class GameEngineTextureRenderer;
@@ -26,6 +27,7 @@ private:
 	MasterMap* MasterMap_;
 	Knight* Knight_;
 	Monster* Crawlid_;
+	HUD* HUD_;
 
 	float4 MainCameraPosition_;
 	float4 MainMapSize_;
@@ -36,6 +38,7 @@ protected:
 	void CraateMasterMapActor();
 	void CreateKnightActor();
 	void CreateKingsPass1Monster();
+	void CreateUIActor();
 
 	void CameraMoveWindowLimit();
 	void CameraMoveKnightLimit();

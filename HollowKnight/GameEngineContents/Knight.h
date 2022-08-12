@@ -24,7 +24,6 @@ protected:
 
 private:
 
-
 	bool isSlashEnd_;		// 공격 애니메이션 종료
 	bool isDoubleSlashEnd_; // 더블 공격 애니메이션 종료
 	bool isUpSlashEnd_;
@@ -77,8 +76,6 @@ private:
 	//================================
 
 	void Walkking(float _DeltaTime);
-
-
 
 	//================================
 	//    Bind State

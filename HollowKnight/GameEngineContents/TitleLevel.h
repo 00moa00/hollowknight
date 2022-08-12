@@ -2,7 +2,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include "HollowKnightLevel.h"
 #include "RendererActor.h"
-#include "MasterTitleUI.h"
+#include "AllTitleUI.h"
 // Ό³Έν :
 class TitleLevel : public HollowKnightLevel
 {
@@ -25,6 +25,6 @@ protected:
 private:
 	RendererActor* Background_;
 	RendererActor* LogoRenderer_;
-	MasterTitleUI* MasterTitleUI_;
+	AllTitleUI* MasterTitleUI_;
 };
 

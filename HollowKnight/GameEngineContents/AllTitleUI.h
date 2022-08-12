@@ -1,23 +1,25 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
 #include "UIPoint.h"
+#include <GameEngineCore/GameEngineFontRenderer.h>
+
 //#pragma comment(lib, "DirectXTex.lib")
 
 class GameEngineUIRenderer;
 
 // Ό³Έν :
-class MasterTitleUI : public GameEngineActor
+class AllTitleUI : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	MasterTitleUI();
-	~MasterTitleUI();
+	AllTitleUI();
+	~AllTitleUI();
 
 	// delete Function
-	MasterTitleUI(const MasterTitleUI& _Other) = delete;
-	MasterTitleUI(MasterTitleUI&& _Other) noexcept = delete;
-	MasterTitleUI& operator=(const MasterTitleUI& _Other) = delete;
-	MasterTitleUI& operator=(MasterTitleUI&& _Other) noexcept = delete;
+	AllTitleUI(const AllTitleUI& _Other) = delete;
+	AllTitleUI(AllTitleUI&& _Other) noexcept = delete;
+	AllTitleUI& operator=(const AllTitleUI& _Other) = delete;
+	AllTitleUI& operator=(AllTitleUI&& _Other) noexcept = delete;
 
 protected:
 	void Start();
@@ -27,6 +29,11 @@ private:
 	UIPoint* UIPointGameStart_;
 	UIPoint* UIPointMapEditor_;
 	UIPoint* UIPointGameExit_;
+
+	GameEngineFontRenderer* GameStartFont_;
+	GameEngineFontRenderer* MapEditorFont_;
+	GameEngineFontRenderer* GameExitFont_;
+
 
 	GameEngineStateManager TitleStateManager_;
 

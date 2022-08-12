@@ -43,6 +43,12 @@
     <Filter Include="Actor\Master\GUI">
       <UniqueIdentifier>{832742dc-683a-462e-a703-d1595718022d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\UI">
+      <UniqueIdentifier>{bd5fa08a-ac72-4750-9a42-fda6d042ed25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Title\All">
+      <UniqueIdentifier>{db04565f-0888-427e-8040-edbc5cd38744}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -79,9 +85,6 @@
     <ClInclude Include="RendererActor.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="MasterTitleUI.h">
-      <Filter>Actor\Master</Filter>
-    </ClInclude>
     <ClInclude Include="UIPoint.h">
       <Filter>Actor\Title</Filter>
     </ClInclude>
@@ -115,6 +118,24 @@
     <ClInclude Include="MapEditorWindow.h">
       <Filter>Actor\Master\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="MasterUI.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="VesselFrame.h">
+      <Filter>Actor\Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="AllTitleUI.h">
+      <Filter>Actor\Title\All</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Actor\Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Soul.h">
+      <Filter>Actor\Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Mask.h">
+      <Filter>Actor\Play\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -147,9 +168,6 @@
     </ClCompile>
     <ClCompile Include="RendererActor.cpp">
       <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="MasterTitleUI.cpp">
-      <Filter>Actor\Master</Filter>
     </ClCompile>
     <ClCompile Include="UIPoint.cpp">
       <Filter>Actor\Title</Filter>
@@ -186,6 +204,24 @@
     </ClCompile>
     <ClCompile Include="MapEditorWindow.cpp">
       <Filter>Actor\Master\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterUI.cpp">
+      <Filter>Actor\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="VesselFrame.cpp">
+      <Filter>Actor\Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="AllTitleUI.cpp">
+      <Filter>Actor\Title\All</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Actor\Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Soul.cpp">
+      <Filter>Actor\Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Mask.cpp">
+      <Filter>Actor\Play\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

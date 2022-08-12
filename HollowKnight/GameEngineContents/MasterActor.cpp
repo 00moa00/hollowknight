@@ -14,6 +14,7 @@ MasterActor::MasterActor()
 
 	FallDownDirection_(float4::DOWN),
 	MoveDirection_(float4::ZERO),
+
 	isMove_(true),
 	isOnGround_(false),
 	isWall_(false),

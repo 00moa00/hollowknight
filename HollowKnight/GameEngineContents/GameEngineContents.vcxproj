@@ -170,6 +170,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Mask.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Soul.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="VesselFrame.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="KinghtData.h">
       <SubType>
       </SubType>
@@ -206,7 +222,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="MasterTitleUI.h">
+    <ClInclude Include="AllTitleUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MasterUI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -264,6 +284,22 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Mask.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Soul.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="VesselFrame.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="KinghtData.cpp">
       <SubType>
       </SubType>
@@ -301,7 +337,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="MasterTitleUI.cpp">
+    <ClCompile Include="AllTitleUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MasterUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>

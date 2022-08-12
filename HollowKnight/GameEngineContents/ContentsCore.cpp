@@ -18,6 +18,10 @@ void ContentsCore::Start()
 {
 	//GameEngineWindow::GetInst()->SetWindowScaleAndPosition(float4{1920,1080}, float4{0,0});
 
+	GameEngineFont::Load("Noto Serif KR");
+
+
+
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -40,6 +44,7 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("UI");
+		Dir.Move("Point");
 
 
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
@@ -52,6 +57,56 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("main_menu_pointer_anim0000-Sheet.png", 11, 1);
 
 	}
+
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("UI");
+		Dir.Move("Vessel");
+
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("HUD Cln_HUD_frame_v020000-Sheet.png", 6, 1);
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("UI");
+		Dir.Move("Mask");
+
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("HUD Cln_appear_v020000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("HUD Cln_idle_v020000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("HUD Cln_add_health_appear0000-Sheet.png", 14, 1);
+		GameEngineTexture::Cut("HUD Cln_break_backboard0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("HUD Cln_refill0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("MaskWait.png", 2, 1);
+
+
+	}
+
+
 
 	{
 		GameEngineDirectory Dir;

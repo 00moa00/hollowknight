@@ -33,7 +33,7 @@ void TitleLevel::Start()
 	LogoRenderer_->GetRenderer()->GetTransform().SetLocalPosition({0, 200, 0});
 
 
-	MasterTitleUI_ = CreateActor<MasterTitleUI>();
+	MasterTitleUI_ = CreateActor<AllTitleUI>();
 	//MasterTitleUI_->GetTransform().SetLocalPosition({ 0, 200, 0 });
 
 	

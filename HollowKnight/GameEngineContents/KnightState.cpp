@@ -499,7 +499,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	else
 	{
-		GetTransform().SetWorldMove(float4::DOWN/* + ActtingMoveDirection_ / 2*/ * GetGravity() * GetFallSpeed() * _DeltaTime);
+		GetTransform().SetWorldMove(float4::DOWN + ActtingMoveDirection_ / 2 * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 	}
 

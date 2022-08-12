@@ -40,6 +40,8 @@ void KingsPassLevel::Start()
 	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_1.png");
 	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_1.png");
 
+	CreateUIActor();
+
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
