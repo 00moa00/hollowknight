@@ -11,6 +11,7 @@ enum class OBJECTORDER
 	Knight_Slash,
 	Monster,
 	FrontObject,
+	TileMap
 };
 
 enum class RENDERORDER

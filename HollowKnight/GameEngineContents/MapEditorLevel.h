@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
-
+#include "TileMapActor.h"
 // Ό³Έν :
 class MapEditorLevel : public GameEngineLevel
 {
@@ -14,6 +14,8 @@ public:
 	MapEditorLevel(MapEditorLevel&& _Other) noexcept = delete;
 	MapEditorLevel& operator=(const MapEditorLevel& _Other) = delete;
 	MapEditorLevel& operator=(MapEditorLevel&& _Other) noexcept = delete;
+
+	TileMapActor* TileMap;
 
 protected:
 	void Start() override;

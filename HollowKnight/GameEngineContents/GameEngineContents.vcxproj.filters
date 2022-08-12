@@ -40,6 +40,9 @@
     <Filter Include="Renderer">
       <UniqueIdentifier>{e2ff85b3-9293-4a0a-82c4-e32bd43c091b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Master\GUI">
+      <UniqueIdentifier>{832742dc-683a-462e-a703-d1595718022d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -100,11 +103,17 @@
     <ClInclude Include="KnightSlashEffect.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="TitleMapRenderer.h">
+    <ClInclude Include="TileMapRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="MapEditorLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapActor.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorWindow.h">
+      <Filter>Actor\Master\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -166,11 +175,17 @@
     <ClCompile Include="KnightSlashEffect.cpp">
       <Filter>Actor\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="TitleMapRenderer.cpp">
+    <ClCompile Include="TileMapRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="MapEditorLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapActor.cpp">
+      <Filter>Actor\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorWindow.cpp">
+      <Filter>Actor\Master\GUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
