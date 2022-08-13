@@ -140,9 +140,9 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	DoubleSlashTimer(_DeltaTime);
 
-	this->KnightDirectionCheck();
-	this->isOnGroundCheck(_DeltaTime);
-	this->isWallCheck(_DeltaTime);
+	KnightDirectionCheck();
+	isOnGroundCheck(_DeltaTime);
+	isWallCheck(_DeltaTime);
 
 	if (GetisWall() == true)
 	{
@@ -1362,9 +1362,12 @@ void Knight::KnightSlideUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("LAND");
 	}
 
-
 	GetTransform().SetWorldMove(float4::DOWN * GetGravity() * GetFallSpeed() * _DeltaTime);
 
+	if (true == GameEngineInput::GetInst()->IsDown("KnightJump"))
+	{
+		KnightManager_.ChangeState("WALL_JUMP");
+	}
 }
 
 void Knight::KnightSlideEnd(const StateInfo& _Info)
@@ -1373,14 +1376,59 @@ void Knight::KnightSlideEnd(const StateInfo& _Info)
 
 void Knight::KnightWallJumpStart(const StateInfo& _Info)
 {
+	KnihgtSlideNegativeRenderer();
 	GetRenderer()->ChangeFrameAnimation("WALL_JUMP_ANIMATION");
+
+	SetJumpPower({ 0, 100.f, 0 });
 }
 
 void Knight::KnightWallJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	SubJumpPower((float4::UP + ( GetMoveDirection())) * GetGravity() * _DeltaTime);
+
+
+	GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
+
+
+	if (GetJumpPower().y <= 0.f )
+	{
+		KnightManager_.ChangeState("WALL_JUMP_LAND");
+	}
+
 }
 
 void Knight::KnightWallJumpEnd(const StateInfo& _Info)
+{
+	KnihgtSlidePositiveRenderer();
+}
+
+void Knight::KnightWallJumpLandStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("WALL_JUMP_ANIMATION");
+
+	SetJumpPower({ 0, 100.f, 0 });
+}
+
+void Knight::KnightWallJumpLandUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+	isWallCheck(_DeltaTime, GetMoveDirection());
+
+	if (GetisWall() == true)
+	{
+		KnightManager_.ChangeState("SLIDE");
+	}
+
+	else
+	{
+		SubJumpPower((float4::UP + (-GetMoveDirection())) * GetGravity() * _DeltaTime);
+		GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
+	}
+
+}
+
+void Knight::KnightWallJumpLandEnd(const StateInfo& _Info)
 {
 }
 

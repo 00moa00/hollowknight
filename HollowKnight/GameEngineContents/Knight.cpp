@@ -177,7 +177,7 @@ void Knight::Start()
 
 	// ---- 슬라이드 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("SLIDE_ANIMATION", FrameAnimation_DESC("Knight_wall_slide0000-Sheet.png", 0, 3, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("WALL_JUMP_ANIMATION", FrameAnimation_DESC("Knight_wall_jump0000-Sheet.png", 0, 2, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("WALL_JUMP_ANIMATION", FrameAnimation_DESC("Knight_wall_jump0000-Sheet.png", 0, 2, 0.100f));
 
 
 
@@ -350,6 +350,9 @@ void Knight::Start()
 
 	KnightManager_.CreateStateMember("WALL_JUMP"
 		, std::bind(&Knight::KnightWallJumpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWallJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightWallJumpEnd, this, std::placeholders::_1));
+	
+	KnightManager_.CreateStateMember("WALL_JUMP_LAND"
+		, std::bind(&Knight::KnightWallJumpLandUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWallJumpLandStart, this, std::placeholders::_1), std::bind(&Knight::KnightWallJumpLandEnd, this, std::placeholders::_1));
 
 
 	KnightManager_.ChangeState("FALL");
@@ -483,6 +486,33 @@ void Knight::KnightActtingDirectionCheck()
 	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
 	{
 		//ActtingMoveDirection_ = float4::UP;
+	}
+}
+
+void Knight::KnihgtSlideNegativeRenderer()
+{
+	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+	}
+
+	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+	}
+
+}
+
+void Knight::KnihgtSlidePositiveRenderer()
+{
+	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+	}
+
+	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
 	}
 }
 

@@ -64,11 +64,16 @@ private:
 private:
 
 	bool GetisKnightMove();
-	void isKnihgtActtingMoveChack();
-
 	void KnightDirectionCheck();
+
+	void isKnihgtActtingMoveChack();
 	void KnightActtingDirectionCheck();
 	void KnightIsActtingCheck();
+
+
+	void KnihgtSlideNegativeRenderer(); //벽타기 점프 랜더러 반전용
+	void KnihgtSlidePositiveRenderer(); //벽타기 점프 랜더러 반전용
+
 
 	void DoubleSlashTimer(float _DeltaTime); //더블 공격(콤보) 타이머
 
@@ -187,6 +192,11 @@ private:
 	void KnightWallJumpStart(const StateInfo& _Info);
 	void KnightWallJumpUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightWallJumpEnd(const StateInfo& _Info);
+
+
+	void KnightWallJumpLandStart(const StateInfo& _Info);
+	void KnightWallJumpLandUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightWallJumpLandEnd(const StateInfo& _Info);
 
 
 	//================================

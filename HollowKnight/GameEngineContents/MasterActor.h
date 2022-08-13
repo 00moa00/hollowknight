@@ -74,6 +74,7 @@ protected:
 	//픽셀 충돌 체크
 	void isOnGroundCheck(float _DeltaTime);
 	void isWallCheck(float _DeltaTime);
+	void isWallCheck(float _DeltaTime, float4 _Dir);
 	void isDownGroundCheck(float _DeltaTime);
 	void isUpBlockCheck(float _DeltaTime);
 

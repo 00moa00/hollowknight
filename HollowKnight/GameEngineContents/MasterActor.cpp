@@ -156,6 +156,19 @@ void MasterActor::isWallCheck(float _DeltaTime)
 	}
 }
 
+void MasterActor::isWallCheck(float _DeltaTime, float4 _Dir)
+{
+	if (GetPixelBlue(GetNextPos(_DeltaTime, _Dir)) == true)
+	{
+		this->SetisWall(true);
+	}
+
+	else
+	{
+		this->SetisWall(false);
+	}
+}
+
 void MasterActor::isDownGroundCheck(float _DeltaTime)
 {
 	if (GetPixelRed(GetNextPos(_DeltaTime, float4::DOWN)) == true)

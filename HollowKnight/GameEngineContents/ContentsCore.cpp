@@ -252,6 +252,7 @@ void ContentsCore::Start()
 
 		// º®Å¸±â
 		GameEngineTexture::Cut("Knight_wall_slide0000-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Knight_wall_jump0000-Sheet.png", 3, 1);
 
 
 
