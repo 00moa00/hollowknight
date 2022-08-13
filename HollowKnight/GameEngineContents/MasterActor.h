@@ -14,6 +14,7 @@ public:
 	float4 CenterTop_;
 	float4 RightCenter_;
 	float4 LeftCenter_;
+	float4 Center_;
 
 };
 
@@ -73,9 +74,11 @@ protected:
 	//픽셀 충돌 체크
 	void isOnGroundCheck(float _DeltaTime);
 	void isWallCheck(float _DeltaTime);
+	void isDownGroundCheck(float _DeltaTime);
 	void isUpBlockCheck(float _DeltaTime);
 
 	float4 GetNextPos(float4 _DeltaTime);
+	float4 GetNextPos(float4 _DeltaTime, float4 Dir);
 
 	GameEngineTextureRenderer* GetRenderer() const
 	{
@@ -117,6 +120,22 @@ protected:
 		return Point_.CenterTop_;
 	}
 
+	float4 GetRightCenter()
+	{
+		return  Point_.RightCenter_;
+	}
+
+	float4 GetLeftCenter()
+	{
+		return Point_.LeftCenter_;
+	}
+
+	float4 GetCenter()
+	{
+		return Point_.Center_;
+	}
+
+
 
 	void SetRightBottom(float4 _f)
 	{
@@ -152,6 +171,11 @@ protected:
 	void SetRightCenter(float4 _f)
 	{
 		Point_.RightCenter_ = _f;
+	}
+
+	void SetCenter(float4 _f)
+	{
+		Point_.Center_ = _f;
 	}
 
 

@@ -70,9 +70,21 @@ void Knight::Start()
 	SetRightTop({ 15.f, 20.f, 0, 0 });
 	SetLeftTop({ -15.f, 20.f, 0, 0 });
 	SetCenterTop({ 0, 20.f, 0, 0 });
+	SetLeftCenter({-15.f, 0, 0});
+	SetRightCenter({ 15.f, 0, 0 });
+	SetCenter({0, 20.f, 0, 0});
 
 	CreateCollisionComponent(float4{349, 186, 1}, static_cast<int>(OBJECTORDER::Knight));
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
+	
+	Test1_ = CreateComponent<GameEngineCollision>();
+	Test1_->GetTransform().SetLocalScale({ 15,15,1 });
+
+	Test2_ = CreateComponent<GameEngineCollision>();
+	Test2_->GetTransform().SetLocalScale({ 15,15,1 });
+
+	//Test1_->ChangeOrder(_Order);
+
 
 	GetTransform().SetLocalPosition({500,-4000,0});
 	
@@ -340,7 +352,7 @@ void Knight::Start()
 		, std::bind(&Knight::KnightWallJumpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWallJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightWallJumpEnd, this, std::placeholders::_1));
 
 
-	KnightManager_.ChangeState("STILL");
+	KnightManager_.ChangeState("FALL");
 }
 
 void Knight::Update(float _DeltaTime)

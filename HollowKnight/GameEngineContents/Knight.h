@@ -57,6 +57,10 @@ private:
 	GameEngineStateManager KnightManager_;
 	KnightSlashEffect* KnightSlashEffect_;
 
+	GameEngineCollision* Test1_;
+	GameEngineCollision* Test2_;
+
+
 private:
 
 	bool GetisKnightMove();
