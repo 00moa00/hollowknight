@@ -311,6 +311,8 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 	isPressJumppingKey_ = true;
 	isPossibleDoubleJump_ = true;
 
+	//SetisGround(false);
+
 	SetJumpPower({ 0, KnightJumpPower_, 0 });
 }
 
@@ -766,11 +768,10 @@ void Knight::KnightRunEnd(const StateInfo& _Info)
 
 void Knight::KnightSlashStart(const StateInfo& _Info)
 {
-	isPossibleDoubleSlash_ = false;
-	KnightSlashTimer_ = 0.f;
+	//isPossibleDoubleSlash_ = false;
+	//KnightSlashTimer_ = 0.f;
 	GetRenderer()->ChangeFrameAnimation("SLASH_ANIMATION");
 	KnightSlashEffect_->SetAnimationSlash();
-
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -100, 0, 0 });
@@ -782,11 +783,124 @@ void Knight::KnightSlashStart(const StateInfo& _Info)
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 100, 0, 0 });
 
 	}
-
 }
 
 void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	KnightDirectionCheck();
+	isOnGroundCheck(_DeltaTime);
+	isWallCheck(_DeltaTime);
+
+
+	if (GetisWall() == true)
+	{
+		SetMoveDirection(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		//KnightManager_.ChangeState("FALL");
+	}
+
+	else if (GetisOnGround() == true)
+	{
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		{
+			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		{
+			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+		}
+	}
+
+	// 낙하중에 공격한다면 애니메이션이 끝날 떄까지 낙하 스테이트로 이동하면 안된다. => 이유 : 애니메이션 처리
+	// 그렇기 때문에 여기서 중력처리를 따로 하는중
+	else if (GetisOnGround() == false || GetisWall() == false)
+	{
+		isKnihgtActtingMoveChack();
+		KnightActtingDirectionCheck();
+		KnightIsActtingCheck();
+	
+		DoubleSlashTimer(_DeltaTime);
+
+		ActtingMoveDirection_.Normalize();
+
+		if (GetisWall() == true)
+		{
+			ActtingMoveDirection_ = float4::ZERO;
+		}
+
+
+		GetTransform().SetWorldMove((GetFallDownDirection() + ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+
+		if (isSlashEnd_ == true)
+		{
+			KnightManager_.ChangeState("FALL");
+
+		}
+
+	}
+
+
+	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, 0});
+
+
+	// ========== 스테이트 변경 ==========
+
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	//{
+	//	KnightManager_.ChangeState("JUMP");
+	//}
+
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
+	{
+		isPressJumppingKey_ = false;
+	}
+
+
+	//애니메이션이 끝나면 
+	if (isSlashEnd_ == true)
+	{
+		isSlashEnd_ = false;
+		KnightManager_.ChangeState("STILL");
+	}
+}
+
+void Knight::KnightSlashEnd(const StateInfo& _Info)
+{
+	SetJumpPower({ 0, KnightJumpPower_, 0 });
+
+	isPossibleDoubleSlash_ = true;
+}
+
+void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH_ANIMATION");
+	KnightSlashEffect_->SetAnimationDoubleSlash();
+	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -100, 0, 0 });
+
+	}
+
+	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 100, 0, 0 });
+
+	}
+}
+
+void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	//KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+
+	////애니메이션이 끝나면 
+	//if (isDoubleSlashEnd_ == true)
+	//{
+	//	isDoubleSlashEnd_ = false;
+	//	KnightManager_.ChangeState("STILL");
+	//}
+
 	KnightDirectionCheck();
 	isOnGroundCheck(_DeltaTime);
 	isWallCheck(_DeltaTime);
@@ -814,12 +928,12 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	// 낙하중에 공격한다면 애니메이션이 끝날 떄까지 낙하 스테이트로 이동하면 안된다. => 이유 : 애니메이션 처리
 	// 그렇기 때문에 여기서 중력처리를 따로 하는중
-	else if (GetisOnGround() == false && GetisWall() == false)
+	else if (GetisOnGround() == false || GetisWall() == false)
 	{
 		isKnihgtActtingMoveChack();
 		KnightActtingDirectionCheck();
 		KnightIsActtingCheck();
-	
+
 		DoubleSlashTimer(_DeltaTime);
 
 		ActtingMoveDirection_.Normalize();
@@ -840,55 +954,21 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, 0});
+	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, 0 });
 
 
 	// ========== 스테이트 변경 ==========
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
-	{
-		KnightManager_.ChangeState("JUMP");
-	}
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	//{
+	//	KnightManager_.ChangeState("JUMP");
+	//}
 
 	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
 	{
 		isPressJumppingKey_ = false;
 	}
 
-
-	//애니메이션이 끝나면 
-	if (isSlashEnd_ == true)
-	{
-		isSlashEnd_ = false;
-		KnightManager_.ChangeState("STILL");
-	}
-}
-
-void Knight::KnightSlashEnd(const StateInfo& _Info)
-{
-	isPossibleDoubleSlash_ = true;
-}
-
-void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
-{
-	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH_ANIMATION");
-	KnightSlashEffect_->SetAnimationDoubleSlash();
-	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
-	{
-		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -100, 0, 0 });
-
-	}
-
-	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
-	{
-		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 100, 0, 0 });
-
-	}
-}
-
-void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
 
 	//애니메이션이 끝나면 
 	if (isDoubleSlashEnd_ == true)

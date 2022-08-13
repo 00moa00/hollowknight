@@ -341,18 +341,18 @@ void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
 
-	std::string a = "";
-	if (isPressJumppingKey_ == true)
-	{
-		a = "true";
-	}
-	else
-	{
-		a = "false";
+	//std::string a = "";
+	//if (isPressJumppingKey_ == true)
+	//{
+	//	a = "true";
+	//}
+	//else
+	//{
+	//	a = "false";
 
-	}
+	//}
 
-	GameEngineDebug::OutPutString(a);
+	//GameEngineDebug::OutPutString(a);
 }
 
 
@@ -413,7 +413,7 @@ void Knight::KnightDirectionCheck()
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
-		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
+		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalPositiveX();
 
 		this->SetMoveDirection(float4::LEFT);
@@ -422,7 +422,7 @@ void Knight::KnightDirectionCheck()
 	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
-		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
+		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalNegativeX();
 
 
@@ -445,26 +445,26 @@ void Knight::KnightActtingDirectionCheck()
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
-		KnightSlashEffect_->GetTransform().PixLocalPositiveX();
+		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
 		ActtingMoveDirection_ = float4::LEFT;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
-		KnightSlashEffect_->GetTransform().PixLocalNegativeX();
+		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
 
 		ActtingMoveDirection_ = float4::RIGHT;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
 	{
-		ActtingMoveDirection_ = float4::DOWN;
+		//ActtingMoveDirection_ = float4::DOWN;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
 	{
-		ActtingMoveDirection_ = float4::UP;
+		//ActtingMoveDirection_ = float4::UP;
 	}
 }
 
