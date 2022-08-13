@@ -21,11 +21,12 @@ protected:
 
 private:
 
+
 	GameEngineStateManager KnightSlashEffectManager_;
 private:
 
 
-	GameEngineRenderer* GameEngineRenderer_;
+	//GameEngineRenderer* KnightSlashEffectRenderer_;
 
 	//================================
 	//    Bind State
@@ -40,6 +41,7 @@ private:
 	void AnimationEndDownSlash(const FrameAnimation_DESC& _Info);
 
 public:
+
 	void SetAnimationSlash();
 	void SetAnimationDoubleSlash();
 	void SetAnimationUpSlash();

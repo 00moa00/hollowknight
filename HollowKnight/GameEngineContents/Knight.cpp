@@ -413,12 +413,19 @@ void Knight::KnightDirectionCheck()
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
+		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
+		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalPositiveX();
+
 		this->SetMoveDirection(float4::LEFT);
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
+		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
+		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalNegativeX();
+
+
 		this->SetMoveDirection(float4::RIGHT);
 	}
 
@@ -438,12 +445,15 @@ void Knight::KnightActtingDirectionCheck()
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
+		KnightSlashEffect_->GetTransform().PixLocalPositiveX();
 		ActtingMoveDirection_ = float4::LEFT;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
+		KnightSlashEffect_->GetTransform().PixLocalNegativeX();
+
 		ActtingMoveDirection_ = float4::RIGHT;
 	}
 

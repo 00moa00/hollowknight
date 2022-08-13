@@ -770,6 +770,19 @@ void Knight::KnightSlashStart(const StateInfo& _Info)
 	KnightSlashTimer_ = 0.f;
 	GetRenderer()->ChangeFrameAnimation("SLASH_ANIMATION");
 	KnightSlashEffect_->SetAnimationSlash();
+
+	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -100, 0, 0 });
+
+	}
+
+	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 100, 0, 0 });
+
+	}
+
 }
 
 void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -826,7 +839,8 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+
+	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, 0});
 
 
 	// ========== 스테이트 변경 ==========
@@ -859,6 +873,17 @@ void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH_ANIMATION");
 	KnightSlashEffect_->SetAnimationDoubleSlash();
+	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -100, 0, 0 });
+
+	}
+
+	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 100, 0, 0 });
+
+	}
 }
 
 void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)

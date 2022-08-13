@@ -25,7 +25,7 @@ private:
 	float4 Direction_;
 	float4 CollisionSize_;
 
-protected:
+public:
 
 	//================================
 	//     Getter

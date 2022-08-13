@@ -13,12 +13,12 @@ void KnightSlashEffect::Start()
 {
 	SetName("KnightSlashEffect");
 
-	CreateCollisionComponent(float4{ 349, 186, 10000 }, static_cast<int>(OBJECTORDER::Knight_Slash));
-
-	GameEngineRenderer_ = GetRenderer();
+	CreateCollisionComponent(float4{ 200, 186, 10000 }, static_cast<int>(OBJECTORDER::Knight_Slash));
 
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_double_slashes_effect-Sheet.png", 2, static_cast<int>(RENDERORDER::Knight));
-
+	
+	//GetCollision()->GetTransform().SetLocalPosition({-100,0,1});
+	GetRenderer()->SetScaleModeImage();
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL", FrameAnimation_DESC("Knight_double_slashes_effect-Sheet.png", 2, 2, 0.100f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH", FrameAnimation_DESC("Knight_slashes_effect0001-Sheet.png", 0, 1, 0.100f, false));
