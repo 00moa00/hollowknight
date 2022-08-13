@@ -27,7 +27,7 @@ class GameEngineTransform;
 class GameEngineCollision;
 class GameEngineCameraActor;
 class GameEngineLevel :
-	public GameEngineNameObject ,
+	public GameEngineNameObject,
 	public GameEngineUpdateObject
 {
 	friend GameEngineCore;
@@ -48,7 +48,7 @@ public:
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
 
-	GameEngineCamera* GetMainCamera() 
+	GameEngineCamera* GetMainCamera()
 	{
 		return Cameras[static_cast<int>(CAMERAORDER::MAINCAMERA)];
 	}
@@ -135,7 +135,7 @@ public:
 	void AllClear();
 
 protected:
-	
+
 
 
 
@@ -159,7 +159,7 @@ private:
 
 	void OverChildMove(GameEngineLevel* _NextLevel);
 
-	void PushCamera(GameEngineCamera* _Camera, CAMERAORDER _Order) 
+	void PushCamera(GameEngineCamera* _Camera, CAMERAORDER _Order)
 	{
 		PushCamera(_Camera, static_cast<int>(_Order));
 	}
@@ -174,7 +174,7 @@ private:
 		PushRenderer(_Renderer, static_cast<int>(CAMERAORDER::UICAMERA));
 	}
 
-	void PushRenderer(GameEngineRenderer* _Renderer, CAMERAORDER _Order) 
+	void PushRenderer(GameEngineRenderer* _Renderer, CAMERAORDER _Order)
 	{
 		PushRenderer(_Renderer, static_cast<int>(_Order));
 	}

@@ -336,9 +336,14 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
 
 
-		if (GetJumpPower().y <= 0.f || GetisUpBlock() == true || GetisWall() == true)
+		if (GetJumpPower().y <= 0.f || GetisUpBlock() == true)
 		{
 			KnightManager_.ChangeState("FALL");
+		}
+
+		else if (GetisWall())
+		{
+			KnightManager_.ChangeState("SLIDE");
 		}
 
 		else
@@ -502,10 +507,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	else
 	{
 		GetTransform().SetWorldMove(float4::DOWN + ActtingMoveDirection_ / 2 * GetGravity() * GetFallSpeed() * _DeltaTime);
-
 	}
-
-
 
 
 	// ========== 스테이트 변경 ==========
@@ -534,7 +536,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("SLASH");
 	}
 
-	//콤보 공격
+	// 콤보 공격
 	if (GameEngineInput::GetInst()->IsDown("KnightSlash") == true
 		&& GameEngineInput::GetInst()->IsFree("KnightUp") == true
 		&& isPossibleDoubleSlash_ == true)
@@ -542,7 +544,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 	}
 
-	//더블 점프
+	// 더블 점프
 	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true)
 	{
 		KnightManager_.ChangeState("DOUBLE_JUMP");
@@ -948,11 +950,8 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		if (isSlashEnd_ == true)
 		{
 			KnightManager_.ChangeState("FALL");
-
 		}
-
 	}
-
 
 	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, 0 });
 
@@ -1074,6 +1073,7 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightUpSlashEnd(const StateInfo& _Info)
 {
+
 }
 
 void Knight::KnightDownSlashStart(const StateInfo& _Info)
@@ -1181,7 +1181,6 @@ void Knight::KnightMapStillStart(const StateInfo& _Info)
 
 void Knight::KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
 	{
 		isLookMap_ = false;
@@ -1193,8 +1192,6 @@ void Knight::KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		//GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
 		KnightManager_.ChangeState("MAP_WALKING");
 	}
-
-
 }
 
 void Knight::KnightMapStillEnd(const StateInfo& _Info)
@@ -1333,6 +1330,32 @@ void Knight::KnightMapSitWritelUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Knight::KnightMapSitWritelEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightSlideStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("SLIDE_ANIMATION");
+}
+
+void Knight::KnightSlideUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightSlideEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightWallJumpStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("WALL_JUMP_ANIMATION");
+}
+
+void Knight::KnightWallJumpUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightWallJumpEnd(const StateInfo& _Info)
 {
 }
 

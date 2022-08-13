@@ -173,6 +173,18 @@ private:
 	void KnightMapSitWritelUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightMapSitWritelEnd(const StateInfo& _Info);
 
+
+	// ---- 슬라이드 ----
+
+	void KnightSlideStart(const StateInfo& _Info);
+	void KnightSlideUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightSlideEnd(const StateInfo& _Info);
+
+	void KnightWallJumpStart(const StateInfo& _Info);
+	void KnightWallJumpUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightWallJumpEnd(const StateInfo& _Info);
+
+
 	//================================
 	//    Bind Animation
 	//================================

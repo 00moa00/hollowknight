@@ -49,6 +49,9 @@
     <Filter Include="Actor\Title\All">
       <UniqueIdentifier>{db04565f-0888-427e-8040-edbc5cd38744}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Meta">
+      <UniqueIdentifier>{6a832eb0-51cc-4dfd-87cc-b23217dd9d0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -136,6 +139,12 @@
     <ClInclude Include="Mask.h">
       <Filter>Actor\Play\UI</Filter>
     </ClInclude>
+    <ClInclude Include="MetaSpriteWindow.h">
+      <Filter>Actor\Master\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MetaLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -222,6 +231,12 @@
     </ClCompile>
     <ClCompile Include="Mask.cpp">
       <Filter>Actor\Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MetaSpriteWindow.cpp">
+      <Filter>Actor\Master\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MetaLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

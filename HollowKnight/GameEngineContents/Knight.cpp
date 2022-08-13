@@ -163,6 +163,9 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH_ANIMATION", FrameAnimation_DESC("Knight_down_slash_v02000-Sheet.png", 0, 4, 0.100f));
 
 
+	// ---- 슬라이드 ----
+	GetRenderer()->CreateFrameAnimationCutTexture("SLIDE_ANIMATION", FrameAnimation_DESC("Knight_wall_slide0000-Sheet.png", 0, 3, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("WALL_JUMP_ANIMATION", FrameAnimation_DESC("Knight_wall_jump0000-Sheet.png", 0, 2, 0.100f, false));
 
 
 
@@ -211,7 +214,6 @@ void Knight::Start()
 		{
 			isMapWalkTurnEnd_ = true;
 		});
-
 
 	GetRenderer()->AnimationBindEnd("MAP_WALKING_TURN_LEFT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -265,7 +267,6 @@ void Knight::Start()
 	KnightManager_.CreateStateMember("WALK_TURN"
 		, std::bind(&Knight::KnightWalkTurnUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWalkTurnStart, this, std::placeholders::_1));
 
-
 	KnightManager_.CreateStateMember("LOOK_UP"
 		, std::bind(&Knight::KnightLookUpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightLookUpStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookUpEnd, this, std::placeholders::_1));
 
@@ -280,7 +281,6 @@ void Knight::Start()
 
 	KnightManager_.CreateStateMember("LAND"
 		, std::bind(&Knight::KnightLandUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightLandStart, this, std::placeholders::_1), std::bind(&Knight::KnightLandEnd, this, std::placeholders::_1));
-
 
 	KnightManager_.CreateStateMember("FALL"
 		, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightFallStart, this, std::placeholders::_1), std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));
@@ -331,10 +331,16 @@ void Knight::Start()
 		, std::bind(&Knight::KnightMapSitWritelUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightMapSitWritelStart, this, std::placeholders::_1), std::bind(&Knight::KnightMapSitWritelEnd, this, std::placeholders::_1));
 
 
+	// ---- 슬라이드 ----
+
+	KnightManager_.CreateStateMember("SLIDE"
+		, std::bind(&Knight::KnightSlideUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightSlideStart, this, std::placeholders::_1), std::bind(&Knight::KnightSlideEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("WALL_JUMP"
+		, std::bind(&Knight::KnightWallJumpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWallJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightWallJumpEnd, this, std::placeholders::_1));
+
 
 	KnightManager_.ChangeState("STILL");
-
-
 }
 
 void Knight::Update(float _DeltaTime)

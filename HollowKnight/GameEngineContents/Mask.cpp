@@ -21,7 +21,7 @@ Mask::~Mask()
 
 void Mask::Start()
 {
-	CreateRendererComponent(float4{ 206, 131, 1 }, "HUD Cln_idle_v020000-Sheet.png", 0, static_cast<int>(RENDERORDER::UI));
+	CreateRendererComponent(float4{ 113, 150, 1 }, "HUD Cln_idle_v020000-Sheet.png", 0, static_cast<int>(RENDERORDER::UI));
 	//GetTransform().SetWorldPosition({ -GameEngineWindow::GetInst()->GetScale().hx(), GameEngineWindow::GetInst()->GetScale().hy() - 100, -100 });
 	//================================
 	//    Create Animation
@@ -39,7 +39,7 @@ void Mask::Start()
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("MASK_BREAK", FrameAnimation_DESC("HUD Cln_break_backboard0000-Sheet.png", 0, 5, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("MASK_BROKEN", FrameAnimation_DESC("HUD Cln_refill0000-Sheet.png", 0, 0, 0.050f, false));
-	
+	GetRenderer()->SetScaleModeImage();
 
 	GetRenderer()->ChangeFrameAnimation("MASK_WAIT");
 	GetRenderer()->SetPivot(PIVOTMODE::LEFTTOP);

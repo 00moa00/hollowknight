@@ -54,7 +54,7 @@ public:
 	void SetParent(GameEngineUpdateObject*) override;
 
 
-	void SetLevelOverOn() 
+	void SetLevelOverOn()
 	{
 		IsLevelOver = true;
 	}
@@ -68,7 +68,6 @@ protected:
 
 
 private:
-
 	void SetLevel(GameEngineLevel* _ParentLevel)
 	{
 		ParentLevel = _ParentLevel;
