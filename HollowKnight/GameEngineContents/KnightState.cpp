@@ -54,14 +54,6 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("RUN");
 	}
 
-
-	//if (GetisOnGround() == false)
-	//{
-	//	KnightManager_.ChangeState("FALL");
-	//}
-
-
-
 	// 점프
 	if (GameEngineInput::GetInst()->IsDown("KnightJump") == true && isPressJumppingKey_ == false)
 	{
@@ -789,13 +781,13 @@ void Knight::KnightSlashStart(const StateInfo& _Info)
 	KnightSlashEffect_->SetAnimationSlash();
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
-		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -100, 0, 0 });
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 80, 50, 0 });
 
 	}
 
 	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
-		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 100, 0, 0 });
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -80, 50, 0 });
 
 	}
 }
@@ -894,13 +886,13 @@ void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
 	KnightSlashEffect_->SetAnimationDoubleSlash();
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
-		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -100, 0, 0 });
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 80, 50, 0 });
 
 	}
 
 	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
-		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 100, 0, 0 });
+		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -80, 50, 0 });
 
 	}
 }
@@ -1000,6 +992,9 @@ void Knight::KnightUpSlashStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("UP_SLASH_ANIMATION");
 	KnightSlashEffect_->SetAnimationUpSlash();
+
+	KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 0, 100, 0 });
+
 }
 
 void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -1060,7 +1055,7 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, 0 });
 
 
 	// ========== 스테이트 변경 ==========
@@ -1150,7 +1145,7 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y -100.f, 0 });
 
 
 	// ========== 스테이트 변경 ==========

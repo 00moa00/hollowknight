@@ -30,20 +30,20 @@ void KingsPassLevel::Start()
 
 	CraateMasterMapActor();
 
-	//GetMasterMap()->CreateBackGround("King's-Pass_Background_1.png");
-	//GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
+	GetMasterMap()->CreateBackGround("King's-Pass_Background_1.png");
+	GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
 	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_1.png");
 
 	CreateKnightActor(); // 플레이어
-	//CreateKingsPass1Monster();
+	CreateKingsPass1Monster();
 
-	//GetMasterMap()->CreateTerrain("King's-Pass_Terrain_1.png");
-	//GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_1.png");
+	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_1.png");
+	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_1.png");
 
 	CreateUIActor();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	SetMainMapSize({7099, 4889});
 

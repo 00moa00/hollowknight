@@ -18,7 +18,10 @@ void Crawlid::Start()
 
 	SetMoveDirection(float4::ZERO);
 
-	CreateCollisionComponent(float4{ 349, 186, 10000 }, static_cast<int>(OBJECTORDER::Monster));
+	CreateCollisionComponent(float4{ 100, 100, 10000 }, static_cast<int>(OBJECTORDER::Monster));
+	GetCollision()->GetTransform().SetWorldPosition({0, 50, 0});
+
+
 	CreateRendererComponent(float4{ 303, 177, 1 }, "Crawler_goomba_death0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
 	GetTransform().SetLocalPosition({ 700,-4000,0 });
 
