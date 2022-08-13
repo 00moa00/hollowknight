@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "HUD.h"
+#include "KnightData.h"
 
 HUD::HUD() 
 	:
@@ -42,7 +43,6 @@ void HUD::Start()
 	HUDManager_.CreateStateMember("MASK_APPEAR"
 		, std::bind(&HUD::MaskAppearUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&HUD::MaskAppearStart, this, std::placeholders::_1), std::bind(&HUD::MaskAppearEnd, this, std::placeholders::_1));
 
-
 	HUDManager_.CreateStateMember("IDLE"
 		, std::bind(&HUD::HUDIdleUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&HUD::HUDIdleStart, this, std::placeholders::_1), std::bind(&HUD::HUDIdleEnd, this, std::placeholders::_1));
 
@@ -53,6 +53,53 @@ void HUD::Start()
 void HUD::Update(float _DeltaTime)
 {
 	HUDManager_.Update(_DeltaTime);
+
+}
+
+void HUD::NewMask()
+{
+	Maskes_.push_back(GetLevel()->CreateActor<Mask>());
+	Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size() - 1) * 60)), GameEngineWindow::GetInst()->GetScale().hy() - 55, -100 });
+	MaskesSize_ = Maskes_.size();
+
+	
+	Maskes_[MaskesSize_-1]->SetNewAppearState();
+	
+
+}
+
+void HUD::RefillMask()
+{
+	// 가장 앞 + 이미 채워진 가면 뒤에것 먼저 채운다
+
+
+	std::vector<Mask*>::iterator MaskStart_ = Maskes_.begin();
+	std::vector<Mask*>::iterator MaskEnd_ = Maskes_.end();
+
+	for (; MaskStart_ != MaskEnd_; ++MaskStart_)
+	{
+
+		if ((*MaskStart_)->GetisBroken() == true)
+		{
+			(*MaskStart_)->SetisRefill();
+		}
+
+	}
+
+}
+
+void HUD::BreakMask()
+{
+	// 가장 뒤에 있는 가면 먼저 깍는다
+	for (int i = Maskes_.size(); i >= 0; --i)
+	{
+		if (Maskes_[i]->GetisIdle() == true)
+		{
+			Maskes_[i]->SetisBroken();
+			return;
+		}
+
+	}
 }
 
 void HUD::MaskAppearStart(const StateInfo& _Info)
@@ -89,8 +136,6 @@ void HUD::MaskAppearEnd(const StateInfo& _Info)
 	{
 		Maskes_[i]->SetIdleState();
 	}
-
-
 }
 
 void HUD::HUDIdleStart(const StateInfo& _Info)
@@ -99,6 +144,12 @@ void HUD::HUDIdleStart(const StateInfo& _Info)
 
 void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (KnightData::GetInst()->GetisRefill() == true)
+	{
+		NewMask();
+		KnightData::GetInst()->SetisRefill(false);
+	}
+
 }
 
 void HUD::HUDIdleEnd(const StateInfo& _Info)

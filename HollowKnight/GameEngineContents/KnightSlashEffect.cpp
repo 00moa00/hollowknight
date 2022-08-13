@@ -79,12 +79,10 @@ void KnightSlashEffect::SetAnimationStill()
 
 bool KnightSlashEffect::thisVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-
 	if (_Other != nullptr)
 	{
 		_Other->GetActor()->Death();
 		return true;
-
 	}
 
 	return false;

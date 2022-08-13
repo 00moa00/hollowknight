@@ -15,17 +15,14 @@ void Crawlid::Start()
 {
 	SetName("Crawlid");
 
-
 	SetMoveDirection(float4::ZERO);
 
 	CreateCollisionComponent(float4{ 100, 100, 10000 }, static_cast<int>(OBJECTORDER::Monster));
 	GetCollision()->GetTransform().SetWorldPosition({0, 50, 0});
 
-
 	CreateRendererComponent(float4{ 303, 177, 1 }, "Crawler_goomba_death0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
 	GetTransform().SetLocalPosition({ 700,-4000,0 });
 
-	GameEngineRenderer_ = GetRenderer();
 	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Crawler_goomba_death0000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Crawler_goomba_turn_r_0000-Sheet.png", 0, 1, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("TURN_LEFT_ANIMATION", FrameAnimation_DESC("Crawler_goomba_turn0000-Sheet.png", 0, 1, 0.100f));
@@ -91,7 +88,6 @@ void Crawlid::CrawlidFallStart(const StateInfo& _Info)
 
 void Crawlid::CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	GetTransform().SetWorldMove((GetFallDownDirection()) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 	if (GetPixelRed(GetNextPos(_DeltaTime)) == true)
@@ -99,7 +95,6 @@ void Crawlid::CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		this->SetisGround(true);
 		CrawlidManager_.ChangeState("WALK");
 	}
-
 }
 
 void Crawlid::CrawlidFallEnd(const StateInfo& _Info)

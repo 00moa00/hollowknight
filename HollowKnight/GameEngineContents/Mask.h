@@ -1,6 +1,17 @@
 #pragma once
 #include "MasterUI.h"
 
+
+class MaskState
+{
+public:
+	bool isBroken_;
+	bool isRefill_;
+	bool isAppear_;
+	bool isNewAppear_;
+	bool isIdle_;
+};
+
 // 설명 :
 class Mask : public MasterUI
 {
@@ -20,6 +31,15 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	MaskState MaskState_;
+
+	float IdleAnimationTimer_;
+
+	GameEngineStateManager MaskManager_;
+
+	//================================
+	//    애니메이션
+	//================================
 
 	bool isAppearEnd_;
 	bool isBreakEnd_;
@@ -27,14 +47,87 @@ private:
 	bool isNewAppearEnd_;
 	bool isIdleAnimationEnd_;
 
+public:
 
-	float IdleAnimationTimer_;
+	bool GetisBroken()
+	{
+		return MaskState_.isBroken_;
+	}
 
-	GameEngineStateManager MaskManager_;
+	bool GetisRefill()
+	{
+		return MaskState_.isRefill_;
+	}
+
+	bool GetisAppear()
+	{
+		return MaskState_.isAppear_;
+	}
+
+	bool GetisNewAppear()
+	{
+		return MaskState_.isNewAppear_;
+	}
+
+	bool GetisIdle()
+	{
+		return MaskState_.isIdle_;
+	}
+
+	void SetisBroken()
+	{
+		MaskState_.isBroken_ = true;
+		MaskState_.isRefill_ = false;
+		MaskState_.isAppear_ = false;
+		MaskState_.isNewAppear_ = false;
+		MaskState_.isIdle_ = false;
+
+	}
+
+	void SetisRefill()
+	{
+		MaskState_.isBroken_ = false;
+		MaskState_.isRefill_ = true;
+		MaskState_.isAppear_ = false;
+		MaskState_.isNewAppear_ = false;
+		MaskState_.isIdle_ = false;
+
+	}
+
+	void SetisAppear()
+	{
+		MaskState_.isBroken_ = false;
+		MaskState_.isRefill_ = false;
+		MaskState_.isAppear_ = true;
+		MaskState_.isNewAppear_ = false;
+		MaskState_.isIdle_ = false;
+
+	}
+
+	void SetisNewAppear()
+	{
+		MaskState_.isBroken_ = false;
+		MaskState_.isRefill_ = false;
+		MaskState_.isAppear_ = false;
+		MaskState_.isNewAppear_ = true;
+		MaskState_.isIdle_ = false;
+
+	}
+
+	void SetisIdle()
+	{
+		MaskState_.isBroken_ = false;
+		MaskState_.isRefill_ = false;
+		MaskState_.isAppear_ = false;
+		MaskState_.isNewAppear_ = false;
+		MaskState_.isIdle_ = true;
+	}
+
 public:
 
 	void SetWaitState();
 	void SetAppearState();
+	void SetNewAppearState();
 
 	void SetIdleState();
 

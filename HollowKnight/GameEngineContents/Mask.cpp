@@ -23,6 +23,7 @@ void Mask::Start()
 {
 	CreateRendererComponent(float4{ 113, 150, 1 }, "HUD Cln_idle_v020000-Sheet.png", 0, static_cast<int>(RENDERORDER::UI));
 	//GetTransform().SetWorldPosition({ -GameEngineWindow::GetInst()->GetScale().hx(), GameEngineWindow::GetInst()->GetScale().hy() - 100, -100 });
+	
 	//================================
 	//    Create Animation
 	//================================
@@ -43,7 +44,8 @@ void Mask::Start()
 
 	GetRenderer()->ChangeFrameAnimation("MASK_WAIT");
 	GetRenderer()->SetPivot(PIVOTMODE::LEFTTOP);
-	//GetRenderer()->GetTransform().SetWorldScale({ 10, 10, 1 });
+
+
 	//================================
 	//    Create Bind Animation
 	//================================
@@ -74,6 +76,7 @@ void Mask::Start()
 			isIdleAnimationEnd_ = true;
 		});
 
+
 	//================================
 	//    Create State
 	//================================
@@ -90,7 +93,6 @@ void Mask::Start()
 	MaskManager_.CreateStateMember("NEW_APPEAR"
 		, std::bind(&Mask::MaskNewAppearUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskNewAppearStart, this, std::placeholders::_1), std::bind(&Mask::MaskNewAppearEnd, this, std::placeholders::_1));
 
-
 	MaskManager_.CreateStateMember("BROKEN"
 		, std::bind(&Mask::MaskBrokenUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskBrokenStart, this, std::placeholders::_1), std::bind(&Mask::MaskBrokenEnd, this, std::placeholders::_1));
 
@@ -98,15 +100,35 @@ void Mask::Start()
 		, std::bind(&Mask::MaskRefillUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskRefillStart, this, std::placeholders::_1), std::bind(&Mask::MaskRefillEnd, this, std::placeholders::_1));
 
 
-
 	MaskManager_.ChangeState("WAIT");
-
 
 }
 
 void Mask::Update(float _DeltaTime)
 {
 	MaskManager_.Update(_DeltaTime);
+
+
+	if (GetisBroken() == true)
+	{
+		MaskManager_.ChangeState("BROKEN");
+	}
+
+	else if (GetisRefill() == true)
+	{
+		MaskManager_.ChangeState("REFILL");
+	}
+
+	else if (GetisAppear() == true)
+	{
+		MaskManager_.ChangeState("APPEAR");
+	}
+
+	else if (GetisNewAppear() == true)
+	{
+		MaskManager_.ChangeState("NEW_APPEAR");
+	}
+
 
 }
 
@@ -120,10 +142,15 @@ void Mask::SetAppearState()
 	MaskManager_.ChangeState("APPEAR");
 }
 
+void Mask::SetNewAppearState()
+{
+	MaskManager_.ChangeState("NEW_APPEAR");
+
+}
+
 void Mask::SetIdleState()
 {
 	MaskManager_.ChangeState("IDLE");
-
 }
 
 void Mask::MaskWaitStart(const StateInfo& _Info)
@@ -149,11 +176,7 @@ void Mask::MaskAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (isAppearEnd_ == true)
 	{
 		isAppearEnd_ = false;
-
 		GetRenderer()->ChangeFrameAnimation("MASK_IDLE");
-
-		//MaskManager_.ChangeState("IDLE");
-
 	}
 }
 
@@ -165,8 +188,8 @@ void Mask::MaskAppearEnd(const StateInfo& _Info)
 
 void Mask::MaskIdleStart(const StateInfo& _Info)
 {
+	SetisIdle();
 	GetRenderer()->ChangeFrameAnimation("MASK_IDLE");
-
 }
 
 void Mask::MaskIdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -184,10 +207,7 @@ void Mask::MaskIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		isIdleAnimationEnd_ = false;
 		GetRenderer()->ChangeFrameAnimation("MASK_IDLE");
-
 	}
-
-
 }
 
 void Mask::MaskIdleEnd(const StateInfo& _Info)
@@ -220,10 +240,18 @@ void Mask::MaskRefillEnd(const StateInfo& _Info)
 
 void Mask::MaskNewAppearStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("MASK_NEW_APPEAR");
+
 }
 
 void Mask::MaskNewAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isNewAppearEnd_ == true)
+	{
+		isNewAppearEnd_ = false;
+		GetRenderer()->ChangeFrameAnimation("MASK_IDLE");
+
+	}
 }
 
 void Mask::MaskNewAppearEnd(const StateInfo& _Info)

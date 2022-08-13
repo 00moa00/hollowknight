@@ -33,8 +33,14 @@ private:
 	VesselFrame* VesselFrame_;
 	std::vector<Mask*> Maskes_;
 
+	
+
 	GameEngineStateManager HUDManager_;
 
+public:
+	void NewMask();
+	void RefillMask();
+	void BreakMask();
 
 private:
 

@@ -194,7 +194,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="KinghtData.h">
+    <ClInclude Include="KnightData.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -316,7 +316,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="KinghtData.cpp">
+    <ClCompile Include="KnightData.cpp">
       <SubType>
       </SubType>
     </ClCompile>

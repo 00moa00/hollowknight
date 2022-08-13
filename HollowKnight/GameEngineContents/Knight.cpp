@@ -115,6 +115,9 @@ void Knight::Start()
 
 		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
 
+	//	GameEngineInput::GetInst()->CreateKey("KnightFocus", 'V');
+
+
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
 
 	}

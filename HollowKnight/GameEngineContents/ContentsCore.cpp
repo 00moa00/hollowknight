@@ -2,6 +2,7 @@
 #include "ContentsCore.h"
 #include "GameEngineContents/TitleLevel.h"
 #include "GameEngineContents/KingsPassLevel.h"
+#include "KnightData.h"
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -309,5 +310,6 @@ void ContentsCore::Update(float _DeltaTime)
 
 void ContentsCore::End()
 {
+	KnightData::Destroy();
 
 }

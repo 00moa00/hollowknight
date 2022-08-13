@@ -94,7 +94,7 @@
     <ClInclude Include="Knight.h">
       <Filter>Actor\Play\Knight</Filter>
     </ClInclude>
-    <ClInclude Include="KinghtData.h">
+    <ClInclude Include="KnightData.h">
       <Filter>Actor\Play\Knight</Filter>
     </ClInclude>
     <ClInclude Include="Crawlid.h">
@@ -187,7 +187,7 @@
     <ClCompile Include="KnightState.cpp">
       <Filter>Actor\Play\Knight</Filter>
     </ClCompile>
-    <ClCompile Include="KinghtData.cpp">
+    <ClCompile Include="KnightData.cpp">
       <Filter>Actor\Play\Knight</Filter>
     </ClCompile>
     <ClCompile Include="Crawlid.cpp">

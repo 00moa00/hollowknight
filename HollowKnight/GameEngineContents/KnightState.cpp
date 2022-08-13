@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Knight.h"
+#include "KnightData.h"
 
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
@@ -21,6 +22,13 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	// ========== UPDATE ==========
 
 	DoubleSlashTimer(_DeltaTime);
+
+
+	if (true == GameEngineInput::GetInst()->IsDown("KnightFocus"))
+	{
+		KnightData::GetInst()->SetisRefill(true);
+	}
+
 
 	if (GameEngineInput::GetInst()->IsFree("KnightJump") == true && isPressJumppingKey_ == true)
 	{

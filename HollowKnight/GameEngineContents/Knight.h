@@ -43,6 +43,7 @@ private:
 	bool isRunMode_;
 	bool isLowHealth_;
 
+
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
 
@@ -59,6 +60,9 @@ private:
 
 	GameEngineCollision* Test1_;
 	GameEngineCollision* Test2_;
+
+public:
+
 
 
 private:
