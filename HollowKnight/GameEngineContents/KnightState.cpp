@@ -1385,10 +1385,10 @@ void Knight::KnightWallJumpStart(const StateInfo& _Info)
 void Knight::KnightWallJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
-	SubJumpPower((float4::UP + ( GetMoveDirection())) * GetGravity() * _DeltaTime);
+	SubJumpPower(((float4::UP * 1.3f) + ( GetMoveDirection())) * GetGravity() * _DeltaTime);
 
 
-	GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
+	GetTransform().SetWorldMove(GetJumpPower() * 12 * _DeltaTime);
 
 
 	if (GetJumpPower().y <= 0.f )
@@ -1422,8 +1422,8 @@ void Knight::KnightWallJumpLandUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	else
 	{
-		SubJumpPower((float4::UP + (-GetMoveDirection())) * GetGravity() * _DeltaTime);
-		GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
+		SubJumpPower(((float4::UP * 1.3f ) + (-GetMoveDirection())) * GetGravity() * _DeltaTime);
+		GetTransform().SetWorldMove(GetJumpPower() * 12 * _DeltaTime);
 	}
 
 }
