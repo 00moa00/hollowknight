@@ -38,10 +38,13 @@ void Crawlid::Start()
 		, std::bind(&Crawlid::CrawlidFallUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Crawlid::CrawlidFallStart, this, std::placeholders::_1), std::bind(&Crawlid::CrawlidFallEnd, this, std::placeholders::_1));
 
 	CrawlidManager_.ChangeState("WALK");
-	this->SetallDownDirection({ 0, -1, 0 });
-	this->SetFallSpeed(2);
-	this->SetGravity(400.f);
-	this->SetSpeed(300.f);
+
+	SetallDownDirection({ 0, -1, 0 });
+	SetFallSpeed(2);
+	SetGravity(400.f);
+	SetSpeed(300.f);
+
+	SetMoveDirection(float4::RIGHT);
 
 }
 
@@ -66,13 +69,12 @@ void Crawlid::CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		SetMoveDirection(float4::ZERO);
 		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
-
 	}
+
 	else if (GetisOnGround() == true)
 	{
-		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
+		//GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 	}
-
 
 	else
 	{
@@ -99,4 +101,5 @@ void Crawlid::CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Crawlid::CrawlidFallEnd(const StateInfo& _Info)
 {
+
 }

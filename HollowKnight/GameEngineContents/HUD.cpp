@@ -40,6 +40,8 @@ void HUD::Start()
 	Maskes_.push_back(GetLevel()->CreateActor<Mask>());
 	Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size() - 1) * 60)), GameEngineWindow::GetInst()->GetScale().hy() - 55, -100 });
 
+	KnightData::GetInst()->SetMask(Maskes_.size()-1);
+
 	HUDManager_.CreateStateMember("MASK_APPEAR"
 		, std::bind(&HUD::MaskAppearUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&HUD::MaskAppearStart, this, std::placeholders::_1), std::bind(&HUD::MaskAppearEnd, this, std::placeholders::_1));
 
@@ -64,7 +66,8 @@ void HUD::NewMask()
 
 	
 	Maskes_[MaskesSize_-1]->SetNewAppearState();
-	
+	KnightData::GetInst()->SetMask(MaskesSize_);
+
 
 }
 
@@ -72,18 +75,14 @@ void HUD::RefillMask()
 {
 	// 가장 앞 + 이미 채워진 가면 뒤에것 먼저 채운다
 
-
-	std::vector<Mask*>::iterator MaskStart_ = Maskes_.begin();
-	std::vector<Mask*>::iterator MaskEnd_ = Maskes_.end();
-
-	for (; MaskStart_ != MaskEnd_; ++MaskStart_)
+	// 가장 뒤에 있는 가면 먼저 깍는다
+	for (int i = 0; i < MaskesSize_; ++i)
 	{
-
-		if ((*MaskStart_)->GetisBroken() == true)
+		if (Maskes_[i]->GetisBroken() == true)
 		{
-			(*MaskStart_)->SetisRefill();
+			Maskes_[i]->SetisRefill();
+			return;
 		}
-
 	}
 
 }
@@ -91,7 +90,7 @@ void HUD::RefillMask()
 void HUD::BreakMask()
 {
 	// 가장 뒤에 있는 가면 먼저 깍는다
-	for (int i = Maskes_.size(); i >= 0; --i)
+	for (int i = Maskes_.size()-1; i >= 0; --i)
 	{
 		if (Maskes_[i]->GetisIdle() == true)
 		{
@@ -144,12 +143,21 @@ void HUD::HUDIdleStart(const StateInfo& _Info)
 
 void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	//리필
 	if (KnightData::GetInst()->GetisRefill() == true)
 	{
-		NewMask();
+		RefillMask();
 		KnightData::GetInst()->SetisRefill(false);
 	}
 
+	//깨짐
+
+
+	if (KnightData::GetInst()->GetisBreak() == true)
+	{
+		BreakMask();
+		KnightData::GetInst()->SetisBreak(false);
+	}
 }
 
 void HUD::HUDIdleEnd(const StateInfo& _Info)

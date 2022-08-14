@@ -45,11 +45,8 @@ void KnightSlashEffect::Start()
 
 void KnightSlashEffect::Update(float _DeltaTime)
 {
-
 	GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&KnightSlashEffect::thisVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
-
-
 }
 
 void KnightSlashEffect::SetAnimationSlash()

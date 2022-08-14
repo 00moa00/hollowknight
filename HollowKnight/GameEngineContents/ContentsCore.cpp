@@ -22,7 +22,6 @@ void ContentsCore::Start()
 	GameEngineFont::Load("Noto Serif KR");
 
 
-
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -255,6 +254,8 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_wall_slide0000-Sheet.png", 4, 1);
 		GameEngineTexture::Cut("Knight_wall_jump0000-Sheet.png", 3, 1);
 
+		// Ω∫≈œ
+		GameEngineTexture::Cut("Knight_stun0000-Sheet.png", 5, 1);
 
 
 

@@ -37,7 +37,10 @@ Knight::Knight()
 	isRunMode_(false),
 	isFocusEnd_(false),
 	isLowHealth_(false),
-	isLandEnd_(false)
+	isLandEnd_(false),
+	isStunEnd_(false),
+
+	KnockbackDirection_(float4::ZERO)
 {
 }
 
@@ -115,9 +118,6 @@ void Knight::Start()
 
 		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
 
-	//	GameEngineInput::GetInst()->CreateKey("KnightFocus", 'V');
-
-
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
 
 	}
@@ -150,6 +150,9 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("FOCUS_ANIMATION", FrameAnimation_DESC("Knight_focus_v020000-Sheet.png", 0, 11, 0.100f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("LOW_HEALTH_ANIMATION", FrameAnimation_DESC("Knight_idle_low_health000-Sheet.png", 0, 9, 0.100f));
+	
+	// ---- 스턴 ----
+	GetRenderer()->CreateFrameAnimationCutTexture("STUN_ANIMATION", FrameAnimation_DESC("Knight_stun0000-Sheet.png", 0, 4, 0.070f, false));
 
 
 	// ---- 달리기 ----
@@ -267,7 +270,11 @@ void Knight::Start()
 			isLandEnd_ = true;
 		});
 
-	
+	GetRenderer()->AnimationBindEnd("STUN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isStunEnd_ = true;
+		});
+
 
 	//================================
 	//    Create State
@@ -322,6 +329,10 @@ void Knight::Start()
 	
 	KnightManager_.CreateStateMember("DOWN_SLASH"
 		, std::bind(&Knight::KnightDownSlashUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightDownSlashStart, this, std::placeholders::_1), std::bind(&Knight::KnightDownSlashEnd, this, std::placeholders::_1));
+	
+	// ----스턴 ----
+	KnightManager_.CreateStateMember("STUN"
+		, std::bind(&Knight::KnightStunUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightStunStart, this, std::placeholders::_1), std::bind(&Knight::KnightStunEnd, this, std::placeholders::_1));
 
 
 	// ---- 달리기 ----
@@ -366,19 +377,6 @@ void Knight::Start()
 void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
-
-	//std::string a = "";
-	//if (isPressJumppingKey_ == true)
-	//{
-	//	a = "true";
-	//}
-	//else
-	//{
-	//	a = "false";
-
-	//}
-
-	//GameEngineDebug::OutPutString(a);
 }
 
 
@@ -531,8 +529,6 @@ void Knight::KnightIsActtingCheck()
 		ActtingMoveDirection_ = float4::ZERO;
 	}
 }
-
-
 
 void Knight::Walkking(float _DeltaTime)
 {

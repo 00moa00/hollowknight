@@ -33,6 +33,7 @@ private:
 	bool isMapWalkTurnEnd_;
 	bool isFocusEnd_;
 	bool isLandEnd_;
+	bool isStunEnd_;
 
 	bool isKnightActtingMove_;
 	bool isPressJumppingKey_;
@@ -51,9 +52,12 @@ private:
 	float KnightLookUpTimer_;
 	float KnightLookDownTimer_;
 	float KnightDashTimer_; // 대쉬 타이머
+	float KnightKnockbackTimer_; // 넉백 타이머
 
 	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
 	float4 PrevDirection_;
+
+	float4 KnockbackDirection_;
 
 	GameEngineStateManager KnightManager_;
 	KnightSlashEffect* KnightSlashEffect_;
@@ -143,7 +147,10 @@ private:
 	void KnightRunUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightRunEnd(const StateInfo& _Info);
 
-
+	// ---- 스턴 ----
+	void KnightStunStart(const StateInfo& _Info);
+	void KnightStunUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightStunEnd(const StateInfo& _Info);
 
 	// ---- 공격 ----
 
@@ -204,10 +211,11 @@ private:
 
 
 	//================================
-	//    Bind Animation
+	//    Bind 
 	//================================
 
 
+	bool KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 
 }; 

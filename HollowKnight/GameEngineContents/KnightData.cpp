@@ -6,7 +6,8 @@ KnightData* KnightData::Inst_ = new KnightData();
 
 KnightData::KnightData()
 	:
-	isRefill_(false)
+	isRefill_(false),
+	Mask_(4)
 
 {
 }

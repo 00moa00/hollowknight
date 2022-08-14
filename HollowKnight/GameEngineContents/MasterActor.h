@@ -61,7 +61,7 @@ protected:
 
 	PixelPOINT Point_;
 
-protected:
+public:
 
 	//================================
 	//     Getter

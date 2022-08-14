@@ -70,7 +70,6 @@ void Mask::Start()
 			isNewAppearEnd_ = true;
 		});
 
-
 	GetRenderer()->AnimationBindEnd("MASK_IDLE_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isIdleAnimationEnd_ = true;
@@ -216,6 +215,8 @@ void Mask::MaskIdleEnd(const StateInfo& _Info)
 
 void Mask::MaskBrokenStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("MASK_BROKEN");
+
 }
 
 void Mask::MaskBrokenUpdate(float _DeltaTime, const StateInfo& _Info)
