@@ -15,6 +15,8 @@
 #include "Knight.h"
 #include "MasterMap.h"
 
+#include "KnightData.h"
+
 Knight::Knight()
 	:
 	KnightManager_(),
@@ -23,6 +25,7 @@ Knight::Knight()
 	KnightLookUpTimer_(),
 	KnightLookDownTimer_(),
 	KnightDashTimer_(),
+
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
 	isPressJumppingKey_(false),
@@ -39,6 +42,8 @@ Knight::Knight()
 	isLowHealth_(false),
 	isLandEnd_(false),
 	isStunEnd_(false),
+	isDeath_(false),
+	isDeathEnd_(false),
 
 	KnockbackDirection_(float4::ZERO)
 {
@@ -73,8 +78,8 @@ void Knight::Start()
 	SetRightTop({ 15.f, 20.f, 0, 0 });
 	SetLeftTop({ -15.f, 20.f, 0, 0 });
 	SetCenterTop({ 0, 20.f, 0, 0 });
-	SetLeftCenter({-15.f, 0, 0});
-	SetRightCenter({ 15.f, 0, 0 });
+	SetLeftCenter({-30.f, 30.f, 0});
+	SetRightCenter({ 30.f, 30.f, 0 });
 	SetCenter({0, 20.f, 0, 0});
 
 	CreateCollisionComponent(float4{60, 120, 1}, static_cast<int>(OBJECTORDER::Knight));
@@ -128,7 +133,6 @@ void Knight::Start()
 	//================================
  
 	// ---- 기본 ----
-
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
@@ -154,15 +158,16 @@ void Knight::Start()
 	// ---- 스턴 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("STUN_ANIMATION", FrameAnimation_DESC("Knight_stun0000-Sheet.png", 0, 4, 0.070f, false));
 
+	// ---- 죽음 ----
+	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Knight_death_anim0000-Sheet.png", 0, 13, 0.070f, false));
+
 
 	// ---- 달리기 ----
-
 	GetRenderer()->CreateFrameAnimationCutTexture("RUN_ANIMATION", FrameAnimation_DESC("Knight_run0000-Sheet.png", 0, 7, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_TO_RUN_ANIMATION", FrameAnimation_DESC("Knight_idle_to_run0000-Sheet.png", 0, 4, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("RUN_TO_IDLE_ANIMATION", FrameAnimation_DESC("Knight_run_to_idle000-Sheet.png", 0, 5, 0.100f, false));
 
 	// ---- 지도 보기 ----
-
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_OPEN_ANIMATION", FrameAnimation_DESC("Knight_idle_map0000-Sheet.png", 0, 1, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_map0000-Sheet.png", 2, 8, 0.100f));
 	
@@ -176,12 +181,14 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_SIT_LOOK_ANIMATION", FrameAnimation_DESC("Knight_sit_map_look0026-Sheet.png", 0, 3, 0.100f));
 
 	// ---- 공격 ----
-
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 6, 10, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("UP_SLASH_ANIMATION", FrameAnimation_DESC("Knight_up_slash0000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH_ANIMATION", FrameAnimation_DESC("Knight_down_slash_v02000-Sheet.png", 0, 4, 0.100f));
-
+	
+	// ---- 기상 ----
+	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_GROUND_ANIMATION", FrameAnimation_DESC("Knight_wake_up_ground0000-Sheet.png", 0, 20, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_ANIMATION", FrameAnimation_DESC("Knight_wake0000-Sheet.png", 0, 4, 0.100f, false));
 
 	// ---- 슬라이드 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("SLIDE_ANIMATION", FrameAnimation_DESC("Knight_wall_slide0000-Sheet.png", 0, 3, 0.100f));
@@ -275,13 +282,27 @@ void Knight::Start()
 			isStunEnd_ = true;
 		});
 
+	GetRenderer()->AnimationBindEnd("DEATH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isDeathEnd_ = true;
+		});
+
+	GetRenderer()->AnimationBindEnd("WAKEUP_GROUND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isGroundWakeUp_ = true;
+		});
+
+	GetRenderer()->AnimationBindEnd("WAKEUP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isWakeUp_ = true;
+		});
+
 
 	//================================
 	//    Create State
 	//================================
 	 
 	// ---- 기본 ----
-
 	KnightManager_.CreateStateMember("STILL"
 		, std::bind(&Knight::KnightStillUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightStillStart, this, std::placeholders::_1));
 	
@@ -317,7 +338,6 @@ void Knight::Start()
 
 
 	// ---- 공격 ----
-
 	KnightManager_.CreateStateMember("SLASH"
 		, std::bind(&Knight::KnightSlashUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightSlashStart, this, std::placeholders::_1), std::bind(&Knight::KnightSlashEnd, this, std::placeholders::_1));
 
@@ -334,15 +354,23 @@ void Knight::Start()
 	KnightManager_.CreateStateMember("STUN"
 		, std::bind(&Knight::KnightStunUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightStunStart, this, std::placeholders::_1), std::bind(&Knight::KnightStunEnd, this, std::placeholders::_1));
 
+	// ---- 사망 ----
+	KnightManager_.CreateStateMember("DEATH"
+		, std::bind(&Knight::KnightDeathUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightDeathStart, this, std::placeholders::_1), std::bind(&Knight::KnightDeathEnd, this, std::placeholders::_1));
+	
+	KnightManager_.CreateStateMember("WAKE_UP"
+		, std::bind(&Knight::KnightWakeUpUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWakeUpStart, this, std::placeholders::_1), std::bind(&Knight::KnightWakeUpEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("GROUND_WAKE_UP"
+		, std::bind(&Knight::KnightWakeUpGroundUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWakeUpGroundStart, this, std::placeholders::_1), std::bind(&Knight::KnightWakeUpGroundEnd, this, std::placeholders::_1));
+
 
 	// ---- 달리기 ----
-
 	KnightManager_.CreateStateMember("RUN"
 		, std::bind(&Knight::KnightRunUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightRunStart, this, std::placeholders::_1), std::bind(&Knight::KnightRunEnd, this, std::placeholders::_1));
 
 
 	// ---- 지도 보기 ----
-
 	KnightManager_.CreateStateMember("MAP_STILL"
 		, std::bind(&Knight::KnightMapStillUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightMapStillStart, this, std::placeholders::_1), std::bind(&Knight::KnightMapStillEnd, this, std::placeholders::_1));
 
@@ -360,7 +388,6 @@ void Knight::Start()
 
 
 	// ---- 슬라이드 ----
-
 	KnightManager_.CreateStateMember("SLIDE"
 		, std::bind(&Knight::KnightSlideUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightSlideStart, this, std::placeholders::_1), std::bind(&Knight::KnightSlideEnd, this, std::placeholders::_1));
 
@@ -600,6 +627,18 @@ void Knight::LookDownTimerAndChangeState(float _DeltaTime)
 		KnightLookDownTimer_ = 0.f;
 		KnightManager_.ChangeState("LOOK_DOWN");
 	}
+}
+
+bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	MasterActor* Monster = dynamic_cast<MasterActor*>(_Other->GetActor());
+
+	if (Monster != nullptr)
+	{
+		KnockbackDirection_ = Monster->GetMoveDirection();
+	}
+
+	return true;
 }
 
 

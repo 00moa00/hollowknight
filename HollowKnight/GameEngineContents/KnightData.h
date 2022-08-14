@@ -12,7 +12,6 @@ public:
 		return Inst_;
 	}
 
-
 	static void Destroy()
 	{
 		if (nullptr != Inst_)
@@ -23,7 +22,6 @@ public:
 	}
 
 public:
-
 	// constrcuter destructer
 	KnightData();
 	~KnightData();
@@ -35,8 +33,8 @@ public:
 	KnightData& operator=(KnightData&& _Other) noexcept = delete;
 
 private:
-
-	int Mask_;
+	int AllMask_;
+	int CurMask_;
 
 	bool isRefill_;
 	bool isNewMask_;
@@ -48,9 +46,14 @@ public:
 	//    Getter
 	//================================
 
-	int GetMask()
+	int GetAllMask()
 	{
-		return Mask_;
+		return AllMask_;
+	}
+
+	int GetCurMask()
+	{
+		return CurMask_;
 	}
 
 	bool GetisRefill()
@@ -72,9 +75,14 @@ public:
 	//    Setter
 	//================================
 
-	void SetMask(int _i)
+	void SetAllMask(int _i)
 	{
-		Mask_ = _i;
+		AllMask_ = _i;
+	}
+
+	void SetCurMask(int _i)
+	{
+		CurMask_ = _i;
 	}
 
 	void SetisRefill(bool _b)

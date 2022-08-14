@@ -28,6 +28,8 @@ private:
 	int MaskesSize_;
 	int MakesAppearCount_;
 
+	int CurMask_;
+
 	float MaskAppearTimer_;
 
 	VesselFrame* VesselFrame_;

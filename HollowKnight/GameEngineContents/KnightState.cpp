@@ -16,8 +16,6 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Monster, CollisionType::CT_OBB2D,
-		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 
 	// ========== UPDATE ==========
 
@@ -118,7 +116,6 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("DASH");
 	}
 
-
 	// 집중
 	if (GameEngineInput::GetInst()->IsDown("KnightFocus") == true)
 	{
@@ -136,13 +133,15 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
-		KnightManager_.ChangeState("STUN");
 
+		KnightData::GetInst()->SetisBreak(true);
+
+		KnightManager_.ChangeState("STUN");
 	}
 
 
-	Test1_->GetTransform().SetWorldPosition({GetTransform().GetWorldPosition().x , GetTransform().GetWorldPosition().y + 20.f});
-	Test2_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x , GetTransform().GetWorldPosition().y });
+	Test1_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x - 15.f , GetTransform().GetWorldPosition().y + 15.f });
+	Test2_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x + 15.f , GetTransform().GetWorldPosition().y + 15.f });
 
 	DoubleSlashTimer(_DeltaTime);
 
@@ -152,7 +151,9 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisWall() == true)
 	{
-		GetTransform().SetWorldMove(float4::ZERO);
+		//GetTransform().SetWorldMove(float4::ZERO);
+		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+
 		//KnightManager_.ChangeState("FALL");
 	}
 
@@ -189,6 +190,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	else if(GetisOnGround() == false)
 	{
 		KnightManager_.ChangeState("FALL");
+		return;
 	}
 
 
@@ -275,8 +277,6 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 }
 
-
-
 void Knight::KnightLookDownStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("LOOK_DOWN_ANIMATION");
@@ -335,25 +335,27 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		isKnihgtActtingMoveChack();
 		KnightIsActtingCheck();
 
-		this->isUpBlockCheck(_DeltaTime);
-		this->isOnGroundCheck(_DeltaTime);
-		this->isWallCheck(_DeltaTime);
+		isUpBlockCheck(_DeltaTime);
+		isOnGroundCheck(_DeltaTime);
+		isWallCheck(_DeltaTime);
 
 		ActtingMoveDirection_.Normalize();
-		SubJumpPower((float4::UP + -ActtingMoveDirection_ / 2) * GetGravity() * _DeltaTime);
 
-
+		SubJumpPower((float4::UP + ( - ActtingMoveDirection_ / 2))* GetGravity()* _DeltaTime);
 		GetTransform().SetWorldMove(GetJumpPower() * GetJumpSpeed() * _DeltaTime);
 
 
 		if (GetJumpPower().y <= 0.f || GetisUpBlock() == true)
 		{
 			KnightManager_.ChangeState("FALL");
+			return;
+
 		}
 
 		else if (GetisWall())
 		{
 			KnightManager_.ChangeState("SLIDE");
+			return;
 		}
 
 		else
@@ -511,10 +513,12 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	//DoubleSlashTimer(_DeltaTime);
 
 	ActtingMoveDirection_.Normalize();
+	GetTransform().SetWorldMove(float4::DOWN + (ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 	if (GetisWall() == true)
 	{
 		KnightManager_.ChangeState("SLIDE");
+		return;
 	}
 
 	else if (GetisOnGround() == true)
@@ -522,12 +526,6 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("LAND");
 		return;
 	}
-
-	else
-	{
-		GetTransform().SetWorldMove(float4::DOWN + ActtingMoveDirection_ / 2 * GetGravity() * GetFallSpeed() * _DeltaTime);
-	}
-
 
 	// ========== 스테이트 변경 ==========
 
@@ -795,12 +793,22 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 
 void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+
 	KnightKnockbackTimer_ += _DeltaTime;
 
 	if (KnightKnockbackTimer_ > 0.3f)
 	{
 		KnightKnockbackTimer_ = 0.f;
-		KnightManager_.ChangeState("STILL");
+		if (KnightData::GetInst()->GetCurMask() == 0)
+		{
+			KnightManager_.ChangeState("DEATH");
+		}
+
+		else
+		{
+			KnightManager_.ChangeState("STILL");
+		}
 
 	}
 
@@ -809,6 +817,59 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Knight::KnightStunEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightDeathStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
+}
+
+void Knight::KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isDeathEnd_ == true)
+	{
+		isDeathEnd_ = false;
+		KnightManager_.ChangeState("GROUND_WAKE_UP");
+	}
+}
+
+void Knight::KnightDeathEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightWakeUpGroundStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("WAKEUP_GROUND_ANIMATION");
+}
+
+void Knight::KnightWakeUpGroundUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isGroundWakeUp_ == true)
+	{
+		isGroundWakeUp_ = false;
+		KnightManager_.ChangeState("STILL");
+	}
+}
+
+void Knight::KnightWakeUpGroundEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightWakeUpStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("WAKEUP_ANIMATION");
+}
+
+void Knight::KnightWakeUpUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isWakeUp_ == true)
+	{
+		isWakeUp_ = false;
+	}
+}
+
+void Knight::KnightWakeUpEnd(const StateInfo& _Info)
 {
 }
 
@@ -1387,14 +1448,17 @@ void Knight::KnightSlideStart(const StateInfo& _Info)
 
 void Knight::KnightSlideUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+
+	GetTransform().SetWorldMove(float4::DOWN * GetGravity() * GetFallSpeed() * _DeltaTime);
+
 	isDownGroundCheck(_DeltaTime);
 
 	if (GetisOnGround() == true)
 	{
 		KnightManager_.ChangeState("LAND");
+		return;
 	}
-
-	GetTransform().SetWorldMove(float4::DOWN * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 	if (true == GameEngineInput::GetInst()->IsDown("KnightJump"))
 	{
@@ -1458,20 +1522,5 @@ void Knight::KnightWallJumpLandUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightWallJumpLandEnd(const StateInfo& _Info)
 {
-}
-
-bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
-{
-
-	MasterActor* Monster = dynamic_cast<MasterActor*>(_Other->GetActor());
-
-	if (Monster != nullptr)
-	{
-		KnockbackDirection_ = Monster->GetMoveDirection();
-	}
-
-	KnightData::GetInst()->SetisBreak(true);
-
-	return true;
 }
 

@@ -254,6 +254,9 @@ void ContentsCore::Start()
 		// 스턴
 		GameEngineTexture::Cut("Knight_stun0000-Sheet.png", 5, 1);
 
+		// 사망
+		GameEngineTexture::Cut("Knight_death_anim0000-Sheet.png", 14, 1);
+
 		// 지도보기
 		GameEngineTexture::Cut("Knight_sit_map_look0026-Sheet.png", 4, 1);
 		GameEngineTexture::Cut("Knight_walk_map0000-Sheet.png", 10, 1);
@@ -261,15 +264,21 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_sit_map_write0000-Sheet.png", 4, 1);
 		GameEngineTexture::Cut("Knight_idle_map0000-Sheet.png", 9, 1);
 
-
 		// 살펴보기
 		GameEngineTexture::Cut("Knight_look_down0000-Sheet.png", 6, 1);
 		GameEngineTexture::Cut("Knight_look_up0000-Sheet.png", 6, 1);
 
-		//공격
+		// 공격
 		GameEngineTexture::Cut("Knight_slash_left_longer0000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Knight_up_slash0000-Sheet.png", 5, 1);
 		GameEngineTexture::Cut("Knight_down_slash_v02000-Sheet.png", 5, 1);
+
+		// 땅에서 기상
+		GameEngineTexture::Cut("Knight_wake_up_ground0000-Sheet.png", 5, 1);
+
+		// 기상
+		GameEngineTexture::Cut("Knight_wake_up_ground0000-Sheet.png", 21, 1);
+		GameEngineTexture::Cut("Knight_wake0000-Sheet.png", 5, 1);
 
 	}
 

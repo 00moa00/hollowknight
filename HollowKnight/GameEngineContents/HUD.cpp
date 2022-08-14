@@ -9,6 +9,7 @@ HUD::HUD()
 	MaskesAppearEnd_(false),
 
 	MaskesSize_(0),
+	CurMask_(0),
 	MakesAppearCount_(0),
 	MaskAppearTimer_(0.f),
 
@@ -40,7 +41,10 @@ void HUD::Start()
 	Maskes_.push_back(GetLevel()->CreateActor<Mask>());
 	Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size() - 1) * 60)), GameEngineWindow::GetInst()->GetScale().hy() - 55, -100 });
 
-	KnightData::GetInst()->SetMask(Maskes_.size()-1);
+	CurMask_ = Maskes_.size() - 1;
+
+	KnightData::GetInst()->SetAllMask(CurMask_);
+	KnightData::GetInst()->SetCurMask(CurMask_);
 
 	HUDManager_.CreateStateMember("MASK_APPEAR"
 		, std::bind(&HUD::MaskAppearUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&HUD::MaskAppearStart, this, std::placeholders::_1), std::bind(&HUD::MaskAppearEnd, this, std::placeholders::_1));
@@ -55,7 +59,6 @@ void HUD::Start()
 void HUD::Update(float _DeltaTime)
 {
 	HUDManager_.Update(_DeltaTime);
-
 }
 
 void HUD::NewMask()
@@ -66,24 +69,23 @@ void HUD::NewMask()
 
 	
 	Maskes_[MaskesSize_-1]->SetNewAppearState();
-	KnightData::GetInst()->SetMask(MaskesSize_);
-
-
+	KnightData::GetInst()->SetAllMask(MaskesSize_);
 }
 
 void HUD::RefillMask()
 {
 	// 가장 앞 + 이미 채워진 가면 뒤에것 먼저 채운다
-
 	for (int i = 0; i < MaskesSize_; ++i)
 	{
 		if (Maskes_[i]->GetisBroken() == true)
 		{
 			Maskes_[i]->SetisRefill();
+			CurMask_ = i;
+
+			KnightData::GetInst()->SetCurMask(CurMask_);
 			return;
 		}
 	}
-
 }
 
 void HUD::BreakMask()
@@ -94,16 +96,17 @@ void HUD::BreakMask()
 		if (Maskes_[i]->GetisIdle() == true)
 		{
 			Maskes_[i]->SetisBroken();
+			CurMask_ = i;
+
+			KnightData::GetInst()->SetCurMask(CurMask_);
 			return;
 		}
-
 	}
 }
 
 void HUD::MaskAppearStart(const StateInfo& _Info)
 {
 	MaskesSize_ = Maskes_.size();
-
 }
 
 void HUD::MaskAppearUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -150,8 +153,6 @@ void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	//깨짐
-
-
 	if (KnightData::GetInst()->GetisBreak() == true)
 	{
 		BreakMask();

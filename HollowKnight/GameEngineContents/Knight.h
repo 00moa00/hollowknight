@@ -34,6 +34,9 @@ private:
 	bool isFocusEnd_;
 	bool isLandEnd_;
 	bool isStunEnd_;
+	bool isDeathEnd_;
+	bool isGroundWakeUp_;
+	bool isWakeUp_;
 
 	bool isKnightActtingMove_;
 	bool isPressJumppingKey_;
@@ -44,6 +47,7 @@ private:
 	bool isRunMode_;
 	bool isLowHealth_;
 
+	bool isDeath_;
 
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
@@ -99,7 +103,6 @@ private:
 	//================================
 
 	// ---- 기본 ----
-
 	void KnightStillStart( const StateInfo& _Info);
 	void KnightStillUpdate(float _DeltaTime, const StateInfo& _Info);
 
@@ -142,7 +145,6 @@ private:
 	void KnightFocusEnd(const StateInfo& _Info);
 
 	// ---- 달리기 ----
-
 	void KnightRunStart(const StateInfo& _Info);
 	void KnightRunUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightRunEnd(const StateInfo& _Info);
@@ -152,8 +154,22 @@ private:
 	void KnightStunUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightStunEnd(const StateInfo& _Info);
 
-	// ---- 공격 ----
+	// ---- 사망 ----
+	void KnightDeathStart(const StateInfo& _Info);
+	void KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightDeathEnd(const StateInfo& _Info);
 
+	// ---- 땅에서 기상 ----
+	void KnightWakeUpGroundStart(const StateInfo& _Info);
+	void KnightWakeUpGroundUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightWakeUpGroundEnd(const StateInfo& _Info);
+
+	// ---- 기상 ----
+	void KnightWakeUpStart(const StateInfo& _Info);
+	void KnightWakeUpUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightWakeUpEnd(const StateInfo& _Info);
+
+	// ---- 공격 ----
 	void KnightSlashStart(const StateInfo& _Info);
 	void KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightSlashEnd(const StateInfo& _Info);
@@ -172,7 +188,6 @@ private:
 
 
 	// ---- 지도 보기 ----
-
 	void KnightMapStillStart(const StateInfo& _Info);
 	void KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightMapStillEnd(const StateInfo& _Info);
@@ -195,7 +210,6 @@ private:
 
 
 	// ---- 슬라이드 ----
-
 	void KnightSlideStart(const StateInfo& _Info);
 	void KnightSlideUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightSlideEnd(const StateInfo& _Info);
@@ -208,6 +222,7 @@ private:
 	void KnightWallJumpLandStart(const StateInfo& _Info);
 	void KnightWallJumpLandUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightWallJumpLandEnd(const StateInfo& _Info);
+
 
 
 	//================================

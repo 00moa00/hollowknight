@@ -31,9 +31,6 @@
     <Filter Include="Actor\Play\Knight">
       <UniqueIdentifier>{008b30a6-3400-49c4-8aab-0cb852ec74ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\Mionster">
-      <UniqueIdentifier>{e71467e9-a601-4aab-ae6c-9e383ede19dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Effect">
       <UniqueIdentifier>{4c71ab7d-c0fd-407f-b3ac-e6f1e4e001d8}</UniqueIdentifier>
     </Filter>
@@ -51,6 +48,12 @@
     </Filter>
     <Filter Include="Actor\Meta">
       <UniqueIdentifier>{6a832eb0-51cc-4dfd-87cc-b23217dd9d0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Knight Shadow">
+      <UniqueIdentifier>{004b92a2-1adc-41bf-a2f2-80514cf1a5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Monster">
+      <UniqueIdentifier>{e71467e9-a601-4aab-ae6c-9e383ede19dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -98,10 +101,10 @@
       <Filter>Actor\Play\Knight</Filter>
     </ClInclude>
     <ClInclude Include="Crawlid.h">
-      <Filter>Actor\Play\Mionster</Filter>
+      <Filter>Actor\Play\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Vengefly.h">
-      <Filter>Actor\Play\Mionster</Filter>
+      <Filter>Actor\Play\Monster</Filter>
     </ClInclude>
     <ClInclude Include="MasterEffect.h">
       <Filter>Actor\Effect</Filter>
@@ -144,6 +147,12 @@
     </ClInclude>
     <ClInclude Include="MetaLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightShadowData.h">
+      <Filter>Actor\Play\Knight Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightShadow.h">
+      <Filter>Actor\Play\Knight Shadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -191,10 +200,10 @@
       <Filter>Actor\Play\Knight</Filter>
     </ClCompile>
     <ClCompile Include="Crawlid.cpp">
-      <Filter>Actor\Play\Mionster</Filter>
+      <Filter>Actor\Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Vengefly.cpp">
-      <Filter>Actor\Play\Mionster</Filter>
+      <Filter>Actor\Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="MasterEffect.cpp">
       <Filter>Actor\Effect</Filter>
@@ -237,6 +246,12 @@
     </ClCompile>
     <ClCompile Include="MetaLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightShadowData.cpp">
+      <Filter>Actor\Play\Knight Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightShadow.cpp">
+      <Filter>Actor\Play\Knight Shadow</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

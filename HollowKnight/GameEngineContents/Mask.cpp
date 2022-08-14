@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Mask.h"
+#include <GameEngineBase/GameEngineTime.h>
 
 Mask::Mask()
 	:
@@ -97,17 +98,14 @@ void Mask::Start()
 	MaskManager_.CreateStateMember("NEW_APPEAR"
 		, std::bind(&Mask::MaskNewAppearUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskNewAppearStart, this, std::placeholders::_1), std::bind(&Mask::MaskNewAppearEnd, this, std::placeholders::_1));
 
-
 	MaskManager_.CreateStateMember("BREAK"
 		, std::bind(&Mask::MaskBreakUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskBreakStart, this, std::placeholders::_1), std::bind(&Mask::MaskBreakEnd, this, std::placeholders::_1));
-
 
 	MaskManager_.CreateStateMember("BROKEN"
 		, std::bind(&Mask::MaskBrokenUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskBrokenStart, this, std::placeholders::_1), std::bind(&Mask::MaskBrokenEnd, this, std::placeholders::_1));
 
 	MaskManager_.CreateStateMember("REFILL"
 		, std::bind(&Mask::MaskRefillUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskRefillStart, this, std::placeholders::_1), std::bind(&Mask::MaskRefillEnd, this, std::placeholders::_1));
-
 
 	MaskManager_.ChangeState("WAIT");
 
@@ -184,6 +182,8 @@ void Mask::MaskIdleStart(const StateInfo& _Info)
 
 void Mask::MaskIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	//GameEngineTime::GetInst()->SetTimeScale(1, 1.0f);
+
 	if (GetisBroken() == true)
 	{
 		MaskManager_.ChangeState("BREAK");
