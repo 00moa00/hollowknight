@@ -225,7 +225,6 @@ void ContentsCore::Start()
 
 		//기본
 		GameEngineTexture::Cut("Knight_idle_still_020000-Sheet.png", 9, 1);
-		GameEngineTexture::Cut("Knight_shadow_dash0000-Sheet.png", 12, 1);
 		GameEngineTexture::Cut("Knight_jump_01-Sheet.png", 6, 1);
 
 		GameEngineTexture::Cut("Knight_land0000-Sheet.png", 3, 1);
@@ -247,8 +246,6 @@ void ContentsCore::Start()
 
 		GameEngineTexture::Cut("Knight_wake_up_ground0000-Sheet.png", 21, 1);
 
-		// 스킬
-		GameEngineTexture::Cut("Knight_cast_v030002-Sheet.png", 12, 1);
 
 		// 벽타기
 		GameEngineTexture::Cut("Knight_wall_slide0000-Sheet.png", 4, 1);
@@ -274,6 +271,28 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_up_slash0000-Sheet.png", 5, 1);
 		GameEngineTexture::Cut("Knight_down_slash_v02000-Sheet.png", 5, 1);
 
+	}
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Kinght");
+		Dir.Move("Effect");
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+
+
+		// 스킬
+		GameEngineTexture::Cut("Knight_cast_v030002-Sheet.png", 12, 1);
+
 		//이펙트
 		GameEngineTexture::Cut("Knight_double_slashes_effect-Sheet.png", 3, 1);
 		GameEngineTexture::Cut("Knight_slashes_effect0001-Sheet.png", 2, 1);
@@ -287,7 +306,6 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_mantis_slash_left0001-Sheet.png", 2, 1);
 
 	}
-
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
 	{
