@@ -40,6 +40,8 @@ private:
 	bool isNewMask_;
 	bool isBreak_;
 
+	bool isDeath_;
+
 public:
 
 	//================================
@@ -71,6 +73,11 @@ public:
 		return isBreak_;
 	}
 
+	bool GetisDeath()
+	{
+		return isDeath_;
+	}
+
 	//================================
 	//    Setter
 	//================================
@@ -98,6 +105,11 @@ public:
 	void SetisBreak(bool _b)
 	{
 		isBreak_ = _b;
+	}
+
+	void SetisDeath(bool _b)
+	{
+		isDeath_ = _b;
 	}
 
 

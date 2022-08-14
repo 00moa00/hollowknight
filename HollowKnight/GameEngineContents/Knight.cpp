@@ -78,8 +78,8 @@ void Knight::Start()
 	SetRightTop({ 15.f, 20.f, 0, 0 });
 	SetLeftTop({ -15.f, 20.f, 0, 0 });
 	SetCenterTop({ 0, 20.f, 0, 0 });
-	SetLeftCenter({-30.f, 30.f, 0});
-	SetRightCenter({ 30.f, 30.f, 0 });
+	SetLeftCenter({-30.f, 100.f, 0});
+	SetRightCenter({ 30.f, 100.f, 0 });
 	SetCenter({0, 20.f, 0, 0});
 
 	CreateCollisionComponent(float4{60, 120, 1}, static_cast<int>(OBJECTORDER::Knight));
@@ -200,7 +200,7 @@ void Knight::Start()
 
 	//================================
 	//    Create Bind Animation
-	//================================
+	//================ ================
 
 	GetRenderer()->AnimationBindEnd("SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{

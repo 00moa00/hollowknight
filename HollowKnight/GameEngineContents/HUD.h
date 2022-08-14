@@ -43,6 +43,8 @@ public:
 	void NewMask();
 	void RefillMask();
 	void BreakMask();
+	void AllRefillMask();
+	void SetAppearAnimation();
 
 private:
 

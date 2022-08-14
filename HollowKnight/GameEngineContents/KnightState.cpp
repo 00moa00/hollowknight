@@ -802,6 +802,7 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightKnockbackTimer_ = 0.f;
 		if (KnightData::GetInst()->GetCurMask() == 0)
 		{
+			KnightData::GetInst()->SetisDeath(true);
 			KnightManager_.ChangeState("DEATH");
 		}
 
@@ -1448,8 +1449,6 @@ void Knight::KnightSlideStart(const StateInfo& _Info)
 
 void Knight::KnightSlideUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
-
 	GetTransform().SetWorldMove(float4::DOWN * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 	isDownGroundCheck(_DeltaTime);

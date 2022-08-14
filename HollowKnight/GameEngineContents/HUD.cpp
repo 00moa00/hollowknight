@@ -104,6 +104,20 @@ void HUD::BreakMask()
 	}
 }
 
+void HUD::AllRefillMask()
+{
+	for (int i = 0; i < MaskesSize_; ++i)
+	{
+		Maskes_[i]->SetisRefill();
+	}
+	KnightData::GetInst()->SetCurMask(MaskesSize_);
+}
+
+void HUD::SetAppearAnimation()
+{
+
+}
+
 void HUD::MaskAppearStart(const StateInfo& _Info)
 {
 	MaskesSize_ = Maskes_.size();
@@ -113,8 +127,10 @@ void HUD::MaskAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	MaskAppearTimer_ += _DeltaTime;
 
-	if (MaskAppearTimer_ > 0.3f * MakesAppearCount_)
+	if (MaskAppearTimer_ > 0.3f )
 	{
+		MaskAppearTimer_ = 0.0f;
+
 		//마지막 가면도 반짝! 하기 위해서.
 		if (MakesAppearCount_ == Maskes_.size())
 		{
@@ -122,6 +138,7 @@ void HUD::MaskAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 		else
 		{
+			//Maskes_[MakesAppearCount_]->SetisIdle();p
 			Maskes_[MakesAppearCount_]->SetAppearState();
 			++MakesAppearCount_;
 		}
@@ -130,11 +147,11 @@ void HUD::MaskAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void HUD::MaskAppearEnd(const StateInfo& _Info)
 {
-	MaskAppearTimer_ = 0.0f;
 	MakesAppearCount_ = 0;
 
 	for (int i = 0; i < MaskesSize_; ++i)
 	{
+		//Maskes_[i]->SetisIdle();
 		Maskes_[i]->SetIdleState();
 	}
 }
@@ -158,9 +175,26 @@ void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 		BreakMask();
 		KnightData::GetInst()->SetisBreak(false);
 	}
+
+	// 나이트 죽음
+	if (KnightData::GetInst()->GetisDeath() == true)
+	{
+		KnightData::GetInst()->SetisDeath(false);
+
+		for (int i = 0; i < MaskesSize_; ++i)
+		{
+			Maskes_[i]->SetIdleState();
+		}
+		KnightData::GetInst()->SetCurMask(MaskesSize_-1);
+
+		//HUDManager_.ChangeState("MASK_APPEAR");
+
+	}
+
 }
 
 void HUD::HUDIdleEnd(const StateInfo& _Info)
 {
+
 }
 

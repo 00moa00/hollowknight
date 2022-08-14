@@ -143,6 +143,10 @@ void Mask::SetIdleState()
 
 void Mask::MaskWaitStart(const StateInfo& _Info)
 {
+	IdleAnimationTimer_ = 0.0f;
+
+	GetRenderer()->ChangeFrameAnimation("MASK_WAIT");
+
 }
 
 void Mask::MaskWaitUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -176,6 +180,8 @@ void Mask::MaskAppearEnd(const StateInfo& _Info)
 
 void Mask::MaskIdleStart(const StateInfo& _Info)
 {
+	IdleAnimationTimer_ = 0.0f;
+
 	SetisIdle();
 	GetRenderer()->ChangeFrameAnimation("MASK_IDLE");
 }
