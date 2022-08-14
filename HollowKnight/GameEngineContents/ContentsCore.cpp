@@ -257,8 +257,6 @@ void ContentsCore::Start()
 		// 스턴
 		GameEngineTexture::Cut("Knight_stun0000-Sheet.png", 5, 1);
 
-
-
 		// 지도보기
 		GameEngineTexture::Cut("Knight_sit_map_look0026-Sheet.png", 4, 1);
 		GameEngineTexture::Cut("Knight_walk_map0000-Sheet.png", 10, 1);
