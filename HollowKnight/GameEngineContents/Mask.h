@@ -150,6 +150,10 @@ private:
 	void MaskIdleUpdate(float _DeltaTime, const StateInfo& _Info);
 	void MaskIdleEnd(const StateInfo& _Info);
 
+	void MaskBreakStart(const StateInfo& _Info);
+	void MaskBreakUpdate(float _DeltaTime, const StateInfo& _Info);
+	void MaskBreakEnd(const StateInfo& _Info);
+
 	void MaskBrokenStart(const StateInfo& _Info);
 	void MaskBrokenUpdate(float _DeltaTime, const StateInfo& _Info);
 	void MaskBrokenEnd(const StateInfo& _Info);

@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "KnightSlashEffect.h"
+#include "KnightData.h"
 
 KnightSlashEffect::KnightSlashEffect() 
 {
@@ -78,6 +79,7 @@ bool KnightSlashEffect::thisVSMonsterCollision(GameEngineCollision* _This, GameE
 {
 	if (_Other != nullptr)
 	{
+		KnightData::GetInst()->SetisRefill(true);
 		_Other->GetActor()->Death();
 		return true;
 	}

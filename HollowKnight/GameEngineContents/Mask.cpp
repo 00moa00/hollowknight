@@ -75,6 +75,11 @@ void Mask::Start()
 			isIdleAnimationEnd_ = true;
 		});
 
+	GetRenderer()->AnimationBindEnd("MASK_REFILL", [=](const FrameAnimation_DESC& _Info)
+		{
+			isRefillEnd_ = true;
+		});
+
 
 	//================================
 	//    Create State
@@ -92,6 +97,11 @@ void Mask::Start()
 	MaskManager_.CreateStateMember("NEW_APPEAR"
 		, std::bind(&Mask::MaskNewAppearUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskNewAppearStart, this, std::placeholders::_1), std::bind(&Mask::MaskNewAppearEnd, this, std::placeholders::_1));
 
+
+	MaskManager_.CreateStateMember("BREAK"
+		, std::bind(&Mask::MaskBreakUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskBreakStart, this, std::placeholders::_1), std::bind(&Mask::MaskBreakEnd, this, std::placeholders::_1));
+
+
 	MaskManager_.CreateStateMember("BROKEN"
 		, std::bind(&Mask::MaskBrokenUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Mask::MaskBrokenStart, this, std::placeholders::_1), std::bind(&Mask::MaskBrokenEnd, this, std::placeholders::_1));
 
@@ -108,25 +118,6 @@ void Mask::Update(float _DeltaTime)
 	MaskManager_.Update(_DeltaTime);
 
 
-	if (GetisBroken() == true)
-	{
-		MaskManager_.ChangeState("BROKEN");
-	}
-
-	else if (GetisRefill() == true)
-	{
-		MaskManager_.ChangeState("REFILL");
-	}
-
-	else if (GetisAppear() == true)
-	{
-		MaskManager_.ChangeState("APPEAR");
-	}
-
-	else if (GetisNewAppear() == true)
-	{
-		MaskManager_.ChangeState("NEW_APPEAR");
-	}
 
 
 }
@@ -193,6 +184,26 @@ void Mask::MaskIdleStart(const StateInfo& _Info)
 
 void Mask::MaskIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (GetisBroken() == true)
+	{
+		MaskManager_.ChangeState("BREAK");
+	}
+
+	else if (GetisRefill() == true)
+	{
+		MaskManager_.ChangeState("REFILL");
+	}
+
+	else if (GetisAppear() == true)
+	{
+		MaskManager_.ChangeState("APPEAR");
+	}
+
+	else if (GetisNewAppear() == true)
+	{
+		MaskManager_.ChangeState("NEW_APPEAR");
+	}
+
 
 	IdleAnimationTimer_ += _DeltaTime;
 
@@ -213,6 +224,29 @@ void Mask::MaskIdleEnd(const StateInfo& _Info)
 {
 }
 
+void Mask::MaskBreakStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("MASK_BREAK");
+
+}
+
+void Mask::MaskBreakUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+	if (isBreakEnd_ == true)
+	{
+		isBreakEnd_ = false;
+		MaskManager_.ChangeState("BROKEN");
+	}
+
+
+
+}
+
+void Mask::MaskBreakEnd(const StateInfo& _Info)
+{
+}
+
 void Mask::MaskBrokenStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("MASK_BROKEN");
@@ -221,18 +255,44 @@ void Mask::MaskBrokenStart(const StateInfo& _Info)
 
 void Mask::MaskBrokenUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (GetisRefill() == true)
+	{
+		MaskManager_.ChangeState("REFILL");
+	}
+
+	else if (GetisAppear() == true)
+	{
+		MaskManager_.ChangeState("APPEAR");
+	}
+
+	else if (GetisNewAppear() == true)
+	{
+		MaskManager_.ChangeState("NEW_APPEAR");
+	}
+
 }
 
 void Mask::MaskBrokenEnd(const StateInfo& _Info)
 {
+
 }
 
 void Mask::MaskRefillStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("MASK_REFILL");
+
 }
 
 void Mask::MaskRefillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isRefillEnd_ == true)
+	{
+		isRefillEnd_ = false;
+		MaskManager_.ChangeState("IDLE");
+
+	}
+
 }
 
 void Mask::MaskRefillEnd(const StateInfo& _Info)

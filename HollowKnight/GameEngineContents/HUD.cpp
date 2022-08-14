@@ -75,7 +75,6 @@ void HUD::RefillMask()
 {
 	// 가장 앞 + 이미 채워진 가면 뒤에것 먼저 채운다
 
-	// 가장 뒤에 있는 가면 먼저 깍는다
 	for (int i = 0; i < MaskesSize_; ++i)
 	{
 		if (Maskes_[i]->GetisBroken() == true)
