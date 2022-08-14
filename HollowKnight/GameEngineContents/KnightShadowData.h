@@ -37,6 +37,7 @@ protected:
 
 private:
 	float4 ShadowPosition_;
+	float4 KnightPosition_;
 
 public:
 	//================================
@@ -47,6 +48,11 @@ public:
 		return ShadowPosition_;
 	}
 
+	float4 GetKnightPosition()
+	{
+		return KnightPosition_;
+	}
+
 	//================================
 	//    Setter
 	//================================
@@ -54,6 +60,11 @@ public:
 	void SetShadowPosition(float4 _Pos)
 	{
 		ShadowPosition_ = _Pos;
+	}
+
+	void SetKnightPosition(float4 _Pos)
+	{
+		KnightPosition_ = _Pos;
 	}
 
 };

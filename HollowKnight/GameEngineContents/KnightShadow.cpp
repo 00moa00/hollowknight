@@ -8,6 +8,8 @@ KnightShadow::KnightShadow()
 	isDeathEnd_(false),
 	isSlashEnd_(false),
 
+	MoveKnihgtTimer_(0),
+
 	KnightShadowManager_()
 {
 }
@@ -18,12 +20,15 @@ KnightShadow::~KnightShadow()
 
 void KnightShadow::Start()
 {
+
+	SetSpeed(300.f);
+
 	CreateCollisionComponent(float4{ 60, 120, 1 }, static_cast<int>(OBJECTORDER::Knight_Shadow));
-	GetCollision()->GetTransform().SetWorldPosition({ 0, 120 / 2, 0 });
+	//GetCollision()->GetTransform().SetWorldPosition({ 0, 120 / 2, 0 });
 
 	CreateRendererComponent(float4{ 431, 287, 1 }, "Hollow Shade Cln_idle0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight_Shadow));
 
-	GetTransform().SetLocalPosition({ 500,-4000,0 });
+	GetTransform().SetWorldPosition({ 500,-4000, -1 });
 
 	//================================
 	//    Create Animation
@@ -91,6 +96,13 @@ void KnightShadow::Start()
 		, std::bind(&KnightShadow::ShadowFlyUpdate, this, std::placeholders::_1, std::placeholders::_2),
 		std::bind(&KnightShadow::ShadowFlyStart, this, std::placeholders::_1),
 		std::bind(&KnightShadow::ShadowFlyEnd, this, std::placeholders::_1));
+
+	KnightShadowManager_.CreateStateMember("FREE_FLY"
+		, std::bind(&KnightShadow::ShadowFreeFlyUpdate, this, std::placeholders::_1, std::placeholders::_2),
+		std::bind(&KnightShadow::ShadowFreeFlyStart, this, std::placeholders::_1),
+		std::bind(&KnightShadow::ShadowFreeFlyEnd, this, std::placeholders::_1));
+
+
 
 	KnightShadowManager_.CreateStateMember("SLASH"
 		, std::bind(&KnightShadow::ShadowSlashUpdate, this, std::placeholders::_1, std::placeholders::_2),

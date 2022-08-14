@@ -182,7 +182,7 @@ void MasterActor::isDownGroundCheck(float _DeltaTime)
 void MasterActor::isUpBlockCheck(float _DeltaTime)
 {
 	float4 NextPos = GetNextPos(_DeltaTime);
-	NextPos += GetCenterTop();
+	NextPos -= GetCenterTop();
 
 
 	if (GetPixelBlue(NextPos) == true)

@@ -1,7 +1,24 @@
 #include "PreCompile.h"
 #include "KnightShadow.h"
+#include "KnightShadowData.h"
 
+void KnightShadow::ShadowDirectionCheck()
+{
+	float4 Dir = KnightShadowData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
+	Dir.Normalize();
 
+	if (Dir.x > 0.0f)
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+
+	}
+
+	else
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+
+	}
+}
 
 void KnightShadow::ShadowAppearStart(const StateInfo& _Info)
 {
@@ -28,6 +45,16 @@ void KnightShadow::ShadowIdleStart(const StateInfo& _Info)
 
 void KnightShadow::ShadowIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	float4 Lenth = KnightShadowData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
+	float LenthAbs = Lenth.Length();
+
+	if (LenthAbs < 400.f)
+	{
+		KnightShadowManager_.ChangeState("STARTLE");
+	}
+
+
+
 }
 
 void KnightShadow::ShadowIdleEnd(const StateInfo& _Info)
@@ -53,25 +80,6 @@ void KnightShadow::ShadowStartleEnd(const StateInfo& _Info)
 {
 }
 
-void KnightShadow::ShadowDeathStart(const StateInfo& _Info)
-{
-	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
-
-}
-
-void KnightShadow::ShadowDeathUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	if (isDeathEnd_ == true)
-	{
-		isDeathEnd_ = false;
-		this->Death();
-	}
-}
-
-void KnightShadow::ShadowDeathEnd(const StateInfo& _Info)
-{
-}
-
 void KnightShadow::ShadowFlyStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("FLY_ANIMATION");
@@ -79,9 +87,48 @@ void KnightShadow::ShadowFlyStart(const StateInfo& _Info)
 
 void KnightShadow::ShadowFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	ShadowDirectionCheck();
+	float4 Dir = KnightShadowData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
+	Dir.Normalize();
+	SetMoveDirection(Dir);
+
+	GetTransform().SetWorldMove(Dir * GetSpeed() * _DeltaTime);
+
+
+	// 플레이어하고 닿으면 FreeFly
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
+		std::bind(&KnightShadow::ShadowVSKnihgtCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+	{
+		KnightShadowManager_.ChangeState("FREE_FLY");
+	}
+
 }
 
 void KnightShadow::ShadowFlyEnd(const StateInfo& _Info)
+{
+}
+
+void KnightShadow::ShadowFreeFlyStart(const StateInfo& _Info)
+{
+}
+
+void KnightShadow::ShadowFreeFlyUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
+
+
+	MoveKnihgtTimer_ += _DeltaTime;
+
+	if (MoveKnihgtTimer_ > 0.5f)
+	{
+		MoveKnihgtTimer_ = 0.f;
+		KnightShadowManager_.ChangeState("FLY");
+
+	}
+
+}
+
+void KnightShadow::ShadowFreeFlyEnd(const StateInfo& _Info)
 {
 }
 
@@ -109,5 +156,29 @@ void KnightShadow::ShadowTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void KnightShadow::ShadowTurnEnd(const StateInfo& _Info)
+{
+}
+
+bool KnightShadow::ShadowVSKnihgtCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	return true;
+}
+
+void KnightShadow::ShadowDeathStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
+
+}
+
+void KnightShadow::ShadowDeathUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isDeathEnd_ == true)
+	{
+		isDeathEnd_ = false;
+		this->Death();
+	}
+}
+
+void KnightShadow::ShadowDeathEnd(const StateInfo& _Info)
 {
 }

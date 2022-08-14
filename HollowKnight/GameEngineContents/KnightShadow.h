@@ -25,9 +25,15 @@ private:
 	bool isDeathEnd_;
 	bool isSlashEnd_;
 
+	float MoveKnihgtTimer_;
+
 	GameEngineStateManager KnightShadowManager_;
 
 private:
+
+	void ShadowDirectionCheck();
+
+
 	//================================
 	//    Bind State
 	//================================
@@ -52,6 +58,10 @@ private:
 	void ShadowFlyUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShadowFlyEnd(const StateInfo& _Info);
 
+	void ShadowFreeFlyStart(const StateInfo& _Info);
+	void ShadowFreeFlyUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ShadowFreeFlyEnd(const StateInfo& _Info);
+
 	void ShadowSlashStart(const StateInfo& _Info);
 	void ShadowSlashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShadowSlashEnd(const StateInfo& _Info);
@@ -59,6 +69,13 @@ private:
 	void ShadowTurnStart(const StateInfo& _Info);
 	void ShadowTurnUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShadowTurnEnd(const StateInfo& _Info);
+
+	//================================
+	//    Bind  Pointer
+	//================================
+
+	bool ShadowVSKnihgtCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+
 
 };
 

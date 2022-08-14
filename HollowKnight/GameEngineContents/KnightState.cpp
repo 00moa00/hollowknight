@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "Knight.h"
 #include "KnightData.h"
+#include "KnightShadow.h"
+#include "KnightShadowData.h"
 
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
@@ -20,6 +22,7 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	// ========== UPDATE ==========
 
 	DoubleSlashTimer(_DeltaTime);
+	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 
 	if (true == GameEngineInput::GetInst()->IsDown("KnightFocus"))
@@ -139,6 +142,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STUN");
 	}
 
+	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 	Test1_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x - 15.f , GetTransform().GetWorldPosition().y + 15.f });
 	Test2_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x + 15.f , GetTransform().GetWorldPosition().y + 15.f });
@@ -161,7 +165,6 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 		{
-
 			if (PrevDirection_.CompareInt2D( float4::LEFT) == false)
 			{
 				PrevDirection_ = float4::LEFT;
@@ -175,7 +178,6 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
-
 			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
 			{
 				PrevDirection_ = float4::RIGHT;
@@ -328,6 +330,8 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 
 void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
+
 	DoubleSlashTimer(_DeltaTime);
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
@@ -503,6 +507,9 @@ void Knight::KnightFallStart(const StateInfo& _Info)
 
 void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
+
+
 	isKnihgtActtingMoveChack();
 	KnightActtingDirectionCheck();
 	KnightIsActtingCheck();
@@ -793,8 +800,6 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 
 void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
-
 	KnightKnockbackTimer_ += _DeltaTime;
 
 	if (KnightKnockbackTimer_ > 0.3f)
@@ -831,6 +836,9 @@ void Knight::KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (isDeathEnd_ == true)
 	{
 		isDeathEnd_ = false;
+		KnightShadow* Shadow = GetLevel()->CreateActor<KnightShadow>();
+		Shadow->GetTransform().SetWorldPosition({this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y});
+		KnightShadowData::GetInst()->SetShadowPosition({ this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y });
 		KnightManager_.ChangeState("GROUND_WAKE_UP");
 	}
 }
