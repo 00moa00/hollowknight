@@ -9,6 +9,7 @@ enum class OBJECTORDER
 	Terrain,
 	Knight,
 	Knight_Slash,
+	Knight_Shadow,
 	Monster,
 	FrontObject,
 	TileMap,

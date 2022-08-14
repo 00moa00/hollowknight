@@ -30,11 +30,11 @@ void ContentsCore::Start()
 		Dir.Move("Title");
 
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
 
@@ -47,11 +47,11 @@ void ContentsCore::Start()
 		Dir.Move("Point");
 
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
 		GameEngineTexture::Cut("main_menu_pointer_anim0000-Sheet.png", 11, 1);
@@ -69,11 +69,11 @@ void ContentsCore::Start()
 		Dir.Move("Vessel");
 
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
 		GameEngineTexture::Cut("HUD Cln_HUD_frame_v020000-Sheet.png", 6, 1);
@@ -89,11 +89,11 @@ void ContentsCore::Start()
 		Dir.Move("Mask");
 
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
 		GameEngineTexture::Cut("HUD Cln_appear_v020000-Sheet.png", 5, 1);
@@ -116,11 +116,11 @@ void ContentsCore::Start()
 		Dir.Move("Monster");
 
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
 		GameEngineTexture::Cut("Buzzer_death0000-Sheet.png", 3, 1);
@@ -146,11 +146,11 @@ void ContentsCore::Start()
 		Dir.Move("KingsPass");
 		Dir.Move("level1");
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
 
@@ -164,11 +164,11 @@ void ContentsCore::Start()
 		Dir.Move("KingsPass");
 		Dir.Move("level2");
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
 
@@ -182,11 +182,11 @@ void ContentsCore::Start()
 		Dir.Move("KingsPass");
 		Dir.Move("level3");
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
 
@@ -200,11 +200,11 @@ void ContentsCore::Start()
 		Dir.Move("KingsPass");
 		Dir.Move("level4");
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
 
@@ -216,11 +216,11 @@ void ContentsCore::Start()
 		Dir.Move("Texture");
 		Dir.Move("Kinght");
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
 		//±âº»
@@ -289,13 +289,44 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Kinght");
+		Dir.Move("Shadow");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Hollow Shade Cln_idle0000-Sheet.png", 12, 1);
+		GameEngineTexture::Cut("Hollow Shade Cln_appear0000-Sheet.png", 30, 1);
+		GameEngineTexture::Cut("Hollow Shade Cln_death000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Hollow Shade Cln_death_explode0000-Sheet.png", 3, 1);
+		GameEngineTexture::Cut("Hollow Shade Cln_fly000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Hollow Shade Cln_slash000-Sheet.png", 11, 1);
+		GameEngineTexture::Cut("Hollow Shade Cln_startle0000-Sheet.png", 7, 1);
+
+
+		GameEngineTexture::Cut("Hollow Shade Cln_slash_effect007-Sheet.png", 2, 1);
+
+	}
+
+
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Kinght");
 		Dir.Move("Effect");
 
-		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 
-		for (size_t i = 0; i < Shaders.size(); i++)
+		for (size_t i = 0; i < Texture.size(); i++)
 		{
-			GameEngineTexture::Load(Shaders[i].GetFullPath());
+			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
 

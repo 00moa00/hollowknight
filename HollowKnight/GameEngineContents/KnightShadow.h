@@ -1,7 +1,8 @@
 #pragma once
+#include "MasterActor.h"
 
 // Ό³Έν :
-class KnightShadow
+class KnightShadow : public MasterActor
 {
 public:
 	// constrcuter destructer
@@ -15,6 +16,8 @@ public:
 	KnightShadow& operator=(KnightShadow&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 private:
 
