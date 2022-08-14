@@ -200,7 +200,7 @@ void Knight::Start()
 
 	//================================
 	//    Create Bind Animation
-	//================ ================
+	//================================
 
 	GetRenderer()->AnimationBindEnd("SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{

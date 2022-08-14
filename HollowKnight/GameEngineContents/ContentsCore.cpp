@@ -3,6 +3,7 @@
 #include "GameEngineContents/TitleLevel.h"
 #include "GameEngineContents/KingsPassLevel.h"
 #include "KnightData.h"
+#include "KnightShadowData.h"
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -301,12 +302,13 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Hollow Shade Cln_idle0000-Sheet.png", 12, 1);
 		GameEngineTexture::Cut("Hollow Shade Cln_appear0000-Sheet.png", 30, 1);
 		GameEngineTexture::Cut("Hollow Shade Cln_death000-Sheet.png", 6, 1);
-		GameEngineTexture::Cut("Hollow Shade Cln_death_explode0000-Sheet.png", 3, 1);
 		GameEngineTexture::Cut("Hollow Shade Cln_fly000-Sheet.png", 5, 1);
 		GameEngineTexture::Cut("Hollow Shade Cln_slash000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Hollow Shade Cln_startle0000-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Hollow Shade Cln_turn000-Sheet.png", 4, 1);
 
 
+		GameEngineTexture::Cut("Hollow Shade Cln_death_explode0000-Sheet.png", 3, 1);
 		GameEngineTexture::Cut("Hollow Shade Cln_slash_effect007-Sheet.png", 2, 1);
 
 	}
@@ -368,5 +370,6 @@ void ContentsCore::Update(float _DeltaTime)
 void ContentsCore::End()
 {
 	KnightData::Destroy();
+	KnightShadowData::Destroy();
 
 }

@@ -5,6 +5,8 @@ KnightShadowData* KnightShadowData::Inst_ = new KnightShadowData();
 
 
 KnightShadowData::KnightShadowData() 
+	:
+	ShadowPosition_()
 {
 }
 

@@ -154,6 +154,9 @@
     <ClInclude Include="KnightShadow.h">
       <Filter>Actor\Play\Knight Shadow</Filter>
     </ClInclude>
+    <ClInclude Include="KnihgtShadowSlashEffect.h">
+      <Filter>Actor\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -251,6 +254,12 @@
       <Filter>Actor\Play\Knight Shadow</Filter>
     </ClCompile>
     <ClCompile Include="KnightShadow.cpp">
+      <Filter>Actor\Play\Knight Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="KnihgtShadowSlashEffect.cpp">
+      <Filter>Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightShadowState.cpp">
       <Filter>Actor\Play\Knight Shadow</Filter>
     </ClCompile>
   </ItemGroup>

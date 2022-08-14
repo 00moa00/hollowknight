@@ -24,7 +24,7 @@ enum class RENDERORDER
 
 	Knight,
 	Monster,
-
+	Knight_Shadow,
 	FrontObject,
 	UI
 

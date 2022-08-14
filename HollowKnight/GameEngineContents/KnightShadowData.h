@@ -36,7 +36,25 @@ public:
 protected:
 
 private:
-	float4 Position_;
+	float4 ShadowPosition_;
+
+public:
+	//================================
+	//    Getter
+	//================================
+	float4 GetShadowPosition()
+	{
+		return ShadowPosition_;
+	}
+
+	//================================
+	//    Setter
+	//================================
+
+	void SetShadowPosition(float4 _Pos)
+	{
+		ShadowPosition_ = _Pos;
+	}
 
 };
 
