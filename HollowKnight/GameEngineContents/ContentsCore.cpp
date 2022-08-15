@@ -104,10 +104,30 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("HUD Cln_refill0000-Sheet.png", 6, 1);
 		GameEngineTexture::Cut("MaskWait.png", 2, 1);
 
-
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("UI");
+		Dir.Move("Geo");
 
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("HUD Cln_coin_get0001-Sheet.png", 3, 1);
+		GameEngineTexture::Cut("HUD Cln_HUD_coin_break_short0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("HUD Cln_HUD_coin_v020000-Sheet.png", 5, 1);
+	
+
+	}
 
 	{
 		GameEngineDirectory Dir;

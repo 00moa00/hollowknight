@@ -33,14 +33,12 @@ void Mask::Start()
 
 	GetRenderer()->CreateFrameAnimationCutTexture("MASK_IDLE_ANIMATION", FrameAnimation_DESC("HUD Cln_idle_v020000-Sheet.png", 0, 5, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("MASK_IDLE", FrameAnimation_DESC("HUD Cln_idle_v020000-Sheet.png", 0, 0, 0.050f, false));
-
 	GetRenderer()->CreateFrameAnimationCutTexture("MASK_APPEAR", FrameAnimation_DESC("HUD Cln_appear_v020000-Sheet.png", 0, 4, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("MASK_NEW_APPEAR", FrameAnimation_DESC("HUD Cln_add_health_appear0000-Sheet.png", 0, 13, 0.150f, false));
-	
+	GetRenderer()->CreateFrameAnimationCutTexture("MASK_NEW_APPEAR", FrameAnimation_DESC("HUD Cln_add_health_appear0000-Sheet.png", 0, 13, 0.150f, false));	
 	GetRenderer()->CreateFrameAnimationCutTexture("MASK_REFILL", FrameAnimation_DESC("HUD Cln_refill0000-Sheet.png", 0, 5, 0.050f, false));
-	
 	GetRenderer()->CreateFrameAnimationCutTexture("MASK_BREAK", FrameAnimation_DESC("HUD Cln_break_backboard0000-Sheet.png", 0, 5, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("MASK_BROKEN", FrameAnimation_DESC("HUD Cln_refill0000-Sheet.png", 0, 0, 0.050f, false));
+	
 	GetRenderer()->SetScaleModeImage();
 
 	GetRenderer()->ChangeFrameAnimation("MASK_WAIT");

@@ -157,6 +157,9 @@
     <ClInclude Include="KnihgtShadowSlashEffect.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Geo.h">
+      <Filter>Actor\Play\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -261,6 +264,9 @@
     </ClCompile>
     <ClCompile Include="KnightShadowState.cpp">
       <Filter>Actor\Play\Knight Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="Geo.cpp">
+      <Filter>Actor\Play\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
