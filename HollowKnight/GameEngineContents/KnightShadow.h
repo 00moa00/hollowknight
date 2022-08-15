@@ -25,7 +25,13 @@ private:
 	bool isDeathEnd_;
 	bool isSlashEnd_;
 
-	float MoveKnihgtTimer_;
+	int HP_;
+
+	float ShadowMoveTimer_;
+	float ShadowKnockbackTimer_;
+
+	float4 KnockbackDirection_;
+
 
 	GameEngineStateManager KnightShadowManager_;
 
@@ -62,6 +68,10 @@ private:
 	void ShadowFreeFlyUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShadowFreeFlyEnd(const StateInfo& _Info);
 
+	void ShadowHitStart(const StateInfo& _Info);
+	void ShadowHitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ShadowHitEnd(const StateInfo& _Info);
+
 	void ShadowSlashStart(const StateInfo& _Info);
 	void ShadowSlashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShadowSlashEnd(const StateInfo& _Info);
@@ -69,6 +79,7 @@ private:
 	void ShadowTurnStart(const StateInfo& _Info);
 	void ShadowTurnUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShadowTurnEnd(const StateInfo& _Info);
+
 
 	//================================
 	//    Bind  Pointer

@@ -102,6 +102,12 @@ void KnightShadow::ShadowFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightShadowManager_.ChangeState("FREE_FLY");
 	}
 
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight_Slash, CollisionType::CT_OBB2D,
+		std::bind(&KnightShadow::ShadowVSKnihgtCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+	{
+		KnightShadowManager_.ChangeState("HIT");
+	}
+
 }
 
 void KnightShadow::ShadowFlyEnd(const StateInfo& _Info)
@@ -114,14 +120,21 @@ void KnightShadow::ShadowFreeFlyStart(const StateInfo& _Info)
 
 void KnightShadow::ShadowFreeFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight_Slash, CollisionType::CT_OBB2D,
+		std::bind(&KnightShadow::ShadowVSKnihgtCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+	{
+		KnightShadowManager_.ChangeState("HIT");
+	}
+
 	GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 
 
-	MoveKnihgtTimer_ += _DeltaTime;
+	ShadowMoveTimer_ += _DeltaTime;
 
-	if (MoveKnihgtTimer_ > 0.5f)
+	if (ShadowMoveTimer_ > 0.5f)
 	{
-		MoveKnihgtTimer_ = 0.f;
+		ShadowMoveTimer_ = 0.f;
 		KnightShadowManager_.ChangeState("FLY");
 
 	}
@@ -129,6 +142,39 @@ void KnightShadow::ShadowFreeFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void KnightShadow::ShadowFreeFlyEnd(const StateInfo& _Info)
+{
+}
+
+void KnightShadow::ShadowHitStart(const StateInfo& _Info)
+{
+	--HP_;
+}
+
+void KnightShadow::ShadowHitUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+	ShadowKnockbackTimer_ += _DeltaTime;
+
+	if (ShadowKnockbackTimer_ > 0.3f)
+	{
+		ShadowKnockbackTimer_ = 0.f;
+		if (HP_ == 0)
+		{
+			KnightShadowManager_.ChangeState("DEATH");
+		}
+
+		else
+		{
+			KnightShadowManager_.ChangeState("FLY");
+		}
+
+	}
+
+	GetTransform().SetWorldMove(-KnockbackDirection_ * GetSpeed() * _DeltaTime);
+
+}
+
+void KnightShadow::ShadowHitEnd(const StateInfo& _Info)
 {
 }
 
@@ -161,6 +207,14 @@ void KnightShadow::ShadowTurnEnd(const StateInfo& _Info)
 
 bool KnightShadow::ShadowVSKnihgtCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
+	MasterActor* Knihgt = dynamic_cast<MasterActor*>(_Other->GetActor());
+
+	if (Knihgt != nullptr)
+	{
+		KnockbackDirection_ = Knihgt->GetMoveDirection();
+	}
+
+
 	return true;
 }
 

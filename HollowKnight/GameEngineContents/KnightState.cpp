@@ -18,6 +18,12 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+	}
 
 	// ========== UPDATE ==========
 
@@ -138,9 +144,10 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 
 		KnightData::GetInst()->SetisBreak(true);
-
 		KnightManager_.ChangeState("STUN");
 	}
+
+
 
 	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
@@ -794,6 +801,13 @@ void Knight::KnightRunEnd(const StateInfo& _Info)
 
 void Knight::KnightStunStart(const StateInfo& _Info)
 {
+	if (KnightData::GetInst()->GetCurMask() == 1)
+	{
+		KnightData::GetInst()->SetisDeath(true);
+		KnightManager_.ChangeState("DEATH");
+		return;
+	}
+
 	//KnightKnockbackTimer_ = 1.0f;
 	GetRenderer()->ChangeFrameAnimation("STUN_ANIMATION");
 }
@@ -805,17 +819,7 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (KnightKnockbackTimer_ > 0.3f)
 	{
 		KnightKnockbackTimer_ = 0.f;
-		if (KnightData::GetInst()->GetCurMask() == 0)
-		{
-			KnightData::GetInst()->SetisDeath(true);
-			KnightManager_.ChangeState("DEATH");
-		}
-
-		else
-		{
-			KnightManager_.ChangeState("STILL");
-		}
-
+		KnightManager_.ChangeState("STILL");
 	}
 
 	GetTransform().SetWorldMove(-KnockbackDirection_ * GetSpeed() * _DeltaTime);
@@ -887,6 +891,7 @@ void Knight::KnightSlashStart(const StateInfo& _Info)
 	//isPossibleDoubleSlash_ = false;
 	//KnightSlashTimer_ = 0.f;
 	GetRenderer()->ChangeFrameAnimation("SLASH_ANIMATION");
+	KnightSlashEffect_->GetCollision()->On();
 	KnightSlashEffect_->SetAnimationSlash();
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
@@ -957,9 +962,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-
 	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, 0});
-
 
 	// ========== 스테이트 변경 ==========
 
@@ -973,10 +976,19 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		isPressJumppingKey_ = false;
 	}
 
+	KnightSlashCollisionTimer_ += _DeltaTime;
+	if (KnightSlashCollisionTimer_ > 0.2f)
+	{
+		KnightSlashCollisionTimer_ = 0.f;
+		KnightSlashEffect_->GetCollision()->Off();
+
+	}
+
 
 	//애니메이션이 끝나면 
 	if (isSlashEnd_ == true)
 	{
+		//KnightSlashEffect_->Off();
 		isSlashEnd_ = false;
 		KnightManager_.ChangeState("STILL");
 	}
@@ -985,14 +997,19 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightSlashEnd(const StateInfo& _Info)
 {
 	SetJumpPower({ 0, KnightJumpPower_, 0 });
-
+	KnightSlashCollisionTimer_ = 0.f;
+	KnightSlashEffect_->GetCollision()->Off();
 	isPossibleDoubleSlash_ = true;
+
 }
 
 void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH_ANIMATION");
+
 	KnightSlashEffect_->SetAnimationDoubleSlash();
+	KnightSlashEffect_->GetCollision()->On();
+
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 80, 50, 0 });
@@ -1082,6 +1099,13 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		isPressJumppingKey_ = false;
 	}
 
+	KnightSlashCollisionTimer_ += _DeltaTime;
+	if (KnightSlashCollisionTimer_ > 0.2f)
+	{
+		KnightSlashCollisionTimer_ = 0.f;
+		KnightSlashEffect_->GetCollision()->Off();
+
+	}
 
 	//애니메이션이 끝나면 
 	if (isDoubleSlashEnd_ == true)
@@ -1094,6 +1118,8 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightDoubleSlashEnd(const StateInfo& _Info)
 {
+	KnightSlashEffect_->GetCollision()->Off();
+	KnightSlashCollisionTimer_ = 0.f;
 	isPossibleDoubleSlash_ = false;
 }
 

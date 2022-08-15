@@ -1,7 +1,8 @@
 #pragma once
+#include "MasterEffect.h"
 
 // Ό³Έν :
-class KnihgtShadowSlashEffect
+class KnihgtShadowSlashEffect : public MasterEffect
 {
 public:
 	// constrcuter destructer
@@ -15,8 +16,19 @@ public:
 	KnihgtShadowSlashEffect& operator=(KnihgtShadowSlashEffect&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 private:
+	GameEngineStateManager ShadowSlashEffectManager_;
+
+private:
+	//================================
+	//    Bind Animation
+	//================================
+
+	//bool EffectVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+
 
 };
 

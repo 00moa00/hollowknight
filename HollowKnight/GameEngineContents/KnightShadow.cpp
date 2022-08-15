@@ -8,7 +8,9 @@ KnightShadow::KnightShadow()
 	isDeathEnd_(false),
 	isSlashEnd_(false),
 
-	MoveKnihgtTimer_(0),
+	ShadowMoveTimer_(0),
+	ShadowKnockbackTimer_(0),
+	HP_(2),
 
 	KnightShadowManager_()
 {
@@ -24,7 +26,7 @@ void KnightShadow::Start()
 	SetSpeed(300.f);
 
 	CreateCollisionComponent(float4{ 60, 120, 1 }, static_cast<int>(OBJECTORDER::Knight_Shadow));
-	//GetCollision()->GetTransform().SetWorldPosition({ 0, 120 / 2, 0 });
+	GetCollision()->GetTransform().SetWorldPosition({ 0, 120, 0 });
 
 	CreateRendererComponent(float4{ 431, 287, 1 }, "Hollow Shade Cln_idle0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight_Shadow));
 
@@ -102,8 +104,6 @@ void KnightShadow::Start()
 		std::bind(&KnightShadow::ShadowFreeFlyStart, this, std::placeholders::_1),
 		std::bind(&KnightShadow::ShadowFreeFlyEnd, this, std::placeholders::_1));
 
-
-
 	KnightShadowManager_.CreateStateMember("SLASH"
 		, std::bind(&KnightShadow::ShadowSlashUpdate, this, std::placeholders::_1, std::placeholders::_2),
 		std::bind(&KnightShadow::ShadowSlashStart, this, std::placeholders::_1),
@@ -114,8 +114,12 @@ void KnightShadow::Start()
 		std::bind(&KnightShadow::ShadowTurnStart, this, std::placeholders::_1),
 		std::bind(&KnightShadow::ShadowTurnEnd, this, std::placeholders::_1));
 
-	KnightShadowManager_.ChangeState("APPEAR");
+	KnightShadowManager_.CreateStateMember("HIT"
+		, std::bind(&KnightShadow::ShadowHitUpdate, this, std::placeholders::_1, std::placeholders::_2),
+		std::bind(&KnightShadow::ShadowHitStart, this, std::placeholders::_1),
+		std::bind(&KnightShadow::ShadowHitEnd, this, std::placeholders::_1));
 
+	KnightShadowManager_.ChangeState("APPEAR");
 
 }
 

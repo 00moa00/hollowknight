@@ -20,25 +20,14 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-
-
 	GameEngineStateManager KnightSlashEffectManager_;
+
 private:
-
-
-	//GameEngineRenderer* KnightSlashEffectRenderer_;
 
 	//================================
 	//    Bind State
 	//================================
 
-	//================================
-	//    Bind Animation
-	//================================
-	void AnimationEndSlash(const FrameAnimation_DESC& _Info);
-	void AnimationEndDoubleSlash(const FrameAnimation_DESC& _Info);
-	void AnimationEndUpSlash(const FrameAnimation_DESC& _Info);
-	void AnimationEndDownSlash(const FrameAnimation_DESC& _Info);
 
 public:
 
@@ -48,7 +37,7 @@ public:
 	void SetAnimationDownSlash();
 	void SetAnimationStill();
 
-	bool thisVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool EffectVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 };
 

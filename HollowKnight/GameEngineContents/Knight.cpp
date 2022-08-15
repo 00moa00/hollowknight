@@ -25,6 +25,7 @@ Knight::Knight()
 	KnightLookUpTimer_(),
 	KnightLookDownTimer_(),
 	KnightDashTimer_(),
+	KnightSlashCollisionTimer_(),
 
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
@@ -100,6 +101,7 @@ void Knight::Start()
 	
 	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
 	KnightSlashEffect_->SetAnimationStill();
+	//KnightSlashEffect_->Off();
 
 	KnightJumpPower_ = 250.f;
 	KnightDoubleJumpPower_ = 180.f;
