@@ -65,7 +65,9 @@ private:
 	float4 KnockbackDirection_;
 
 	GameEngineStateManager KnightManager_;
+
 	KnightSlashEffect* KnightSlashEffect_;
+
 
 	GameEngineCollision* Test1_;
 	GameEngineCollision* Test2_;

@@ -5,6 +5,7 @@
 #include "Monster.h"
 #include "Crawlid.h"
 #include "HUD.h"
+#include "KnightShadow.h"
 
 // Ό³Έν :
 class GameEngineTextureRenderer;
@@ -29,6 +30,9 @@ private:
 	Monster* Crawlid_;
 	HUD* HUD_;
 
+	KnightShadow* CurKnightShadow_;
+	KnightShadow* NewKnihgtShadow_;
+
 	float4 MainCameraPosition_;
 	float4 MainMapSize_;
 
@@ -39,6 +43,7 @@ protected:
 	void CreateKnightActor();
 	void CreateKingsPass1Monster();
 	void CreateUIActor();
+	void CreateKnightShadowActor();
 
 	void CameraMoveWindowLimit();
 	void CameraMoveKnightLimit();

@@ -34,10 +34,14 @@ public:
 	KnightShadowData& operator=(KnightShadowData&& _Other) noexcept = delete;
 
 protected:
+	//레벨에서 생성해? 
+
 
 private:
 	float4 ShadowPosition_;
 	float4 KnightPosition_;
+
+	bool isShadowDepart_;
 
 public:
 	//================================
@@ -53,6 +57,11 @@ public:
 		return KnightPosition_;
 	}
 
+	bool GetisShadowDepart()
+	{
+		return isShadowDepart_;
+	}
+
 	//================================
 	//    Setter
 	//================================
@@ -65,6 +74,11 @@ public:
 	void SetKnightPosition(float4 _Pos)
 	{
 		KnightPosition_ = _Pos;
+	}
+
+	void SetisShadowDepart(bool _b)
+	{
+		isShadowDepart_ = _b;
 	}
 
 };

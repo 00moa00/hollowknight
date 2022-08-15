@@ -16,7 +16,6 @@ void KnightShadow::ShadowDirectionCheck()
 	else
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
-
 	}
 }
 
@@ -53,7 +52,11 @@ void KnightShadow::ShadowIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightShadowManager_.ChangeState("STARTLE");
 	}
 
-
+	if (KnightShadowData::GetInst()->GetisShadowDepart() == true)
+	{
+		KnightShadowData::GetInst()->SetisShadowDepart(false);
+		KnightShadowManager_.ChangeState("DEPART");
+	}
 
 }
 
@@ -108,6 +111,12 @@ void KnightShadow::ShadowFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightShadowManager_.ChangeState("HIT");
 	}
 
+	if (KnightShadowData::GetInst()->GetisShadowDepart() == true)
+	{
+		KnightShadowData::GetInst()->SetisShadowDepart(false);
+		KnightShadowManager_.ChangeState("DEPART");
+	}
+
 }
 
 void KnightShadow::ShadowFlyEnd(const StateInfo& _Info)
@@ -137,6 +146,12 @@ void KnightShadow::ShadowFreeFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 		ShadowMoveTimer_ = 0.f;
 		KnightShadowManager_.ChangeState("FLY");
 
+	}
+
+	if (KnightShadowData::GetInst()->GetisShadowDepart() == true)
+	{
+		KnightShadowData::GetInst()->SetisShadowDepart(false);
+		KnightShadowManager_.ChangeState("DEPART");
 	}
 
 }
@@ -172,6 +187,12 @@ void KnightShadow::ShadowHitUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	GetTransform().SetWorldMove(-KnockbackDirection_ * GetSpeed() * _DeltaTime);
 
+	if (KnightShadowData::GetInst()->GetisShadowDepart() == true)
+	{
+		KnightShadowData::GetInst()->SetisShadowDepart(false);
+		KnightShadowManager_.ChangeState("DEPART");
+	}
+
 }
 
 void KnightShadow::ShadowHitEnd(const StateInfo& _Info)
@@ -199,9 +220,34 @@ void KnightShadow::ShadowTurnStart(const StateInfo& _Info)
 
 void KnightShadow::ShadowTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (KnightShadowData::GetInst()->GetisShadowDepart() == true)
+	{
+		KnightShadowData::GetInst()->SetisShadowDepart(false);
+		KnightShadowManager_.ChangeState("DEPART");
+	}
 }
 
 void KnightShadow::ShadowTurnEnd(const StateInfo& _Info)
+{
+}
+
+void KnightShadow::ShadowDepartStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("DEPART_ANIMATION");
+
+}
+
+void KnightShadow::ShadowDepartUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isDeathEnd_ == true)
+	{
+		isDeathEnd_ = false;
+		Death();
+	}
+}
+
+void KnightShadow::ShadowDepartEnd(const StateInfo& _Info)
 {
 }
 

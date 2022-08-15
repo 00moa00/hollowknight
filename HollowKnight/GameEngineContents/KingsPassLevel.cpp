@@ -5,6 +5,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include "Knight.h"
 #include "Monster.h"
+#include "KnightData.h"
 
 KingsPassLevel::KingsPassLevel() 
 {
@@ -58,6 +59,8 @@ void KingsPassLevel::Update(float _DeltaTime)
 	}
 
 	CameraMoveWindowLimit();
+
+
 }
 
 void KingsPassLevel::End() {}

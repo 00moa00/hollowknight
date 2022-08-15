@@ -24,6 +24,7 @@ private:
 	bool isStartleEnd_;
 	bool isDeathEnd_;
 	bool isSlashEnd_;
+	bool isDepartEnd_;
 
 	int HP_;
 
@@ -80,6 +81,9 @@ private:
 	void ShadowTurnUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShadowTurnEnd(const StateInfo& _Info);
 
+	void ShadowDepartStart(const StateInfo& _Info);
+	void ShadowDepartUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ShadowDepartEnd(const StateInfo& _Info);
 
 	//================================
 	//    Bind  Pointer

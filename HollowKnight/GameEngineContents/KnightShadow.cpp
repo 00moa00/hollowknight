@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "KnightShadow.h"
+#include "KnightShadowData.h"
 
 KnightShadow::KnightShadow() 
 	:
@@ -42,7 +43,8 @@ void KnightShadow::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("FLY_ANIMATION", FrameAnimation_DESC("Hollow Shade Cln_fly000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_ANIMATION", FrameAnimation_DESC("Hollow Shade Cln_slash000-Sheet.png", 0, 10, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("TURN_ANIMATION", FrameAnimation_DESC("Hollow Shade Cln_turn000-Sheet.png", 0, 3, 0.100f));
-	
+	GetRenderer()->CreateFrameAnimationCutTexture("DEPART_ANIMATION", FrameAnimation_DESC("Hollow Shade Cln_depart000-Sheet.png", 0, 8, 0.100f, false));
+
 	GetRenderer()->ChangeFrameAnimation("APPEAR_ANIMATION");
 
 
@@ -68,6 +70,11 @@ void KnightShadow::Start()
 	GetRenderer()->AnimationBindEnd("SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isSlashEnd_ = true;
+		});
+
+	GetRenderer()->AnimationBindEnd("DEPART_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isDeathEnd_ = true;
 		});
 
 	//================================
@@ -119,6 +126,11 @@ void KnightShadow::Start()
 		std::bind(&KnightShadow::ShadowHitStart, this, std::placeholders::_1),
 		std::bind(&KnightShadow::ShadowHitEnd, this, std::placeholders::_1));
 
+	KnightShadowManager_.CreateStateMember("DEPART"
+		, std::bind(&KnightShadow::ShadowDepartUpdate, this, std::placeholders::_1, std::placeholders::_2),
+		std::bind(&KnightShadow::ShadowDepartStart, this, std::placeholders::_1),
+		std::bind(&KnightShadow::ShadowDepartEnd, this, std::placeholders::_1));
+
 	KnightShadowManager_.ChangeState("APPEAR");
 
 }
@@ -126,4 +138,6 @@ void KnightShadow::Start()
 void KnightShadow::Update(float _DeltaTime)
 {
 	KnightShadowManager_.Update(_DeltaTime);
+
+
 }

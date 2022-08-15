@@ -6,7 +6,8 @@ KnightShadowData* KnightShadowData::Inst_ = new KnightShadowData();
 
 KnightShadowData::KnightShadowData() 
 	:
-	ShadowPosition_()
+	ShadowPosition_(),
+	isShadowDepart_(false)
 {
 }
 

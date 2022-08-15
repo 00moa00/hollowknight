@@ -1,7 +1,9 @@
 #include "PreCompile.h"
+#include <GameEngineCore/GameEngineCameraActor.h>
+
 #include "HollowKnightLevel.h"
 #include "GlobalContentsValue.h"
-#include <GameEngineCore/GameEngineCameraActor.h>
+#include "KnightData.h"
 
 HollowKnightLevel::HollowKnightLevel() 
 	:
@@ -37,6 +39,11 @@ void HollowKnightLevel::CreateKingsPass1Monster()
 void HollowKnightLevel::CreateUIActor()
 {
 	HUD_ = CreateActor<HUD>();
+}
+
+void HollowKnightLevel::CreateKnightShadowActor()
+{
+	CurKnightShadow_ = CreateActor<KnightShadow>();
 }
 
 

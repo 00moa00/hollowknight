@@ -42,11 +42,18 @@ private:
 
 	bool isDeath_;
 
+	bool isShadow_;
+
 public:
 
 	//================================
 	//    Getter
 	//================================
+
+	bool GetisShadow()
+	{
+		return isShadow_;
+	}
 
 	int GetAllMask()
 	{
@@ -81,6 +88,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+
+	void SetisShadow(bool _b)
+	{
+		isShadow_ = _b;
+	}
 
 	void SetAllMask(int _i)
 	{

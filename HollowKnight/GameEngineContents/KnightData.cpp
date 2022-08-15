@@ -7,6 +7,7 @@ KnightData* KnightData::Inst_ = new KnightData();
 KnightData::KnightData()
 	:
 	isRefill_(false),
+	isShadow_(false),
 	AllMask_(4),
 	CurMask_(4)
 

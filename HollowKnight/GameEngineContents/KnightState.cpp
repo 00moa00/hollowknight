@@ -837,13 +837,24 @@ void Knight::KnightDeathStart(const StateInfo& _Info)
 
 void Knight::KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	
+	if (KnightData::GetInst()->GetisShadow() == true)
+	{
+		KnightData::GetInst()->SetisShadow(false);
+		KnightShadowData::GetInst()->SetisShadowDepart(true);
+
+	}
+
 	if (isDeathEnd_ == true)
 	{
 		isDeathEnd_ = false;
 		KnightShadow* Shadow = GetLevel()->CreateActor<KnightShadow>();
 		Shadow->GetTransform().SetWorldPosition({this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y});
+		
+		KnightData::GetInst()->SetisShadow(true);
 		KnightShadowData::GetInst()->SetShadowPosition({ this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y });
 		KnightManager_.ChangeState("GROUND_WAKE_UP");
+		return;
 	}
 }
 
