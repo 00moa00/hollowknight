@@ -55,6 +55,9 @@
     <Filter Include="Actor\Play\Monster">
       <UniqueIdentifier>{e71467e9-a601-4aab-ae6c-9e383ede19dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\MapItem">
+      <UniqueIdentifier>{4a25f608-3033-4907-b564-b00995befe1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -159,6 +162,12 @@
     </ClInclude>
     <ClInclude Include="Geo.h">
       <Filter>Actor\Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterMapItem.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="DropGeo.h">
+      <Filter>Actor\MapItem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +276,12 @@
     </ClCompile>
     <ClCompile Include="Geo.cpp">
       <Filter>Actor\Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterMapItem.cpp">
+      <Filter>Actor\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="DropGeo.cpp">
+      <Filter>Actor\MapItem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

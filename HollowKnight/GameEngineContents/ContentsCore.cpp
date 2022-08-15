@@ -18,11 +18,14 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
-	//GameEngineWindow::GetInst()->SetWindowScaleAndPosition(float4{1920,1080}, float4{0,0});
-
+	//================================
+	//    폰트
+	//================================
 	GameEngineFont::Load("Noto Serif KR");
 
-
+	//================================
+	//    텍스처 / 타이틀
+	//================================
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -39,6 +42,9 @@ void ContentsCore::Start()
 		}
 	}
 
+	//================================
+	//    텍스처 / UI
+	//================================
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -129,6 +135,33 @@ void ContentsCore::Start()
 
 	}
 
+	//================================
+	//    텍스처 / 맵 아이템
+	//================================
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("MapItem");
+		Dir.Move("Geo");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Geo_coin_air000-Sheet.png", 9, 1);
+		GameEngineTexture::Cut("Geo_coin0000-Sheet.png", 8, 1);
+
+	}
+
+	//================================
+	//    텍스처 / 몬스터
+	//================================
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -154,10 +187,11 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Crawler_goomba_turn_r_0000-Sheet.png", 2, 1);
 		GameEngineTexture::Cut("Crawler_goomba_turn0000-Sheet.png", 2, 1);
 		GameEngineTexture::Cut("Crawler_goomba_walk0000-Sheet.png", 4, 1);
-
-
 	}
 
+	//================================
+	//    텍스처 / 맵
+	//================================
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -174,7 +208,6 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
-
 
 	{
 		GameEngineDirectory Dir;
@@ -229,7 +262,9 @@ void ContentsCore::Start()
 		}
 	}
 
-
+	//================================
+	//    텍스처 / 플레이어
+	//================================
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -334,7 +369,9 @@ void ContentsCore::Start()
 	}
 
 
-
+	//================================
+	//    텍스처 / 이펙트
+	//================================
 
 	{
 		GameEngineDirectory Dir;
@@ -374,7 +411,9 @@ void ContentsCore::Start()
 		GameEngineInput::GetInst()->CreateKey("LevelChangeKey", 'P');
 	}
 
-
+	//================================
+	//    레벨 생성
+	//================================
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<KingsPassLevel>("KingsPassLevel");
 

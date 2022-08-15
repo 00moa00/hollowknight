@@ -8,6 +8,7 @@ enum class OBJECTORDER
 	Background_Object,
 	Terrain,
 	Knight,
+	Geo,
 	Knight_Slash,
 	Knight_Shadow,
 	Knight_Shadow_Slash,

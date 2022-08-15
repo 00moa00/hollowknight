@@ -3,29 +3,28 @@
 #include <GameEngineCore/GameEngineCollision.h>
 
 class GameEngineUIRenderer;
-class MasterUI : public GameEngineActor
+class MasterMapItem : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	MasterUI();
-	~MasterUI();
+	MasterMapItem();
+	~MasterMapItem();
 
 	// delete Function
-	MasterUI(const MasterUI& _Other) = delete;
-	MasterUI(MasterUI&& _Other) noexcept = delete;
-	MasterUI& operator=(const MasterUI& _Other) = delete;
-	MasterUI& operator=(MasterUI&& _Other) noexcept = delete;
+	MasterMapItem(const MasterMapItem& _Other) = delete;
+	MasterMapItem(MasterMapItem&& _Other) noexcept = delete;
+	MasterMapItem& operator=(const MasterMapItem& _Other) = delete;
+	MasterMapItem& operator=(MasterMapItem&& _Other) noexcept = delete;
 
 protected:
-	GameEngineUIRenderer* Renderer_;
+	GameEngineTextureRenderer* Renderer_;
 	GameEngineCollision* Collision_;
 
 protected:
-
 	//================================
 	//     Getter
 	//================================
-	GameEngineUIRenderer* GetRenderer() const
+	GameEngineTextureRenderer* GetRenderer() const
 	{
 		return Renderer_;
 	}
@@ -34,14 +33,12 @@ protected:
 	{
 		return Collision_;
 	}
-	
 
 	//================================
 	//    Setter
 	//================================
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
-
 
 
 };

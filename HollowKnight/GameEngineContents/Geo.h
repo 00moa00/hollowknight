@@ -53,10 +53,10 @@ public:
 	}
 
 private:
+
 	//================================
 	//    Bind State
 	//================================
-
 	void GeoAppearStart(const StateInfo& _Info);
 	void GeoAppearUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GeoAppearEnd(const StateInfo& _Info);
