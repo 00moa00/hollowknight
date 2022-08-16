@@ -85,7 +85,6 @@ void Geo::Start()
 		std::bind(&Geo::GeoBrokenStart, this, std::placeholders::_1),
 		std::bind(&Geo::GeoBrokenEnd, this, std::placeholders::_1));
 
-
 	GeoManager_.ChangeState("APPEAR");
 
 }

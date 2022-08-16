@@ -19,6 +19,70 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	bool isGrowEnd_;
+	bool isShrinkEnd_;
 
+	int SoulLevel_; // 디폴트 MAK 9 , 꺠졌을때 MAK 6
+
+	GameEngineStateManager SoulManager_;
+	GameEngineUIRenderer* EyeRenderer_;
+public:
+	//================================
+	//     Getter
+	//================================
+	int GetSoulLevel()
+	{
+		return SoulLevel_;
+	}
+
+	//================================
+	//     Setter
+	//================================
+	void GrowSoulLevel()
+	{
+		if (SoulLevel_ <= 9)
+		{
+			++SoulLevel_;
+			SoulManager_.ChangeState("GROW");
+		}
+	}
+	
+	void SetSoulLevel(int _i)
+	{
+		SoulLevel_ = _i;
+	}
+
+	void SetGrowState()
+	{
+		SoulManager_.ChangeState("GROW");
+	}
+
+	void SetIdleState()
+	{
+		SoulManager_.ChangeState("IDLE");
+	}
+
+	void SetShrinkState()
+	{
+		SoulManager_.ChangeState("SHRINK");
+	}
+
+private:
+	void SetLevelPosition(int _Level);
+
+	//================================
+	//    Bind State
+	//================================
+	void SoulGrowStart(const StateInfo& _Info);
+	void SoulGrowUpdate(float _DeltaTime, const StateInfo& _Info);
+	void SoulGrowEnd(const StateInfo& _Info);
+
+	void SoulIdleStart(const StateInfo& _Info);
+	void SoulIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void SoulIdleEnd(const StateInfo& _Info);
+
+	void SoulShrinkStart(const StateInfo& _Info);
+	void SoulShrinkUpdate(float _DeltaTime, const StateInfo& _Info);
+	void SoulShrinkEnd(const StateInfo& _Info);
 };
 

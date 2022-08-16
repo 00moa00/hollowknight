@@ -21,7 +21,6 @@ protected:
 	GameEngineCollision* Collision_;
 
 protected:
-
 	//================================
 	//     Getter
 	//================================

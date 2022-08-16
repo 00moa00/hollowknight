@@ -20,6 +20,8 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	bool isSlashEnd_;
+
 	GameEngineStateManager KnightSlashEffectManager_;
 
 private:
@@ -27,6 +29,14 @@ private:
 	//================================
 	//    Bind State
 	//================================
+	void SlashIdleStart(const StateInfo& _Info);
+	void SlashIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void SlashIdleEnd(const StateInfo& _Info);
+
+	void SlashHitEnemyStart(const StateInfo& _Info);
+	void SlashHitEnemyUpdate(float _DeltaTime, const StateInfo& _Info);
+	void SlashHitEnemyEnd(const StateInfo& _Info);
+
 
 
 public:

@@ -58,6 +58,9 @@
     <Filter Include="Actor\MapItem">
       <UniqueIdentifier>{4a25f608-3033-4907-b564-b00995befe1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\Levels\KingsPass">
+      <UniqueIdentifier>{4bfdf699-bde7-4275-ab67-6ba7507ecc22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">

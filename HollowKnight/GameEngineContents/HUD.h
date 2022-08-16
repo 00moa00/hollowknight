@@ -3,6 +3,7 @@
 #include "VesselFrame.h"
 #include "Mask.h"
 #include "Geo.h"
+#include "Soul.h"
 
 // Ό³Έν :
 class HUD : public GameEngineActor
@@ -35,6 +36,7 @@ private:
 
 	VesselFrame* VesselFrame_;
 	Geo* Geo_;
+	Soul* Soul_;
 	std::vector<Mask*> Maskes_;
 
 	

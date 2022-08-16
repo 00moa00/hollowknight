@@ -5,6 +5,9 @@
 HUD::HUD() 
 	:
 	VesselFrame_(nullptr),
+	Soul_(nullptr),
+	Geo_(nullptr),
+	Maskes_(),
 
 	MaskesAppearEnd_(false),
 
@@ -28,6 +31,8 @@ void HUD::Start()
 
 	VesselFrame_ = GetLevel() ->CreateActor<VesselFrame>();
 	VesselFrame_ -> GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 70.f), GameEngineWindow::GetInst()->GetScale().hy() - 50.f, -100 });
+	
+	Soul_ = GetLevel()->CreateActor<Soul>();
 
 	Maskes_.push_back(GetLevel()->CreateActor<Mask>());
 	Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size()-1) * 60)), GameEngineWindow::GetInst()->GetScale().hy() - 55, -100});
@@ -190,6 +195,13 @@ void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 		KnightData::GetInst()->SetCurMask(MaskesSize_-1);
 		Geo_->SetBreakState();
+	}
+
+	// ¿µÈ¥ ¼ºÀå
+	if (KnightData::GetInst()->GetisGrowSoul() == true)
+	{
+		KnightData::GetInst()->SetisSoulGrow(false);
+		Soul_->GrowSoulLevel();
 	}
 
 }

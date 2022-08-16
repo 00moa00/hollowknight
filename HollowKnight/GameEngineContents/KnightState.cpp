@@ -987,13 +987,13 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		isPressJumppingKey_ = false;
 	}
 
-	KnightSlashCollisionTimer_ += _DeltaTime;
-	if (KnightSlashCollisionTimer_ > 0.2f)
-	{
-		KnightSlashCollisionTimer_ = 0.f;
-		KnightSlashEffect_->GetCollision()->Off();
+	//KnightSlashCollisionTimer_ += _DeltaTime;
+	//if (KnightSlashCollisionTimer_ > 0.2f)
+	//{
+	//	KnightSlashCollisionTimer_ = 0.f;
+	//	KnightSlashEffect_->GetCollision()->Off();
 
-	}
+	//}
 
 
 	//애니메이션이 끝나면 
@@ -1110,13 +1110,13 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		isPressJumppingKey_ = false;
 	}
 
-	KnightSlashCollisionTimer_ += _DeltaTime;
-	if (KnightSlashCollisionTimer_ > 0.2f)
-	{
-		KnightSlashCollisionTimer_ = 0.f;
-		KnightSlashEffect_->GetCollision()->Off();
+	//KnightSlashCollisionTimer_ += _DeltaTime;
+	//if (KnightSlashCollisionTimer_ > 0.2f)
+	//{
+	//	KnightSlashCollisionTimer_ = 0.f;
+	//	KnightSlashEffect_->GetCollision()->Off();
 
-	}
+	//}
 
 	//애니메이션이 끝나면 
 	if (isDoubleSlashEnd_ == true)

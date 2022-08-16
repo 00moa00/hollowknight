@@ -44,6 +44,8 @@ private:
 
 	bool isShadow_;
 
+	bool isGrowSoul_; // 몬스터를 쳤을때 영혼이 찬다
+
 public:
 
 	//================================
@@ -85,6 +87,11 @@ public:
 		return isDeath_;
 	}
 
+	bool GetisGrowSoul()
+	{
+		return isGrowSoul_;
+	}
+
 	//================================
 	//    Setter
 	//================================
@@ -124,6 +131,10 @@ public:
 		isDeath_ = _b;
 	}
 
+	void SetisSoulGrow(bool _b)
+	{
+		isGrowSoul_ = _b;
+	}
 
 };
 
