@@ -1,7 +1,19 @@
 #include "PreCompile.h"
+
 #include "ContentsCore.h"
-#include "GameEngineContents/TitleLevel.h"
-#include "GameEngineContents/KingsPassLevel.h"
+
+#include "TitleLevel.h"
+#include "KingsPassLevel1.h"
+#include "KingsPassLevel2.h"
+#include "KingsPassLevel3.h"
+#include "KingsPassLevel4.h"
+
+#include "CrossroadsLevel1.h"
+#include "CrossroadsLevel2.h"
+
+#include "DirtmouthLevel1.h"
+#include "DirtmouthLevel2.h"
+
 #include "KnightData.h"
 #include "KnightShadowData.h"
 
@@ -211,7 +223,7 @@ void ContentsCore::Start()
 	}
 
 	//================================
-	//    텍스처 / 맵
+	//    텍스처 / 맵 / KingsPass
 	//================================
 	{
 		GameEngineDirectory Dir;
@@ -282,6 +294,44 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
+
+	//================================
+	//    텍스처 / 맵 / KingsPass
+	//================================
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("Forgotten Crossroads");
+		Dir.Move("Level1");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("Forgotten Crossroads");
+		Dir.Move("Level2");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
 
 	//================================
 	//    텍스처 / 플레이어
@@ -436,7 +486,17 @@ void ContentsCore::Start()
 	//    레벨 생성
 	//================================
 	CreateLevel<TitleLevel>("TitleLevel");
-	CreateLevel<KingsPassLevel>("KingsPassLevel");
+
+	CreateLevel<KingsPassLevel1>("KingsPassLevel1");
+	CreateLevel<KingsPassLevel2>("KingsPassLevel2");
+	CreateLevel<KingsPassLevel3>("KingsPassLevel3");
+	CreateLevel<KingsPassLevel4>("KingsPassLevel4");
+
+	CreateLevel<CrossroadsLevel1>("CrossroadsLevel1");
+	CreateLevel<CrossroadsLevel2>("CrossroadsLevel2");
+
+	CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");
+	CreateLevel<DirtmouthLevel2>("DirtmouthLevel2");
 
 	ChangeLevel("TitleLevel");
 	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);

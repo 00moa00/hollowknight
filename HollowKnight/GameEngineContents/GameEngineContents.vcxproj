@@ -165,6 +165,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CrossroadsLevel1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CrossroadsLevel2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="DirtmouthLevel1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="DirtmouthLevel2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="DropGeo.h">
       <SubType>
       </SubType>
@@ -175,6 +191,18 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GlobalContentsValue.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KingsPassLevel2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KingsPassLevel3.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KingsPassLevel4.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -270,7 +298,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="KingsPassLevel.h">
+    <ClInclude Include="KingsPassLevel1.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -312,6 +340,22 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="CrossroadsLevel1.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CrossroadsLevel2.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="DirtmouthLevel1.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="DirtmouthLevel2.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="DropGeo.cpp">
       <SubType>
       </SubType>
@@ -321,6 +365,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GlobalContentsValue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KingsPassLevel2.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KingsPassLevel3.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KingsPassLevel4.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -418,7 +474,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="KingsPassLevel.cpp">
+    <ClCompile Include="KingsPassLevel1.cpp">
       <SubType>
       </SubType>
     </ClCompile>

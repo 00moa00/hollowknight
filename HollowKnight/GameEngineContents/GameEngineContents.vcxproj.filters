@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Contents">
-      <UniqueIdentifier>{eee3c248-3814-48af-b1f4-f221fa7a0ee6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{5df23444-ca8f-40f8-8c39-0d7d75f58b7d}</UniqueIdentifier>
     </Filter>
@@ -15,9 +12,6 @@
     </Filter>
     <Filter Include="Actor\Title">
       <UniqueIdentifier>{804cf31e-d3ed-4dc6-9803-e76637ce47a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Global">
-      <UniqueIdentifier>{5c0d327c-f680-4cd4-a5c1-9a7caec22b46}</UniqueIdentifier>
     </Filter>
     <Filter Include="PreCompile">
       <UniqueIdentifier>{439c0504-814e-4f90-8507-3f4dacd0226c}</UniqueIdentifier>
@@ -61,13 +55,28 @@
     <Filter Include="Level\Levels\KingsPass">
       <UniqueIdentifier>{4bfdf699-bde7-4275-ab67-6ba7507ecc22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\Levels\Forgotten Crossroads">
+      <UniqueIdentifier>{550e659b-7e28-4414-91d6-f87f6dadda2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Levels\Dirtmouth">
+      <UniqueIdentifier>{296598e9-2b2b-4dab-84c6-807e80773c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Levels\Dirtmouth\BossRoom">
+      <UniqueIdentifier>{a5254e96-a9ca-4069-b8d8-8e87b186c0b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{eee3c248-3814-48af-b1f4-f221fa7a0ee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalData">
+      <UniqueIdentifier>{5c0d327c-f680-4cd4-a5c1-9a7caec22b46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
-      <Filter>Contents</Filter>
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Enums.h">
-      <Filter>Global</Filter>
+      <Filter>GlobalData</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Actor\Play</Filter>
@@ -85,17 +94,11 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="KingsPassLevel.h">
-      <Filter>Level\Levels</Filter>
-    </ClInclude>
     <ClInclude Include="MasterActor.h">
       <Filter>Actor\Master</Filter>
     </ClInclude>
     <ClInclude Include="MasterMap.h">
       <Filter>Actor\Master</Filter>
-    </ClInclude>
-    <ClInclude Include="RendererActor.h">
-      <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="UIPoint.h">
       <Filter>Actor\Title</Filter>
@@ -172,10 +175,37 @@
     <ClInclude Include="DropGeo.h">
       <Filter>Actor\MapItem</Filter>
     </ClInclude>
+    <ClInclude Include="KingsPassLevel1.h">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossroadsLevel1.h">
+      <Filter>Level\Levels\Forgotten Crossroads</Filter>
+    </ClInclude>
+    <ClInclude Include="CrossroadsLevel2.h">
+      <Filter>Level\Levels\Forgotten Crossroads</Filter>
+    </ClInclude>
+    <ClInclude Include="KingsPassLevel2.h">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClInclude>
+    <ClInclude Include="KingsPassLevel3.h">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClInclude>
+    <ClInclude Include="KingsPassLevel4.h">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClInclude>
+    <ClInclude Include="DirtmouthLevel1.h">
+      <Filter>Level\Levels\Dirtmouth</Filter>
+    </ClInclude>
+    <ClInclude Include="DirtmouthLevel2.h">
+      <Filter>Level\Levels\Dirtmouth</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererActor.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
-      <Filter>Contents</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Play</Filter>
@@ -193,17 +223,11 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level\Levels</Filter>
     </ClCompile>
-    <ClCompile Include="KingsPassLevel.cpp">
-      <Filter>Level\Levels</Filter>
-    </ClCompile>
     <ClCompile Include="MasterActor.cpp">
       <Filter>Actor\Master</Filter>
     </ClCompile>
     <ClCompile Include="MasterMap.cpp">
       <Filter>Actor\Master</Filter>
-    </ClCompile>
-    <ClCompile Include="RendererActor.cpp">
-      <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="UIPoint.cpp">
       <Filter>Actor\Title</Filter>
@@ -285,6 +309,33 @@
     </ClCompile>
     <ClCompile Include="DropGeo.cpp">
       <Filter>Actor\MapItem</Filter>
+    </ClCompile>
+    <ClCompile Include="KingsPassLevel1.cpp">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossroadsLevel1.cpp">
+      <Filter>Level\Levels\Forgotten Crossroads</Filter>
+    </ClCompile>
+    <ClCompile Include="CrossroadsLevel2.cpp">
+      <Filter>Level\Levels\Forgotten Crossroads</Filter>
+    </ClCompile>
+    <ClCompile Include="KingsPassLevel2.cpp">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClCompile>
+    <ClCompile Include="KingsPassLevel3.cpp">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClCompile>
+    <ClCompile Include="KingsPassLevel4.cpp">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClCompile>
+    <ClCompile Include="DirtmouthLevel1.cpp">
+      <Filter>Level\Levels\Dirtmouth</Filter>
+    </ClCompile>
+    <ClCompile Include="DirtmouthLevel2.cpp">
+      <Filter>Level\Levels\Dirtmouth</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererActor.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
