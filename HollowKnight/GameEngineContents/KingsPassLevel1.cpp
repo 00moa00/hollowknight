@@ -47,12 +47,11 @@ void KingsPassLevel1::Start()
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	SetMainMapSize({7099, 4889});
-
-
+	//GetMainCameraActor()->GetCameraComponent()->GetTransform().SetWorldPosition();
+	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 }
 void KingsPassLevel1::Update(float _DeltaTime) 
 {
-	//GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 	if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
 	{
 		// ;

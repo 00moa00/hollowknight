@@ -59,32 +59,32 @@ void HollowKnightLevel::CameraMoveWindowLimit()
 	//GetMainCameraActorTransform().SetLocalPosition(Knight_->GetTransform().GetLocalPosition());
 	//MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
 
-	GetMainCameraActorTransform().SetLocalPosition(Knight_->GetTransform().GetLocalPosition());
+	GetMainCameraActorTransform().SetWorldPosition({ Knight_->GetTransform().GetLocalPosition().x, Knight_->GetTransform().GetLocalPosition().y,  -1800.0f });
 	MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
 
 	//카메라의 위치 - 윈도우 사이즈의 x가 0이라면
 	if ( 0 > MainCameraPosition_.x - GameEngineWindow::GetInst()->GetScale().hix() )
 	{
 		MainCameraPosition_.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
-		GetMainCameraActorTransform().SetLocalPosition(MainCameraPosition_);
+		GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition_);
 	}
 
 	if (MainMapSize_.x < MainCameraPosition_.x + GameEngineWindow::GetInst()->GetScale().hix())
 	{
 		MainCameraPosition_.x = MainMapSize_.x - GameEngineWindow::GetInst()->GetScale().hix();
-		GetMainCameraActorTransform().SetLocalPosition(MainCameraPosition_);
+		GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition_);
 	}
 
 	if (0 < MainCameraPosition_.y + GameEngineWindow::GetInst()->GetScale().hiy())
 	{
 		MainCameraPosition_.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
-		GetMainCameraActorTransform().SetLocalPosition(MainCameraPosition_);
+		GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition_);
 	}
 
 	if (-MainMapSize_.y > MainCameraPosition_.y - GameEngineWindow::GetInst()->GetScale().hiy())
 	{
 		MainCameraPosition_.y = -(MainMapSize_.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
-		GetMainCameraActorTransform().SetLocalPosition(MainCameraPosition_);
+		GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition_);
 	}
 
 }

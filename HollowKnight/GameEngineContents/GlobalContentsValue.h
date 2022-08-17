@@ -53,9 +53,9 @@ enum class Z_ORDER
 
 	Knight,
 
-	Background_Object,
+	Background_Object = 1000,
 
-	Background = 500,
+	Background = 1400,
 
 
 };
