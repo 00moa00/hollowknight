@@ -20,15 +20,15 @@ void CrossroadsLevel1::Start()
 
 	CraateMasterMapActor();
 
-	//GetMasterMap()->CreateBackGround("Cross1_BackGround.png");
-	//GetMasterMap()->CreateBackGroundObject("Cross1_BackObject.png");
+	GetMasterMap()->CreateBackGround("Cross1_BackGround.png");
+	GetMasterMap()->CreateBackGroundObject("Cross1_BackObject.png");
 	GetMasterMap()->CreateMapCollision("Cross1_Coll.png");
 
 	CreateKnightActor(); // 플레이어
 	CreateKingsPass1Monster();
 
-	//GetMasterMap()->CreateTerrain("Cross1_Ground.png");
-	//GetMasterMap()->CreateFrontObject("Cross1_FrontObject.png");
+	GetMasterMap()->CreateTerrain("Cross1_Ground.png");
+	GetMasterMap()->CreateFrontObject("Cross1_FrontObject.png");
 
 	CreateUIActor();
 

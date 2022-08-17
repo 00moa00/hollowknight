@@ -185,7 +185,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Enums.h" />
     <ClInclude Include="Geo.h">
       <SubType>
       </SubType>
@@ -361,10 +360,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Geo.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GlobalContentsValue.cpp">
       <SubType>
       </SubType>
     </ClCompile>

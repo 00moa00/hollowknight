@@ -84,7 +84,7 @@ void Knight::Start()
 	SetCenter({0, 20.f, 0, 0});
 
 	CreateCollisionComponent(float4{60, 120, 1}, static_cast<int>(OBJECTORDER::Knight));
-	GetCollision()->GetTransform().SetWorldPosition({0, 120/2, 0});
+	GetCollision()->GetTransform().SetWorldPosition({0, 120/2, static_cast<float>(Z_ORDER::Knight) });
 
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
 	

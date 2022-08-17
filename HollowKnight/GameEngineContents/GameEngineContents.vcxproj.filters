@@ -75,13 +75,6 @@
     <ClInclude Include="ContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Enums.h">
-      <Filter>GlobalData</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Actor\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="GlobalContentsValue.h" />
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
@@ -202,15 +195,17 @@
     <ClInclude Include="RendererActor.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="GlobalContentsValue.h">
+      <Filter>GlobalData</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Actor\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="GlobalContentsValue.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
@@ -336,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="RendererActor.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\Master</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

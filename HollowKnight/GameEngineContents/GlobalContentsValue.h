@@ -1,6 +1,4 @@
 #pragma once
-#include "Knight.h"
-#include "Monster.h"
 
 enum class OBJECTORDER
 {
@@ -32,28 +30,32 @@ enum class RENDERORDER
 
 };
 
-
-// 설명 :
-class GlobalContentsValue
+//역순으로. 숫자가 높을 수록 뒤로간다
+enum class Z_ORDER
 {
-public:
-	class Enums 
-	{
-	};
+	UI,
 
-	class Actors 
-	{
-	public:
-		static Monster* TestMonster;
+	TileMap,
 
-	private:
-		Actors() {		}
-		~Actors() {		}
-	};
+	FrontObject,
 
-private:
-	GlobalContentsValue()	{	}
+	Terrain,
 
-	~GlobalContentsValue()	{	}
+	Monster,
+
+	Knight_Shadow_Slash,
+
+	Knight_Shadow,
+
+	Knight_Slash,
+
+	Geo,
+
+	Knight,
+
+	Background_Object,
+
+	Background,
+
+
 };
-
