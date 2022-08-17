@@ -270,7 +270,7 @@ void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 
 void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (isWalkTurnEnd_ == true)
+	if (isWalkTurnEnd_ == true) //애니메이션 end bool 값
 	{
 		isWalkTurnEnd_ = false;
 

@@ -4,6 +4,7 @@
 // 그래픽카드에게 이녀석은 이런 부류니까 니가 자동으로 처리하는 녀석이 있으면 하고.
 
 #include "TransformHeader.fx"
+#include "RenderOption.fx"
 
 // 0                                                                                                1 
 // 0□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□1
@@ -18,7 +19,8 @@ struct Output
 {
     float4 Pos : SV_POSITION;
     float4 PosLocal : POSITION;
-    float4 Tex : TEXCOORD;
+    float4 Tex0 : TEXCOORD0;
+    float4 Tex1 : TEXCOORD1; //마스크 기준이 될 텍스처
 };
 
 // 1000
@@ -50,8 +52,10 @@ Output TextureAtlas_VS(Input _Input)
     
     // 10    11
     
-    NewOutPut.Tex.x = (_Input.Tex.x * TextureFrameSize.x) + TextureFramePos.x;
-    NewOutPut.Tex.y = (_Input.Tex.y * TextureFrameSize.y) + TextureFramePos.y;
+    NewOutPut.Tex0.x = (_Input.Tex.x * TextureFrameSize.x) + TextureFramePos.x;
+    NewOutPut.Tex0.y = (_Input.Tex.y * TextureFrameSize.y) + TextureFramePos.y;
+
+    NewOutPut.Tex1 = _Input.Tex; // uv값을 그대로 넣었다.
     
     return NewOutPut;
 }
@@ -64,7 +68,23 @@ cbuffer ColorData : register(b0)
 
 Texture2D Tex : register(t0);
 SamplerState Smp : register(s0);
+Texture2D Test : register(t10);
+
 float4 TextureAtlas_PS(Output _Input) : SV_Target0
 {
-    return (Tex.Sample(Smp, _Input.Tex.xy) * MulColor) + PlusColor;
+    float4 MaskColor = Test.Sample(Smp, _Input.Tex1.xy); //기준이 될 아이의 색상 정보를 가져와
+    
+    if (1 == IsMask) //마스킹을 할거야
+    {     
+        if (MaskColor.a == 0.f) //투명하지 않은 부분은 그려내지 않을거야
+        {
+            discard;
+        }
+    
+    }
+    
+    return (Tex.Sample(Smp, _Input.Tex0.xy) * MulColor) + PlusColor;
 }
+    
+    
+    

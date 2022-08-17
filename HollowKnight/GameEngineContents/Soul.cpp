@@ -26,6 +26,16 @@ void Soul::Start()
 	EyeRenderer_->GetTransform().SetLocalScale({ 87, 33, 1 });
 	EyeRenderer_->GetTransform().SetWorldPosition({65.f, -87.f, 1});
 
+
+	GameEngineUIRenderer *GameEngineUIRenderer_ = CreateComponent<GameEngineUIRenderer>();
+	GameEngineUIRenderer_->SetTexture("HUD Cln_soul_orb_shape.png");
+	GameEngineUIRenderer_->GetTransform().SetLocalScale({ 124, 124, 1 });
+	GameEngineUIRenderer_->GetTransform().SetWorldPosition({ 65.f, -87.f, 1 });
+
+
+	GetRenderer()->Option.IsMask = 1;
+	GetRenderer()->ShaderResources.SetTexture("Test", GameEngineUIRenderer_->GetCurTexture());
+
 	//================================
 	//    Create Animation
 	//================================
