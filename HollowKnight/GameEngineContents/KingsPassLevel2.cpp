@@ -6,6 +6,7 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+
 KingsPassLevel2::KingsPassLevel2() 
 {
 }
@@ -16,6 +17,8 @@ KingsPassLevel2::~KingsPassLevel2()
 
 void KingsPassLevel2::Start()
 {
+
+
 }
 
 void KingsPassLevel2::Update(float _DeltaTime)

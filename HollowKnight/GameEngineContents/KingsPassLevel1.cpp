@@ -59,8 +59,6 @@ void KingsPassLevel1::Update(float _DeltaTime)
 	}
 
 	CameraMoveWindowLimit();
-
-
 }
 
 void KingsPassLevel1::End() {}
