@@ -24,7 +24,7 @@ void MasterMap::CreateBackGround(std::string _FileName)
 	BackGroundRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	BackGroundRenderer_->SetTexture(_FileName);
 	BackGroundRenderer_->GetTransform().SetLocalScale(BackGroundRenderer_->GetCurTexture()->GetScale());
-	BackGroundRenderer_->GetTransform().SetLocalPosition({0, 0, static_cast<float>(Z_ORDER::Background) });
+	BackGroundRenderer_->GetTransform().SetLocalPosition({0, 0, -static_cast<float>(Z_ORDER::Background) });
 	BackGroundRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 	//BackGroundRenderer_->Set
 
@@ -35,7 +35,7 @@ void MasterMap::CreateBackGroundObject(std::string _FileName)
 	BackGroundObjectRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	BackGroundObjectRenderer_->SetTexture(_FileName);
 	BackGroundObjectRenderer_->GetTransform().SetLocalScale(BackGroundObjectRenderer_->GetCurTexture()->GetScale());
-	BackGroundObjectRenderer_->GetTransform().SetLocalPosition({ 0, 0, static_cast<float>(Z_ORDER::Background_Object) });
+	BackGroundObjectRenderer_->GetTransform().SetLocalPosition({ 0, 0, -static_cast<float>(Z_ORDER::Background_Object) });
 	BackGroundObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 
 }
@@ -46,7 +46,7 @@ void MasterMap::CreateTerrain(std::string _FileName)
 	TerrainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	TerrainRenderer_->SetTexture(_FileName);
 	TerrainRenderer_->GetTransform().SetLocalScale(TerrainRenderer_->GetCurTexture()->GetScale());
-	TerrainRenderer_->GetTransform().SetLocalPosition({ 0, 0, static_cast<float>(Z_ORDER::Terrain) });
+	TerrainRenderer_->GetTransform().SetLocalPosition({ 0, 0, -static_cast<float>(Z_ORDER::Terrain) });
 	TerrainRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 
 }
@@ -56,7 +56,7 @@ void MasterMap::CreateFrontObject(std::string _FileName)
 	FrontObjectRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	FrontObjectRenderer_->SetTexture(_FileName);
 	FrontObjectRenderer_->GetTransform().SetLocalScale(FrontObjectRenderer_->GetCurTexture()->GetScale());
-	FrontObjectRenderer_->GetTransform().SetLocalPosition({ 0, 0, static_cast<float>(Z_ORDER::FrontObject) });
+	FrontObjectRenderer_->GetTransform().SetLocalPosition({ 0, 0, -static_cast<float>(Z_ORDER::FrontObject) });
 	FrontObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 
 }

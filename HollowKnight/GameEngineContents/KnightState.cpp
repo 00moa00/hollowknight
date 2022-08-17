@@ -852,7 +852,7 @@ void Knight::KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info)
 		Shadow->GetTransform().SetWorldPosition({this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, 0});
 		
 		KnightData::GetInst()->SetisShadow(true);
-		KnightShadowData::GetInst()->SetShadowPosition({ this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Shadow) });
+		KnightShadowData::GetInst()->SetShadowPosition({ this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, -static_cast<float>(Z_ORDER::Knight_Shadow) });
 		KnightManager_.ChangeState("GROUND_WAKE_UP");
 		return;
 	}
@@ -973,7 +973,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Slash) });
+	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, -static_cast<float>(Z_ORDER::Knight_Slash) });
 
 	// ========== 스테이트 변경 ==========
 
@@ -1095,7 +1095,7 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Slash) });
+	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, -static_cast<float>(Z_ORDER::Knight_Slash) });
 
 
 	// ========== 스테이트 변경 ==========

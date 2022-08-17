@@ -52,6 +52,7 @@ void KingsPassLevel1::Start()
 }
 void KingsPassLevel1::Update(float _DeltaTime) 
 {
+	//GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 	if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
 	{
 		// ;

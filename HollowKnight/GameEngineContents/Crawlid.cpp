@@ -21,7 +21,7 @@ void Crawlid::Start()
 	GetCollision()->GetTransform().SetWorldPosition({0, 50, 0});
 
 	CreateRendererComponent(float4{ 303, 177, 1 }, "Crawler_goomba_death0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
-	GetTransform().SetLocalPosition({ 700,-4000, static_cast<float>(Z_ORDER::Monster) });
+	GetTransform().SetLocalPosition({ 700,-4000, -static_cast<float>(Z_ORDER::Monster) });
 
 	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Crawler_goomba_death0000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Crawler_goomba_turn_r_0000-Sheet.png", 0, 1, 0.100f));

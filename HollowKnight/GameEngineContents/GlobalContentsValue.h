@@ -55,7 +55,7 @@ enum class Z_ORDER
 
 	Background_Object,
 
-	Background,
+	Background = 500,
 
 
 };
