@@ -37,7 +37,7 @@ void CrossroadsLevel1::Start()
 
 	SetMainMapSize({ 6633, 1661 });
 
-	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, -static_cast<float>(Z_ORDER::Knight) });
+	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, static_cast<float>(Z_ORDER::Knight) });
 
 }
 
