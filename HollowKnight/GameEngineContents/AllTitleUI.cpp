@@ -35,7 +35,8 @@ void AllTitleUI::Start()
 	GameStartFont_->SetColor({ 1.0f, 1.0f, 1.0f });
 	GameStartFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 100.0f)});
 	GameStartFont_->SetSize(35);
-
+	GameStartFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
+	GameStartFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
 	MapEditorFont_ = CreateComponent<GameEngineFontRenderer>();
 
@@ -43,6 +44,8 @@ void AllTitleUI::Start()
 	MapEditorFont_->SetColor({ 1.0f, 1.0f, 1.0f });
 	MapEditorFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 200.0f) });
 	MapEditorFont_->SetSize(35);
+	MapEditorFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
+	MapEditorFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
 
 	GameExitFont_ = CreateComponent<GameEngineFontRenderer>();
@@ -51,6 +54,8 @@ void AllTitleUI::Start()
 	GameExitFont_->SetColor({ 1.0f, 1.0f, 1.0f });
 	GameExitFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 300.0f) });
 	GameExitFont_->SetSize(35);
+	GameExitFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
+	GameExitFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
 	
 	//GameStartFont_->GetTransform().SetWorldPosition({ 500.0f, 100.0f,0 });
