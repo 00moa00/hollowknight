@@ -70,6 +70,27 @@
     <Filter Include="GlobalData">
       <UniqueIdentifier>{5c0d327c-f680-4cd4-a5c1-9a7caec22b46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\UI\HUD">
+      <UniqueIdentifier>{0d50eb08-1054-4415-a021-cf107a19dae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting">
+      <UniqueIdentifier>{bcc22d23-a7f1-492f-949c-4a58ef738460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Map">
+      <UniqueIdentifier>{59c1c169-8aec-4cf3-b750-e7d76c8cf682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Inventory">
+      <UniqueIdentifier>{693cceb4-4958-49d5-8bfd-6fa2927314ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Charm">
+      <UniqueIdentifier>{a987c965-5ef4-4faa-baf9-2b341d4ee51d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Border">
+      <UniqueIdentifier>{78f046b0-91ef-4189-81a1-d826d20810de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Map\Forgotten Crossroads">
+      <UniqueIdentifier>{56bddc11-9cdc-4b99-a134-16b0125b6a22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -129,20 +150,8 @@
     <ClInclude Include="MasterUI.h">
       <Filter>Actor\Master</Filter>
     </ClInclude>
-    <ClInclude Include="VesselFrame.h">
-      <Filter>Actor\Play\UI</Filter>
-    </ClInclude>
     <ClInclude Include="AllTitleUI.h">
       <Filter>Actor\Title\All</Filter>
-    </ClInclude>
-    <ClInclude Include="HUD.h">
-      <Filter>Actor\Play\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Soul.h">
-      <Filter>Actor\Play\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Mask.h">
-      <Filter>Actor\Play\UI</Filter>
     </ClInclude>
     <ClInclude Include="MetaSpriteWindow.h">
       <Filter>Actor\Master\GUI</Filter>
@@ -158,9 +167,6 @@
     </ClInclude>
     <ClInclude Include="KnihgtShadowSlashEffect.h">
       <Filter>Actor\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="Geo.h">
-      <Filter>Actor\Play\UI</Filter>
     </ClInclude>
     <ClInclude Include="MasterMapItem.h">
       <Filter>Actor\Master</Filter>
@@ -203,6 +209,51 @@
     </ClInclude>
     <ClInclude Include="GameEngineContentsMaskRenderer.h">
       <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Geo.h">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Mask.h">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Soul.h">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="VesselFrame.h">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="MapPage.h">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryPage.h">
+      <Filter>Actor\Play\UI\Setting\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="CharmPage.h">
+      <Filter>Actor\Play\UI\Setting\Charm</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingPointer.h">
+      <Filter>Actor\Play\UI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="BorderArrow.h">
+      <Filter>Actor\Play\UI\Setting\Border</Filter>
+    </ClInclude>
+    <ClInclude Include="BorderBottom.h">
+      <Filter>Actor\Play\UI\Setting\Border</Filter>
+    </ClInclude>
+    <ClInclude Include="BorderCorner.h">
+      <Filter>Actor\Play\UI\Setting\Border</Filter>
+    </ClInclude>
+    <ClInclude Include="BorderTop.h">
+      <Filter>Actor\Play\UI\Setting\Border</Filter>
+    </ClInclude>
+    <ClInclude Include="DetailedMapPage.h">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="WideMap.h">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -266,20 +317,8 @@
     <ClCompile Include="MasterUI.cpp">
       <Filter>Actor\Master</Filter>
     </ClCompile>
-    <ClCompile Include="VesselFrame.cpp">
-      <Filter>Actor\Play\UI</Filter>
-    </ClCompile>
     <ClCompile Include="AllTitleUI.cpp">
       <Filter>Actor\Title\All</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Actor\Play\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Soul.cpp">
-      <Filter>Actor\Play\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Mask.cpp">
-      <Filter>Actor\Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="MetaSpriteWindow.cpp">
       <Filter>Actor\Master\GUI</Filter>
@@ -298,9 +337,6 @@
     </ClCompile>
     <ClCompile Include="KnightShadowState.cpp">
       <Filter>Actor\Play\Knight Shadow</Filter>
-    </ClCompile>
-    <ClCompile Include="Geo.cpp">
-      <Filter>Actor\Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="MasterMapItem.cpp">
       <Filter>Actor\Master</Filter>
@@ -340,6 +376,51 @@
     </ClCompile>
     <ClCompile Include="GameEngineContentsMaskRenderer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Geo.cpp">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Mask.cpp">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Soul.cpp">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="VesselFrame.cpp">
+      <Filter>Actor\Play\UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="MapPage.cpp">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryPage.cpp">
+      <Filter>Actor\Play\UI\Setting\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="CharmPage.cpp">
+      <Filter>Actor\Play\UI\Setting\Charm</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingPointer.cpp">
+      <Filter>Actor\Play\UI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="BorderArrow.cpp">
+      <Filter>Actor\Play\UI\Setting\Border</Filter>
+    </ClCompile>
+    <ClCompile Include="BorderBottom.cpp">
+      <Filter>Actor\Play\UI\Setting\Border</Filter>
+    </ClCompile>
+    <ClCompile Include="BorderCorner.cpp">
+      <Filter>Actor\Play\UI\Setting\Border</Filter>
+    </ClCompile>
+    <ClCompile Include="BorderTop.cpp">
+      <Filter>Actor\Play\UI\Setting\Border</Filter>
+    </ClCompile>
+    <ClCompile Include="DetailedMapPage.cpp">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="WideMap.cpp">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

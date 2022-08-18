@@ -29,10 +29,8 @@ void Soul::Start()
 
 	GameEngineUIRenderer *GameEngineUIRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	GameEngineUIRenderer_->SetTexture("HUD Cln_soul_orb_shape.png");
-	//GameEngineUIRenderer_->GetTransform().SetLocalScale({ 124, 124, 1 });
-	//GameEngineUIRenderer_->GetTransform().SetWorldPosition({ 65.f, -87.f, 1 });
 	GameEngineUIRenderer_->Off();
-	//GameEngineUIRenderer_->SetSamplingModePoint();
+
 	GetRenderer()->Option.IsMask = 1;
 	GetRenderer()->ShaderResources.SetTexture("Test", GameEngineUIRenderer_->GetCurTexture());
 	//GetRenderer()->SetSamplingModePoint();
