@@ -11,7 +11,7 @@ void FrameAnimation::Reset()
 
 void FrameAnimation::Update(float _Delta)
 {
-
+	
 	Info.FrameTime += _Delta;
 
 	if (nullptr != Time)
@@ -129,6 +129,11 @@ void GameEngineTextureRenderer::SetTextureRendererSetting()
 
 	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
 	ShaderResources.SetConstantBufferLink("ColorData", ColorData);
+	
+	UVData.OffsetX = 0.f;
+	UVData.OffsetY = 0.f;
+
+	ShaderResources.SetConstantBufferLink("UVData", UVData);
 
 }
 
@@ -307,6 +312,8 @@ void GameEngineTextureRenderer::Update(float _Delta)
 	{
 		CurAni->Update(_Delta);
 	}
+
+
 }
 
 

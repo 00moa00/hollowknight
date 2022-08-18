@@ -28,6 +28,15 @@ struct ColorData
 	}
 };
 
+struct UVData
+{
+	float OffsetX;
+	float OffsetY;
+	float Dummy0;
+	float Dummy1;
+};
+
+
 class FrameAnimation_DESC 
 {
 public:
@@ -191,6 +200,11 @@ public:
 		return ColorData;
 	}
 
+	UVData& GetUVData()
+	{
+		return UVData;
+	}
+
 
 	// 애니메이션 바인드
 	// 시작 프레임에 들어온다.
@@ -253,7 +267,7 @@ protected:
 
 	void Update(float _Delta) override;
 
-private:
+protected:
 	PIVOTMODE PivotMode;
 	SCALEMODE ScaleMode;
 	float ScaleRatio;
@@ -262,6 +276,7 @@ private:
 	float4 FrameData;
 
 	ColorData ColorData;
+	UVData UVData;
 
 	std::map<std::string, FrameAnimation> FrameAni;
 	FrameAnimation* CurAni;

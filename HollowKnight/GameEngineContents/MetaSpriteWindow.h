@@ -21,14 +21,17 @@ protected:
     void OnGUI(GameEngineLevel* _Level, float _DeltaTime) override;
 
 private:
+    int CurFrame;
+    GameEngineTextureRenderer* Renderer;
+
     std::string CurMetaFolder_;
     std::string CurAtlasFolder_;
 
     std::string CurMetaFile_;
     std::string CurAtlasFile_;
 
-    void MetaFileButton();
-    void AtlasFileButton();
+    void MetaFileButton(GameEngineLevel* _Level);
+    void AtlasFileButton(GameEngineLevel* _Level);
 
     //void MetaFileButton();
     //void AtlasFileButton();

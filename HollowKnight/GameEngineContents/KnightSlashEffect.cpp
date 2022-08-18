@@ -16,7 +16,7 @@ void KnightSlashEffect::Start()
 {
 	SetName("KnightSlashEffect");
 
-	CreateCollisionComponent(float4{ 140, 120, 10000 }, static_cast<int>(OBJECTORDER::Knight_Slash));
+	CreateCollisionComponent(float4{ 140, 120, 1 }, static_cast<int>(OBJECTORDER::Knight_Slash));
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_double_slashes_effect-Sheet.png", 2, static_cast<int>(RENDERORDER::Knight));
 	
 	//GetCollision()->GetTransform().SetLocalPosition({-100,0,1});

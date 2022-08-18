@@ -822,7 +822,7 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STILL");
 	}
 
-	GetTransform().SetWorldMove(-KnockbackDirection_ * GetSpeed() * _DeltaTime);
+	GetTransform().SetWorldMove(-GetMoveDirection() * GetSpeed() * _DeltaTime);
 
 }
 

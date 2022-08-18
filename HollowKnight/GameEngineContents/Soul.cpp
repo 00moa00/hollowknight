@@ -29,12 +29,13 @@ void Soul::Start()
 
 	GameEngineUIRenderer *GameEngineUIRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	GameEngineUIRenderer_->SetTexture("HUD Cln_soul_orb_shape.png");
-	GameEngineUIRenderer_->GetTransform().SetLocalScale({ 124, 124, 1 });
-	GameEngineUIRenderer_->GetTransform().SetWorldPosition({ 65.f, -87.f, 1 });
-
-
+	//GameEngineUIRenderer_->GetTransform().SetLocalScale({ 124, 124, 1 });
+	//GameEngineUIRenderer_->GetTransform().SetWorldPosition({ 65.f, -87.f, 1 });
+	GameEngineUIRenderer_->Off();
+	//GameEngineUIRenderer_->SetSamplingModePoint();
 	GetRenderer()->Option.IsMask = 1;
 	GetRenderer()->ShaderResources.SetTexture("Test", GameEngineUIRenderer_->GetCurTexture());
+	//GetRenderer()->SetSamplingModePoint();
 
 	//================================
 	//    Create Animation
@@ -49,7 +50,11 @@ void Soul::Start()
 	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
 	GetRenderer()->SetPivot(PIVOTMODE::LEFTTOP);
 	GetRenderer()->GetColorData().MulColor = {1,1,1,0.5f};
+	
 
+	//GetRenderer()->GetTransformData().
+	
+	// 
 	//================================
 	//    Create Bind Animation
 	//================================
@@ -82,6 +87,9 @@ void Soul::Start()
 		std::bind(&Soul::SoulShrinkEnd, this, std::placeholders::_1));
 
 	SoulManager_.ChangeState("IDLE");
+
+	GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f),
+	GameEngineWindow::GetInst()->GetScale().hy() - 87.f, -100 });
 }
 
 void Soul::Update(float _DeltaTime)
@@ -94,53 +102,52 @@ void Soul::SetLevelPosition(int _Level)
 	switch (_Level)
 	{
 	case 0:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f), 
-			GameEngineWindow::GetInst()->GetScale().hy() - 195.f, -100 });
+		GetRenderer()->GetUVData().OffsetY = -0.9f;
+
 		break;
 
 	case 1:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f), 
-			GameEngineWindow::GetInst()->GetScale().hy() - 181.f, -100 });
+		GetRenderer()->GetUVData().OffsetY = -0.8f;
 		break;
 
 	case 2:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f), 
-			GameEngineWindow::GetInst()->GetScale().hy() - 168.f, -100 });
+		GetRenderer()->GetUVData().OffsetY = -0.7f;
+
 		break;
 
 	case 3:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f),
-			GameEngineWindow::GetInst()->GetScale().hy() - 155.f, -100 });
+		GetRenderer()->GetUVData().OffsetY = -0.6f;
+
 		break;
 
 	case 4:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f), 
-			GameEngineWindow::GetInst()->GetScale().hy() - 142.f, -100 });
+		GetRenderer()->GetUVData().OffsetY = -0.5f;
+
 		break;
 
 	case 5:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f), 
-			GameEngineWindow::GetInst()->GetScale().hy() - 129.f, -100 });
+		GetRenderer()->GetUVData().OffsetY = -0.4f;
+
 		break;
 
 	case 6:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f), 
-			GameEngineWindow::GetInst()->GetScale().hy() - 116.f, -100 });
+		GetRenderer()->GetUVData().OffsetY = -0.3f;
+
 		break;
 
 	case 7:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f),
-			GameEngineWindow::GetInst()->GetScale().hy() - 103.f, -100 });
+		GetRenderer()->GetUVData().OffsetY = -0.2f;
+
 		break;
 
 	case 8 : 
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f),
-			GameEngineWindow::GetInst()->GetScale().hy() - 90.f, -100 });
+
+		GetRenderer()->GetUVData().OffsetY = -0.1f;
 
 		break;
 	case 9:
-		GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f), 
-			GameEngineWindow::GetInst()->GetScale().hy() - 87.f, -100 });
+
+		GetRenderer()->GetUVData().OffsetY = -0.f;
 
 		break;
 	default:
