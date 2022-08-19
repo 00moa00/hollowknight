@@ -47,7 +47,7 @@ void Soul::Start()
 
 	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
 	GetRenderer()->SetPivot(PIVOTMODE::LEFTTOP);
-	GetRenderer()->GetColorData().MulColor = {1,1,1,0.5f};
+	//GetRenderer()->GetColorData().MulColor = {1,1,1,0.5f};
 	
 
 	//GetRenderer()->GetTransformData().

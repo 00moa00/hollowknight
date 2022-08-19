@@ -40,11 +40,12 @@ public:
 	//================================
 	void GrowSoulLevel()
 	{
-		if (SoulLevel_ <= 9)
+		if (SoulLevel_ < 9)
 		{
 			++SoulLevel_;
 			SoulManager_.ChangeState("GROW");
 		}
+
 	}
 	
 	void SetSoulLevel(int _i)
