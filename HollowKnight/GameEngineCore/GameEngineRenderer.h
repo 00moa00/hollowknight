@@ -6,7 +6,7 @@ struct RenderOption
 {
     float DeltaTime;
     int IsMask;
-    int Empty;
+    int IsJump;
     int Option00;
     int Option01;
     int Option02;
@@ -31,40 +31,44 @@ struct RenderOption
 };
 
 // Ό³Έν :
+class GameEngineRenderingPipeLine;
 class GameEngineRenderer : public GameEngineTransformComponent
 {
-	friend class GameEngineLevel;
-	friend class GameEngineCamera;
+    friend class GameEngineLevel;
+    friend class GameEngineCamera;
 
 public:
     RenderOption Option;
 
-	// constrcuter destructer
-	GameEngineRenderer();
-	~GameEngineRenderer();
+    // constrcuter destructer
+    GameEngineRenderer();
+    ~GameEngineRenderer();
 
-	// delete Function
-	GameEngineRenderer(const GameEngineRenderer& _Other) = delete;
-	GameEngineRenderer(GameEngineRenderer&& _Other) noexcept = delete;
-	GameEngineRenderer& operator=(const GameEngineRenderer& _Other) = delete;
-	GameEngineRenderer& operator=(GameEngineRenderer&& _Other) noexcept = delete;
+    // delete Function
+    GameEngineRenderer(const GameEngineRenderer& _Other) = delete;
+    GameEngineRenderer(GameEngineRenderer&& _Other) noexcept = delete;
+    GameEngineRenderer& operator=(const GameEngineRenderer& _Other) = delete;
+    GameEngineRenderer& operator=(GameEngineRenderer&& _Other) noexcept = delete;
 
-	// float4x4 ViewPort;
-	void ChangeCamera(CAMERAORDER _Order);
+    // float4x4 ViewPort;
+    void ChangeCamera(CAMERAORDER _Order);
+
+    GameEngineRenderingPipeLine* GetClonePipeLine(GameEngineRenderingPipeLine* _Rendering);
 
 protected:
-	virtual void Start();
-	virtual void Update(float _DeltaTime) {}
-	virtual void End() {}
+    virtual void Start();
+    virtual void Update(float _DeltaTime) {}
+    virtual void End() {}
 
-	void PushRendererToMainCamera();
-	void PushRendererToUICamera();
+    void PushRendererToMainCamera();
+    void PushRendererToUICamera();
 
 
-	CAMERAORDER CameraOrder;
+    CAMERAORDER CameraOrder;
+
 
 private:
-	virtual void Render(float _DeltaTime) = 0;
+    virtual void Render(float _DeltaTime) = 0;
 
 };
 
