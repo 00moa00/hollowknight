@@ -237,11 +237,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="KnightDonutLightEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightLightEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="KnightShadow.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="KnightShadowData.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightSmallLightEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -270,6 +282,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="SettingPointer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SideDarkEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -451,6 +467,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="KnightDonutLightEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightLightEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="KnightShadow.cpp">
       <SubType>
       </SubType>
@@ -460,6 +484,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="KnightShadowState.cpp" />
+    <ClCompile Include="KnightSmallLightEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="KnihgtShadowSlashEffect.cpp">
       <SubType>
       </SubType>
@@ -485,6 +513,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="SettingPointer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SideDarkEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

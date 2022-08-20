@@ -23,6 +23,14 @@ void MasterEffect::CreateRendererComponent(float4 _LocalScale, std::string _File
 	MainRenderer_->GetTransform().SetWorldPosition({ 0, _LocalScale.y / 2 });
 }
 
+void MasterEffect::CreateRendererComponent(float4 _LocalScale, std::string _FileName)
+{
+	MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	MainRenderer_->SetTexture(_FileName);
+	MainRenderer_->GetTransform().SetLocalScale({ _LocalScale.x, _LocalScale.y, 1 });
+	MainRenderer_->GetTransform().SetWorldPosition({ 0, _LocalScale.y / 2 });
+}
+
 void MasterEffect::CreateCollisionComponent(float4 _LocalScale, int _Order)
 {
 	MainCollision_ = CreateComponent<GameEngineCollision>();

@@ -99,7 +99,11 @@ void Knight::Start()
 
 	GetTransform().SetWorldPosition({500,-4000,static_cast<float>(Z_ORDER::Knight) });
 	
+	KnightLightEffect_ = GetLevel()->CreateActor<KnightLightEffect>();
 	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
+	KnightDonutLightEffect_ = GetLevel()->CreateActor<KnightDonutLightEffect>();
+	KnightSmallLightEffect_ = GetLevel()->CreateActor<KnightSmallLightEffect>();
+	SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 	//KnightSlashEffect_->Off();
 
@@ -199,6 +203,7 @@ void Knight::Start()
 
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
+	//GetRenderer()->GetPipeLine()->SetOutputMergerBlend("LightenBlend");
 
 	//================================
 	//    Create Bind Animation

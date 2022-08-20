@@ -91,6 +91,9 @@
     <Filter Include="Actor\Play\UI\Setting\Map\Forgotten Crossroads">
       <UniqueIdentifier>{56bddc11-9cdc-4b99-a134-16b0125b6a22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\Light">
+      <UniqueIdentifier>{e01c558b-bd75-49d3-a46b-a899b618eb1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -254,6 +257,18 @@
     </ClInclude>
     <ClInclude Include="WideMap.h">
       <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightDonutLightEffect.h">
+      <Filter>Actor\Effect\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightLightEffect.h">
+      <Filter>Actor\Effect\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightSmallLightEffect.h">
+      <Filter>Actor\Effect\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="SideDarkEffect.h">
+      <Filter>Actor\Effect\Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +436,18 @@
     </ClCompile>
     <ClCompile Include="WideMap.cpp">
       <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightDonutLightEffect.cpp">
+      <Filter>Actor\Effect\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightLightEffect.cpp">
+      <Filter>Actor\Effect\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightSmallLightEffect.cpp">
+      <Filter>Actor\Effect\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SideDarkEffect.cpp">
+      <Filter>Actor\Effect\Light</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

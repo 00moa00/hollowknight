@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
 #include "HollowKnightLevel.h"
+#include "SideDarkEffect.h"
 
 // Ό³Έν :
 class CrossroadsLevel1 : public HollowKnightLevel

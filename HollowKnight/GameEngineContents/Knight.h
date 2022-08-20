@@ -1,6 +1,10 @@
 #pragma once
 #include "MasterActor.h"
 #include "KnightSlashEffect.h"
+#include "KnightLightEffect.h"
+#include "KnightDonutLightEffect.h"
+#include "KnightSmallLightEffect.h"
+#include "SideDarkEffect.h"
 
 // Ό³Έν :
 class GameEngineTextureRenderer;
@@ -67,7 +71,10 @@ private:
 	GameEngineStateManager KnightManager_;
 
 	KnightSlashEffect* KnightSlashEffect_;
-
+	KnightLightEffect* KnightLightEffect_;
+	KnightDonutLightEffect* KnightDonutLightEffect_;
+	KnightSmallLightEffect* KnightSmallLightEffect_;
+	SideDarkEffect* SideDarkEffect_;
 
 	GameEngineCollision* Test1_;
 	GameEngineCollision* Test2_;
