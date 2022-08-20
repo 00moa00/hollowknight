@@ -51,6 +51,8 @@ enum class Z_ORDER
 
 	Geo,
 
+	Knight,
+
 	Small_Light,
 
 	Light,
@@ -58,7 +60,6 @@ enum class Z_ORDER
 	Dount_Light,
 
 	Side_Dark,
-	Knight,
 
 
 

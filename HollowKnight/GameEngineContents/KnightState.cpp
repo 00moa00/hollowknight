@@ -150,7 +150,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	KnightLightEffect_->GetTransform().SetWorldPosition({GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light)});
 	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
 	KnightSmallLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
-	SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
+	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 	Test1_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x - 15.f , GetTransform().GetWorldPosition().y + 15.f });
