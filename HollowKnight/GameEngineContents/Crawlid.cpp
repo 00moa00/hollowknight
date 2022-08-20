@@ -39,7 +39,6 @@ void Crawlid::Start()
 
 	CrawlidManager_.ChangeState("WALK");
 
-	SetallDownDirection({ 0, -1, 0 });
 	SetFallSpeed(2);
 	SetGravity(400.f);
 	SetSpeed(300.f);
@@ -90,7 +89,7 @@ void Crawlid::CrawlidFallStart(const StateInfo& _Info)
 
 void Crawlid::CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	GetTransform().SetWorldMove((GetFallDownDirection()) * GetGravity() * GetFallSpeed() * _DeltaTime);
+	GetTransform().SetWorldMove((float4::DOWN) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 	if (GetPixelRed(GetNextPos(_DeltaTime)) == true)
 	{

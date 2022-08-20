@@ -270,6 +270,9 @@
     <ClInclude Include="SideDarkEffect.h">
       <Filter>Actor\Effect\Light</Filter>
     </ClInclude>
+    <ClInclude Include="SettingPage.h">
+      <Filter>Actor\Play\UI\Setting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -448,6 +451,9 @@
     </ClCompile>
     <ClCompile Include="SideDarkEffect.cpp">
       <Filter>Actor\Effect\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingPage.cpp">
+      <Filter>Actor\Play\UI\Setting</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

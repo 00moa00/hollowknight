@@ -20,7 +20,7 @@ protected:
 	GameEngineUIRenderer* Renderer_;
 	GameEngineCollision* Collision_;
 
-protected:
+public:
 	//================================
 	//     Getter
 	//================================
@@ -39,7 +39,15 @@ protected:
 	//    Setter
 	//================================
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
+	void CreateRendererComponent(float4 _LocalScale, std::string _FileName);
+
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
+
+	void PixLocalNegativeY();
+	void PixLocalPositiveY();
+
+	void ChangeAnimation(std::string _Name);
+	
 
 
 

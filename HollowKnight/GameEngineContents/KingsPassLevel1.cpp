@@ -46,6 +46,8 @@ void KingsPassLevel1::Start()
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
+	CreateSettingPageActor();
+
 	SetMainMapSize({7099, 4889});
 	//GetMainCameraActor()->GetCameraComponent()->GetTransform().SetWorldPosition();
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);

@@ -33,6 +33,8 @@ enum class RENDERORDER
 //역순으로. 숫자가 높을 수록 뒤로간다
 enum class Z_ORDER
 {
+	UI_Border,
+
 	UI,
 
 	TileMap,

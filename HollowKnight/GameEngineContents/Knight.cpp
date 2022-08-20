@@ -45,6 +45,7 @@ Knight::Knight()
 	isStunEnd_(false),
 	isDeath_(false),
 	isDeathEnd_(false),
+	isSitEnd_(false),
 
 	KnockbackDirection_(float4::ZERO)
 {
@@ -63,14 +64,12 @@ void Knight::Start()
 	//================================
 	//    Initialize
 	//================================
-
 	SetMoveDirection(float4::RIGHT);
 	SetSpeed(300.f);
 	SetisMove(true);
 	SetGravity(400.f);
 	SetJumpPower({ 300, 0 });
 	SetJumpSpeed(5);
-	SetallDownDirection({ 0, -1, 0 });
 	SetCollisionSize({ 0, 0, 0 });
 	SetFallSpeed(2);
 
@@ -105,7 +104,6 @@ void Knight::Start()
 	KnightSmallLightEffect_ = GetLevel()->CreateActor<KnightSmallLightEffect>();
 	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
-	//KnightSlashEffect_->Off();
 
 	KnightJumpPower_ = 250.f;
 	KnightDoubleJumpPower_ = 180.f;
@@ -128,6 +126,8 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightFocus", 'Q');
 
 		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
+
+		GameEngineInput::GetInst()->CreateKey("KnightSit", 'T');
 
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
 
@@ -200,6 +200,9 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("SLIDE_ANIMATION", FrameAnimation_DESC("Knight_wall_slide0000-Sheet.png", 0, 3, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALL_JUMP_ANIMATION", FrameAnimation_DESC("Knight_wall_jump0000-Sheet.png", 0, 2, 0.100f));
 
+	// ---- 의자 ----
+	GetRenderer()->CreateFrameAnimationCutTexture("SIT_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 0, 3, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SIT_IDLE_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 4, 4, 0.100f));
 
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
@@ -208,6 +211,13 @@ void Knight::Start()
 	//================================
 	//    Create Bind Animation
 	//================================
+
+	GetRenderer()->AnimationBindEnd("SIT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("SIT_IDLE_ANIMATION");
+
+		});
+
 
 	GetRenderer()->AnimationBindEnd("SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -296,12 +306,12 @@ void Knight::Start()
 
 	GetRenderer()->AnimationBindEnd("WAKEUP_GROUND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
-			isGroundWakeUp_ = true;
+			isGroundWakeUpEnd_ = true;
 		});
 
 	GetRenderer()->AnimationBindEnd("WAKEUP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
-			isWakeUp_ = true;
+			isWakeUpEnd_ = true;
 		});
 
 
@@ -403,6 +413,13 @@ void Knight::Start()
 	
 	KnightManager_.CreateStateMember("WALL_JUMP_LAND"
 		, std::bind(&Knight::KnightWallJumpLandUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWallJumpLandStart, this, std::placeholders::_1), std::bind(&Knight::KnightWallJumpLandEnd, this, std::placeholders::_1));
+
+	// ---- 의자 ----
+
+	KnightManager_.CreateStateMember("SIT"
+		, std::bind(&Knight::KnightSitUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightSitStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightSitEnd, this, std::placeholders::_1));
 
 
 	KnightManager_.ChangeState("FALL");

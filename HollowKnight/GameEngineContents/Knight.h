@@ -39,8 +39,9 @@ private:
 	bool isLandEnd_;
 	bool isStunEnd_;
 	bool isDeathEnd_;
-	bool isGroundWakeUp_;
-	bool isWakeUp_;
+	bool isGroundWakeUpEnd_;
+	bool isWakeUpEnd_;
+	bool isSitEnd_;
 
 	bool isKnightActtingMove_;
 	bool isPressJumppingKey_;
@@ -52,6 +53,8 @@ private:
 	bool isLowHealth_;
 
 	bool isDeath_;
+
+
 
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
@@ -233,7 +236,11 @@ private:
 	void KnightWallJumpLandUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightWallJumpLandEnd(const StateInfo& _Info);
 
+	// ---- ÀÇÀÚ À§ ----
 
+	void KnightSitStart(const StateInfo& _Info);
+	void KnightSitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightSitEnd(const StateInfo& _Info);
 
 	//================================
 	//    Bind 

@@ -44,7 +44,9 @@ private:
 
 	bool isShadow_;
 
-	bool isGrowSoul_; // 몬스터를 쳤을때 영혼이 찬다
+	bool isGrowSoul_; // 몬스터를 쳤을때 영혼이 찬다]
+
+	bool isSetting_;
 
 public:
 
@@ -55,6 +57,11 @@ public:
 	bool GetisShadow()
 	{
 		return isShadow_;
+	}
+
+	bool GetisSetting()
+	{
+		return isSetting_;
 	}
 
 	int GetAllMask()
@@ -99,6 +106,11 @@ public:
 	void SetisShadow(bool _b)
 	{
 		isShadow_ = _b;
+	}
+
+	void SetisSetting(bool _b)
+	{
+		isSetting_ = _b;
 	}
 
 	void SetAllMask(int _i)

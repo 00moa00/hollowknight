@@ -11,6 +11,7 @@ HollowKnightLevel::HollowKnightLevel()
 	BackgroundRenderer_(nullptr),
 	Knight_(nullptr),
 	HUD_(nullptr),
+	SettingPage_(nullptr),
 	MainCameraPosition_()
 {
 }
@@ -44,6 +45,11 @@ void HollowKnightLevel::CreateUIActor()
 void HollowKnightLevel::CreateKnightShadowActor()
 {
 	CurKnightShadow_ = CreateActor<KnightShadow>();
+}
+
+void HollowKnightLevel::CreateSettingPageActor()
+{
+	SettingPage_ = CreateActor<SettingPage>();
 }
 
 

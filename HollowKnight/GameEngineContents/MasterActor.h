@@ -53,7 +53,6 @@ protected:
 
 
 	float4 JumpPower_;
-	float4 FallDownDirection_;
 	float4 CollisionSize_;
 
 protected:
@@ -199,11 +198,6 @@ public:
 	}
 
 
-	float4 GetFallDownDirection() const
-	{
-		return FallDownDirection_;
-	}
-
 	float4 GetCollisionSize() const
 	{
 		return CollisionSize_;
@@ -270,11 +264,6 @@ public:
 	void SubJumpPower(float4 _JumpPower)
 	{
 		JumpPower_ -= _JumpPower;
-	}
-
-	void SetallDownDirection(float4 _FallDownDirection)
-	{
-		FallDownDirection_ = _FallDownDirection;
 	}
 
 	void SetCollisionSize(float4 _CollisionSize)

@@ -21,6 +21,9 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	bool AnimationEnd_;
+	
 
+public:
 };
 

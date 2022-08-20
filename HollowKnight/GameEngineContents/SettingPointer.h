@@ -1,6 +1,7 @@
 #pragma once
 #include "MasterUI.h"
 
+
 // Ό³Έν :
 class SettingPointer : public MasterUI
 {

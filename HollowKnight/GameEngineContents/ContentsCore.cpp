@@ -17,6 +17,8 @@
 #include "KnightData.h"
 #include "KnightShadowData.h"
 
+#include <GameEngineCore/GameEngineBlend.h>
+
 #pragma comment(lib, "GameEngineBase.lib")
 
 ContentsCore::ContentsCore() 
@@ -30,6 +32,96 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
+
+
+
+	{
+
+		D3D11_BLEND_DESC Desc = { 0 };
+
+		Desc.AlphaToCoverageEnable = FALSE;
+		Desc.IndependentBlendEnable = FALSE;
+		Desc.RenderTarget[0].BlendEnable = true;
+		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+
+		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_MAX;
+		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_MAX;
+
+
+
+		GameEngineBlend::Create("LightenBlend", Desc);
+	}
+
+	{
+
+		D3D11_BLEND_DESC Desc = { 0 };
+
+		Desc.AlphaToCoverageEnable = FALSE;
+		Desc.IndependentBlendEnable = FALSE;
+		Desc.RenderTarget[0].BlendEnable = TRUE;
+		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+
+		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND::D3D11_BLEND_ZERO;
+		Desc.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_SRC_COLOR;
+		Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_DEST_ALPHA;
+		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ZERO;
+		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+
+
+
+		GameEngineBlend::Create("MultplyBlend", Desc);
+	}
+
+	{
+
+		D3D11_BLEND_DESC Desc = { 0 };
+
+		Desc.AlphaToCoverageEnable = FALSE;
+		Desc.IndependentBlendEnable = FALSE;
+		Desc.RenderTarget[0].BlendEnable = TRUE;
+		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+
+		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND::D3D11_BLEND_SRC_ALPHA;
+		Desc.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ZERO;
+		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+
+
+
+		GameEngineBlend::Create("AddBlend", Desc);
+	}
+
+	{
+
+		D3D11_BLEND_DESC Desc = { 0 };
+
+		Desc.AlphaToCoverageEnable = FALSE;
+		Desc.IndependentBlendEnable = FALSE;
+		Desc.RenderTarget[0].BlendEnable = TRUE;
+		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+
+		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_MIN;
+		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_MIN;
+
+
+
+		GameEngineBlend::Create("DarkenBlend", Desc);
+	}
 	//================================
 	//    폰트
 	//================================
@@ -178,6 +270,22 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Setting");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Setting");
 		Dir.Move("MiniMap");
 		Dir.Move("Forgotten Crossroads");
 
@@ -264,6 +372,31 @@ void ContentsCore::Start()
 		{
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
+
+	}
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Setting");
+		Dir.Move("UI Inventroy animated");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("UI_inventory_animated_Border_Fleur_arrow0000-Sheet.png", 11, 1);
+		GameEngineTexture::Cut("UI_inventory_animated_Border_Fleur_bottom0000-Sheet.png", 9, 1);
+		GameEngineTexture::Cut("UI_inventory_animated_Border_Fleur_corner0000-Sheet.png", 10, 1);
+		GameEngineTexture::Cut("UI_inventory_animated_Border_Fleur_top0000-Sheet.png", 11, 1);
+
 
 	}
 
@@ -505,6 +638,10 @@ void ContentsCore::Start()
 		// 기상
 		GameEngineTexture::Cut("Knight_wake_up_ground0000-Sheet.png", 21, 1);
 		GameEngineTexture::Cut("Knight_wake0000-Sheet.png", 5, 1);
+
+		//의자
+		GameEngineTexture::Cut("Knight_sit0000-Sheet.png", 5, 1);
+
 
 	}
 
