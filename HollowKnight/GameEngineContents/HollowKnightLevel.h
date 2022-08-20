@@ -10,6 +10,7 @@
 
 // Ό³Έν :
 class GameEngineTextureRenderer;
+class PointActorComponent;
 class HollowKnightLevel : public GameEngineLevel
 {
 public:
@@ -23,7 +24,7 @@ public:
 	HollowKnightLevel& operator=(const HollowKnightLevel& _Other) = delete;
 	HollowKnightLevel& operator=(HollowKnightLevel&& _Other) noexcept = delete;
 
-protected:
+
 
 private:
 	float4 MainCameraPosition_;
@@ -38,6 +39,11 @@ private:
 	KnightShadow* NewKnihgtShadow_;
 
 	SettingPage* SettingPage_;
+
+public:
+	std::map<int, PointActorComponent*> PointActorListCharm;
+	std::map<int, PointActorComponent*> PointActorListMap;
+	std::map<int, PointActorComponent*> PointActorListMonsterBook;
 
 	GameEngineRenderer* BackgroundRenderer_;
 
@@ -69,5 +75,23 @@ protected:
 
 	void SetMainMapSize(float4 _MapSize);
 
+public :
+	void PushPointActorCharm(int _Order, PointActorComponent* _PointActorComponent);
+	void PushPointActorMonsterBook(int _Order, PointActorComponent* _PointActorComponent);
+	void PushPointActorMap(int _Order, PointActorComponent* _PointActorComponent);
+
+
+
+	void SortPointActor();
+
+	//bool PointActorXSort(SettingUIMaster* _Left, SettingUIMaster* _Right)
+	//{
+	//	return _Left->GetTransform().GetWorldPosition().x < _Right->GetTransform().GetWorldPosition().x;
+	//}
+
+	//bool PointActorYSort(SettingUIMaster* _Left, SettingUIMaster* _Right)
+	//{
+	//	return _Left->GetTransform().GetWorldPosition().y > _Right->GetTransform().GetWorldPosition().y;
+	//}
 };
 

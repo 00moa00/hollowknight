@@ -54,6 +54,7 @@ void KingsPassLevel1::Start()
 }
 void KingsPassLevel1::Update(float _DeltaTime) 
 {
+
 	if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
 	{
 		// ;

@@ -7,6 +7,8 @@
 #include "BorderCorner.h"
 #include "BorderTop.h"
 
+#include "SettingPointer.h"
+
 #include "CharmPage.h"
 
 class GameEngineTextureRenderer;
@@ -45,6 +47,8 @@ private:
 
 	CharmPage* CharmPage_;
 	GameEngineUIRenderer* BackGround_;
+
+	SettingPointer* SettingPointer_;
 
 	GameEngineStateManager SettingPageManager_;
 

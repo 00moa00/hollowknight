@@ -1,8 +1,8 @@
 #pragma once
-#include "MasterUI.h"
+#include "SettingUIMaster.h"
 
 // Ό³Έν :
-class BorderArrow : public MasterUI
+class BorderArrow : public SettingUIMaster
 {
 public:
 	// constrcuter destructer
@@ -22,5 +22,5 @@ protected:
 private:
 	bool AnimationEnd_;
 
-};
+}; 
 

@@ -19,7 +19,7 @@ void KnightSlashEffect::Start()
 	CreateCollisionComponent(float4{ 140, 120, 1 }, static_cast<int>(OBJECTORDER::Knight_Slash));
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_double_slashes_effect-Sheet.png", 2, static_cast<int>(RENDERORDER::Knight));
 	
-	//GetCollision()->GetTransform().SetLocalPosition({-100,0,1});
+	//GetRenderer()->GetTransform().SetLocalPosition({0,0,static_cast<float>(Z_ORDER::Knight_Slash) });
 	GetRenderer()->SetScaleModeImage();
 
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL", FrameAnimation_DESC("Knight_double_slashes_effect-Sheet.png", 2, 2, 0.100f, false));

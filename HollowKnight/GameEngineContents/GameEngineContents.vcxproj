@@ -281,11 +281,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PointActorComponent.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SettingPage.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="SettingPointer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SettingPointerBox.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SettingUIMaster.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -516,11 +528,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="PointActorComponent.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SettingPage.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="SettingPointer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SettingPointerBox.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SettingUIMaster.cpp">
       <SubType>
       </SubType>
     </ClCompile>

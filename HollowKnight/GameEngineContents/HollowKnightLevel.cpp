@@ -52,6 +52,32 @@ void HollowKnightLevel::CreateSettingPageActor()
 	SettingPage_ = CreateActor<SettingPage>();
 }
 
+void HollowKnightLevel::PushPointActorCharm(int _Order, PointActorComponent* _PointActorComponent)
+{
+	
+	PointActorListCharm.insert({ _Order, _PointActorComponent });
+}
+
+void HollowKnightLevel::PushPointActorMonsterBook(int _Order, PointActorComponent* _PointActorComponent)
+{
+	PointActorListMonsterBook.insert({ _Order, _PointActorComponent });
+}
+
+void HollowKnightLevel::PushPointActorMap(int _Order, PointActorComponent* _PointActorComponent)
+{
+	PointActorListMap.insert({ _Order, _PointActorComponent });
+}
+
+
+//void HollowKnightLevel::SortPointActor()
+//{
+//	PointActorList.sort(PointActorYSort);
+//	PointActorList.sort(PointActorXSort);
+//
+//	int a = 0;
+//
+//}
+
 
 void HollowKnightLevel::CameraMoveWindowLimit()
 {

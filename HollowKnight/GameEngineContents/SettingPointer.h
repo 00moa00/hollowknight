@@ -1,8 +1,9 @@
 #pragma once
 #include "MasterUI.h"
+#include "SettingUIMaster.h"
+#include "SettingPointerBox.h"
 
-
-// º≥∏Ì :
+class PointActorComponent;
 class SettingPointer : public MasterUI
 {
 public:
@@ -21,6 +22,21 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+
+	// «ˆ¿Á ¿Œµ¶Ω∫
+	int CurrentPosInCharmPage;
+	int CurrentPosInMapPage;
+	int CurrentPosInCMonsterPage;
+
+	//√— ¿Œµ¶Ω∫
+	int CharmPageActorCount;
+	int MapPageActorCount;
+	int MonsterPageActorCount;
+
+
+
+	SettingPointerBox* SettingPointerBox_;
+
 
 };
 

@@ -2,6 +2,8 @@
 #include "SettingPage.h"
 #include "GlobalContentsValue.h"
 #include "KnightData.h"
+#include "PointActorComponent.h"
+#include "HollowKnightLevel.h"
 
 SettingPage::SettingPage() 
 	:
@@ -42,6 +44,9 @@ void SettingPage::Start()
 	BackGround_->SetPivot(PIVOTMODE::LEFTTOP);
 	BackGround_->GetTransform().SetLocalPosition({0,0,static_cast<float>(Z_ORDER::UI)});
 	BackGround_->Off();
+
+
+
 
 	BorderCornerLeftTop_ = GetLevel()->CreateActor<BorderCorner>();
 	BorderCornerLeftTop_->GetTransform().SetLocalPosition({
@@ -109,6 +114,9 @@ void SettingPage::Start()
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderLeftArrow_->Off();
 
+	PointActorComponent* BorderLeftArrowComponent_ = CreateComponent<PointActorComponent>();
+	BorderLeftArrowComponent_->PushPointerActor( 0, PAGE_TYPE::Charm, BorderLeftArrow_);
+	BorderLeftArrowComponent_->GetTransform().SetLocalPosition({ BorderLeftArrow_->GetTransform().GetLocalPosition()});
 
 	BorderRightArrow_ = GetLevel()->CreateActor<BorderArrow>();
 	BorderRightArrow_->GetTransform().SetLocalPosition({
@@ -116,6 +124,18 @@ void SettingPage::Start()
 	, 0
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderRightArrow_->Off();
+
+	PointActorComponent* BorderRightArrowComponent_ = CreateComponent<PointActorComponent>();
+	BorderRightArrowComponent_->PushPointerActor(1, PAGE_TYPE::Charm, BorderRightArrow_);
+	BorderRightArrowComponent_->GetTransform().SetLocalPosition({ BorderRightArrow_->GetTransform().GetLocalPosition() });
+
+
+	SettingPointer_ = GetLevel()->CreateActor<SettingPointer>();
+	//SettingPointer_->CopyPointActorListCharm();
+	//HollowKnightLevel* HollowKnightLevel_ = GetLevel<HollowKnightLevel>();
+	//HollowKnightLevel_->SortPointActor();
+
+
 
 	CharmPage_ = GetLevel()->CreateActor<CharmPage>();
 
@@ -167,7 +187,7 @@ void SettingPage::AllOff()
 	BorderTop_->Off();
 	BorderLeftArrow_->Off();
 	BorderRightArrow_->Off();
-
+	//SettingPointer_->Off();
 
 
 
@@ -200,6 +220,8 @@ void SettingPage::AllOn()
 
 	BorderRightArrow_->On();
 	BorderRightArrow_->ChangeAnimation("OPEN_ANIMATION");
+
+//	SettingPointer_->On();
 
 }
 

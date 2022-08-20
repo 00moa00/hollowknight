@@ -273,6 +273,15 @@
     <ClInclude Include="SettingPage.h">
       <Filter>Actor\Play\UI\Setting</Filter>
     </ClInclude>
+    <ClInclude Include="PointActorComponent.h">
+      <Filter>Actor\Play\UI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingUIMaster.h">
+      <Filter>Actor\Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingPointerBox.h">
+      <Filter>Actor\Play\UI\Setting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -453,6 +462,15 @@
       <Filter>Actor\Effect\Light</Filter>
     </ClCompile>
     <ClCompile Include="SettingPage.cpp">
+      <Filter>Actor\Play\UI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="PointActorComponent.cpp">
+      <Filter>Actor\Play\UI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingUIMaster.cpp">
+      <Filter>Actor\Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingPointerBox.cpp">
       <Filter>Actor\Play\UI\Setting</Filter>
     </ClCompile>
   </ItemGroup>
