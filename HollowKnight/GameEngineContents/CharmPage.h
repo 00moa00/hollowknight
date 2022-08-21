@@ -1,5 +1,6 @@
 #pragma once
 #include "MasterUI.h"
+#include "CharmSlot.h"
 
 // Ό³Έν :
 class CharmPage : public MasterUI
@@ -20,6 +21,7 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-
+	std::vector<CharmSlot*> AllCharmSlot_;
+	std::vector<std::string> CharmFilePath_;
 };
 

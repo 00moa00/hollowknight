@@ -94,6 +94,9 @@
     <Filter Include="Actor\Effect\Light">
       <UniqueIdentifier>{e01c558b-bd75-49d3-a46b-a899b618eb1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Charm\Charm">
+      <UniqueIdentifier>{84458e18-3f02-4cbf-b2c0-5a1d9ea15138}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -281,6 +284,12 @@
     </ClInclude>
     <ClInclude Include="SettingPointerBox.h">
       <Filter>Actor\Play\UI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="CharmSlot.h">
+      <Filter>Actor\Play\UI\Setting\Charm</Filter>
+    </ClInclude>
+    <ClInclude Include="Charm.h">
+      <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -472,6 +481,12 @@
     </ClCompile>
     <ClCompile Include="SettingPointerBox.cpp">
       <Filter>Actor\Play\UI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="CharmSlot.cpp">
+      <Filter>Actor\Play\UI\Setting\Charm</Filter>
+    </ClCompile>
+    <ClCompile Include="Charm.cpp">
+      <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

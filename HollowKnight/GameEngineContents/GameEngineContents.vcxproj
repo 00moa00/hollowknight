@@ -173,7 +173,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Charm.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="CharmPage.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CharmSlot.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -423,7 +431,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Charm.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="CharmPage.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CharmSlot.cpp">
       <SubType>
       </SubType>
     </ClCompile>
