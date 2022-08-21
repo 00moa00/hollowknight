@@ -537,7 +537,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	//DoubleSlashTimer(_DeltaTime);
 
 	ActtingMoveDirection_.Normalize();
-	GetTransform().SetWorldMove(float4::DOWN + (ActtingMoveDirection_ / 2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+	GetTransform().SetWorldMove((float4::DOWN + (ActtingMoveDirection_ / 2)) * (700.f * _DeltaTime));
 
 	if (GetisWall() == true)
 	{

@@ -132,9 +132,7 @@ void SettingPage::Start()
 
 
 	SettingPointer_ = GetLevel()->CreateActor<SettingPointer>();
-	//SettingPointer_->CopyPointActorListCharm();
-	//HollowKnightLevel* HollowKnightLevel_ = GetLevel<HollowKnightLevel>();
-	//HollowKnightLevel_->SortPointActor();
+
 	SettingPointer_->SetCharmPageActorMax();
 	SettingPointer_->SetFirstPosCharmPage();
 
@@ -190,7 +188,7 @@ void SettingPage::AllOff()
 	BorderLeftArrow_->Off();
 	BorderRightArrow_->Off();
 	SettingPointer_->AllOff();
-
+	
 
 
 }
