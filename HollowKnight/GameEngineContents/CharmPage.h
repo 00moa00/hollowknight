@@ -22,6 +22,12 @@ protected:
 
 private:
 	std::vector<CharmSlot*> AllCharmSlot_;
-	std::vector<std::string> CharmFilePath_;
+
+public:
+	void AllOff();
+	void AllOn();
+
+
+
 };
 

@@ -17,7 +17,7 @@ void CharmSlot::Update(float _Deltatime)
 {
 }
 
-void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePath, CharmState _CharmState)
+void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePath, CharmState _CharmState, CHARM_SLOT _slot)
 {
 	// 何利 浇吩
 	CreateRendererComponent({68,68,1}, "charm_backboard.png");
@@ -30,8 +30,10 @@ void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePat
 
 	//何利
 	Charm_ = GetLevel()->CreateActor<Charm>();
-	Charm_->CreateCharm(_SlotName, _CharmFilePath, {142, 134, 1});
+	Charm_->CreateCharm(_SlotName, _CharmFilePath, { 131, 128, 1 });
+
 	Charm_->SetParent(this);
+
 	//GetRenderer()->SetParent(this);
 
 }

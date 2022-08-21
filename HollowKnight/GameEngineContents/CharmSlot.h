@@ -40,9 +40,10 @@ private:
 
 	Charm* Charm_;
 	CharmState CharmState_;
+
 public:
 
-	void CreateCharmSlot(std::string _SlotName, std::string _CharmFilePath, CharmState _CharmState);
+	void CreateCharmSlot(std::string _SlotName, std::string _CharmFilePath, CharmState _CharmState, CHARM_SLOT _slot);
 
 	int GetSlotNum()
 	{
@@ -68,7 +69,7 @@ public:
 	{
 		return CharmState_;
 	}
-
+	
 
 };
 

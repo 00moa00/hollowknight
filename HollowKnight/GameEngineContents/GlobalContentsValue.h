@@ -84,8 +84,8 @@ enum class PAGE_TYPE
 
 enum class CHAR_PAGE_ACTOR
 {
-	RightArrow = 1,
-	LeftArrow,
+	RightArrow = 50,
+	LeftArrow = 51,
 };
 
 

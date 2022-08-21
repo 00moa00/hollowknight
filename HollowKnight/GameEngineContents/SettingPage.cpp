@@ -116,7 +116,6 @@ void SettingPage::Start()
 
 	PointActorComponent* BorderLeftArrowComponent_ = CreateComponent<PointActorComponent>();
 	BorderLeftArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow), PAGE_TYPE::Charm, BorderLeftArrow_);
-	BorderLeftArrowComponent_->GetTransform().SetLocalPosition({ BorderLeftArrow_->GetTransform().GetLocalPosition()});
 
 	BorderRightArrow_ = GetLevel()->CreateActor<BorderArrow>();
 	//BorderRightArrow_->
@@ -128,8 +127,9 @@ void SettingPage::Start()
 
 	PointActorComponent* BorderRightArrowComponent_ = CreateComponent<PointActorComponent>();
 	BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Charm, BorderRightArrow_);
-	BorderRightArrowComponent_->GetTransform().SetLocalPosition({ BorderRightArrow_->GetTransform().GetLocalPosition() });
 
+
+	CharmPage_ = GetLevel()->CreateActor<CharmPage>();
 
 	SettingPointer_ = GetLevel()->CreateActor<SettingPointer>();
 
@@ -137,7 +137,6 @@ void SettingPage::Start()
 	SettingPointer_->SetFirstPosCharmPage();
 
 
-	CharmPage_ = GetLevel()->CreateActor<CharmPage>();
 
 	//================================
 	//    CreateKey
@@ -188,7 +187,7 @@ void SettingPage::AllOff()
 	BorderLeftArrow_->Off();
 	BorderRightArrow_->Off();
 	SettingPointer_->AllOff();
-	
+	CharmPage_->AllOff();
 
 
 }
@@ -198,7 +197,7 @@ void SettingPage::AllOn()
 	BackGround_->On();
 	//CharmPage_->On();
 	BorderCornerLeftTop_->On();
-	BorderCornerLeftTop_->ChangeAnimation("OPEN_ANIMATION");
+	BorderCornerLeftTop_-> ChangeAnimation("OPEN_ANIMATION");
 
 	BorderCornerRightTop_->On();
 	BorderCornerRightTop_->ChangeAnimation("OPEN_ANIMATION");
@@ -222,6 +221,8 @@ void SettingPage::AllOn()
 	BorderRightArrow_->ChangeAnimation("OPEN_ANIMATION");
 
 	SettingPointer_->AllOn();
+	CharmPage_->AllOn();
+
 
 }
 

@@ -31,7 +31,7 @@ void BorderArrow::Start()
 
 	GetRenderer()->AnimationBindEnd("OPEN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
-			AnimationEnd_ = true;
+			GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
 		});
 }
 
