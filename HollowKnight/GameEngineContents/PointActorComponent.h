@@ -5,12 +5,6 @@
 #include "SettingPointer.h"
 #include "HollowKnightLevel.h"
 
-enum class PAGE_TYPE
-{
-	Charm,
-	MonsterBook,
-	Map
-};
 
 // Ό³Έν :
 class PointActorComponent : public GameEngineTransformComponent
@@ -33,6 +27,12 @@ protected:
 private:
 	SettingUIMaster* SettingUIMasterPointer_;
 public:
+
+	SettingUIMaster* GetPointActor()
+	{
+		return SettingUIMasterPointer_;
+	}
+
 
 	void PushPointerActor(int _Order, PAGE_TYPE _PageType, SettingUIMaster* _SettingUIMasterPointer_)
 	{

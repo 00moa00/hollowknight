@@ -115,10 +115,11 @@ void SettingPage::Start()
 	BorderLeftArrow_->Off();
 
 	PointActorComponent* BorderLeftArrowComponent_ = CreateComponent<PointActorComponent>();
-	BorderLeftArrowComponent_->PushPointerActor( 0, PAGE_TYPE::Charm, BorderLeftArrow_);
+	BorderLeftArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow), PAGE_TYPE::Charm, BorderLeftArrow_);
 	BorderLeftArrowComponent_->GetTransform().SetLocalPosition({ BorderLeftArrow_->GetTransform().GetLocalPosition()});
 
 	BorderRightArrow_ = GetLevel()->CreateActor<BorderArrow>();
+	//BorderRightArrow_->
 	BorderRightArrow_->GetTransform().SetLocalPosition({
 	(GameEngineWindow::GetInst()->GetScale().hx() - 90.f)
 	, 0
@@ -126,7 +127,7 @@ void SettingPage::Start()
 	BorderRightArrow_->Off();
 
 	PointActorComponent* BorderRightArrowComponent_ = CreateComponent<PointActorComponent>();
-	BorderRightArrowComponent_->PushPointerActor(1, PAGE_TYPE::Charm, BorderRightArrow_);
+	BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Charm, BorderRightArrow_);
 	BorderRightArrowComponent_->GetTransform().SetLocalPosition({ BorderRightArrow_->GetTransform().GetLocalPosition() });
 
 
@@ -134,7 +135,8 @@ void SettingPage::Start()
 	//SettingPointer_->CopyPointActorListCharm();
 	//HollowKnightLevel* HollowKnightLevel_ = GetLevel<HollowKnightLevel>();
 	//HollowKnightLevel_->SortPointActor();
-
+	SettingPointer_->SetCharmPageActorMax();
+	SettingPointer_->SetFirstPosCharmPage();
 
 
 	CharmPage_ = GetLevel()->CreateActor<CharmPage>();
@@ -187,7 +189,7 @@ void SettingPage::AllOff()
 	BorderTop_->Off();
 	BorderLeftArrow_->Off();
 	BorderRightArrow_->Off();
-	//SettingPointer_->Off();
+	SettingPointer_->AllOff();
 
 
 
@@ -221,7 +223,7 @@ void SettingPage::AllOn()
 	BorderRightArrow_->On();
 	BorderRightArrow_->ChangeAnimation("OPEN_ANIMATION");
 
-//	SettingPointer_->On();
+	SettingPointer_->AllOn();
 
 }
 

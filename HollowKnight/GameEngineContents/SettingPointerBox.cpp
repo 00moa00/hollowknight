@@ -75,15 +75,15 @@ void SettingPointerBox::PointerZoomInStart(const StateInfo& _Info)
 
 void SettingPointerBox::PointerZoomInUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	LeftTopPointer_->GetTransform().SetLocalMove((float4::RIGHT + float4::DOWN) * 50.f * _DeltaTime);
-	RightTopPointer_->GetTransform().SetLocalMove((float4::LEFT + float4::DOWN) * 50.f * _DeltaTime);
-	LeftBottomPointer_->GetTransform().SetLocalMove((float4::RIGHT + float4::UP) * 50.f * _DeltaTime);
-	RightBottomPointer_->GetTransform().SetLocalMove((float4::LEFT + float4::UP) * 50.f * _DeltaTime);
+	LeftTopPointer_->GetTransform().SetLocalMove((float4::RIGHT + float4::DOWN) * 5.f * _DeltaTime);
+	RightTopPointer_->GetTransform().SetLocalMove((float4::LEFT + float4::DOWN) * 5.f * _DeltaTime);
+	LeftBottomPointer_->GetTransform().SetLocalMove((float4::RIGHT + float4::UP) * 5.f * _DeltaTime);
+	RightBottomPointer_->GetTransform().SetLocalMove((float4::LEFT + float4::UP) * 5.f * _DeltaTime);
 
 
 	ZommTimer_ += _DeltaTime;
 
-	if (ZommTimer_ > 1.0f)
+	if (ZommTimer_ > 0.4f)
 	{
 		ZommTimer_ = 0.f;
 		SettingPointerBoxtManager_.ChangeState("ZOOM_OUT");
@@ -103,16 +103,14 @@ void SettingPointerBox::PointerZoomOutStart(const StateInfo& _Info)
 
 void SettingPointerBox::PointerZoomOutUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
-
-	LeftTopPointer_->GetTransform().SetLocalMove( (float4::LEFT + float4::UP) * 50.f *  _DeltaTime);
-	RightTopPointer_->GetTransform().SetLocalMove((float4::RIGHT + float4::UP) * 50.f * _DeltaTime);
-	LeftBottomPointer_->GetTransform().SetLocalMove((float4::LEFT + float4::DOWN) * 50.f * _DeltaTime);
-	RightBottomPointer_->GetTransform().SetLocalMove((float4::RIGHT + float4::DOWN) * 50.f * _DeltaTime);
+	LeftTopPointer_->GetTransform().SetLocalMove( (float4::LEFT + float4::UP) * 5.f *  _DeltaTime);
+	RightTopPointer_->GetTransform().SetLocalMove((float4::RIGHT + float4::UP) * 5.f * _DeltaTime);
+	LeftBottomPointer_->GetTransform().SetLocalMove((float4::LEFT + float4::DOWN) * 5.f * _DeltaTime);
+	RightBottomPointer_->GetTransform().SetLocalMove((float4::RIGHT + float4::DOWN) * 5.f * _DeltaTime);
 
 	ZommTimer_ += _DeltaTime;
 
-	if (ZommTimer_ > 1.0f)
+	if (ZommTimer_ > 0.4f)
 	{
 		ZommTimer_ = 0.f;
 		SettingPointerBoxtManager_.ChangeState("ZOOM_IN");
@@ -134,4 +132,13 @@ void SettingPointerBox::SetPositiveY(GameEngineUIRenderer* _GameEngineUIRenderer
 
 	_GameEngineUIRenderer->GetTransform().SetLocalScale({ 60, -(56), 1 });
 
+}
+
+void SettingPointerBox::SetBoxSize(float4 _Size)
+{
+
+	LeftTopPointer_->GetTransform().SetLocalPosition({-_Size.x /2, +_Size.y/2, static_cast<float>(Z_ORDER::UI_Border) });
+	RightTopPointer_->GetTransform().SetLocalPosition({ _Size.x/2, +_Size.y/2, static_cast<float>(Z_ORDER::UI_Border) });
+	LeftBottomPointer_->GetTransform().SetLocalPosition({ -_Size.x/2, -_Size.y/2, static_cast<float>(Z_ORDER::UI_Border) });
+	RightBottomPointer_->GetTransform().SetLocalPosition({ _Size.x/2, -_Size.y/2, static_cast<float>(Z_ORDER::UI_Border) });
 }

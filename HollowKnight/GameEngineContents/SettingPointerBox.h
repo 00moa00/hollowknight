@@ -44,5 +44,10 @@ private:
 	void PointerZoomOutEnd(const StateInfo& _Info);
 
 	void SetPositiveY(GameEngineUIRenderer* _GameEngineUIRenderer);
+
+
+
+public:
+	void SetBoxSize(float4 _Size);
 };
 

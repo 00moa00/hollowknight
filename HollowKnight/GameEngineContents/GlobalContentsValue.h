@@ -71,3 +71,33 @@ enum class Z_ORDER
 
 
 };
+
+//액터 포인터
+//0은 대기 상태? 상황에 따라 바귈 수 있음.
+
+enum class PAGE_TYPE
+{
+	Charm,
+	MonsterBook,
+	Map
+};
+
+enum class CHAR_PAGE_ACTOR
+{
+	RightArrow = 1,
+	LeftArrow,
+};
+
+
+enum class MONSTER_BOOK_PAGE_ACTOR
+{
+	RightArrow = 1,
+	LeftArrow,
+};
+
+
+enum class MAP_PAGE_ACTOR
+{
+	RightArrow = 1,
+	LeftArrow,
+};
