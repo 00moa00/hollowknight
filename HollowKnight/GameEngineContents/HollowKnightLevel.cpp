@@ -68,17 +68,6 @@ void HollowKnightLevel::PushPointActorMap(int _Order, PointActorComponent* _Poin
 	PointActorListMap.insert({ _Order, _PointActorComponent });
 }
 
-
-//void HollowKnightLevel::SortPointActor()
-//{
-//	PointActorList.sort(PointActorYSort);
-//	PointActorList.sort(PointActorXSort);
-//
-//	int a = 0;
-//
-//}
-
-
 void HollowKnightLevel::CameraMoveWindowLimit()
 {
 	//카메라가 없다면

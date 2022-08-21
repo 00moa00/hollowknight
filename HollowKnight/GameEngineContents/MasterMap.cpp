@@ -27,7 +27,7 @@ void MasterMap::CreateBackGround(std::string _FileName)
 	BackGroundRenderer_->GetTransform().SetLocalScale(BackGroundRenderer_->GetCurTexture()->GetScale());
 	BackGroundRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 	BackGroundRenderer_->GetTransform().SetWorldPosition({ BackGroundRenderer_->GetCurTexture()->GetScale().x/2, -BackGroundRenderer_->GetCurTexture()->GetScale().y/2, static_cast<float>(Z_ORDER::Background) });
-	//BackGroundRenderer_->Set
+	BackGroundRenderer_->SetSamplingModePoint();
 
 }
 
@@ -38,6 +38,7 @@ void MasterMap::CreateBackGroundObject(std::string _FileName)
 	BackGroundObjectRenderer_->GetTransform().SetLocalScale(BackGroundObjectRenderer_->GetCurTexture()->GetScale());
 	BackGroundObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 	BackGroundObjectRenderer_->GetTransform().SetWorldPosition({ BackGroundObjectRenderer_->GetCurTexture()->GetScale().x / 2, -BackGroundObjectRenderer_->GetCurTexture()->GetScale().y / 2, static_cast<float>(Z_ORDER::Background_Object) });
+	BackGroundObjectRenderer_->SetSamplingModePoint();
 
 }
 
@@ -49,6 +50,7 @@ void MasterMap::CreateTerrain(std::string _FileName)
 	TerrainRenderer_->GetTransform().SetLocalScale(TerrainRenderer_->GetCurTexture()->GetScale());
 	TerrainRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 	TerrainRenderer_->GetTransform().SetWorldPosition({ TerrainRenderer_->GetCurTexture()->GetScale().x / 2, -TerrainRenderer_->GetCurTexture()->GetScale().y / 2, static_cast<float>(Z_ORDER::Terrain) });
+	TerrainRenderer_->SetSamplingModePoint();
 
 }
 
@@ -59,6 +61,7 @@ void MasterMap::CreateFrontObject(std::string _FileName)
 	FrontObjectRenderer_->GetTransform().SetLocalScale(FrontObjectRenderer_->GetCurTexture()->GetScale());
 	FrontObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 	FrontObjectRenderer_->GetTransform().SetWorldPosition({ FrontObjectRenderer_->GetCurTexture()->GetScale().x / 2, -FrontObjectRenderer_->GetCurTexture()->GetScale().y / 2, static_cast<float>(Z_ORDER::FrontObject) });
+	FrontObjectRenderer_->SetSamplingModePoint();
 
 }
 

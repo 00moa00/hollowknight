@@ -102,8 +102,8 @@ void Knight::Start()
 	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
 	KnightDonutLightEffect_ = GetLevel()->CreateActor<KnightDonutLightEffect>();
 	KnightSmallLightEffect_ = GetLevel()->CreateActor<KnightSmallLightEffect>();
-	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
-	KnightSlashEffect_->SetAnimationStill();
+	SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
+//	KnightSlashEffect_->SetAnimationStill();
 
 	KnightJumpPower_ = 250.f;
 	KnightDoubleJumpPower_ = 180.f;
@@ -434,6 +434,7 @@ void Knight::Update(float _DeltaTime)
 	KnightLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
 	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
 	KnightSmallLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
+	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 
 }
 

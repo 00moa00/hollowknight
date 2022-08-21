@@ -109,6 +109,7 @@ class FrameAnimation : public GameEngineNameObject
 	GameEngineTextureRenderer* ParentRenderer;
 	GameEngineTexture* Texture;
 	GameEngineFolderTexture* FolderTexture;
+	bool Pause;
 
 	bool bOnceStart;
 	bool bOnceEnd;
@@ -116,6 +117,8 @@ class FrameAnimation : public GameEngineNameObject
 	std::function<void(const FrameAnimation_DESC&)> End;
 	std::function<void(const FrameAnimation_DESC&)> Start;
 	std::function<void(const FrameAnimation_DESC&, float)> Time;
+
+	void PauseSwtich();
 
 	void Reset();
 
@@ -125,6 +128,8 @@ public:
 	FrameAnimation() 
 		: bOnceStart(true)
 		, bOnceEnd(false)
+		, Pause(false)
+
 	{
 
 	}
@@ -190,6 +195,8 @@ public:
 	void ScaleToTexture();
 
 	void ScaleToCutTexture(int _Index);
+
+	void CurAnimationPauseSwitch();
 
 	void CurAnimationReset();
 
