@@ -46,7 +46,10 @@ private:
 
 	bool isGrowSoul_; // 몬스터를 쳤을때 영혼이 찬다]
 
-	bool isSetting_;
+	bool isSitting_; // 의자에 앉아있다.
+	
+	bool isSetting_; //세팅 페이지 열었당
+
 
 public:
 
@@ -54,14 +57,19 @@ public:
 	//    Getter
 	//================================
 
+	bool GetisSetting()
+	{
+		return isSetting_;
+	}
+
 	bool GetisShadow()
 	{
 		return isShadow_;
 	}
 
-	bool GetisSetting()
+	bool GetisSitting()
 	{
-		return isSetting_;
+		return isSitting_;
 	}
 
 	int GetAllMask()
@@ -103,14 +111,19 @@ public:
 	//    Setter
 	//================================
 
+	void SetisSetting(bool _b)
+	{
+		isSetting_ = _b;
+	}
+
 	void SetisShadow(bool _b)
 	{
 		isShadow_ = _b;
 	}
 
-	void SetisSetting(bool _b)
+	void SetisSitting(bool _b)
 	{
-		isSetting_ = _b;
+		isSitting_ = _b;
 	}
 
 	void SetAllMask(int _i)

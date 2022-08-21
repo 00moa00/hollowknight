@@ -9,6 +9,7 @@ KnightData::KnightData()
 	isRefill_(false),
 	isShadow_(false),
 	isGrowSoul_(false),
+	isSetting_(false),
 	AllMask_(4),
 	CurMask_(4)
 

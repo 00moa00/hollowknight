@@ -131,6 +131,8 @@ void Knight::Start()
 
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
 
+		GameEngineInput::GetInst()->CreateKey("OnOffSettingPage", 'I');
+
 	}
 
 
@@ -428,6 +430,11 @@ void Knight::Start()
 void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
+
+	KnightLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
+	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
+	KnightSmallLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
+
 }
 
 

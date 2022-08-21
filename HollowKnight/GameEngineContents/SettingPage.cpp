@@ -141,10 +141,6 @@ void SettingPage::Start()
 	//================================
 	//    CreateKey
 	//================================
-	if (false == GameEngineInput::GetInst()->IsKey("OnOffSettingPage"))
-	{
-		GameEngineInput::GetInst()->CreateKey("OnOffSettingPage", 'I');
-	}
 
 	//================================
 	//    Create State
@@ -233,7 +229,7 @@ void SettingPage::SettingOffStart(const StateInfo& _Info)
 
 void SettingPage::SettingOffUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("OnOffSettingPage") && KnightData::GetInst()->GetisSetting() == true)
+	if (KnightData::GetInst()->GetisSetting() ==true)
 	{
 		OnOffPage();
 		SettingPageManager_.ChangeState("ON");
@@ -254,8 +250,7 @@ void SettingPage::SettingOnStart(const StateInfo& _Info)
 void SettingPage::SettingOnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
-	if (true == GameEngineInput::GetInst()->IsDown("OnOffSettingPage") 
-		&& KnightData::GetInst()->GetisSetting() == true)
+	if (KnightData::GetInst()->GetisSetting() == false)
 	{
 		OnOffPage();
 		SettingPageManager_.ChangeState("OFF");

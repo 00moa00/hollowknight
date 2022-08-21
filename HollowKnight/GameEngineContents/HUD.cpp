@@ -28,6 +28,7 @@ void HUD::Start()
 {
 	Geo_ = GetLevel()->CreateActor<Geo>();
 	Geo_->GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 220.f), GameEngineWindow::GetInst()->GetScale().hy() - 160.f, -100 });
+	
 
 	VesselFrame_ = GetLevel() ->CreateActor<VesselFrame>();
 	VesselFrame_ -> GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 70.f), GameEngineWindow::GetInst()->GetScale().hy() - 50.f, -100 });
@@ -55,10 +56,21 @@ void HUD::Start()
 	KnightData::GetInst()->SetCurMask(CurMask_);
 
 	HUDManager_.CreateStateMember("MASK_APPEAR"
-		, std::bind(&HUD::MaskAppearUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&HUD::MaskAppearStart, this, std::placeholders::_1), std::bind(&HUD::MaskAppearEnd, this, std::placeholders::_1));
+		, std::bind(&HUD::MaskAppearUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&HUD::MaskAppearStart, this, std::placeholders::_1)
+		, std::bind(&HUD::MaskAppearEnd, this, std::placeholders::_1));
 
 	HUDManager_.CreateStateMember("IDLE"
-		, std::bind(&HUD::HUDIdleUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&HUD::HUDIdleStart, this, std::placeholders::_1), std::bind(&HUD::HUDIdleEnd, this, std::placeholders::_1));
+		, std::bind(&HUD::HUDIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&HUD::HUDIdleStart, this, std::placeholders::_1)
+		, std::bind(&HUD::HUDIdleEnd, this, std::placeholders::_1));
+
+	HUDManager_.CreateStateMember("HIDE"
+		, std::bind(&HUD::HUDHideUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&HUD::HUDHideStart, this, std::placeholders::_1)
+		, std::bind(&HUD::HUDHideEnd, this, std::placeholders::_1));
+
+
 
 	HUDManager_.ChangeState("MASK_APPEAR");
 
@@ -170,6 +182,13 @@ void HUD::HUDIdleStart(const StateInfo& _Info)
 
 void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (KnightData::GetInst()->GetisSetting() == true)
+	{
+		HUDManager_.ChangeState("HIDE");
+
+	}
+
 	//¸®ÇÊ
 	if (KnightData::GetInst()->GetisRefill() == true)
 	{
@@ -209,5 +228,40 @@ void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 void HUD::HUDIdleEnd(const StateInfo& _Info)
 {
 
+}
+
+void HUD::HUDHideStart(const StateInfo& _Info)
+{
+
+	Geo_->Off();
+	VesselFrame_->Off();
+	Soul_->Off();
+
+	for (int i = 0; i < Maskes_.size(); ++i)
+	{
+		Maskes_[i]->Off();
+	}
+
+}
+
+void HUD::HUDHideUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (KnightData::GetInst()->GetisSetting() == false)
+	{
+		HUDManager_.ChangeState("IDLE");
+	}
+
+}
+
+void HUD::HUDHideEnd(const StateInfo& _Info)
+{
+	Geo_->On();
+	VesselFrame_->On();
+	Soul_->On();
+
+	for (int i = 0; i < Maskes_.size(); ++i)
+	{
+		Maskes_[i]->On();
+	}
 }
 

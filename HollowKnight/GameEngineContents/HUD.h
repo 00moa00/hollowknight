@@ -64,6 +64,9 @@ private:
 	void HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info);
 	void HUDIdleEnd(const StateInfo& _Info);
 
+	void HUDHideStart(const StateInfo& _Info);
+	void HUDHideUpdate(float _DeltaTime, const StateInfo& _Info);
+	void HUDHideEnd(const StateInfo& _Info);
 
 };
 

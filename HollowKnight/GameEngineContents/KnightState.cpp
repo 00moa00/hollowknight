@@ -155,9 +155,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STUN");
 	}
 
-	KnightLightEffect_->GetTransform().SetWorldPosition({GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light)});
-	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
-	KnightSmallLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
+
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
@@ -625,18 +623,11 @@ void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 		//KnightManager_.ChangeState("FALL");
 	}
 
-	else if (GetisOnGround() == true)
+	else
 	{
-		GetMoveDirection().Normalize();
 		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 
 	}
-
-	else
-	{
-		KnightManager_.ChangeState("FALL");
-	}
-
 
 	// ========== 스테이트 변경 ==========
 
@@ -1581,12 +1572,19 @@ void Knight::KnightWallJumpLandEnd(const StateInfo& _Info)
 void Knight::KnightSitStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("SIT_ANIMATION");
-	KnightData::GetInst()->SetisSetting(true);
+	KnightData::GetInst()->SetisSitting(true);
 
 }
 
 void Knight::KnightSitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (true == GameEngineInput::GetInst()->IsDown("OnOffSettingPage"))
+	{
+		KnightData::GetInst()->SetisSetting(!KnightData::GetInst()->GetisSetting());
+	}
+
+
 	if (true == GameEngineInput::GetInst()->IsDown("KnightSit"))
 	{
 		KnightManager_.ChangeState("STILL");
@@ -1596,7 +1594,7 @@ void Knight::KnightSitUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightSitEnd(const StateInfo& _Info)
 {
-	KnightData::GetInst()->SetisSetting(false);
+	KnightData::GetInst()->SetisSitting(false);
 
 }
 
