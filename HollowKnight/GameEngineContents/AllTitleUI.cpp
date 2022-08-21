@@ -18,6 +18,8 @@ AllTitleUI::~AllTitleUI()
 
 void AllTitleUI::Start()
 {
+
+
 	UIPointGameStart_ = GetLevel()->CreateActor<UIPoint>();
 	UIPointGameStart_->GetTransform().SetLocalPosition({ 0, -100, 0 });
 
@@ -113,6 +115,11 @@ void AllTitleUI::GameStartUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		UIPointMapEditor_->SetPointChangeUpdateAnimation();
 		TitleStateManager_.ChangeState("MapEditor");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("PressEnter"))
+	{
+		GEngine::ChangeLevel("DirtmouthLevel2");
 	}
 }
 

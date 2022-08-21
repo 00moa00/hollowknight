@@ -599,6 +599,58 @@ void ContentsCore::Start()
 		}
 	}
 
+	//================================
+	//    텍스처 / 맵 / Dirtmouth
+	//================================
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("Dirtmouth");
+		Dir.Move("Level1");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("Dirtmouth");
+		Dir.Move("Level2");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("Dirtmouth");
+		Dir.Move("Level3");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
 
 	//================================
 	//    텍스처 / 플레이어
@@ -766,8 +818,8 @@ void ContentsCore::Start()
 	CreateLevel<CrossroadsLevel1>("CrossroadsLevel1");
 	//CreateLevel<CrossroadsLevel2>("CrossroadsLevel2");
 
-	//CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");
-	//CreateLevel<DirtmouthLevel2>("DirtmouthLevel2");
+	CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");
+	CreateLevel<DirtmouthLevel2>("DirtmouthLevel2");
 
 	ChangeLevel("TitleLevel");
 	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);

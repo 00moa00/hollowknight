@@ -291,6 +291,9 @@
     <ClInclude Include="Charm.h">
       <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
     </ClInclude>
+    <ClInclude Include="DirtmouthLevel3.h">
+      <Filter>Level\Levels\Dirtmouth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -487,6 +490,9 @@
     </ClCompile>
     <ClCompile Include="Charm.cpp">
       <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
+    </ClCompile>
+    <ClCompile Include="DirtmouthLevel3.cpp">
+      <Filter>Level\Levels\Dirtmouth</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -102,8 +102,8 @@ void Knight::Start()
 	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
 	KnightDonutLightEffect_ = GetLevel()->CreateActor<KnightDonutLightEffect>();
 	KnightSmallLightEffect_ = GetLevel()->CreateActor<KnightSmallLightEffect>();
-	SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
-//	KnightSlashEffect_->SetAnimationStill();
+	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
+	KnightSlashEffect_->SetAnimationStill();
 
 	KnightJumpPower_ = 250.f;
 	KnightDoubleJumpPower_ = 180.f;

@@ -41,10 +41,10 @@ void TitleLevel::Start()
 
 void TitleLevel::Update(float _DeltaTime)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
-	{
-		GEngine::ChangeLevel("KingsPassLevel1");
-	}
+	//if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
+	//{
+	//	GEngine::ChangeLevel("KingsPassLevel1");
+	//}
 }
 
 void TitleLevel::End()
