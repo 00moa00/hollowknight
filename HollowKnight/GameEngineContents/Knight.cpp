@@ -87,6 +87,8 @@ void Knight::Start()
 
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
 	
+	GetRenderer()->GetTransform().PixLocalNegativeX();
+
 	Test1_ = CreateComponent<GameEngineCollision>();
 	Test1_->GetTransform().SetLocalScale({ 15,15,1 });
 
@@ -203,8 +205,8 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("WALL_JUMP_ANIMATION", FrameAnimation_DESC("Knight_wall_jump0000-Sheet.png", 0, 2, 0.100f));
 
 	// ---- ÀÇÀÚ ----
-	GetRenderer()->CreateFrameAnimationCutTexture("SIT_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 0, 3, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("SIT_IDLE_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 4, 4, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("SIT_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 0, 4, 0.070f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SIT_IDLE_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 3, 3, 0.100f));
 
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
@@ -670,6 +672,11 @@ bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineColl
 		KnockbackDirection_ = Monster->GetMoveDirection();
 	}
 
+	return true;
+}
+
+bool Knight::KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
 	return true;
 }
 

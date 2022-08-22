@@ -25,6 +25,17 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightData::GetInst()->SetisBreak(true);
 	}
 
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Object, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnihgtVSBenchCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+		&& (GameEngineInput::GetInst()->IsDown("KnightUp") == true))
+	{
+
+		KnightManager_.ChangeState("SIT");
+		return;
+	}
+
+
+
 	// ========== UPDATE ==========
 
 	DoubleSlashTimer(_DeltaTime);
@@ -60,11 +71,11 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSit"))
-	{
-		KnightManager_.ChangeState("SIT");
+	//if (true == GameEngineInput::GetInst()->IsDown("KnightSit"))
+	//{
+	//	
 
-	}
+	//}
 
  	if (GetisKnightMove() == true && isRunMode_ == false)
 	{
@@ -154,6 +165,9 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightData::GetInst()->SetisBreak(true);
 		KnightManager_.ChangeState("STUN");
 	}
+
+
+
 
 
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
@@ -1572,6 +1586,7 @@ void Knight::KnightWallJumpLandEnd(const StateInfo& _Info)
 void Knight::KnightSitStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("SIT_ANIMATION");
+	GetTransform().SetLocalMove({0, 10.f});
 	KnightData::GetInst()->SetisSitting(true);
 
 }
@@ -1585,7 +1600,7 @@ void Knight::KnightSitUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSit"))
+	if (true == GameEngineInput::GetInst()->IsDown("KnightUp"))
 	{
 		KnightManager_.ChangeState("STILL");
 
@@ -1595,6 +1610,7 @@ void Knight::KnightSitUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightSitEnd(const StateInfo& _Info)
 {
 	KnightData::GetInst()->SetisSitting(false);
+	GetTransform().SetLocalMove({ 0, -10.f });
 
 }
 

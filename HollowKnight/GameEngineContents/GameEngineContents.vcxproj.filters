@@ -97,6 +97,9 @@
     <Filter Include="Actor\Play\UI\Setting\Charm\Charm">
       <UniqueIdentifier>{84458e18-3f02-4cbf-b2c0-5a1d9ea15138}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Object">
+      <UniqueIdentifier>{c717f5e0-861a-4efd-bc6b-095ed45b18be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -293,6 +296,12 @@
     </ClInclude>
     <ClInclude Include="DirtmouthLevel3.h">
       <Filter>Level\Levels\Dirtmouth</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterObject.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="Bench.h">
+      <Filter>Actor\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -493,6 +502,12 @@
     </ClCompile>
     <ClCompile Include="DirtmouthLevel3.cpp">
       <Filter>Level\Levels\Dirtmouth</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterObject.cpp">
+      <Filter>Actor\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="Bench.cpp">
+      <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

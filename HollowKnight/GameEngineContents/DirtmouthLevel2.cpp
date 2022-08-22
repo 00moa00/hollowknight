@@ -7,6 +7,8 @@
 #include "Monster.h"
 #include "KnightData.h"
 
+#include "Bench.h"
+
 DirtmouthLevel2::DirtmouthLevel2() 
 {
 }
@@ -47,6 +49,8 @@ void DirtmouthLevel2::Start()
 	GetKnight()->GetTransform().SetLocalPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
 
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
+
+	Bench* Test_ = CreateActor<Bench>();
 }
 
 void DirtmouthLevel2::Update(float _DeltaTime)

@@ -6,6 +6,7 @@ enum class OBJECTORDER
 	Background_Object,
 	Terrain,
 	Knight,
+	Object,
 	Geo,
 	Knight_Slash,
 	Knight_Shadow,
@@ -54,6 +55,8 @@ enum class Z_ORDER
 	Geo,
 
 	Knight,
+
+	Object,
 
 	Small_Light,
 

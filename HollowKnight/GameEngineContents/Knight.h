@@ -248,6 +248,7 @@ private:
 
 
 	bool KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 
 }; 

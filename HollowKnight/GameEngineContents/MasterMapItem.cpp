@@ -2,6 +2,9 @@
 #include "MasterMapItem.h"
 
 MasterMapItem::MasterMapItem() 
+	:
+	Renderer_(nullptr),
+	Collision_(nullptr)
 {
 }
 

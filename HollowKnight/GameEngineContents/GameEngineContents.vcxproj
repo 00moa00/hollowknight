@@ -157,6 +157,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bench.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BorderArrow.h">
       <SubType>
       </SubType>
@@ -282,6 +286,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="MasterMapItem.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MasterObject.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -419,6 +427,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bench.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BorderArrow.cpp">
       <SubType>
       </SubType>
@@ -541,6 +553,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MasterMapItem.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MasterObject.cpp">
       <SubType>
       </SubType>
     </ClCompile>

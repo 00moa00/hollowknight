@@ -2,18 +2,19 @@
 #include <GameEngineCore/CoreMinimal.h>
 #include <GameEngineCore/GameEngineCollision.h>
 
-class MasterMapItem : public GameEngineActor
+// Ό³Έν :
+class MasterObject : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	MasterMapItem();
-	~MasterMapItem();
+	MasterObject();
+	~MasterObject();
 
 	// delete Function
-	MasterMapItem(const MasterMapItem& _Other) = delete;
-	MasterMapItem(MasterMapItem&& _Other) noexcept = delete;
-	MasterMapItem& operator=(const MasterMapItem& _Other) = delete;
-	MasterMapItem& operator=(MasterMapItem&& _Other) noexcept = delete;
+	MasterObject(const MasterObject& _Other) = delete;
+	MasterObject(MasterObject&& _Other) noexcept = delete;
+	MasterObject& operator=(const MasterObject& _Other) = delete;
+	MasterObject& operator=(MasterObject&& _Other) noexcept = delete;
 
 protected:
 	GameEngineTextureRenderer* Renderer_;
@@ -36,7 +37,7 @@ protected:
 	//================================
 	//    Setter
 	//================================
-	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
+	void CreateRendererComponent(float4 _LocalScale, std::string _FileName);
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
 
 
