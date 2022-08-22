@@ -100,6 +100,9 @@
     <Filter Include="Actor\Object">
       <UniqueIdentifier>{c717f5e0-861a-4efd-bc6b-095ed45b18be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\UI\Area TItle">
+      <UniqueIdentifier>{639c4fae-9977-4e34-bd5c-aff10e136806}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -302,6 +305,15 @@
     </ClInclude>
     <ClInclude Include="Bench.h">
       <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaTitle.h">
+      <Filter>Actor\Play\UI\Area TItle</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaTitleTop.h">
+      <Filter>Actor\Play\UI\Area TItle</Filter>
+    </ClInclude>
+    <ClInclude Include="AreaTitleBottom.h">
+      <Filter>Actor\Play\UI\Area TItle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -508,6 +520,15 @@
     </ClCompile>
     <ClCompile Include="Bench.cpp">
       <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="AreaTitle.cpp">
+      <Filter>Actor\Play\UI\Area TItle</Filter>
+    </ClCompile>
+    <ClCompile Include="AreaTitleTop.cpp">
+      <Filter>Actor\Play\UI\Area TItle</Filter>
+    </ClCompile>
+    <ClCompile Include="AreaTitleBottom.cpp">
+      <Filter>Actor\Play\UI\Area TItle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -157,6 +157,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AreaTitle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="AreaTitleBottom.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="AreaTitleTop.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Bench.h">
       <SubType>
       </SubType>
@@ -427,6 +439,18 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AreaTitle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="AreaTitleBottom.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="AreaTitleTop.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Bench.cpp">
       <SubType>
       </SubType>

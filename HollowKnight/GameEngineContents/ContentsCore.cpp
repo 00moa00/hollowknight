@@ -260,6 +260,27 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("HUD Cln_soul_orb_glow0000.png", 1, 1);
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("UI");
+		Dir.Move("TitleUI");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+		GameEngineTexture::Cut("Area Title Cln_fleur_top0000-Sheet.png", 11, 1);
+		GameEngineTexture::Cut("Area Title Cln_fleur_top0011-Sheet.png", 11, 1);
+		GameEngineTexture::Cut("Area Title Cln_fleur_bottom0000-Sheet.png", 11, 1);
+		GameEngineTexture::Cut("Area Title Cln_fleur_bottom0011-Sheet.png", 11, 1);
+
+	}
 	//================================
 	//    ÅØ½ºÃ³ / Setting
 	//================================

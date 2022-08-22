@@ -8,6 +8,7 @@
 #include "KnightData.h"
 
 #include "Bench.h"
+#include "AreaTitle.h"
 
 DirtmouthLevel2::DirtmouthLevel2() 
 {
@@ -51,6 +52,8 @@ void DirtmouthLevel2::Start()
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 	Bench* Test_ = CreateActor<Bench>();
+
+	AreaTitle* AreaTitle_ = CreateActor<AreaTitle>();
 }
 
 void DirtmouthLevel2::Update(float _DeltaTime)
