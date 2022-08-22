@@ -19,7 +19,6 @@ AllTitleUI::~AllTitleUI()
 void AllTitleUI::Start()
 {
 
-
 	UIPointGameStart_ = GetLevel()->CreateActor<UIPoint>();
 	UIPointGameStart_->GetTransform().SetLocalPosition({ 0, -100, 0 });
 

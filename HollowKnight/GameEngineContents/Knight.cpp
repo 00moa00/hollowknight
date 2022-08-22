@@ -114,10 +114,10 @@ void Knight::Start()
 
 	if (false == GameEngineInput::GetInst()->IsKey("KnightLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("KnightLeft", 'A');
-		GameEngineInput::GetInst()->CreateKey("KnightRight", 'D');
-		GameEngineInput::GetInst()->CreateKey("KnightUp", 'W');
-		GameEngineInput::GetInst()->CreateKey("KnightDown", 'S');
+		GameEngineInput::GetInst()->CreateKey("KnightLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("KnightRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("KnightUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("KnightDown", VK_DOWN);
 
 		GameEngineInput::GetInst()->CreateKey("KnightRunMode", 'R');
 
