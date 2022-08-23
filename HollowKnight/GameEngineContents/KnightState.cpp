@@ -529,7 +529,7 @@ void Knight::KnightFallStart(const StateInfo& _Info)
 	isKnightActtingMove_ = false;
 	ActtingMoveDirection_ = float4::ZERO;
 	
-	SetMoveDirection(float4::DOWN);
+	//SetMoveDirection(float4::DOWN);
 
 	GetRenderer()->ChangeFrameAnimation("FAll_ANIMATION");
 }
