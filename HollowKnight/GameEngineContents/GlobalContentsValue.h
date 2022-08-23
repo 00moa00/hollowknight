@@ -37,6 +37,8 @@ enum class Z_ORDER
 	UI_Border,
 
 	UI,
+	
+	UI_BackBoard,
 
 	TileMap,
 

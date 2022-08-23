@@ -35,6 +35,7 @@ public:
 private:
 	int AllMask_;
 	int CurMask_;
+	int CharmNotches_;
 
 	bool isRefill_;
 	bool isNewMask_;
@@ -49,6 +50,8 @@ private:
 	bool isSitting_; // 의자에 앉아있다.
 	
 	bool isSetting_; //세팅 페이지 열었당
+
+	
 
 
 public:
@@ -105,6 +108,11 @@ public:
 	bool GetisGrowSoul()
 	{
 		return isGrowSoul_;
+	}
+
+	int GetCharmNotches()
+	{
+		return CharmNotches_;
 	}
 
 	//================================

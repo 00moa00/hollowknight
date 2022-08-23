@@ -24,6 +24,7 @@ private:
 
 public:
 	void CreateCharm(std::string _Name, std::string _FilePath, float4 Scale);
+	//void CreateEquippedCharm(std::string _Name, std::string _FilePath, float4 Scale);
 
 };
 

@@ -11,7 +11,8 @@ KnightData::KnightData()
 	isGrowSoul_(false),
 	isSetting_(false),
 	AllMask_(4),
-	CurMask_(4)
+	CurMask_(4),
+	CharmNotches_(5)
 
 {
 }

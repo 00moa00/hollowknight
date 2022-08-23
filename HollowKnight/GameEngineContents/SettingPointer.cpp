@@ -3,6 +3,7 @@
 #include "HollowKnightLevel.h"
 #include "PointActorComponent.h"
 #include "GlobalContentsValue.h"
+#include "KnightData.h"
 
 #include <algorithm>
 
@@ -36,11 +37,11 @@ void SettingPointer::Start()
 	//================================
 	if (false == GameEngineInput::GetInst()->IsKey("MoveRight"))
 	{
-		GameEngineInput::GetInst()->CreateKey("MoveRight", 'D');
-		GameEngineInput::GetInst()->CreateKey("MoveLeft", 'A');
-		GameEngineInput::GetInst()->CreateKey("MoveDown", 'S');
-		GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
-
+		GameEngineInput::GetInst()->CreateKey("MoveRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("MoveLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("MoveDown", VK_DOWN);
+		GameEngineInput::GetInst()->CreateKey("MoveUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("Select", VK_RETURN);
 	}
 
 	SettingPointeManager_.CreateStateMember("IDLE"
@@ -203,6 +204,47 @@ void SettingPointer::PointerIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
 	}
+
+
+	if (true == GameEngineInput::GetInst()->IsDown("Select"))
+	{
+
+		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
+
+
+		//일단 내 노치를 확인해.
+
+		//장착이 가능하면 포인터에서 정보를 가져와
+
+		//장착 슬롯(40~49)앞에서 부터 for문 돌려
+
+		//가능하며ㅑㄴ 현재 포인터의 정보를 넣는다.
+		CharmSlot* slot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+
+
+
+
+		if (slot->GetSlotCount() < KnightData::GetInst()->GetCharmNotches())
+		{
+
+			for (int i = 40; i < 50; ++i)
+			{
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(i)->second;
+
+				CharmSlot* NotesSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+				if (NotesSlot->GetisEquippedUsing() == false)
+				{
+					NotesSlot->CreateCopyCharm(slot->GetRenderer(), slot->GetCharmName(), slot->GetFilePath());
+					NotesSlot->SetisEquippedUsing(true);
+					break;
+				}
+			}
+		}
+	}
+
+
 }
 
 void SettingPointer::PointerIdleEnd(const StateInfo& _Info)

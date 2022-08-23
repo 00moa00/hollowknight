@@ -7,6 +7,9 @@
 #include "PointActorComponent.h"
 
 CharmPage::CharmPage() 
+	:
+	NotchesFont_(nullptr),
+	Line_(nullptr)
 {
 }
 
@@ -16,7 +19,7 @@ CharmPage::~CharmPage()
 
 void CharmPage::Start()
 {
-
+	//ºÎÀû ½½·Ô
 
 	AllCharmSlot_.reserve(40);
 
@@ -52,34 +55,65 @@ void CharmPage::Start()
 			AllCharmSlot_.push_back(GetLevel()->CreateActor<CharmSlot>());
 			AllCharmSlot_[ValueNum]->CreateCharmSlot(EnumString, "Charm_" + FilePathNum + ".png", CharmState{ValueNum , 0, false, false}, CharmEnum.value());
 			AllCharmSlot_[ValueNum]->GetTransform().SetLocalPosition({ ( - 750.f + AddMaginX) + MaginX , -60.f + MaginY, static_cast<float>(Z_ORDER::UI)});
+			
 			//AllCharmSlot_[ValueNum]->SetParent(this);
 				
 			PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
 			Component_->PushPointerActor(ValueNum, PAGE_TYPE::Charm, AllCharmSlot_[ValueNum]);
 
-
 			MaginX += 90.f;
 			++SlotNum;
 		}
+
 		MaginX = 0.f;
 		MaginY -= 80.f;
-
-
 	}
 
 
+	 MaginX = 0;
 
-	int CharmSlotNum = 0;
+	 //ÀåÂø ½½·Ô
+
+	for (int i = 40; i < 50; ++i)
+	{
+
+		AllCharmSlot_.push_back(GetLevel()->CreateActor<CharmSlot>());
+		AllCharmSlot_[i]->CreateEquippedCharmSlot(CharmState{ i , 0, false, false });
+		AllCharmSlot_[i]->GetTransform().SetLocalPosition({ -750.f + MaginX , 200.f , static_cast<float>(Z_ORDER::UI) });
+
+		PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
+		Component_->PushPointerActor(i, PAGE_TYPE::Charm, AllCharmSlot_[i]);
+
+		MaginX += 90.f;
+	}
+
+	//³ëÄ¡
+
+	MaginX = 0;
+
+	for (int i = 0; i < 5; ++i)
+	{
+		AllNotes_.push_back(GetLevel()->CreateActor<Notches>());
+		AllNotes_[i]->GetTransform().SetLocalPosition({-750.f + MaginX, 60.f , static_cast<float>(Z_ORDER::UI) });
+
+		MaginX += 50.f;
+	}
+
+	NotchesFont_ = CreateComponent<GameEngineFontRenderer>();
+	NotchesFont_->SetText("ºÎÀû Ä­", "Noto Serif KR");
+	NotchesFont_->SetColor({ 1.0f, 1.0f, 1.0f });
+	NotchesFont_->SetScreenPostion({ 200.f, (GameEngineWindow::GetInst()->GetScale().hy() - 110.0f), static_cast<float>(Z_ORDER::UI) });
+	NotchesFont_->SetSize(32);
+	NotchesFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
+	NotchesFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
+	//NotchesFont_->Set
 
 
+	Line_ = CreateComponent<GameEngineUIRenderer>();
 
-
-
-
-
-
-	//CreateRendererComponent(float4{ 1920, 1080, 1 }, "Black.png");
-
+	Line_->SetTexture("Line.png");
+	Line_->GetTransform().SetWorldScale({1021, 5});
+	Line_->GetTransform().SetWorldPosition({ -400.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
 }
 
 void CharmPage::Update(float _DeltaTime)
@@ -106,6 +140,12 @@ void CharmPage::AllOn()
 		AllCharmSlot_[i]->On();
 	}
 
+
+
+}
+
+void CharmPage::CreateEquippedCharm(GameEngineUIRenderer* _CopyRenderer)
+{
 
 
 }

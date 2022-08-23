@@ -1,8 +1,10 @@
 #pragma once
 #include "MasterUI.h"
 #include "CharmSlot.h"
+#include "Notches.h"
 
-// 설명 :
+#include <GameEngineCore/GameEngineFontRenderer.h>
+// 설명 : 0~39 : 부적, 50, 51 : 포인터, 40~49 : 장착슬롯
 class CharmPage : public MasterUI
 {
 public:
@@ -22,12 +24,16 @@ protected:
 
 private:
 	std::vector<CharmSlot*> AllCharmSlot_;
+	std::vector<Notches*> AllNotes_;
+
+	GameEngineFontRenderer* NotchesFont_;
+	GameEngineUIRenderer* Line_;
 
 public:
 	void AllOff();
 	void AllOn();
 
-
+	void CreateEquippedCharm(GameEngineUIRenderer* _CopyRenderer);
 
 };
 

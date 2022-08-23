@@ -41,8 +41,8 @@ void SettingPage::Start()
 	BackGround_->SetTexture("Black.png");
 	BackGround_->ScaleToTexture();
 	BackGround_->GetColorData().MulColor.a = 0.8f;
-	BackGround_->SetPivot(PIVOTMODE::LEFTTOP);
-	BackGround_->GetTransform().SetLocalPosition({0,0,static_cast<float>(Z_ORDER::UI)});
+	//ckGround_->SetPivot(PIVOTMODE::LEFTTOP);
+	BackGround_->GetTransform().SetLocalPosition({0,0,static_cast<float>(Z_ORDER::UI_BackBoard)});
 	BackGround_->Off();
 
 

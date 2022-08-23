@@ -315,6 +315,9 @@
     <ClInclude Include="AreaTitleBottom.h">
       <Filter>Actor\Play\UI\Area TItle</Filter>
     </ClInclude>
+    <ClInclude Include="Notches.h">
+      <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -529,6 +532,9 @@
     </ClCompile>
     <ClCompile Include="AreaTitleBottom.cpp">
       <Filter>Actor\Play\UI\Area TItle</Filter>
+    </ClCompile>
+    <ClCompile Include="Notches.cpp">
+      <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
