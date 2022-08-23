@@ -42,14 +42,6 @@ public:
 };
 
 
-struct UVData
-{
-	float OffsetX;
-	float OffsetY;
-	float Dummy0;
-	float Dummy1;
-};
-
 
 class FrameAnimation_DESC 
 {
@@ -138,6 +130,7 @@ class FrameAnimation : public GameEngineNameObject
 
 	void Reset();
 
+public:
 	void Update(float _DeltaTime);
 
 public:
@@ -225,10 +218,6 @@ public:
 		return ColorData;
 	}
 
-	UVData& GetUVData()
-	{
-		return UVData;
-	}
 
 
 	// 애니메이션 바인드
@@ -301,7 +290,6 @@ protected:
 	//float4 FrameData;
 
 	ColorData ColorData;
-	UVData UVData;
 	AtlasData AtlasDataInst;
 
 	std::map<std::string, FrameAnimation> FrameAni;

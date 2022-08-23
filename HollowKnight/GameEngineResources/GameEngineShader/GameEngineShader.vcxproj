@@ -128,9 +128,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\..\..\AR40\DIRECTX\GameEngineResources\GameEngineShader\Mask.hlsl" />
     <FxCompile Include="Color.hlsl" />
     <FxCompile Include="Debug3D.hlsl" />
+    <FxCompile Include="Mask.hlsl" />
     <FxCompile Include="RenderOption.fx" />
     <FxCompile Include="TargetMerge.hlsl" />
     <FxCompile Include="Texture.hlsl" />

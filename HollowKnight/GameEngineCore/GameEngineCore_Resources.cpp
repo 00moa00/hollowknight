@@ -218,6 +218,12 @@ void EngineRenderingPipeLine()
 	}
 
 	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("TextureAtlasMask");
+		NewPipe->SetVertexShader("Mask.hlsl");
+		NewPipe->SetPixelShader("Mask.hlsl");
+	}
+
+	{
 		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("3DDebug");
 		NewPipe->SetInputAssembler1VertexBuffer("Box");
 		NewPipe->SetInputAssembler2IndexBuffer("Box");

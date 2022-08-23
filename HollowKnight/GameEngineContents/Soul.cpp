@@ -19,7 +19,7 @@ Soul::~Soul()
 void Soul::Start()
 {
 
-	CreateRendererComponent(float4{ 130, 125, 1 }, "HUD_Soulorb_fills_soul_idle0000-Sheet.png", 0, static_cast<int>(RENDERORDER::UI));
+	//CreateRendererComponent(float4{ 130, 125, 1 }, "HUD_Soulorb_fills_soul_idle0000-Sheet.png", 0, static_cast<int>(RENDERORDER::UI));
 
 	EyeRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	EyeRenderer_->SetTexture("HUD Cln_soul_orb_eyes.png");
@@ -31,37 +31,43 @@ void Soul::Start()
 	GameEngineUIRenderer_->SetTexture("HUD Cln_soul_orb_shape.png");
 	GameEngineUIRenderer_->Off();
 
-	GetRenderer()->Option.IsMask = 1;
-	GetRenderer()->ShaderResources.SetTexture("Test", GameEngineUIRenderer_->GetCurTexture());
-	//GetRenderer()->SetSamplingModePoint();
+
+	Soul_ = CreateComponent<GameEngineContentsMaskRenderer>();
+	Soul_->SetTexture("HUD Cln_soul_orb_eyes.png");
+	Soul_->GetTransform().SetLocalScale({ 130, 125, 1 });
+
+	Soul_->Option.IsMask = 1;
+	Soul_->ShaderResources.SetTexture("Test", GameEngineUIRenderer_->GetCurTexture());
+
+	//Soul_->SetSamplingModePoint();
 
 	//================================
 	//    Create Animation
 	//================================
-	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_ANIMATION", FrameAnimation_DESC("HUD_Soulorb_fills_soul_idle0000-Sheet.png", 0, 5, 0.150f));
-	GetRenderer()->CreateFrameAnimationCutTexture("GROW_ANIMATION", FrameAnimation_DESC("HUD_Soulorb_fills_soul_grow0000-Sheet.png", 0, 7, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("SHRINK_ANIMATION", FrameAnimation_DESC("HUD_Soulorb_fills_soul_shrink0000-Sheet.png", 0, 5, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("FULL_ANIMATION", FrameAnimation_DESC("HUD Cln_soul_orb_glow0000.png", 0, 0, 0.100f, false));
+	Soul_->CreateFrameAnimationCutTexture("IDLE_ANIMATION", FrameAnimation_DESC("HUD_Soulorb_fills_soul_idle0000-Sheet.png", 0, 5, 0.150f));
+	Soul_->CreateFrameAnimationCutTexture("GROW_ANIMATION", FrameAnimation_DESC("HUD_Soulorb_fills_soul_grow0000-Sheet.png", 0, 7, 0.100f, false));
+	Soul_->CreateFrameAnimationCutTexture("SHRINK_ANIMATION", FrameAnimation_DESC("HUD_Soulorb_fills_soul_shrink0000-Sheet.png", 0, 5, 0.100f, false));
+	Soul_->CreateFrameAnimationCutTexture("FULL_ANIMATION", FrameAnimation_DESC("HUD Cln_soul_orb_glow0000.png", 0, 0, 0.100f, false));
 
-	GetRenderer()->SetScaleModeImage();
+	Soul_->SetScaleModeImage();
 
-	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
-	GetRenderer()->SetPivot(PIVOTMODE::LEFTTOP);
-	//GetRenderer()->GetColorData().MulColor = {1,1,1,0.5f};
+	Soul_->ChangeFrameAnimation("IDLE_ANIMATION");
+	Soul_->SetPivot(PIVOTMODE::LEFTTOP);
+	//Soul_->GetColorData().MulColor = {1,1,1,0.5f};
 	
 
-	//GetRenderer()->GetTransformData().
+	//Soul_->GetTransformData().
 	
 	// 
 	//================================
 	//    Create Bind Animation
 	//================================
-	GetRenderer()->AnimationBindEnd("GROW_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+	Soul_->AnimationBindEnd("GROW_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isGrowEnd_ = true;
 		});
 
-	GetRenderer()->AnimationBindEnd("SHRINK_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+	Soul_->AnimationBindEnd("SHRINK_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isShrinkEnd_ = true;
 		});
@@ -100,52 +106,52 @@ void Soul::SetLevelPosition(int _Level)
 	switch (_Level)
 	{
 	case 0:
-		GetRenderer()->GetUVData().OffsetY = -0.9f;
+		Soul_->GetUVData().OffsetY = -0.9f;
 
 		break;
 
 	case 1:
-		GetRenderer()->GetUVData().OffsetY = -0.8f;
+		Soul_->GetUVData().OffsetY = -0.8f;
 		break;
 
 	case 2:
-		GetRenderer()->GetUVData().OffsetY = -0.7f;
+		Soul_->GetUVData().OffsetY = -0.7f;
 
 		break;
 
 	case 3:
-		GetRenderer()->GetUVData().OffsetY = -0.6f;
+		Soul_->GetUVData().OffsetY = -0.6f;
 
 		break;
 
 	case 4:
-		GetRenderer()->GetUVData().OffsetY = -0.5f;
+		Soul_->GetUVData().OffsetY = -0.5f;
 
 		break;
 
 	case 5:
-		GetRenderer()->GetUVData().OffsetY = -0.4f;
+		Soul_->GetUVData().OffsetY = -0.4f;
 
 		break;
 
 	case 6:
-		GetRenderer()->GetUVData().OffsetY = -0.3f;
+		Soul_->GetUVData().OffsetY = -0.3f;
 
 		break;
 
 	case 7:
-		GetRenderer()->GetUVData().OffsetY = -0.2f;
+		Soul_->GetUVData().OffsetY = -0.2f;
 
 		break;
 
 	case 8 : 
 
-		GetRenderer()->GetUVData().OffsetY = -0.1f;
+		Soul_->GetUVData().OffsetY = -0.1f;
 
 		break;
 	case 9:
 
-		GetRenderer()->GetUVData().OffsetY = -0.f;
+		Soul_->GetUVData().OffsetY = -0.f;
 
 		break;
 	default:
@@ -156,7 +162,7 @@ void Soul::SetLevelPosition(int _Level)
 void Soul::SoulGrowStart(const StateInfo& _Info)
 {
 	SetLevelPosition(SoulLevel_);
-	GetRenderer()->ChangeFrameAnimation("GROW_ANIMATION");
+	Soul_->ChangeFrameAnimation("GROW_ANIMATION");
 }
 
 void Soul::SoulGrowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -178,13 +184,13 @@ void Soul::SoulIdleStart(const StateInfo& _Info)
 	if (SoulLevel_ == 9)
 	{
 		EyeRenderer_->On();
-		GetRenderer()->ChangeFrameAnimation("FULL_ANIMATION");
+		Soul_->ChangeFrameAnimation("FULL_ANIMATION");
 	}
 	else
 	{
 		EyeRenderer_->Off();
 
-		GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
+		Soul_->ChangeFrameAnimation("IDLE_ANIMATION");
 	}
 }
 
@@ -199,7 +205,7 @@ void Soul::SoulIdleEnd(const StateInfo& _Info)
 
 void Soul::SoulShrinkStart(const StateInfo& _Info)
 {
-	GetRenderer()->ChangeFrameAnimation("SHRINK_ANIMATION");
+	Soul_->ChangeFrameAnimation("SHRINK_ANIMATION");
 
 }
 

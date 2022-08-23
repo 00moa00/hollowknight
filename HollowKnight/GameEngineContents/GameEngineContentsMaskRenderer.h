@@ -2,6 +2,14 @@
 #include <GameEngineCore/GameEngineTextureRenderer.h>
 
 
+struct UVData
+{
+	float OffsetX;
+	float OffsetY;
+	float Dummy0;
+	float Dummy1;
+};
+
 
 
 class GameEngineContentsMaskRenderer : public GameEngineTextureRenderer
@@ -25,6 +33,12 @@ protected:
 	void Update(float _Delta) override;
 
 private:
+	UVData UVData_;
+public:
+	UVData& GetUVData()
+	{
+		return UVData_;
+	}
 
 };
 

@@ -136,11 +136,7 @@ void GameEngineTextureRenderer::SetTextureRendererSetting()
 
 	ShaderResources.SetConstantBufferLink("AtlasData", AtlasDataInst);
 	ShaderResources.SetConstantBufferLink("ColorData", ColorData);
-	
-	UVData.OffsetX = 0.f;
-	UVData.OffsetY = 0.f;
 
-	ShaderResources.SetConstantBufferLink("UVData", UVData);
 
 }
 
