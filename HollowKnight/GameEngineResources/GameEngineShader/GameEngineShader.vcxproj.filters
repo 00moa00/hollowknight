@@ -13,6 +13,7 @@
     </FxCompile>
     <FxCompile Include="RenderOption.fx" />
     <FxCompile Include="..\..\..\..\AR40\DIRECTX\GameEngineResources\GameEngineShader\Mask.hlsl" />
+    <FxCompile Include="TargetMerge.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">

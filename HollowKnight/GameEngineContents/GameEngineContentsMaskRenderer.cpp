@@ -11,19 +11,19 @@ GameEngineContentsMaskRenderer::~GameEngineContentsMaskRenderer()
 
 void GameEngineContentsMaskRenderer::Start()
 {
-	GameEngineDefaultRenderer::Start();
+	//GameEngineDefaultRenderer::Start();
 
-	PushRendererToMainCamera();
+	//PushRendererToMainCamera();
 
-	SetPipeLine("TextureAtlas");
+	//SetPipeLine("TextureAtlas");
 
-	FrameData.PosX = 0.0f;
-	FrameData.PosY = 0.0f;
-	FrameData.SizeX = 1.0f;
-	FrameData.SizeY = 1.0f;
+	//FrameData.PosX = 0.0f;
+	//FrameData.PosY = 0.0f;
+	//FrameData.SizeX = 1.0f;
+	//FrameData.SizeY = 1.0f;
 
-	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
-	ShaderResources.SetConstantBufferLink("ColorData", ColorData);
+	//ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
+	//ShaderResources.SetConstantBufferLink("ColorData", ColorData);
 }
 
 void GameEngineContentsMaskRenderer::SetTextureRendererSetting()

@@ -37,6 +37,7 @@ cbuffer AtlasData : register(b1)
 {
     float2 TextureFramePos;
     float2 TextureFrameSize;
+    float4 PivotPos;
 };
 
 cbuffer UVData : register(b2)
@@ -52,6 +53,7 @@ cbuffer UVData : register(b2)
 Output TextureAtlas_VS(Input _Input)
 {
     Output NewOutPut = (Output)0;
+    _Input.Pos += PivotPos;
     NewOutPut.Pos = mul(_Input.Pos, WorldViewProjection);
     NewOutPut.PosLocal = _Input.Pos;
     
@@ -61,8 +63,8 @@ Output TextureAtlas_VS(Input _Input)
     
     // 10    11
     
-    NewOutPut.Tex0.x = ((_Input.Tex.x ) * TextureFrameSize.x) + (TextureFramePos.x);
-    NewOutPut.Tex0.y = ((_Input.Tex.y) * TextureFrameSize.y) + (TextureFramePos.y + OffsetY);
+    NewOutPut.Tex0.x = (_Input.Tex.x  * TextureFrameSize.x) + (TextureFramePos.x);
+    NewOutPut.Tex0.y = (_Input.Tex.y * TextureFrameSize.y) + (TextureFramePos.y + OffsetY);
 
     NewOutPut.Tex1 = _Input.Tex; // uv값을 그대로 넣었다.
     

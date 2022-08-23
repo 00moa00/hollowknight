@@ -128,12 +128,13 @@ void GameEngineTextureRenderer::SetTextureRendererSetting()
 
 	SetPipeLine("TextureAtlas");
 
-	FrameData.PosX = 0.0f;
-	FrameData.PosY = 0.0f;
-	FrameData.SizeX = 1.0f;
-	FrameData.SizeY = 1.0f;
+	AtlasDataInst.FrameData.PosX = 0.0f;
+	AtlasDataInst.FrameData.PosY = 0.0f;
+	AtlasDataInst.FrameData.SizeX = 1.0f;
+	AtlasDataInst.FrameData.SizeY = 1.0f;
+	AtlasDataInst.PivotPos = float4::ZERO;
 
-	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
+	ShaderResources.SetConstantBufferLink("AtlasData", AtlasDataInst);
 	ShaderResources.SetConstantBufferLink("ColorData", ColorData);
 	
 	UVData.OffsetX = 0.f;
@@ -177,13 +178,33 @@ void GameEngineTextureRenderer::SetPivot(PIVOTMODE _Mode)
 	switch (_Mode)
 	{
 	case PIVOTMODE::CENTER:
-		SetPivotToVector(float4::ZERO);
-		break;
-	case PIVOTMODE::LEFTTOP:
-		SetPivotToVector(float4(GetTransform().GetWorldScale().hx(), -GetTransform().GetWorldScale().hy()));
+		AtlasDataInst.PivotPos = float4::ZERO;
 		break;
 	case PIVOTMODE::BOT:
-		SetPivotToVector(float4(0.0f, GetTransform().GetWorldScale().hy()));
+		AtlasDataInst.PivotPos = float4(0.0f, 0.5f, 0.0f, 0.0f);
+		break;
+	case PIVOTMODE::TOP:
+		AtlasDataInst.PivotPos = float4(0.0f, -0.5f, 0.0f, 0.0f);
+		break;
+	case PIVOTMODE::LEFT:
+		AtlasDataInst.PivotPos = float4(0.5f, 0.0f, 0.0f, 0.0f);
+		break;
+	case PIVOTMODE::RIGHT:
+		AtlasDataInst.PivotPos = float4(-0.5f, 0.0f, 0.0f, 0.0f);
+		break;
+	case PIVOTMODE::LEFTTOP:
+		AtlasDataInst.PivotPos = float4(0.5f, -0.5f, 0.0f, 0.0f);
+		break;
+	case PIVOTMODE::RIGHTTOP:
+		AtlasDataInst.PivotPos = float4(-0.5f, -0.5f, 0.0f, 0.0f);
+		break;
+	case PIVOTMODE::LEFTBOT:
+		AtlasDataInst.PivotPos = float4(0.5f, 0.5f, 0.0f, 0.0f);
+		break;
+	case PIVOTMODE::RIGHTBOT:
+		AtlasDataInst.PivotPos = float4(-0.5f, 0.5f, 0.0f, 0.0f);
+		break;
+	case PIVOTMODE::CUSTOM:
 		break;
 	default:
 		break;
@@ -191,6 +212,7 @@ void GameEngineTextureRenderer::SetPivot(PIVOTMODE _Mode)
 
 	PivotMode = _Mode;
 }
+
 
 void GameEngineTextureRenderer::SetPivotToVector(const float4& _Value)
 {
@@ -210,7 +232,7 @@ void GameEngineTextureRenderer::SetTexture(const std::string& _Name)
 
 void GameEngineTextureRenderer::SetFrame(UINT _Index)
 {
-	FrameData = CurTex->GetFrameData(_Index);
+	AtlasDataInst.FrameData = CurTex->GetFrameData(_Index);
 }
 
 GameEngineTexture* GameEngineTextureRenderer::GetCurTexture()
@@ -236,6 +258,18 @@ void GameEngineTextureRenderer::SetTexture(GameEngineTexture* _Texture, UINT _In
 	SetFrame(_Index);
 }
 
+void GameEngineTextureRenderer::SetFolderTextureToIndex(const std::string& _Text, UINT _Index)
+{
+	GameEngineFolderTexture* FolderTexture = GameEngineFolderTexture::Find(_Text);
+
+	SetTexture(FolderTexture->GetTexture(_Index));
+
+	AtlasDataInst.FrameData.PosX = 0.0f;
+	AtlasDataInst.FrameData.PosY = 0.0f;
+	AtlasDataInst.FrameData.SizeX = 1.0f;
+	AtlasDataInst.FrameData.SizeY = 1.0f;
+}
+
 void GameEngineTextureRenderer::CreateFrameAnimationFolder(const std::string& _AnimationName, const FrameAnimation_DESC& _Desc)
 {
 	std::string Name = GameEngineString::ToUpperReturn(_AnimationName);
@@ -248,6 +282,7 @@ void GameEngineTextureRenderer::CreateFrameAnimationFolder(const std::string& _A
 
 	FrameAnimation& NewAni = FrameAni[Name];
 	NewAni.Info = _Desc;
+	NewAni.Info.Renderer = this;
 	NewAni.ParentRenderer = this;
 	NewAni.Texture = nullptr;
 	NewAni.FolderTexture = GameEngineFolderTexture::Find(_Desc.TextureName);
@@ -273,6 +308,8 @@ void GameEngineTextureRenderer::CreateFrameAnimationCutTexture(const std::string
 
 	FrameAnimation& NewAni = FrameAni[Name];
 	NewAni.Info = _Desc;
+	NewAni.Info.Renderer = this;
+
 	NewAni.ParentRenderer = this;
 	NewAni.Texture = GameEngineTexture::Find(_Desc.TextureName);
 	NewAni.FolderTexture = nullptr;
@@ -313,8 +350,9 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(const std::string& _Animati
 
 void GameEngineTextureRenderer::FrameDataReset()
 {
-	FrameData = { 0.0f , 0.0f, 1.0f, 1.0f };
+	AtlasDataInst.FrameData = { 0.0f , 0.0f, 1.0f, 1.0f };
 }
+
 
 
 void GameEngineTextureRenderer::Update(float _Delta)
