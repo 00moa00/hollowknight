@@ -24,8 +24,8 @@ protected:
 private:
 	bool isNotchesUsed_;
 
-private:
-	void SetNotchesUsed(bool _b)
+public:
+	void SetNotchesUsed()
 	{
 		GetRenderer()->SetTexture("charm_UI__0000_charm_cost_02_lit.png");
 	}

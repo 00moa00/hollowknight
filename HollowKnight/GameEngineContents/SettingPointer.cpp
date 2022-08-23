@@ -210,38 +210,50 @@ void SettingPointer::PointerIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 
 		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
-
-
-		//일단 내 노치를 확인해.
-
-		//장착이 가능하면 포인터에서 정보를 가져와
-
-		//장착 슬롯(40~49)앞에서 부터 for문 돌려
-
-		//가능하며ㅑㄴ 현재 포인터의 정보를 넣는다.
 		CharmSlot* slot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
 
-
-
-
-		if (slot->GetSlotCount() < KnightData::GetInst()->GetCharmNotches())
+		// 부적 장착이 가능한지 && 내가 선택한 부적이 사용중이 아닌건지
+		if (KnightData::GetInst()->SubUsingCharmNotches(slot->GetSlotCount()) == true && slot->GetisUsing() == false)
 		{
-
 			for (int i = 40; i < 50; ++i)
 			{
 				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(i)->second;
 
 				CharmSlot* NotesSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
+				//부적 칸을 사용하지 않다면
 				if (NotesSlot->GetisEquippedUsing() == false)
 				{
 					NotesSlot->CreateCopyCharm(slot->GetRenderer(), slot->GetCharmName(), slot->GetFilePath());
 					NotesSlot->SetisEquippedUsing(true);
+					slot->SetisUsing(true);
+
+
+					//사용 가능한 부적 칸 수(노치) 갱신
+					for (int j = 0; j < KnightData::GetInst()->GetUsingCharmNotches(); ++j)
+					{
+						GetLevel<HollowKnightLevel>()->AllNotes_[j]->SetNotchesUsed();
+					}
+
+
+					//위에 모든걸 적용하고도 다음에 부적이 또 달 수있는 남은 칸이 있다면, 뒤에있는 빈 슬롯을 표시한다
+					if (KnightData::GetInst()->GetUsingCharmNotches() > 0)
+					{
+						PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(i+1)->second;
+						CharmSlot* NotesSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+						NotesSlot->GetRenderer()->On();
+					}
+
 					break;
 				}
 			}
+
+
+
 		}
+
+		
 	}
 
 

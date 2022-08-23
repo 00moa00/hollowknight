@@ -9,6 +9,10 @@ SettingUIMaster::~SettingUIMaster()
 {
 }
 
+void SettingUIMaster::SelectSettingPointer()
+{
+}
+
 void SettingUIMaster::CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order)
 {
 	Renderer_ = CreateComponent<GameEngineUIRenderer>();

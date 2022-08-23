@@ -23,6 +23,9 @@ protected:
 	GameEngineUIRenderer* Renderer_;
 
 public:
+
+	virtual void SelectSettingPointer();
+
 	//================================
 	//     Getter
 	//================================

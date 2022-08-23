@@ -68,6 +68,13 @@ void HollowKnightLevel::PushPointActorMap(int _Order, PointActorComponent* _Poin
 	PointActorListMap.insert({ _Order, _PointActorComponent });
 }
 
+void HollowKnightLevel::PushNotches(Notches* _Notches, float4 _Position)
+{
+	AllNotes_.push_back(_Notches);
+	_Notches->GetTransform().SetLocalPosition(_Position);
+
+}
+
 void HollowKnightLevel::CameraMoveWindowLimit()
 {
 	//카메라가 없다면

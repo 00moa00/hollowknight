@@ -35,7 +35,8 @@ public:
 private:
 	int AllMask_;
 	int CurMask_;
-	int CharmNotches_;
+	int CharmNotches_; //가능한 부적 칸 수
+	int UsingCharmNotches_; // 현재 사용중인 부적 칸 수
 
 	bool isRefill_;
 	bool isNewMask_;
@@ -48,10 +49,10 @@ private:
 	bool isGrowSoul_; // 몬스터를 쳤을때 영혼이 찬다]
 
 	bool isSitting_; // 의자에 앉아있다.
-	
+
 	bool isSetting_; //세팅 페이지 열었당
 
-	
+
 
 
 public:
@@ -59,6 +60,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+
+	int GetUsingCharmNotches()
+	{
+		return UsingCharmNotches_;
+	}
 
 	bool GetisSetting()
 	{
@@ -118,6 +124,24 @@ public:
 	//================================
 	//    Setter
 	//================================
+
+	//부적을 장착한다.
+	bool SubUsingCharmNotches(int _i)
+	{
+		if (CharmNotches_ - UsingCharmNotches_ > _i)
+		{
+			UsingCharmNotches_ += _i;
+			return true;
+		}
+
+		return false;
+	}
+
+	// 부적을 뺸다
+	void AddUsingCharmNotches(int _i)
+	{
+		UsingCharmNotches_ -= _i;
+	}
 
 	void SetisSetting(bool _b)
 	{

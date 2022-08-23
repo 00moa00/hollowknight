@@ -45,6 +45,10 @@ public:
 	std::map<int, PointActorComponent*> PointActorListMap;
 	std::map<int, PointActorComponent*> PointActorListMonsterBook;
 
+	std::vector<Notches*> AllNotes_;
+
+
+
 	GameEngineRenderer* BackgroundRenderer_;
 
 protected:
@@ -80,6 +84,7 @@ public :
 	void PushPointActorMonsterBook(int _Order, PointActorComponent* _PointActorComponent);
 	void PushPointActorMap(int _Order, PointActorComponent* _PointActorComponent);
 
+	void PushNotches(Notches* _Notches, float4 _Position);
 
 
 	void SortPointActor();

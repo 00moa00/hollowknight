@@ -24,7 +24,7 @@ protected:
 
 private:
 	std::vector<CharmSlot*> AllCharmSlot_;
-	std::vector<Notches*> AllNotes_;
+	
 
 	GameEngineFontRenderer* NotchesFont_;
 	GameEngineUIRenderer* Line_;

@@ -120,6 +120,11 @@ public:
 		CharmState_.isEquippedUsing_ = _b;
 	}
 	
+
+	void SetisUsing(bool _b)
+	{
+		CharmState_.isUsing_ = _b;
+	}
 	
 
 };

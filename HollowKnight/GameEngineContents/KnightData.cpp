@@ -12,7 +12,8 @@ KnightData::KnightData()
 	isSetting_(false),
 	AllMask_(4),
 	CurMask_(4),
-	CharmNotches_(5)
+	CharmNotches_(5),
+	UsingCharmNotches_(0)
 
 {
 }

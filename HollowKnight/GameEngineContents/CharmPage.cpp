@@ -80,7 +80,14 @@ void CharmPage::Start()
 		AllCharmSlot_.push_back(GetLevel()->CreateActor<CharmSlot>());
 		AllCharmSlot_[i]->CreateEquippedCharmSlot(CharmState{ i , 0, false, false });
 		AllCharmSlot_[i]->GetTransform().SetLocalPosition({ -750.f + MaginX , 200.f , static_cast<float>(Z_ORDER::UI) });
+		
+		if (i != 40)
+		{
+			AllCharmSlot_[i]->GetRenderer()->Off();
 
+		}
+
+		
 		PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
 		Component_->PushPointerActor(i, PAGE_TYPE::Charm, AllCharmSlot_[i]);
 
@@ -93,8 +100,9 @@ void CharmPage::Start()
 
 	for (int i = 0; i < 5; ++i)
 	{
-		AllNotes_.push_back(GetLevel()->CreateActor<Notches>());
-		AllNotes_[i]->GetTransform().SetLocalPosition({-750.f + MaginX, 60.f , static_cast<float>(Z_ORDER::UI) });
+
+		GetLevel<HollowKnightLevel>()->PushNotches(GetLevel()->CreateActor<Notches>(),
+			{ -750.f + MaginX, 60.f , static_cast<float>(Z_ORDER::UI) });
 
 		MaginX += 50.f;
 	}
@@ -129,6 +137,12 @@ void CharmPage::AllOff()
 		AllCharmSlot_[i]->Off();
 	}
 
+
+	for (int i = 0; i < GetLevel<HollowKnightLevel>()->AllNotes_.size(); ++i)
+	{
+		GetLevel<HollowKnightLevel>()->AllNotes_[i]->Off();
+	}
+
 }
 
 void CharmPage::AllOn()
@@ -140,7 +154,10 @@ void CharmPage::AllOn()
 		AllCharmSlot_[i]->On();
 	}
 
-
+	for (int i = 0; i < GetLevel<HollowKnightLevel>()->AllNotes_.size(); ++i)
+	{
+		GetLevel<HollowKnightLevel>()->AllNotes_[i]->On();
+	}
 
 }
 
