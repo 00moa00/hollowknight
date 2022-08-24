@@ -14,6 +14,9 @@ SettingPointer::SettingPointer()
 	inRightArrow_(false),
 	inLeftArrow_(false),
 
+	isDownLextPageLeft_(false),
+	isDownNextPageRight_(false),
+
 	CurrentPosInCharmPage(0),
 	CurrentPosInMapPage(0),
 	CurrentPosInCMonsterPage(0)
@@ -32,9 +35,9 @@ void SettingPointer::Start()
 
 	SettingPointerBox_ = GetLevel()->CreateActor<SettingPointerBox>();
 
-	//================================
+	//=========================================
 	//    CreateKey
-	//================================
+	//=========================================
 	if (false == GameEngineInput::GetInst()->IsKey("MoveRight"))
 	{
 		GameEngineInput::GetInst()->CreateKey("MoveRight", VK_RIGHT);
@@ -44,6 +47,9 @@ void SettingPointer::Start()
 		GameEngineInput::GetInst()->CreateKey("Select", VK_RETURN);
 	}
 
+	//=========================================
+	//    SettingPointerCharmPageManager
+	//=========================================
 
 	SettingPointerCharmPageManager_.CreateStateMember("IDLE"
 		, std::bind(&SettingPointer::PointerCharmPageIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -72,15 +78,64 @@ void SettingPointer::Start()
 
 
 
-
 	SettingPointerCharmPageManager_.ChangeState("IDLE");
+
+
+
+	//=========================================
+	//    SettingPointerInventoyPageManager
+	//=========================================
+
+	SettingPointerInventoyPageManager_.CreateStateMember("IDLE"
+		, std::bind(&SettingPointer::PointerInventoryPageIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerInventoryPageIdleStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerInventoryPageIdleEnd, this, std::placeholders::_1));
+
+	SettingPointerInventoyPageManager_.CreateStateMember("MOVE_RIGHT"
+		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftEnd, this, std::placeholders::_1));
+
+	SettingPointerInventoyPageManager_.CreateStateMember("MOVE_LEFT"
+		, std::bind(&SettingPointer::PointerInventoryPageMoveRightUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerInventoryPageMoveRightStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerInventoryPageMoveRightEnd, this, std::placeholders::_1));
+
+	SettingPointerInventoyPageManager_.CreateStateMember("IN_RIGHT_ARROW"
+		, std::bind(&SettingPointer::PointerInInventoryPageRightArrowUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerInInventoryPageRightArrowStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerInInventoryPageRightArrowEnd, this, std::placeholders::_1));
+
+	SettingPointerInventoyPageManager_.CreateStateMember("IN_LEFT_ARROW"
+		, std::bind(&SettingPointer::PointerInventoryPageInLeftArrowUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerInventoryPageInLeftArrowStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerInventoryPageInLeftArrowEnd, this, std::placeholders::_1));
+
+
+
+	SettingPointerInventoyPageManager_.ChangeState("IDLE");
+
+
+	CurrentPage_ = PAGE_TYPE::Charm;
 
 }
 
 void SettingPointer::Update(float _DeltaTime)
 {
+	switch (CurrentPage_)
+	{
+	case PAGE_TYPE::Charm:
 	SettingPointerCharmPageManager_.Update(_DeltaTime);
-
+		break;
+	case PAGE_TYPE::MonsterBook:
+		break;
+	case PAGE_TYPE::Map:
+		break;
+	case PAGE_TYPE::Inventory:
+		break;
+	default:
+		break;
+	}
 }
 
 void SettingPointer::SetCharmPageActorMax()
@@ -322,7 +377,8 @@ void SettingPointer::PointerCharmPageMoveLeftStart(const StateInfo& _Info)
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
 		}
-	}	
+	}
+
 }
 
 void SettingPointer::PointerCharmPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -334,6 +390,7 @@ void SettingPointer::PointerCharmPageMoveLeftUpdate(float _DeltaTime, const Stat
 
 void SettingPointer::PointerCharmPageMoveLeftEnd(const StateInfo& _Info)
 {
+
 }
 
 void SettingPointer::PointerCharmPageMoveRightStart(const StateInfo& _Info)
@@ -366,9 +423,7 @@ void SettingPointer::PointerCharmPageMoveRightStart(const StateInfo& _Info)
 				, static_cast<float>(Z_ORDER::UI_Border) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
-
 		}
-
 
 	}
 }
@@ -376,12 +431,10 @@ void SettingPointer::PointerCharmPageMoveRightStart(const StateInfo& _Info)
 void SettingPointer::PointerCharmPageMoveRightUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	SettingPointerCharmPageManager_.ChangeState("IDLE");
-
 }
 
 void SettingPointer::PointerCharmPageMoveRightEnd(const StateInfo& _Info)
 {
-
 }
 
 void SettingPointer::PointerInCharmPageRightArrowStart(const StateInfo& _Info)
@@ -402,6 +455,11 @@ void SettingPointer::PointerInCharmPageRightArrowUpdate(float _DeltaTime, const 
 	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft"))
 	{
 		SettingPointerCharmPageManager_.ChangeState("MOVE_LEFT");
+	}
+
+	else if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))
+	{
+		isDownNextPageRight_ = true;
 	}
 }
 
@@ -428,8 +486,74 @@ void SettingPointer::PointerCharmPageInLeftArrowUpdate(float _DeltaTime, const S
 		SettingPointerCharmPageManager_.ChangeState("MOVE_RIGHT");
 	}
 
+
+	else if (true == GameEngineInput::GetInst()->IsDown("MoveLeft"))
+	{
+		isDownLextPageLeft_ = true;
+	}
+
 }
 
 void SettingPointer::PointerCharmPageInLeftArrowEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageIdleStart(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageIdleEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageMoveLeftEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageMoveRightUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageMoveRightEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInInventoryPageRightArrowStart(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInInventoryPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInInventoryPageRightArrowEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageInLeftArrowStart(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerInventoryPageInLeftArrowEnd(const StateInfo& _Info)
 {
 }

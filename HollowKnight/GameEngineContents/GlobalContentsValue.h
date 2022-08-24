@@ -83,8 +83,22 @@ enum class Z_ORDER
 enum class PAGE_TYPE
 {
 	Charm,
+	Inventory,
 	MonsterBook,
-	Map
+	Map,
+};
+
+// 페이지 인덱스 : 현재 페이지를 0으로 세팅한다.
+// 만약 내가 +1 이었다가 0으로 된다면 오른쪽으로 이동된다.
+// 만약 내가 -1 이었다가 0으로 된다면 왼족으로 이동된다.
+enum class CURRENT_PAGE_INDEX
+{
+	MIN = -2,
+	SincePage = -1,
+	CurrentPage = 0,
+	NextPage = 1,
+	AfterNextPage = 2,
+	MAX = 3
 };
 
 enum class CHAR_PAGE_ACTOR

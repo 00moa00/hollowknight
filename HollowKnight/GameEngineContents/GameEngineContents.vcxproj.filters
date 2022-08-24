@@ -318,6 +318,9 @@
     <ClInclude Include="Notches.h">
       <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
     </ClInclude>
+    <ClInclude Include="MasterPage.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -535,6 +538,9 @@
     </ClCompile>
     <ClCompile Include="Notches.cpp">
       <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterPage.cpp">
+      <Filter>Actor\Master</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

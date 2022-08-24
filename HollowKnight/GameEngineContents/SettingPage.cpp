@@ -9,7 +9,7 @@ SettingPage::SettingPage()
 	:
 	BackGround_(nullptr),
 
-	CharmPage_(nullptr),
+	//CharmPage_(nullptr),
 
 	BorderCornerLeftTop_(nullptr),
 	BorderCornerRightTop_(nullptr),
@@ -42,7 +42,7 @@ void SettingPage::Start()
 	BackGround_->ScaleToTexture();
 	BackGround_->GetColorData().MulColor.a = 0.8f;
 	//ckGround_->SetPivot(PIVOTMODE::LEFTTOP);
-	BackGround_->GetTransform().SetLocalPosition({0,0,static_cast<float>(Z_ORDER::UI_BackBoard)});
+	BackGround_->GetTransform().SetLocalPosition({ 0,0,static_cast<float>(Z_ORDER::UI_BackBoard) });
 	BackGround_->Off();
 
 
@@ -50,7 +50,7 @@ void SettingPage::Start()
 
 	BorderCornerLeftTop_ = GetLevel()->CreateActor<BorderCorner>();
 	BorderCornerLeftTop_->GetTransform().SetLocalPosition({
-		- (GameEngineWindow::GetInst()->GetScale().hx() - 200.f)
+		-(GameEngineWindow::GetInst()->GetScale().hx() - 200.f)
 		, GameEngineWindow::GetInst()->GetScale().hy() - 250.f
 		, static_cast<float>(Z_ORDER::UI_Border) });
 
@@ -61,7 +61,7 @@ void SettingPage::Start()
 	BorderCornerRightTop_ = GetLevel()->CreateActor<BorderCorner>();
 	BorderCornerRightTop_->GetRenderer()->GetTransform().PixLocalNegativeX();
 	BorderCornerRightTop_->GetTransform().SetLocalPosition({
-	GameEngineWindow::GetInst()->GetScale().hx() - 200.f 
+	GameEngineWindow::GetInst()->GetScale().hx() - 200.f
 	, GameEngineWindow::GetInst()->GetScale().hy() - 250.f
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderCornerRightTop_->Off();
@@ -71,8 +71,8 @@ void SettingPage::Start()
 	BorderCornerLeftBottom_ = GetLevel()->CreateActor<BorderCorner>();
 	BorderCornerLeftBottom_->PixLocalNegativeY();
 	BorderCornerLeftBottom_->GetTransform().SetLocalPosition({
-	- (GameEngineWindow::GetInst()->GetScale().hx() - 200.f)
-	, - (GameEngineWindow::GetInst()->GetScale().hy() - 250.f)
+	-(GameEngineWindow::GetInst()->GetScale().hx() - 200.f)
+	, -(GameEngineWindow::GetInst()->GetScale().hy() - 250.f)
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderCornerLeftBottom_->Off();
 
@@ -109,7 +109,7 @@ void SettingPage::Start()
 
 	BorderLeftArrow_ = GetLevel()->CreateActor<BorderArrow>();
 	BorderLeftArrow_->GetTransform().SetLocalPosition({
-	- (GameEngineWindow::GetInst()->GetScale().hx() - 70.f)
+	-(GameEngineWindow::GetInst()->GetScale().hx() - 70.f)
 	, 0
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderLeftArrow_->Off();
@@ -129,7 +129,14 @@ void SettingPage::Start()
 	BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Charm, BorderRightArrow_);
 
 
-	CharmPage_ = GetLevel()->CreateActor<CharmPage>();
+	AllPage_.push_back(GetLevel()->CreateActor<CharmPage>());
+	AllPage_[0]->SetCurrentPage(CURRENT_PAGE_INDEX::CurrentPage);
+
+
+	AllPage_.push_back(GetLevel()->CreateActor<InventoryPage>());
+	AllPage_[1]->SetCurrentPage(CURRENT_PAGE_INDEX::NextPage);
+
+
 
 	SettingPointer_ = GetLevel()->CreateActor<SettingPointer>();
 
@@ -138,9 +145,31 @@ void SettingPage::Start()
 
 
 
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::CurrentPage)
+		{
+			AllPage_[1]->GetTransform().SetWorldPosition({ 0, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
+		}
+
+	}
+
+
+
 	//================================
 	//    CreateKey
 	//================================
+
+	if (false == GameEngineInput::GetInst()->IsKey("OnOffCheck"))
+	{
+		GameEngineInput::GetInst()->CreateKey("OnOffCheck", 'I');
+	}
 
 	//================================
 	//    Create State
@@ -154,6 +183,21 @@ void SettingPage::Start()
 		, std::bind(&SettingPage::SettingOffUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPage::SettingOffStart, this, std::placeholders::_1)
 		, std::bind(&SettingPage::SettingOffEnd, this, std::placeholders::_1));
+
+	SettingPageManager_.CreateStateMember("IDLE"
+		, std::bind(&SettingPage::SettingIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPage::SettingIdleStart, this, std::placeholders::_1)
+		, std::bind(&SettingPage::SettingIdleEnd, this, std::placeholders::_1));
+
+	SettingPageManager_.CreateStateMember("RIGHT_MOVE"
+		, std::bind(&SettingPage::SettingMoveRightUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPage::SettingMoveRightStart, this, std::placeholders::_1)
+		, std::bind(&SettingPage::SettingMoveRightEnd, this, std::placeholders::_1));
+
+	SettingPageManager_.CreateStateMember("LEFT_MOVE"
+		, std::bind(&SettingPage::SettingMoveLeftUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPage::SettingMoveLeftStart, this, std::placeholders::_1)
+		, std::bind(&SettingPage::SettingMoveLeftEnd, this, std::placeholders::_1));
 
 	SettingPageManager_.ChangeState("OFF");
 
@@ -183,7 +227,13 @@ void SettingPage::AllOff()
 	BorderLeftArrow_->Off();
 	BorderRightArrow_->Off();
 	SettingPointer_->AllOff();
-	CharmPage_->AllOff();
+	//CharmPage_->AllOff();
+
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+		AllPage_[i]->AllOff();
+	}
+
 
 
 }
@@ -217,8 +267,11 @@ void SettingPage::AllOn()
 	BorderRightArrow_->ChangeAnimation("OPEN_ANIMATION");
 
 	SettingPointer_->AllOn();
-	CharmPage_->AllOn();
 
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+		AllPage_[i]->AllOn();
+	}
 
 }
 
@@ -229,12 +282,8 @@ void SettingPage::SettingOffStart(const StateInfo& _Info)
 
 void SettingPage::SettingOffUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (KnightData::GetInst()->GetisSetting() ==true)
-	{
-		OnOffPage();
-		SettingPageManager_.ChangeState("ON");
-	}
 
+	SettingPageManager_.ChangeState("IDLE");
 
 }
 
@@ -250,15 +299,133 @@ void SettingPage::SettingOnStart(const StateInfo& _Info)
 void SettingPage::SettingOnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
-	if (KnightData::GetInst()->GetisSetting() == false)
-	{
-		OnOffPage();
-		SettingPageManager_.ChangeState("OFF");
-	}
+	SettingPageManager_.ChangeState("IDLE");
 
 }
 
 void SettingPage::SettingOnEnd(const StateInfo& _Info)
 {
+}
+
+void SettingPage::SettingIdleStart(const StateInfo& _Info)
+{
+}
+
+void SettingPage::SettingIdleUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (true == GameEngineInput::GetInst()->IsDown("OnOffCheck"))
+	{
+		if (KnightData::GetInst()->GetisSetting() == false)
+		{
+			OnOffPage();
+			SettingPageManager_.ChangeState("OFF");
+		}
+
+		if (KnightData::GetInst()->GetisSetting() == true)
+		{
+			OnOffPage();
+			SettingPageManager_.ChangeState("ON");
+		}
+	}
+
+	if (SettingPointer_->GetisDownNextpageRight())
+	{
+		SettingPageManager_.ChangeState("RIGHT_MOVE");
+	}
+}
+
+void SettingPage::SettingIdleEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPage::SettingMoveRightStart(const StateInfo& _Info)
+{
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+		int Setindex = (static_cast<int>(AllPage_[i]->GetCurrentPage())) - 1;
+
+		if (Setindex == (static_cast<int>(CURRENT_PAGE_INDEX::MAX)))
+		{
+			Setindex = (static_cast<int>(CURRENT_PAGE_INDEX::SincePage));
+		}
+
+		else if (Setindex == (static_cast<int>(CURRENT_PAGE_INDEX::MIN)))
+		{
+			Setindex = (static_cast<int>(CURRENT_PAGE_INDEX::AfterNextPage));
+		}
+
+		AllPage_[i]->SetCurrentPage(static_cast<CURRENT_PAGE_INDEX>(Setindex));
+	}
+
+}
+
+void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	//CharmPage_->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 200.f);
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+		if (AllPage_[i]->isCurrentPage() == true)
+		{
+
+			int PosCheck = AllPage_[i]->GetTransform().GetWorldPosition().ix();
+
+			if (PosCheck == 0)
+			{
+				int a = 0;
+			}
+		}
+
+
+		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 200.f);
+
+
+
+	}
+
+	//if()
+}
+
+void SettingPage::SettingMoveRightEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPage::SettingMoveLeftStart(const StateInfo& _Info)
+{
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+
+		int Setindex = (static_cast<int>(AllPage_[i]->GetCurrentPage())) - 1;
+
+		if (Setindex == (static_cast<int>(CURRENT_PAGE_INDEX::MAX)))
+		{
+			Setindex = (static_cast<int>(CURRENT_PAGE_INDEX::SincePage));
+		}
+
+		else if (Setindex == (static_cast<int>(CURRENT_PAGE_INDEX::MIN)))
+		{
+			Setindex = (static_cast<int>(CURRENT_PAGE_INDEX::AfterNextPage));
+		}
+
+		AllPage_[i]->SetCurrentPage(static_cast<CURRENT_PAGE_INDEX>(Setindex));
+	}
+
+}
+
+void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void SettingPage::SettingMoveLeftEnd(const StateInfo& _Info)
+{
+
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+
+		if (AllPage_[i]->isCurrentPage() == true)
+		{
+			SettingPointer_->SetCurrentPage(AllPage_[i]->GetPageType());
+		}
+	}
+
 }
 

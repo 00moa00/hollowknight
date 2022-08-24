@@ -1,8 +1,8 @@
 #pragma once
-#include "MasterUI.h"
+#include "MasterPage.h"
 
 // Ό³Έν :
-class InventoryPage : public MasterUI
+class InventoryPage : public MasterPage
 {
 public:
 	// constrcuter destructer

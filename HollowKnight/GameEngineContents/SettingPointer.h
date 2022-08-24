@@ -23,6 +23,9 @@ protected:
 
 private:
 
+	bool isDownNextPageRight_;
+	bool isDownLextPageLeft_;
+
 	bool inRightArrow_;
 	bool inLeftArrow_;
 
@@ -38,10 +41,11 @@ private:
 
 	SettingPointerBox* SettingPointerBox_;
 
-	PAGE_TYPE CurrentPage_;
+	PAGE_TYPE CurrentPage_; //현재 페이지
+	PAGE_TYPE PrevPage_; // 페이지 저장용
 
 	GameEngineStateManager SettingPointerCharmPageManager_;
-	GameEngineStateManager SettingPointerManager_;
+	GameEngineStateManager SettingPointerInventoyPageManager_;
 
 public:
 
@@ -64,7 +68,9 @@ public:
 	//    Bind State
 	//================================
 
-
+	//=========================================
+	//    SettingPointerCharmPageManager
+	//=========================================
 	void PointerCharmPageIdleStart(const StateInfo& _Info);
 	void PointerCharmPageIdleUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerCharmPageIdleEnd(const StateInfo& _Info);
@@ -86,5 +92,52 @@ public:
 	void PointerCharmPageInLeftArrowEnd(const StateInfo& _Info);
 
 
+	//=========================================
+	//    SettingPointerInventoyPageManager
+	//=========================================
+	void PointerInventoryPageIdleStart(const StateInfo& _Info);
+	void PointerInventoryPageIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerInventoryPageIdleEnd(const StateInfo& _Info);
+
+	void PointerInventoryPageMoveLeftStart(const StateInfo& _Info);
+	void PointerInventoryPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerInventoryPageMoveLeftEnd(const StateInfo& _Info);
+
+	void PointerInventoryPageMoveRightStart(const StateInfo& _Info);
+	void PointerInventoryPageMoveRightUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerInventoryPageMoveRightEnd(const StateInfo& _Info);
+
+	void PointerInInventoryPageRightArrowStart(const StateInfo& _Info);
+	void PointerInInventoryPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerInInventoryPageRightArrowEnd(const StateInfo& _Info);
+
+	void PointerInventoryPageInLeftArrowStart(const StateInfo& _Info);
+	void PointerInventoryPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerInventoryPageInLeftArrowEnd(const StateInfo& _Info);
+
+
+public:
+	//================================
+	//    Getter
+	//================================
+	bool GetisDownNextpageRight()
+	{
+		return isDownNextPageRight_;
+	}
+
+	bool GetisDownLextPageLeft()
+	{
+		return isDownLextPageLeft_;
+	}
+
+
+	//================================
+	//    Setter
+	//================================
+
+	void SetCurrentPage(PAGE_TYPE _PageType)
+	{
+		CurrentPage_ = _PageType;
+	}
 };
 

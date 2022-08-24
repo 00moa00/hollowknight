@@ -10,6 +10,11 @@
 #include "SettingPointer.h"
 
 #include "CharmPage.h"
+#include "InventoryPage.h"
+
+
+
+
 
 class GameEngineTextureRenderer;
 class SettingPage : public GameEngineActor
@@ -45,11 +50,16 @@ private:
 	BorderArrow* BorderLeftArrow_;
 	BorderArrow* BorderRightArrow_;
 
-	CharmPage* CharmPage_;
 	GameEngineUIRenderer* BackGround_;
+
+	//CharmPage* CharmPage_;
+	//InventoryPage* InventoryPage_;
+
 
 	SettingPointer* SettingPointer_;
 
+	std::vector<MasterPage*> AllPage_;
+	
 	GameEngineStateManager SettingPageManager_;
 
 
@@ -70,6 +80,16 @@ private:
 	void SettingOnUpdate(float _DeltaTime, const StateInfo& _Info);
 	void SettingOnEnd(const StateInfo& _Info);
 
+	void SettingIdleStart(const StateInfo& _Info);
+	void SettingIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void SettingIdleEnd(const StateInfo& _Info);
 
+	void SettingMoveRightStart(const StateInfo& _Info);
+	void SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Info);
+	void SettingMoveRightEnd(const StateInfo& _Info);
+
+	void SettingMoveLeftStart(const StateInfo& _Info);
+	void SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info);
+	void SettingMoveLeftEnd(const StateInfo& _Info);
 };
 

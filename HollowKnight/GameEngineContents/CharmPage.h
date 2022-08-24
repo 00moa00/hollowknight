@@ -1,11 +1,11 @@
 #pragma once
-#include "MasterUI.h"
+#include "MasterPage.h"
 #include "CharmSlot.h"
 #include "Notches.h"
 
 #include <GameEngineCore/GameEngineFontRenderer.h>
 // 설명 : 0~39 : 부적, 50, 51 : 포인터, 40~49 : 장착슬롯
-class CharmPage : public MasterUI
+class CharmPage : public MasterPage
 {
 public:
 	// constrcuter destructer
@@ -30,8 +30,8 @@ private:
 	GameEngineUIRenderer* Line_;
 
 public:
-	void AllOff();
-	void AllOn();
+	void AllOff() override;
+	void AllOn() override ;
 
 	void CreateEquippedCharm(GameEngineUIRenderer* _CopyRenderer);
 

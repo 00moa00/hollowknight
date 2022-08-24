@@ -56,7 +56,7 @@ void CharmPage::Start()
 			AllCharmSlot_[ValueNum]->CreateCharmSlot(EnumString, "Charm_" + FilePathNum + ".png", CharmState{ValueNum , 0, false, false}, CharmEnum.value());
 			AllCharmSlot_[ValueNum]->GetTransform().SetLocalPosition({ ( - 750.f + AddMaginX) + MaginX , -60.f + MaginY, static_cast<float>(Z_ORDER::UI)});
 			
-			//AllCharmSlot_[ValueNum]->SetParent(this);
+			AllCharmSlot_[ValueNum]->SetParent(this);
 				
 			PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
 			Component_->PushPointerActor(ValueNum, PAGE_TYPE::Charm, AllCharmSlot_[ValueNum]);
@@ -80,7 +80,8 @@ void CharmPage::Start()
 		AllCharmSlot_.push_back(GetLevel()->CreateActor<CharmSlot>());
 		AllCharmSlot_[i]->CreateEquippedCharmSlot(CharmState{ i , 0, false, false });
 		AllCharmSlot_[i]->GetTransform().SetLocalPosition({ -750.f + MaginX , 200.f , static_cast<float>(Z_ORDER::UI) });
-		
+		AllCharmSlot_[i]->SetParent(this);
+
 		if (i != 40)
 		{
 			AllCharmSlot_[i]->GetRenderer()->Off();
@@ -103,7 +104,7 @@ void CharmPage::Start()
 
 		GetLevel<HollowKnightLevel>()->PushNotches(GetLevel()->CreateActor<Notches>(),
 			{ -750.f + MaginX, 60.f , static_cast<float>(Z_ORDER::UI) });
-
+		GetLevel<HollowKnightLevel>()->AllNotes_[i]->SetParent(this);
 		MaginX += 50.f;
 	}
 
@@ -114,14 +115,16 @@ void CharmPage::Start()
 	NotchesFont_->SetSize(32);
 	NotchesFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 	NotchesFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
-	//NotchesFont_->Set
-
+	//NotchesFont_->
 
 	Line_ = CreateComponent<GameEngineUIRenderer>();
 
 	Line_->SetTexture("Line.png");
 	Line_->GetTransform().SetWorldScale({1021, 5});
 	Line_->GetTransform().SetWorldPosition({ -400.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
+
+
+	SetPageType(PAGE_TYPE::Charm);
 }
 
 void CharmPage::Update(float _DeltaTime)
