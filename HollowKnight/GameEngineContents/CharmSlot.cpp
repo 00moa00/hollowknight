@@ -28,8 +28,8 @@ void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePat
 	CharmState_.SlotNum_ = _CharmState.SlotNum_;
 	CharmState_.KnihgistHas_ = _CharmState.KnihgistHas_;
 	CharmState_.isUsing_ = _CharmState.isUsing_;
-	CharmState_.isEquipped_ = false;
-	CharmState_.isEquippedUsing_ = false;
+	CharmState_.isEquippedSlot_ = false;
+	CharmState_.isEquippedSlotUsing_ = false;
 	CharmState_.CharmFilePath_ = _CharmFilePath;
 	CharmState_.CharmName_ = _SlotName;
 
@@ -221,8 +221,8 @@ void CharmSlot::CreateEquippedCharmSlot( CharmState _CharmState)
 	CharmState_.SlotCount_ = _CharmState.SlotCount_;
 	CharmState_.KnihgistHas_ = _CharmState.KnihgistHas_;
 	CharmState_.isUsing_ = _CharmState.isUsing_;
-	CharmState_.isEquipped_ = true;
-	CharmState_.isEquippedUsing_ = false;
+	CharmState_.isEquippedSlot_ = true;
+	CharmState_.isEquippedSlotUsing_ = false;
 
 
 	//ºÎÀû

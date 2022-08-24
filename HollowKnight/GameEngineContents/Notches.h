@@ -29,5 +29,10 @@ public:
 	{
 		GetRenderer()->SetTexture("charm_UI__0000_charm_cost_02_lit.png");
 	}
+
+	void SetNotchesNotUsed()
+	{
+		GetRenderer()->SetTexture("charm_UI__0001_charm_cost_02_unlit.png");
+	}
 };
 

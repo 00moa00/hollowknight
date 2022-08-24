@@ -213,22 +213,25 @@ void SettingPointer::PointerIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 		CharmSlot* slot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
 
-		// 부적 장착이 가능한지 && 내가 선택한 부적이 사용중이 아닌건지
-		if (KnightData::GetInst()->SubUsingCharmNotches(slot->GetSlotCount()) == true && slot->GetisUsing() == false)
+		// 부적 장착이 가능한지 && 내가 선택한 부적이 사용중이 아닌건지 && 부적 슬롯이 아니다
+		if (KnightData::GetInst()->SubUsingCharmNotches(slot->GetSlotCount()) == true
+			&& slot->GetisUsing() == false 
+			&& slot->GetisEquippedSlot() == false)
 		{
 			for (int i = 40; i < 50; ++i)
 			{
+				//NotesSlot : 장착 가능한 슬롯, slot: 현재 포인트 하고있는 슬롯
 				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(i)->second;
-
 				CharmSlot* NotesSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
-				//부적 칸을 사용하지 않다면
-				if (NotesSlot->GetisEquippedUsing() == false)
+				//부적 장착중이 아니라면
+				if (NotesSlot->GetisEquippedSlotUsing() == false)
 				{
 					NotesSlot->CreateCopyCharm(slot->GetRenderer(), slot->GetCharmName(), slot->GetFilePath());
-					NotesSlot->SetisEquippedUsing(true);
-					slot->SetisUsing(true);
+					NotesSlot->SetisEquippedSlotUsing(true);
+					NotesSlot->SetUsingSlotNum(slot->GetSlotNum());
 
+					slot->SetisUsing(true);
 
 					//사용 가능한 부적 칸 수(노치) 갱신
 					for (int j = 0; j < KnightData::GetInst()->GetUsingCharmNotches(); ++j)
@@ -248,12 +251,32 @@ void SettingPointer::PointerIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 					break;
 				}
 			}
-
-
-
 		}
 
 		
+		else if(slot->GetisEquippedSlotUsing() == true)
+		{
+
+			//해당 부적을 사용하고 있지 않음으로 바꿔야한다.
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(slot->GetUsingSlotNum())->second;
+			CharmSlot* SearchSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+			KnightData::GetInst()->AddUsingCharmNotches(SearchSlot->GetSlotCount());
+			SearchSlot->SetisUsing(false);
+
+			slot->SetUsingSlotNum(-1);
+			slot->SetisEquippedSlotUsing(false);
+			slot->GetCharm()->GetRenderer()->Death();
+
+			//사용 가능한 부적 칸 수(노치) 갱신
+			for (int j = KnightData::GetInst()->GetCharmNotches()-1; j > KnightData::GetInst()->GetUsingCharmNotches()-1; --j)
+			{
+				GetLevel<HollowKnightLevel>()->AllNotes_[j]->SetNotchesNotUsed();
+			}
+
+		}
+
+	
 	}
 
 

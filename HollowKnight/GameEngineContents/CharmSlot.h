@@ -3,11 +3,13 @@
 #include "Charm.h"
 
 // 해당 슬롯에 내가 가지고 있는 부적인지, 그리고 장착하고 있는 부적인지 상태를 알 수 있어야한다
-// 부적위치는 고정이니까 글로벌벨류에서 우선 ㅅ[ㅔ팅
+// 부적위치는 늘 고정(바뀔 일이 없다.)
 
-// 포인터 엑터는 슬롯이다.
+// 포인터 엑터는 해당 클래스이다(슬롯)이다.
 
-// 슬롯은 이미 부적에 대한 정보와, 부적을 가지고 있음.
+// 슬롯은 부적에 대한 정보와, 부적을 가지고 있다.
+
+// 해당 게임은 부적의 종류가 바뀌어도(강화) 갯수와 위치는 고정이기때문에 유동적으로 짤 이유가 없다
 
 struct CharmState 
 {
@@ -16,8 +18,13 @@ public :
 	int SlotCount_;		//슬롯 몇개가 필요한지
 	bool KnihgistHas_;	//나이트가 가지고 있는지
 	bool isUsing_;		//사용 하고 있는지
-	bool isEquipped_; //장착 슬롯인지
-	bool isEquippedUsing_; //장착 슬롯 사용중인지
+
+	bool isEquippedSlot_; //장착 슬롯인지
+	bool isEquippedSlotUsing_; //장착 슬롯이 사용중인지
+
+	int UsingSlotNum_; //장착한 슬롯의 번호
+
+
 	std::string CharmFilePath_; // 파일 패스
 	std::string CharmName_;
 };
@@ -53,6 +60,15 @@ public:
 	void CreateCopyCharm(GameEngineUIRenderer* _RenderData, std::string _SlotName, std::string _FilePath);
 
 
+	//================================
+	//    Getter 
+	//================================
+
+	Charm* GetCharm()
+	{
+		return Charm_;
+	}
+
 	int GetSlotNum()
 	{
 		return CharmState_.SlotNum_;
@@ -73,15 +89,20 @@ public:
 		return CharmState_.isUsing_;
 	}
 
-	bool GetisEquipped()
+	bool GetisEquippedSlot()
 	{
-		return CharmState_.isEquipped_;
+		return CharmState_.isEquippedSlot_;
 	}
-	bool GetisEquippedUsing()
+	bool GetisEquippedSlotUsing()
 	{
-		return  CharmState_.isEquippedUsing_;
+		return  CharmState_.isEquippedSlotUsing_;
 	}
 
+
+	int GetUsingSlotNum()
+	{
+		return  CharmState_.UsingSlotNum_;
+	}
 
 	CharmState& GetCharmState()
 	{
@@ -97,6 +118,10 @@ public:
 	{
 		return CharmState_.CharmName_;
 	}
+
+	//================================
+	//    Setter 
+	//================================
 
 	void SetCharmisHas(bool _b)
 	{
@@ -115,15 +140,20 @@ public:
 		}
 	}
 
-	void SetisEquippedUsing(bool _b)
+	void SetisEquippedSlotUsing(bool _b)
 	{
-		CharmState_.isEquippedUsing_ = _b;
+		CharmState_.isEquippedSlotUsing_ = _b;
 	}
 	
 
 	void SetisUsing(bool _b)
 	{
 		CharmState_.isUsing_ = _b;
+	}
+
+	void SetUsingSlotNum(int _i)
+	{
+		CharmState_.UsingSlotNum_ = _i;
 	}
 	
 

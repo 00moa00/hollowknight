@@ -128,7 +128,7 @@ public:
 	//부적을 장착한다.
 	bool SubUsingCharmNotches(int _i)
 	{
-		if (CharmNotches_ - UsingCharmNotches_ > _i)
+		if (CharmNotches_ - UsingCharmNotches_ >= _i)
 		{
 			UsingCharmNotches_ += _i;
 			return true;
