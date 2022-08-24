@@ -171,8 +171,11 @@ void SettingPointer::PointerIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		if (CurrentPosInCharmPage < 0)
 		{
+			CurrentPosInCharmPage += 50;
+		}
+		else if (CurrentPosInCharmPage >= 30)
+		{
 			CurrentPosInCharmPage = PrevCount;
-
 		}
 
 		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
@@ -192,8 +195,15 @@ void SettingPointer::PointerIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		if (CurrentPosInCharmPage > CharmPageActorCount)
 		{
-			CurrentPosInCharmPage = PrevCount;
+			if (CurrentPosInCharmPage >= 50)
+			{
+				CurrentPosInCharmPage -= 50;
+			}
+		}
 
+		else if(CurrentPosInCharmPage >= 40) //위에서 10씩 더해주고있으니까 생각하고 있는 인덱스 + 10
+		{
+			CurrentPosInCharmPage = PrevCount;
 		}
 
 		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
