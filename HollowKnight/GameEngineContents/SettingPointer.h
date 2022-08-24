@@ -38,7 +38,11 @@ private:
 
 	SettingPointerBox* SettingPointerBox_;
 
-	GameEngineStateManager SettingPointeManager_;
+	PAGE_TYPE CurrentPage_;
+
+	GameEngineStateManager SettingPointerCharmPageManager_;
+	GameEngineStateManager SettingPointerManager_;
+
 public:
 
 	void AllOn();
@@ -61,25 +65,26 @@ public:
 	//================================
 
 
-	void PointerIdleStart(const StateInfo& _Info);
-	void PointerIdleUpdate(float _DeltaTime, const StateInfo& _Info);
-	void PointerIdleEnd(const StateInfo& _Info);
+	void PointerCharmPageIdleStart(const StateInfo& _Info);
+	void PointerCharmPageIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerCharmPageIdleEnd(const StateInfo& _Info);
 
-	void PointerMoveLeftStart(const StateInfo& _Info);
-	void PointerMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info);
-	void PointerMoveLeftEnd(const StateInfo& _Info);
+	void PointerCharmPageMoveLeftStart(const StateInfo& _Info);
+	void PointerCharmPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerCharmPageMoveLeftEnd(const StateInfo& _Info);
 
-	void PointerMoveRightStart(const StateInfo& _Info);
-	void PointerMoveRightUpdate(float _DeltaTime, const StateInfo& _Info);
-	void PointerMoveRightEnd(const StateInfo& _Info);
+	void PointerCharmPageMoveRightStart(const StateInfo& _Info);
+	void PointerCharmPageMoveRightUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerCharmPageMoveRightEnd(const StateInfo& _Info);
 
-	void PointerInRightArrowStart(const StateInfo& _Info);
-	void PointerInRightArrowUpdate(float _DeltaTime, const StateInfo& _Info);
-	void PointerInRightArrowEnd(const StateInfo& _Info);
+	void PointerInCharmPageRightArrowStart(const StateInfo& _Info);
+	void PointerInCharmPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerInCharmPageRightArrowEnd(const StateInfo& _Info);
 
-	void PointerInLeftArrowStart(const StateInfo& _Info);
-	void PointerInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info);
-	void PointerInLeftArrowEnd(const StateInfo& _Info);
+	void PointerCharmPageInLeftArrowStart(const StateInfo& _Info);
+	void PointerCharmPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerCharmPageInLeftArrowEnd(const StateInfo& _Info);
+
 
 };
 
