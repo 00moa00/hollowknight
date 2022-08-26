@@ -140,11 +140,11 @@ void SettingPointer::Update(float _DeltaTime)
 		SettingPointerCharmPageManager_.Update(_DeltaTime);
 		break;
 	case PAGE_TYPE::MonsterBook:
-		SettingPointerInventoyPageManager_.Update(_DeltaTime);
 		break;
 	case PAGE_TYPE::Map:
 		break;
 	case PAGE_TYPE::Inventory:
+		SettingPointerInventoyPageManager_.Update(_DeltaTime);
 		break;
 	default:
 		break;
@@ -227,6 +227,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
 			SettingPointerCharmPageManager_.ChangeState("IN_LEFT_ARROW");
+			SettingPointerInventoyPageManager_.ChangeState("WAIT");
 
 		}
 
@@ -234,6 +235,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
 			SettingPointerCharmPageManager_.ChangeState("IN_RIGHT_ARROW");
+			SettingPointerInventoyPageManager_.ChangeState("WAIT");
 
 		}
 
@@ -253,7 +255,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
 			SettingPointerInventoyPageManager_.ChangeState("IN_LEFT_ARROW");
-
+			SettingPointerCharmPageManager_.ChangeState("WAIT");
 
 
 
@@ -265,6 +267,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
 			SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+			SettingPointerCharmPageManager_.ChangeState("WAIT");
 
 		}
 
@@ -640,7 +643,7 @@ void SettingPointer::PointerInInventoryPageRightArrowUpdate(float _DeltaTime, co
 {
 	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft"))
 	{
-		SettingPointerCharmPageManager_.ChangeState("MOVE_LEFT");
+		SettingPointerInventoyPageManager_.ChangeState("MOVE_LEFT");
 	}
 
 	else if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))
@@ -661,12 +664,12 @@ void SettingPointer::PointerInventoryPageInLeftArrowUpdate(float _DeltaTime, con
 {
 	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft"))
 	{
-		SettingPointerCharmPageManager_.ChangeState("MOVE_LEFT");
+		isDownLextPageLeft_ = true;
 	}
 
 	else if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))
 	{
-		isDownNextPageRight_ = true;
+		SettingPointerInventoyPageManager_.ChangeState("MOVE_RIGHT");
 	}
 }
 

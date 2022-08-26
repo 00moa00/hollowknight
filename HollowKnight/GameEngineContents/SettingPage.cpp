@@ -351,12 +351,15 @@ void SettingPage::SettingIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (SettingPointer_->GetisDownNextpageRight())
 	{
+		SettingPointer_->SetisDownNextPageRight(false);
+
 		SettingPageManager_.ChangeState("RIGHT_MOVE");
 	}
 
 
 	if (SettingPointer_->GetisDownLextPageLeft())
 	{
+		SettingPointer_->SetisDownNextPageLeft(false);
 		SettingPageManager_.ChangeState("LEFT_MOVE");
 	}
 }

@@ -150,5 +150,15 @@ public:
 	//    Setter
 	//================================
 
+	void SetisDownNextPageRight(bool _b)
+	{
+		isDownNextPageRight_ = _b;
+	}
+	
+	void SetisDownNextPageLeft(bool _b)
+	{
+		isDownLextPageLeft_ = _b;
+	}
+
 };
 
