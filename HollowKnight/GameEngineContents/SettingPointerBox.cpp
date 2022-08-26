@@ -21,7 +21,7 @@ SettingPointerBox::~SettingPointerBox()
 void SettingPointerBox::Start()
 {
 	LeftTopPointer_ = CreateComponent<GameEngineUIRenderer>();
-	LeftTopPointer_->SetTexture("InventoryPointer.png");
+	LeftTopPointer_->SetTexture("Knight_turn000-Sheet.png",1);
 	LeftTopPointer_->ScaleToTexture();
 	LeftTopPointer_->GetTransform().SetLocalPosition({ 0,0,static_cast<float>(Z_ORDER::UI_Border) });
 
