@@ -217,11 +217,7 @@ void EngineRenderingPipeLine()
 		NewPipe->SetPixelShader("TextureAtlas.hlsl");
 	}
 
-	{
-		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("TextureAtlasMask");
-		NewPipe->SetVertexShader("Mask.hlsl");
-		NewPipe->SetPixelShader("Mask.hlsl");
-	}
+
 
 	{
 		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("3DDebug");
@@ -244,6 +240,15 @@ void EngineRenderingPipeLine()
 		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("DebugTexture");
 		NewPipe->SetVertexShader("DebugTexture.hlsl");
 		NewPipe->SetPixelShader("DebugTexture.hlsl");
+	}
+
+	// PostEffect
+	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("Blur");
+		NewPipe->SetInputAssembler1VertexBuffer("FullRect");
+		NewPipe->SetInputAssembler2IndexBuffer("FullRect");
+		NewPipe->SetVertexShader("Blur.hlsl");
+		NewPipe->SetPixelShader("Blur.hlsl");
 	}
 }
 

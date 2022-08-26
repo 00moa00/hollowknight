@@ -33,7 +33,11 @@ ContentsCore::~ContentsCore()
 void ContentsCore::Start()
 {
 
-
+	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("TextureAtlasMask");
+		NewPipe->SetVertexShader("Mask.hlsl");
+		NewPipe->SetPixelShader("Mask.hlsl");
+	}
 
 	{
 
