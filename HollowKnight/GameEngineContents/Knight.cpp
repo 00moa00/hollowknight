@@ -96,7 +96,7 @@ void Knight::Start()
 	Test2_->GetTransform().SetLocalScale({ 15,15,1 });
 
 	//Test1_->ChangeOrder(_Order);
-	//GetRenderer()->GetColorData().MulColor
+	//GetRenderer()->GetPixelData().MulColor
 
 	GetTransform().SetWorldPosition({500,-4000,static_cast<float>(Z_ORDER::Knight) });
 	

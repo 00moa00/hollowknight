@@ -21,14 +21,16 @@ enum class SCALEMODE
 	CUSTOM,
 };
 
-struct ColorData
+struct PixelData
 {
 	float4 MulColor;
 	float4 PlusColor;
+	float4 Slice;
 
-	ColorData()
+	PixelData()
 		: MulColor(float4::WHITE)
 		, PlusColor(float4::ZERO)
+		, Slice(float4::ZERO)
 	{
 
 	}
@@ -223,11 +225,11 @@ public:
 
 	void CurAnimationSetStartPivotFrame(int SetFrame);
 
-	ColorData& GetColorData() 
-	{
-		return ColorData;
-	}
 
+	PixelData& GetPixelData()
+	{
+		return PixelDataInst;
+	}
 
 
 	// 애니메이션 바인드
@@ -299,7 +301,7 @@ protected:
 	GameEngineTexture* CurTex;
 	//float4 FrameData;
 
-	ColorData ColorData;
+	PixelData PixelDataInst;
 	AtlasData AtlasDataInst;
 
 	std::map<std::string, FrameAnimation> FrameAni;

@@ -49,6 +49,6 @@ private:
 	float4 TileScaleH;
 	std::vector<std::vector<Tile>> Tiles;
 	float4 FrameData;
-	ColorData ColorData;
+	PixelData PixelDataInst;
 };
 

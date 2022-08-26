@@ -132,8 +132,8 @@ void AreaTitle::AreaTitleByeUpdate(float _DeltaTime, const StateInfo& _Info)
 		AlphaTimer_ = 0.0f;
 		GameTitleFont_->SetColor({ 1.0f, 1.0f, 1.0f, Alpha_ });
 		GameTitleBottomFont_->SetColor({ 1.0f, 1.0f, 1.0f, Alpha_ });
-		AreaTitleTop_->GetRenderer()->GetColorData().MulColor.a = Alpha_;
-		AreaTitleBottom_->GetRenderer()->GetColorData().MulColor.a = Alpha_;
+		AreaTitleTop_->GetRenderer()->GetPixelData().MulColor.a = Alpha_;
+		AreaTitleBottom_->GetRenderer()->GetPixelData().MulColor.a = Alpha_;
 
 	}
 

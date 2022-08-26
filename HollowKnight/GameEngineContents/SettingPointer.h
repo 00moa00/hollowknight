@@ -3,7 +3,10 @@
 #include "SettingUIMaster.h"
 #include "SettingPointerBox.h"
 
+
+class HollowKnightLevel;
 class PointActorComponent;
+
 class SettingPointer : public MasterUI
 {
 public:
@@ -32,7 +35,8 @@ private:
 	// «ˆ¿Á ¿Œµ¶Ω∫
 	int CurrentPosInCharmPage;
 	int CurrentPosInMapPage;
-	int CurrentPosInCMonsterPage;
+	int CurrentPosInMonsterPage;
+	int CurrentPosInInventoryPage;
 
 	//√— ¿Œµ¶Ω∫
 	int CharmPageActorCount;
@@ -64,6 +68,9 @@ public:
 	void SetFirstPosMapPage();
 	void SetFirstPosMonsterBookPage();
 
+
+	void SetCurrentPage(PAGE_TYPE _PageType);
+
 	//================================
 	//    Bind State
 	//================================
@@ -92,8 +99,12 @@ public:
 	void PointerCharmPageInLeftArrowEnd(const StateInfo& _Info);
 
 
+	void PointerCharmPageWaitStart(const StateInfo& _Info);
+	void PointerCharmPageWaitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerCharmPageWaitEnd(const StateInfo& _Info);
+
 	//=========================================
-	//    SettingPointerInventoyPageManager
+	//    SettingPointerInventoryPageManager
 	//=========================================
 	void PointerInventoryPageIdleStart(const StateInfo& _Info);
 	void PointerInventoryPageIdleUpdate(float _DeltaTime, const StateInfo& _Info);
@@ -116,6 +127,10 @@ public:
 	void PointerInventoryPageInLeftArrowEnd(const StateInfo& _Info);
 
 
+	void PointerInventoryPageWaitStart(const StateInfo& _Info);
+	void PointerInventoryPageWaitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerInventoryPageWaitEnd(const StateInfo& _Info);
+
 public:
 	//================================
 	//    Getter
@@ -135,9 +150,5 @@ public:
 	//    Setter
 	//================================
 
-	void SetCurrentPage(PAGE_TYPE _PageType)
-	{
-		CurrentPage_ = _PageType;
-	}
 };
 

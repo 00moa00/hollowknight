@@ -71,10 +71,11 @@ Output TextureAtlas_VS(Input _Input)
     return NewOutPut;
 }
 
-cbuffer ColorData : register(b0)
+cbuffer PixelData : register(b0)
 {
     float4 MulColor;
     float4 PlusColor;
+    float4 Slice;
 }
 
 Texture2D Tex : register(t0);

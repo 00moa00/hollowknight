@@ -40,7 +40,7 @@ void SettingPage::Start()
 	BackGround_ = CreateComponent<GameEngineUIRenderer>();
 	BackGround_->SetTexture("Black.png");
 	BackGround_->ScaleToTexture();
-	BackGround_->GetColorData().MulColor.a = 0.8f;
+	BackGround_->GetPixelData().MulColor.a = 0.8f;
 	//ckGround_->SetPivot(PIVOTMODE::LEFTTOP);
 	BackGround_->GetTransform().SetLocalPosition({ 0,0,static_cast<float>(Z_ORDER::UI_BackBoard) });
 	BackGround_->Off();
@@ -114,20 +114,36 @@ void SettingPage::Start()
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderLeftArrow_->Off();
 
-	PointActorComponent* BorderLeftArrowComponent_ = CreateComponent<PointActorComponent>();
-	BorderLeftArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow), PAGE_TYPE::Charm, BorderLeftArrow_);
+	{
+		PointActorComponent* BorderLeftArrowComponent_ = CreateComponent<PointActorComponent>();
+		BorderLeftArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow), PAGE_TYPE::Charm, BorderLeftArrow_);
+
+	}
+
+	{
+		PointActorComponent* BorderLeftArrowComponent_ = CreateComponent<PointActorComponent>();
+		BorderLeftArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow), PAGE_TYPE::Inventory, BorderLeftArrow_);
+	}
+
 
 	BorderRightArrow_ = GetLevel()->CreateActor<BorderArrow>();
-	//BorderRightArrow_->
 	BorderRightArrow_->GetTransform().SetLocalPosition({
 	(GameEngineWindow::GetInst()->GetScale().hx() - 90.f)
 	, 0
 	, static_cast<float>(Z_ORDER::UI_Border) });
+	BorderRightArrow_->GetRenderer()->GetTransform().PixLocalNegativeX();
 	BorderRightArrow_->Off();
 
-	PointActorComponent* BorderRightArrowComponent_ = CreateComponent<PointActorComponent>();
-	BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Charm, BorderRightArrow_);
+	{
+		PointActorComponent* BorderRightArrowComponent_ = CreateComponent<PointActorComponent>();
+		BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Charm, BorderRightArrow_);
+	}
 
+	{
+
+		PointActorComponent* BorderRightArrowComponent_ = CreateComponent<PointActorComponent>();
+		BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Inventory, BorderRightArrow_);
+	}
 
 	AllPage_.push_back(GetLevel()->CreateActor<CharmPage>());
 	AllPage_[0]->SetCurrentPage(CURRENT_PAGE_INDEX::CurrentPage);
@@ -337,6 +353,12 @@ void SettingPage::SettingIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		SettingPageManager_.ChangeState("RIGHT_MOVE");
 	}
+
+
+	if (SettingPointer_->GetisDownLextPageLeft())
+	{
+		SettingPageManager_.ChangeState("LEFT_MOVE");
+	}
 }
 
 void SettingPage::SettingIdleEnd(const StateInfo& _Info)
@@ -376,12 +398,12 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 
 			if (PosCheck == 0)
 			{
-				int a = 0;
+				SettingPageManager_.ChangeState("IDLE");
 			}
 		}
 
 
-		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 200.f);
+		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 400.f);
 
 
 
@@ -430,7 +452,7 @@ void SettingPage::SettingMoveLeftStart(const StateInfo& _Info)
 	for (int i = 0; i < AllPage_.size(); ++i)
 	{
 
-		int Setindex = (static_cast<int>(AllPage_[i]->GetCurrentPage())) - 1;
+		int Setindex = (static_cast<int>(AllPage_[i]->GetCurrentPage())) + 1;
 
 		if (Setindex == (static_cast<int>(CURRENT_PAGE_INDEX::MAX)))
 		{
@@ -449,6 +471,26 @@ void SettingPage::SettingMoveLeftStart(const StateInfo& _Info)
 
 void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+		if (AllPage_[i]->isCurrentPage() == true)
+		{
+
+			int PosCheck = AllPage_[i]->GetTransform().GetWorldPosition().ix();
+
+			if (PosCheck == 0)
+			{
+				SettingPageManager_.ChangeState("IDLE");
+			}
+		}
+
+
+		AllPage_[i]->GetTransform().SetWorldMove(float4::RIGHT * _DeltaTime * 400.f);
+
+
+
+	}
+
 }
 
 void SettingPage::SettingMoveLeftEnd(const StateInfo& _Info)
