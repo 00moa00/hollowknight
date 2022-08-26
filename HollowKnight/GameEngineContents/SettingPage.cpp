@@ -158,6 +158,11 @@ void SettingPage::Start()
 			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
 		}
 
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
+		}
+
 	}
 
 
@@ -387,6 +392,37 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 
 void SettingPage::SettingMoveRightEnd(const StateInfo& _Info)
 {
+
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+
+		if (AllPage_[i]->isCurrentPage() == true)
+		{
+			SettingPointer_->SetCurrentPage(AllPage_[i]->GetPageType());
+		}
+	}
+
+
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::CurrentPage)
+		{
+			AllPage_[1]->GetTransform().SetWorldPosition({ 0, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
+		}
+
+	}
+
 }
 
 void SettingPage::SettingMoveLeftStart(const StateInfo& _Info)
@@ -426,6 +462,30 @@ void SettingPage::SettingMoveLeftEnd(const StateInfo& _Info)
 			SettingPointer_->SetCurrentPage(AllPage_[i]->GetPageType());
 		}
 	}
+
+
+
+
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::CurrentPage)
+		{
+			AllPage_[1]->GetTransform().SetWorldPosition({ 0, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
+		}
+
+	}
+
 
 }
 
