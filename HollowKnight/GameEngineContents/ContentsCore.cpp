@@ -67,7 +67,7 @@ void ContentsCore::Start()
 
 		Desc.AlphaToCoverageEnable = FALSE;
 		Desc.IndependentBlendEnable = FALSE;
-		Desc.RenderTarget[0].BlendEnable = true;
+		Desc.RenderTarget[0].BlendEnable = TRUE;
 		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 
@@ -89,7 +89,7 @@ void ContentsCore::Start()
 
 		Desc.AlphaToCoverageEnable = FALSE;
 		Desc.IndependentBlendEnable = FALSE;
-		Desc.RenderTarget[0].BlendEnable = true;
+		Desc.RenderTarget[0].BlendEnable = TRUE;
 		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 
@@ -111,7 +111,7 @@ void ContentsCore::Start()
 
 		Desc.AlphaToCoverageEnable = FALSE;
 		Desc.IndependentBlendEnable = FALSE;
-		Desc.RenderTarget[0].BlendEnable = true;
+		Desc.RenderTarget[0].BlendEnable = TRUE;
 		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 
