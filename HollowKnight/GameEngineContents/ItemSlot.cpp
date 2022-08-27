@@ -11,18 +11,21 @@ ItemSlot::~ItemSlot()
 }
 
 
-void ItemSlot::CreateItem(std::string _Name, int _ItemNum, ITEM_LIST _Item)
+void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 {
-
-
-
 	ItemState_.ItemName_ = _Name;
 	ItemState_.ItemNum_ = _ItemNum;
-
 
 
 	Item_ = GetLevel()->CreateActor<Item>();
 	Item_->CreateItem(_Name,  _ItemNum, _Item);
 
 	Item_->SetParent(this);
+}
+
+void ItemSlot::CreateItemSlot(int _ItemNum, ITEM_LIST _Item, ITEM_TYPE _type)
+{
+	CreateRendererComponent({49,49}, "new_item_orb.png");
+	ItemState_.ItemNum_ = _ItemNum;
+
 }

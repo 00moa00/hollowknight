@@ -35,7 +35,8 @@ protected:
 	ItemState ItemState_;
 
 public:
-	void CreateItem(std::string _Name, int _ItemNum, ITEM_LIST _Item);
+	void CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item);
+	void CreateItemSlot(int _ItemNum, ITEM_LIST _Item, ITEM_TYPE _type);
 
 
 

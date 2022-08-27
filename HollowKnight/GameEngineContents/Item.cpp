@@ -120,3 +120,4 @@ void Item::CreateItem(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 	CreateRendererComponent(Scale, _Name + ".png");
 
 }
+
