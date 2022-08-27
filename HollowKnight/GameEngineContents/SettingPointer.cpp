@@ -257,10 +257,6 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 			SettingPointerInventoyPageManager_.ChangeState("IN_LEFT_ARROW");
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
 
-
-
-
-
 		}
 
 		if (PrevPage_ == PAGE_TYPE::Map)
@@ -272,7 +268,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		}
 
 
-		PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInInventoryPage)->second;
+		PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
 
 		SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y

@@ -140,7 +140,6 @@ void SettingPage::Start()
 	}
 
 	{
-
 		PointActorComponent* BorderRightArrowComponent_ = CreateComponent<PointActorComponent>();
 		BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Inventory, BorderRightArrow_);
 	}
@@ -153,9 +152,7 @@ void SettingPage::Start()
 	AllPage_[1]->SetCurrentPage(CURRENT_PAGE_INDEX::NextPage);
 
 
-
 	SettingPointer_ = GetLevel()->CreateActor<SettingPointer>();
-
 	SettingPointer_->SetCharmPageActorMax();
 	SettingPointer_->SetFirstPosCharmPage();
 
