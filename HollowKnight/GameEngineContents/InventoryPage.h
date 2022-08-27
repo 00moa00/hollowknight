@@ -1,5 +1,6 @@
 #pragma once
 #include "MasterPage.h"
+#include "ItemSlot.h"
 
 // Ό³Έν :
 class InventoryPage : public MasterPage
@@ -20,6 +21,7 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	std::map<int, ItemSlot*> AllItem_;
 
 };
 

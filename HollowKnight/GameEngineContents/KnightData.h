@@ -1,6 +1,14 @@
 #pragma once
 
-// 설명 :
+//struct KnihgtHasItem
+//{
+//	int ItemSlotNum_;
+//	std::string _Name;
+//};
+//
+//
+
+
 class KnightData
 {
 private:
@@ -52,8 +60,7 @@ private:
 
 	bool isSetting_; //세팅 페이지 열었당
 
-
-
+	std::map<int, std::string> KnihgtItemList_;
 
 public:
 

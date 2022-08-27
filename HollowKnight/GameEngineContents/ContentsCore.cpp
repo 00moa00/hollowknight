@@ -279,10 +279,30 @@ void ContentsCore::Start()
 		{
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
+
 		GameEngineTexture::Cut("Area Title Cln_fleur_top0000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Area Title Cln_fleur_top0011-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Area Title Cln_fleur_bottom0000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Area Title Cln_fleur_bottom0011-Sheet.png", 11, 1);
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("UI");
+		Dir.Move("Heart Piece UI Cln");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
 
 	}
 	//================================
@@ -295,6 +315,41 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Setting");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+	}
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Setting");
+		Dir.Move("Item");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Setting");
+		Dir.Move("SpellIcon");
 
 		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
 

@@ -1,10 +1,11 @@
 #include "PreCompile.h"
 #include "CharmPage.h"
 #include "GlobalContentsValue.h"
+#include "PointActorComponent.h"
+
 #include <GameEngineBase/magic_enum.hpp>
 #include <GameEngineBase/magic_enum_format.hpp>
 #include <GameEngineBase/magic_enum_fuse.hpp>
-#include "PointActorComponent.h"
 
 CharmPage::CharmPage() 
 	:
@@ -119,9 +120,9 @@ void CharmPage::Start()
 
 	Line_ = CreateComponent<GameEngineUIRenderer>();
 
-	Line_->SetTexture("Line.png");
+	Line_->SetTexture("Inv_0017_divider.png");
 	Line_->GetTransform().SetWorldScale({1021, 5});
-	Line_->GetTransform().SetWorldPosition({ -400.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
+	Line_->GetTransform().SetWorldPosition({ -380.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
 
 
 	SetPageType(PAGE_TYPE::Charm);

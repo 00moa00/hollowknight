@@ -103,6 +103,9 @@
     <Filter Include="Actor\Play\UI\Area TItle">
       <UniqueIdentifier>{639c4fae-9977-4e34-bd5c-aff10e136806}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Inventory\Item">
+      <UniqueIdentifier>{92448587-8228-4a80-905b-6f0f2390d2dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -320,6 +323,15 @@
     </ClInclude>
     <ClInclude Include="MasterPage.h">
       <Filter>Actor\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterItem.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemSlot.h">
+      <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -541,6 +553,15 @@
     </ClCompile>
     <ClCompile Include="MasterPage.cpp">
       <Filter>Actor\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterItem.cpp">
+      <Filter>Actor\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemSlot.cpp">
+      <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

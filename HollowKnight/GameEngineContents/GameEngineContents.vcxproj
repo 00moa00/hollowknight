@@ -253,6 +253,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ItemSlot.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="KingsPassLevel2.h">
       <SubType>
       </SubType>
@@ -294,6 +302,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Mask.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MasterItem.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -539,6 +551,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ItemSlot.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="KingsPassLevel2.cpp">
       <SubType>
       </SubType>
@@ -581,6 +601,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Mask.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MasterItem.cpp">
       <SubType>
       </SubType>
     </ClCompile>

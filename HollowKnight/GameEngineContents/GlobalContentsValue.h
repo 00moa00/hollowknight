@@ -122,6 +122,53 @@ enum class MAP_PAGE_ACTOR
 };
 
 
+enum class ITEM_LIST
+{
+	Heart_Piece = 0,
+	Soul_Piece,
+	Dream_Nail,
+	Nail,
+	Spell_Fireball,
+	Spell_Scream,
+	Spell_core,
+	Item_Geo,
+
+
+
+	Tram_Pass = 10,
+	Lumafly_Lantern,
+	Mapand_Quill,
+	Collectors_Map,
+	Hunters_Journal,
+	Hunters_Mark,
+	Delicate_Flower,
+	Godtuner,
+	Mask_Shard,
+	Vessel_Fragment,
+	Salubras_Blessing,
+	Pale_Ore,
+	Rancid_Egg,
+
+
+
+	Wanderers_Journal = 40,
+	hallownest_seal,
+	Kings_idol,
+	arcane_egg
+
+};
+
+
+enum class ITEM_TYPE
+{
+	Spell_Item,
+	Normal_Item,
+	Sell_Item
+};
+
+
+
+
 enum class CHARM_SLOT
 {
 	Wayward_Compass, // 슬롯 1, 변덕스런납침반, 지도가 열릴 때마다 착용자에게 위치를 속삭여 방랑자가 자신의 현재 위치를 정확히 파악할 수 있게 합니다. 흙의 마을, 이셀다가 220지오에 판매

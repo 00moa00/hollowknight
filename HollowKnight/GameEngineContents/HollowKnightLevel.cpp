@@ -81,6 +81,14 @@ void HollowKnightLevel::PushNotches(Notches* _Notches, float4 _Position)
 
 }
 
+void HollowKnightLevel::PushItemSlot(int _SlotNum, float4 _SlotPos)
+{
+	ItemSlot_.insert({ _SlotNum, ItemSlotPos(_SlotNum, _SlotPos) });
+}
+
+
+
+
 void HollowKnightLevel::CameraMoveWindowLimit()
 {
 	//카메라가 없다면
