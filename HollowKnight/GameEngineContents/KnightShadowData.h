@@ -34,8 +34,6 @@ public:
 	KnightShadowData& operator=(KnightShadowData&& _Other) noexcept = delete;
 
 protected:
-	//레벨에서 생성해? 
-
 
 private:
 	float4 ShadowPosition_;
