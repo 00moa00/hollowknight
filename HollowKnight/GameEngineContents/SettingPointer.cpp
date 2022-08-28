@@ -98,12 +98,12 @@ void SettingPointer::Start()
 		, std::bind(&SettingPointer::PointerInventoryPageIdleStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageIdleEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoyPageManager_.CreateStateMember("MOVE_RIGHT"
+	SettingPointerInventoyPageManager_.CreateStateMember("MOVE_LEFT"
 		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoyPageManager_.CreateStateMember("MOVE_LEFT"
+	SettingPointerInventoyPageManager_.CreateStateMember("MOVE_RIGHT"
 		, std::bind(&SettingPointer::PointerInventoryPageMoveRightUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveRightStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveRightEnd, this, std::placeholders::_1));
@@ -188,7 +188,7 @@ void SettingPointer::SetFirstPosCharmPage()
 		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 		, static_cast<float>(Z_ORDER::UI_Border) });
 
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize()/2 });
 }
 
 void SettingPointer::SetFirstPosMapPage()
@@ -200,7 +200,7 @@ void SettingPointer::SetFirstPosMapPage()
 		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 		, static_cast<float>(Z_ORDER::UI_Border) });
 
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 }
 
 void SettingPointer::SetFirstPosMonsterBookPage()
@@ -211,7 +211,7 @@ void SettingPointer::SetFirstPosMonsterBookPage()
 		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 		, static_cast<float>(Z_ORDER::UI_Border) });
 
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 }
 
 void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
@@ -234,6 +234,8 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		if (PrevPage_ == PAGE_TYPE::Inventory)
 		{
 			CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
+			inLeftArrow_ = false;
+
 			SettingPointerCharmPageManager_.ChangeState("IN_RIGHT_ARROW");
 			SettingPointerInventoyPageManager_.ChangeState("WAIT");
 
@@ -246,7 +248,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 			, static_cast<float>(Z_ORDER::UI_Border) });
 
-		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
 		break;
 	case PAGE_TYPE::Inventory:
@@ -254,6 +256,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		if (PrevPage_ == PAGE_TYPE::Charm)
 		{
 			CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
+			inRightArrow_ = false;
 			SettingPointerInventoyPageManager_.ChangeState("IN_LEFT_ARROW");
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
 
@@ -274,7 +277,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 			, static_cast<float>(Z_ORDER::UI_Border) });
 
-		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
 		break;
 	case PAGE_TYPE::MonsterBook:
@@ -325,7 +328,7 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 			, static_cast<float>(Z_ORDER::UI_Border) });
 
-		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("MoveDown"))
@@ -353,7 +356,7 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 			, static_cast<float>(Z_ORDER::UI_Border) });
 
-		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 	}
 
 
@@ -461,7 +464,7 @@ void SettingPointer::PointerCharmPageMoveLeftStart(const StateInfo& _Info)
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 				, static_cast<float>(Z_ORDER::UI_Border) });
 
-			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 		}
 	}
 
@@ -507,7 +510,7 @@ void SettingPointer::PointerCharmPageMoveRightStart(const StateInfo& _Info)
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 				, static_cast<float>(Z_ORDER::UI_Border) });
 
-			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 		}
 
 	}
@@ -532,7 +535,7 @@ void SettingPointer::PointerInCharmPageRightArrowStart(const StateInfo& _Info)
 		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 		, static_cast<float>(Z_ORDER::UI_Border) });
 
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 }
 
 void SettingPointer::PointerInCharmPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -561,7 +564,7 @@ void SettingPointer::PointerCharmPageInLeftArrowStart(const StateInfo& _Info)
 		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 		, static_cast<float>(Z_ORDER::UI_Border) });
 
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetRenderer()->GetTransform().GetLocalScale() });
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 }
 
 void SettingPointer::PointerCharmPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -601,6 +604,16 @@ void SettingPointer::PointerInventoryPageIdleStart(const StateInfo& _Info)
 
 void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))
+	{
+		SettingPointerInventoyPageManager_.ChangeState("MOVE_RIGHT");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft"))
+	{
+		SettingPointerInventoyPageManager_.ChangeState("MOVE_LEFT");
+
+	}
 }
 
 void SettingPointer::PointerInventoryPageIdleEnd(const StateInfo& _Info)
@@ -621,10 +634,44 @@ void SettingPointer::PointerInventoryPageMoveLeftEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 {
+
+	if (true == GameEngineInput::GetInst()->IsDown("MoveRight") && inRightArrow_ == false)
+	{
+		inLeftArrow_ = false;
+		int PrevCount = CurrentPosInInventoryPage;
+
+		if ((PrevCount == 9 || PrevCount == 19 || PrevCount == 29 || PrevCount == 39) && _Info.PrevState != "IN_LEFT_ARROW")
+		{
+			++CurrentPosInInventoryPage;
+			SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+			return;
+		}
+
+		else
+		{
+			++CurrentPosInInventoryPage;
+
+			if (CurrentPosInInventoryPage > CharmPageActorCount)
+			{
+				CurrentPosInInventoryPage = 0;
+			}
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2   });
+		}
+
+	}
 }
 
 void SettingPointer::PointerInventoryPageMoveRightUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	SettingPointerInventoyPageManager_.ChangeState("IDLE");
+
 }
 
 void SettingPointer::PointerInventoryPageMoveRightEnd(const StateInfo& _Info)

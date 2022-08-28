@@ -13,6 +13,8 @@
 // 갯수가 0이 되면 해당 아이템의 뒤에 있는 포인터 액터의 key값을 댕긴다.
 // 댕기기 전에는 해당 아이템의 맵을 삭제먼저 한다.
 
+class ItemSlot;
+
 class Item : public MasterUI
 {
 public:
@@ -33,7 +35,7 @@ protected:
 private:
 
 public:
-	void CreateItem(std::string _Name, ITEM_LIST _Item);
+	void CreateItem(std::string _Name, ITEM_LIST _Item, ItemSlot* _Slot);
 
 
 

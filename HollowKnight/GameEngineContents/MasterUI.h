@@ -40,6 +40,7 @@ public:
 	//================================
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName, int _Index, int _Order);
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName);
+	void CreateRendererComponent(std::string _FileName);
 
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
 

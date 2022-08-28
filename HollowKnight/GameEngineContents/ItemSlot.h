@@ -38,7 +38,7 @@ public:
 	void CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item);
 	void CreateItemSlot(int _ItemNum, ITEM_LIST _Item, ITEM_TYPE _type);
 	void PustItem(std::string _Name, ITEM_LIST _Item);
-
+	void BackItem(std::string _Name, ITEM_LIST _Item);
 
 	//================================
 	//    Getter 

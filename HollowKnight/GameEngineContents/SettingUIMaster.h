@@ -20,6 +20,8 @@ public:
 	SettingUIMaster& operator=(SettingUIMaster&& _Other) noexcept = delete;
 
 protected:
+	float4 PointerSize_;
+	
 	GameEngineUIRenderer* Renderer_;
 
 public:
@@ -32,6 +34,11 @@ public:
 	GameEngineUIRenderer* GetRenderer() const
 	{
 		return Renderer_;
+	}
+
+	float4 GetPointerSize() const
+	{
+		return PointerSize_;
 	}
 
 
@@ -47,6 +54,12 @@ public:
 	void PixLocalPositiveY();
 
 	void ChangeAnimation(std::string _Name);
+
+
+	void SetPointerSize(float4 _Size)
+	{
+		PointerSize_ = _Size;
+	}
 	
 };
 

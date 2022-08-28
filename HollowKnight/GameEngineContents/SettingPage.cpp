@@ -112,6 +112,7 @@ void SettingPage::Start()
 	-(GameEngineWindow::GetInst()->GetScale().hx() - 70.f)
 	, 0
 	, static_cast<float>(Z_ORDER::UI_Border) });
+	BorderLeftArrow_->SetPointerSize(BorderLeftArrow_->GetRenderer()->GetTransform().GetLocalScale());
 	BorderLeftArrow_->Off();
 
 	{
@@ -132,6 +133,8 @@ void SettingPage::Start()
 	, 0
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderRightArrow_->GetRenderer()->GetTransform().PixLocalNegativeX();
+	BorderRightArrow_->SetPointerSize({ -BorderRightArrow_->GetRenderer()->GetTransform().GetLocalScale().x ,BorderRightArrow_->GetRenderer()->GetTransform().GetLocalScale().y  });
+
 	BorderRightArrow_->Off();
 
 	{

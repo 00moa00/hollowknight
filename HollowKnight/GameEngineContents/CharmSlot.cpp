@@ -39,6 +39,8 @@ void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePat
 
 	Charm_->SetParent(this);
 
+	SetPointerSize(Charm_->GetRenderer()->GetCurTexture()->GetScale());
+
 	//ºÎÀû Ä­ ¼¼ÆÃ
 	switch (_slot)
 	{
@@ -231,11 +233,13 @@ void CharmSlot::CreateEquippedCharmSlot( CharmState _CharmState)
 
 	Charm_->SetParent(this);
 
+	SetPointerSize({ 38 , 38, 1});
 
 }
 
 void CharmSlot::CreateCopyCharm(GameEngineUIRenderer* _RenderData, std::string _SlotName, std::string _FilePath)
 {
 	Charm_->CreateCharm(_SlotName, _FilePath, { 131, 128, 1 });
-	
+	SetPointerSize(Charm_->GetRenderer()->GetCurTexture()->GetScale());
+
 }
