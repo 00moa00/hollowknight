@@ -399,7 +399,7 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 
 			int PosCheck = AllPage_[i]->GetTransform().GetWorldPosition().ix();
 
-			if (PosCheck == 0)
+			if (PosCheck < 0)
 			{
 				SettingPageManager_.ChangeState("IDLE");
 			}
@@ -481,7 +481,7 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 
 			int PosCheck = AllPage_[i]->GetTransform().GetWorldPosition().ix();
 
-			if (PosCheck == 0)
+			if (PosCheck > 0)
 			{
 				SettingPageManager_.ChangeState("IDLE");
 			}

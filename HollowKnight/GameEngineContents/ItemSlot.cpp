@@ -3,6 +3,8 @@
 
 
 ItemSlot::ItemSlot() 
+	:
+	SpellRing_(nullptr)
 {
 }
 
@@ -22,41 +24,72 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 
 	Item_->SetParent(this);
 
-	SetPointerSize({ Item_->GetRenderer()->GetCurTexture()->GetScale()});
-
+	Item_->GetRenderer()->GetTransform().SetLocalScale(Item_->GetRenderer()->GetCurTexture()->GetScale() * 0.8f);
 
 	switch (_Item)
 	{
 	case ITEM_LIST::Heart_Piece:
-		GetTransform().SetLocalPosition({ -600.f, 300.f });
+		GetTransform().SetLocalPosition({ -700.f, 250.f });
 
 		break;
 	case ITEM_LIST::Soul_Piece:
-		GetTransform().SetLocalPosition({ -550.f, 250.f });
+		GetTransform().SetLocalPosition({ -550.f, 220.f });
 
 		break;
 	case ITEM_LIST::Dream_Nail:
-		GetTransform().SetLocalPosition({ -500.f, 300.f });
+		GetTransform().SetLocalPosition({ -250.f, 200.f });
 
 
 		break;
 	case ITEM_LIST::Nail:
-		GetTransform().SetLocalPosition({ -600.f, 50.f });
+		GetTransform().SetLocalPosition({ -700.f, -150.f });
+		Item_->GetRenderer()->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
 
 		break;
 	case ITEM_LIST::Spell_Fireball:
-		GetTransform().SetLocalPosition({ -500.f, 100.f });
+
+
+
+		//SpellRingBack_ = CreateComponent<GameEngineUIRenderer>();
+		//SpellRingBack_->SetTexture("spell_ring_back.png");
+		//SpellRingBack_->GetTransform().SetLocalScale(SpellRingBack_->GetCurTexture()->GetScale());
+		////SpellRingBack_->Off();
+		//SpellRingBack_->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+
+
+		SpellRing_ = CreateComponent<GameEngineUIRenderer>();
+		SpellRing_->SetTexture("spell_ring.png");
+		SpellRing_->GetTransform().SetLocalScale(SpellRing_->GetCurTexture()->GetScale());
+		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
+
+
+
+		GetTransform().SetLocalPosition({ -550.f, 0 });
+		//SpellRing_->GetTransform().SetLocalPosition({ SpellRing_->GetTransform().GetLocalPosition().x, SpellRing_->GetTransform().GetLocalPosition().y, static_cast<float>(Z_ORDER::UI_BackBoard)});
 
 
 		break;
 	case ITEM_LIST::Spell_Scream:
-		GetTransform().SetLocalPosition({ -400.f, 100.f });
+
+		SpellRing_ = CreateComponent<GameEngineUIRenderer>();
+		SpellRing_->SetTexture("spell_ring.png");
+		SpellRing_->GetTransform().SetLocalScale(SpellRing_->GetCurTexture()->GetScale());
+		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
+
+		GetTransform().SetLocalPosition({ -350.f, 0 });
 
 
 		break;
 	case ITEM_LIST::Spell_core:
-		GetTransform().SetLocalPosition({ -450.f, 0.f });
+
+		SpellRing_ = CreateComponent<GameEngineUIRenderer>();
+		SpellRing_->SetTexture("spell_ring.png");
+
+		SpellRing_->GetTransform().SetLocalScale(SpellRing_->GetCurTexture()->GetScale());
+		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
+
+		GetTransform().SetLocalPosition({ -450.f, -100.f });
 
 
 		break;
@@ -67,6 +100,7 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		break;
 	case ITEM_LIST::Tram_Pass:
 		break;
+
 	case ITEM_LIST::Lumafly_Lantern:
 		break;
 	case ITEM_LIST::Mapand_Quill:
@@ -107,6 +141,7 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		break;
 	}
 
+	SetPointerSize({ Item_->GetRenderer()->GetCurTexture()->GetScale() });
 
 
 
