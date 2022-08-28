@@ -17,7 +17,7 @@ void Item::Update(float _DeltaTime)
 {
 }
 
-void Item::CreateItem(std::string _Name ITEM_LIST _Item)
+void Item::CreateItem(std::string _Name, ITEM_LIST _Item)
 {
 
 

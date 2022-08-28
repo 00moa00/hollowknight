@@ -101,9 +101,9 @@ void Knight::Start()
 	GetTransform().SetWorldPosition({500,-4000,static_cast<float>(Z_ORDER::Knight) });
 	
 	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
-	//KnightLightEffect_ = GetLevel()->CreateActor<KnightLightEffect>();
+	KnightLightEffect_ = GetLevel()->CreateActor<KnightLightEffect>();
 	KnightDonutLightEffect_ = GetLevel()->CreateActor<KnightDonutLightEffect>();
-	//KnightSmallLightEffect_ = GetLevel()->CreateActor<KnightSmallLightEffect>();
+	KnightSmallLightEffect_ = GetLevel()->CreateActor<KnightSmallLightEffect>();
 	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 
