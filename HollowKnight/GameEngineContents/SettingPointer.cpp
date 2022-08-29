@@ -614,6 +614,155 @@ void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const Stat
 		SettingPointerInventoyPageManager_.ChangeState("MOVE_LEFT");
 
 	}
+
+
+	if (true == GameEngineInput::GetInst()->IsDown("MoveUp"))
+	{
+
+		int PrevCount = CurrentPosInInventoryPage;
+
+		//내가 지금 스펠에 있다면
+
+		if (PrevCount > static_cast<int>(ITEM_LIST::SPELL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::SPELL_MAX))
+		{
+
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Nail))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Heart_Piece);
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Item_Geo))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Spell_core);
+			}
+
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Heart_Piece))
+			{
+				CurrentPosInInventoryPage = PrevCount;
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Spell_core))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Spell_Fireball);
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Spell_Fireball) || PrevCount == static_cast<int>(ITEM_LIST::Spell_Scream))
+			{
+				CurrentPosInInventoryPage -= 4;
+			}
+
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+
+
+		//내가 지금 일반 아이템에 있다면 
+
+		else if (PrevCount > static_cast<int>(ITEM_LIST::NORMAL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::NORMAL_MAX))
+		{
+
+			CurrentPosInInventoryPage -= 4;
+
+			if (CurrentPosInInventoryPage < static_cast<int>(ITEM_LIST::NORMAL_MIN))
+			{
+				CurrentPosInInventoryPage = PrevCount;
+			}
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+
+		}
+
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("MoveDown"))
+	{
+
+		int PrevCount = CurrentPosInInventoryPage;
+
+		//내가 지금 스펠에 있다면
+
+		if (PrevCount > static_cast<int>(ITEM_LIST::SPELL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::SPELL_MAX))
+		{
+
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Nail))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Item_Geo);
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Item_Geo))
+			{
+				CurrentPosInInventoryPage = PrevCount;
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Spell_core))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Item_Geo);
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Heart_Piece))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Nail);
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Spell_Fireball) || PrevCount == static_cast<int>(ITEM_LIST::Spell_Scream))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Spell_core);
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Soul_Piece) || PrevCount == static_cast<int>(ITEM_LIST::Dream_Nail))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Spell_Fireball);
+			}
+
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+
+
+		//내가 지금 일반 아이템에 있다면 
+
+		else if (PrevCount > static_cast<int>(ITEM_LIST::NORMAL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::NORMAL_MAX))
+		{
+
+			CurrentPosInInventoryPage += 4;
+
+			if (CurrentPosInInventoryPage < static_cast<int>(ITEM_LIST::NORMAL_MAX))
+			{
+				CurrentPosInInventoryPage = PrevCount;
+			}
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+
+		}
+	}
+
 }
 
 void SettingPointer::PointerInventoryPageIdleEnd(const StateInfo& _Info)
@@ -659,10 +808,15 @@ void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
 		{
 			--CurrentPosInInventoryPage;
 
-			//if (CurrentPosInInventoryPage < 0)
-			//{
-			//	CurrentPosInInventoryPage = CharmPageActorCount;
-			//}
+			if (PrevCount == static_cast<int>(ITEM_LIST::Spell_core))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Spell_Fireball);
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Spell_Fireball))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Nail);
+			}
 
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
 
@@ -769,6 +923,16 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 		{		
 			
 			++CurrentPosInInventoryPage;
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Nail))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Spell_Fireball);
+			}
+
+			if (PrevCount == static_cast<int>(ITEM_LIST::Spell_core))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Spell_Scream);
+			}
 
 			if (CurrentPosInInventoryPage > CharmPageActorCount)
 			{

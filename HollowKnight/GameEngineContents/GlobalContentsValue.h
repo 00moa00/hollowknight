@@ -124,6 +124,7 @@ enum class MAP_PAGE_ACTOR
 
 enum class ITEM_LIST
 {
+	SPELL_MIN = -1,
 	Heart_Piece = 0,
 	Soul_Piece,
 	Dream_Nail,
@@ -132,8 +133,9 @@ enum class ITEM_LIST
 	Spell_Fireball,
 	Spell_Scream,
 	Item_Geo,
+	SPELL_MAX = 8,
 
-
+	NORMAL_MIN = 9,
 
 	Tram_Pass = 10,
 	Lumafly_Lantern,
@@ -147,6 +149,10 @@ enum class ITEM_LIST
 	Vessel_Fragment,
 	Salubras_Blessing,
 	Pale_Ore,
+
+	NORMAL_MAX,
+
+
 	Rancid_Egg,
 	Shade_Cloak,
 	Witches_eye,
