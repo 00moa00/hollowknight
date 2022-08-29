@@ -639,6 +639,22 @@ void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
 			return;
 		}
 
+		//다음 갈 곳이 스펠이다
+
+		else if (PrevCount == 10 || PrevCount == 14 || PrevCount == 18 || PrevCount == 22)
+		{
+			CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Dream_Nail);
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+
 		else
 		{
 			--CurrentPosInInventoryPage;
@@ -678,20 +694,22 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 		inLeftArrow_ = false;
 		int PrevCount = CurrentPosInInventoryPage;
 
-		if ((PrevCount == 13 || PrevCount == 17 || PrevCount == 21 || PrevCount == 25) && _Info.PrevState != "IN_LEFT_ARROW")
+		if ((PrevCount == 13 || PrevCount == 17 || PrevCount == 21 || PrevCount == 25) 
+			&& _Info.PrevState != "IN_LEFT_ARROW")  //내가 다음 갈 곳이 화살표라면
 		{
 			++CurrentPosInInventoryPage;
 			SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
 			return;
 		}
 
+		//다음 갈 곳이 아이템이다
 		else if (PrevCount == static_cast<int>(ITEM_LIST::Dream_Nail) || PrevCount == static_cast<int>(ITEM_LIST::Spell_Scream))
 		{
-			// 아이템이 하나라도 없으면 aroow로 이동
+			
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(10)->second;
 			ItemSlot* CheckItem = dynamic_cast<ItemSlot*>(PointActorComponent_->GetPointActor());
 
-			if (CheckItem->GetisItem() == false)
+			if (CheckItem->GetisItem() == false) // 아이템이 하나라도 없으면 aroow로 이동
 			{
 				++CurrentPosInInventoryPage;
 				SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
@@ -708,16 +726,48 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 					, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 					, static_cast<float>(Z_ORDER::UI_Border) });
 
+
 				SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
-				
 
 			}
 
 		}
 
+		else if (PrevCount >= 10 && PrevCount < 50) // 내가 지금 아이템 카테고리에 있다
+		{
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(PrevCount + 1)->second;
+			ItemSlot* CheckItem = dynamic_cast<ItemSlot*>(PointActorComponent_->GetPointActor());
+
+			if (CheckItem->GetisItem() == false) // 내가 갈 곳에 아이템이 없으면
+			{
+				++CurrentPosInInventoryPage;
+				SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+				return;
+			}
+
+			else
+			{
+				++CurrentPosInInventoryPage;
+
+				if (CurrentPosInInventoryPage > CharmPageActorCount)
+				{
+					CurrentPosInInventoryPage = 0;
+				}
+
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+				SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+					, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+					, static_cast<float>(Z_ORDER::UI_Border) });
+
+				SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+			}
+
+		}
 
 		else
-		{
+		{		
+			
 			++CurrentPosInInventoryPage;
 
 			if (CurrentPosInInventoryPage > CharmPageActorCount)
@@ -731,9 +781,9 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 				, static_cast<float>(Z_ORDER::UI_Border) });
 
-			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2   });
-		}
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
+		}
 	}
 }
 
