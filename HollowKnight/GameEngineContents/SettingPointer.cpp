@@ -686,6 +686,36 @@ void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const Stat
 
 		}
 
+		//내가 지금 소비 아이템에 있다면
+		else if (PrevCount > static_cast<int>(ITEM_LIST::SELL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::SELL_MAX))
+		{
+
+			for (int i = static_cast<int>(ITEM_LIST::NORMAL_MAX) -1; i > static_cast<int>(ITEM_LIST::NORMAL_MIN); --i)
+			{
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(i)->second;
+				ItemSlot* FindSlot = dynamic_cast<ItemSlot*>(PointActorComponent_->GetPointActor());
+
+				if (FindSlot != nullptr && FindSlot->GetisItem() == true)
+				{
+					CurrentPosInInventoryPage = i;
+					break;
+				}
+
+
+			}
+
+
+			//CurrentPosInInventoryPage -= 8;
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("MoveDown"))
@@ -697,8 +727,6 @@ void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const Stat
 
 		if (PrevCount > static_cast<int>(ITEM_LIST::SPELL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::SPELL_MAX))
 		{
-
-
 			if (PrevCount == static_cast<int>(ITEM_LIST::Nail))
 			{
 				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Item_Geo);
@@ -749,7 +777,7 @@ void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const Stat
 
 			if (CurrentPosInInventoryPage < static_cast<int>(ITEM_LIST::NORMAL_MAX))
 			{
-				CurrentPosInInventoryPage = PrevCount;
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Wanderers_Journal);
 			}
 
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
@@ -761,6 +789,12 @@ void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const Stat
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
 		}
+
+		// 내가 지금 소비 아이템에 있으면 내려갈 수가 없다
+		else if (PrevCount > static_cast<int>(ITEM_LIST::SELL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::SELL_MAX))
+		{
+			CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Wanderers_Journal);
+		}
 	}
 
 }
@@ -771,7 +805,7 @@ void SettingPointer::PointerInventoryPageIdleEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft") && inLeftArrow_ == false)
+	if ( inLeftArrow_ == false)
 	{
 		inRightArrow_ = false;
 		int PrevCount = CurrentPosInInventoryPage;
@@ -789,10 +823,30 @@ void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
 		}
 
 		//다음 갈 곳이 스펠이다
-
 		else if (PrevCount == 10 || PrevCount == 14 || PrevCount == 18 || PrevCount == 22)
 		{
 			CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Dream_Nail);
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+
+		//난 지금 소비 아이템 안에 있다
+		else if (PrevCount > static_cast<int>(ITEM_LIST::SELL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::SELL_MAX))
+		{
+
+			--CurrentPosInInventoryPage;
+
+			if (PrevCount - 1 == static_cast<int>(ITEM_LIST::SELL_MIN))
+			{
+				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Dream_Nail);
+			}
 
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
 
@@ -828,6 +882,8 @@ void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 		}
 	}
+
+
 }
 
 void SettingPointer::PointerInventoryPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -848,16 +904,31 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 		inLeftArrow_ = false;
 		int PrevCount = CurrentPosInInventoryPage;
 
-		if ((PrevCount == 13 || PrevCount == 17 || PrevCount == 21 || PrevCount == 25) 
-			&& _Info.PrevState != "IN_LEFT_ARROW")  //내가 다음 갈 곳이 화살표라면
-		{
-			++CurrentPosInInventoryPage;
-			SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
-			return;
-		}
+		//다음 아이템이 아무것도 없다면
+		//if ( (PrevCount > static_cast<int>(ITEM_LIST::NORMAL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::NORMAL_MAX))
+		//	&& _Info.PrevState != "IN_LEFT_ARROW")  //내가 다음 갈 곳이 화살표라면
+		//{
 
-		//다음 갈 곳이 아이템이다
-		else if (PrevCount == static_cast<int>(ITEM_LIST::Dream_Nail) || PrevCount == static_cast<int>(ITEM_LIST::Spell_Scream))
+
+
+		//	//if (PrevCount == static_cast<int>(ITEM_LIST::NORMAL_MAX) - 1)
+		//	//{		
+		//	//	++CurrentPosInInventoryPage;
+		//	//	SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+		//	//}
+
+
+
+
+
+		//	++CurrentPosInInventoryPage;
+		//	SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+		//	return;
+		//}
+
+		////다음 갈 곳이 아이템이다
+		//else 
+			if (PrevCount == static_cast<int>(ITEM_LIST::Dream_Nail) || PrevCount == static_cast<int>(ITEM_LIST::Spell_Scream) || PrevCount == static_cast<int>(ITEM_LIST::Item_Geo))
 		{
 			
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(10)->second;
@@ -887,7 +958,7 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 
 		}
 
-		else if (PrevCount >= 10 && PrevCount < 50) // 내가 지금 아이템 카테고리에 있다
+		else if (PrevCount > static_cast<int>(ITEM_LIST::NORMAL_MIN)  && PrevCount < static_cast<int>(ITEM_LIST::NORMAL_MAX)) // 내가 지금 아이템 카테고리에 있다
 		{
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(PrevCount + 1)->second;
 			ItemSlot* CheckItem = dynamic_cast<ItemSlot*>(PointActorComponent_->GetPointActor());
@@ -919,6 +990,45 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 
 		}
 
+		else if (PrevCount > static_cast<int>(ITEM_LIST::SELL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::SELL_MAX))
+		{
+			if (PrevCount + 1 == static_cast<int>(ITEM_LIST::SELL_MAX))
+			{
+				++CurrentPosInInventoryPage;
+				SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+				return;
+			}
+
+
+			{
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(PrevCount + 1)->second;
+				ItemSlot* FindSlot = dynamic_cast<ItemSlot*>(PointActorComponent_->GetPointActor());
+
+
+				if (FindSlot->GetisItem() == true)
+				{
+					++CurrentPosInInventoryPage;
+				}
+
+				else
+				{
+					++CurrentPosInInventoryPage;
+					SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+					return;
+				}
+				{
+					PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+					SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+						, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+						, static_cast<float>(Z_ORDER::UI_Border) });
+
+					SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+				}
+			}
+		}
+
+
 		else
 		{		
 			
@@ -933,6 +1043,7 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 			{
 				CurrentPosInInventoryPage = static_cast<int>(ITEM_LIST::Spell_Scream);
 			}
+
 
 			if (CurrentPosInInventoryPage > CharmPageActorCount)
 			{

@@ -167,11 +167,12 @@ enum class ITEM_LIST
 	Treasure_map, 
 	Mantis_Cloak,
 
+	SELL_MIN = 39,
 	Wanderers_Journal = 40,
 	hallownest_seal,
 	Kings_idol,
-	arcane_egg
-
+	arcane_egg,
+	SELL_MAX = 44,
 };
 
 
