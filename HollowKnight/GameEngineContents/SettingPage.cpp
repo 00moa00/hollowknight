@@ -397,19 +397,18 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 		if (AllPage_[i]->isCurrentPage() == true)
 		{
 
-			int PosCheck = AllPage_[i]->GetTransform().GetWorldPosition().ix();
 
-			if (PosCheck < 0)
+			if (AllPage_[i]->GetTransform().GetWorldPosition().x < 0)
 			{
 				SettingPageManager_.ChangeState("IDLE");
 			}
 		}
 
 
-		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 400.f);
 
 
 
+		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 700.f);
 	}
 
 	//if()
@@ -417,7 +416,7 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 
 void SettingPage::SettingMoveRightEnd(const StateInfo& _Info)
 {
-
+	SettingPointer_->SetisDownNextPageRight(false);
 	for (int i = 0; i < AllPage_.size(); ++i)
 	{
 
@@ -479,16 +478,15 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 		if (AllPage_[i]->isCurrentPage() == true)
 		{
 
-			int PosCheck = AllPage_[i]->GetTransform().GetWorldPosition().ix();
 
-			if (PosCheck > 0)
+			if (AllPage_[i]->GetTransform().GetWorldPosition().x > 0)
 			{
 				SettingPageManager_.ChangeState("IDLE");
 			}
 		}
 
 
-		AllPage_[i]->GetTransform().SetWorldMove(float4::RIGHT * _DeltaTime * 400.f);
+		AllPage_[i]->GetTransform().SetWorldMove(float4::RIGHT * _DeltaTime * 700.f);
 
 
 
@@ -498,7 +496,7 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 
 void SettingPage::SettingMoveLeftEnd(const StateInfo& _Info)
 {
-
+	SettingPointer_->SetisDownNextPageRight(false);
 	for (int i = 0; i < AllPage_.size(); ++i)
 	{
 

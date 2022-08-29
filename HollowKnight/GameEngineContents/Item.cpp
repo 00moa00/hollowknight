@@ -18,7 +18,7 @@ void Item::Update(float _DeltaTime)
 {
 }
 
-void Item::CreateItem(std::string _Name, ITEM_LIST _Item, ItemSlot* _Slot)
+void Item::CreateItem(std::string _Name, ITEM_LIST _Item)
 {
 	CreateRendererComponent(_Name + ".png");
 }

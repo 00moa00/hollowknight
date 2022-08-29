@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "ItemSlot.h"
 
+#include <GameEngineBase/magic_enum.hpp>
+#include <GameEngineBase/magic_enum_format.hpp>
+#include <GameEngineBase/magic_enum_fuse.hpp>
 
 ItemSlot::ItemSlot() 
 	:
@@ -15,12 +18,20 @@ ItemSlot::~ItemSlot()
 
 void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 {
+	if (_Item == ITEM_LIST::Spell_Fireball || _Item == ITEM_LIST::Spell_Scream)
+	{
+		SpellRing_ = CreateComponent<GameEngineUIRenderer>();
+
+	}
+
+
 	ItemState_.ItemName_ = _Name;
 	ItemState_.ItemNum_ = _ItemNum;
+	ItemState_.isItem_ = true;
 
 	CreateRendererComponent({ 49,49 }, "new_item_orb.png");
 	Item_ = GetLevel()->CreateActor<Item>();
-	Item_->CreateItem(_Name,  _Item, this);
+	Item_->CreateItem(_Name,  _Item);
 
 	Item_->SetParent(this);
 
@@ -29,55 +40,44 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 	switch (_Item)
 	{
 	case ITEM_LIST::Heart_Piece:
-		GetTransform().SetLocalPosition({ -700.f, 250.f });
+		GetTransform().SetLocalPosition({ -710.f, 220.f });
 
 		break;
 	case ITEM_LIST::Soul_Piece:
-		GetTransform().SetLocalPosition({ -550.f, 220.f });
+		GetTransform().SetLocalPosition({ -540.f, 200.f });
 
 		break;
 	case ITEM_LIST::Dream_Nail:
-		GetTransform().SetLocalPosition({ -250.f, 200.f });
+		GetTransform().SetLocalPosition({ -340.f, 200.f });
 
 
 		break;
 	case ITEM_LIST::Nail:
-		GetTransform().SetLocalPosition({ -700.f, -150.f });
+		GetTransform().SetLocalPosition({ -710.f, -150.f });
 		Item_->GetRenderer()->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
 
 		break;
 	case ITEM_LIST::Spell_Fireball:
 
-
-
-		//SpellRingBack_ = CreateComponent<GameEngineUIRenderer>();
-		//SpellRingBack_->SetTexture("spell_ring_back.png");
-		//SpellRingBack_->GetTransform().SetLocalScale(SpellRingBack_->GetCurTexture()->GetScale());
-		////SpellRingBack_->Off();
-		//SpellRingBack_->GetPipeLine()->SetOutputMergerBlend("AddBlend");
-
-
-		SpellRing_ = CreateComponent<GameEngineUIRenderer>();
+		//SpellRing_ = CreateComponent<GameEngineUIRenderer>();
 		SpellRing_->SetTexture("spell_ring.png");
-		SpellRing_->GetTransform().SetLocalScale(SpellRing_->GetCurTexture()->GetScale());
+		SpellRing_->GetTransform().SetLocalScale({100,100});
 		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
 
-
-		GetTransform().SetLocalPosition({ -550.f, 0 });
-		//SpellRing_->GetTransform().SetLocalPosition({ SpellRing_->GetTransform().GetLocalPosition().x, SpellRing_->GetTransform().GetLocalPosition().y, static_cast<float>(Z_ORDER::UI_BackBoard)});
+		GetTransform().SetLocalPosition({ -500.f, -30 });
 
 
 		break;
 	case ITEM_LIST::Spell_Scream:
 
-		SpellRing_ = CreateComponent<GameEngineUIRenderer>();
+		//SpellRing_ = CreateComponent<GameEngineUIRenderer>();
 		SpellRing_->SetTexture("spell_ring.png");
-		SpellRing_->GetTransform().SetLocalScale(SpellRing_->GetCurTexture()->GetScale());
+		SpellRing_->GetTransform().SetLocalScale({ 100,100 });
 		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
-		GetTransform().SetLocalPosition({ -350.f, 0 });
+		GetTransform().SetLocalPosition({ -340.f, -30 });
 
 
 		break;
@@ -86,15 +86,15 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		SpellRing_ = CreateComponent<GameEngineUIRenderer>();
 		SpellRing_->SetTexture("spell_ring.png");
 
-		SpellRing_->GetTransform().SetLocalScale(SpellRing_->GetCurTexture()->GetScale());
+		SpellRing_->GetTransform().SetLocalScale(Item_->GetRenderer()->GetCurTexture()->GetScale());
 		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
-		GetTransform().SetLocalPosition({ -450.f, -100.f });
+		GetTransform().SetLocalPosition({ -420.f, -100.f });
 
 
 		break;
 	case ITEM_LIST::Item_Geo:
-		GetTransform().SetLocalPosition({ -500.f, -200.f });
+		GetTransform().SetLocalPosition({ -510.f, -400.f });
 
 
 		break;
@@ -151,12 +151,22 @@ void ItemSlot::CreateItemSlot(int _ItemNum, ITEM_LIST _Item, ITEM_TYPE _type)
 {
 	CreateRendererComponent({49,49}, "new_item_orb.png");
 	ItemState_.ItemNum_ = _ItemNum;
+	ItemState_.isItem_ = false;
 	SetPointerSize({49,49,1});
 
 }
 
-void ItemSlot::PustItem(std::string _Name, ITEM_LIST _Item)
+void ItemSlot::PustItem(int _ItemNum, ITEM_LIST _Item)
 {
-	Item_ = GetLevel()->CreateActor<Item>();
-	Item_->CreateItem(_Name, _Item, this);
+
+
+	std::string EnumString;
+
+	auto Name = magic_enum::enum_name(_Item);
+	EnumString = static_cast<std::string>(Name);
+
+	CreateItemSlot(EnumString, _ItemNum, _Item);
+
+	//Item_ = GetLevel()->CreateActor<Item>();
+	//Item_->CreateItem(EnumString, _Item, this);
 }

@@ -128,9 +128,9 @@ enum class ITEM_LIST
 	Soul_Piece,
 	Dream_Nail,
 	Nail,
+	Spell_core,
 	Spell_Fireball,
 	Spell_Scream,
-	Spell_core,
 	Item_Geo,
 
 
@@ -148,8 +148,18 @@ enum class ITEM_LIST
 	Salubras_Blessing,
 	Pale_Ore,
 	Rancid_Egg,
-
-
+	Shade_Cloak,
+	Witches_eye,
+	Storeroom_key,
+	Quill_combined,
+	Emperor_wings,
+	Mender_key, 
+	Acid_armour,
+	Crystal_heart, 
+	Rancid_egg,
+	Area_map, 
+	Treasure_map, 
+	Mantis_Cloak,
 
 	Wanderers_Journal = 40,
 	hallownest_seal,

@@ -54,7 +54,6 @@ public:
 	std::map<int, PointActorComponent*> PointActorListMonsterBook;
 	std::map<int, PointActorComponent*> PointActorListInventory;
 
-	std::map<int, ItemSlotPos> ItemSlot_;
 	std::map<int, Item>* AllItem_;
 
 
@@ -101,6 +100,7 @@ public :
 	void PushNotches(Notches* _Notches, float4 _Position);
 
 	void PushItemSlot(int _SlotNum, float4 _SlotPos);
+	void PustItemInventroy(ITEM_LIST _Item);
 
 	void SortPointActor();
 

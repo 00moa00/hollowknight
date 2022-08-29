@@ -622,10 +622,48 @@ void SettingPointer::PointerInventoryPageIdleEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
 {
+	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft") && inLeftArrow_ == false)
+	{
+		inRightArrow_ = false;
+		int PrevCount = CurrentPosInInventoryPage;
+
+		
+		if ((PrevCount == static_cast<int>(ITEM_LIST::Heart_Piece) 
+			|| PrevCount == static_cast<int>(ITEM_LIST::Nail)
+			|| PrevCount == static_cast<int>(ITEM_LIST::Item_Geo)
+
+			)&& _Info.PrevState != "IN_RIGHT_ARROW")
+		{
+			--CurrentPosInInventoryPage;
+			SettingPointerInventoyPageManager_.ChangeState("IN_LEFT_ARROW");
+			return;
+		}
+
+		else
+		{
+			--CurrentPosInInventoryPage;
+
+			//if (CurrentPosInInventoryPage < 0)
+			//{
+			//	CurrentPosInInventoryPage = CharmPageActorCount;
+			//}
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+	}
 }
 
 void SettingPointer::PointerInventoryPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	SettingPointerInventoyPageManager_.ChangeState("IDLE");
+
 }
 
 void SettingPointer::PointerInventoryPageMoveLeftEnd(const StateInfo& _Info)
@@ -640,12 +678,43 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 		inLeftArrow_ = false;
 		int PrevCount = CurrentPosInInventoryPage;
 
-		if ((PrevCount == 9 || PrevCount == 19 || PrevCount == 29 || PrevCount == 39) && _Info.PrevState != "IN_LEFT_ARROW")
+		if ((PrevCount == 13 || PrevCount == 17 || PrevCount == 21 || PrevCount == 25) && _Info.PrevState != "IN_LEFT_ARROW")
 		{
 			++CurrentPosInInventoryPage;
 			SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
 			return;
 		}
+
+		else if (PrevCount == static_cast<int>(ITEM_LIST::Dream_Nail) || PrevCount == static_cast<int>(ITEM_LIST::Spell_Scream))
+		{
+			// 아이템이 하나라도 없으면 aroow로 이동
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(10)->second;
+			ItemSlot* CheckItem = dynamic_cast<ItemSlot*>(PointActorComponent_->GetPointActor());
+
+			if (CheckItem->GetisItem() == false)
+			{
+				++CurrentPosInInventoryPage;
+				SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+				return;
+			}
+
+			else
+			{
+				CurrentPosInInventoryPage = 10;
+
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+
+				SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+					, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+					, static_cast<float>(Z_ORDER::UI_Border) });
+
+				SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+				
+
+			}
+
+		}
+
 
 		else
 		{
@@ -680,6 +749,14 @@ void SettingPointer::PointerInventoryPageMoveRightEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerInInventoryPageRightArrowStart(const StateInfo& _Info)
 {
+	inRightArrow_ = true;
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(50)->second;
+
+	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+		, static_cast<float>(Z_ORDER::UI_Border) });
+
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 }
 
 void SettingPointer::PointerInInventoryPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -701,6 +778,14 @@ void SettingPointer::PointerInInventoryPageRightArrowEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerInventoryPageInLeftArrowStart(const StateInfo& _Info)
 {
+	inLeftArrow_ = true;
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(51)->second;
+
+	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+		, static_cast<float>(Z_ORDER::UI_Border) });
+
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 }
 
 void SettingPointer::PointerInventoryPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info)

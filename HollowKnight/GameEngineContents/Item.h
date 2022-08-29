@@ -35,7 +35,7 @@ protected:
 private:
 
 public:
-	void CreateItem(std::string _Name, ITEM_LIST _Item, ItemSlot* _Slot);
+	void CreateItem(std::string _Name, ITEM_LIST _Item);
 
 
 

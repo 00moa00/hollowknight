@@ -3,7 +3,9 @@
 
 #include "HollowKnightLevel.h"
 #include "GlobalContentsValue.h"
+#include "PointActorComponent.h"
 #include "KnightData.h"
+#include "ItemSlot.h"
 
 HollowKnightLevel::HollowKnightLevel() 
 	:
@@ -81,9 +83,23 @@ void HollowKnightLevel::PushNotches(Notches* _Notches, float4 _Position)
 
 }
 
-void HollowKnightLevel::PushItemSlot(int _SlotNum, float4 _SlotPos)
+
+void HollowKnightLevel::PustItemInventroy(ITEM_LIST _Item)
 {
-	ItemSlot_.insert({ _SlotNum, ItemSlotPos(_SlotNum, _SlotPos) });
+	for (int i = 10; i < 22; ++i)
+	{
+		PointActorComponent*  findComponent = PointActorListInventory.find(i)->second;
+		
+
+		ItemSlot* slot = dynamic_cast<ItemSlot*>(findComponent->GetPointActor());
+		if (slot->GetisItem() == false)
+		{
+			slot->PustItem(i, _Item);
+			break;
+		}
+	}
+
+
 }
 
 

@@ -80,11 +80,11 @@ void InventoryPage::Start()
 				AllItem_[SlotNum]->CreateItemSlot(SlotNum, ItemEnum.value(), ITEM_TYPE::Normal_Item);
 
 				AllItem_[SlotNum]->SetParent(this);
-				AllItem_[SlotNum]->GetTransform().SetLocalPosition({0 + MaginX, 100.f + MaginY , static_cast<float>(Z_ORDER::UI) });
+				AllItem_[SlotNum]->GetTransform().SetLocalPosition({-150.f + MaginX, 200.f + MaginY , static_cast<float>(Z_ORDER::UI) });
 
 
 				PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
-				Component_->PushPointerActor(ValueNum, PAGE_TYPE::Inventory, AllItem_[ValueNum]);
+				Component_->PushPointerActor(SlotNum, PAGE_TYPE::Inventory, AllItem_[SlotNum]);
 
 				++SlotNum;
 				MaginX += 120.f;
@@ -97,6 +97,10 @@ void InventoryPage::Start()
 
 
 	}
+
+	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Shade_Cloak);
+	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Mantis_Cloak);
+
 
 
 	//소비 아이템 등록
@@ -127,7 +131,7 @@ void InventoryPage::Start()
 
 
 			PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
-			Component_->PushPointerActor(ValueNum, PAGE_TYPE::Inventory, AllItem_[ValueNum]);
+			Component_->PushPointerActor(SlotNum, PAGE_TYPE::Inventory, AllItem_[SlotNum]);
 
 			++SlotNum;
 			MaginX += 120.f;
