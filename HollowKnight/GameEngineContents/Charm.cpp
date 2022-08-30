@@ -100,6 +100,7 @@ void Charm::PointerCharmMoveEnd(const StateInfo& _Info)
 	if (CharmPointer_ != nullptr)
 	{
 		CharmPointer_->GetRenderer()->On();
+
 		CharmPointer_->GetRenderer()->GetPixelData().MulColor.r = 1;
 		CharmPointer_->GetRenderer()->GetPixelData().MulColor.g = 1;
 		CharmPointer_->GetRenderer()->GetPixelData().MulColor.b = 1;

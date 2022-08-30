@@ -106,6 +106,12 @@
     <Filter Include="Actor\Play\UI\Setting\Inventory\Item">
       <UniqueIdentifier>{92448587-8228-4a80-905b-6f0f2390d2dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Pointer">
+      <UniqueIdentifier>{63a6e59e-b57c-4cd0-b95f-9fa00e0f30da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Pointer\PointerState">
+      <UniqueIdentifier>{b20ed465-c032-4dbd-966e-803629137879}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -249,9 +255,6 @@
     <ClInclude Include="CharmPage.h">
       <Filter>Actor\Play\UI\Setting\Charm</Filter>
     </ClInclude>
-    <ClInclude Include="SettingPointer.h">
-      <Filter>Actor\Play\UI\Setting</Filter>
-    </ClInclude>
     <ClInclude Include="BorderArrow.h">
       <Filter>Actor\Play\UI\Setting\Border</Filter>
     </ClInclude>
@@ -291,9 +294,6 @@
     <ClInclude Include="SettingUIMaster.h">
       <Filter>Actor\Play\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SettingPointerBox.h">
-      <Filter>Actor\Play\UI\Setting</Filter>
-    </ClInclude>
     <ClInclude Include="CharmSlot.h">
       <Filter>Actor\Play\UI\Setting\Charm</Filter>
     </ClInclude>
@@ -332,6 +332,12 @@
     </ClInclude>
     <ClInclude Include="ItemSlot.h">
       <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingPointerBox.h">
+      <Filter>Actor\Play\UI\Setting\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingPointer.h">
+      <Filter>Actor\Play\UI\Setting\Pointer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -479,9 +485,6 @@
     <ClCompile Include="CharmPage.cpp">
       <Filter>Actor\Play\UI\Setting\Charm</Filter>
     </ClCompile>
-    <ClCompile Include="SettingPointer.cpp">
-      <Filter>Actor\Play\UI\Setting</Filter>
-    </ClCompile>
     <ClCompile Include="BorderArrow.cpp">
       <Filter>Actor\Play\UI\Setting\Border</Filter>
     </ClCompile>
@@ -521,9 +524,6 @@
     <ClCompile Include="SettingUIMaster.cpp">
       <Filter>Actor\Play\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SettingPointerBox.cpp">
-      <Filter>Actor\Play\UI\Setting</Filter>
-    </ClCompile>
     <ClCompile Include="CharmSlot.cpp">
       <Filter>Actor\Play\UI\Setting\Charm</Filter>
     </ClCompile>
@@ -562,6 +562,18 @@
     </ClCompile>
     <ClCompile Include="ItemSlot.cpp">
       <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingPointer.cpp">
+      <Filter>Actor\Play\UI\Setting\Pointer</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingPointerBox.cpp">
+      <Filter>Actor\Play\UI\Setting\Pointer</Filter>
+    </ClCompile>
+    <ClCompile Include="CharmPageState.cpp">
+      <Filter>Actor\Play\UI\Setting\Pointer\PointerState</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryPageStatecpp.cpp">
+      <Filter>Actor\Play\UI\Setting\Pointer\PointerState</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

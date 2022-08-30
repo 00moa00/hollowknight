@@ -99,14 +99,15 @@ public:
 	//    Bind State
 	//================================
 
-	void PointerCharmPageMoveStart(const StateInfo& _Info);
-	void PointerCharmPageMoveUpdate(float _DeltaTime, const StateInfo& _Info);
-	void PointerCharmPageMoveEnd(const StateInfo& _Info);
-
 
 	//=========================================
 	//    SettingPointerCharmPageManager
 	//=========================================
+
+	void PointerCharmPageMoveStart(const StateInfo& _Info);
+	void PointerCharmPageMoveUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerCharmPageMoveEnd(const StateInfo& _Info);
+
 	void PointerCharmPageIdleStart(const StateInfo& _Info);
 	void PointerCharmPageIdleUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerCharmPageIdleEnd(const StateInfo& _Info);
@@ -139,17 +140,19 @@ public:
 	void PointerChramPageNextSortSlotUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerChramPageNextSortSlotEnd(const StateInfo& _Info);
 
-
-
 	void PointerChramPageMoveRendererMoveStart(const StateInfo& _Info);
 	void PointerChramPageMoveRendererMoveUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerChramPageMoveRendererMoveEnd(const StateInfo& _Info);
 
 
-
 	//=========================================
 	//    SettingPointerInventoryPageManager
 	//=========================================
+
+	void PointerInventoryPageMoveStart(const StateInfo& _Info);
+	void PointerInventoryPageMoveUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerInventoryPageMoveEnd(const StateInfo& _Info);
+
 	void PointerInventoryPageIdleStart(const StateInfo& _Info);
 	void PointerInventoryPageIdleUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerInventoryPageIdleEnd(const StateInfo& _Info);
@@ -169,7 +172,6 @@ public:
 	void PointerInventoryPageInLeftArrowStart(const StateInfo& _Info);
 	void PointerInventoryPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerInventoryPageInLeftArrowEnd(const StateInfo& _Info);
-
 
 	void PointerInventoryPageWaitStart(const StateInfo& _Info);
 	void PointerInventoryPageWaitUpdate(float _DeltaTime, const StateInfo& _Info);
