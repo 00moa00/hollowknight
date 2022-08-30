@@ -3,6 +3,14 @@
 #include "SettingUIMaster.h"
 #include "SettingPointerBox.h"
 
+struct MoveState
+{
+	float4 Dir_;
+	float4 Size_;
+	std::string NextMoveStateName_;
+};
+
+
 
 class CharmSlot;
 class HollowKnightLevel;
@@ -26,6 +34,7 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+
 
 	bool isMoveRenderer_;
 	bool isMoveRendererDeath_;
@@ -51,11 +60,14 @@ private:
 
 	float MoveTimer_;
 
+
+
 	SettingPointerBox* SettingPointerBox_;
 
 	PAGE_TYPE CurrentPage_; //현재 페이지
 	PAGE_TYPE PrevPage_; // 페이지 저장용
 
+	MoveState MoveState_;
 
 	CharmSlot* CharmMovePointer_;
 
@@ -66,6 +78,9 @@ public:
 
 	void AllOn();
 	void AllOff();
+
+
+	void MovePointer(float _DeltaTime, float4 _Dir, float4 BoxSize);
 
 	// 모든 포인터 액터들이 다 만들어지고 나서 사용해야하는 필수 함수
 
@@ -85,6 +100,11 @@ public:
 	//================================
 	//    Bind State
 	//================================
+
+	void PointerCharmPageMoveStart(const StateInfo& _Info);
+	void PointerCharmPageMoveUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerCharmPageMoveEnd(const StateInfo& _Info);
+
 
 	//=========================================
 	//    SettingPointerCharmPageManager

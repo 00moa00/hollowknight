@@ -10,6 +10,7 @@
 
 SettingPointer::SettingPointer() 
 	:
+	
 
 	isMoveRenderer_(false),
 
@@ -56,6 +57,13 @@ void SettingPointer::Start()
 	//=========================================
 	//    SettingPointerCharmPageManager
 	//=========================================
+
+	SettingPointerCharmPageManager_.CreateStateMember("POINTER_MOVE"
+		, std::bind(&SettingPointer::PointerCharmPageMoveUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerCharmPageMoveStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerCharmPageMoveEnd, this, std::placeholders::_1));
+
+
 
 	SettingPointerCharmPageManager_.CreateStateMember("IDLE"
 		, std::bind(&SettingPointer::PointerCharmPageIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -167,6 +175,7 @@ void SettingPointer::Update(float _DeltaTime)
 	default:
 		break;
 	}
+
 }
 
 void SettingPointer::SetCharmPageActorMax()
@@ -308,6 +317,36 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 }
 
+
+
+
+void SettingPointer::PointerCharmPageMoveStart(const StateInfo& _Info)
+{
+
+}
+
+void SettingPointer::PointerCharmPageMoveUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	float4 MoveDir = MoveState_.Dir_ - SettingPointerBox_->GetTransform().GetWorldPosition();
+	float Lenth = MoveDir.Length();
+
+	MoveDir.Normalize();
+	if (Lenth <= 2.f)
+	{
+		SettingPointerBox_->GetTransform().SetWorldPosition(MoveState_.Dir_);
+		SettingPointerCharmPageManager_.ChangeState(MoveState_.NextMoveStateName_);
+	}
+
+	SettingPointerBox_->GetTransform().SetWorldMove(MoveDir * 200.f * _DeltaTime);
+	SettingPointerBox_->SetBoxSize({ MoveState_.Size_ });
+}
+
+void SettingPointer::PointerCharmPageMoveEnd(const StateInfo& _Info)
+{
+
+}
+
+
 void SettingPointer::PointerCharmPageIdleStart(const StateInfo& _Info)
 {
 	Sort_ = 0;
@@ -328,13 +367,11 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 
 	if (true == GameEngineInput::GetInst()->IsDown("MoveUp"))
 	{
-
 		int PrevCount = CurrentPosInCharmPage;
 		CurrentPosInCharmPage -= 10;
 
 		if (CurrentPosInCharmPage < 0)
 		{
-
 			PointActorComponent* FindActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(40)->second;
 
 			CharmSlot* findSlot = dynamic_cast<CharmSlot*>(FindActorComponent_->GetPointActor());
@@ -345,11 +382,11 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 
 				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 
-				SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-					, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-					, static_cast<float>(Z_ORDER::UI_Border) });
 
-				SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+				SettingPointerCharmPageManager_.ChangeState("POINTER_MOVE");
+				MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
+				MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
+				MoveState_.NextMoveStateName_ = "IDLE";
 
 			}
 
@@ -357,8 +394,6 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 			{
 				CurrentPosInCharmPage = PrevCount;
 			}
-
-
 		}
 		else if (PrevCount > 39 && PrevCount < 50)
 		{
@@ -369,13 +404,11 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 		{
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 
-			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
-
-			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+			SettingPointerCharmPageManager_.ChangeState("POINTER_MOVE");
+			MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
+			MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
+			MoveState_.NextMoveStateName_ = "IDLE";
 		}
-
 
 	}
 
@@ -400,11 +433,10 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 
 		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 
-		SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-			, static_cast<float>(Z_ORDER::UI_Border) });
-
-		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		SettingPointerCharmPageManager_.ChangeState("POINTER_MOVE");
+		MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
+		MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
+		MoveState_.NextMoveStateName_ = "IDLE";
 	}
 
 
@@ -466,7 +498,6 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 		
 		else if (slot->GetisEquippedSlotUsing() == true)
 		{
-
 			{
 
 				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 1)->second;
@@ -474,7 +505,6 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 
 				if (SearchNextSlot != nullptr && SearchNextSlot->GetisEquippedSlotUsing() == true)
 				{
-
 					SettingPointerCharmPageManager_.ChangeState("SORT_SLOT");
 				}
 
@@ -510,10 +540,7 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 						, true
 						, true);
 
-
 				}
-
-
 
 				//사용 가능한 부적 칸 수(노치) 갱신
 				for (int j = KnightData::GetInst()->GetCharmNotches() - 1; j > KnightData::GetInst()->GetUsingCharmNotches() - 1; --j)
@@ -525,7 +552,6 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 			}
 		}
 	}
-
 }
 
 void SettingPointer::PointerCharmPageIdleEnd(const StateInfo& _Info)
@@ -543,7 +569,14 @@ void SettingPointer::PointerCharmPageMoveLeftStart(const StateInfo& _Info)
 		if ((PrevCount % 10 == 0 ) && _Info.PrevState != "IN_RIGHT_ARROW")
 		{
 			--CurrentPosInCharmPage;
-			SettingPointerCharmPageManager_.ChangeState("IN_LEFT_ARROW");
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(51)->second;
+
+			SettingPointerCharmPageManager_.ChangeState("POINTER_MOVE");
+			MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
+			MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
+			MoveState_.NextMoveStateName_ = "IN_LEFT_ARROW";
+
 			return;
 		}
 
@@ -558,11 +591,10 @@ void SettingPointer::PointerCharmPageMoveLeftStart(const StateInfo& _Info)
 
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 
-			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
-
-			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+			SettingPointerCharmPageManager_.ChangeState("POINTER_MOVE");
+			MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
+			MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
+			MoveState_.NextMoveStateName_ = "IDLE";
 		}
 	}
 
@@ -571,7 +603,6 @@ void SettingPointer::PointerCharmPageMoveLeftStart(const StateInfo& _Info)
 void SettingPointer::PointerCharmPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	SettingPointerCharmPageManager_.ChangeState("IDLE");
-
 }
 
 void SettingPointer::PointerCharmPageMoveLeftEnd(const StateInfo& _Info)
@@ -589,7 +620,16 @@ void SettingPointer::PointerCharmPageMoveRightStart(const StateInfo& _Info)
 		if ((PrevCount == 9 || PrevCount == 19 || PrevCount == 29 || PrevCount == 39) && _Info.PrevState != "IN_LEFT_ARROW")
 		{
 			++CurrentPosInCharmPage;
-			SettingPointerCharmPageManager_.ChangeState("IN_RIGHT_ARROW");
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(50)->second;
+
+			SettingPointerCharmPageManager_.ChangeState("POINTER_MOVE");
+			MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
+			MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
+			MoveState_.NextMoveStateName_ = "IN_RIGHT_ARROW";
+
+			//SettingPointerCharmPageManager_.ChangeState("IN_RIGHT_ARROW");
+
+
 			return;
 		}
 
@@ -605,13 +645,14 @@ void SettingPointer::PointerCharmPageMoveRightStart(const StateInfo& _Info)
 				++CurrentPosInCharmPage;
 			}
 
-			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 
-			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
+			FindActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 
-			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+
+			SettingPointerCharmPageManager_.ChangeState("POINTER_MOVE");
+			MoveState_.Dir_ = FindActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
+			MoveState_.Size_ = FindActorComponent_->GetPointActor()->GetPointerSize() / 2;
+			MoveState_.NextMoveStateName_ = "IDLE";
 		}
 
 		else
@@ -625,11 +666,10 @@ void SettingPointer::PointerCharmPageMoveRightStart(const StateInfo& _Info)
 
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 
-			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
-
-			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+			SettingPointerCharmPageManager_.ChangeState("POINTER_MOVE");
+			MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
+			MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
+			MoveState_.NextMoveStateName_ = "IDLE";
 		}
 
 	}
@@ -647,14 +687,6 @@ void SettingPointer::PointerCharmPageMoveRightEnd(const StateInfo& _Info)
 void SettingPointer::PointerInCharmPageRightArrowStart(const StateInfo& _Info)
 {
 	inRightArrow_ = true;
-
-	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(50)->second;
-
-	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-		, static_cast<float>(Z_ORDER::UI_Border) });
-
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 }
 
 void SettingPointer::PointerInCharmPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -677,13 +709,7 @@ void SettingPointer::PointerInCharmPageRightArrowEnd(const StateInfo& _Info)
 void SettingPointer::PointerCharmPageInLeftArrowStart(const StateInfo& _Info)
 {
 	inLeftArrow_ = true;
-	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(51)->second;
 
-	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-		, static_cast<float>(Z_ORDER::UI_Border) });
-
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 }
 
 void SettingPointer::PointerCharmPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info)
