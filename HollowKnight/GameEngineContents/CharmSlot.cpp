@@ -32,6 +32,7 @@ void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePat
 	CharmState_.isEquippedSlotUsing_ = false;
 	CharmState_.CharmFilePath_ = _CharmFilePath;
 	CharmState_.CharmName_ = _SlotName;
+	CharmState_.UsingSlotNum_ = static_cast<int>(_slot);
 
 	//ºÎÀû
 	Charm_ = GetLevel()->CreateActor<Charm>();

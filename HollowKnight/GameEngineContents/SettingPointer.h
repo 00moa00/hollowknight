@@ -117,9 +117,17 @@ public:
 	void PointerChramPageSortSlotUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerChramPageSortSlotEnd(const StateInfo& _Info);
 
+	void PointerChramPageNextSortSlotStart(const StateInfo& _Info);
+	void PointerChramPageNextSortSlotUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerChramPageNextSortSlotEnd(const StateInfo& _Info);
+
+
+
 	void PointerChramPageMoveRendererMoveStart(const StateInfo& _Info);
 	void PointerChramPageMoveRendererMoveUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerChramPageMoveRendererMoveEnd(const StateInfo& _Info);
+
+
 
 	//=========================================
 	//    SettingPointerInventoryPageManager
