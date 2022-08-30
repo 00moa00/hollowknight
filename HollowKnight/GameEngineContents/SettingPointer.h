@@ -10,8 +10,6 @@ struct MoveState
 	std::string NextMoveStateName_;
 };
 
-
-
 class CharmSlot;
 class HollowKnightLevel;
 class PointActorComponent;

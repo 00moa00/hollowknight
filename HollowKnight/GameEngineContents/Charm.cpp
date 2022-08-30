@@ -83,7 +83,7 @@ void Charm::PointerCharmMoveUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
-	GetRenderer()->GetTransform().SetWorldMove(MoveDir * 200.f * _DeltaTime);
+	GetRenderer()->GetTransform().SetWorldMove(MoveDir * 550.f * _DeltaTime);
 }
 
 void Charm::PointerCharmMoveEnd(const StateInfo& _Info)
@@ -100,6 +100,9 @@ void Charm::PointerCharmMoveEnd(const StateInfo& _Info)
 	if (CharmPointer_ != nullptr)
 	{
 		CharmPointer_->GetRenderer()->On();
+		CharmPointer_->GetRenderer()->GetPixelData().MulColor.r = 1;
+		CharmPointer_->GetRenderer()->GetPixelData().MulColor.g = 1;
+		CharmPointer_->GetRenderer()->GetPixelData().MulColor.b = 1;
 		CharmPointer_ = nullptr;
 	}
 

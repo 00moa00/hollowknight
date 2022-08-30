@@ -96,6 +96,7 @@ public:
 	{
 		return CharmState_.isEquippedSlot_;
 	}
+
 	bool GetisEquippedSlotUsing()
 	{
 		return  CharmState_.isEquippedSlotUsing_;
@@ -152,6 +153,21 @@ public:
 	void SetisUsing(bool _b)
 	{
 		CharmState_.isUsing_ = _b;
+
+		if (CharmState_.isUsing_ == true)
+		{
+			Charm_->GetRenderer()->GetPixelData().MulColor.r = 0.5;
+			Charm_->GetRenderer()->GetPixelData().MulColor.g = 0.5;
+			Charm_->GetRenderer()->GetPixelData().MulColor.b = 0.5;
+		}
+
+		else
+		{
+			//Charm_->GetRenderer()->GetPixelData().MulColor.r = 1;
+			//Charm_->GetRenderer()->GetPixelData().MulColor.g = 1;
+			//Charm_->GetRenderer()->GetPixelData().MulColor.b = 1;
+		}
+
 	}
 
 	void SetUsingSlotNum(int _i)
