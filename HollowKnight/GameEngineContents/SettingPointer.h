@@ -4,6 +4,7 @@
 #include "SettingPointerBox.h"
 
 
+class CharmSlot;
 class HollowKnightLevel;
 class PointActorComponent;
 
@@ -26,11 +27,16 @@ protected:
 
 private:
 
+	bool isMoveRenderer_;
+	bool isMoveRendererDeath_;
+
 	bool isDownNextPageRight_;
 	bool isDownLextPageLeft_;
 
 	bool inRightArrow_;
 	bool inLeftArrow_;
+
+	int Sort_;
 
 	// 현재 인덱스
 	int CurrentPosInCharmPage;
@@ -43,10 +49,15 @@ private:
 	int MapPageActorCount;
 	int MonsterPageActorCount;
 
+	float MoveTimer_;
+
 	SettingPointerBox* SettingPointerBox_;
 
 	PAGE_TYPE CurrentPage_; //현재 페이지
 	PAGE_TYPE PrevPage_; // 페이지 저장용
+
+
+	CharmSlot* CharmMovePointer_;
 
 	GameEngineStateManager SettingPointerCharmPageManager_;
 	GameEngineStateManager SettingPointerInventoyPageManager_;
@@ -105,6 +116,10 @@ public:
 	void PointerChramPageSortSlotStart(const StateInfo& _Info);
 	void PointerChramPageSortSlotUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerChramPageSortSlotEnd(const StateInfo& _Info);
+
+	void PointerChramPageMoveRendererMoveStart(const StateInfo& _Info);
+	void PointerChramPageMoveRendererMoveUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerChramPageMoveRendererMoveEnd(const StateInfo& _Info);
 
 	//=========================================
 	//    SettingPointerInventoryPageManager

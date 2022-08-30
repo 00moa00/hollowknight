@@ -60,6 +60,9 @@ public:
 	void CreateCopyCharm(GameEngineUIRenderer* _RenderData, std::string _SlotName, std::string _FilePath);
 
 	void CharmSetMoveLeft();
+
+
+
 	//================================
 	//    Getter 
 	//================================

@@ -239,6 +239,11 @@ void CharmSlot::CreateEquippedCharmSlot( CharmState _CharmState)
 
 void CharmSlot::CreateCopyCharm(GameEngineUIRenderer* _RenderData, std::string _SlotName, std::string _FilePath)
 {
+
+
+	CharmState_.CharmFilePath_ = _FilePath;
+	CharmState_.CharmName_ = _SlotName;
+
 	Charm_->CreateCharm(_SlotName, _FilePath, { 131, 128, 1 });
 	SetPointerSize(Charm_->GetRenderer()->GetCurTexture()->GetScale());
 
