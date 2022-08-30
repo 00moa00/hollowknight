@@ -24,6 +24,7 @@ SettingPointer::SettingPointer()
 	CurrentPosInCharmPage(0),
 	CurrentPosInMapPage(0),
 	CurrentPosInMonsterPage(0),
+	PointerMoveSpeed_(750.f),
 
 	CharmMovePointer_(nullptr)
 

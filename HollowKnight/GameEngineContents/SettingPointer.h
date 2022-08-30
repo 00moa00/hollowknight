@@ -33,7 +33,6 @@ protected:
 
 private:
 
-
 	bool isMoveRenderer_;
 	bool isMoveRendererDeath_;
 
@@ -56,9 +55,7 @@ private:
 	int MapPageActorCount;
 	int MonsterPageActorCount;
 
-	float MoveTimer_;
-
-
+	float PointerMoveSpeed_;
 
 	SettingPointerBox* SettingPointerBox_;
 
