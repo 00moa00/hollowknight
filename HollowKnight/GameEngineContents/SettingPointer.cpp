@@ -310,6 +310,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 void SettingPointer::PointerCharmPageIdleStart(const StateInfo& _Info)
 {
+	Sort_ = 0;
 }
 
 void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -822,10 +823,10 @@ void SettingPointer::PointerChramPageSortSlotEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerChramPageNextSortSlotStart(const StateInfo& _Info)
 {
-	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 1)->second;
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 1 + Sort_)->second;
 	CharmSlot* SearchNextSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
-	PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 2)->second;
+	PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 2 + Sort_)->second;
 	CharmSlot* SearchNextAfterSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
 	PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(SearchNextAfterSlot->GetUsingSlotNum())->second;
@@ -853,8 +854,25 @@ void SettingPointer::PointerChramPageNextSortSlotStart(const StateInfo& _Info)
 	SearchNextSlot->GetCharm()->GetTransform().SetWorldPosition({ SearchNextSlot->GetTransform().GetWorldPosition() });
 	SearchNextSlot->GetCharm()->GetRenderer()->Off();
 
-	SearchNextAfterSlot->SetUsingSlotNum(-1);
-	SearchNextAfterSlot->SetisEquippedSlotUsing(false);
+
+	PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 3 + Sort_)->second;
+	CharmSlot* LoopCheck = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+	if (LoopCheck != nullptr && LoopCheck->GetisEquippedSlotUsing() == true)
+	{
+		++Sort_;
+		SettingPointerCharmPageManager_.ChangeState("NEXT_SORT_SLOT");
+
+	}
+
+	else
+	{
+		SearchNextAfterSlot->SetUsingSlotNum(-1);
+		SearchNextAfterSlot->SetisEquippedSlotUsing(false);
+	}
+
+
+
 }
 
 void SettingPointer::PointerChramPageNextSortSlotUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -867,7 +885,7 @@ void SettingPointer::PointerChramPageNextSortSlotUpdate(float _DeltaTime, const 
 void SettingPointer::PointerChramPageNextSortSlotEnd(const StateInfo& _Info)
 {
 
-
+	
 }
 
 
