@@ -82,6 +82,10 @@ void SettingPointer::Start()
 		, std::bind(&SettingPointer::PointerCharmPageWaitStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerCharmPageWaitEnd, this, std::placeholders::_1));
 
+	SettingPointerCharmPageManager_.CreateStateMember("SORT_SLOT"
+		, std::bind(&SettingPointer::PointerChramPageSortSlotUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerChramPageSortSlotStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerChramPageSortSlotEnd, this, std::placeholders::_1));
 
 
 
@@ -315,20 +319,49 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 
 		if (CurrentPosInCharmPage < 0)
 		{
-			CurrentPosInCharmPage += 50;
+
+			PointActorComponent* FindActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(40)->second;
+
+			CharmSlot* findSlot = dynamic_cast<CharmSlot*>(FindActorComponent_->GetPointActor());
+
+			if (findSlot->GetisEquippedSlotUsing() == true)
+			{
+				CurrentPosInCharmPage = 40;
+
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
+
+				SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+					, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+					, static_cast<float>(Z_ORDER::UI_Border) });
+
+				SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+
+			}
+
+			else
+			{
+				CurrentPosInCharmPage = PrevCount;
+			}
+
+
 		}
-		else if (CurrentPosInCharmPage >= 30)
+		else if (PrevCount > 39 && PrevCount < 50)
 		{
 			CurrentPosInCharmPage = PrevCount;
 		}
 
-		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
+		else
+		{
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 
-		SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-			, static_cast<float>(Z_ORDER::UI_Border) });
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
 
-		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+
+
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("MoveDown"))
@@ -406,24 +439,54 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 			}
 		}
 		
-		else if(slot->GetisEquippedSlotUsing() == true)
+		else if (slot->GetisEquippedSlotUsing() == true)
 		{
 
-			//해당 부적을 사용하고 있지 않음으로 바꿔야한다.
-			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(slot->GetUsingSlotNum())->second;
-			CharmSlot* SearchSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
-
-			KnightData::GetInst()->AddUsingCharmNotches(SearchSlot->GetSlotCount());
-			SearchSlot->SetisUsing(false);
-
-			slot->SetUsingSlotNum(-1);
-			slot->SetisEquippedSlotUsing(false);
-			slot->GetCharm()->GetRenderer()->Death();
-
-			//사용 가능한 부적 칸 수(노치) 갱신
-			for (int j = KnightData::GetInst()->GetCharmNotches()-1; j > KnightData::GetInst()->GetUsingCharmNotches()-1; --j)
 			{
-				GetLevel<HollowKnightLevel>()->AllNotes_[j]->SetNotchesNotUsed();
+
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 1)->second;
+				CharmSlot* SearchNextSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+				if (SearchNextSlot != nullptr && SearchNextSlot->GetisEquippedSlotUsing() == true)
+				{
+					
+
+					////해당 부적을 사용하고 있지 않음으로 바꿔야한다.
+					//{
+					// 
+					//	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(slot->GetUsingSlotNum())->second;
+					//	CharmSlot* SearchSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+					//	KnightData::GetInst()->AddUsingCharmNotches(SearchSlot->GetSlotCount());
+					//}
+
+					SettingPointerCharmPageManager_.ChangeState("SORT_SLOT");
+				}
+
+				else
+				{
+
+					//해당 부적을 사용하고 있지 않음으로 바꿔야한다.
+					PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(slot->GetUsingSlotNum())->second;
+					CharmSlot* SearchSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+					KnightData::GetInst()->AddUsingCharmNotches(SearchSlot->GetSlotCount());
+					SearchSlot->SetisUsing(false);
+
+					slot->SetUsingSlotNum(-1);
+					slot->SetisEquippedSlotUsing(false);
+					slot->GetCharm()->GetRenderer()->Death();
+				}
+
+
+
+				//사용 가능한 부적 칸 수(노치) 갱신
+				for (int j = KnightData::GetInst()->GetCharmNotches() - 1; j > KnightData::GetInst()->GetUsingCharmNotches() - 1; --j)
+				{
+					GetLevel<HollowKnightLevel>()->AllNotes_[j]->SetNotchesNotUsed();
+				}
+
+				++CurrentPosInCharmPage;
 			}
 		}
 	}
@@ -493,6 +556,27 @@ void SettingPointer::PointerCharmPageMoveRightStart(const StateInfo& _Info)
 			++CurrentPosInCharmPage;
 			SettingPointerCharmPageManager_.ChangeState("IN_RIGHT_ARROW");
 			return;
+		}
+
+		else if (PrevCount > 39 && PrevCount < 50)
+		{
+
+			PointActorComponent* FindActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(PrevCount + 1)->second;
+
+			CharmSlot* findSlot = dynamic_cast<CharmSlot*>(FindActorComponent_->GetPointActor());
+
+			if (findSlot->GetisEquippedSlotUsing() == true)
+			{
+				++CurrentPosInCharmPage;
+			}
+
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 		}
 
 		else
@@ -597,6 +681,70 @@ void SettingPointer::PointerCharmPageWaitUpdate(float _DeltaTime, const StateInf
 void SettingPointer::PointerCharmPageWaitEnd(const StateInfo& _Info)
 {
 }
+
+void SettingPointer::PointerChramPageSortSlotStart(const StateInfo& _Info)
+{
+
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
+	CharmSlot* slot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+	PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 1)->second;
+	CharmSlot* SearchNextSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+
+	SearchNextSlot->GetCharm()->GetRenderer()->GetTransform().SetWorldPosition({ slot->GetTransform().GetWorldPosition() });
+	PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(SearchNextSlot->GetUsingSlotNum())->second;
+	CharmSlot* SearchNextCharm = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+
+	slot->GetCharm()->GetRenderer()->Death();
+	slot->CreateCopyCharm(SearchNextCharm->GetRenderer(), SearchNextCharm->GetCharmName(), SearchNextCharm->GetFilePath());
+	slot->SetisEquippedSlotUsing(true);
+	slot->SetUsingSlotNum(SearchNextCharm->GetSlotNum());
+
+	SearchNextSlot->SetUsingSlotNum(-1);
+	SearchNextSlot->SetisEquippedSlotUsing(false);
+	SearchNextSlot->GetCharm()->GetRenderer()->Death();
+
+	PointActorComponent* DestPointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(slot->GetUsingSlotNum())->second;
+	CharmSlot* SearchDestCharm = dynamic_cast<CharmSlot*>(DestPointActorComponent_->GetPointActor());
+
+
+	SearchDestCharm->SetisUsing(false);
+	KnightData::GetInst()->AddUsingCharmNotches(SearchDestCharm->GetSlotCount());
+
+	PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage + 2)->second;
+	CharmSlot* SearchNextAfterSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+	//사용 가능한 부적 칸 수(노치) 갱신
+	for (int j = KnightData::GetInst()->GetCharmNotches() - 1; j > KnightData::GetInst()->GetUsingCharmNotches() - 1; --j)
+	{
+		GetLevel<HollowKnightLevel>()->AllNotes_[j]->SetNotchesNotUsed();
+	}
+
+	++CurrentPosInCharmPage;
+
+	if (SearchNextAfterSlot != nullptr && SearchNextAfterSlot->GetisEquippedSlotUsing() == true)
+	{
+		SettingPointerCharmPageManager_.ChangeState("SORT_SLOT");
+
+	}
+
+}
+
+void SettingPointer::PointerChramPageSortSlotUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	SettingPointerCharmPageManager_.ChangeState("IDLE");
+
+}
+
+void SettingPointer::PointerChramPageSortSlotEnd(const StateInfo& _Info)
+{
+
+
+}
+
+
 
 void SettingPointer::PointerInventoryPageIdleStart(const StateInfo& _Info)
 {

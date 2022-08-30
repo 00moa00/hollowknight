@@ -48,7 +48,7 @@ protected:
 	void Update(float _Deltatime) override;
 
 private:
-
+	//bool
 	
 	Charm* Charm_;
 	CharmState CharmState_;
@@ -59,7 +59,7 @@ public:
 	void CreateEquippedCharmSlot(CharmState _CharmState);
 	void CreateCopyCharm(GameEngineUIRenderer* _RenderData, std::string _SlotName, std::string _FilePath);
 
-
+	void CharmSetMoveLeft();
 	//================================
 	//    Getter 
 	//================================

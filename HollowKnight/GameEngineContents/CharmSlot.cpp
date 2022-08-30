@@ -243,3 +243,9 @@ void CharmSlot::CreateCopyCharm(GameEngineUIRenderer* _RenderData, std::string _
 	SetPointerSize(Charm_->GetRenderer()->GetCurTexture()->GetScale());
 
 }
+
+
+void CharmSlot::CharmSetMoveLeft()
+{
+
+}

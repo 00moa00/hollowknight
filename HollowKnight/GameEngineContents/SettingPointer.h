@@ -98,10 +98,13 @@ public:
 	void PointerCharmPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerCharmPageInLeftArrowEnd(const StateInfo& _Info);
 
-
 	void PointerCharmPageWaitStart(const StateInfo& _Info);
 	void PointerCharmPageWaitUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerCharmPageWaitEnd(const StateInfo& _Info);
+
+	void PointerChramPageSortSlotStart(const StateInfo& _Info);
+	void PointerChramPageSortSlotUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerChramPageSortSlotEnd(const StateInfo& _Info);
 
 	//=========================================
 	//    SettingPointerInventoryPageManager

@@ -147,7 +147,12 @@ public:
 	// 부적을 뺸다
 	void AddUsingCharmNotches(int _i)
 	{
-		UsingCharmNotches_ -= _i;
+
+		if (UsingCharmNotches_ >= 0)
+		{
+			UsingCharmNotches_ -= _i;
+
+		}
 	}
 
 	void SetisSetting(bool _b)
