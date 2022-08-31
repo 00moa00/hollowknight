@@ -112,43 +112,43 @@ void SettingPointer::Start()
 	//=========================================
 	//    SettingPointerInventoyPageManager
 	//=========================================
-	SettingPointerInventoyPageManager_.CreateStateMember("POINTER_MOVE"
+	SettingPointerInventoryPageManager_.CreateStateMember("POINTER_MOVE"
 		, std::bind(&SettingPointer::PointerInventoryPageMoveUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveEnd, this, std::placeholders::_1));
 
 
-	SettingPointerInventoyPageManager_.CreateStateMember("IDLE"
+	SettingPointerInventoryPageManager_.CreateStateMember("IDLE"
 		, std::bind(&SettingPointer::PointerInventoryPageIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInventoryPageIdleStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageIdleEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoyPageManager_.CreateStateMember("MOVE_LEFT"
+	SettingPointerInventoryPageManager_.CreateStateMember("MOVE_LEFT"
 		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveLeftEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoyPageManager_.CreateStateMember("MOVE_RIGHT"
+	SettingPointerInventoryPageManager_.CreateStateMember("MOVE_RIGHT"
 		, std::bind(&SettingPointer::PointerInventoryPageMoveRightUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveRightStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageMoveRightEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoyPageManager_.CreateStateMember("IN_RIGHT_ARROW"
+	SettingPointerInventoryPageManager_.CreateStateMember("IN_RIGHT_ARROW"
 		, std::bind(&SettingPointer::PointerInInventoryPageRightArrowUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInInventoryPageRightArrowStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInInventoryPageRightArrowEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoyPageManager_.CreateStateMember("IN_LEFT_ARROW"
+	SettingPointerInventoryPageManager_.CreateStateMember("IN_LEFT_ARROW"
 		, std::bind(&SettingPointer::PointerInventoryPageInLeftArrowUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInventoryPageInLeftArrowStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageInLeftArrowEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoyPageManager_.CreateStateMember("WAIT"
+	SettingPointerInventoryPageManager_.CreateStateMember("WAIT"
 		, std::bind(&SettingPointer::PointerInventoryPageWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&SettingPointer::PointerInventoryPageWaitStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageWaitEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoyPageManager_.ChangeState("IDLE");
+	SettingPointerInventoryPageManager_.ChangeState("IDLE");
 
 
 	CurrentPage_ = PAGE_TYPE::Charm;
@@ -167,7 +167,7 @@ void SettingPointer::Update(float _DeltaTime)
 	case PAGE_TYPE::Map:
 		break;
 	case PAGE_TYPE::Inventory:
-		SettingPointerInventoyPageManager_.Update(_DeltaTime);
+		SettingPointerInventoryPageManager_.Update(_DeltaTime);
 		break;
 	default:
 		break;
@@ -212,28 +212,6 @@ void SettingPointer::SetFirstPosCharmPage()
 	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize()/2 });
 }
 
-void SettingPointer::SetFirstPosMapPage()
-{
-
-	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(1)->second;
-
-	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-		, static_cast<float>(Z_ORDER::UI_Border) });
-
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
-}
-
-void SettingPointer::SetFirstPosMonsterBookPage()
-{
-	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMonsterBook.find(1)->second;
-
-	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-		, static_cast<float>(Z_ORDER::UI_Border) });
-
-	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
-}
 
 void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 {
@@ -248,7 +226,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
 			SettingPointerCharmPageManager_.ChangeState("IN_LEFT_ARROW");
-			SettingPointerInventoyPageManager_.ChangeState("WAIT");
+			SettingPointerInventoryPageManager_.ChangeState("WAIT");
 
 		}
 
@@ -258,7 +236,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 			inLeftArrow_ = false;
 
 			SettingPointerCharmPageManager_.ChangeState("IN_RIGHT_ARROW");
-			SettingPointerInventoyPageManager_.ChangeState("WAIT");
+			SettingPointerInventoryPageManager_.ChangeState("WAIT");
 
 		}
 
@@ -278,7 +256,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
 			inRightArrow_ = false;
-			SettingPointerInventoyPageManager_.ChangeState("IN_LEFT_ARROW");
+			SettingPointerInventoryPageManager_.ChangeState("IN_LEFT_ARROW");
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
 
 		}
@@ -286,7 +264,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		if (PrevPage_ == PAGE_TYPE::Map)
 		{
 			CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
-			SettingPointerInventoyPageManager_.ChangeState("IN_RIGHT_ARROW");
+			SettingPointerInventoryPageManager_.ChangeState("IN_RIGHT_ARROW");
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
 
 		}

@@ -19,17 +19,13 @@ void InventoryPage::Start()
 {
 	SetPageType(PAGE_TYPE::Inventory);
 
-
-
 	//스펠 아이템 등록
 
 	{
-
 		int SlotNum = 0;
 
 		for (int i = 0; i < 8; ++i)
 		{
-
 			int ValueNum = SlotNum;
 			auto ItemEnum = magic_enum::enum_cast<ITEM_LIST>(ValueNum);
 
@@ -50,9 +46,7 @@ void InventoryPage::Start()
 			Component_->PushPointerActor(ValueNum, PAGE_TYPE::Inventory, AllItem_[ValueNum]);
 
 			++SlotNum;
-		}
-
-	
+		}	
 	}
 
 	// 일반 아이템 등록
@@ -90,29 +84,22 @@ void InventoryPage::Start()
 				MaginX += 120.f;
 
 			}
-
 			MaginX = 0.f;
 			MaginY -= 100.f;
 		}
-
-
 	}
 
 	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Shade_Cloak);
 	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Mantis_Cloak);
 
 
-
 	//소비 아이템 등록
-
 	{
-
 		int SlotNum = 40;
 		float MaginX = 0.0f;
 
 		for (int i = 40; i < 44; ++i)
 		{
-
 			int ValueNum = SlotNum;
 			auto ItemEnum = magic_enum::enum_cast<ITEM_LIST>(ValueNum);
 
@@ -121,27 +108,18 @@ void InventoryPage::Start()
 			auto Name = magic_enum::enum_name(ItemEnum.value());
 			EnumString = static_cast<std::string>(Name);
 
-
 			AllItem_.insert({ SlotNum, GetLevel()->CreateActor<ItemSlot>() });
 			AllItem_[SlotNum]->CreateItemSlot(EnumString, SlotNum, ItemEnum.value());
-
 			AllItem_[SlotNum]->SetParent(this);
 			AllItem_[SlotNum]->GetTransform().SetLocalPosition({ 0 + MaginX, -200.f  , static_cast<float>(Z_ORDER::UI) });
-
-
 
 			PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
 			Component_->PushPointerActor(SlotNum, PAGE_TYPE::Inventory, AllItem_[SlotNum]);
 
 			++SlotNum;
 			MaginX += 120.f;
-
 		}
-
-
 	}
-
-
 }
 
 void InventoryPage::Update(float _DeltaTime)

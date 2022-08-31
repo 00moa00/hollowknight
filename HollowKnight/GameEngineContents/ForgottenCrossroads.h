@@ -1,7 +1,9 @@
 #pragma once
+#include "Map.h"
+#include "MasterUI.h"
 
 // Ό³Έν :
-class ForgottenCrossroads
+class ForgottenCrossroads : public MasterUI
 {
 public:
 	// constrcuter destructer
@@ -15,8 +17,11 @@ public:
 	ForgottenCrossroads& operator=(ForgottenCrossroads&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 private:
+	std::map<int, Map*> ForgottenCrossroadMap_;
 
 };
 

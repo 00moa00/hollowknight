@@ -1,13 +1,6 @@
 #pragma once
 
-//struct KnihgtHasItem
-//{
-//	int ItemSlotNum_;
-//	std::string _Name;
-//};
-//
-//
-
+// 관리해야하는 데이터 : 플레이어 체력, 영혼레벨, 부적, 맵 해금, 아이템
 
 class KnightData
 {

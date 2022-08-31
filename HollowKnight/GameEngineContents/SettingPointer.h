@@ -51,8 +51,8 @@ private:
 	int CurrentPosInInventoryPage;
 
 	//총 인덱스
-	int CharmPageActorCount;
-	int MapPageActorCount;
+	int CharmPageActorCount;		// 부적은 맥스가 고정
+	int MapPageActorCount;			
 	int MonsterPageActorCount;
 
 	float PointerMoveSpeed_;
@@ -67,18 +67,15 @@ private:
 	CharmSlot* CharmMovePointer_;
 
 	GameEngineStateManager SettingPointerCharmPageManager_;
-	GameEngineStateManager SettingPointerInventoyPageManager_;
+	GameEngineStateManager SettingPointerInventoryPageManager_;
+	GameEngineStateManager SettingPointerMapPageManager_;
 
 public:
 
 	void AllOn();
 	void AllOff();
 
-
-	void MovePointer(float _DeltaTime, float4 _Dir, float4 BoxSize);
-
 	// 모든 포인터 액터들이 다 만들어지고 나서 사용해야하는 필수 함수
-
 	//맥스 카운트 세팅
 	void SetCharmPageActorMax();
 	void SetMapPageActorMax();
@@ -86,8 +83,6 @@ public:
 
 	//페이지를 처음 켰을때 가장 먼저 있어야하는 포인터 위치
 	void SetFirstPosCharmPage();
-	void SetFirstPosMapPage();
-	void SetFirstPosMonsterBookPage();
 
 
 	void SetCurrentPage(PAGE_TYPE _PageType);
@@ -173,6 +168,38 @@ public:
 	void PointerInventoryPageWaitStart(const StateInfo& _Info);
 	void PointerInventoryPageWaitUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerInventoryPageWaitEnd(const StateInfo& _Info);
+
+	//=========================================
+	//    SettingPointerMapPageManager
+	//=========================================
+
+	void PointerMapPageMoveStart(const StateInfo& _Info);
+	void PointerMapPageMoveUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerMapPageMoveEnd(const StateInfo& _Info);
+
+	void PointerMapPageIdleStart(const StateInfo& _Info);
+	void PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerMapPageIdleEnd(const StateInfo& _Info);
+
+	void PointerPageMoveLeftStart(const StateInfo& _Info);
+	void PointerPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerPageMoveLeftEnd(const StateInfo& _Info);
+
+	void PointerMapPageMoveRightStart(const StateInfo& _Info);
+	void PointerMapPageMoveRightUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerMapPageMoveRightEnd(const StateInfo& _Info);
+
+	void PointerMapPageRightArrowStart(const StateInfo& _Info);
+	void PointerMapPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerMapPageRightArrowEnd(const StateInfo& _Info);
+
+	void PointerMapPageInLeftArrowStart(const StateInfo& _Info);
+	void PointerMapPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerMapPageInLeftArrowEnd(const StateInfo& _Info);
+
+	void PointerMapPageWaitStart(const StateInfo& _Info);
+	void PointerMapPageWaitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PointerMapPageWaitEnd(const StateInfo& _Info);
 
 public:
 	//================================

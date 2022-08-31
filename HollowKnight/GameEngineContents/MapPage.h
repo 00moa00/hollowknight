@@ -1,8 +1,8 @@
 #pragma once
-#include "MasterUI.h"
+#include "MasterPage.h"
 
 // 설명 : 간략화 지도
-class MapPage : public MasterUI
+class MapPage : public MasterPage
 {
 public:
 	// constrcuter destructer

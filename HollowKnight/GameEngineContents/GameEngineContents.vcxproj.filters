@@ -348,6 +348,9 @@
     <ClInclude Include="MapRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -592,6 +595,12 @@
     </ClCompile>
     <ClCompile Include="MapRenderer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="MapPageState.cpp">
+      <Filter>Actor\Play\UI\Setting\Pointer\PointerState</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
