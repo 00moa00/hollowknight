@@ -702,7 +702,7 @@ void ContentsCore::Start()
 	}
 
 	//================================
-	//    ≈ÿΩ∫√≥ / ∏  / Dirtmouth
+	//    ≈ÿΩ∫√≥ / ∏  / DirtmouthMap
 	//================================
 	{
 		GameEngineDirectory Dir;

@@ -28,12 +28,6 @@ GameEngineLevel::GameEngineLevel()
 		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::UICAMERA);
 	}
 
-	{
-		GameEngineCameraActor* CameraActor = CreateActor<GameEngineCameraActor>();
-		CameraActor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
-		CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::USER0);
-	}
 }
 
 GameEngineLevel::~GameEngineLevel()

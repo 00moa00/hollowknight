@@ -9,13 +9,8 @@
 #include "SettingPage.h"
 #include "ItemSlot.h"
 #include "Item.h"
+#include "ForgottenCrossroadMap.h"
 
-// 데이터 관리 : KnightData에 모든 정보가 들어있다.
-// 레벨 변경 할 때에 정보를 넣어주는 형식으로 간다.
-// 스펠아이템과 소비 아이템은 모두 생성해두고 on오프만 하기 때문에 상관없음.
-// 일반 아이템의 경우 순서가 달라지는데 모든 아이템의 경우 생성이 되어있으나
-// 가지고 있는 아이템만 랜더 on이 되어있기 때문에 
-//문제 : 플레이어가 해당 아이템을 가지고 있는지 아닌지 글로벌로 체크해야함. 
 
 class GameEngineTextureRenderer;
 class PointActorComponent;
@@ -47,6 +42,7 @@ private:
 	KnightShadow* NewKnihgtShadow_;
 
 	SettingPage* SettingPage_;
+	ForgottenCrossroadMap* ForgottenCrossroadMap_;
 
 public:
 	std::map<int, PointActorComponent*> PointActorListCharm;
@@ -70,6 +66,7 @@ protected:
 	void CreateUIActor();
 	void CreateKnightShadowActor();
 	void CreateSettingPageActor();
+	void CreateForgottenCrossroadMap();
 
 	void CameraMoveWindowLimit();
 	void CameraMoveKnightLimit();
@@ -101,8 +98,8 @@ public :
 
 	void PustItemInventroy(ITEM_LIST _Item);
 
-	GameEngineCameraActor* GetUser0CameraActor();
-	GameEngineTransform& GetUser0CameraActorTransform();
+	GameEngineCameraActor* GetMapCameraActor();
+	GameEngineTransform& GetMapCameraActorTransform();
 
 
 };

@@ -14,7 +14,7 @@ void MapRenderer::Start()
 	GameEngineDefaultRenderer::Start();
 
 	PushRendererToUICamera();
-	ChangeCamera(CAMERAORDER::USER0);
+	ChangeCamera(CAMERAORDER::MAPCAMERA);
 
 	SetPipeLine("TextureAtlas");
 

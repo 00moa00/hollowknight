@@ -41,7 +41,6 @@ void DirtmouthLevel1::Start()
 	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	CreateSettingPageActor();
-
 	SetMainMapSize({ 3700, 3418 });
 
 	GetKnight()->GetTransform().SetLocalPosition({ 500, -0, static_cast<float>(Z_ORDER::Knight) });

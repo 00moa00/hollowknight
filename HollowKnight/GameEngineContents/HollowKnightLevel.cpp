@@ -17,7 +17,12 @@ HollowKnightLevel::HollowKnightLevel()
 	MainCameraPosition_()
 {
 
-
+	{
+		GameEngineCameraActor* CameraActor = CreateActor<GameEngineCameraActor>();
+		CameraActor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
+		CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::MAPCAMERA);
+	}
 }
 
 HollowKnightLevel::~HollowKnightLevel() 
@@ -56,9 +61,13 @@ void HollowKnightLevel::CreateSettingPageActor()
 	SettingPage_ = CreateActor<SettingPage>();
 }
 
-void HollowKnightLevel::PushPointActorCharm(int _Order, PointActorComponent* _PointActorComponent)
+void HollowKnightLevel::CreateForgottenCrossroadMap()
 {
-	
+	ForgottenCrossroadMap_ = CreateActor<ForgottenCrossroadMap>();
+}
+
+void HollowKnightLevel::PushPointActorCharm(int _Order, PointActorComponent* _PointActorComponent)
+{	
 	PointActorListCharm.insert({ _Order, _PointActorComponent });
 }
 
@@ -104,12 +113,12 @@ void HollowKnightLevel::PustItemInventroy(ITEM_LIST _Item)
 
 }
 
-GameEngineCameraActor* HollowKnightLevel::GetUser0CameraActor()
+GameEngineCameraActor* HollowKnightLevel::GetMapCameraActor()
 {
 	return Cameras[static_cast<int>(CAMERAORDER::USER0)]->GetActor<GameEngineCameraActor>();
 }
 
-GameEngineTransform& HollowKnightLevel::GetUser0CameraActorTransform()
+GameEngineTransform& HollowKnightLevel::GetMapCameraActorTransform()
 {
 	return Cameras[static_cast<int>(CAMERAORDER::USER0)]->GetActor()->GetTransform();
 }

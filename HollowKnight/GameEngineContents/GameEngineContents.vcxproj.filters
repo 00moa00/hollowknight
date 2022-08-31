@@ -339,10 +339,10 @@
     <ClInclude Include="AllLocalMap.h">
       <Filter>Actor\Play\UI\Setting\Map</Filter>
     </ClInclude>
-    <ClInclude Include="Dirtmouth.h">
+    <ClInclude Include="DirtmouthMap.h">
       <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
     </ClInclude>
-    <ClInclude Include="ForgottenCrossroads.h">
+    <ClInclude Include="ForgottenCrossroadMap.h">
       <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
     </ClInclude>
     <ClInclude Include="MapRenderer.h">
@@ -587,10 +587,10 @@
     <ClCompile Include="AllLocalMap.cpp">
       <Filter>Actor\Play\UI\Setting\Map</Filter>
     </ClCompile>
-    <ClCompile Include="Dirtmouth.cpp">
+    <ClCompile Include="DirtmouthMap.cpp">
       <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
     </ClCompile>
-    <ClCompile Include="ForgottenCrossroads.cpp">
+    <ClCompile Include="ForgottenCrossroadMap.cpp">
       <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
     </ClCompile>
     <ClCompile Include="MapRenderer.cpp">

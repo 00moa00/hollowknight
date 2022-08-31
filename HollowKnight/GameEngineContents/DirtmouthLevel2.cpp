@@ -44,6 +44,7 @@ void DirtmouthLevel2::Start()
 	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	CreateSettingPageActor();
+	CreateForgottenCrossroadMap();
 
 	SetMainMapSize({ 6646, 3418 });
 

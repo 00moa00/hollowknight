@@ -36,7 +36,7 @@ public:
 	//================================
 	//    Setter
 	//================================
-	void CreateRendererComponent(float4 _LocalScale, std::string _FileName);
+	void CreateRendererComponent( std::string _FileName);
 
 
 
