@@ -1,6 +1,6 @@
 #pragma once
 #include "MasterUI.h"
-#include "GameEngineContentsMaskRenderer.h"
+#include "MaskRenderer.h"
 // Ό³Έν :
 class Soul : public MasterUI
 {
@@ -27,7 +27,7 @@ private:
 
 	GameEngineStateManager SoulManager_;
 	GameEngineUIRenderer* EyeRenderer_;
-	GameEngineContentsMaskRenderer* Soul_;
+	MaskRenderer* Soul_;
 public:
 	//================================
 	//     Getter

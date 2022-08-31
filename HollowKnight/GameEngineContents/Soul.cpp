@@ -32,7 +32,7 @@ void Soul::Start()
 	GameEngineUIRenderer_->Off();
 
 
-	Soul_ = CreateComponent<GameEngineContentsMaskRenderer>();
+	Soul_ = CreateComponent<MaskRenderer>();
 	Soul_->SetTexture("HUD Cln_soul_orb_eyes.png");
 	Soul_->GetTransform().SetLocalScale({ 130, 125, 1 });
 

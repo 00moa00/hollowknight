@@ -184,7 +184,7 @@ private:
 
 	void Release(float _DelataTime);
 
-private:
+protected:
 	std::map<int, std::list<GameEngineActor*>> AllActors;
 
 	std::list<GameEngineUpdateObject*> DeleteObject;

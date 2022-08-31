@@ -157,6 +157,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AllLocalMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="AreaTitle.h">
       <SubType>
       </SubType>
@@ -217,7 +221,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="DetailedMapPage.h">
+    <ClInclude Include="Dirtmouth.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -237,7 +241,15 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GameEngineContentsMaskRenderer.h">
+    <ClInclude Include="ForgottenCrossroads.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MapRenderer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MaskRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -453,12 +465,16 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="WideMap.h">
+    <ClInclude Include="WorldMap.h">
       <SubType>
       </SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AllLocalMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="AreaTitle.cpp">
       <SubType>
       </SubType>
@@ -520,7 +536,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="DetailedMapPage.cpp">
+    <ClCompile Include="Dirtmouth.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -540,7 +556,15 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="GameEngineContentsMaskRenderer.cpp">
+    <ClCompile Include="ForgottenCrossroads.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MapRenderer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MaskRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -757,7 +781,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="WideMap.cpp">
+    <ClCompile Include="WorldMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>

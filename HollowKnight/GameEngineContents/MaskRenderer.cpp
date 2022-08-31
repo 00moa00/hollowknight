@@ -1,26 +1,25 @@
 #include "PreCompile.h"
-#include "GameEngineContentsMaskRenderer.h"
+#include "MaskRenderer.h"
 
-GameEngineContentsMaskRenderer::GameEngineContentsMaskRenderer() 
+MaskRenderer::MaskRenderer() 
 {
 }
 
-GameEngineContentsMaskRenderer::~GameEngineContentsMaskRenderer() 
+MaskRenderer::~MaskRenderer() 
 {
 }
 
-void GameEngineContentsMaskRenderer::Start()
+void MaskRenderer::Start()
 {
 
 	GameEngineDefaultRenderer::Start();
 
 	PushRendererToUICamera();
 
-
 	SetTextureRendererSetting();
 }
 
-void GameEngineContentsMaskRenderer::SetTextureRendererSetting()
+void MaskRenderer::SetTextureRendererSetting()
 {
 	SetPipeLine("TextureAtlasMask");
 
@@ -40,7 +39,7 @@ void GameEngineContentsMaskRenderer::SetTextureRendererSetting()
 }
 
 
-void GameEngineContentsMaskRenderer::Update(float _Delta)
+void MaskRenderer::Update(float _Delta)
 {
 	if (nullptr != CurAni)
 	{

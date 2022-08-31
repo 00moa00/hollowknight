@@ -88,9 +88,6 @@
     <Filter Include="Actor\Play\UI\Setting\Border">
       <UniqueIdentifier>{78f046b0-91ef-4189-81a1-d826d20810de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Map\Forgotten Crossroads">
-      <UniqueIdentifier>{56bddc11-9cdc-4b99-a134-16b0125b6a22}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Effect\Light">
       <UniqueIdentifier>{e01c558b-bd75-49d3-a46b-a899b618eb1d}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,9 @@
     </Filter>
     <Filter Include="Actor\Play\UI\Setting\Pointer\PointerState">
       <UniqueIdentifier>{b20ed465-c032-4dbd-966e-803629137879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Map\LocalMaps">
+      <UniqueIdentifier>{e1cd26ab-883b-487d-9e85-fdd9f47d2e64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,7 +228,7 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\Master</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineContentsMaskRenderer.h">
+    <ClInclude Include="MaskRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Geo.h">
@@ -266,12 +266,6 @@
     </ClInclude>
     <ClInclude Include="BorderTop.h">
       <Filter>Actor\Play\UI\Setting\Border</Filter>
-    </ClInclude>
-    <ClInclude Include="DetailedMapPage.h">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="WideMap.h">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
     </ClInclude>
     <ClInclude Include="KnightDonutLightEffect.h">
       <Filter>Actor\Effect\Light</Filter>
@@ -338,6 +332,21 @@
     </ClInclude>
     <ClInclude Include="SettingPointer.h">
       <Filter>Actor\Play\UI\Setting\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap.h">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="AllLocalMap.h">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Dirtmouth.h">
+      <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
+    </ClInclude>
+    <ClInclude Include="ForgottenCrossroads.h">
+      <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
+    </ClInclude>
+    <ClInclude Include="MapRenderer.h">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -458,7 +467,7 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Master</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineContentsMaskRenderer.cpp">
+    <ClCompile Include="MaskRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Geo.cpp">
@@ -496,12 +505,6 @@
     </ClCompile>
     <ClCompile Include="BorderTop.cpp">
       <Filter>Actor\Play\UI\Setting\Border</Filter>
-    </ClCompile>
-    <ClCompile Include="DetailedMapPage.cpp">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="WideMap.cpp">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
     </ClCompile>
     <ClCompile Include="KnightDonutLightEffect.cpp">
       <Filter>Actor\Effect\Light</Filter>
@@ -574,6 +577,21 @@
     </ClCompile>
     <ClCompile Include="InventoryPageStatecpp.cpp">
       <Filter>Actor\Play\UI\Setting\Pointer\PointerState</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap.cpp">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="AllLocalMap.cpp">
+      <Filter>Actor\Play\UI\Setting\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Dirtmouth.cpp">
+      <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="ForgottenCrossroads.cpp">
+      <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="MapRenderer.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

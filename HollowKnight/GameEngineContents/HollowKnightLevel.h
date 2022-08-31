@@ -99,19 +99,11 @@ public :
 
 	void PushNotches(Notches* _Notches, float4 _Position);
 
-	void PushItemSlot(int _SlotNum, float4 _SlotPos);
 	void PustItemInventroy(ITEM_LIST _Item);
 
-	void SortPointActor();
+	GameEngineCameraActor* GetUser0CameraActor();
+	GameEngineTransform& GetUser0CameraActorTransform();
 
-	//bool PointActorXSort(SettingUIMaster* _Left, SettingUIMaster* _Right)
-	//{
-	//	return _Left->GetTransform().GetWorldPosition().x < _Right->GetTransform().GetWorldPosition().x;
-	//}
 
-	//bool PointActorYSort(SettingUIMaster* _Left, SettingUIMaster* _Right)
-	//{
-	//	return _Left->GetTransform().GetWorldPosition().y > _Right->GetTransform().GetWorldPosition().y;
-	//}
 };
 

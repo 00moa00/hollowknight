@@ -16,6 +16,8 @@ HollowKnightLevel::HollowKnightLevel()
 	SettingPage_(nullptr),
 	MainCameraPosition_()
 {
+
+
 }
 
 HollowKnightLevel::~HollowKnightLevel() 
@@ -102,7 +104,15 @@ void HollowKnightLevel::PustItemInventroy(ITEM_LIST _Item)
 
 }
 
+GameEngineCameraActor* HollowKnightLevel::GetUser0CameraActor()
+{
+	return Cameras[static_cast<int>(CAMERAORDER::USER0)]->GetActor<GameEngineCameraActor>();
+}
 
+GameEngineTransform& HollowKnightLevel::GetUser0CameraActorTransform()
+{
+	return Cameras[static_cast<int>(CAMERAORDER::USER0)]->GetActor()->GetTransform();
+}
 
 
 void HollowKnightLevel::CameraMoveWindowLimit()

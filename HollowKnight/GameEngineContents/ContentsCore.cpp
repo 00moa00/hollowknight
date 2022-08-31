@@ -19,6 +19,8 @@
 
 #include <GameEngineCore/GameEngineBlend.h>
 
+#include <GameEngineCore/GameEngineLevel.h>
+
 #pragma comment(lib, "GameEngineBase.lib")
 
 ContentsCore::ContentsCore() 
