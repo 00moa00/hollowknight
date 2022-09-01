@@ -184,6 +184,12 @@ void SettingPointer::Start()
 		, std::bind(&SettingPointer::PointerMapPageWaitStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerMapPageWaitEnd, this, std::placeholders::_1));
 
+	SettingPointerMapPageManager_.CreateStateMember("WIDE"
+		, std::bind(&SettingPointer::PointerMapPageWideMapUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerMapPageWideMapStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerMapPageWideMapEnd, this, std::placeholders::_1));
+
+
 	SettingPointerMapPageManager_.ChangeState("WAIT");
 
 

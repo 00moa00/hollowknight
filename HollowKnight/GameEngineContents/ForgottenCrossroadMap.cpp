@@ -23,7 +23,7 @@ void ForgottenCrossroadMap::Start()
 	MapPosition_.push_back({ -258, 49 , -10 });
 	MapPosition_.push_back({ -328, 123, -10 });
 	MapPosition_.push_back({ -252, -38, -10 });
-	MapPosition_.push_back({ -149, 20 , -10 });
+	MapPosition_.push_back({ -419, 20 , -10 });
 	MapPosition_.push_back({ -165, 49 , -10 });
 	MapPosition_.push_back({ -479, 111 , -10 });
 	MapPosition_.push_back({ -422, -30 , -10 });
@@ -74,12 +74,12 @@ void ForgottenCrossroadMap::Start()
 		ForgottenCrossroadMap_[i]->SetParent(this);
 	}
 
-	//this->Off();
+	this->Off();
 }
 
 void ForgottenCrossroadMap::Update(float _DeltaTime)
 {
-	GetLevel<HollowKnightLevel>()->GetMapCameraActorTransform().SetLocalPosition({0, 200, -2000.f});
+	GetLevel<HollowKnightLevel>()->GetMapCameraActorTransform().SetLocalPosition({0, 0, -2000.f});
 
 }
 

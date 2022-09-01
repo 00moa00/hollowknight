@@ -21,6 +21,8 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+	
+
 private:
 	std::map<int, Map*> ForgottenCrossroadMap_;
 	std::vector<float4> MapPosition_;

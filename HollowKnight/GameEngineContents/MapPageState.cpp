@@ -32,6 +32,11 @@ void SettingPointer::PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo&
 	if (true == GameEngineInput::GetInst()->IsDown("MoveDown"))
 	{
 	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Select"))
+	{
+		SettingPointerMapPageManager_.ChangeState("WIDE");
+	}
 }
 
 void SettingPointer::PointerMapPageIdleEnd(const StateInfo& _Info)
@@ -104,7 +109,6 @@ void SettingPointer::PointerMapPageMoveRightStart(const StateInfo& _Info)
 
 		else
 		{
-
 			++CurrentPosInMapPage;
 
 			for (int i = 0; i < 2; ++i)
@@ -229,4 +233,38 @@ void SettingPointer::PointerMapPageWaitUpdate(float _DeltaTime, const StateInfo&
 void SettingPointer::PointerMapPageWaitEnd(const StateInfo& _Info)
 {
 	
+}
+
+void SettingPointer::PointerMapPageWideMapStart(const StateInfo& _Info)
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(i)->second;
+		WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+		FindMap->Off();
+	}
+	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->On();
+}
+
+void SettingPointer::PointerMapPageWideMapUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (true == GameEngineInput::GetInst()->IsDown("Select"))
+	{
+		SettingPointerMapPageManager_.ChangeState("IDLE");
+	}
+}
+
+void SettingPointer::PointerMapPageWideMapEnd(const StateInfo& _Info)
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(i)->second;
+		WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+		FindMap->On();
+	}
+
+	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->Off();
+
 }
