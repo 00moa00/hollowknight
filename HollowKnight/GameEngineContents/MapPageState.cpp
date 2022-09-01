@@ -10,7 +10,7 @@
 
 void SettingPointer::PointerMapPageIdleStart(const StateInfo& _Info)
 {
-	//SettingPointerBox_->AllPointerOff();
+	SettingPointerBox_->AllPointerOff();
 }
 
 void SettingPointer::PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -32,8 +32,6 @@ void SettingPointer::PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo&
 	if (true == GameEngineInput::GetInst()->IsDown("MoveDown"))
 	{
 	}
-
-
 }
 
 void SettingPointer::PointerMapPageIdleEnd(const StateInfo& _Info)
@@ -42,7 +40,7 @@ void SettingPointer::PointerMapPageIdleEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerPageMoveLeftStart(const StateInfo& _Info)
 {
-	//SettingPointerBox_->AllPointerOff();
+	SettingPointerBox_->AllPointerOff();
 	if (inLeftArrow_ == false)
 	{
 		inRightArrow_ = false;
@@ -59,6 +57,21 @@ void SettingPointer::PointerPageMoveLeftStart(const StateInfo& _Info)
 		else
 		{
 			--CurrentPosInMapPage;
+			for (int i = 0; i < 2; ++i)
+			{
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(i)->second;
+				WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+				if (CurrentPosInMapPage == i)
+				{
+					FindMap->ChangeTextureSelect();
+				}
+
+				else
+				{
+					FindMap->ChangeTextureIdle();
+				}
+			}
 		}
 
 	}
@@ -75,7 +88,7 @@ void SettingPointer::PointerPageMoveLeftEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerMapPageMoveRightStart(const StateInfo& _Info)
 {
-	//SettingPointerBox_->AllPointerOff();
+	SettingPointerBox_->AllPointerOff();
 	if (inRightArrow_ == false)
 	{
 		inLeftArrow_ = false;
@@ -91,7 +104,24 @@ void SettingPointer::PointerMapPageMoveRightStart(const StateInfo& _Info)
 
 		else
 		{
+
 			++CurrentPosInMapPage;
+
+			for (int i = 0; i < 2; ++i)
+			{
+				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(i)->second;
+				WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+				if (CurrentPosInMapPage == i)
+				{
+					FindMap->ChangeTextureSelect();
+				}
+
+				else
+				{
+					FindMap->ChangeTextureIdle();
+				}
+			}
 		}
 	}
 }
@@ -109,7 +139,7 @@ void SettingPointer::PointerMapPageRightArrowStart(const StateInfo& _Info)
 {
 	inRightArrow_ = true;
 
-	//SettingPointerBox_->AllPointerOn();
+	SettingPointerBox_->AllPointerOn();
 
 	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(50)->second;
 	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
@@ -117,6 +147,15 @@ void SettingPointer::PointerMapPageRightArrowStart(const StateInfo& _Info)
 		, static_cast<float>(Z_ORDER::UI_Border) });
 
 	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+
+
+	for (int i = 0; i < 2; ++i)
+	{
+		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(i)->second;
+		WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+		FindMap->ChangeTextureIdle();
+	}
 }
 
 void SettingPointer::PointerMapPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -142,7 +181,7 @@ void SettingPointer::PointerMapPageInLeftArrowStart(const StateInfo& _Info)
 {
 	inLeftArrow_ = true;
 
-	//SettingPointerBox_->AllPointerOn();
+	SettingPointerBox_->AllPointerOn();
 
 	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(51)->second;
 	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
@@ -150,6 +189,14 @@ void SettingPointer::PointerMapPageInLeftArrowStart(const StateInfo& _Info)
 		, static_cast<float>(Z_ORDER::UI_Border) });
 
 	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+
+	for (int i = 0; i < 2; ++i)
+	{
+		PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(i)->second;
+		WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+		FindMap->ChangeTextureIdle();
+	}
 }
 
 void SettingPointer::PointerMapPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info)

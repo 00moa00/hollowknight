@@ -46,8 +46,6 @@ void SettingPointer::PointerInventoryPageWaitEnd(const StateInfo& _Info)
 
 }
 
-
-
 void SettingPointer::PointerInventoryPageIdleStart(const StateInfo& _Info)
 {
 	PointerMoveSpeed_ = 750.f;
@@ -156,7 +154,6 @@ void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const Stat
 		int PrevCount = CurrentPosInInventoryPage;
 
 		//내가 지금 스펠에 있다면
-
 		if (PrevCount > static_cast<int>(ITEM_LIST::SPELL_MIN) && PrevCount < static_cast<int>(ITEM_LIST::SPELL_MAX))
 		{
 			if (PrevCount == static_cast<int>(ITEM_LIST::Nail))

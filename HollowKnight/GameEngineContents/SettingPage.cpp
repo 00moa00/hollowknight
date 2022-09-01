@@ -346,7 +346,6 @@ void SettingPage::SettingOnEnd(const StateInfo& _Info)
 
 void SettingPage::SettingIdleStart(const StateInfo& _Info)
 {
-
 	for (int i = 0; i < AllPage_.size(); ++i)
 	{
 		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
@@ -368,7 +367,6 @@ void SettingPage::SettingIdleStart(const StateInfo& _Info)
 		{
 			AllPage_[i]->GetTransform().SetWorldPosition({ 1920 * 2, 0 });
 		}
-
 	}
 }
 

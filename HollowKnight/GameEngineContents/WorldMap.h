@@ -23,10 +23,13 @@ protected:
 private:
 	MAP_LIST MapType_;
 
+
 private:
 
 public:
 	void CreateWorldMapRenderer(std::string _FilePath, MAP_LIST _MapType);
+	void ChangeTextureIdle();
+	void ChangeTextureSelect();
 
 	MAP_LIST GetMapType()
 	{
@@ -37,6 +40,5 @@ public:
 	{
 		MapType_ = _MapType;
 	}
-
 };
 
