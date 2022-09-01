@@ -108,7 +108,6 @@ void SettingPointer::Start()
 	SettingPointerCharmPageManager_.ChangeState("IDLE");
 
 
-
 	//=========================================
 	//    SettingPointerInventoyPageManager
 	//=========================================
@@ -148,7 +147,45 @@ void SettingPointer::Start()
 		, std::bind(&SettingPointer::PointerInventoryPageWaitStart, this, std::placeholders::_1)
 		, std::bind(&SettingPointer::PointerInventoryPageWaitEnd, this, std::placeholders::_1));
 
-	SettingPointerInventoryPageManager_.ChangeState("IDLE");
+	SettingPointerInventoryPageManager_.ChangeState("WAIT");
+
+
+	//=========================================
+	//    SettingPointerInventoyPageManager
+	//=========================================
+
+	SettingPointerMapPageManager_.CreateStateMember("IDLE"
+		, std::bind(&SettingPointer::PointerMapPageIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerMapPageIdleStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerMapPageIdleEnd, this, std::placeholders::_1));
+
+	SettingPointerMapPageManager_.CreateStateMember("MOVE_LEFT"
+		, std::bind(&SettingPointer::PointerPageMoveLeftUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerPageMoveLeftStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerPageMoveLeftEnd, this, std::placeholders::_1));
+
+	SettingPointerMapPageManager_.CreateStateMember("MOVE_RIGHT"
+		, std::bind(&SettingPointer::PointerMapPageMoveRightUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerMapPageMoveRightStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerMapPageMoveRightEnd, this, std::placeholders::_1));
+
+	SettingPointerMapPageManager_.CreateStateMember("IN_RIGHT_ARROW"
+		, std::bind(&SettingPointer::PointerMapPageRightArrowUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerMapPageRightArrowStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerMapPageRightArrowEnd, this, std::placeholders::_1));
+
+	SettingPointerMapPageManager_.CreateStateMember("IN_LEFT_ARROW"
+		, std::bind(&SettingPointer::PointerMapPageInLeftArrowUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerMapPageInLeftArrowStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerMapPageInLeftArrowEnd, this, std::placeholders::_1));
+
+	SettingPointerMapPageManager_.CreateStateMember("WAIT"
+		, std::bind(&SettingPointer::PointerMapPageWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&SettingPointer::PointerMapPageWaitStart, this, std::placeholders::_1)
+		, std::bind(&SettingPointer::PointerMapPageWaitEnd, this, std::placeholders::_1));
+
+	SettingPointerMapPageManager_.ChangeState("WAIT");
+
 
 
 	CurrentPage_ = PAGE_TYPE::Charm;
@@ -165,6 +202,8 @@ void SettingPointer::Update(float _DeltaTime)
 	case PAGE_TYPE::MonsterBook:
 		break;
 	case PAGE_TYPE::Map:
+		SettingPointerMapPageManager_.Update(_DeltaTime);
+
 		break;
 	case PAGE_TYPE::Inventory:
 		SettingPointerInventoryPageManager_.Update(_DeltaTime);
@@ -187,6 +226,16 @@ void SettingPointer::SetMapPageActorMax()
 void SettingPointer::SetMonsterBookActorMax()
 {
 	MonsterPageActorCount = GetLevel<HollowKnightLevel>()->PointActorListMonsterBook.size() ;
+}
+
+void SettingPointer::PointerBoxRenderOn()
+{
+	SettingPointerBox_->AllPointerOn();
+}
+
+void SettingPointer::PointerBoxRenderOff()
+{
+	SettingPointerBox_->AllPointerOff();
 }
 
 void SettingPointer::AllOn()
@@ -222,67 +271,149 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 	switch (_PageType)
 	{
 	case PAGE_TYPE::Charm:
+		SettingPointerBox_->AllPointerOn();
+
 		if (PrevPage_ == PAGE_TYPE::Map)
 		{
-			CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
+			inRightArrow_ = false;
+			CurrentPosInCharmPage = -1;
+
+
+			//CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
+
 			SettingPointerCharmPageManager_.ChangeState("IN_LEFT_ARROW");
 			SettingPointerInventoryPageManager_.ChangeState("WAIT");
+			SettingPointerMapPageManager_.ChangeState("WAIT");
 
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(51)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 		}
 
 		if (PrevPage_ == PAGE_TYPE::Inventory)
 		{
-			CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
 			inLeftArrow_ = false;
+
+			//CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
+			CurrentPosInCharmPage = 1;
 
 			SettingPointerCharmPageManager_.ChangeState("IN_RIGHT_ARROW");
 			SettingPointerInventoryPageManager_.ChangeState("WAIT");
+			SettingPointerMapPageManager_.ChangeState("WAIT");
 
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(50)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 		}
-
-
-		PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
-
-		SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-			, static_cast<float>(Z_ORDER::UI_Border) });
-
-		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
 		break;
 	case PAGE_TYPE::Inventory:
+		SettingPointerBox_->AllPointerOn();
 
 		if (PrevPage_ == PAGE_TYPE::Charm)
 		{
-			CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
 			inRightArrow_ = false;
+
+			//CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
 			SettingPointerInventoryPageManager_.ChangeState("IN_LEFT_ARROW");
+
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
+			SettingPointerMapPageManager_.ChangeState("WAIT");
+
+			CurrentPosInInventoryPage = -1;
+
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(51)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
 		}
 
 		if (PrevPage_ == PAGE_TYPE::Map)
 		{
-			CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
+			inLeftArrow_ = false;
+
+			CurrentPosInInventoryPage = 1;
+
+
+			//CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
 			SettingPointerInventoryPageManager_.ChangeState("IN_RIGHT_ARROW");
+
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
+			SettingPointerMapPageManager_.ChangeState("WAIT");
+
+
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(50)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
 		}
 
 
-		PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+	
 
-		SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
-			, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-			, static_cast<float>(Z_ORDER::UI_Border) });
-
-		SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
-
-		break;
-	case PAGE_TYPE::MonsterBook:
 		break;
 	case PAGE_TYPE::Map:
+		if (PrevPage_ == PAGE_TYPE::Inventory)
+		{
+			inRightArrow_ = false;
+
+			//CurrentPosInMapPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
+
+			SettingPointerMapPageManager_.ChangeState("IN_LEFT_ARROW");
+
+			SettingPointerCharmPageManager_.ChangeState("WAIT");
+			SettingPointerInventoryPageManager_.ChangeState("WAIT");
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(51)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+
+		if (PrevPage_ == PAGE_TYPE::Charm)
+		{
+			inLeftArrow_ = false;
+
+			//CurrentPosInMapPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
+
+			SettingPointerMapPageManager_.ChangeState("IN_RIGHT_ARROW");
+
+			SettingPointerCharmPageManager_.ChangeState("WAIT");
+			SettingPointerInventoryPageManager_.ChangeState("WAIT");
+
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(50)->second;
+
+			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+				, static_cast<float>(Z_ORDER::UI_Border) });
+
+			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+		}
+
+
 		break;
+
+	case PAGE_TYPE::MonsterBook:
+		break;
+
 	default:
 		break;
 	}

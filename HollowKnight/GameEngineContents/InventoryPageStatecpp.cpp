@@ -46,89 +46,7 @@ void SettingPointer::PointerInventoryPageWaitEnd(const StateInfo& _Info)
 
 }
 
-void SettingPointer::PointerMapPageMoveStart(const StateInfo& _Info)
-{
-}
 
-void SettingPointer::PointerMapPageMoveUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageMoveEnd(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageIdleStart(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageIdleEnd(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerPageMoveLeftStart(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerPageMoveLeftEnd(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageMoveRightStart(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageMoveRightUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageMoveRightEnd(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageRightArrowStart(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageRightArrowEnd(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageInLeftArrowStart(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageInLeftArrowEnd(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageWaitStart(const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageWaitUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void SettingPointer::PointerMapPageWaitEnd(const StateInfo& _Info)
-{
-}
 
 void SettingPointer::PointerInventoryPageIdleStart(const StateInfo& _Info)
 {
@@ -411,7 +329,6 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 
 		if (PrevCount == static_cast<int>(ITEM_LIST::Dream_Nail) || PrevCount == static_cast<int>(ITEM_LIST::Spell_Scream) || PrevCount == static_cast<int>(ITEM_LIST::Item_Geo))
 		{
-
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(10)->second;
 			ItemSlot* CheckItem = dynamic_cast<ItemSlot*>(PointActorComponent_->GetPointActor());
 
@@ -441,7 +358,6 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 				MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
 				MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
 				MoveState_.NextMoveStateName_ = "IDLE";
-
 			}
 
 		}
@@ -570,7 +486,7 @@ void SettingPointer::PointerInventoryPageMoveRightUpdate(float _DeltaTime, const
 
 void SettingPointer::PointerInventoryPageMoveRightEnd(const StateInfo& _Info)
 {
-	CurrentPosInInventoryPage = 0;
+	//CurrentPosInInventoryPage = 0;
 
 }
 
@@ -589,12 +505,14 @@ void SettingPointer::PointerInInventoryPageRightArrowUpdate(float _DeltaTime, co
 
 	else if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))
 	{
+		//urrentPosInInventoryPage = -1;
 		isDownNextPageRight_ = true;
 	}
 }
 
 void SettingPointer::PointerInInventoryPageRightArrowEnd(const StateInfo& _Info)
 {
+	
 }
 
 void SettingPointer::PointerInventoryPageInLeftArrowStart(const StateInfo& _Info)
@@ -618,6 +536,6 @@ void SettingPointer::PointerInventoryPageInLeftArrowUpdate(float _DeltaTime, con
 
 void SettingPointer::PointerInventoryPageInLeftArrowEnd(const StateInfo& _Info)
 {
-	CurrentPosInInventoryPage = 0;
+	//CurrentPosInInventoryPage = -1;
 }
 

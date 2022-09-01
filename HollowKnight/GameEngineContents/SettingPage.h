@@ -11,7 +11,7 @@
 
 #include "CharmPage.h"
 #include "InventoryPage.h"
-
+#include "MapPage.h"
 
 
 

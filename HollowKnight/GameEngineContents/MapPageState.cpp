@@ -6,3 +6,180 @@
 #include "KnightData.h"
 
 #include <algorithm>
+
+
+void SettingPointer::PointerMapPageIdleStart(const StateInfo& _Info)
+{
+	//SettingPointerBox_->AllPointerOff();
+}
+
+void SettingPointer::PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))
+	{
+		SettingPointerMapPageManager_.ChangeState("MOVE_RIGHT");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft"))
+	{
+		SettingPointerMapPageManager_.ChangeState("MOVE_LEFT");
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("MoveUp"))
+	{
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("MoveDown"))
+	{
+	}
+
+
+}
+
+void SettingPointer::PointerMapPageIdleEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerPageMoveLeftStart(const StateInfo& _Info)
+{
+	//SettingPointerBox_->AllPointerOff();
+	if (inLeftArrow_ == false)
+	{
+		inRightArrow_ = false;
+		int PrevCount = CurrentPosInMapPage;
+
+		if ((PrevCount == static_cast<int>(MAP_LIST::DIRTMOUTH) || PrevCount == static_cast<int>(MAP_LIST::CORSSROAD)) && _Info.PrevState != "IN_LEFT_ARROW")
+		{
+			//CurrentPosInMapPage = -1;
+			SettingPointerMapPageManager_.ChangeState("IN_LEFT_ARROW");
+
+			return;
+		}
+
+		else
+		{
+			--CurrentPosInMapPage;
+		}
+
+	}
+}
+
+void SettingPointer::PointerPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	SettingPointerMapPageManager_.ChangeState("IDLE");
+}
+
+void SettingPointer::PointerPageMoveLeftEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerMapPageMoveRightStart(const StateInfo& _Info)
+{
+	//SettingPointerBox_->AllPointerOff();
+	if (inRightArrow_ == false)
+	{
+		inLeftArrow_ = false;
+		int PrevCount = CurrentPosInMapPage;
+
+		if ((PrevCount == static_cast<int>(MAP_LIST::DIRTMOUTH) || PrevCount == static_cast<int>(MAP_LIST::CORSSROAD)) && _Info.PrevState != "IN_RIGHT_ARROW")
+		{
+			//CurrentPosInMapPage = 2;
+			SettingPointerMapPageManager_.ChangeState("IN_RIGHT_ARROW");
+
+			return;
+		}
+
+		else
+		{
+			++CurrentPosInMapPage;
+		}
+	}
+}
+
+void SettingPointer::PointerMapPageMoveRightUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	SettingPointerMapPageManager_.ChangeState("IDLE");
+}
+
+void SettingPointer::PointerMapPageMoveRightEnd(const StateInfo& _Info)
+{
+}
+
+void SettingPointer::PointerMapPageRightArrowStart(const StateInfo& _Info)
+{
+	inRightArrow_ = true;
+
+	//SettingPointerBox_->AllPointerOn();
+
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(50)->second;
+	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+		, static_cast<float>(Z_ORDER::UI_Border) });
+
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+}
+
+void SettingPointer::PointerMapPageRightArrowUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft"))
+	{
+		SettingPointerMapPageManager_.ChangeState("MOVE_LEFT");
+	}
+
+	else if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))
+	{
+		isDownNextPageRight_ = true;
+	}
+}
+
+void SettingPointer::PointerMapPageRightArrowEnd(const StateInfo& _Info)
+{
+	CurrentPosInMapPage = 2;
+
+}
+
+void SettingPointer::PointerMapPageInLeftArrowStart(const StateInfo& _Info)
+{
+	inLeftArrow_ = true;
+
+	//SettingPointerBox_->AllPointerOn();
+
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(51)->second;
+	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
+		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
+		, static_cast<float>(Z_ORDER::UI_Border) });
+
+	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+}
+
+void SettingPointer::PointerMapPageInLeftArrowUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft"))
+	{
+		isDownLextPageLeft_ = true;
+	}
+	else if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))
+	{
+		SettingPointerMapPageManager_.ChangeState("MOVE_RIGHT");
+	}
+}
+
+void SettingPointer::PointerMapPageInLeftArrowEnd(const StateInfo& _Info)
+{
+	CurrentPosInMapPage = -1;
+}
+
+void SettingPointer::PointerMapPageWaitStart(const StateInfo& _Info)
+{
+
+}
+
+void SettingPointer::PointerMapPageWaitUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+}
+
+void SettingPointer::PointerMapPageWaitEnd(const StateInfo& _Info)
+{
+	
+}

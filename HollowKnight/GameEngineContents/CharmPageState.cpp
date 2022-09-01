@@ -366,7 +366,9 @@ void SettingPointer::PointerInCharmPageRightArrowUpdate(float _DeltaTime, const 
 
 void SettingPointer::PointerInCharmPageRightArrowEnd(const StateInfo& _Info)
 {
-	//CurrentPosInCharmPage = -1;
+	CurrentPosInCharmPage = 1;
+
+	////CurrentPosInCharmPage = -1;
 
 	//PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
 

@@ -1,7 +1,9 @@
 #pragma once
+#include <GameEngineCore/CoreMinimal.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 // Ό³Έν :
-class AllLocalMap
+class AllLocalMap : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -15,8 +17,12 @@ public:
 	AllLocalMap& operator=(AllLocalMap&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 private:
-
+public:
+	void OpenAllLocalMap();
+	void CloseAllLocalMap();
 };
 

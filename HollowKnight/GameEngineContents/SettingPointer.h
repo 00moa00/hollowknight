@@ -72,6 +72,9 @@ private:
 
 public:
 
+	void PointerBoxRenderOn();
+	void PointerBoxRenderOff();
+
 	void AllOn();
 	void AllOff();
 
@@ -172,10 +175,6 @@ public:
 	//=========================================
 	//    SettingPointerMapPageManager
 	//=========================================
-
-	void PointerMapPageMoveStart(const StateInfo& _Info);
-	void PointerMapPageMoveUpdate(float _DeltaTime, const StateInfo& _Info);
-	void PointerMapPageMoveEnd(const StateInfo& _Info);
 
 	void PointerMapPageIdleStart(const StateInfo& _Info);
 	void PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo& _Info);

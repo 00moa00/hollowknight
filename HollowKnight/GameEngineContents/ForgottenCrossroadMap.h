@@ -1,9 +1,10 @@
 #pragma once
 #include "Map.h"
-#include "MasterUI.h"
+#include <GameEngineCore/CoreMinimal.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 // Ό³Έν :
-class ForgottenCrossroadMap : public MasterUI
+class ForgottenCrossroadMap : public GameEngineActor
 {
 public:
 	// constrcuter destructer

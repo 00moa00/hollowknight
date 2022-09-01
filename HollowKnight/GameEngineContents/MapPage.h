@@ -1,5 +1,6 @@
 #pragma once
 #include "MasterPage.h"
+#include "WorldMap.h"
 
 // 설명 : 간략화 지도
 class MapPage : public MasterPage
@@ -20,6 +21,6 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-
+	std::vector<WorldMap*> MapList_;
 };
 

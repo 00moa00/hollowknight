@@ -21,7 +21,6 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-
 	float ZommTimer_;
 
 	float4 BoxSize_;
@@ -34,7 +33,6 @@ private:
 	GameEngineStateManager  SettingPointerBoxtManager_;
 
 private:
-
 	void PointerZoomInStart(const StateInfo& _Info);
 	void PointerZoomInUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PointerZoomInEnd(const StateInfo& _Info);
@@ -45,9 +43,9 @@ private:
 
 	void SetPositiveY(GameEngineUIRenderer* _GameEngineUIRenderer);
 
-
-
 public:
 	void SetBoxSize(float4 _Size);
+	void AllPointerOn();
+	void AllPointerOff();
 };
 

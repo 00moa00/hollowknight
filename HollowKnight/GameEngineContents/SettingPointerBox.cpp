@@ -136,9 +136,24 @@ void SettingPointerBox::SetPositiveY(GameEngineUIRenderer* _GameEngineUIRenderer
 
 void SettingPointerBox::SetBoxSize(float4 _Size)
 {
-
 	LeftTopPointer_->GetTransform().SetLocalPosition({-_Size.x /2, +_Size.y/2, static_cast<float>(Z_ORDER::UI_Border) });
 	RightTopPointer_->GetTransform().SetLocalPosition({ _Size.x/2, +_Size.y/2, static_cast<float>(Z_ORDER::UI_Border) });
 	LeftBottomPointer_->GetTransform().SetLocalPosition({ -_Size.x/2, -_Size.y/2, static_cast<float>(Z_ORDER::UI_Border) });
 	RightBottomPointer_->GetTransform().SetLocalPosition({ _Size.x/2, -_Size.y/2, static_cast<float>(Z_ORDER::UI_Border) });
+}
+
+void SettingPointerBox::AllPointerOn()
+{
+	LeftTopPointer_->On();
+	RightTopPointer_->On();
+	LeftBottomPointer_->On();
+	RightBottomPointer_->On();
+}
+
+void SettingPointerBox::AllPointerOff()
+{
+	LeftTopPointer_->Off();
+	RightTopPointer_->Off();
+	LeftBottomPointer_->Off();
+	RightBottomPointer_->Off();
 }

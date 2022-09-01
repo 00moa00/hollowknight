@@ -84,8 +84,8 @@ enum class PAGE_TYPE
 {
 	Charm,
 	Inventory,
-	MonsterBook,
 	Map,
+	MonsterBook,
 };
 
 // 페이지 인덱스 : 현재 페이지를 0으로 세팅한다.
@@ -107,6 +107,11 @@ enum class CHAR_PAGE_ACTOR
 	LeftArrow = 51,
 };
 
+enum class MAP_PAGE_ACTOR
+{
+	RightArrow = 50,
+	LeftArrow = 51,
+};
 
 enum class MONSTER_BOOK_PAGE_ACTOR
 {
@@ -114,13 +119,13 @@ enum class MONSTER_BOOK_PAGE_ACTOR
 	LeftArrow,
 };
 
-
-enum class MAP_PAGE_ACTOR
+enum class MAP_LIST
 {
-	RightArrow = 1,
-	LeftArrow,
+	MAP_MIN = -1,
+	DIRTMOUTH,
+	CORSSROAD,
+	MAP_MAX
 };
-
 
 enum class ITEM_LIST
 {

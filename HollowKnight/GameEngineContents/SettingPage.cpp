@@ -126,6 +126,10 @@ void SettingPage::Start()
 		BorderLeftArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow), PAGE_TYPE::Inventory, BorderLeftArrow_);
 	}
 
+	{
+		PointActorComponent* BorderLeftArrowComponent_ = CreateComponent<PointActorComponent>();
+		BorderLeftArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow), PAGE_TYPE::Map, BorderLeftArrow_);
+	}
 
 	BorderRightArrow_ = GetLevel()->CreateActor<BorderArrow>();
 	BorderRightArrow_->GetTransform().SetLocalPosition({
@@ -147,6 +151,12 @@ void SettingPage::Start()
 		BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Inventory, BorderRightArrow_);
 	}
 
+	{
+		PointActorComponent* BorderRightArrowComponent_ = CreateComponent<PointActorComponent>();
+		BorderRightArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::RightArrow), PAGE_TYPE::Map, BorderRightArrow_);
+	}
+
+
 	AllPage_.push_back(GetLevel()->CreateActor<CharmPage>());
 	AllPage_[0]->SetCurrentPage(CURRENT_PAGE_INDEX::CurrentPage);
 
@@ -154,6 +164,8 @@ void SettingPage::Start()
 	AllPage_.push_back(GetLevel()->CreateActor<InventoryPage>());
 	AllPage_[1]->SetCurrentPage(CURRENT_PAGE_INDEX::NextPage);
 
+	AllPage_.push_back(GetLevel()->CreateActor<MapPage>());
+	AllPage_[2]->SetCurrentPage(CURRENT_PAGE_INDEX::AfterNextPage);
 
 	SettingPointer_ = GetLevel()->CreateActor<SettingPointer>();
 	SettingPointer_->SetCharmPageActorMax();
@@ -163,10 +175,14 @@ void SettingPage::Start()
 
 	for (int i = 0; i < AllPage_.size(); ++i)
 	{
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
+		}
 
 		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::CurrentPage)
 		{
-			AllPage_[1]->GetTransform().SetWorldPosition({ 0, 0 });
+			AllPage_[i]->GetTransform().SetWorldPosition({ 0, 0 });
 		}
 
 		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
@@ -174,9 +190,9 @@ void SettingPage::Start()
 			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
 		}
 
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::AfterNextPage)
 		{
-			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
+			AllPage_[i]->GetTransform().SetWorldPosition({ 1920 * 2, 0 });
 		}
 
 	}
@@ -330,10 +346,37 @@ void SettingPage::SettingOnEnd(const StateInfo& _Info)
 
 void SettingPage::SettingIdleStart(const StateInfo& _Info)
 {
+
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::CurrentPage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ 0, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::AfterNextPage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ 1920 * 2, 0 });
+		}
+
+	}
 }
 
 void SettingPage::SettingIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	AllPage_;
+
+
 	if (true == GameEngineInput::GetInst()->IsDown("OnOffCheck"))
 	{
 		if (KnightData::GetInst()->GetisSetting() == false)
@@ -427,26 +470,6 @@ void SettingPage::SettingMoveRightEnd(const StateInfo& _Info)
 	}
 
 
-	for (int i = 0; i < AllPage_.size(); ++i)
-	{
-
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::CurrentPage)
-		{
-			AllPage_[1]->GetTransform().SetWorldPosition({ 0, 0 });
-		}
-
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
-		{
-			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
-		}
-
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
-		{
-			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
-		}
-
-	}
-
 }
 
 void SettingPage::SettingMoveLeftStart(const StateInfo& _Info)
@@ -488,10 +511,7 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 
 		AllPage_[i]->GetTransform().SetWorldMove(float4::RIGHT * _DeltaTime * 700.f);
 
-
-
 	}
-
 }
 
 void SettingPage::SettingMoveLeftEnd(const StateInfo& _Info)
@@ -504,29 +524,6 @@ void SettingPage::SettingMoveLeftEnd(const StateInfo& _Info)
 		{
 			SettingPointer_->SetCurrentPage(AllPage_[i]->GetPageType());
 		}
-	}
-
-
-
-
-	for (int i = 0; i < AllPage_.size(); ++i)
-	{
-
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::CurrentPage)
-		{
-			AllPage_[1]->GetTransform().SetWorldPosition({ 0, 0 });
-		}
-
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
-		{
-			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
-		}
-
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
-		{
-			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
-		}
-
 	}
 
 

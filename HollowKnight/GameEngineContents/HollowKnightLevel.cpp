@@ -20,7 +20,7 @@ HollowKnightLevel::HollowKnightLevel()
 	{
 		GameEngineCameraActor* CameraActor = CreateActor<GameEngineCameraActor>();
 		CameraActor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
-		CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::MAPCAMERA);
 	}
 }
@@ -115,12 +115,12 @@ void HollowKnightLevel::PustItemInventroy(ITEM_LIST _Item)
 
 GameEngineCameraActor* HollowKnightLevel::GetMapCameraActor()
 {
-	return Cameras[static_cast<int>(CAMERAORDER::USER0)]->GetActor<GameEngineCameraActor>();
+	return Cameras[static_cast<int>(CAMERAORDER::MAPCAMERA)]->GetActor<GameEngineCameraActor>();
 }
 
 GameEngineTransform& HollowKnightLevel::GetMapCameraActorTransform()
 {
-	return Cameras[static_cast<int>(CAMERAORDER::USER0)]->GetActor()->GetTransform();
+	return Cameras[static_cast<int>(CAMERAORDER::MAPCAMERA)]->GetActor()->GetTransform();
 }
 
 

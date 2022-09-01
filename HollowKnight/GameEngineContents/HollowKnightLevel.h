@@ -101,6 +101,11 @@ public :
 	GameEngineCameraActor* GetMapCameraActor();
 	GameEngineTransform& GetMapCameraActorTransform();
 
+	ForgottenCrossroadMap* GetForgottenCrossroadMap()
+	{
+		return ForgottenCrossroadMap_;
+	}
+
 
 };
 

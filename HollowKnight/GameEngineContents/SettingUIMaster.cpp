@@ -28,6 +28,13 @@ void SettingUIMaster::CreateRendererComponent(float4 _LocalScale, std::string _F
 	Renderer_->GetTransform().SetLocalScale({ _LocalScale.x, _LocalScale.y, 1 });
 }
 
+void SettingUIMaster::CreateRendererComponent(std::string _FileName)
+{
+	Renderer_ = CreateComponent<GameEngineUIRenderer>();
+	Renderer_->SetTexture(_FileName);
+	Renderer_->GetTransform().SetLocalScale(Renderer_->GetCurTexture()->GetScale());
+}
+
 
 void SettingUIMaster::PixLocalNegativeY()
 {
