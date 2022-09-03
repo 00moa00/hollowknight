@@ -21,7 +21,6 @@ CharmPage::~CharmPage()
 void CharmPage::Start()
 {
 	//何利 浇吩
-
 	AllCharmSlot_.reserve(40);
 
 	float MaginY = 0.f;
@@ -70,7 +69,6 @@ void CharmPage::Start()
 		MaginY -= 80.f;
 	}
 
-
 	 MaginX = 0;
 
 	 //厘馒 浇吩
@@ -106,28 +104,43 @@ void CharmPage::Start()
 		MaginX += 50.f;
 	}
 
-	NotchesFont_ = CreateComponent<GameEngineFontRenderer>();
-	NotchesFont_->SetText("何利 沫", "Noto Serif KR");
-	NotchesFont_->SetColor({ 1.0f, 1.0f, 1.0f });
-	NotchesFont_->ChangeCamera(CAMERAORDER::UICAMERA);
-	NotchesFont_->SetScreenPostion({ 200.f, (GameEngineWindow::GetInst()->GetScale().hy() - 110.0f), static_cast<float>(Z_ORDER::UI) });
-	NotchesFont_->SetSize(32);
-	NotchesFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
-	NotchesFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
-	//NotchesFont_->
+	NotchesFont_ = GetLevel() -> CreateActor<ContentsFontRenderer>();
+	NotchesFont_->CreateFontRenderer("何利 沫"
+		, 34
+		, { 0, 0, 0 }
+	, false);
+	NotchesFont_->GetTransform().SetWorldPosition({ -700,  150, static_cast<float>(Z_ORDER::UI) });
+	NotchesFont_->SetScreenMove();
+	NotchesFont_->SetParent(this);
+
+	EquippedSlotFont_ = GetLevel()->CreateActor<ContentsFontRenderer>();
+	EquippedSlotFont_->CreateFontRenderer("厘馒等 何利"
+		, 40
+		, { 200.f, (GameEngineWindow::GetInst()->GetScale().hy() - 300.0f), static_cast<float>(Z_ORDER::UI) }
+	, false);
+	EquippedSlotFont_->GetTransform().SetWorldPosition({ -700,  300, static_cast<float>(Z_ORDER::UI) });
+	EquippedSlotFont_->SetScreenMove();
+	EquippedSlotFont_->SetParent(this);
+	//EquippedSlotFont_->SetParent(this);
 
 	Line_ = CreateComponent<GameEngineUIRenderer>();
 
 	Line_->SetTexture("Inv_0017_divider.png");
 	Line_->GetTransform().SetWorldScale({1021, 5});
+
 	Line_->GetTransform().SetWorldPosition({ -380.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
 
 
 	SetPageType(PAGE_TYPE::Charm);
+	SetPageName("何利");
 }
 
 void CharmPage::Update(float _DeltaTime)
 {
+	EquippedSlotFont_->SetScreenMove();
+
+	NotchesFont_->SetScreenMove();
+
 }
 
 void CharmPage::AllOff()

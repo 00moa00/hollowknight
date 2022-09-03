@@ -2,6 +2,7 @@
 #include "MasterPage.h"
 #include "CharmSlot.h"
 #include "Notches.h"
+#include "ContentsFontRenderer.h"
 
 #include <GameEngineCore/GameEngineFontRenderer.h>
 // 설명 : 0~39 : 부적, 50, 51 : 포인터, 40~49 : 장착슬롯
@@ -25,8 +26,8 @@ protected:
 private:
 	std::vector<CharmSlot*> AllCharmSlot_;
 	
-
-	GameEngineFontRenderer* NotchesFont_;
+	ContentsFontRenderer* NotchesFont_;
+	ContentsFontRenderer* EquippedSlotFont_;
 	GameEngineUIRenderer* Line_;
 
 public:

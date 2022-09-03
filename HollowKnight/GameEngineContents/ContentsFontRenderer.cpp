@@ -42,8 +42,6 @@ void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize
 	GameEngineFontRenderer_->SetColor({ 1.0f, 1.0f, 1.0f });
 	GameEngineFontRenderer_->SetScreenPostion(_Position);
 	GameEngineFontRenderer_->SetSize(_FontSize);
-	GameEngineFontRenderer_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
-	GameEngineFontRenderer_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 	GameEngineFontRenderer_->SetText(_Text, "Noto Serif KR");
 
 	if (_LineBreak > 0)
@@ -62,6 +60,52 @@ void ContentsFontRenderer::SetActorToScreenPosition(float4 _ActorPos, float4 _Ca
 
 	GameEngineFontRenderer_->SetScreenPostion({ _ActorPos.x - _CameraPos.x + GameEngineWindow::GetScale().x / 2 
 		, ( _CameraPos.y - _ActorPos.y  + GameEngineWindow::GetScale().y /2)});
+
+
+}
+
+void ContentsFontRenderer::SetThisToScreenPosition(float4 _CameraPos)
+{
+	GameEngineFontRenderer_->SetScreenPostion({ GetTransform().GetWorldPosition().x - _CameraPos.x + GameEngineWindow::GetScale().x / 2
+	, (_CameraPos.y - GetTransform().GetWorldPosition().y + GameEngineWindow::GetScale().y / 2) });
+}
+
+void ContentsFontRenderer::SetScreenMove()
+{
+	//float4 Position;
+
+	//if (GetTransform().GetWorldPosition().x > 0)
+	//{
+	//	Position.x = GetTransform().GetWorldPosition().x + GameEngineWindow::GetScale().x / 2;
+	//}
+	//else if (GetTransform().GetWorldPosition().x == 0)
+	//{
+	//	Position.x = GameEngineWindow::GetScale().x / 2;
+	//}
+	//else
+	//{
+	//	Position.x =  (GetTransform().GetWorldPosition().x) * -1;
+	//}
+
+	//if (GetTransform().GetWorldPosition().y > 0)
+	//{
+	//	Position.y = (GameEngineWindow::GetScale().y / 2 ) - GetTransform().GetWorldPosition().y;
+	//}
+	//else if (GetTransform().GetWorldPosition().y == 0)
+	//{
+	//	Position.y = GameEngineWindow::GetScale().y / 2;
+	//}
+	//else
+	//{
+	//	Position.y = GetTransform().GetWorldPosition().y * -1 + (GameEngineWindow::GetScale().y / 2);
+
+	//}
+
+
+	//GameEngineFontRenderer_->SetScreenPostion(Position);
+
+	GameEngineFontRenderer_->SetScreenPostion({ GetTransform().GetWorldPosition().x + GameEngineWindow::GetScale().x / 2 
+, (GameEngineWindow::GetScale().y / 2) - GetTransform().GetWorldPosition().y });
 
 
 }

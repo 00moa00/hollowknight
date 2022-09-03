@@ -13,9 +13,6 @@
 #include "InventoryPage.h"
 #include "MapPage.h"
 
-
-
-
 class GameEngineTextureRenderer;
 class SettingPage : public GameEngineActor
 {
@@ -36,7 +33,6 @@ protected:
 
 private:
 	bool OnOffPage_;
-
 
 	BorderCorner* BorderCornerLeftTop_;
 	BorderCorner* BorderCornerRightTop_;

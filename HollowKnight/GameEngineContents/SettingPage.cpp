@@ -41,23 +41,22 @@ void SettingPage::Start()
 	BackGround_->SetTexture("Black.png");
 	BackGround_->ScaleToTexture();
 	BackGround_->GetPixelData().MulColor.a = 0.8f;
-	//ckGround_->SetPivot(PIVOTMODE::LEFTTOP);
 	BackGround_->GetTransform().SetLocalPosition({ 0,0,static_cast<float>(Z_ORDER::UI_BackBoard) });
 	BackGround_->Off();
 
 	PageName_ = CreateComponent<GameEngineFontRenderer>();
-	PageName_->SetText("何利 沫", "Noto Serif KR");
+	PageName_->SetText("何利", "Noto Serif KR");
 	PageName_->SetColor({ 1.0f, 1.0f, 1.0f });
 	PageName_->ChangeCamera(CAMERAORDER::UICAMERA);
 
 	PageName_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(),
-		(200.f ),
+		(100.f ),
 		static_cast<float>(Z_ORDER::UI) });
 
-	PageName_->SetSize(32);
+	PageName_->SetSize(38);
 	PageName_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 	PageName_->SetTopAndBotSort(TopAndBotSort::VCENTER);
-
+	//PageName_->SetLevelOverOn();
 
 	BorderCornerLeftTop_ = GetLevel()->CreateActor<BorderCorner>();
 	BorderCornerLeftTop_->GetTransform().SetLocalPosition({
@@ -67,8 +66,6 @@ void SettingPage::Start()
 
 	BorderCornerLeftTop_->Off();
 
-
-
 	BorderCornerRightTop_ = GetLevel()->CreateActor<BorderCorner>();
 	BorderCornerRightTop_->GetRenderer()->GetTransform().PixLocalNegativeX();
 	BorderCornerRightTop_->GetTransform().SetLocalPosition({
@@ -76,8 +73,6 @@ void SettingPage::Start()
 	, GameEngineWindow::GetInst()->GetScale().hy() - 250.f
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderCornerRightTop_->Off();
-
-
 
 	BorderCornerLeftBottom_ = GetLevel()->CreateActor<BorderCorner>();
 	BorderCornerLeftBottom_->PixLocalNegativeY();
@@ -88,7 +83,6 @@ void SettingPage::Start()
 	BorderCornerLeftBottom_->Off();
 
 
-
 	BorderCornerRightBottom_ = GetLevel()->CreateActor<BorderCorner>();
 	BorderCornerRightBottom_->PixLocalNegativeY();
 	BorderCornerRightBottom_->GetRenderer()->GetTransform().PixLocalNegativeX();
@@ -97,7 +91,6 @@ void SettingPage::Start()
 	,  -(GameEngineWindow::GetInst()->GetScale().hy() - 250.f)
 	, static_cast<float>(Z_ORDER::UI_Border) });
 	BorderCornerRightBottom_->Off();
-
 
 
 	BorderBottom_ = GetLevel()->CreateActor<BorderBottom>();
@@ -116,8 +109,6 @@ void SettingPage::Start()
 	BorderTop_->Off();
 
 
-
-
 	BorderLeftArrow_ = GetLevel()->CreateActor<BorderArrow>();
 	BorderLeftArrow_->GetTransform().SetLocalPosition({
 	-(GameEngineWindow::GetInst()->GetScale().hx() - 70.f)
@@ -129,7 +120,6 @@ void SettingPage::Start()
 	{
 		PointActorComponent* BorderLeftArrowComponent_ = CreateComponent<PointActorComponent>();
 		BorderLeftArrowComponent_->PushPointerActor(static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow), PAGE_TYPE::Charm, BorderLeftArrow_);
-
 	}
 
 	{
@@ -440,6 +430,7 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 
 			if (AllPage_[i]->GetTransform().GetWorldPosition().x < 0)
 			{
+				PageName_->SetText(AllPage_[i]->GetPageName(), "Noto Serif KR");
 				SettingPageManager_.ChangeState("IDLE");
 			}
 		}
@@ -501,6 +492,7 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 
 			if (AllPage_[i]->GetTransform().GetWorldPosition().x > 0)
 			{
+				PageName_->SetText(AllPage_[i]->GetPageName(), "Noto Serif KR");
 				SettingPageManager_.ChangeState("IDLE");
 			}
 		}

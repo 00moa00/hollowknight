@@ -18,6 +18,7 @@ InventoryPage::~InventoryPage()
 void InventoryPage::Start()
 {
 	SetPageType(PAGE_TYPE::Inventory);
+	SetPageName("소지품");
 
 	//스펠 아이템 등록
 

@@ -19,6 +19,8 @@ public:
 	MasterPage& operator=(MasterPage&& _Other) noexcept = delete;
 
 protected:
+	std::string PageName_;
+
 	CURRENT_PAGE_INDEX CurrentPage_;
 	PAGE_TYPE PageType_;
 
@@ -56,6 +58,11 @@ public:
 		}
 	}
 
+	std::string& GetPageName()
+	{
+		return PageName_;
+	}
+
 	//================================
 	//    Setter
 	//================================
@@ -67,6 +74,11 @@ public:
 	void SetPageType(PAGE_TYPE _PageType)
 	{
 		PageType_ = _PageType;
+	}
+
+	void SetPageName(std::string _Name)
+	{
+		PageName_ = _Name;
 	}
 
 };

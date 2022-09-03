@@ -433,6 +433,7 @@ void Knight::Start()
 	ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
 	ContentsFontRenderer_->CreateFontRenderer("가나다라마바사", 24, {500,500}, true, 4);
 	ContentsFontRenderer_->FontOn();
+
 }
 
 void Knight::Update(float _DeltaTime)

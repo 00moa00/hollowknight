@@ -13,6 +13,7 @@ MapPage::~MapPage()
 void MapPage::Start()
 {
 	SetPageType(PAGE_TYPE::Map);
+	SetPageName("Áöµµ");
 
 	MapList_.push_back(GetLevel()->CreateActor<WorldMap>());
 	MapList_[0]->CreateWorldMapRenderer("wide_map__0001_town.png", MAP_LIST::DIRTMOUTH);

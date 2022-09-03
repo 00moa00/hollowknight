@@ -49,6 +49,10 @@ public:
 
 	void SetActorToScreenPosition(float4 _ActorPos, float4 _CameraPos);
 
+	void SetThisToScreenPosition(float4 _CameraPos);
+
+	void SetScreenMove();
+
 	void FontOn();
 
 	void FontOff();
@@ -68,7 +72,10 @@ public:
 	//================================
 	//    Getter
 	//================================
-
+	GameEngineFontRenderer* GetFontRenderer()
+	{
+		return GameEngineFontRenderer_;
+	}
 	//================================
 	//    Setter
 	//================================
