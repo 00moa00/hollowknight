@@ -34,7 +34,7 @@ void ContentsFontRenderer::Update(float _DeltatTime)
 	FontStateManager_.Update(_DeltatTime);
 }
 
-void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isTyping)
+void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isTyping, int _LineBreak )
 {
 	GameEngineFontRenderer_ = CreateComponent<GameEngineFontRenderer>();
 	GameEngineFontRenderer_->ChangeCamera(CAMERAORDER::UICAMERA);
@@ -46,11 +46,15 @@ void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize
 	GameEngineFontRenderer_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 	GameEngineFontRenderer_->SetText(_Text, "Noto Serif KR");
 
+	if (_LineBreak > 0)
+	{
+		_Text.insert(_LineBreak, "\n");
+	}
+
 	FontState_.FontSize_ = _FontSize;
 	FontState_.Text_ = _Text;
 	FontState_.isTyping_ = _isTyping;
 	FontState_.TextSize_ = _Text.size();
-
 }
 
 void ContentsFontRenderer::SetActorToScreenPosition(float4 _ActorPos, float4 _CameraPos)

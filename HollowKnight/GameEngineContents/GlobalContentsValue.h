@@ -85,7 +85,6 @@ enum class PAGE_TYPE
 	Charm,
 	Inventory,
 	Map,
-	MonsterBook,
 };
 
 // 페이지 인덱스 : 현재 페이지를 0으로 세팅한다.
@@ -97,8 +96,7 @@ enum class CURRENT_PAGE_INDEX
 	SincePage = -1,
 	CurrentPage = 0,
 	NextPage = 1,
-	AfterNextPage = 2,
-	MAX = 3
+	MAX = 2
 };
 
 enum class CHAR_PAGE_ACTOR

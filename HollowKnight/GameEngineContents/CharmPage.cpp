@@ -86,7 +86,6 @@ void CharmPage::Start()
 		if (i != 40)
 		{
 			AllCharmSlot_[i]->GetRenderer()->Off();
-
 		}
 
 		
@@ -97,12 +96,10 @@ void CharmPage::Start()
 	}
 
 	//³ëÄ¡
-
 	MaginX = 0;
 
 	for (int i = 0; i < 5; ++i)
 	{
-
 		GetLevel<HollowKnightLevel>()->PushNotches(GetLevel()->CreateActor<Notches>(),
 			{ -750.f + MaginX, 60.f , static_cast<float>(Z_ORDER::UI) });
 		GetLevel<HollowKnightLevel>()->AllNotes_[i]->SetParent(this);
@@ -112,6 +109,7 @@ void CharmPage::Start()
 	NotchesFont_ = CreateComponent<GameEngineFontRenderer>();
 	NotchesFont_->SetText("ºÎÀû Ä­", "Noto Serif KR");
 	NotchesFont_->SetColor({ 1.0f, 1.0f, 1.0f });
+	NotchesFont_->ChangeCamera(CAMERAORDER::UICAMERA);
 	NotchesFont_->SetScreenPostion({ 200.f, (GameEngineWindow::GetInst()->GetScale().hy() - 110.0f), static_cast<float>(Z_ORDER::UI) });
 	NotchesFont_->SetSize(32);
 	NotchesFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);

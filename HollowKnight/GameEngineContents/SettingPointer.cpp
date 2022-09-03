@@ -205,8 +205,7 @@ void SettingPointer::Update(float _DeltaTime)
 	case PAGE_TYPE::Charm:
 		SettingPointerCharmPageManager_.Update(_DeltaTime);
 		break;
-	case PAGE_TYPE::MonsterBook:
-		break;
+
 	case PAGE_TYPE::Map:
 		SettingPointerMapPageManager_.Update(_DeltaTime);
 
@@ -282,16 +281,16 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		if (PrevPage_ == PAGE_TYPE::Map)
 		{
 			inRightArrow_ = false;
-			CurrentPosInCharmPage = -1;
+			CurrentPosInCharmPage = 0;
 
 
 			//CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
 
-			SettingPointerCharmPageManager_.ChangeState("IN_LEFT_ARROW");
+			SettingPointerCharmPageManager_.ChangeState("IDLE");
 			SettingPointerInventoryPageManager_.ChangeState("WAIT");
 			SettingPointerMapPageManager_.ChangeState("WAIT");
 
-			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(51)->second;
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(0)->second;
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
@@ -305,13 +304,13 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 			inLeftArrow_ = false;
 
 			//CurrentPosInCharmPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
-			CurrentPosInCharmPage = 1;
+			CurrentPosInCharmPage = 0;
 
-			SettingPointerCharmPageManager_.ChangeState("IN_RIGHT_ARROW");
+			SettingPointerCharmPageManager_.ChangeState("IDLE");
 			SettingPointerInventoryPageManager_.ChangeState("WAIT");
 			SettingPointerMapPageManager_.ChangeState("WAIT");
 
-			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(50)->second;
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(0)->second;
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
@@ -328,15 +327,14 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			inRightArrow_ = false;
 
-			//CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
-			SettingPointerInventoryPageManager_.ChangeState("IN_LEFT_ARROW");
+			CurrentPosInInventoryPage = 0;
 
+			SettingPointerInventoryPageManager_.ChangeState("IDLE");
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
 			SettingPointerMapPageManager_.ChangeState("WAIT");
 
-			CurrentPosInInventoryPage = -1;
 
-			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(51)->second;
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(0)->second;
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
@@ -350,17 +348,14 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			inLeftArrow_ = false;
 
-			CurrentPosInInventoryPage = 1;
+			CurrentPosInInventoryPage = 0;
 
-
-			//CurrentPosInInventoryPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
-			SettingPointerInventoryPageManager_.ChangeState("IN_RIGHT_ARROW");
-
+			SettingPointerInventoryPageManager_.ChangeState("IDLE");
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
 			SettingPointerMapPageManager_.ChangeState("WAIT");
 
 
-			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(50)->second;
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(0)->second;
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
@@ -379,45 +374,49 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 		{
 			inRightArrow_ = false;
 
-			//CurrentPosInMapPage = static_cast<int>(CHAR_PAGE_ACTOR::LeftArrow);
+			CurrentPosInMapPage = 0;
 
-			SettingPointerMapPageManager_.ChangeState("IN_LEFT_ARROW");
+			SettingPointerMapPageManager_.ChangeState("IDLE");
 
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
 			SettingPointerInventoryPageManager_.ChangeState("WAIT");
-			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(51)->second;
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(0)->second;
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 				, static_cast<float>(Z_ORDER::UI_Border) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+
+			WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+			FindMap->ChangeTextureSelect();
 		}
 
 		if (PrevPage_ == PAGE_TYPE::Charm)
 		{
 			inLeftArrow_ = false;
 
-			//CurrentPosInMapPage = static_cast<int>(CHAR_PAGE_ACTOR::RightArrow);
+			CurrentPosInMapPage = 0;
 
-			SettingPointerMapPageManager_.ChangeState("IN_RIGHT_ARROW");
+
+			SettingPointerMapPageManager_.ChangeState("IDLE");
 
 			SettingPointerCharmPageManager_.ChangeState("WAIT");
 			SettingPointerInventoryPageManager_.ChangeState("WAIT");
 
-			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(50)->second;
+			PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(0)->second;
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
 				, static_cast<float>(Z_ORDER::UI_Border) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
+
+			WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+			FindMap->ChangeTextureSelect();
 		}
 
 
-		break;
-
-	case PAGE_TYPE::MonsterBook:
 		break;
 
 	default:

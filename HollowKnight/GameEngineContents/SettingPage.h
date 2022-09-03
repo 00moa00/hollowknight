@@ -54,7 +54,7 @@ private:
 
 	//CharmPage* CharmPage_;
 	//InventoryPage* InventoryPage_;
-
+	GameEngineFontRenderer* PageName_;
 
 	SettingPointer* SettingPointer_;
 

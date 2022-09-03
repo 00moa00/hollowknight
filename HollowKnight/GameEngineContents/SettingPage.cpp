@@ -45,7 +45,18 @@ void SettingPage::Start()
 	BackGround_->GetTransform().SetLocalPosition({ 0,0,static_cast<float>(Z_ORDER::UI_BackBoard) });
 	BackGround_->Off();
 
+	PageName_ = CreateComponent<GameEngineFontRenderer>();
+	PageName_->SetText("ºÎÀû Ä­", "Noto Serif KR");
+	PageName_->SetColor({ 1.0f, 1.0f, 1.0f });
+	PageName_->ChangeCamera(CAMERAORDER::UICAMERA);
 
+	PageName_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(),
+		(200.f ),
+		static_cast<float>(Z_ORDER::UI) });
+
+	PageName_->SetSize(32);
+	PageName_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
+	PageName_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
 
 	BorderCornerLeftTop_ = GetLevel()->CreateActor<BorderCorner>();
@@ -165,7 +176,7 @@ void SettingPage::Start()
 	AllPage_[1]->SetCurrentPage(CURRENT_PAGE_INDEX::NextPage);
 
 	AllPage_.push_back(GetLevel()->CreateActor<MapPage>());
-	AllPage_[2]->SetCurrentPage(CURRENT_PAGE_INDEX::AfterNextPage);
+	AllPage_[2]->SetCurrentPage(CURRENT_PAGE_INDEX::SincePage);
 
 	SettingPointer_ = GetLevel()->CreateActor<SettingPointer>();
 	SettingPointer_->SetCharmPageActorMax();
@@ -188,11 +199,6 @@ void SettingPage::Start()
 		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
 		{
 			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
-		}
-
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::AfterNextPage)
-		{
-			AllPage_[i]->GetTransform().SetWorldPosition({ 1920 * 2, 0 });
 		}
 
 	}
@@ -319,9 +325,7 @@ void SettingPage::SettingOffStart(const StateInfo& _Info)
 
 void SettingPage::SettingOffUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	SettingPageManager_.ChangeState("IDLE");
-
 }
 
 void SettingPage::SettingOffEnd(const StateInfo& _Info)
@@ -361,11 +365,6 @@ void SettingPage::SettingIdleStart(const StateInfo& _Info)
 		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
 		{
 			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
-		}
-
-		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::AfterNextPage)
-		{
-			AllPage_[i]->GetTransform().SetWorldPosition({ 1920 * 2, 0 });
 		}
 	}
 }
@@ -422,7 +421,7 @@ void SettingPage::SettingMoveRightStart(const StateInfo& _Info)
 
 		else if (Setindex == (static_cast<int>(CURRENT_PAGE_INDEX::MIN)))
 		{
-			Setindex = (static_cast<int>(CURRENT_PAGE_INDEX::AfterNextPage));
+			Setindex = (static_cast<int>(CURRENT_PAGE_INDEX::NextPage));
 		}
 
 		AllPage_[i]->SetCurrentPage(static_cast<CURRENT_PAGE_INDEX>(Setindex));
@@ -484,7 +483,7 @@ void SettingPage::SettingMoveLeftStart(const StateInfo& _Info)
 
 		else if (Setindex == (static_cast<int>(CURRENT_PAGE_INDEX::MIN)))
 		{
-			Setindex = (static_cast<int>(CURRENT_PAGE_INDEX::AfterNextPage));
+			Setindex = (static_cast<int>(CURRENT_PAGE_INDEX::NextPage));
 		}
 
 		AllPage_[i]->SetCurrentPage(static_cast<CURRENT_PAGE_INDEX>(Setindex));

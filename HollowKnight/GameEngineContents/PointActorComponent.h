@@ -43,11 +43,7 @@ public:
 			GetActor()->GetLevel<HollowKnightLevel>()->PushPointActorCharm(_Order, this);
 			SettingUIMasterPointer_ = _SettingUIMasterPointer_;
 			break;
-		case PAGE_TYPE::MonsterBook:
-			GetActor()->GetLevel<HollowKnightLevel>()->PushPointActorMonsterBook(_Order, this);
-			SettingUIMasterPointer_ = _SettingUIMasterPointer_;
 
-			break;
 		case PAGE_TYPE::Map:
 			GetActor()->GetLevel<HollowKnightLevel>()->PushPointActorMap(_Order, this);
 			SettingUIMasterPointer_ = _SettingUIMasterPointer_;

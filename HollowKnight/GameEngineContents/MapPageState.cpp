@@ -53,7 +53,6 @@ void SettingPointer::PointerPageMoveLeftStart(const StateInfo& _Info)
 
 		if ((PrevCount == static_cast<int>(MAP_LIST::DIRTMOUTH) || PrevCount == static_cast<int>(MAP_LIST::CORSSROAD)) && _Info.PrevState != "IN_LEFT_ARROW")
 		{
-			//CurrentPosInMapPage = -1;
 			SettingPointerMapPageManager_.ChangeState("IN_LEFT_ARROW");
 
 			return;
@@ -71,7 +70,6 @@ void SettingPointer::PointerPageMoveLeftStart(const StateInfo& _Info)
 				{
 					FindMap->ChangeTextureSelect();
 				}
-
 				else
 				{
 					FindMap->ChangeTextureIdle();
@@ -178,7 +176,6 @@ void SettingPointer::PointerMapPageRightArrowUpdate(float _DeltaTime, const Stat
 void SettingPointer::PointerMapPageRightArrowEnd(const StateInfo& _Info)
 {
 	CurrentPosInMapPage = 2;
-
 }
 
 void SettingPointer::PointerMapPageInLeftArrowStart(const StateInfo& _Info)
@@ -244,6 +241,7 @@ void SettingPointer::PointerMapPageWideMapStart(const StateInfo& _Info)
 
 		FindMap->Off();
 	}
+
 	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->On();
 }
 

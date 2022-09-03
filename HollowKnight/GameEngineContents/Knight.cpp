@@ -431,35 +431,30 @@ void Knight::Start()
 
 
 	ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-	ContentsFontRenderer_->CreateFontRenderer("가나다\n라마바사", 24, {500,500}, true);
+	ContentsFontRenderer_->CreateFontRenderer("가나다라마바사", 24, {500,500}, true, 4);
 	ContentsFontRenderer_->FontOn();
 }
 
 void Knight::Update(float _DeltaTime)
 {
-
 	ContentsFontRenderer_->SetActorToScreenPosition(GetTransform().GetWorldPosition(), GetLevel()->GetMainCameraActorTransform().GetWorldPosition());
 	KnightManager_.Update(_DeltaTime);
 
 	if (KnightLightEffect_ != nullptr)
 	{
-		KnightLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
-	
+		KnightLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });	
 	}
 
 	if (KnightDonutLightEffect_ != nullptr)
 	{
 		KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
-
 	}
 
 	if (KnightSmallLightEffect_ != nullptr)
 	{
 		KnightSmallLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
-
 	}
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
-
 }
 
 

@@ -82,10 +82,10 @@ void InventoryPage::Start()
 
 				++SlotNum;
 				MaginX += 120.f;
-
 			}
+
 			MaginX = 0.f;
-			MaginY -= 100.f;
+			MaginY -= 120.f;
 		}
 	}
 
@@ -111,7 +111,7 @@ void InventoryPage::Start()
 			AllItem_.insert({ SlotNum, GetLevel()->CreateActor<ItemSlot>() });
 			AllItem_[SlotNum]->CreateItemSlot(EnumString, SlotNum, ItemEnum.value());
 			AllItem_[SlotNum]->SetParent(this);
-			AllItem_[SlotNum]->GetTransform().SetLocalPosition({ 0 + MaginX, -200.f  , static_cast<float>(Z_ORDER::UI) });
+			AllItem_[SlotNum]->GetTransform().SetLocalPosition({ -150.f + MaginX, -200.f  , static_cast<float>(Z_ORDER::UI) });
 
 			PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
 			Component_->PushPointerActor(SlotNum, PAGE_TYPE::Inventory, AllItem_[SlotNum]);
@@ -120,6 +120,22 @@ void InventoryPage::Start()
 			MaginX += 120.f;
 		}
 	}
+
+
+	GameEngineUIRenderer* Line_ = CreateComponent<GameEngineUIRenderer>();
+
+	Line_->SetTexture("Inv_0017_divider.png");
+	Line_->GetTransform().SetWorldScale({ 700, 5 });
+	Line_->GetTransform().SetWorldPosition({ -250.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
+	Line_->GetTransform().SetWorldRotation({ 0,0,90 });
+
+	Line_ = CreateComponent<GameEngineUIRenderer>();
+
+	Line_->SetTexture("Inv_0017_divider.png");
+	Line_->GetTransform().SetWorldScale({ 700, 5 });
+	Line_->GetTransform().SetWorldPosition({ 300.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
+	Line_->GetTransform().SetWorldRotation({ 0,0,90 });
+
 }
 
 void InventoryPage::Update(float _DeltaTime)
