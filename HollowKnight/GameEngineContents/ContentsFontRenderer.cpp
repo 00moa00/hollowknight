@@ -31,11 +31,14 @@ void ContentsFontRenderer::Start()
 
 void ContentsFontRenderer::Update(float _DeltatTime)
 {
+	FontStateManager_.Update(_DeltatTime);
 }
 
 void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isTyping)
 {
 	GameEngineFontRenderer_ = CreateComponent<GameEngineFontRenderer>();
+	GameEngineFontRenderer_->ChangeCamera(CAMERAORDER::UICAMERA);
+
 	GameEngineFontRenderer_->SetColor({ 1.0f, 1.0f, 1.0f });
 	GameEngineFontRenderer_->SetScreenPostion(_Position);
 	GameEngineFontRenderer_->SetSize(_FontSize);
@@ -50,12 +53,21 @@ void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize
 
 }
 
+void ContentsFontRenderer::SetActorToScreenPosition(float4 _ActorPos, float4 _CameraPos)
+{
+
+	GameEngineFontRenderer_->SetScreenPostion({ _ActorPos.x - _CameraPos.x + GameEngineWindow::GetScale().x / 2 
+		, ( _CameraPos.y - _ActorPos.y  + GameEngineWindow::GetScale().y /2)});
+
+
+}
+
 void ContentsFontRenderer::FontOn()
 {
 	if (FontState_.isTyping_ == true)
 	{
 		FontStateManager_.ChangeState("TYPING_UPDATE");
-		GameEngineFontRenderer_->SetText("", "Noto Serif KR");
+		GameEngineFontRenderer_->SetText(" ", "Noto Serif KR");
 
 	}
 }
@@ -64,33 +76,45 @@ void ContentsFontRenderer::FontOff()
 {
 }
 
-
-
 void ContentsFontRenderer::FontTypingStart(const StateInfo& _Info)
 {
-	TypingCount_ = 0;
+	TypingCount_ = 2;
 }
 
 void ContentsFontRenderer::FontTypingUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	TypingTimer_ += _DeltaTime;
 
-	if (TypingCount_ >= FontState_.TextSize_)
+	if (TypingCount_ > FontState_.TextSize_)
 	{
 		FontStateManager_.ChangeState("TYPING_IDLE");
 	}
-
 	if (TypingTimer_ > 0.5f)
 	{
-		GameEngineFontRenderer_->SetText(FontState_.Text_.substr(TypingCount_), "Noto Serif KR");
+		TypingTimer_ = 0.f;
 
-		++TypingCount_;
+		std::string test = FontState_.Text_.substr(0, TypingCount_);
+		GameEngineFontRenderer_->SetText(test
+			, "Noto Serif KR");
+
+		int C = TypingCount_ ;
+		std::string Check = FontState_.Text_.substr(TypingCount_, 1);
+		if (Check == "\n")
+		{
+			TypingCount_ += 1;
+		}
+		else
+		{
+
+		TypingCount_ += 2;
+		}
+
 	}
 }
 
 void ContentsFontRenderer::FontTypingEnd(const StateInfo& _Info)
 {
-	TypingCount_ = 0;
+	TypingCount_ = 2;
 }
 
 void ContentsFontRenderer::FontTypingIdleStart(const StateInfo& _Info)

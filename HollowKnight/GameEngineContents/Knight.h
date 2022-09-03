@@ -5,6 +5,7 @@
 #include "KnightDonutLightEffect.h"
 #include "KnightSmallLightEffect.h"
 #include "SideDarkEffect.h"
+#include "ContentsFontRenderer.h"
 
 // 설명 :
 class GameEngineTextureRenderer;
@@ -27,7 +28,7 @@ protected:
 	void End() override {}
 
 private:
-
+	ContentsFontRenderer* ContentsFontRenderer_;
 	bool isSlashEnd_;		// 공격 애니메이션 종료
 	bool isDoubleSlashEnd_; // 더블 공격 애니메이션 종료
 	bool isUpSlashEnd_;

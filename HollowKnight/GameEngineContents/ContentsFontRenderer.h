@@ -56,7 +56,6 @@ public:
 	//================================
 	//    Bind State
 	//================================
-
 	void FontTypingStart(const StateInfo& _Info);
 	void FontTypingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void FontTypingEnd(const StateInfo& _Info);

@@ -17,6 +17,7 @@
 
 #include "KnightData.h"
 
+
 Knight::Knight()
 	:
 	KnightManager_(),
@@ -427,12 +428,18 @@ void Knight::Start()
 
 
 	KnightManager_.ChangeState("FALL");
+
+
+	ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
+	ContentsFontRenderer_->CreateFontRenderer("가나다\n라마바사", 24, {500,500}, true);
+	ContentsFontRenderer_->FontOn();
 }
 
 void Knight::Update(float _DeltaTime)
 {
-	KnightManager_.Update(_DeltaTime);
 
+	ContentsFontRenderer_->SetActorToScreenPosition(GetTransform().GetWorldPosition(), GetLevel()->GetMainCameraActorTransform().GetWorldPosition());
+	KnightManager_.Update(_DeltaTime);
 
 	if (KnightLightEffect_ != nullptr)
 	{
