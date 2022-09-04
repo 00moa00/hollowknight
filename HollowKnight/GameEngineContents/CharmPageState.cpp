@@ -38,6 +38,27 @@ void SettingPointer::PointerCharmPageIdleStart(const StateInfo& _Info)
 {
 	Sort_ = 0;
 	PointerMoveSpeed_ = 750.f;
+
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(CurrentPosInCharmPage)->second;
+	CharmSlot* findSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+	if (findSlot->GetisEquippedSlotUsing())
+	{
+		PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(findSlot->GetUsingSlotNum())->second;
+		findSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 19);
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
+
+	}
+	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
+	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 19);
+	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
+
+
+
+
 }
 
 void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)

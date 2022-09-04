@@ -36,9 +36,16 @@ void ContentsFontRenderer::Update(float _DeltatTime)
 
 void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isTyping, int _LineBreak )
 {
+	int TextSize = _Text.size();
 	if (_LineBreak > 0)
 	{
-		_Text.insert(_LineBreak, "\n");
+		for (int i = _LineBreak; i * _LineBreak < TextSize; ++i)
+		{
+			_Text.insert(i * _LineBreak, "\n");
+			++i;
+			++TextSize;
+			++_LineBreak;
+		}
 	}
 
 	for (int i = 0; i < _Text.size(); ++i)
@@ -83,10 +90,42 @@ void ContentsFontRenderer::SetThisToScreenPosition(float4 _CameraPos)
 
 void ContentsFontRenderer::SetText(std::string _Text, int _LineBreak)
 {
+	int LineBreakCount = 0;
+
 	if (_LineBreak > 0)
 	{
-		_Text.insert(_LineBreak, "\n");
+		for (int i = 0; i < _Text.size();)
+		{
+			std::string line = _Text.substr(i, 1);
+			if (line == " ")
+			{
+				i += 1;
+				++LineBreakCount;
+			}
+
+			else if (line == ".")
+			{
+				i += 1;
+				LineBreakCount = 0;
+			}
+
+			else
+			{
+				i += 2;
+				++LineBreakCount;
+			}
+
+			if (LineBreakCount >= _LineBreak)
+			{
+				LineBreakCount = 0;
+				_Text.insert((i), "\n");
+			}
+
+		}
 	}
+
+
+	//FontState_.Text_ = _Text;
 
 	for (int i = 0; i < _Text.size(); ++i)
 	{
@@ -179,7 +218,7 @@ void ContentsFontRenderer::FontTypingUpdate(float _DeltaTime, const StateInfo& _
 
 		int C = TypingCount_ ;
 		std::string Check = FontState_.Text_.substr(TypingCount_, 1);
-		if (Check == "\n")
+		if (Check == "\n" || Check == " ")
 		{
 			TypingCount_ += 1;
 		}

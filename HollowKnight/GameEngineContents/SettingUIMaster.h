@@ -79,6 +79,7 @@ public:
 	{
 		Info_ = _Info;
 	}
+
 	void SetInfoName(std::string _Name)
 	{
 		InfoName_ = _Name;
