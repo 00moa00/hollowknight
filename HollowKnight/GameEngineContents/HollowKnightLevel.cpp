@@ -66,6 +66,20 @@ void HollowKnightLevel::CreateForgottenCrossroadMap()
 	ForgottenCrossroadMap_ = CreateActor<ForgottenCrossroadMap>();
 }
 
+void HollowKnightLevel::CreateCharmPageInfo(GameEngineActor* ParrentPage)
+{
+	CharmPageInfo_ = CreateActor<SettingPageInfo>();
+	CharmPageInfo_->SetParent(ParrentPage);
+
+
+}
+
+void HollowKnightLevel::CreateInventoryPageInfo(GameEngineActor* ParrentPage)
+{
+	InventoryPageInfo_ = CreateActor<SettingPageInfo>();
+	InventoryPageInfo_->SetParent(ParrentPage);
+}
+
 void HollowKnightLevel::PushPointActorCharm(int _Order, PointActorComponent* _PointActorComponent)
 {	
 	PointActorListCharm.insert({ _Order, _PointActorComponent });

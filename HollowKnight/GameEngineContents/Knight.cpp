@@ -431,7 +431,7 @@ void Knight::Start()
 
 
 	ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-	ContentsFontRenderer_->CreateFontRenderer("가나다라마바사", 24, {500,500}, true, 4);
+	ContentsFontRenderer_->CreateFontRenderer("가나다라마.바사", 24, {500,500}, false, 4);
 	ContentsFontRenderer_->FontOn();
 
 }

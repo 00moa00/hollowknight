@@ -27,6 +27,7 @@ public :
 
 	std::string CharmFilePath_; // 파일 패스
 	std::string CharmName_;
+
 };
 
 // 설명 :
@@ -122,6 +123,7 @@ public:
 	{
 		return CharmState_.CharmName_;
 	}
+
 
 	//================================
 	//    Setter 

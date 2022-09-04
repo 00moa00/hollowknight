@@ -51,6 +51,8 @@ public:
 
 	void SetThisToScreenPosition(float4 _CameraPos);
 
+	void SetText(std::string _Text, int _LineBreak = 0);
+
 	void SetScreenMove();
 
 	void FontOn();

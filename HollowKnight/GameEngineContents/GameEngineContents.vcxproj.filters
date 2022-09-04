@@ -360,6 +360,9 @@
     <ClInclude Include="FontActor.h">
       <Filter>Actor\Font</Filter>
     </ClInclude>
+    <ClInclude Include="SettingPageInfo.h">
+      <Filter>Actor\Play\UI\Setting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -616,6 +619,9 @@
     </ClCompile>
     <ClCompile Include="FontActor.cpp">
       <Filter>Actor\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingPageInfo.cpp">
+      <Filter>Actor\Play\UI\Setting</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

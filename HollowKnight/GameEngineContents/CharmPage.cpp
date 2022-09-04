@@ -85,8 +85,7 @@ void CharmPage::Start()
 		{
 			AllCharmSlot_[i]->GetRenderer()->Off();
 		}
-
-		
+	
 		PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
 		Component_->PushPointerActor(i, PAGE_TYPE::Charm, AllCharmSlot_[i]);
 
@@ -121,18 +120,17 @@ void CharmPage::Start()
 	EquippedSlotFont_->GetTransform().SetWorldPosition({ -700,  300, static_cast<float>(Z_ORDER::UI) });
 	EquippedSlotFont_->SetScreenMove();
 	EquippedSlotFont_->SetParent(this);
-	//EquippedSlotFont_->SetParent(this);
 
 	Line_ = CreateComponent<GameEngineUIRenderer>();
-
 	Line_->SetTexture("Inv_0017_divider.png");
 	Line_->GetTransform().SetWorldScale({1021, 5});
-
 	Line_->GetTransform().SetWorldPosition({ -380.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
 
 
 	SetPageType(PAGE_TYPE::Charm);
 	SetPageName("ºÎÀû");
+
+	GetLevel<HollowKnightLevel>()->CreateCharmPageInfo(this);
 }
 
 void CharmPage::Update(float _DeltaTime)

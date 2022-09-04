@@ -27,7 +27,8 @@ private:
 	std::vector<CharmSlot*> AllCharmSlot_;
 	
 	ContentsFontRenderer* NotchesFont_;
-	ContentsFontRenderer* EquippedSlotFont_;
+	ContentsFontRenderer* EquippedSlotFont_; 
+
 	GameEngineUIRenderer* Line_;
 
 public:

@@ -190,15 +190,11 @@ void SettingPage::Start()
 		{
 			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
 		}
-
 	}
-
-
 
 	//================================
 	//    CreateKey
 	//================================
-
 	if (false == GameEngineInput::GetInst()->IsKey("OnOffCheck"))
 	{
 		GameEngineInput::GetInst()->CreateKey("OnOffCheck", 'I');
@@ -356,7 +352,18 @@ void SettingPage::SettingIdleStart(const StateInfo& _Info)
 		{
 			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
 		}
+
+		if (AllPage_[i]->GetPageType() == PAGE_TYPE::Inventory)
+		{
+			GetLevel<HollowKnightLevel>()->GetInventoryInfo()->SetFontMove();
+		}
+
+		if (AllPage_[i]->GetPageType() == PAGE_TYPE::Charm)
+		{
+			GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetFontMove();
+		}
 	}
+
 }
 
 void SettingPage::SettingIdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -382,7 +389,6 @@ void SettingPage::SettingIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (SettingPointer_->GetisDownNextpageRight())
 	{
 		SettingPointer_->SetisDownNextPageRight(false);
-
 		SettingPageManager_.ChangeState("RIGHT_MOVE");
 	}
 
@@ -427,7 +433,6 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 		if (AllPage_[i]->isCurrentPage() == true)
 		{
 
-
 			if (AllPage_[i]->GetTransform().GetWorldPosition().x < 0)
 			{
 				PageName_->SetText(AllPage_[i]->GetPageName(), "Noto Serif KR");
@@ -435,9 +440,8 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 			}
 		}
 
-
-
-
+		GetLevel<HollowKnightLevel>()->GetInventoryInfo()->SetFontMove();
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetFontMove();
 
 		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 700.f);
 	}
@@ -488,8 +492,6 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 	{
 		if (AllPage_[i]->isCurrentPage() == true)
 		{
-
-
 			if (AllPage_[i]->GetTransform().GetWorldPosition().x > 0)
 			{
 				PageName_->SetText(AllPage_[i]->GetPageName(), "Noto Serif KR");
@@ -497,9 +499,9 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 			}
 		}
 
-
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetFontMove();
+		GetLevel<HollowKnightLevel>()->GetInventoryInfo()->SetFontMove();
 		AllPage_[i]->GetTransform().SetWorldMove(float4::RIGHT * _DeltaTime * 700.f);
-
 	}
 }
 

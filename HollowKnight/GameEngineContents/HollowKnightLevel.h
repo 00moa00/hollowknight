@@ -10,7 +10,7 @@
 #include "ItemSlot.h"
 #include "Item.h"
 #include "ForgottenCrossroadMap.h"
-
+#include "SettingPageInfo.h"
 
 class GameEngineTextureRenderer;
 class PointActorComponent;
@@ -44,18 +44,17 @@ private:
 	SettingPage* SettingPage_;
 	ForgottenCrossroadMap* ForgottenCrossroadMap_;
 
+	SettingPageInfo* CharmPageInfo_;
+	SettingPageInfo* InventoryPageInfo_;
+
+
 public:
 	std::map<int, PointActorComponent*> PointActorListCharm;
 	std::map<int, PointActorComponent*> PointActorListMap;
 	std::map<int, PointActorComponent*> PointActorListMonsterBook;
 	std::map<int, PointActorComponent*> PointActorListInventory;
 
-	std::map<int, Item>* AllItem_;
-
-
 	std::vector<Notches*> AllNotes_;
-
-
 
 	GameEngineRenderer* BackgroundRenderer_;
 
@@ -68,23 +67,13 @@ protected:
 	void CreateSettingPageActor();
 	void CreateForgottenCrossroadMap();
 
+public:
+	void CreateCharmPageInfo(GameEngineActor* ParrentPage);
+	void CreateInventoryPageInfo(GameEngineActor* ParrentPage);
+
+protected:
 	void CameraMoveWindowLimit();
 	void CameraMoveKnightLimit();
-
-	MasterMap* GetMasterMap() const
-	{
-		return MasterMap_;
-	}
-
-	Knight* GetKnight() const
-	{
-		return Knight_;
-	}
-
-	Monster* GetCrawlid() const
-	{
-		return Crawlid_;
-	}
 
 	void SetMainMapSize(float4 _MapSize);
 
@@ -106,6 +95,30 @@ public :
 		return ForgottenCrossroadMap_;
 	}
 
+	MasterMap* GetMasterMap() const
+	{
+		return MasterMap_;
+	}
+
+	Knight* GetKnight() const
+	{
+		return Knight_;
+	}
+
+	Monster* GetCrawlid() const
+	{
+		return Crawlid_;
+	}
+
+	SettingPageInfo* GetCharmPageInfo()
+	{
+		return 	CharmPageInfo_;
+	}
+		
+	SettingPageInfo* GetInventoryInfo()
+	{
+		return 	InventoryPageInfo_;
+	}
 
 };
 

@@ -36,6 +36,26 @@ void ContentsFontRenderer::Update(float _DeltatTime)
 
 void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isTyping, int _LineBreak )
 {
+	if (_LineBreak > 0)
+	{
+		_Text.insert(_LineBreak, "\n");
+	}
+
+	for (int i = 0; i < _Text.size(); ++i)
+	{
+		std::string line = _Text.substr(i, 1);
+		if (line == ".")
+		{
+			_Text.insert(i + 1, "\n\n");
+			break;
+		}
+	}
+
+	FontState_.Text_ = _Text;
+	FontState_.FontSize_ = _FontSize;
+	FontState_.isTyping_ = _isTyping;
+	FontState_.TextSize_ = _Text.size();
+
 	GameEngineFontRenderer_ = CreateComponent<GameEngineFontRenderer>();
 	GameEngineFontRenderer_->ChangeCamera(CAMERAORDER::UICAMERA);
 
@@ -44,15 +64,6 @@ void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize
 	GameEngineFontRenderer_->SetSize(_FontSize);
 	GameEngineFontRenderer_->SetText(_Text, "Noto Serif KR");
 
-	if (_LineBreak > 0)
-	{
-		_Text.insert(_LineBreak, "\n");
-	}
-
-	FontState_.FontSize_ = _FontSize;
-	FontState_.Text_ = _Text;
-	FontState_.isTyping_ = _isTyping;
-	FontState_.TextSize_ = _Text.size();
 }
 
 void ContentsFontRenderer::SetActorToScreenPosition(float4 _ActorPos, float4 _CameraPos)
@@ -68,6 +79,27 @@ void ContentsFontRenderer::SetThisToScreenPosition(float4 _CameraPos)
 {
 	GameEngineFontRenderer_->SetScreenPostion({ GetTransform().GetWorldPosition().x - _CameraPos.x + GameEngineWindow::GetScale().x / 2
 	, (_CameraPos.y - GetTransform().GetWorldPosition().y + GameEngineWindow::GetScale().y / 2) });
+}
+
+void ContentsFontRenderer::SetText(std::string _Text, int _LineBreak)
+{
+	if (_LineBreak > 0)
+	{
+		_Text.insert(_LineBreak, "\n");
+	}
+
+	for (int i = 0; i < _Text.size(); ++i)
+	{
+		std::string line = _Text.substr(i, 1);
+		if (line == ".")
+		{
+			_Text.insert(i + 1, "\n\n");
+			break;
+		}
+	}
+
+	FontState_.Text_ = _Text;
+	GameEngineFontRenderer_->SetText(_Text, "Noto Serif KR");
 }
 
 void ContentsFontRenderer::SetScreenMove()
@@ -154,7 +186,7 @@ void ContentsFontRenderer::FontTypingUpdate(float _DeltaTime, const StateInfo& _
 		else
 		{
 
-		TypingCount_ += 2;
+			TypingCount_ += 2;
 		}
 
 	}

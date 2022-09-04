@@ -137,9 +137,12 @@ void InventoryPage::Start()
 	Line_->GetTransform().SetWorldPosition({ 300.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
 	Line_->GetTransform().SetWorldRotation({ 0,0,90 });
 
+	GetLevel<HollowKnightLevel>()->CreateInventoryPageInfo(this);
+
 }
 
 void InventoryPage::Update(float _DeltaTime)
 {
+	
 }
 

@@ -20,7 +20,8 @@ public:
 	SettingUIMaster& operator=(SettingUIMaster&& _Other) noexcept = delete;
 
 protected:
-
+	std::string InfoName_;
+	std::string Info_;
 	
 
 	float4 PointerSize_;
@@ -44,6 +45,15 @@ public:
 		return PointerSize_;
 	}
 
+	std::string& GetInfo()
+	{
+		return Info_;
+	}
+
+	std::string& GetInfoName()
+	{
+		return InfoName_;
+	}
 
 	//================================
 	//    Setter
@@ -52,7 +62,7 @@ public:
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName);
 	void CreateRendererComponent(std::string _FileName);
 
-	void CreateCollisionComponent(float4 _LocalScale, int _Order);
+	//void CreateCollisionComponent(float4 _LocalScale, int _Order);
 
 	void PixLocalNegativeY();
 	void PixLocalPositiveY();
@@ -65,5 +75,23 @@ public:
 		PointerSize_ = _Size;
 	}
 	
+	void SetInfo(std::string _Info)
+	{
+		Info_ = _Info;
+	}
+	void SetInfoName(std::string _Name)
+	{
+		InfoName_ = _Name;
+	}
+
+	void OnInfo()
+	{
+
+	}
+
+	void OffInfo()
+	{
+
+	}
 };
 
