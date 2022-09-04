@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
 #include "HollowKnightLevel.h"
+#include "Elderbug.h"
 
 // Ό³Έν :
 class DirtmouthLevel2 : public HollowKnightLevel
@@ -22,6 +23,6 @@ protected:
 	void End() override;
 
 private:
-
+	Elderbug* Elderbug_;
 };
 

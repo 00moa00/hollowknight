@@ -43,7 +43,6 @@ void ContentsCore::Start()
 		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
 		Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-
 		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 		Desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 
@@ -62,7 +61,6 @@ void ContentsCore::Start()
 	}
 
 	{
-
 		D3D11_BLEND_DESC Desc = { 0 };
 
 		Desc.AlphaToCoverageEnable = FALSE;
@@ -77,8 +75,6 @@ void ContentsCore::Start()
 		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
 		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
 		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_MAX;
-
-
 
 		GameEngineBlend::Create("LightenBlend", Desc);
 	}
@@ -106,7 +102,6 @@ void ContentsCore::Start()
 	}
 
 	{
-
 		D3D11_BLEND_DESC Desc = { 0 };
 
 		Desc.AlphaToCoverageEnable = FALSE;
@@ -122,8 +117,6 @@ void ContentsCore::Start()
 		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
 		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
 
-
-
 		GameEngineBlend::Create("AddBlend", Desc);
 	}
 
@@ -135,7 +128,6 @@ void ContentsCore::Start()
 		Desc.IndependentBlendEnable = FALSE;
 		Desc.RenderTarget[0].BlendEnable = TRUE;
 		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-
 
 		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND::D3D11_BLEND_ONE;
 		Desc.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_ONE;
@@ -327,6 +319,52 @@ void ContentsCore::Start()
 
 
 	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("UI");
+		Dir.Move("Prompts");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Prompts Cln_prompt_appear0000-Sheet.png", 10, 1);
+		GameEngineTexture::Cut("Prompts Cln_prompt_appear0009-Sheet.png", 10, 1);
+		GameEngineTexture::Cut("Prompts Cln_prompt_idle0000-Sheet.png", 5, 1);
+
+
+	}
+	//================================
+	//    텍스처 / NPC
+	//================================
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Npc");
+		Dir.Move("Elderbug");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+		
+		GameEngineTexture::Cut("Elderbug_idle_01-Sheet.png", 6, 1);
+
+	}
+
+
 	//================================
 	//    텍스처 / Setting
 	//================================

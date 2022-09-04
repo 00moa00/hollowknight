@@ -115,6 +115,15 @@
     <Filter Include="Actor\Font">
       <UniqueIdentifier>{a65209a9-80ee-4374-b387-ae1b7ed23732}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\Npc">
+      <UniqueIdentifier>{178f3818-a43e-46d1-9974-cc38ba3be7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Dialogue">
+      <UniqueIdentifier>{6f31a5fe-47ec-4b01-99f9-ae26b2aecf9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\Setting\Info">
+      <UniqueIdentifier>{c37ca923-d779-47d1-a913-ae2aca7e6fdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -362,6 +371,18 @@
     </ClInclude>
     <ClInclude Include="SettingPageInfo.h">
       <Filter>Actor\Play\UI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="MasterNPC.h">
+      <Filter>Actor\Master</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueSet.h">
+      <Filter>Actor\Play\UI\Setting\Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="Elderbug.h">
+      <Filter>Actor\Play\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="PromptSet.h">
+      <Filter>Actor\Play\UI\Setting\Info</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -622,6 +643,18 @@
     </ClCompile>
     <ClCompile Include="SettingPageInfo.cpp">
       <Filter>Actor\Play\UI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="MasterNPC.cpp">
+      <Filter>Actor\Master</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogueSet.cpp">
+      <Filter>Actor\Play\UI\Setting\Dialogue</Filter>
+    </ClCompile>
+    <ClCompile Include="Elderbug.cpp">
+      <Filter>Actor\Play\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="PromptSet.cpp">
+      <Filter>Actor\Play\UI\Setting\Info</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

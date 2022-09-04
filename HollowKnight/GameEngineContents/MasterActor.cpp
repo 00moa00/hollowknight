@@ -35,6 +35,22 @@ void MasterActor::CreateRendererComponent(float4 _LocalScale, std::string _FileN
 	
 }
 
+void MasterActor::CreateRendererComponent(std::string _FileName, int _Index)
+{
+	MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	MainRenderer_->SetTexture(_FileName, _Index);
+	MainRenderer_->GetTransform().SetLocalScale(MainRenderer_->GetCurTexture()->GetScale());
+
+}
+
+void MasterActor::CreateRendererComponent(std::string _FileName)
+{
+	MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	MainRenderer_->SetTexture(_FileName);
+	MainRenderer_->GetTransform().SetLocalScale(MainRenderer_->GetCurTexture()->GetScale());
+	MainRenderer_->SetPivot(PIVOTMODE::BOT);
+}
+
 void MasterActor::CreateCollisionComponent(float4 _LocalScale, int _Order)
 {
 	MainCollision_ = CreateComponent<GameEngineCollision>();

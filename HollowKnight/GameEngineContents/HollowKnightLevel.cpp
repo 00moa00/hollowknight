@@ -70,8 +70,6 @@ void HollowKnightLevel::CreateCharmPageInfo(GameEngineActor* ParrentPage)
 {
 	CharmPageInfo_ = CreateActor<SettingPageInfo>();
 	CharmPageInfo_->SetParent(ParrentPage);
-
-
 }
 
 void HollowKnightLevel::CreateInventoryPageInfo(GameEngineActor* ParrentPage)

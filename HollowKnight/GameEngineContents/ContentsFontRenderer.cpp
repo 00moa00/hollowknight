@@ -152,37 +152,6 @@ void ContentsFontRenderer::SetText(std::string _Text, int _LineBreak)
 
 void ContentsFontRenderer::SetScreenMove()
 {
-	//float4 Position;
-
-	//if (GetTransform().GetWorldPosition().x > 0)
-	//{
-	//	Position.x = GetTransform().GetWorldPosition().x + GameEngineWindow::GetScale().x / 2;
-	//}
-	//else if (GetTransform().GetWorldPosition().x == 0)
-	//{
-	//	Position.x = GameEngineWindow::GetScale().x / 2;
-	//}
-	//else
-	//{
-	//	Position.x =  (GetTransform().GetWorldPosition().x) * -1;
-	//}
-
-	//if (GetTransform().GetWorldPosition().y > 0)
-	//{
-	//	Position.y = (GameEngineWindow::GetScale().y / 2 ) - GetTransform().GetWorldPosition().y;
-	//}
-	//else if (GetTransform().GetWorldPosition().y == 0)
-	//{
-	//	Position.y = GameEngineWindow::GetScale().y / 2;
-	//}
-	//else
-	//{
-	//	Position.y = GetTransform().GetWorldPosition().y * -1 + (GameEngineWindow::GetScale().y / 2);
-
-	//}
-
-
-	//GameEngineFontRenderer_->SetScreenPostion(Position);
 
 	GameEngineFontRenderer_->SetScreenPostion({ GetTransform().GetWorldPosition().x + GameEngineWindow::GetScale().x / 2 
 , (GameEngineWindow::GetScale().y / 2) - GetTransform().GetWorldPosition().y });

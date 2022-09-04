@@ -5,7 +5,9 @@ enum class OBJECTORDER
 	Background,
 	Background_Object,
 	Terrain,
+	Elderbug,
 	Knight,
+	Prompt,
 	Object,
 	Geo,
 	Knight_Slash,
@@ -59,6 +61,8 @@ enum class Z_ORDER
 	Geo,
 
 	Knight,
+
+	NPC,
 
 	Object,
 
