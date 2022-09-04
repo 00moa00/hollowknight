@@ -54,7 +54,7 @@ void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePat
 	case CHARM_SLOT::Gathering_Swarm:
 		CharmState_.SlotCount_ = 1;
 		SetInfoName( "수집벌레 무리");
-		SetInfo( "무리가 착용자를 따라다니며, 놓친 지오를 가져옵니다. 아무리 사소한 것이라도 남기는 것을 견디지 못하는 이들에게 유용합니다.");
+		SetInfo( "무리가 착용자를 따라다니며, 놓친 지오를 가져옵니다.아무리 사소한 것이라도 남기는 것을 견디지 못하는 이들에게 유용합니다.");
 
 	break;	
 	case CHARM_SLOT::Stalwart_Shell:
@@ -187,7 +187,7 @@ void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePat
 	case CHARM_SLOT::Deep_Focus:
 		CharmState_.SlotCount_ = 3;
 		SetInfoName( "깊은 집중");
-		SetInfo( "오랜 기간에 걸쳐 수정 안에 자연적으로 형성된 부적.주변 공기로부터 영혼을 끌어냅니다.착용자는 더 느린 속도로 영혼을 집중하지만, 치유 효과는 두 배가 됩니다.");
+		SetInfo( "오랜 기간에 걸쳐 수정 안에 자연적으로 형성된 부적. 주변 공기로부터 영혼을 끌어냅니다.착용자는 더 느린 속도로 영혼을 집중하지만, 치유 효과는 두 배가 됩니다.");
 
 		break;
 	case CHARM_SLOT::Lifeblood_Heart:

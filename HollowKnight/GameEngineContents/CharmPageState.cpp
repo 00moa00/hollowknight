@@ -48,12 +48,12 @@ void SettingPointer::PointerCharmPageIdleStart(const StateInfo& _Info)
 		findSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
-		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 19);
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 21);
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
 
 	}
 	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
-	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 19);
+	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 21);
 	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
 
 

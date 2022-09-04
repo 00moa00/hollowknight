@@ -103,12 +103,11 @@ void ContentsFontRenderer::SetText(std::string _Text, int _LineBreak)
 				++LineBreakCount;
 			}
 
-			else if (line == ".")
+			else if (line == "." )
 			{
 				i += 1;
 				LineBreakCount = 0;
 			}
-
 			else
 			{
 				i += 2;
@@ -117,15 +116,24 @@ void ContentsFontRenderer::SetText(std::string _Text, int _LineBreak)
 
 			if (LineBreakCount >= _LineBreak)
 			{
+				int NextBreakCount = i;
+				if (NextBreakCount < _Text.size())
+				{
+					std::string Nextline = _Text.substr(NextBreakCount, 1);
+					if (Nextline == ".")
+					{
+						i += 1;
+						++LineBreakCount;
+						continue;
+					}
+				}
+
 				LineBreakCount = 0;
 				_Text.insert((i), "\n");
 			}
-
 		}
 	}
 
-
-	//FontState_.Text_ = _Text;
 
 	for (int i = 0; i < _Text.size(); ++i)
 	{
@@ -133,7 +141,8 @@ void ContentsFontRenderer::SetText(std::string _Text, int _LineBreak)
 		if (line == ".")
 		{
 			_Text.insert(i + 1, "\n\n");
-			break;
+			++i;
+			continue;
 		}
 	}
 
