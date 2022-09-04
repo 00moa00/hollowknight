@@ -54,7 +54,7 @@ void CharmPage::Start()
 			std::string FilePathNum = std::to_string(ValueNum);
 			AllCharmSlot_.push_back(GetLevel()->CreateActor<CharmSlot>());
 			AllCharmSlot_[ValueNum]->CreateCharmSlot(EnumString, "Charm_" + FilePathNum + ".png", CharmState{ValueNum , 0, false, false}, CharmEnum.value());
-			AllCharmSlot_[ValueNum]->GetTransform().SetLocalPosition({ ( - 750.f + AddMaginX) + MaginX , -60.f + MaginY, static_cast<float>(Z_ORDER::UI)});
+			AllCharmSlot_[ValueNum]->GetTransform().SetLocalPosition({ ( - 750.f + AddMaginX) + MaginX , -60.f + MaginY, static_cast<float>(Z_ORDER::UI_Border)});
 			
 			AllCharmSlot_[ValueNum]->SetParent(this);
 				
@@ -72,13 +72,11 @@ void CharmPage::Start()
 	 MaginX = 0;
 
 	 //ÀåÂø ½½·Ô
-
 	for (int i = 40; i < 50; ++i)
 	{
-
 		AllCharmSlot_.push_back(GetLevel()->CreateActor<CharmSlot>());
 		AllCharmSlot_[i]->CreateEquippedCharmSlot(CharmState{ i , 0, false, false });
-		AllCharmSlot_[i]->GetTransform().SetLocalPosition({ -750.f + MaginX , 200.f , static_cast<float>(Z_ORDER::UI) });
+		AllCharmSlot_[i]->GetTransform().SetLocalPosition({ -750.f + MaginX , 200.f , static_cast<float>(Z_ORDER::UI_Border) });
 		AllCharmSlot_[i]->SetParent(this);
 
 		if (i != 40)
@@ -98,7 +96,7 @@ void CharmPage::Start()
 	for (int i = 0; i < 5; ++i)
 	{
 		GetLevel<HollowKnightLevel>()->PushNotches(GetLevel()->CreateActor<Notches>(),
-			{ -750.f + MaginX, 60.f , static_cast<float>(Z_ORDER::UI) });
+			{ -750.f + MaginX, 60.f , static_cast<float>(Z_ORDER::UI_Border) });
 		GetLevel<HollowKnightLevel>()->AllNotes_[i]->SetParent(this);
 		MaginX += 50.f;
 	}
@@ -108,23 +106,23 @@ void CharmPage::Start()
 		, 34
 		, { 0, 0, 0 }
 	, false);
-	NotchesFont_->GetTransform().SetWorldPosition({ -700,  150, static_cast<float>(Z_ORDER::UI) });
+	NotchesFont_->GetTransform().SetWorldPosition({ -700,  150, static_cast<float>(Z_ORDER::UI_Border) });
 	NotchesFont_->SetScreenMove();
 	NotchesFont_->SetParent(this);
 
 	EquippedSlotFont_ = GetLevel()->CreateActor<ContentsFontRenderer>();
 	EquippedSlotFont_->CreateFontRenderer("ÀåÂøµÈ ºÎÀû"
 		, 40
-		, { 200.f, (GameEngineWindow::GetInst()->GetScale().hy() - 300.0f), static_cast<float>(Z_ORDER::UI) }
+		, { 200.f, (GameEngineWindow::GetInst()->GetScale().hy() - 300.0f), static_cast<float>(Z_ORDER::UI_Border) }
 	, false);
-	EquippedSlotFont_->GetTransform().SetWorldPosition({ -700,  300, static_cast<float>(Z_ORDER::UI) });
+	EquippedSlotFont_->GetTransform().SetWorldPosition({ -700,  300, static_cast<float>(Z_ORDER::UI_Border) });
 	EquippedSlotFont_->SetScreenMove();
 	EquippedSlotFont_->SetParent(this);
 
 	Line_ = CreateComponent<GameEngineUIRenderer>();
 	Line_->SetTexture("Inv_0017_divider.png");
 	Line_->GetTransform().SetWorldScale({1021, 5});
-	Line_->GetTransform().SetWorldPosition({ -380.f  , 15.f , static_cast<float>(Z_ORDER::UI) });
+	Line_->GetTransform().SetWorldPosition({ -380.f  , 15.f , static_cast<float>(Z_ORDER::UI_Border) });
 
 
 	SetPageType(PAGE_TYPE::Charm);

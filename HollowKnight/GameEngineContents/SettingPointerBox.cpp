@@ -23,13 +23,13 @@ void SettingPointerBox::Start()
 	LeftTopPointer_ = CreateComponent<GameEngineUIRenderer>();
 	LeftTopPointer_->SetTexture("InventoryPointer.png");
 	LeftTopPointer_->ScaleToTexture();
-	LeftTopPointer_->GetTransform().SetLocalPosition({ 0,0,static_cast<float>(Z_ORDER::UI_Border) });
+	LeftTopPointer_->GetTransform().SetWorldPosition({ 0,0,static_cast<float>(Z_ORDER::UI_Pointer) });
 
 
 	RightTopPointer_ = CreateComponent<GameEngineUIRenderer>();
 	RightTopPointer_->SetTexture("InventoryPointer.png");
 	RightTopPointer_->ScaleToTexture();
-	RightTopPointer_->GetTransform().SetLocalPosition({ 0,0,static_cast<float>(Z_ORDER::UI_Border) });
+	RightTopPointer_->GetTransform().SetLocalPosition({ 0,0, static_cast<float>(Z_ORDER::UI_Pointer) });
 	RightTopPointer_->GetTransform().PixLocalNegativeX();
 
 

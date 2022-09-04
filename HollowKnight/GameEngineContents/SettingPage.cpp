@@ -171,7 +171,7 @@ void SettingPage::Start()
 	SettingPointer_ = GetLevel()->CreateActor<SettingPointer>();
 	SettingPointer_->SetCharmPageActorMax();
 	SettingPointer_->SetFirstPosCharmPage();
-
+	SettingPointer_->GetTransform().SetWorldPosition({0,0,100});
 
 
 	for (int i = 0; i < AllPage_.size(); ++i)

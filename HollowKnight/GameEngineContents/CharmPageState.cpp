@@ -15,22 +15,37 @@ void SettingPointer::PointerCharmPageMoveStart(const StateInfo& _Info)
 
 void SettingPointer::PointerCharmPageMoveUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	float4 MoveDir = MoveState_.Dir_ - SettingPointerBox_->GetTransform().GetWorldPosition();
+	float4 MoveDir;
+	MoveDir.x = MoveState_.Dir_.x - SettingPointerBox_->GetTransform().GetWorldPosition().x;
+	MoveDir.y = MoveState_.Dir_.y - SettingPointerBox_->GetTransform().GetWorldPosition().y;
+	MoveDir.z = 0;
+
 	float Lenth = MoveDir.Length();
 
 	MoveDir.Normalize();
-	if (Lenth <= 2.f)
+	if (Lenth < PointerMoveSpeed_ * _DeltaTime)
 	{
-		SettingPointerBox_->GetTransform().SetWorldPosition(MoveState_.Dir_);
+		SettingPointerBox_->GetTransform().SetWorldPosition({MoveState_.Dir_.x, MoveState_.Dir_ .y , -100});
 		SettingPointerCharmPageManager_.ChangeState(MoveState_.NextMoveStateName_);
+		return;
 	}
 
-	SettingPointerBox_->GetTransform().SetWorldMove(MoveDir * PointerMoveSpeed_ * _DeltaTime);
-	SettingPointerBox_->SetBoxSize({ MoveState_.Size_ });
+	float4 Move = MoveDir * PointerMoveSpeed_ * _DeltaTime;
+	SettingPointerBox_->GetTransform().SetWorldMove({ Move.x, Move.y});
+	SettingPointerBox_->SetBoxSize({ MoveState_.Size_ });	
+
+	SettingPointerBox_->GetTransform().SetWorldPosition({
+	SettingPointerBox_->GetTransform().GetWorldPosition().x
+	, SettingPointerBox_->GetTransform().GetWorldPosition().y
+	, -100
+			});
+
 }
 
 void SettingPointer::PointerCharmPageMoveEnd(const StateInfo& _Info)
 {
+
+
 
 }
 
@@ -52,12 +67,10 @@ void SettingPointer::PointerCharmPageIdleStart(const StateInfo& _Info)
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
 
 	}
+
 	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
 	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 21);
 	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
-
-
-
 
 }
 

@@ -261,7 +261,7 @@ void SettingPointer::SetFirstPosCharmPage()
 
 	SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 		, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-		, static_cast<float>(Z_ORDER::UI_Border) });
+		, static_cast<float>(Z_ORDER::UI_Pointer) });
 
 	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize()/2 });
 }
@@ -294,7 +294,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
+				, static_cast<float>(Z_ORDER::UI_Pointer) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 		}
@@ -314,7 +314,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
+				, static_cast<float>(Z_ORDER::UI_Pointer) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 		}
@@ -338,7 +338,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
+				, static_cast<float>(Z_ORDER::UI_Pointer) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
@@ -359,7 +359,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
+				, static_cast<float>(Z_ORDER::UI_Pointer) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
@@ -384,7 +384,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
+				, static_cast<float>(Z_ORDER::UI_Pointer) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
@@ -408,7 +408,7 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 			SettingPointerBox_->GetTransform().SetWorldPosition({ PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().x
 				, PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition().y
-				, static_cast<float>(Z_ORDER::UI_Border) });
+				, static_cast<float>(Z_ORDER::UI_Pointer) });
 
 			SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize() / 2 });
 
