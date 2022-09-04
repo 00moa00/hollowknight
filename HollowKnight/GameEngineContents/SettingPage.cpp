@@ -355,7 +355,7 @@ void SettingPage::SettingIdleStart(const StateInfo& _Info)
 
 		if (AllPage_[i]->GetPageType() == PAGE_TYPE::Inventory)
 		{
-			GetLevel<HollowKnightLevel>()->GetInventoryInfo()->SetFontMove();
+			GetLevel<HollowKnightLevel>()->GetInventoryPageInfo()->SetFontMove();
 		}
 
 		if (AllPage_[i]->GetPageType() == PAGE_TYPE::Charm)
@@ -440,7 +440,7 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 			}
 		}
 
-		GetLevel<HollowKnightLevel>()->GetInventoryInfo()->SetFontMove();
+		GetLevel<HollowKnightLevel>()->GetInventoryPageInfo()->SetFontMove();
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetFontMove();
 
 		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 700.f);
@@ -500,7 +500,7 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 		}
 
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetFontMove();
-		GetLevel<HollowKnightLevel>()->GetInventoryInfo()->SetFontMove();
+		GetLevel<HollowKnightLevel>()->GetInventoryPageInfo()->SetFontMove();
 		AllPage_[i]->GetTransform().SetWorldMove(float4::RIGHT * _DeltaTime * 700.f);
 	}
 }

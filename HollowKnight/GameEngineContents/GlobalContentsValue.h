@@ -158,12 +158,13 @@ enum class ITEM_LIST
 	NORMAL_MAX,
 
 
+	Map_and_Quill,
 	Rancid_Egg,
 	Shade_Cloak,
 	Witches_eye,
 	Storeroom_key,
 	Quill_combined,
-	Emperor_wings,
+	Monarch_Wings,
 	Mender_key, 
 	Acid_armour,
 	Crystal_heart, 

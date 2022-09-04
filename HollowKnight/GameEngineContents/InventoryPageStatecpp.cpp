@@ -62,6 +62,15 @@ void SettingPointer::PointerInventoryPageWaitEnd(const StateInfo& _Info)
 void SettingPointer::PointerInventoryPageIdleStart(const StateInfo& _Info)
 {
 	PointerMoveSpeed_ = 750.f;
+
+
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
+	ItemSlot* findSlot = dynamic_cast<ItemSlot*>(PointActorComponent_->GetPointActor());
+
+	//GetLevel<HollowKnightLevel>()->GetInventoryPageInfo()->SetInfoImage(findSlot->GetFilePath());
+	GetLevel<HollowKnightLevel>()->GetInventoryPageInfo()->SetInfo(findSlot->GetInfo(), 21);
+	GetLevel<HollowKnightLevel>()->GetInventoryPageInfo()->SetInfoName(findSlot->GetInfoName());
+
 }
 
 void SettingPointer::PointerInventoryPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)

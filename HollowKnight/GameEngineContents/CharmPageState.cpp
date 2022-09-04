@@ -302,7 +302,8 @@ void SettingPointer::PointerCharmPageMoveLeftStart(const StateInfo& _Info)
 }
 
 void SettingPointer::PointerCharmPageMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info)
-{	SettingPointerCharmPageManager_.ChangeState("IDLE");
+{	
+	SettingPointerCharmPageManager_.ChangeState("IDLE");
 }
 
 void SettingPointer::PointerCharmPageMoveLeftEnd(const StateInfo& _Info)

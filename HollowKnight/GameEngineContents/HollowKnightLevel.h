@@ -115,7 +115,7 @@ public :
 		return 	CharmPageInfo_;
 	}
 		
-	SettingPageInfo* GetInventoryInfo()
+	SettingPageInfo* GetInventoryPageInfo()
 	{
 		return 	InventoryPageInfo_;
 	}
