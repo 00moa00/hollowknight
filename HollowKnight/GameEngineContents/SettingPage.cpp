@@ -256,7 +256,7 @@ void SettingPage::AllOff()
 	BorderLeftArrow_->Off();
 	BorderRightArrow_->Off();
 	SettingPointer_->AllOff();
-	//CharmPage_->AllOff();
+	PageName_->Off();
 
 	for (int i = 0; i < AllPage_.size(); ++i)
 	{
@@ -294,6 +294,7 @@ void SettingPage::AllOn()
 
 	BorderRightArrow_->On();
 	BorderRightArrow_->ChangeAnimation("OPEN_ANIMATION");
+	PageName_->On();
 
 	SettingPointer_->AllOn();
 
