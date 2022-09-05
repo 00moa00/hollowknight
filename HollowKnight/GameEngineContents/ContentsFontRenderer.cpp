@@ -86,9 +86,24 @@ void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize
 		std::string line = _Text.substr(i, 1);
 		if (line == ".")
 		{
-			_Text.insert(i + 1, "\n");
-			//++i;
-			continue;
+
+			std::string Doubleline = _Text.substr(i, 3);
+			if (Doubleline == "...")
+			{
+				++i;
+				continue;
+			}
+			else
+			{
+				_Text.insert(i + 1, "\n");
+				//++i;
+				continue;
+
+			}
+
+			//_Text.insert(i + 1, "\n");
+			////++i;
+			//continue;
 		}
 	}
 	//int TextSize = _Text.size();
@@ -195,9 +210,22 @@ void ContentsFontRenderer::SetText(std::string _Text, int _LineBreak)
 		std::string line = _Text.substr(i, 1);
 		if (line == ".")
 		{
-			_Text.insert(i + 1, "\n\n");
-			++i;
-			continue;
+
+			std::string Doubleline = _Text.substr(i, 3);
+			if (Doubleline == "...")
+			{
+				continue;
+			}
+			else
+			{
+				_Text.insert(i + 1, "\n\n");
+				++i;
+				continue;
+
+			}
+
+
+	
 		}
 	}
 
