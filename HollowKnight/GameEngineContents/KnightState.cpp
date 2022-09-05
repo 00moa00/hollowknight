@@ -163,14 +163,9 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
-
 		KnightData::GetInst()->SetisBreak(true);
 		KnightManager_.ChangeState("STUN");
 	}
-
-
-
-
 
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
@@ -624,7 +619,6 @@ void Knight::KnightDashStart(const StateInfo& _Info)
 
 void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	KnightDashTimer_ += _DeltaTime;
 	//DoubleSlashTimer(_DeltaTime);
 
@@ -642,7 +636,6 @@ void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 	else
 	{
 		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
-
 	}
 
 	// ========== 스테이트 변경 ==========
@@ -667,8 +660,6 @@ void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 	//	KnightManager_.ChangeState("DOUBLE_SLASH");
 	//}
 
-
-
 	if (KnightDashTimer_ > 0.4f)
 	{
 		KnightManager_.ChangeState("STILL");
@@ -687,7 +678,6 @@ void Knight::KnightFocusStart(const StateInfo& _Info)
 
 void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	if (GameEngineInput::GetInst()->IsFree("KnightFocus") == true)
 	{
 		KnightManager_.ChangeState("STILL");
@@ -698,7 +688,6 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 		isFocusEnd_ = false;
 		KnightManager_.ChangeState("STILL");
 	}
-
 }
 
 void Knight::KnightFocusEnd(const StateInfo& _Info)
@@ -711,7 +700,6 @@ void Knight::KnightRunStart(const StateInfo& _Info)
 	{
 		GetRenderer()->ChangeFrameAnimation("IDLE_TO_RUN_ANIMATION");
 	}
-
 	else
 	{
 		GetRenderer()->ChangeFrameAnimation("RUN_ANIMATION");
@@ -738,7 +726,6 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 		{
-
 			if (PrevDirection_.CompareInt2D(float4::LEFT) == false)
 			{
 				PrevDirection_ = float4::LEFT;
@@ -752,7 +739,6 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
-
 			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
 			{
 				PrevDirection_ = float4::RIGHT;
@@ -840,7 +826,6 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	GetTransform().SetWorldMove(-GetMoveDirection() * GetSpeed() * _DeltaTime);
-
 }
 
 void Knight::KnightStunEnd(const StateInfo& _Info)
@@ -853,13 +838,11 @@ void Knight::KnightDeathStart(const StateInfo& _Info)
 }
 
 void Knight::KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	
+{	
 	if (KnightData::GetInst()->GetisShadow() == true)
 	{
 		KnightData::GetInst()->SetisShadow(false);
 		KnightShadowData::GetInst()->SetisShadowDepart(true);
-
 	}
 
 	if (isDeathEnd_ == true)
@@ -930,7 +913,6 @@ void Knight::KnightSlashStart(const StateInfo& _Info)
 	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -80, 50, 0 });
-
 	}
 }
 

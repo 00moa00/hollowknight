@@ -59,7 +59,6 @@ void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize
 				i += 2;
 				++LineBreakCount;
 			}
-
 			if (LineBreakCount >= _LineBreak)
 			{
 				int NextBreakCount = i;
@@ -73,7 +72,6 @@ void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize
 						continue;
 					}
 				}
-
 				LineBreakCount = 0;
 				_Text.insert((i), "\n");
 			}

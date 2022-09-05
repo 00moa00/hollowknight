@@ -1,24 +1,16 @@
 #include "PreCompile.h"
-#include "GameEngineDefaultRenderer.h"
-#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineRenderSet.h"
 
-GameEngineDefaultRenderer::GameEngineDefaultRenderer()
-	:PipeLine(nullptr)
+GameEngineRenderSet::GameEngineRenderSet()
 {
 }
 
-GameEngineDefaultRenderer::~GameEngineDefaultRenderer()
+GameEngineRenderSet::~GameEngineRenderSet()
 {
 }
 
-void GameEngineDefaultRenderer::Start()
-{
-	GameEngineRenderer::Start();
 
-	// 뭔가 또 할일이 있다면 여기서 해라.
-}
-
-void GameEngineDefaultRenderer::SetPipeLine(const std::string& _Name)
+void GameEngineRenderSet::SetPipeLine(const std::string& _Name)
 {
 	PipeLine = GameEngineRenderingPipeLine::Find(_Name);
 
@@ -30,19 +22,19 @@ void GameEngineDefaultRenderer::SetPipeLine(const std::string& _Name)
 
 	ShaderResources.ResourcesCheck(PipeLine);
 
-	if (true == ShaderResources.IsConstantBuffer("TRANSFORMDATA"))
-	{
-		ShaderResources.SetConstantBufferLink("TRANSFORMDATA", &GetTransformData(), sizeof(GetTransformData()));
-	}
+	//if (true == ShaderResources.IsConstantBuffer("TRANSFORMDATA"))
+	//{
+	//	ShaderResources.SetConstantBufferLink("TRANSFORMDATA", &GetTransformData(), sizeof(GetTransformData()));
+	//}
 
-	if (true == ShaderResources.IsConstantBuffer("RENDEROPTION"))
-	{
-		ShaderResources.SetConstantBufferLink("RENDEROPTION", &Option, sizeof(Option));
-	}
+	//if (true == ShaderResources.IsConstantBuffer("RENDEROPTION"))
+	//{
+	//	ShaderResources.SetConstantBufferLink("RENDEROPTION", &Option, sizeof(Option));
+	//}
 
 }
 
-void GameEngineDefaultRenderer::Render(float _DeltaTime)
+void GameEngineRenderSet::Render()
 {
 	if (nullptr == PipeLine)
 	{
@@ -54,15 +46,15 @@ void GameEngineDefaultRenderer::Render(float _DeltaTime)
 	PipeLine->Rendering();
 }
 
-
-
-GameEngineRenderingPipeLine* GameEngineDefaultRenderer::GetPipeLine()
+GameEngineRenderingPipeLine* GameEngineRenderSet::GetPipeLine()
 {
 	if (false == PipeLine->IsOriginal())
 	{
 		return PipeLine;
 	}
 
-	PipeLine = GetClonePipeLine(PipeLine);
+	GameEngineRenderingPipeLine* Clone = GameEngineRenderingPipeLine::Create();
+	Clone->Copy(PipeLine);
+	PipeLine = Clone;
 	return PipeLine;
 }

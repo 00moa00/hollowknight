@@ -3,9 +3,11 @@
 #include "GlobalContentsValue.h"
 #include <GameEngineCore/GameEngineCameraActor.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineCore/GameEngineDevice.h>
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+#include "OverlayEffect.h"
 
 #include "Bench.h"
 #include "AreaTitle.h"
@@ -57,10 +59,14 @@ void DirtmouthLevel2::Start()
 
 	MapShopPotal_ = CreateActor<RoomPotal>();
 	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop);
-	MapShopPotal_->GetTransform().SetWorldPosition({3840, -3030});
+	MapShopPotal_->GetTransform().SetWorldPosition({3840, -3045.f });
 
 
-	Elderbug_ - CreateActor<Elderbug>();
+	Elderbug_ = CreateActor<Elderbug>();
+
+	GameEngineDevice::GetBackBuffer()->AddEffect<OverlayEffect>();
+
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayEffect>();
 }
 
 void DirtmouthLevel2::Update(float _DeltaTime)

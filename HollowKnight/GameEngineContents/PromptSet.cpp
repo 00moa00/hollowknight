@@ -13,13 +13,16 @@ PromptSet::~PromptSet()
 
 void PromptSet::Start()
 {
+	GetTransform().SetLocalPosition({ 0, 150.f });
+
 	PromptCollision_ = CreateComponent<GameEngineCollision>();
 	PromptCollision_->GetTransform().SetLocalScale({ 600, 120 });
 	PromptCollision_->ChangeOrder(OBJECTORDER::Prompt);
+	GetCollision()->GetTransform().SetLocalPosition({ 0, -150.f });
 
 	Prompt_ = CreateComponent<GameEngineTextureRenderer>();
 	Prompt_->SetTexture("Prompts Cln_prompt_appear0000-Sheet.png", 0);
-	Prompt_->GetTransform().SetLocalScale(Prompt_->GetCurTexture()->GetScale());
+	Prompt_->GetTransform().SetWorldScale(Prompt_->GetCurTexture()->GetScale());
 	Prompt_->SetScaleModeImage();
 
 	Prompt_->CreateFrameAnimationCutTexture("APPEAR_ANIMATION", FrameAnimation_DESC("Prompts Cln_prompt_appear0000-Sheet.png", 0, 9, 0.050f, true));
@@ -81,10 +84,12 @@ void PromptSet::CreatePrompSet(PromptSetType _Type)
 	{
 	case PromptSetType::TALK:
 		PromptName_->SetTexture("TalkFont.png");
+		PromptName_->GetTransform().SetLocalScale(PromptName_->GetCurTexture()->GetScale());
 
 		break;
 	case PromptSetType::INTER:
-
+		PromptName_->SetTexture("InterFont.png");
+		PromptName_->GetTransform().SetWorldScale({121, 42});
 		break;
 	default:
 		break;
