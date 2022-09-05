@@ -13,21 +13,21 @@ protected:
 	bool Original;
 
 public:
-	bool IsOriginal()
+	bool IsOriginal() 
 	{
 		return Original;
 	}
 
 public:
 	// constrcuter destructer
-	GameEngineRes()
+	GameEngineRes() 
 		: Original(true)
 	{
 	}
 	virtual ~GameEngineRes() {}
 
 	// delete Function
-	GameEngineRes(const GameEngineRes& _Other)
+	GameEngineRes(const GameEngineRes& _Other) 
 		: Original(false)
 	{
 
@@ -41,17 +41,17 @@ public:
 	{
 		std::string UpperName = GameEngineString::ToUpperReturn(_Name);
 
-		typename std::map<std::string, ResType*>::iterator Iter = NamedRes.find(UpperName);
+		typename std::map<std::string, ResType*>::iterator Iter =  NamedRes.find(UpperName);
 
 		if (NamedRes.end() == Iter)
 		{
 			return nullptr;
 		}
-
+		
 		return Iter->second;
 	}
 
-	static void ResourcesDestroy()
+	static void ResourcesDestroy() 
 	{
 		for (auto& Res : UnNamedRes)
 		{
@@ -68,7 +68,7 @@ protected:
 	static std::map<std::string, ResType*> NamedRes;
 	static std::list<ResType*> UnNamedRes;
 
-	static ResType* CreateResName(const std::string& _Name = "")
+	static ResType* CreateResName(const std::string& _Name = "") 
 	{
 		if (NamedRes.end() != NamedRes.find(GameEngineString::ToUpperReturn(_Name)))
 		{

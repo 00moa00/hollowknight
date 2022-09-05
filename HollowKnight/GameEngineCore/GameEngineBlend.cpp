@@ -2,7 +2,7 @@
 #include "GameEngineBlend.h"
 
 GameEngineBlend::GameEngineBlend() 
-	: mask(0xffffffff)
+	: Mask(0xffffffff)
 {
 }
 
@@ -43,6 +43,6 @@ void GameEngineBlend::Setting()
 		return;
 	}
 
-	GameEngineDevice::GetContext()->OMSetBlendState(State, Factor.Arr1D, mask);
+	GameEngineDevice::GetContext()->OMSetBlendState(State, Factor.Arr1D, Mask);
 
 }

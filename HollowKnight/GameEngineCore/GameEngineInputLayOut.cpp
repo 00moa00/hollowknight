@@ -10,12 +10,12 @@ GameEngineInputLayOut* GameEngineInputLayOut::Create(const GameEngineLayOutDesc&
 	return Input;
 }
 
-GameEngineInputLayOut::GameEngineInputLayOut()
+GameEngineInputLayOut::GameEngineInputLayOut() 
 	: InputLayOut(nullptr)
 {
 }
 
-GameEngineInputLayOut::~GameEngineInputLayOut()
+GameEngineInputLayOut::~GameEngineInputLayOut() 
 {
 	if (nullptr != InputLayOut)
 	{
@@ -42,10 +42,10 @@ void GameEngineInputLayOut::CreateRes(const GameEngineLayOutDesc& _Desc, GameEng
 {
 	if (
 		S_OK != GameEngineDevice::GetDevice()->CreateInputLayout(
-			&_Desc.InputLayOutDesc[0],
-			static_cast<UINT>(_Desc.InputLayOutDesc.size()),
-			_Shader->BinaryPtr->GetBufferPointer(),
-			_Shader->BinaryPtr->GetBufferSize(),
+		&_Desc.InputLayOutDesc[0],
+		static_cast<UINT>(_Desc.InputLayOutDesc.size()),
+		_Shader->BinaryPtr->GetBufferPointer(),
+		_Shader->BinaryPtr->GetBufferSize(),
 			&InputLayOut)
 		)
 	{

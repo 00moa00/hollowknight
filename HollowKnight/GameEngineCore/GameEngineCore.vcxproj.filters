@@ -151,7 +151,13 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineUpdateObject.h">
-      <Filter>Object</Filter>
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineBlur.h">
+      <Filter>Object\Component\Rendering\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderSet.h">
+      <Filter>Object\Component\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -295,7 +301,13 @@
       <Filter>Debug</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineUpdateObject.cpp">
-      <Filter>Object</Filter>
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineBlur.cpp">
+      <Filter>Object\Component\Rendering\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderSet.cpp">
+      <Filter>Object\Component\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +388,9 @@
     </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{e68d6257-0003-4043-bd87-9182cd06ca99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Rendering\PostEffect">
+      <UniqueIdentifier>{46d08731-172c-4b19-8fb5-25f7401c5f82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

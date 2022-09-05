@@ -10,7 +10,7 @@
 #include "GameEngineCoreDebug.h"
 #include "GEngine.h"
 
-GameEngineLevel::GameEngineLevel()
+GameEngineLevel::GameEngineLevel() 
 {
 	Cameras.resize(static_cast<unsigned int>(CAMERAORDER::UICAMERA));
 
@@ -27,10 +27,9 @@ GameEngineLevel::GameEngineLevel()
 		CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
 		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::UICAMERA);
 	}
-
 }
 
-GameEngineLevel::~GameEngineLevel()
+GameEngineLevel::~GameEngineLevel() 
 {
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
 	{
@@ -64,7 +63,7 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 	}
 }
 
-void GameEngineLevel::ActorLevelStartEvent()
+void GameEngineLevel::ActorLevelStartEvent() 
 {
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
 	{
@@ -283,11 +282,11 @@ void GameEngineLevel::Release(float _DelataTime)
 			{
 				GroupStart = Group.erase(GroupStart);
 			}
-			else
+			else 
 			{
 				++GroupStart;
 			}
-
+			
 		}
 	}
 
@@ -334,7 +333,7 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _NextLevel)
 	}
 
 	// 플레이 레벨
-
+	
 	// 로그인 레벨
 	// _NextLevel
 	{
@@ -420,7 +419,7 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _NextLevel)
 	}
 }
 
-void GameEngineLevel::AllClear()
+void GameEngineLevel::AllClear() 
 {
 	{
 		std::map<int, std::list<GameEngineActor*>>::iterator StartGroupIter = AllActors.begin();
@@ -435,7 +434,7 @@ void GameEngineLevel::AllClear()
 			std::list<GameEngineActor*>::iterator GroupEnd = Group.end();
 			for (; GroupStart != GroupEnd; ++GroupStart)
 			{
-				delete* GroupStart;
+				delete *GroupStart;
 			}
 		}
 	}

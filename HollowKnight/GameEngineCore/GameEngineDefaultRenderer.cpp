@@ -1,16 +1,24 @@
 #include "PreCompile.h"
-#include "GameEngineRenderSet.h"
+#include "GameEngineDefaultRenderer.h"
+#include "GameEngineRenderingPipeLine.h"
 
-GameEngineRenderSet::GameEngineRenderSet()
+GameEngineDefaultRenderer::GameEngineDefaultRenderer() 
+	:PipeLine(nullptr)
 {
 }
 
-GameEngineRenderSet::~GameEngineRenderSet()
+GameEngineDefaultRenderer::~GameEngineDefaultRenderer() 
 {
 }
 
+void GameEngineDefaultRenderer::Start()
+{
+	GameEngineRenderer::Start();
 
-void GameEngineRenderSet::SetPipeLine(const std::string& _Name)
+	// 뭔가 또 할일이 있다면 여기서 해라.
+}
+
+void GameEngineDefaultRenderer::SetPipeLine(const std::string& _Name)
 {
 	PipeLine = GameEngineRenderingPipeLine::Find(_Name);
 
@@ -22,19 +30,19 @@ void GameEngineRenderSet::SetPipeLine(const std::string& _Name)
 
 	ShaderResources.ResourcesCheck(PipeLine);
 
-	//if (true == ShaderResources.IsConstantBuffer("TRANSFORMDATA"))
-	//{
-	//	ShaderResources.SetConstantBufferLink("TRANSFORMDATA", &GetTransformData(), sizeof(GetTransformData()));
-	//}
+	if (true == ShaderResources.IsConstantBuffer("TRANSFORMDATA"))
+	{
+		ShaderResources.SetConstantBufferLink("TRANSFORMDATA", &GetTransformData(), sizeof(GetTransformData()));
+	}
 
-	//if (true == ShaderResources.IsConstantBuffer("RENDEROPTION"))
-	//{
-	//	ShaderResources.SetConstantBufferLink("RENDEROPTION", &Option, sizeof(Option));
-	//}
+	if (true == ShaderResources.IsConstantBuffer("RENDEROPTION"))
+	{
+		ShaderResources.SetConstantBufferLink("RENDEROPTION", &Option, sizeof(Option));
+	}
 
 }
 
-void GameEngineRenderSet::Render()
+void GameEngineDefaultRenderer::Render(float _DeltaTime) 
 {
 	if (nullptr == PipeLine)
 	{
@@ -46,15 +54,15 @@ void GameEngineRenderSet::Render()
 	PipeLine->Rendering();
 }
 
-GameEngineRenderingPipeLine* GameEngineRenderSet::GetPipeLine()
+
+
+GameEngineRenderingPipeLine* GameEngineDefaultRenderer::GetPipeLine()
 {
 	if (false == PipeLine->IsOriginal())
 	{
 		return PipeLine;
 	}
-
-	GameEngineRenderingPipeLine* Clone = GameEngineRenderingPipeLine::Create();
-	Clone->Copy(PipeLine);
-	PipeLine = Clone;
+	
+	PipeLine = GetClonePipeLine(PipeLine);
 	return PipeLine;
 }

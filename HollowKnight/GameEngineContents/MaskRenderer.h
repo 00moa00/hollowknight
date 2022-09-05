@@ -33,7 +33,11 @@ protected:
 	void Update(float _Delta) override;
 
 private:
+	PixelData PixelDataInst;
+	AtlasData AtlasDataInst;
 	UVData UVData_;
+	FrameAnimation* CurAni;
+
 public:
 	UVData& GetUVData()
 	{

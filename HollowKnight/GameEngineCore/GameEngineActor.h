@@ -54,14 +54,14 @@ public:
 	void SetParent(GameEngineUpdateObject*) override;
 
 
-	void SetLevelOverOn()
+	void SetLevelOverOn() 
 	{
 		IsLevelOver = true;
 	}
 
 	void ActorUpdate(float _DeltaTime);
 
-	bool IsRoot()
+	bool IsRoot() 
 	{
 		return nullptr == GetParent();
 	}

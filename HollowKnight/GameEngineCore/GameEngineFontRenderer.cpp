@@ -5,7 +5,7 @@
 
 GameEngineRenderTarget* GameEngineFontRenderer::FontTarget = nullptr;
 
-GameEngineFontRenderer::GameEngineFontRenderer()
+GameEngineFontRenderer::GameEngineFontRenderer() 
 	: Font(nullptr)
 	, FontSize(20.0f)
 	, Color(float4::WHITE)
@@ -13,7 +13,7 @@ GameEngineFontRenderer::GameEngineFontRenderer()
 {
 }
 
-GameEngineFontRenderer::~GameEngineFontRenderer()
+GameEngineFontRenderer::~GameEngineFontRenderer() 
 {
 }
 
@@ -23,7 +23,7 @@ void GameEngineFontRenderer::SetText(const std::string& _Text, const std::string
 	Font = GameEngineFont::Find(_Font);
 }
 
-void GameEngineFontRenderer::Start()
+void GameEngineFontRenderer::Start() 
 {
 	if (nullptr == FontTarget)
 	{
@@ -35,7 +35,7 @@ void GameEngineFontRenderer::Start()
 }
 
 // 랜더링 파이프라인이 필요가 아직은 없어요
-void GameEngineFontRenderer::Render(float _DeltaTime)
+void GameEngineFontRenderer::Render(float _DeltaTime) 
 {
 	// 이거는 랜더타겟을 해야겠네요.
 	if (nullptr == Font)
@@ -47,7 +47,7 @@ void GameEngineFontRenderer::Render(float _DeltaTime)
 	// 기존 화면에다가 그리면 안되죠?
 	// 랜더타겟
 	// 글자는 또다른 랜더타겟에 그릴겁니다.
-
+	
 	// 이전에 존재했던 랜더타겟을 얻고
 	//GameEngineRenderTarget::GetPrevRenderTarget();
 	//FontTarget->Setting();
@@ -56,6 +56,10 @@ void GameEngineFontRenderer::Render(float _DeltaTime)
 	FontTarget->Setting();
 	Font->FontDraw(Text, FontSize, ScreenPostion, Color, static_cast<int>(LR) | static_cast<int>(TB));
 	GameEngineRenderingPipeLine::AllShaderReset();
+
+	// SetTexture 
+	// FontTarget 화면 전체크기만한 그림이에요
+
 	Camera->GetCameraRenderTarget()->Merge(FontTarget);
 
 	//GameEngineRenderTarget::SetPrevRenderTarget();

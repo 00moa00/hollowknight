@@ -36,13 +36,12 @@ struct PixelData
 	}
 };
 
-struct AtlasData
+struct AtlasData 
 {
 public:
 	float4 FrameData;
 	float4 PivotPos;
 };
-
 
 
 class FrameAnimation_DESC 
@@ -119,8 +118,8 @@ class FrameAnimation : public GameEngineNameObject
 	GameEngineTextureRenderer* ParentRenderer;
 	GameEngineTexture* Texture;
 	GameEngineFolderTexture* FolderTexture;
-	bool Pause;
 
+	bool Pause;
 	bool bOnceStart;
 	bool bOnceEnd;
 	std::function<void(const FrameAnimation_DESC&)> Frame;
@@ -131,7 +130,6 @@ class FrameAnimation : public GameEngineNameObject
 	void PauseSwtich();
 
 	void Reset();
-
 public:
 	void Update(float _DeltaTime);
 
@@ -140,7 +138,6 @@ public:
 		: bOnceStart(true)
 		, bOnceEnd(false)
 		, Pause(false)
-
 	{
 
 	}
@@ -180,7 +177,6 @@ public:
 		return ScaleRatio;
 	}
 
-
 	bool IsCurAnimation()
 	{
 		if (nullptr == CurAni)
@@ -200,8 +196,6 @@ public:
 
 	void SetTexture(const std::string& _Name, UINT _Index);
 
-	void SetFolderTextureToIndex(const std::string& _Text, UINT _Index);
-
 	void SetPivot();
 
 	void SetPivot(PIVOTMODE _Mode);
@@ -209,6 +203,8 @@ public:
 	void SetPivotToVector(const float4& _Value);
 
 	void SetTexture(GameEngineTexture* _Texture, UINT _Index);
+
+	void SetFolderTextureToIndex(const std::string& _Text, UINT _Index);
 
 	void CreateFrameAnimationFolder(const std::string& _AnimationName, const FrameAnimation_DESC& _Desc);
 
@@ -221,10 +217,15 @@ public:
 
 	void CurAnimationPauseSwitch();
 
+	void CurAnimationPauseOn();
+
+	void CurAnimationPauseOff();
+
+	bool IsCurAnimationPause();
+
 	void CurAnimationReset();
 
 	void CurAnimationSetStartPivotFrame(int SetFrame);
-
 
 	PixelData& GetPixelData()
 	{
@@ -293,13 +294,12 @@ protected:
 
 	void Update(float _Delta) override;
 
-protected:
+private:
 	PIVOTMODE PivotMode;
 	SCALEMODE ScaleMode;
 	float ScaleRatio;
 
 	GameEngineTexture* CurTex;
-	//float4 FrameData;
 
 	PixelData PixelDataInst;
 	AtlasData AtlasDataInst;

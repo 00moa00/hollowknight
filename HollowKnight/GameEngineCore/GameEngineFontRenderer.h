@@ -46,7 +46,7 @@ public:
 
 	void SetText(const std::string& _Text, const std::string& _Font = "µ¸¿ò");
 
-	std::string GetText()
+	std::string GetText() 
 	{
 		return Text;
 	}
@@ -54,6 +54,11 @@ public:
 	void SetScreenPostion(float4 _ScreenPostion)
 	{
 		ScreenPostion = _ScreenPostion;
+	}
+
+	float4 SetScreenPostion()
+	{
+		return ScreenPostion;
 	}
 
 	void SetColor(float4 _Color)

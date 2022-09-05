@@ -22,14 +22,14 @@ namespace GameEngineDebug
 
 	public:
 		DebugInfo(DebugRenderType _Type, const float4& _Color)
-			: Type{ static_cast<int>(_Type) }
+			: Type{static_cast<int>(_Type)}
 			, Color(_Color)
 		{
 
 		}
 	};
 
-	struct DebugRenderData
+	struct DebugRenderData 
 	{
 	public:
 		DebugInfo Info;
@@ -39,7 +39,7 @@ namespace GameEngineDebug
 
 	std::vector<DebugRenderData> DebugData = std::vector<DebugRenderData>();
 
-	void DrawBox(const GameEngineTransform& _Trans, const float4& _Color)
+	void DrawBox(const GameEngineTransform& _Trans, const float4& _Color) 
 	{
 		DrawBox(_Trans, GameEngineCore::GetCurLevel()->GetMainCamera(), _Color);
 	}
@@ -111,11 +111,11 @@ namespace GameEngineDebug
 	}
 
 
-	void DrawSphere(const GameEngineTransform& _Trans, const float4& _Color)
+	void DrawSphere(const GameEngineTransform& _Trans, const float4& _Color) 
 	{
 		DrawSphere(_Trans, GameEngineCore::GetCurLevel()->GetMainCamera(), _Color);
 	}
-	void DrawSphere(const GameEngineTransform& _Trans, GameEngineCamera* _Camera, const float4& _Color)
+	void DrawSphere(const GameEngineTransform& _Trans, GameEngineCamera* _Camera, const float4& _Color) 
 	{
 		static GameEngineTransform DebugTrans;
 
@@ -134,7 +134,7 @@ namespace GameEngineDebug
 	GameEngineShaderResourcesHelper TextureShaderResources;
 	GameEngineRenderingPipeLine* TextureRenderingPipeLine;
 
-	void Debug3DInitialize()
+	void Debug3DInitialize() 
 	{
 		static bool IsOnce = false;
 
@@ -165,7 +165,7 @@ namespace GameEngineDebug
 				DebugShaderResources.AllResourcesSetting();
 				DebugRenderingPipeLine->Rendering();
 			}
-			else
+			else 
 			{
 				TextureShaderResources.SetConstantBufferLink("TransformData", DebugData[i].Data);
 				TextureShaderResources.SetConstantBufferLink("DebugInfo", DebugData[i].Info);
@@ -179,5 +179,5 @@ namespace GameEngineDebug
 		DebugData.clear();
 		int a = 0;
 	}
-
+	
 };

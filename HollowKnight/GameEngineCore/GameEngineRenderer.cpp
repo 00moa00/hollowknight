@@ -17,18 +17,18 @@ GameEngineRenderer::GameEngineRenderer()
 {
 }
 
-GameEngineRenderer::~GameEngineRenderer()
+GameEngineRenderer::~GameEngineRenderer() 
 {
 }
 
 
-void GameEngineRenderer::Start()
+void GameEngineRenderer::Start() 
 {
 }
 
 void GameEngineRenderer::PushRendererToMainCamera()
 {
-	GetActor()->GetLevel()->PushRendererToMainCamera(this);
+	GetActor()->GetLevel()->PushRendererToMainCamera(this);	
 }
 
 void GameEngineRenderer::SetRenderingOrder(int _Order)

@@ -38,7 +38,7 @@ public:
 	virtual void EffectInit() = 0;
 	virtual void Effect(class GameEngineRenderTarget* _Render) = 0;
 
-	virtual ~GameEnginePostEffect()
+	virtual ~GameEnginePostEffect() 
 	{
 
 	}
@@ -92,7 +92,7 @@ public:
 
 	void CreateDepthTexture(int _Index = 0);
 
-	inline GameEngineTexture* GetDepthTexture()
+	inline GameEngineTexture* GetDepthTexture() 
 	{
 		return DepthTexture;
 	}
@@ -102,7 +102,7 @@ public:
 	void Copy(GameEngineRenderTarget* _Other, int _Index = 0);
 
 	void Merge(GameEngineRenderTarget* _Other, int _Index = 0);
-
+	
 	void Effect(GameEngineRenderingPipeLine* _Other, GameEngineShaderResourcesHelper* _ShaderResourcesHelper);
 
 	void Effect(class GameEngineRenderSet& _RenderSet);
@@ -131,7 +131,7 @@ private:
 
 public:
 	template<typename EffectType>
-	void AddEffect()
+	void AddEffect() 
 	{
 		EffectType* NewEffect = new EffectType();
 		NewEffect->EffectInit();

@@ -64,9 +64,9 @@ void DirtmouthLevel2::Start()
 
 	Elderbug_ = CreateActor<Elderbug>();
 
-	GameEngineDevice::GetBackBuffer()->AddEffect<OverlayEffect>();
+	//GameEngineDevice::GetBackBuffer()->AddEffect<OverlayEffect>();
 
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayEffect>();
+	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayEffect>();
 }
 
 void DirtmouthLevel2::Update(float _DeltaTime)
