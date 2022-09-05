@@ -34,6 +34,13 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::NPC, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnihgtVSNPCCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
+	{
+
+	}
+
+
 
 
 	// ========== UPDATE ==========
@@ -71,11 +78,6 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	//if (true == GameEngineInput::GetInst()->IsDown("KnightSit"))
-	//{
-	//	
-
-	//}
 
  	if (GetisKnightMove() == true && isRunMode_ == false)
 	{
@@ -1600,7 +1602,7 @@ void Knight::KnightSitUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightUp"))
+	if (true == GameEngineInput::GetInst()->IsDown("KnightUp") && KnightData::GetInst()->GetisSetting() == false)
 	{
 		KnightManager_.ChangeState("STILL");
 
@@ -1612,5 +1614,24 @@ void Knight::KnightSitEnd(const StateInfo& _Info)
 	KnightData::GetInst()->SetisSitting(false);
 	GetTransform().SetLocalMove({ 0, -10.f });
 
+}
+
+void Knight::KnightTalkingStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightTalkingUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::NPC, CollisionType::CT_OBB2D,
+		std::bind(&Knight::NPCNextDialogueCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
+	{
+
+		
+	}
+
+}
+
+void Knight::KnightTalkingEnd(const StateInfo& _Info)
+{
 }
 

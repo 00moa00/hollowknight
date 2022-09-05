@@ -17,6 +17,8 @@
 
 #include "KnightData.h"
 
+#include "MasterNPC.h"
+
 
 Knight::Knight()
 	:
@@ -90,6 +92,7 @@ void Knight::Start()
 	
 	GetRenderer()->GetTransform().PixLocalNegativeX();
 
+
 	Test1_ = CreateComponent<GameEngineCollision>();
 	Test1_->GetTransform().SetLocalScale({ 15,15,1 });
 
@@ -129,7 +132,7 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightFocus", 'Q');
 
 		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
-
+		GameEngineInput::GetInst()->CreateKey("KnightTalking", 'Z');
 		GameEngineInput::GetInst()->CreateKey("KnightSit", 'T');
 
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
@@ -420,12 +423,17 @@ void Knight::Start()
 		, std::bind(&Knight::KnightWallJumpLandUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Knight::KnightWallJumpLandStart, this, std::placeholders::_1), std::bind(&Knight::KnightWallJumpLandEnd, this, std::placeholders::_1));
 
 	// ---- 의자 ----
-
 	KnightManager_.CreateStateMember("SIT"
 		, std::bind(&Knight::KnightSitUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightSitStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightSitEnd, this, std::placeholders::_1));
 
+
+	// ---- NPC 대화 ----
+	KnightManager_.CreateStateMember("TALKING"
+		, std::bind(&Knight::KnightTalkingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightTalkingStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightTalkingEnd, this, std::placeholders::_1));
 
 	KnightManager_.ChangeState("FALL");
 
@@ -695,6 +703,54 @@ bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineColl
 
 bool Knight::KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
+	return true;
+}
+
+bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	MasterNPC* NPC = dynamic_cast<MasterNPC*>(_Other->GetActor());
+
+	if (NPC != nullptr)
+	{
+
+		if (true == GameEngineInput::GetInst()->IsDown("KnightUp"))
+		{
+			KnightManager_.ChangeState("TALKING");
+
+			NPC->GetDialogueSet()->SetDialogueOn();
+
+		}
+
+	}
+
+	isTalkingNPC_ = true;
+	return true;
+}
+
+bool Knight::NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	MasterNPC* NPC = dynamic_cast<MasterNPC*>(_Other->GetActor());
+
+	if (NPC != nullptr)
+	{
+		if (true == GameEngineInput::GetInst()->IsDown("KnightTalking"))
+		{
+			if (NPC->GetDialogueSet()->GetDialougueFull() == true)
+			{
+				NPC->GetDialogueSet()->SetDialogueOff();
+				KnightManager_.ChangeState("STILL");
+				//return;
+			}
+
+			else
+			{
+				NPC->GetDialogueSet()->SetNextDialogue();
+
+			}
+
+		}
+	}
+
 	return true;
 }
 

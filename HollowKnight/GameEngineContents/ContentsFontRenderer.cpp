@@ -36,27 +36,82 @@ void ContentsFontRenderer::Update(float _DeltatTime)
 
 void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isTyping, int _LineBreak )
 {
-	int TextSize = _Text.size();
+	int LineBreakCount = 0;
+
 	if (_LineBreak > 0)
 	{
-		for (int i = _LineBreak; i * _LineBreak < TextSize; ++i)
+		for (int i = 0; i < _Text.size();)
 		{
-			_Text.insert(i * _LineBreak, "\n");
-			++i;
-			++TextSize;
-			++_LineBreak;
+			std::string line = _Text.substr(i, 1);
+			if (line == " ")
+			{
+				i += 1;
+				++LineBreakCount;
+			}
+
+			else if (line == ".")
+			{
+				i += 1;
+				LineBreakCount = 0;
+			}
+			else
+			{
+				i += 2;
+				++LineBreakCount;
+			}
+
+			if (LineBreakCount >= _LineBreak)
+			{
+				int NextBreakCount = i;
+				if (NextBreakCount < _Text.size())
+				{
+					std::string Nextline = _Text.substr(NextBreakCount, 1);
+					if (Nextline == ".")
+					{
+						i += 1;
+						++LineBreakCount;
+						continue;
+					}
+				}
+
+				LineBreakCount = 0;
+				_Text.insert((i), "\n");
+			}
 		}
 	}
+
 
 	for (int i = 0; i < _Text.size(); ++i)
 	{
 		std::string line = _Text.substr(i, 1);
 		if (line == ".")
 		{
-			_Text.insert(i + 1, "\n\n");
-			break;
+			_Text.insert(i + 1, "\n");
+			//++i;
+			continue;
 		}
 	}
+	//int TextSize = _Text.size();
+	//if (_LineBreak > 0)
+	//{
+	//	for (int i = _LineBreak; i * _LineBreak < TextSize; ++i)
+	//	{
+	//		_Text.insert(i * _LineBreak, "\n");
+	//		++i;
+	//		++TextSize;
+	//		++_LineBreak;
+	//	}
+	//}
+
+	//for (int i = 0; i < _Text.size(); ++i)
+	//{
+	//	std::string line = _Text.substr(i, 1);
+	//	if (line == ".")
+	//	{
+	//		_Text.insert(i + 1, "\n\n");
+	//		break;
+	//	}
+	//}
 
 	FontState_.Text_ = _Text;
 	FontState_.FontSize_ = _FontSize;
@@ -161,6 +216,7 @@ void ContentsFontRenderer::SetScreenMove()
 
 void ContentsFontRenderer::FontOn()
 {
+	this->On();
 	if (FontState_.isTyping_ == true)
 	{
 		FontStateManager_.ChangeState("TYPING_UPDATE");
@@ -186,7 +242,7 @@ void ContentsFontRenderer::FontTypingUpdate(float _DeltaTime, const StateInfo& _
 	{
 		FontStateManager_.ChangeState("TYPING_IDLE");
 	}
-	if (TypingTimer_ > 0.5f)
+	if (TypingTimer_ > 0.05f)
 	{
 		TypingTimer_ = 0.f;
 

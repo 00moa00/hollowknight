@@ -58,19 +58,8 @@ public:
 	void FontOn();
 
 	void FontOff();
+
 public:	
-	//================================
-	//    Bind State
-	//================================
-	void FontTypingStart(const StateInfo& _Info);
-	void FontTypingUpdate(float _DeltaTime, const StateInfo& _Info);
-	void FontTypingEnd(const StateInfo& _Info);
-
-	void FontTypingIdleStart(const StateInfo& _Info);
-	void FontTypingIdleUpdate(float _DeltaTime, const StateInfo& _Info);
-	void FontTypingIdleEnd(const StateInfo& _Info);
-
-
 	//================================
 	//    Getter
 	//================================
@@ -92,6 +81,18 @@ public:
 		FontState_.FontSize_ = _Size;
 		//GameEngineFontRenderer_->SetSize(_Size);
 	}
+
+private:
+	//================================
+	//    Bind State
+	//================================
+	void FontTypingStart(const StateInfo& _Info);
+	void FontTypingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FontTypingEnd(const StateInfo& _Info);
+
+	void FontTypingIdleStart(const StateInfo& _Info);
+	void FontTypingIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FontTypingIdleEnd(const StateInfo& _Info);
 
 };
 

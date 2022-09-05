@@ -29,3 +29,8 @@ void MasterNPC::CreatePromptSet()
 	PromptSet_->CreatePrompSet(PromptSetType::TALK);
 	PromptSet_->SetParent(this);
 }
+
+void MasterNPC::CreateDialogueSet()
+{
+	DialogueSet_ = GetLevel()->CreateActor<DialogueSet>();
+}

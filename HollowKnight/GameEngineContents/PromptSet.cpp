@@ -13,12 +13,9 @@ PromptSet::~PromptSet()
 
 void PromptSet::Start()
 {
-	//GetTransform().SetWorldPosition(0, 200.f);
-
 	PromptCollision_ = CreateComponent<GameEngineCollision>();
 	PromptCollision_->GetTransform().SetLocalScale({ 600, 120 });
 	PromptCollision_->ChangeOrder(OBJECTORDER::Prompt);
-
 
 	Prompt_ = CreateComponent<GameEngineTextureRenderer>();
 	Prompt_->SetTexture("Prompts Cln_prompt_appear0000-Sheet.png", 0);
@@ -35,13 +32,11 @@ void PromptSet::Start()
 			Prompt_->ChangeFrameAnimation("IDLE_ANIMATION");
 		});
 
-
 	Prompt_->AnimationBindEnd("LEAVE_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			Prompt_->Off();
 			PromptName_->Off();
 		});
-
 
 	Prompt_->ChangeFrameAnimation("APPEAR_ANIMATION");
 
@@ -149,7 +144,6 @@ void PromptSet::PromptIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 void PromptSet::PromptIdleEnd(const StateInfo& _Info)
 {
 	Prompt_->ChangeFrameAnimation("LEAVE_ANIMATION");
-
 }
 
 void PromptSet::PromptChangeLeaveStart(const StateInfo& _Info)

@@ -5,6 +5,7 @@
 #include "ContentsFontRenderer.h"
 #include "MasterActor.h"
 #include "PromptSet.h"
+#include "DialogueSet.h"
 
 struct NPCState
 {
@@ -26,10 +27,8 @@ public:
 	MasterNPC& operator=(MasterNPC&& _Other) noexcept = delete;
 
 protected:
-	GameEngineTextureRenderer* Renderer_;
-	//GameEngineCollision* Collision_;
+	DialogueSet* DialogueSet_;
 
-	
 	ContentsFontRenderer* NPCNameFontRenderer_;
 
 private:
@@ -50,6 +49,11 @@ public:
 		return PromptSet_;
 	}
 
+	DialogueSet* GetDialogueSet()
+	{
+		return DialogueSet_;
+	}
+
 	//================================
 	//    Setter
 	//================================
@@ -60,6 +64,7 @@ public:
 
 	void CreateNameFontRenderer();
 	void CreatePromptSet();
+	void CreateDialogueSet();
 
 };
 

@@ -29,6 +29,7 @@ protected:
 
 private:
 	ContentsFontRenderer* ContentsFontRenderer_;
+
 	bool isSlashEnd_;		// 공격 애니메이션 종료
 	bool isDoubleSlashEnd_; // 더블 공격 애니메이션 종료
 	bool isUpSlashEnd_;
@@ -43,6 +44,8 @@ private:
 	bool isGroundWakeUpEnd_;
 	bool isWakeUpEnd_;
 	bool isSitEnd_;
+
+	bool isTalkingNPC_;
 
 	bool isKnightActtingMove_;
 	bool isPressJumppingKey_;
@@ -238,18 +241,23 @@ private:
 	void KnightWallJumpLandEnd(const StateInfo& _Info);
 
 	// ---- 의자 위 ----
-
 	void KnightSitStart(const StateInfo& _Info);
 	void KnightSitUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightSitEnd(const StateInfo& _Info);
 
+	// ---- NPC 대화 ----
+	void KnightTalkingStart(const StateInfo& _Info);
+	void KnightTalkingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightTalkingEnd(const StateInfo& _Info);
+
+
 	//================================
 	//    Bind 
 	//================================
-
-
 	bool KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	bool KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 
 }; 
