@@ -148,7 +148,14 @@ void HollowKnightLevel::CameraMoveWindowLimit()
 	//GetMainCameraActorTransform().SetLocalPosition(Knight_->GetTransform().GetLocalPosition());
 	//MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
 
-	GetMainCameraActorTransform().SetWorldPosition({ Knight_->GetTransform().GetLocalPosition().x, Knight_->GetTransform().GetLocalPosition().y,  -1800.0f });
+
+	float4 CurrentPos = GetMainCameraActorTransform().GetWorldPosition();
+	float4 DestPos = Knight_->GetTransform().GetWorldPosition();
+	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 10.f);
+
+
+
+	GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x,MoveCamera.y,  -1800.0f });
 	MainCameraPosition_ = GetMainCameraActorTransform().GetLocalPosition();
 
 	//카메라의 위치 - 윈도우 사이즈의 x가 0이라면
