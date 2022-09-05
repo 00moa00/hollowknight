@@ -16,6 +16,13 @@ void MasterObject::CreateRendererComponent(float4 _LocalScale, std::string _File
 	Renderer_->GetTransform().SetLocalScale({ _LocalScale.x, _LocalScale.y, 1 });
 }
 
+void MasterObject::CreateRendererComponent(std::string _FileName)
+{
+	Renderer_ = CreateComponent<GameEngineTextureRenderer>();
+	Renderer_->SetTexture(_FileName);
+	Renderer_->GetTransform().SetLocalScale(Renderer_->GetCurTexture()->GetScale());
+}
+
 void MasterObject::CreateCollisionComponent(float4 _LocalScale, int _Order)
 {
 	Collision_ = CreateComponent<GameEngineCollision>();

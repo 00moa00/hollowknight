@@ -71,9 +71,9 @@ void MasterMap::CreateMapCollision(std::string _FileName)
 	CollisionMap_ = CreateComponent<GameEngineTextureRenderer>();
 	CollisionMap_->SetTexture(_FileName);
 	CollisionMap_->GetTransform().SetLocalScale(CollisionMap_->GetCurTexture()->GetScale());
-	CollisionMap_->SetPivot(PIVOTMODE::LEFTTOP);
+	//CollisionMap_->SetPivot(PIVOTMODE::LEFTTOP);
 	CollisionMap_->GetTransform().SetWorldPosition({ CollisionMap_->GetCurTexture()->GetScale().x / 2, -CollisionMap_->GetCurTexture()->GetScale().y / 2 });
-	CollisionMap_->Off();
+	CollisionMap_->On();
 
 }
 

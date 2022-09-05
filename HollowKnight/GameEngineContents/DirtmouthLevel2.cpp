@@ -35,7 +35,6 @@ void DirtmouthLevel2::Start()
 	GetMasterMap()->CreateMapCollision("Dirtmouth_2_Coll.png");
 
 	CreateKnightActor(); // 플레이어
-	//CreateKingsPass1Monster();
 
 	GetMasterMap()->CreateTerrain("Dirtmouth_Terrian_2.png");
 	GetMasterMap()->CreateFrontObject("Dirtmouth_MapObject_2.png");
@@ -43,7 +42,6 @@ void DirtmouthLevel2::Start()
 	CreateUIActor();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
@@ -56,6 +54,11 @@ void DirtmouthLevel2::Start()
 
 	Bench* Test_ = CreateActor<Bench>();
 	AreaTitle* AreaTitle_ = CreateActor<AreaTitle>();
+
+	MapShopPotal_ = CreateActor<RoomPotal>();
+	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop);
+	MapShopPotal_->GetTransform().SetWorldPosition({3840, -3030});
+
 
 	Elderbug_ - CreateActor<Elderbug>();
 }

@@ -2,6 +2,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include "HollowKnightLevel.h"
 #include "Elderbug.h"
+#include "RoomPotal.h"
 
 // Ό³Έν :
 class DirtmouthLevel2 : public HollowKnightLevel
@@ -24,5 +25,7 @@ protected:
 
 private:
 	Elderbug* Elderbug_;
+	RoomPotal* MapShopPotal_;
+	RoomPotal* SlyShopPotal_;
 };
 

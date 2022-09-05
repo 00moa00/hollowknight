@@ -66,10 +66,6 @@ private:
 	void PromptIdleUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PromptIdleEnd(const StateInfo& _Info);
 
-	void PromptChangeDirStart(const StateInfo& _Info);
-	void PromptChangeDirUpdate(float _DeltaTime, const StateInfo& _Info);
-	void PromptChangeDirEnd(const StateInfo& _Info);
-
 	void PromptChangeLeaveStart(const StateInfo& _Info);
 	void PromptChangeLeaveUpdate(float _DeltaTime, const StateInfo& _Info);
 	void PromptChangeLeaveEnd(const StateInfo& _Info);

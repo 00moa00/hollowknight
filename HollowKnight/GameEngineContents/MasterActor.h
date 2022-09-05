@@ -76,10 +76,15 @@ public:
 	void isWallCheck(float _DeltaTime);
 	void isWallCheck(float _DeltaTime, float4 _Dir);
 	void isDownGroundCheck(float _DeltaTime);
+	void isDownGroundCheck(float _DeltaTime, float _Speed);
+	void isDownGroundCheck(float4 Dir);
+
+
 	void isUpBlockCheck(float _DeltaTime);
 
 	float4 GetNextPos(float4 _DeltaTime);
 	float4 GetNextPos(float4 _DeltaTime, float4 Dir);
+	float4 GetNextPos(float4 _DeltaTime, float _Speed);
 
 	GameEngineTextureRenderer* GetRenderer() const
 	{

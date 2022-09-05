@@ -6,6 +6,7 @@ enum class OBJECTORDER
 	Background_Object,
 	Terrain,
 	NPC,
+	Potal,
 	//Elderbug,
 	Knight,
 	Prompt,

@@ -80,13 +80,31 @@ bool MasterActor::GetPixelRed(float4 _NextPos)
 	//float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetDirPos.ix(), GetDirPos.iy());
 
 
-	float4 GetBottomPos = { GetTransform().GetLocalPosition().ix() + _NextPos.x ,
-	-(GetTransform().GetLocalPosition().iy() + _NextPos.y) };
-
+	float4 GetBottomPos = { GetTransform().GetLocalPosition().x + _NextPos.x ,
+	-(GetTransform().GetLocalPosition().y - _NextPos.y) };
 
 	float4 BottomColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetBottomPos.ix(), GetBottomPos.iy());
 
+	while (true)
+	{
 
+		float4 CheckPos = { GetTransform().GetLocalPosition().x,
+		-(GetTransform().GetLocalPosition().y + 1.f)};
+
+		float4 CheckColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(CheckPos.ix(), CheckPos.iy());
+
+		if (CheckColor.CompareInt4D(float4(1.f, 0, 0, 1.f)) == true/* && DirColor.CompareInt2D(float4(1.f, 0, 0, 1.f)) == true*/)
+		{
+			GameEngineDebug::OutPutString("ff");
+			GetTransform().SetWorldMove(float4::UP);
+			continue;
+		}
+		else
+		{
+			break;
+		}
+
+	}
 
 
 	if (BottomColor.CompareInt4D(float4(1.f, 0, 0, 1.f)) == true/* && DirColor.CompareInt2D(float4(1.f, 0, 0, 1.f)) == true*/)
@@ -218,6 +236,32 @@ void MasterActor::isDownGroundCheck(float _DeltaTime)
 	}
 }
 
+void MasterActor::isDownGroundCheck(float _DeltaTime, float _Speed)
+{
+	if (GetPixelRed(float4::DOWN * _Speed * _DeltaTime) == true)
+	{
+		this->SetisGround(true);
+	}
+
+	else
+	{
+		this->SetisGround(false);
+	}
+}
+
+void MasterActor::isDownGroundCheck(float4 Dir)
+{
+	if (GetPixelRed(Dir) == true)
+	{
+		this->SetisGround(true);
+	}
+
+	else
+	{
+		this->SetisGround(false);
+	}
+}
+
 void MasterActor::isUpBlockCheck(float _DeltaTime)
 {
 	float4 NextPos = GetPixelBlueUpPoint(_DeltaTime);
@@ -246,4 +290,9 @@ float4 MasterActor::GetNextPos(float4 _DeltaTime)
 float4 MasterActor::GetNextPos(float4 _DeltaTime, float4 Dir)
 {
 	return (Dir * _DeltaTime * GetSpeed());
+}
+
+float4 MasterActor::GetNextPos(float4 _DeltaTime, float _Speed)
+{
+	return  (float4::DOWN * _Speed * _DeltaTime );
 }

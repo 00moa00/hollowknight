@@ -38,6 +38,8 @@ protected:
 	//    Setter
 	//================================
 	void CreateRendererComponent(float4 _LocalScale, std::string _FileName);
+	void CreateRendererComponent(std::string _FileName);
+
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
 
 

@@ -393,6 +393,9 @@
     <ClInclude Include="SlyShopLevel.h">
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
     </ClInclude>
+    <ClInclude Include="RoomPotal.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -673,6 +676,9 @@
     </ClCompile>
     <ClCompile Include="SlyShopLevel.cpp">
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomPotal.cpp">
+      <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -547,12 +547,12 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	KnightDirectionCheck();
 
 	isWallCheck(_DeltaTime);
-	isOnGroundCheck(_DeltaTime);
 	//DoubleSlashTimer(_DeltaTime);
 
 	ActtingMoveDirection_.Normalize();
 	GetTransform().SetWorldMove((float4::DOWN + (ActtingMoveDirection_ / 2)) * (700.f * _DeltaTime));
 
+	isDownGroundCheck((float4::DOWN + (ActtingMoveDirection_ / 2)) * (700.f * _DeltaTime));
 	if (GetisWall() == true)
 	{
 		KnightManager_.ChangeState("SLIDE");
