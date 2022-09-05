@@ -14,12 +14,15 @@
 #include "DirtmouthLevel1.h"
 #include "DirtmouthLevel2.h"
 
+#include "MapShopLevel.h"
+#include "SlyShopLevel.h"
+
 #include "KnightData.h"
 #include "KnightShadowData.h"
 
 #include <GameEngineCore/GameEngineBlend.h>
 
-#include <GameEngineCore/GameEngineLevel.h>
+//#include <GameEngineCore/GameEngineLevel.h>
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -815,6 +818,40 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("Dirtmouth");
+		Dir.Move("MapShop");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("Dirtmouth");
+		Dir.Move("SlyShop");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
 	//================================
 	//    텍스처 / 오브젝트
 	//================================
@@ -1002,6 +1039,11 @@ void ContentsCore::Start()
 
 	CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");
 	CreateLevel<DirtmouthLevel2>("DirtmouthLevel2");
+
+	CreateLevel<MapShopLevel>("MapShopLevel");
+	CreateLevel<SlyShopLevel>("SlyShopLevel");
+
+	
 
 	ChangeLevel("TitleLevel");
 	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);

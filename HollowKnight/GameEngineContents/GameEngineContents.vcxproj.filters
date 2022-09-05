@@ -61,9 +61,6 @@
     <Filter Include="Level\Levels\Dirtmouth">
       <UniqueIdentifier>{296598e9-2b2b-4dab-84c6-807e80773c8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Levels\Dirtmouth\BossRoom">
-      <UniqueIdentifier>{a5254e96-a9ca-4069-b8d8-8e87b186c0b7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{eee3c248-3814-48af-b1f4-f221fa7a0ee6}</UniqueIdentifier>
     </Filter>
@@ -123,6 +120,9 @@
     </Filter>
     <Filter Include="Actor\Play\UI\Setting\Info">
       <UniqueIdentifier>{c37ca923-d779-47d1-a913-ae2aca7e6fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Levels\Dirtmouth\Room">
+      <UniqueIdentifier>{a5254e96-a9ca-4069-b8d8-8e87b186c0b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -383,6 +383,15 @@
     </ClInclude>
     <ClInclude Include="PromptSet.h">
       <Filter>Actor\Play\UI\Setting\Info</Filter>
+    </ClInclude>
+    <ClInclude Include="DirtmouthStationLevel.h">
+      <Filter>Level\Levels\Dirtmouth\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="MapShopLevel.h">
+      <Filter>Level\Levels\Dirtmouth\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="SlyShopLevel.h">
+      <Filter>Level\Levels\Dirtmouth\Room</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -655,6 +664,15 @@
     </ClCompile>
     <ClCompile Include="PromptSet.cpp">
       <Filter>Actor\Play\UI\Setting\Info</Filter>
+    </ClCompile>
+    <ClCompile Include="DirtmouthStationLevel.cpp">
+      <Filter>Level\Levels\Dirtmouth\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="MapShopLevel.cpp">
+      <Filter>Level\Levels\Dirtmouth\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="SlyShopLevel.cpp">
+      <Filter>Level\Levels\Dirtmouth\Room</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
