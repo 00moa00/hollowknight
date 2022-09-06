@@ -5,7 +5,8 @@
 enum class POTAL_TYPE
 {
 	Sly_Shop,
-	 Map_Shop
+	Map_Shop,
+	Dirt,
 };
 
 // Ό³Έν :

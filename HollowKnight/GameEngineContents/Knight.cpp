@@ -838,6 +838,11 @@ bool Knight::KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollis
 			ChangeLevel_ = "MapShopLevel";
 
 			break;
+
+		case POTAL_TYPE::Dirt:
+			ChangeLevel_ = "DirtmouthLevel2";
+
+			break;
 		default:
 			break;
 		}

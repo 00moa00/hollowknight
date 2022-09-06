@@ -45,8 +45,8 @@ void MapShopLevel::Start()
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 	DirtmouthPotal_ = CreateActor<RoomPotal>();
-	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Map_Shop, true);
-	DirtmouthPotal_->GetTransform().SetWorldPosition({ 3840, -3045.f });
+	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Dirt, false);
+	DirtmouthPotal_->GetTransform().SetWorldPosition({ 400, -870.f });
 }
 
 void MapShopLevel::Update(float _DeltaTime)
