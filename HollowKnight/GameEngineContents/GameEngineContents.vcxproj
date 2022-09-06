@@ -269,7 +269,15 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="OverlayEffect.h">
+    <ClInclude Include="NoisePostEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="OverlayBlend.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="OverlayPostEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -636,7 +644,15 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="OverlayEffect.cpp">
+    <ClCompile Include="NoisePostEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="OverlayBlend.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="OverlayPostEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -40,6 +40,12 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Potal, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSPotalCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
+	{
+
+	}
+
 
 
 
@@ -228,6 +234,12 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	// ========== 스테이트 변경 ==========
+
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Potal, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSPotalCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
+	{
+
+	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
 	{
@@ -1615,5 +1627,26 @@ void Knight::KnightTalkingUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightTalkingEnd(const StateInfo& _Info)
 {
+}
+
+void Knight::KnightDoorStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("DOOR_ANIMATION");
+
+}
+
+void Knight::KnightDoorUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isDoorEnd_ == true)
+	{
+		isDoorEnd_ = false;
+		GEngine::ChangeLevel(ChangeLevel_);
+		KnightManager_.ChangeState("STILL");
+	}
+}
+
+void Knight::KnightDoorEnd(const StateInfo& _Info)
+{
+	ChangeLevel_ = "";
 }
 

@@ -64,6 +64,22 @@ void ContentsCore::Start()
 	}
 
 	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("Noise");
+		NewPipe->SetInputAssembler1VertexBuffer("FullRect");
+		NewPipe->SetInputAssembler2IndexBuffer("FullRect");
+		NewPipe->SetVertexShader("Noise.hlsl");
+		NewPipe->SetPixelShader("Noise.hlsl");
+	}
+
+	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("Overlay");
+		NewPipe->SetInputAssembler1VertexBuffer("FullRect");
+		NewPipe->SetInputAssembler2IndexBuffer("FullRect");
+		NewPipe->SetVertexShader("Overlay.hlsl");
+		NewPipe->SetPixelShader("Overlay.hlsl");
+	}
+
+	{
 		D3D11_BLEND_DESC Desc = { 0 };
 
 		Desc.AlphaToCoverageEnable = FALSE;
@@ -947,6 +963,8 @@ void ContentsCore::Start()
 
 		//ÀÇÀÚ
 		GameEngineTexture::Cut("Knight_sit0000-Sheet.png", 5, 1);
+
+		GameEngineTexture::Cut("Knight_into_door0000-Sheet.png", 10, 1);
 
 
 	}

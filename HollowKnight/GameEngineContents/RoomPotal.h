@@ -29,14 +29,14 @@ protected:
 private:
 	PromptSet* PromptSet_;
 
-	POTAL_TYPE POTAL_TYPE_;
+	POTAL_TYPE PotalType_;
 
 public:
-	void CreatePotal(POTAL_TYPE _Type);
+	void CreatePotal(POTAL_TYPE _Type, bool isPromt);
 	
 	POTAL_TYPE GetPotalType()
 	{
-		return POTAL_TYPE_;
+		return PotalType_;
 	}
 
 };

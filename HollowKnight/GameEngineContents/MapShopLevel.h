@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
 #include "HollowKnightLevel.h"
+#include "RoomPotal.h"
 
 // Ό³Έν :
 class MapShopLevel : public HollowKnightLevel
@@ -20,7 +21,8 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 	void End() override;
-private:
 
+private:
+	RoomPotal* DirtmouthPotal_;
 };
 

@@ -5,6 +5,7 @@
 
 
 
+
 struct Input
 {
     float4 Pos : POSITION;
@@ -18,6 +19,13 @@ struct Output
     float4 Tex : TEXCOORD;
 };
 
+cbuffer NoiseData : register(b3)
+{
+    float Time;
+    float Dummy0;
+    float Dummy1;
+    float Dummy2;
+};
 
 // 그래픽카드에서 이뤄지는것.
 Output Blur_VS(Input _Input)
@@ -28,20 +36,10 @@ Output Blur_VS(Input _Input)
     return NewOutPut;
 }
 
-// 1000
-// 0100
-// 2010
-// 0301
-
-// 1020
-// 0103
-// 0010
-// 0001
-
-//static float Gau[5][5] =
-//{
-//    {  }
-//};
+float WhiteNoise(float2 coord)
+{
+    return frac(sin(dot(coord, float2(8.7819, 3.255))) * 437.645);
+}
 
 Texture2D Tex : register(t0);
 SamplerState Smp : register(s0);
@@ -49,34 +47,18 @@ float4 Blur_PS(Output _Input) : SV_Target0
 {
     // 파란색
     
-    float2 PixelUVSize = float2(1.0f / 1280.0f, 1.0f / 720.0f);
+    float2 PixelUVSize = float2(1.0f / 1920.0f, 1.0f / 1080.0f);
     float2 PixelUVCenter = _Input.Tex.xy;
     float2 StartUV = PixelUVCenter + (-PixelUVSize * 2);
     float2 CurUV = StartUV;
     
     float4 Result = (float4) 0.0f;
+     
+    float2 samplePoint = CurUV;
+    float4 Texture = Tex.Sample(Smp, samplePoint);
+    float noise = WhiteNoise(CurUV * Time) - 0.5;
+    Texture.rgb += float3(noise, noise, noise);
+    return Texture;
     
-    for (int y = 0; y < 5; ++y)
-    {
-        for (int x = 0; x < 5; ++x)
-        {
-            Result += Tex.Sample(Smp, CurUV) /* * Gau[y][x]*/;
-            CurUV.x += PixelUVSize.x;
-        }
-        
-        CurUV.x = StartUV.x;
-        CurUV.y += PixelUVSize.y;
-    }
     
-    Result /= 25.0f;
-    
-    // Color
-    // 지금 이 색깔은?
-    
-    if (Result.a <= 0.0f)
-    {
-        clip(-1);
-    }
-    
-    return Result;
 }

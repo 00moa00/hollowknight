@@ -7,10 +7,12 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
-#include "OverlayEffect.h"
+#include "OverlayPostEffect.h"
 
 #include "Bench.h"
 #include "AreaTitle.h"
+#include "OverlayBlend.h"
+#include "NoisePostEffect.h"
 
 DirtmouthLevel2::DirtmouthLevel2() 
 	:
@@ -58,25 +60,24 @@ void DirtmouthLevel2::Start()
 	AreaTitle* AreaTitle_ = CreateActor<AreaTitle>();
 
 	MapShopPotal_ = CreateActor<RoomPotal>();
-	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop);
+	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop, true);
 	MapShopPotal_->GetTransform().SetWorldPosition({3840, -3045.f });
 
 
 	Elderbug_ = CreateActor<Elderbug>();
 
-	//GameEngineDevice::GetBackBuffer()->AddEffect<OverlayEffect>();
 
-	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayEffect>();
+	//OverlayBlend* OverlayBlend_;
+	//OverlayBlend_ = CreateActor<OverlayBlend>();
+	//GameEngineDevice::GetBackBuffer()->AddEffect<OverlayPostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	//GameEngineTexture* GameEngineTexture_;
+	//GameEngineTexture_ = GameEngineTexture::Find("PostEffectOverlay.png");
+	//GetMainCamera()->GetCameraRenderTarget()->CreateRenderTargetTexture(OverlayBlend_->GetRenderer()->GetCurTexture());
 }
 
 void DirtmouthLevel2::Update(float _DeltaTime)
 {
-	if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
-	{
-		// ;
-		GetMainCameraActor()->FreeCameraModeOnOff();
-	}
-
 	CameraMoveWindowLimit();
 }
 

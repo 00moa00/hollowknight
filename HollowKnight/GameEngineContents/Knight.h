@@ -44,6 +44,7 @@ private:
 	bool isGroundWakeUpEnd_;
 	bool isWakeUpEnd_;
 	bool isSitEnd_;
+	bool isDoorEnd_;
 
 	bool isTalkingNPC_;
 
@@ -85,6 +86,8 @@ private:
 
 	GameEngineCollision* Test1_;
 	GameEngineCollision* Test2_;
+
+	std::string ChangeLevel_;
 
 public:
 
@@ -250,7 +253,12 @@ private:
 	void KnightTalkingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightTalkingEnd(const StateInfo& _Info);
 
+	// ---- 들어가기 ----
+	void KnightDoorStart(const StateInfo& _Info);
+	void KnightDoorUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightDoorEnd(const StateInfo& _Info);
 
+	 
 	//================================
 	//    Bind 
 	//================================
@@ -258,6 +266,7 @@ private:
 	bool KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	bool KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	bool NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 
 }; 

@@ -396,7 +396,13 @@
     <ClInclude Include="RoomPotal.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
-    <ClInclude Include="OverlayEffect.h">
+    <ClInclude Include="OverlayPostEffect.h">
+      <Filter>Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlayBlend.h">
+      <Filter>Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="NoisePostEffect.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
   </ItemGroup>
@@ -683,7 +689,13 @@
     <ClCompile Include="RoomPotal.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
-    <ClCompile Include="OverlayEffect.cpp">
+    <ClCompile Include="OverlayPostEffect.cpp">
+      <Filter>Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayBlend.cpp">
+      <Filter>Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="NoisePostEffect.cpp">
       <Filter>Actor\Effect</Filter>
     </ClCompile>
   </ItemGroup>

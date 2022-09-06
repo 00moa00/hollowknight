@@ -14,20 +14,26 @@ RoomPotal::~RoomPotal()
 
 void RoomPotal::Start()
 {
-	PromptSet_ = GetLevel()->CreateActor<PromptSet>();
-	PromptSet_->SetParent(this);
 
-	CreateCollisionComponent(float4{ 400, 200, 1 }, static_cast<int>(OBJECTORDER::Potal));
-	PromptSet_->GetCollision()->GetTransform().SetLocalScale(float4{ 400, 200, 1 });
-	PromptSet_->CreatePrompSet(PromptSetType::INTER);
 }
 
 void RoomPotal::Update(float _DeltaTime)
 {
 }
 
-void RoomPotal::CreatePotal(POTAL_TYPE _Type)
+void RoomPotal::CreatePotal(POTAL_TYPE _Type, bool isPromt)
 {
-	POTAL_TYPE_ = _Type;
+	if (isPromt == true)
+	{
+		PromptSet_ = GetLevel()->CreateActor<PromptSet>();
+		PromptSet_->SetParent(this);
+
+		PromptSet_->GetCollision()->GetTransform().SetLocalScale(float4{ 400, 200, 1 });
+		PromptSet_->CreatePrompSet(PromptSetType::INTER);
+	}
+
+
+	CreateCollisionComponent(float4{ 400, 200, 1 }, static_cast<int>(OBJECTORDER::Potal));
+	PotalType_ = _Type;
 }
 

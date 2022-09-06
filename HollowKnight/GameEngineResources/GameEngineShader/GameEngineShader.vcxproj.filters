@@ -15,6 +15,8 @@
     <FxCompile Include="TargetMerge.hlsl" />
     <FxCompile Include="Mask.hlsl" />
     <FxCompile Include="Blur.hlsl" />
+    <FxCompile Include="Noise.hlsl" />
+    <FxCompile Include="Overlay.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
