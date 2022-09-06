@@ -2,6 +2,8 @@
 #include "MasterNPC.h"
 
 MasterNPC::MasterNPC() 
+	:
+	isOpenShop_(false)
 {
 }
 
@@ -18,7 +20,8 @@ void MasterNPC::CreateNameFontRenderer()
 	NPCNameFontRenderer_->CreateFontRenderer(NPCState_.NPCName_
 		, 40
 		, { 100, 900, static_cast<float>(Z_ORDER::UI_Border) }
-	, false);
+		, false
+		, false);
 
 	NPCNameFontRenderer_->SetParent(this);
 }

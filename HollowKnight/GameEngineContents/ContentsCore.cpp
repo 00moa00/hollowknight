@@ -393,6 +393,31 @@ void ContentsCore::Start()
 
 
 	}
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("UI");
+		Dir.Move("Shop");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("UI_shops_animated_Shop_Menu_bottom0000-Sheet.png", 9, 1);
+		GameEngineTexture::Cut("UI_shops_animated_Shop_Menu_top0000-Sheet.png", 9, 1);
+		GameEngineTexture::Cut("UI_shops_animated_Shop_Menu_figurehead_Mapperwife0000-Sheet.png",12, 1);
+		GameEngineTexture::Cut("UI_shops_animated_Shop_Menu_figurehead_sly0000-Sheet.png", 7, 1);
+
+	}
+
 	//================================
 	//    ÅØ½ºÃ³ / NPC
 	//================================
@@ -412,6 +437,32 @@ void ContentsCore::Start()
 		}
 		
 		GameEngineTexture::Cut("Elderbug_idle_01-Sheet.png", 6, 1);
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Npc");
+		Dir.Move("Iselda");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Iselda Cln_idle_to_Shop0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Iselda Cln_idle0001-Sheet.png", 3, 1);
+		GameEngineTexture::Cut("Iselda Cln_idle0013-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Iselda Cln_Shop_0006-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Iselda Cln_Shop_to_idle0000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Iselda Cln_talk_right0000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("Iselda Cln_turn0001-Sheet.png", 5, 1);
+
 
 	}
 

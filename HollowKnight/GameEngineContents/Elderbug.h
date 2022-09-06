@@ -30,9 +30,9 @@ private:
 	//    Bind State
 	//================================
 
-	void EldeWaitStart(const StateInfo& _Info);
-	void EldeWaitUpdate(float _DeltaTime, const StateInfo& _Info);
-	void EldeWaitEnd(const StateInfo& _Info);
+	void ElderWaitStart(const StateInfo& _Info);
+	void ElderWaitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ElderWaitEnd(const StateInfo& _Info);
 
 	void ElderIdleStart(const StateInfo& _Info);
 	void ElderIdleUpdate(float _DeltaTime, const StateInfo& _Info);

@@ -195,8 +195,26 @@ enum class ITEM_TYPE
 	Sell_Item
 };
 
+enum class SHOP_ITEM
+{
+	Crosslaod_Map,
 
+	MaskPiece,		// 가면조각
+	Wayward_Compass, //나침반
+	Mark_of_Pride,	//사마귀
+	Dreamshield,	//몽환방패
+};
 
+enum class SlideItemIndex
+{
+	Min = -1,
+	First,
+	Second,
+	Third,
+	Fourth,
+	Fifth,
+	Sixth
+};
 
 enum class CHARM_SLOT
 {

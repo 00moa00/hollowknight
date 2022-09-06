@@ -45,7 +45,7 @@ private:
 	GameEngineStateManager FontStateManager_;
 
 public:
-	void CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isTyping, int _LineBreak = 0);
+	void CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isdotLineBreak, bool _isTyping,  int _LineBreak = 0);
 
 	void SetActorToScreenPosition(float4 _ActorPos, float4 _CameraPos);
 

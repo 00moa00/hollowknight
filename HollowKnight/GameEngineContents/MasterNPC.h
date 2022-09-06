@@ -35,7 +35,11 @@ private:
 	NPCState NPCState_;
 	PromptSet* PromptSet_;
 
+	bool isTalking_;
+	bool isOpenShop_;
+
 public:
+
 	//================================
 	//     Getter
 	//================================
@@ -54,12 +58,32 @@ public:
 		return DialogueSet_;
 	}
 
+	ContentsFontRenderer* GetNameFontRenderer()
+	{
+		return  NPCNameFontRenderer_;
+	}
+
+	bool isTalking()
+	{
+		return isTalking_;
+	}
+
 	//================================
 	//    Setter
 	//================================
 	void SetNPCName(std::string _Name)
 	{
 		NPCState_.NPCName_ = _Name;
+	}
+
+	void SetisTalking(bool b)
+	{
+		isTalking_ = b;
+	}
+
+	void SetisShop(bool b)
+	{
+		isOpenShop_ = b;
 	}
 
 	void CreateNameFontRenderer();

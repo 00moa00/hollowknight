@@ -21,6 +21,7 @@ void SettingPageInfo::Start()
 	InfoName_->CreateFontRenderer("테스트 "
 		, 40
 		, { 0, 0, static_cast<float>(Z_ORDER::UI) }
+	, false
 	, false);
 	InfoName_->GetTransform().SetWorldPosition({ 500, 200, static_cast<float>(Z_ORDER::UI) });
 	InfoName_->SetScreenMove();
@@ -34,7 +35,8 @@ void SettingPageInfo::Start()
 	Info_->CreateFontRenderer("테스트 "
 		, 30
 		, { 0, 0, static_cast<float>(Z_ORDER::UI) }
-	, false);
+		, true
+		, false);
 	Info_->GetTransform().SetWorldPosition({ 500, 0, static_cast<float>(Z_ORDER::UI) });
 	Info_->SetScreenMove();
 	Info_->GetFontRenderer()->SetLeftAndRightSort(LeftAndRightSort::CENTER);

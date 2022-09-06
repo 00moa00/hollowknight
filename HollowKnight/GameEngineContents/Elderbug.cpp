@@ -14,7 +14,7 @@ void Elderbug::Start()
 	SetNPCName("Àå·Î¹ú·¹");
 
 	GetTransform().SetWorldPosition({ 4400, -3045.f, static_cast<int>(Z_ORDER::NPC)});
-	
+	CreateNameFontRenderer();
 	CreatePromptSet();
 	//GetPromptSet()->GetTransform().SetLocalPosition({0, 150.f});
 	//GetPromptSet()->GetCollision()->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
@@ -40,9 +40,9 @@ void Elderbug::Start()
 
 
 	ElderManager_.CreateStateMember("WAIT"
-		, std::bind(&Elderbug::EldeWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Elderbug::EldeWaitStart, this, std::placeholders::_1)
-		, std::bind(&Elderbug::EldeWaitEnd, this, std::placeholders::_1));
+		, std::bind(&Elderbug::ElderWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Elderbug::ElderWaitStart, this, std::placeholders::_1)
+		, std::bind(&Elderbug::ElderWaitEnd, this, std::placeholders::_1));
 
 	ElderManager_.CreateStateMember("IDLE"
 		, std::bind(&Elderbug::ElderIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -74,13 +74,12 @@ bool Elderbug::ThisVSKnightCollision(GameEngineCollision* _This, GameEngineColli
 }
 
 
-void Elderbug::EldeWaitStart(const StateInfo& _Info)
+void Elderbug::ElderWaitStart(const StateInfo& _Info)
 {
 }
 
-void Elderbug::EldeWaitUpdate(float _DeltaTime, const StateInfo& _Info)
+void Elderbug::ElderWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
 		std::bind(&Elderbug::ThisVSKnightCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
@@ -88,7 +87,7 @@ void Elderbug::EldeWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 }
 
-void Elderbug::EldeWaitEnd(const StateInfo& _Info)
+void Elderbug::ElderWaitEnd(const StateInfo& _Info)
 {
 }
 

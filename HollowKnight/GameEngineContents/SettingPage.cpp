@@ -369,9 +369,6 @@ void SettingPage::SettingIdleStart(const StateInfo& _Info)
 
 void SettingPage::SettingIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	AllPage_;
-
-
 	if (true == GameEngineInput::GetInst()->IsDown("OnOffCheck"))
 	{
 		if (KnightData::GetInst()->GetisSetting() == false)

@@ -78,6 +78,7 @@ public:
 			, 36
 			, {GameEngineWindow::GetInst()->GetScale().hx() - 430, GameEngineWindow::GetInst()->GetScale().hy()-300 },
 			true,
+			true,
 			31
 			);
 

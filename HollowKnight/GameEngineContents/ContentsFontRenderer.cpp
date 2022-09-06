@@ -34,7 +34,7 @@ void ContentsFontRenderer::Update(float _DeltatTime)
 	FontStateManager_.Update(_DeltatTime);
 }
 
-void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isTyping, int _LineBreak )
+void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isdotLineBreak, bool _isTyping, int _LineBreak )
 {
 	int LineBreakCount = 0;
 
@@ -78,30 +78,32 @@ void ContentsFontRenderer::CreateFontRenderer(std::string _Text, float _FontSize
 		}
 	}
 
-
-	for (int i = 0; i < _Text.size(); ++i)
+	if (_isdotLineBreak == true)
 	{
-		std::string line = _Text.substr(i, 1);
-		if (line == ".")
+		for (int i = 0; i < _Text.size(); ++i)
 		{
-
-			std::string Doubleline = _Text.substr(i, 3);
-			if (Doubleline == "...")
+			std::string line = _Text.substr(i, 1);
+			if (line == ".")
 			{
-				++i;
-				continue;
-			}
-			else
-			{
-				_Text.insert(i + 1, "\n");
-				//++i;
-				continue;
 
-			}
+				std::string Doubleline = _Text.substr(i, 3);
+				if (Doubleline == "...")
+				{
+					++i;
+					continue;
+				}
+				else
+				{
+					_Text.insert(i + 1, "\n");
+					//++i;
+					continue;
 
-			//_Text.insert(i + 1, "\n");
-			////++i;
-			//continue;
+				}
+
+				//_Text.insert(i + 1, "\n");
+				////++i;
+				//continue;
+			}
 		}
 	}
 	//int TextSize = _Text.size();

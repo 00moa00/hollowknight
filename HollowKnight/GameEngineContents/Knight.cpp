@@ -501,7 +501,6 @@ void Knight::Start()
 
 	KnightManager_.ChangeState("FALL");
 
-
 	ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
 	ContentsFontRenderer_->CreateFontRenderer("가나다라마.바사", 24, {500,500}, false, 4);
 	ContentsFontRenderer_->FontOn();
@@ -780,7 +779,7 @@ bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollisio
 		if (true == GameEngineInput::GetInst()->IsDown("KnightUp"))
 		{
 			KnightManager_.ChangeState("TALKING");
-
+			NPC->SetisTalking(true);
 			NPC->GetDialogueSet()->SetDialogueOn();
 
 		}
@@ -802,6 +801,7 @@ bool Knight::NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineColl
 			if (NPC->GetDialogueSet()->GetDialougueFull() == true)
 			{
 				NPC->GetDialogueSet()->SetDialogueOff();
+				NPC->SetisTalking(false);
 				KnightManager_.ChangeState("STILL");
 				//return;
 			}

@@ -105,6 +105,8 @@ void CharmPage::Start()
 	NotchesFont_->CreateFontRenderer("何利 沫"
 		, 34
 		, { 0, 0, 0 }
+		,
+		false
 	, false);
 	NotchesFont_->GetTransform().SetWorldPosition({ -700,  150, static_cast<float>(Z_ORDER::UI_Border) });
 	NotchesFont_->SetScreenMove();
@@ -114,7 +116,8 @@ void CharmPage::Start()
 	EquippedSlotFont_->CreateFontRenderer("厘馒等 何利"
 		, 40
 		, { 200.f, (GameEngineWindow::GetInst()->GetScale().hy() - 300.0f), static_cast<float>(Z_ORDER::UI_Border) }
-	, false);
+		, false
+		, false);
 	EquippedSlotFont_->GetTransform().SetWorldPosition({ -700,  300, static_cast<float>(Z_ORDER::UI_Border) });
 	EquippedSlotFont_->SetScreenMove();
 	EquippedSlotFont_->SetParent(this);

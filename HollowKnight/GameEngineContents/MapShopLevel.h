@@ -2,6 +2,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include "HollowKnightLevel.h"
 #include "RoomPotal.h"
+#include "Iselda.h"
 
 // Ό³Έν :
 class MapShopLevel : public HollowKnightLevel
@@ -24,5 +25,6 @@ protected:
 
 private:
 	RoomPotal* DirtmouthPotal_;
+	Iselda* Iselda_;
 };
 

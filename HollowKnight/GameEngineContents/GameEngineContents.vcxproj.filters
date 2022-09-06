@@ -130,6 +130,9 @@
     <Filter Include="Actor\Play\UI\Dialogue">
       <UniqueIdentifier>{6f31a5fe-47ec-4b01-99f9-ae26b2aecf9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\Npc\Shop">
+      <UniqueIdentifier>{abe4ffdc-a5bb-4841-a9cd-4b2eee6f1bb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -413,6 +416,18 @@
     </ClInclude>
     <ClInclude Include="VignettePostEffect.h">
       <Filter>Actor\Effect\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Iselda.h">
+      <Filter>Actor\Play\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>Actor\Play\Npc\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopItem.h">
+      <Filter>Actor\Play\Npc\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopArrow.h">
+      <Filter>Actor\Play\Npc\Shop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -709,6 +724,18 @@
     </ClCompile>
     <ClCompile Include="VignettePostEffect.cpp">
       <Filter>Actor\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Iselda.cpp">
+      <Filter>Actor\Play\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Actor\Play\Npc\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopItem.cpp">
+      <Filter>Actor\Play\Npc\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopArrow.cpp">
+      <Filter>Actor\Play\Npc\Shop</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -28,20 +28,6 @@ Output Vignette_VS(Input _Input)
     return NewOutPut;
 }
 
-// 1000
-// 0100
-// 2010
-// 0301
-
-// 1020
-// 0103
-// 0010
-// 0001
-
-//static float Gau[5][5] =
-//{
-//    {  }
-//};
 
 Texture2D Tex : register(t0);
 SamplerState Smp : register(s0);
@@ -59,5 +45,26 @@ float4 Vignette_PS(Output _Input) : SV_Target0
     vignette = clamp(vignette - 0.2, 0, 1);
     Texture.rgb -= vignette;
     return Texture;
+    
+    
+        
+    //float2 PixelUVSize = float2(1.0f / 1920.0f, 1.0f / 1080.0f);
+    //float2 PixelUVCenter = _Input.Tex.xy;
+    //float2 StartUV = PixelUVCenter + (-PixelUVSize * 2);
+    //float2 CurUV = StartUV;
+    
+    //float2 samplePoint = CurUV;
+    //float4 Texture = Tex.Sample(Smp, samplePoint);
+    //float2 coord = (samplePoint - 0.5) * (_Input.Tex.x / _Input.Tex.y) * 2.0;
+    
+    
+    //float rf = sqrt(dot(coord, coord)) * 0.25f;
+    //float rf2_1 = rf * rf + 1.0;
+    //float e = 1.0 / (rf2_1 * rf2_1);
+    
+    //float4 src = float4(1.0, 1.0, 1.0, 0.4);
+    //float4 Result = float4(src.rgb * e, 1.0);
+    
+    //return Re;
    
 }
