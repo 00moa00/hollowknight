@@ -34,17 +34,12 @@ void OverlayPostEffect::Effect(GameEngineRenderTarget* _Target)
 {
 	CopyTarget->Copy(_Target);
 
-	//EffectSet.GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
-	//EffectSet.ShaderResources.SetTexture("Tex", Overlay_);
 	EffectSet.ShaderResources.SetTexture("Tex1", CopyTarget->GetRenderTargetTexture(0));
-	EffectSet.ShaderResources.SetTexture("Tex2", Overlay_);
-
-	//EffectSet.GetPipeLine()->Find("Tex2")->SetOutputMergerBlend("TransparentBlend");
-	
+	EffectSet.ShaderResources.SetTexture("Tex2", Overlay_);	
 
 	_Target->Clear();
 	_Target->Setting();
 	_Target->Effect(EffectSet);
-	//_Target->SettingDepthTexture(Overlay_);
+
 }
 

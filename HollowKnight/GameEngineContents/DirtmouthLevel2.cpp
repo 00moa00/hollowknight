@@ -13,6 +13,7 @@
 #include "AreaTitle.h"
 #include "OverlayBlend.h"
 #include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
 
 DirtmouthLevel2::DirtmouthLevel2() 
 	:
@@ -71,6 +72,8 @@ void DirtmouthLevel2::Start()
 	//OverlayBlend_ = CreateActor<OverlayBlend>();
 	//GameEngineDevice::GetBackBuffer()->AddEffect<OverlayPostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+
 	//GameEngineTexture* GameEngineTexture_;
 	//GameEngineTexture_ = GameEngineTexture::Find("PostEffectOverlay.png");
 	//GetMainCamera()->GetCameraRenderTarget()->CreateRenderTargetTexture(OverlayBlend_->GetRenderer()->GetCurTexture());

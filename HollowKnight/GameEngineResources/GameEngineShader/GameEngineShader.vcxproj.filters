@@ -17,6 +17,7 @@
     <FxCompile Include="Blur.hlsl" />
     <FxCompile Include="Noise.hlsl" />
     <FxCompile Include="Overlay.hlsl" />
+    <FxCompile Include="Vignette.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">

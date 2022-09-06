@@ -80,6 +80,14 @@ void ContentsCore::Start()
 	}
 
 	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("Vignette");
+		NewPipe->SetInputAssembler1VertexBuffer("FullRect");
+		NewPipe->SetInputAssembler2IndexBuffer("FullRect");
+		NewPipe->SetVertexShader("Vignette.hlsl");
+		NewPipe->SetPixelShader("Vignette.hlsl");
+	}
+
+	{
 		D3D11_BLEND_DESC Desc = { 0 };
 
 		Desc.AlphaToCoverageEnable = FALSE;

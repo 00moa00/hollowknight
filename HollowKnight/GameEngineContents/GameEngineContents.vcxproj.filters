@@ -124,6 +124,12 @@
     <Filter Include="Level\Levels\Dirtmouth\Room">
       <UniqueIdentifier>{a5254e96-a9ca-4069-b8d8-8e87b186c0b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\Knight">
+      <UniqueIdentifier>{53e1d123-3a3e-43a2-9d3d-d0265b2ed185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Effect\PostEffect">
+      <UniqueIdentifier>{bc835f29-28ac-4303-97f5-917e9ac03a05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -165,9 +171,6 @@
     <ClInclude Include="MasterEffect.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="KnightSlashEffect.h">
-      <Filter>Actor\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="TileMapRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -197,9 +200,6 @@
     </ClInclude>
     <ClInclude Include="KnightShadow.h">
       <Filter>Actor\Play\Knight Shadow</Filter>
-    </ClInclude>
-    <ClInclude Include="KnihgtShadowSlashEffect.h">
-      <Filter>Actor\Effect</Filter>
     </ClInclude>
     <ClInclude Include="MasterMapItem.h">
       <Filter>Actor\Master</Filter>
@@ -396,14 +396,23 @@
     <ClInclude Include="RoomPotal.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
-    <ClInclude Include="OverlayPostEffect.h">
-      <Filter>Actor\Effect</Filter>
+    <ClInclude Include="KnightSlashEffect.h">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClInclude>
-    <ClInclude Include="OverlayBlend.h">
-      <Filter>Actor\Effect</Filter>
+    <ClInclude Include="KnihgtShadowSlashEffect.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlayPostEffect.h">
+      <Filter>Actor\Effect\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="NoisePostEffect.h">
-      <Filter>Actor\Effect</Filter>
+      <Filter>Actor\Effect\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlayBlend.h">
+      <Filter>Actor\Effect\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="VignettePostEffect.h">
+      <Filter>Actor\Effect\PostEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +458,6 @@
     <ClCompile Include="MasterEffect.cpp">
       <Filter>Actor\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="KnightSlashEffect.cpp">
-      <Filter>Actor\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="TileMapRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -481,9 +487,6 @@
     </ClCompile>
     <ClCompile Include="KnightShadow.cpp">
       <Filter>Actor\Play\Knight Shadow</Filter>
-    </ClCompile>
-    <ClCompile Include="KnihgtShadowSlashEffect.cpp">
-      <Filter>Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="KnightShadowState.cpp">
       <Filter>Actor\Play\Knight Shadow</Filter>
@@ -689,14 +692,23 @@
     <ClCompile Include="RoomPotal.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
-    <ClCompile Include="OverlayPostEffect.cpp">
-      <Filter>Actor\Effect</Filter>
+    <ClCompile Include="KnightSlashEffect.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
-    <ClCompile Include="OverlayBlend.cpp">
-      <Filter>Actor\Effect</Filter>
+    <ClCompile Include="KnihgtShadowSlashEffect.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="NoisePostEffect.cpp">
-      <Filter>Actor\Effect</Filter>
+      <Filter>Actor\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayBlend.cpp">
+      <Filter>Actor\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayPostEffect.cpp">
+      <Filter>Actor\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="VignettePostEffect.cpp">
+      <Filter>Actor\Effect\PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
