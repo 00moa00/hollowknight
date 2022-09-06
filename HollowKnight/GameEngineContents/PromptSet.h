@@ -35,6 +35,8 @@ private:
 	GameEngineTextureRenderer* Prompt_;
 
 	GameEngineTextureRenderer* PromptName_;
+	GameEngineTextureRenderer* PromptBack_;
+
 	GameEngineCollision* PromptCollision_;
 	GameEngineStateManager PromptManager_;
 

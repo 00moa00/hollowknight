@@ -13,11 +13,19 @@ PromptSet::~PromptSet()
 
 void PromptSet::Start()
 {
+	PromptBack_ = CreateComponent<GameEngineTextureRenderer>();
+	PromptBack_->SetTexture("black_fader.png");
+	PromptBack_->GetTransform().SetWorldScale({250,150});
+	PromptBack_-> GetPixelData().MulColor = { 1,1,1,0.6f };
+	PromptBack_->SetScaleModeImage();
+	PromptBack_->GetTransform().SetLocalPosition({ 0, 20 });
+
 	GetTransform().SetLocalPosition({ 0, 150.f });
 
 	PromptCollision_ = CreateComponent<GameEngineCollision>();
 	PromptCollision_->GetTransform().SetLocalScale({ 600, 120 });
 	PromptCollision_->ChangeOrder(OBJECTORDER::Prompt);
+
 	GetCollision()->GetTransform().SetLocalPosition({ 0, -150.f });
 
 	Prompt_ = CreateComponent<GameEngineTextureRenderer>();
@@ -39,6 +47,7 @@ void PromptSet::Start()
 		{
 			Prompt_->Off();
 			PromptName_->Off();
+			PromptBack_->Off();
 		});
 
 	Prompt_->ChangeFrameAnimation("APPEAR_ANIMATION");
@@ -68,6 +77,7 @@ void PromptSet::Start()
 
 	Prompt_->Off();
 	PromptName_->Off();
+	PromptBack_->Off();
 
 	//PromptName_->SetScaleModeImage();
 
@@ -133,6 +143,7 @@ void PromptSet::PromptIdleStart(const StateInfo& _Info)
 {
 	Prompt_->On();
 	PromptName_->On();
+	PromptBack_->On();
 	Prompt_->ChangeFrameAnimation("APPEAR_ANIMATION");
 
 }
