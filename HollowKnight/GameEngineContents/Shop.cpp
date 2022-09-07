@@ -2,6 +2,8 @@
 #include "Shop.h"
 
 Shop::Shop() 
+	:
+	ShopArrow_(nullptr)
 {
 }
 
@@ -70,6 +72,10 @@ void Shop::Start()
 			ShopBottomRenderer_->ChangeFrameAnimation("IDLE_ANIMATION");
 		});
 
+	ShopArrow_ = GetLevel()->CreateActor<ShopArrow>();
+	ShopArrow_->GetTransform().SetWorldPosition({ -100, 20 });
+	ShopArrow_->SetParent(this);
+	ShopArrow_->SetCurrentPointItemIndex(2);
 	//================================
 	//    CreateKey
 	//================================
@@ -222,8 +228,12 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("ItemSlideUp"))
 	{
-		ShopManager_.ChangeState("SHOP_MOVE_UP");
-		return;
+		if (ShopArrow_->GetCurrentPointItemIndex() > 0)
+		{
+			ShopManager_.ChangeState("SHOP_MOVE_UP");
+			return;
+		}
+
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("ItemSlideDown"))
@@ -252,18 +262,16 @@ void Shop::ShopPopDownEnd(const StateInfo& _Info)
 void Shop::ShopMoveUpStart(const StateInfo& _Info)
 {
 
+	ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() - 1);
 }
 
 void Shop::ShopMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	for (int i = 0; i < ShopItemList_.size(); ++i)
 	{
-		if (ShopItemList_[i]->isCurrentSlideItemCenter() == true)
+		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y < 20)
 		{
-			if (ShopItemList_[i]->GetTransform().GetWorldPosition().y > 20)
-			{
-				ShopManager_.ChangeState("IDLE");
-			}
+			ShopManager_.ChangeState("SHOP_IDLE");
 		}
 
 		ShopItemList_[i]->GetTransform().SetWorldMove(float4::DOWN * _DeltaTime * 700.f);

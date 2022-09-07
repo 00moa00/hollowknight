@@ -18,7 +18,7 @@ public:
 public:
 	virtual void EffectInit();
 	virtual void Effect(GameEngineRenderTarget* _Target);
-
+	virtual void Update(float _DeltaTime){};
 protected:
 	GameEngineRenderTarget* CopyTarget;
 	GameEngineRenderSet EffectSet;

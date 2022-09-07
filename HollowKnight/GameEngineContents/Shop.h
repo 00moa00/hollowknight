@@ -4,6 +4,7 @@
 
 #include <GameEngineCore/GameEngineFontRenderer.h>
 #include "ShopItem.h"
+#include "ShopArrow.h"
 
 enum class SHOP_TYPE
 {
@@ -43,6 +44,8 @@ private:
 	GameEngineUIRenderer* ShopBottomDividerRenderer_;
 
 	GameEngineUIRenderer* FigureheadRenderer_;
+
+	ShopArrow* ShopArrow_;
 
 	SHOP_TYPE ShopType_;
 

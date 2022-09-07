@@ -66,17 +66,17 @@ float4 Blur_PS(Output _Input) : SV_Target0
     //
     float2 PixelUVSize = float2(1.0f / 1920.0f, 1.0f / 1080.0f);
     float2 PixelUVCenter = _Input.Tex.xy;
-    float2 StartUV = PixelUVCenter + (-PixelUVSize * 2);
+    float2 StartUV = PixelUVCenter + (-PixelUVSize * 1.5);
     float2 CurUV = StartUV;
 
 
     float4 Texture = Tex.Sample(Smp, CurUV);
 
-    float3 grainPlate = float(grain(CurUV + Time)) - 0.7;
+    float3 grainPlate = float(grain(CurUV + Time)) - 0.005;
     
     //Get the webcam
    
-    
+        
     //Mix the two signals together
     float3 mixer = lerp(Texture.rgb, grainPlate, .1);
 	
