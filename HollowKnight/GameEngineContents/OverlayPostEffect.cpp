@@ -43,7 +43,3 @@ void OverlayPostEffect::Effect(GameEngineRenderTarget* _Target)
 
 }
 
-void OverlayPostEffect::Update(float _DeltaTime)
-{
-}
-

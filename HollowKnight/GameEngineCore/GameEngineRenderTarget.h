@@ -37,7 +37,6 @@ class GameEnginePostEffect
 public:
 	virtual void EffectInit() = 0;
 	virtual void Effect(class GameEngineRenderTarget* _Render) = 0;
-	virtual void Update(float _DeltaTime) = 0;
 
 	virtual ~GameEnginePostEffect() 
 	{

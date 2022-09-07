@@ -73,7 +73,7 @@ float4 Blur_PS(Output _Input) : SV_Target0
     float4 Texture = Tex.Sample(Smp, CurUV);
 
     float3 grainPlate = float(grain(CurUV + Time)) - 0.005;
-    
+    grainPlate /= 2;
     //Get the webcam
    
         

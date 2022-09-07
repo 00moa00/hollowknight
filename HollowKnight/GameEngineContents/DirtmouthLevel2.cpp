@@ -90,12 +90,12 @@ void DirtmouthLevel2::Start()
 void DirtmouthLevel2::Update(float _DeltaTime)
 {
 	CameraMoveWindowLimit();
-	std::list<GameEnginePostEffect*> Find = GetMainCamera()->GetCameraRenderTarget()->Effects;
+	//std::list<GameEnginePostEffect*> Find = GetMainCamera()->GetCameraRenderTarget()->Effects;
 
-	for (GameEnginePostEffect* Effect : Find)
-	{
-		Effect->Update(_DeltaTime);
-	}
+	//for (GameEnginePostEffect* Effect : Find)
+	//{
+	//	Effect->Update(_DeltaTime);
+	//}
 }
 
 void DirtmouthLevel2::End()

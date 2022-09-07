@@ -41,11 +41,7 @@ void NoisePostEffect::Effect(GameEngineRenderTarget* _Target)
 	_Target->Setting();
 	_Target->Effect(EffectSet);
 	_Target->SetName("Noise");
+	NoiseData_.Time = GameEngineTime::GetInst()->GetDeltaTime();
 
-}
-
-void NoisePostEffect::Update(float _DeltaTime)
-{
-	NoiseData_.Time = _DeltaTime * 1.8f;
 }
 
