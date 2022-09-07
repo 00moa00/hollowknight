@@ -72,16 +72,29 @@ void DirtmouthLevel2::Start()
 	//OverlayBlend_ = CreateActor<OverlayBlend>();
 	//GameEngineDevice::GetBackBuffer()->AddEffect<OverlayPostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
-	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 
+
+	
+
+	//std::list<GameEnginePostEffect*> FindEffect = GetMainCamera()->GetCameraRenderTarget()->Effects;
+	
+
+//	GetMainCamera()->GetCameraRenderTarget()->
 	//GameEngineTexture* GameEngineTexture_;
 	//GameEngineTexture_ = GameEngineTexture::Find("PostEffectOverlay.png");
-	//GetMainCamera()->GetCameraRenderTarget()->CreateRenderTargetTexture(OverlayBlend_->GetRenderer()->GetCurTexture());
+
 }
 
 void DirtmouthLevel2::Update(float _DeltaTime)
 {
 	CameraMoveWindowLimit();
+	std::list<GameEnginePostEffect*> Find = GetMainCamera()->GetCameraRenderTarget()->Effects;
+
+	for (GameEnginePostEffect* Effect : Find)
+	{
+		Effect->Update(_DeltaTime);
+	}
 }
 
 void DirtmouthLevel2::End()

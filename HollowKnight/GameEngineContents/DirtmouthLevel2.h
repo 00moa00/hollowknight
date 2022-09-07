@@ -27,5 +27,7 @@ private:
 	Elderbug* Elderbug_;
 	RoomPotal* MapShopPotal_;
 	RoomPotal* SlyShopPotal_;
+
+	GameEnginePostEffect* GameEnginePostEffect_;
 };
 

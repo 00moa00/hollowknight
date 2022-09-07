@@ -15,7 +15,8 @@ public:
 	ShopArrow& operator=(ShopArrow&& _Other) noexcept = delete;
 
 protected:
-
+	void Start();
+	void Update(float _DeltaTime);
 private:
 
 };

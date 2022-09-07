@@ -251,22 +251,7 @@ void Shop::ShopPopDownEnd(const StateInfo& _Info)
 
 void Shop::ShopMoveUpStart(const StateInfo& _Info)
 {
-	for (int i = 0; i < ShopItemList_.size(); ++i)
-	{
-		int Setindex = (static_cast<int>(ShopItemList_[i]->isCurrentSlideItemCenter())) - 1;
 
-		if (Setindex == (static_cast<int>(SlideItemIndex::Min)))
-		{
-			Setindex = (static_cast<int>(SlideItemIndex::First));
-		}
-
-		else if (Setindex == (ShopItemList_.size()))
-		{
-			Setindex = ShopItemList_.size() - 1;
-		}
-
-		ShopItemList_[i]->SetSlideItemIndex(Setindex);
-	}
 }
 
 void Shop::ShopMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
