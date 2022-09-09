@@ -253,6 +253,10 @@ private:
 	void KnightTalkingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightTalkingEnd(const StateInfo& _Info);
 
+	void KnightShoppingStart(const StateInfo& _Info);
+	void KnightShoppingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightShoppingEnd(const StateInfo& _Info);
+
 	// ---- 들어가기 ----
 	void KnightDoorStart(const StateInfo& _Info);
 	void KnightDoorUpdate(float _DeltaTime, const StateInfo& _Info);
@@ -266,6 +270,7 @@ private:
 	bool KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	bool KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	bool NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+
 	bool KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 

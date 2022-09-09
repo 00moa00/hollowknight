@@ -71,8 +71,10 @@ void DirtmouthLevel2::Start()
 	//OverlayBlend* OverlayBlend_;
 	//OverlayBlend_ = CreateActor<OverlayBlend>();
 	//GameEngineDevice::GetBackBuffer()->AddEffect<OverlayPostEffect>();
+
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+
 	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 

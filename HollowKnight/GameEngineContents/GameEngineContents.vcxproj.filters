@@ -124,14 +124,14 @@
     <Filter Include="Actor\Effect\PostEffect">
       <UniqueIdentifier>{bc835f29-28ac-4303-97f5-917e9ac03a05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\UI\Info">
-      <UniqueIdentifier>{c37ca923-d779-47d1-a913-ae2aca7e6fdd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Play\UI\Dialogue">
       <UniqueIdentifier>{6f31a5fe-47ec-4b01-99f9-ae26b2aecf9a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Play\Npc\Shop">
       <UniqueIdentifier>{abe4ffdc-a5bb-4841-a9cd-4b2eee6f1bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\UI\PromptSet">
+      <UniqueIdentifier>{c37ca923-d779-47d1-a913-ae2aca7e6fdd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -385,7 +385,7 @@
       <Filter>Actor\Play\Npc</Filter>
     </ClInclude>
     <ClInclude Include="PromptSet.h">
-      <Filter>Actor\Play\UI\Info</Filter>
+      <Filter>Actor\Play\UI\PromptSet</Filter>
     </ClInclude>
     <ClInclude Include="DirtmouthStationLevel.h">
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
@@ -693,7 +693,7 @@
       <Filter>Actor\Play\Npc</Filter>
     </ClCompile>
     <ClCompile Include="PromptSet.cpp">
-      <Filter>Actor\Play\UI\Info</Filter>
+      <Filter>Actor\Play\UI\PromptSet</Filter>
     </ClCompile>
     <ClCompile Include="DirtmouthStationLevel.cpp">
       <Filter>Level\Levels\Dirtmouth\Room</Filter>

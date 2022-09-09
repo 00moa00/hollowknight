@@ -37,21 +37,32 @@ void Shop::Start()
 	ShopBottomMaskRederer = CreateComponent<GameEngineUIRenderer>();
 	ShopBottomMaskRederer->SetTexture("shop_mask_bottom.png");
 	ShopBottomMaskRederer->GetTransform().SetLocalScale({600, 200});
-	ShopBottomMaskRederer->GetTransform().SetLocalPosition({ 0, -350 });
+	ShopBottomMaskRederer->GetTransform().SetLocalPosition({ 0, -380, -100 });
 
 	ShopTopMaskRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	ShopTopMaskRenderer_->SetTexture("shop_mask_top.png");
 	ShopTopMaskRenderer_->GetTransform().SetLocalScale({ 600, 200 });
-	ShopTopMaskRenderer_->GetTransform().SetLocalPosition({ 0,190 });
+	ShopTopMaskRenderer_->GetTransform().SetLocalPosition({ 0, 220, -100 });
 
 	ShopTopRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	ShopTopRenderer_->SetTexture("UI_shops_animated_Shop_Menu_top0000-Sheet.png");
 	ShopTopRenderer_->GetTransform().SetLocalScale(ShopTopRenderer_->GetCurTexture()->GetScale());
 	ShopTopRenderer_->CreateFrameAnimationCutTexture("POPUP_ANIMATION", FrameAnimation_DESC("UI_shops_animated_Shop_Menu_top0000-Sheet.png", 0, 8, 0.100f, false));
 	ShopTopRenderer_->CreateFrameAnimationCutTexture("IDLE_ANIMATION", FrameAnimation_DESC("UI_shops_animated_Shop_Menu_top0000-Sheet.png", 8, 8, 0.100f, false));
+	
+	{
+		std::vector<unsigned int>BackAni;
+
+		for (unsigned int i = 8; i > -1; ++i)
+		{
+			BackAni.push_back(i);
+		}
+		ShopTopRenderer_->CreateFrameAnimationCutTexture("POPDOWN_ANIMATION", FrameAnimation_DESC("UI_shops_animated_Shop_Menu_top0000-Sheet.png", BackAni, 0.100f, false));
+	}
+	
 	ShopTopRenderer_->ChangeFrameAnimation("POPUP_ANIMATION");
 	ShopTopRenderer_->SetScaleModeImage();
-	ShopTopRenderer_->GetTransform().SetLocalPosition({ 0,190 });
+	ShopTopRenderer_->GetTransform().SetLocalPosition({ 0,190 , -100 });
 
 	ShopTopRenderer_->AnimationBindEnd("POPUP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -63,9 +74,21 @@ void Shop::Start()
 	ShopBottomRenderer_->GetTransform().SetLocalScale(ShopBottomRenderer_->GetCurTexture()->GetScale());
 	ShopBottomRenderer_->CreateFrameAnimationCutTexture("POPUP_ANIMATION", FrameAnimation_DESC("UI_shops_animated_Shop_Menu_bottom0000-Sheet.png", 0, 8, 0.100f, false));
 	ShopBottomRenderer_->CreateFrameAnimationCutTexture("IDLE_ANIMATION", FrameAnimation_DESC("UI_shops_animated_Shop_Menu_bottom0000-Sheet.png", 8, 8, 0.100f, false));
+
+	{
+		std::vector<unsigned int>BackAni;
+
+		for (unsigned int i = 8; i > -1; ++i)
+		{
+			BackAni.push_back(i);
+		}
+		ShopBottomRenderer_->CreateFrameAnimationCutTexture("POPDOWN_ANIMATION", FrameAnimation_DESC("UI_shops_animated_Shop_Menu_bottom0000-Sheet.png", BackAni, 0.100f, false));
+	}
+
+
 	ShopBottomRenderer_->ChangeFrameAnimation("POPUP_ANIMATION");
 	ShopBottomRenderer_->SetScaleModeImage();
-	ShopBottomRenderer_->GetTransform().SetLocalPosition({ 0, -350 });
+	ShopBottomRenderer_->GetTransform().SetLocalPosition({ 0, -350, -100 });
 
 	ShopBottomRenderer_->AnimationBindEnd("POPUP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -76,6 +99,7 @@ void Shop::Start()
 	ShopArrow_->GetTransform().SetWorldPosition({ -100, 20 });
 	ShopArrow_->SetParent(this);
 	ShopArrow_->SetCurrentPointItemIndex(2);
+
 	//================================
 	//    CreateKey
 	//================================
@@ -83,9 +107,15 @@ void Shop::Start()
 	{
 		GameEngineInput::GetInst()->CreateKey("ItemSlideUp", VK_UP);
 	}
+
 	if (false == GameEngineInput::GetInst()->IsKey("ItemSlideDown"))
 	{
 		GameEngineInput::GetInst()->CreateKey("ItemSlideDown", VK_DOWN);
+	}
+
+	if (false == GameEngineInput::GetInst()->IsKey("ItemBuy"))
+	{
+		GameEngineInput::GetInst()->CreateKey("ItemBuy", VK_RETURN);
 	}
 
 	ShopManager_.CreateStateMember("SHOP_STILL"
@@ -112,6 +142,16 @@ void Shop::Start()
 		, std::bind(&Shop::ShopMoveDownUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Shop::ShopMoveDownStart, this, std::placeholders::_1)
 		, std::bind(&Shop::ShopMoveDownEnd, this, std::placeholders::_1));
+
+	ShopManager_.CreateStateMember("BUY_ITEM_MOVE_UP"
+		, std::bind(&Shop::ShopBuyItemMoveUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Shop::ShopBuyItemMoveUpStart, this, std::placeholders::_1)
+		, std::bind(&Shop::ShopBuyItemMoveUpEnd, this, std::placeholders::_1));
+
+	ShopManager_.CreateStateMember("BUY_ITEM_MOVE_DOWN"
+		, std::bind(&Shop::ShopBuyItemMoveDownUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Shop::ShopBuyItemMoveDownStart, this, std::placeholders::_1)
+		, std::bind(&Shop::ShopBuyItemMoveDownEnd, this, std::placeholders::_1));
 
 	ShopManager_.ChangeState("SHOP_IDLE");
 
@@ -288,6 +328,8 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		if (ShopArrow_->GetCurrentPointItemIndex() > 0)
 		{
+			ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() - 1);
+
 			ShopManager_.ChangeState("SHOP_MOVE_UP");
 			return;
 		}
@@ -298,7 +340,37 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	{	
 		if (ShopArrow_->GetCurrentPointItemIndex() < ShopItemList_.size()-1)
 		{
+			ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() + 1);
+
 			ShopManager_.ChangeState("SHOP_MOVE_DOWN");
+			return;
+		}
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("ItemBuy"))
+	{
+
+		if (ShopArrow_->GetCurrentPointItemIndex() == ShopItemList_.size() - 1) 
+		{
+
+			ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
+
+			ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
+			ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex()-1);
+			ShopManager_.ChangeState("BUY_ITEM_MOVE_DOWN");
+			return;
+		}
+		else
+		{
+			ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
+
+			for (int i = ShopArrow_->GetCurrentPointItemIndex() + 1; i < ShopItemList_.size(); ++i)
+			{
+				ShopItemList_[i]->SetSlideItemIndex(i - 1);
+			}
+			ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
+
+			ShopManager_.ChangeState("BUY_ITEM_MOVE_UP");
 			return;
 		}
 	}
@@ -323,13 +395,27 @@ void Shop::ShopPopDownEnd(const StateInfo& _Info)
 void Shop::ShopMoveUpStart(const StateInfo& _Info)
 {
 
-	ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() - 1);
+
+
+
+//	if(ShopArrow_->GetCurrentPointItemIndex() )
 }
 
 void Shop::ShopMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	for (int i = 0; i < ShopItemList_.size(); ++i)
 	{
+		if (ShopItemList_[i]->GetTransform().GetWorldPosition().y < -280 || ShopItemList_[i]->GetTransform().GetWorldPosition().y > 220)
+		{
+			ShopItemList_[i]->Off();
+		}
+
+		else
+		{
+			ShopItemList_[i]->On();
+		}
+
+
 		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y < ShopCurrentItemBackboardRenderer_->GetTransform().GetLocalPosition().y)
 		{
 			ShopManager_.ChangeState("SHOP_IDLE");
@@ -337,13 +423,10 @@ void Shop::ShopMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		}
 
-
 		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
 		float4 Move = float4::DOWN * _DeltaTime * 700.f;
 		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
 		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
-
-
 
 		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
 		ShopItemList_[i]->SetFontRendererMove();
@@ -359,7 +442,6 @@ void Shop::ShopMoveUpEnd(const StateInfo& _Info)
 
 void Shop::ShopMoveDownStart(const StateInfo& _Info)
 {
-	ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() + 1);
 
 }
 
@@ -367,6 +449,67 @@ void Shop::ShopMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	for (int i = 0; i < ShopItemList_.size(); ++i)
 	{
+
+		if (ShopItemList_[i]->GetTransform().GetWorldPosition().y > 220 || ShopItemList_[i]->GetTransform().GetWorldPosition().y < -280)
+		{
+			ShopItemList_[i]->Off();
+		}
+
+		else
+		{
+			ShopItemList_[i]->On();
+		}
+
+
+
+
+		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
+		float4 Move = float4::UP * _DeltaTime * 700.f;
+		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
+		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
+
+		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y > ShopCurrentItemBackboardRenderer_->GetTransform().GetLocalPosition().y)
+		{
+			ShopManager_.ChangeState("SHOP_IDLE");
+			return;
+		}
+
+		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+		ShopItemList_[i]->SetFontRendererMove();
+
+	}
+}
+
+void Shop::ShopMoveDownEnd(const StateInfo& _Info)
+{
+	SetItemListUpdatePosition();
+
+}
+
+void Shop::ShopBuyItemMoveUpStart(const StateInfo& _Info)
+{
+
+
+
+}
+
+void Shop::ShopBuyItemMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+	for (int i = ShopArrow_->GetCurrentPointItemIndex(); i < ShopItemList_.size(); ++i)
+	{
+
+		if (ShopItemList_[i]->GetTransform().GetWorldPosition().y > 220 || ShopItemList_[i]->GetTransform().GetWorldPosition().y < -280)
+		{
+			ShopItemList_[i]->Off();
+		}
+
+		else
+		{
+			ShopItemList_[i]->On();
+		}
+
+
 		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y > ShopCurrentItemBackboardRenderer_->GetTransform().GetLocalPosition().y)
 		{
 			ShopManager_.ChangeState("SHOP_IDLE");
@@ -384,10 +527,52 @@ void Shop::ShopMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
 		ShopItemList_[i]->SetFontRendererMove();
 
 	}
+
 }
 
-void Shop::ShopMoveDownEnd(const StateInfo& _Info)
+void Shop::ShopBuyItemMoveUpEnd(const StateInfo& _Info)
 {
 	SetItemListUpdatePosition();
 
+}
+
+void Shop::ShopBuyItemMoveDownStart(const StateInfo& _Info)
+{
+}
+
+void Shop::ShopBuyItemMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	for (int i = 0; i < ShopItemList_.size(); ++i)
+	{
+		if (ShopItemList_[i]->GetTransform().GetWorldPosition().y < -280 || ShopItemList_[i]->GetTransform().GetWorldPosition().y > 220)
+		{
+			ShopItemList_[i]->Off();
+		}
+
+		else
+		{
+			ShopItemList_[i]->On();
+		}
+
+
+		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y < ShopCurrentItemBackboardRenderer_->GetTransform().GetLocalPosition().y)
+		{
+			ShopManager_.ChangeState("SHOP_IDLE");
+			return;
+
+		}
+
+		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
+		float4 Move = float4::DOWN * _DeltaTime * 700.f;
+		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
+		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
+
+		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+		ShopItemList_[i]->SetFontRendererMove();
+
+	}
+}
+
+void Shop::ShopBuyItemMoveDownEnd(const StateInfo& _Info)
+{
 }

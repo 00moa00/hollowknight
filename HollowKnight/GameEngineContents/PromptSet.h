@@ -32,6 +32,9 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+
+	PromptSetType PromptSetType_;
+
 	GameEngineTextureRenderer* Prompt_;
 
 	GameEngineTextureRenderer* PromptName_;

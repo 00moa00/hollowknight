@@ -53,6 +53,9 @@ private:
 
 	bool isSetting_; //세팅 페이지 열었당
 
+	float4 KnightPosition_;
+
+
 	std::map<int, std::string> KnihgtItemList_;
 
 public:
@@ -121,6 +124,12 @@ public:
 		return CharmNotches_;
 	}
 
+	float4 GetKnightPosition()
+	{
+		return KnightPosition_;
+	}
+
+
 	//================================
 	//    Setter
 	//================================
@@ -147,6 +156,12 @@ public:
 
 		}
 	}
+
+	void SetKnightPosition(float4 _Pos)
+	{
+		KnightPosition_ = _Pos;
+	}
+
 
 	void SetisSetting(bool _b)
 	{

@@ -56,7 +56,7 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 
 		ItemRenderer_ = CreateComponent<GameEngineUIRenderer>();
 		ItemRenderer_->SetTexture("Charm_0.png");
-		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale() * 0.6f);
+		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale() * 0.5f);
 
 		GeoRenderer_ = CreateComponent<GameEngineUIRenderer>();
 		GeoRenderer_->SetTexture("Item_Geo.png");
@@ -109,8 +109,8 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 	case SHOP_ITEM::Dreamshield:
 
 		ItemRenderer_ = CreateComponent<GameEngineUIRenderer>();
-		ItemRenderer_->SetTexture("Heart_Piece_01.png");
-		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale() * 0.6f);
+		ItemRenderer_->SetTexture("Charm_38.png");
+		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale() * 0.5f);
 
 		GeoRenderer_ = CreateComponent<GameEngineUIRenderer>();
 		GeoRenderer_->SetTexture("Item_Geo.png");
@@ -137,7 +137,8 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 	case SHOP_ITEM::MaskPiece:
 
 		ItemRenderer_ = CreateComponent<GameEngineUIRenderer>();
-		ItemRenderer_->SetTexture("Charm_38.png");
+		ItemRenderer_->SetTexture("Heart_Piece_01.png");
+
 		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale() * 0.6f);
 
 		GeoRenderer_ = CreateComponent<GameEngineUIRenderer>();

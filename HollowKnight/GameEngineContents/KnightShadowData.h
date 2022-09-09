@@ -37,7 +37,6 @@ protected:
 
 private:
 	float4 ShadowPosition_;
-	float4 KnightPosition_;
 
 	bool isShadowDepart_;
 
@@ -50,10 +49,6 @@ public:
 		return ShadowPosition_;
 	}
 
-	float4 GetKnightPosition()
-	{
-		return KnightPosition_;
-	}
 
 	bool GetisShadowDepart()
 	{
@@ -69,10 +64,6 @@ public:
 		ShadowPosition_ = _Pos;
 	}
 
-	void SetKnightPosition(float4 _Pos)
-	{
-		KnightPosition_ = _Pos;
-	}
 
 	void SetisShadowDepart(bool _b)
 	{

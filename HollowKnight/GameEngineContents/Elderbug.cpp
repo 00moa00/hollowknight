@@ -12,6 +12,7 @@ Elderbug::~Elderbug()
 void Elderbug::Start()
 {
 	SetNPCName("ภๅทฮน๚ทน");
+	SetNPCType(NPC_TYPE::Normal);
 
 	GetTransform().SetWorldPosition({ 4400, -3045.f, static_cast<int>(Z_ORDER::NPC)});
 	CreateNameFontRenderer();

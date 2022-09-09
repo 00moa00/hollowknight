@@ -109,5 +109,13 @@ public:
 	void ShopMoveDownStart(const StateInfo& _Info);
 	void ShopMoveDownUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShopMoveDownEnd(const StateInfo& _Info);
+
+	void ShopBuyItemMoveUpStart(const StateInfo& _Info);
+	void ShopBuyItemMoveUpUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ShopBuyItemMoveUpEnd(const StateInfo& _Info);
+
+	void ShopBuyItemMoveDownStart(const StateInfo& _Info);
+	void ShopBuyItemMoveDownUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ShopBuyItemMoveDownEnd(const StateInfo& _Info);
 };
 

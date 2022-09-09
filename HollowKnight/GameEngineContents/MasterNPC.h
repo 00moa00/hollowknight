@@ -10,6 +10,7 @@
 struct NPCState
 {
 	std::string NPCName_;
+	NPC_TYPE NPCType_;
 };
 
 // Ό³Έν :
@@ -27,6 +28,8 @@ public:
 	MasterNPC& operator=(MasterNPC&& _Other) noexcept = delete;
 
 protected:
+	//float4 NPCDir_;
+
 	DialogueSet* DialogueSet_;
 
 	ContentsFontRenderer* NPCNameFontRenderer_;
@@ -68,6 +71,13 @@ public:
 		return isTalking_;
 	}
 
+	NPC_TYPE GetNPCType()
+	{
+		return NPCState_.NPCType_;
+	}
+
+
+
 	//================================
 	//    Setter
 	//================================
@@ -81,14 +91,24 @@ public:
 		isTalking_ = b;
 	}
 
-	void SetisShop(bool b)
+	virtual void SetisShop(bool b)
 	{
 		isOpenShop_ = b;
 	}
 
+	void SetNPCType(NPC_TYPE _Type)
+	{
+		NPCState_.NPCType_ = _Type;
+	}
+
+
+
+
 	void CreateNameFontRenderer();
 	void CreatePromptSet();
 	void CreateDialogueSet();
+	
+	void CheckDirToKnight();
 
 };
 

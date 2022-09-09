@@ -1,10 +1,11 @@
 #include "PreCompile.h"
 #include "KnightShadow.h"
 #include "KnightShadowData.h"
+#include "KnightData.h"
 
 void KnightShadow::ShadowDirectionCheck()
 {
-	float4 Dir = KnightShadowData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
+	float4 Dir = KnightData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
 	Dir.Normalize();
 
 	if (Dir.x > 0.0f)
@@ -44,7 +45,7 @@ void KnightShadow::ShadowIdleStart(const StateInfo& _Info)
 
 void KnightShadow::ShadowIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	float4 Lenth = KnightShadowData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
+	float4 Lenth = KnightData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
 	float LenthAbs = Lenth.Length();
 
 	if (LenthAbs < 400.f)
@@ -91,7 +92,7 @@ void KnightShadow::ShadowFlyStart(const StateInfo& _Info)
 void KnightShadow::ShadowFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	ShadowDirectionCheck();
-	float4 Dir = KnightShadowData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
+	float4 Dir = KnightData::GetInst()->GetKnightPosition() - this->GetTransform().GetWorldPosition();
 	Dir.Normalize();
 	SetMoveDirection(Dir);
 

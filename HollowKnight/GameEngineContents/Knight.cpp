@@ -493,6 +493,11 @@ void Knight::Start()
 		, std::bind(&Knight::KnightTalkingStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightTalkingEnd, this, std::placeholders::_1));
 
+	KnightManager_.CreateStateMember("SHOPPING"
+		, std::bind(&Knight::KnightShoppingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightShoppingStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightShoppingEnd, this, std::placeholders::_1));
+
 	// ---- 문 들어가기 ----
 	KnightManager_.CreateStateMember("DOOR"
 		, std::bind(&Knight::KnightDoorUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -778,15 +783,36 @@ bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollisio
 
 		if (true == GameEngineInput::GetInst()->IsDown("KnightUp"))
 		{
-			KnightManager_.ChangeState("TALKING");
-			NPC->SetisTalking(true);
-			NPC->GetDialogueSet()->SetDialogueOn();
+			if (NPC->GetNPCType() == NPC_TYPE::Shop)
+			{
+				NPC->GetMoveDirection().Normalize();
+				if (NPC->GetMoveDirection().y < 0)
+				{
+					NPC->SetisShop(true);
+					KnightManager_.ChangeState("SHOPPING");
+					//NPC->SetisShop(true);
+				}
 
+				else if (NPC->GetMoveDirection().y > 0)
+				{
+					NPC->SetisTalking(true);
+					NPC->GetDialogueSet()->SetDialogueOn();
+					KnightManager_.ChangeState("TALKING");
+				}
+
+			}
+
+			else if (NPC->GetNPCType() == NPC_TYPE::Normal)
+			{
+				KnightManager_.ChangeState("TALKING");
+				NPC->SetisTalking(true);
+				NPC->GetDialogueSet()->SetDialogueOn();
+				isTalkingNPC_ = true;
+
+			}
 		}
-
 	}
 
-	isTalkingNPC_ = true;
 	return true;
 }
 

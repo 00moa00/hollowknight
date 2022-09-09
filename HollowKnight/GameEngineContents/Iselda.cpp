@@ -12,6 +12,7 @@ Iselda::~Iselda()
 void Iselda::Start()
 {
 	SetNPCName("¿Ãºø¥Ÿ");
+	SetNPCType(NPC_TYPE::Shop);
 
 	GetTransform().SetWorldPosition({ 1040, -760.f, static_cast<int>(Z_ORDER::NPC) });
 	CreateNameFontRenderer();
@@ -72,13 +73,10 @@ void Iselda::Start()
 	MapShop_->GetShopItemList().back()->SetSlideItemIndex(5);
 
 	MapShop_->SetItemListPosition();
+	MapShop_->Off();
 	//MapShop_->GetShopItemList().back()->GetTransform().SetWorldPosition({270,0});
 	//MapShop_->GetShopItemList().back()->SetFontRendererMove();
 
-	IseldaManager_.CreateStateMember("WAIT"
-		, std::bind(&Iselda::IseldaWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Iselda::IseldaWaitStart, this, std::placeholders::_1)
-		, std::bind(&Iselda::IseldaWaitEnd, this, std::placeholders::_1));
 
 	IseldaManager_.CreateStateMember("IDLE"
 		, std::bind(&Iselda::IseldaIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -95,12 +93,19 @@ void Iselda::Start()
 		, std::bind(&Iselda::IseldaChangeLeaveStart, this, std::placeholders::_1)
 		, std::bind(&Iselda::IseldaChangeLeaveEnd, this, std::placeholders::_1));
 
-	IseldaManager_.ChangeState("WAIT");
+	IseldaManager_.CreateStateMember("OPEN_SHOP"
+		, std::bind(&Iselda::IseldaShopOpenUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Iselda::IseldaShopOpenStart, this, std::placeholders::_1)
+		, std::bind(&Iselda::IseldaShopOpenEnd, this, std::placeholders::_1));
+
+
+	IseldaManager_.ChangeState("IDLE");
 
 }
 
 void Iselda::Update(float _DeltaTime)
 {
+	CheckDirToKnight();
 	IseldaManager_.Update(_DeltaTime);
 }
 
@@ -159,5 +164,17 @@ void Iselda::IseldaChangeLeaveUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Iselda::IseldaChangeLeaveEnd(const StateInfo& _Info)
+{
+}
+
+void Iselda::IseldaShopOpenStart(const StateInfo& _Info)
+{
+}
+
+void Iselda::IseldaShopOpenUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Iselda::IseldaShopOpenEnd(const StateInfo& _Info)
 {
 }

@@ -52,7 +52,7 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	// ========== UPDATE ==========
 
 	DoubleSlashTimer(_DeltaTime);
-	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
+	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 
 
@@ -174,7 +174,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
-	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
+	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 	Test1_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x - 15.f , GetTransform().GetWorldPosition().y + 15.f });
 	Test2_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x + 15.f , GetTransform().GetWorldPosition().y + 15.f });
@@ -368,7 +368,7 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 
 void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
+	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 	DoubleSlashTimer(_DeltaTime);
 
@@ -545,7 +545,7 @@ void Knight::KnightFallStart(const StateInfo& _Info)
 
 void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	KnightShadowData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
+	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 
 	isKnihgtActtingMoveChack();
@@ -1626,6 +1626,18 @@ void Knight::KnightTalkingUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Knight::KnightTalkingEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightShoppingStart(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightShoppingUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Knight::KnightShoppingEnd(const StateInfo& _Info)
 {
 }
 

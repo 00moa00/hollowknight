@@ -2,7 +2,9 @@
 #include "MasterNPC.h"
 #include "Shop.h"
 
-// 설명 :
+// 대화 -> prompt
+// 상점 - > npc
+
 class Iselda : public MasterNPC
 {
 public:
@@ -19,6 +21,23 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
+
+	void SetisShop(bool b) override
+	{
+		if (b == true)
+		{
+			MapShop_->On();
+			IseldaManager_.ChangeState("OPEN_SHOP");
+		}
+
+		else if (b == false)
+		{
+			MapShop_->Off();
+			IseldaManager_.ChangeState("IDLE");
+
+		}
+
+	}
 
 private:
 	Shop* MapShop_;
@@ -47,6 +66,10 @@ private:
 	void IseldaChangeLeaveStart(const StateInfo& _Info);
 	void IseldaChangeLeaveUpdate(float _DeltaTime, const StateInfo& _Info);
 	void IseldaChangeLeaveEnd(const StateInfo& _Info);
+
+	void IseldaShopOpenStart(const StateInfo& _Info);
+	void IseldaShopOpenUpdate(float _DeltaTime, const StateInfo& _Info);
+	void IseldaShopOpenEnd(const StateInfo& _Info);
 
 };
 

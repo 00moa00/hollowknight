@@ -216,6 +216,12 @@ enum class SlideItemIndex
 	Sixth
 };
 
+enum class NPC_TYPE
+{
+	Normal,
+	Shop
+};
+
 enum class CHARM_SLOT
 {
 	Wayward_Compass, // 슬롯 1, 변덕스런납침반, 지도가 열릴 때마다 착용자에게 위치를 속삭여 방랑자가 자신의 현재 위치를 정확히 파악할 수 있게 합니다. 흙의 마을, 이셀다가 220지오에 판매

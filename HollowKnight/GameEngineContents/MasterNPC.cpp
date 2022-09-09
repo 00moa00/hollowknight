@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "MasterNPC.h"
+#include "KnightData.h"
 
 MasterNPC::MasterNPC() 
 	:
@@ -36,4 +37,24 @@ void MasterNPC::CreatePromptSet()
 void MasterNPC::CreateDialogueSet()
 {
 	DialogueSet_ = GetLevel()->CreateActor<DialogueSet>();
+}
+
+void MasterNPC::CheckDirToKnight()
+{
+	float4 KnightPos = KnightData::GetInst()->GetKnightPosition();
+	float4 DirPos = KnightPos - this->GetTransform().GetWorldPosition();
+	DirPos.Normalize();
+
+	SetMoveDirection(DirPos);
+
+	if (DirPos.CompareInt2D(float4::RIGHT))
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+	}
+
+	else if (DirPos.CompareInt2D(float4::LEFT))
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+	}
+
 }

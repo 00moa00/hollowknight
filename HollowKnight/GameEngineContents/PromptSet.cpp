@@ -79,6 +79,14 @@ void PromptSet::Start()
 	PromptName_->Off();
 	PromptBack_->Off();
 
+
+
+	if (false == GameEngineInput::GetInst()->IsKey("PromptEnter"))
+	{
+		GameEngineInput::GetInst()->CreateKey("PromptEnter", VK_UP);
+	}
+
+
 	//PromptName_->SetScaleModeImage();
 
 }
@@ -95,11 +103,14 @@ void PromptSet::CreatePrompSet(PromptSetType _Type)
 	case PromptSetType::TALK:
 		PromptName_->SetTexture("TalkFont.png");
 		PromptName_->GetTransform().SetLocalScale(PromptName_->GetCurTexture()->GetScale());
+		PromptSetType_ = _Type;
 
 		break;
 	case PromptSetType::INTER:
 		PromptName_->SetTexture("InterFont.png");
 		PromptName_->GetTransform().SetWorldScale({121, 42});
+		PromptSetType_ = _Type;
+
 		break;
 	default:
 		break;
@@ -150,6 +161,21 @@ void PromptSet::PromptIdleStart(const StateInfo& _Info)
 
 void PromptSet::PromptIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	//if (true == GameEngineInput::GetInst()->IsDown("PromptEnter"))
+	//{
+	//	switch (PromptSetType_)
+	//	{
+	//	case PromptSetType::TALK:
+
+
+	//		break;
+	//	case PromptSetType::INTER:
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//}
+
 	if (PromptCollision_->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
 		std::bind(&PromptSet::ThisVSKnightCollision, this, std::placeholders::_1, std::placeholders::_2)) == false)
 	{
