@@ -83,6 +83,7 @@ public:
 	void CreateFigurehead(SHOP_TYPE _Type);
 
 	void SetItemListPosition();
+	void SetItemListUpdatePosition();
 
 	//================================
 	//    Bind State

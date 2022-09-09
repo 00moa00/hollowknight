@@ -208,6 +208,64 @@ void Shop::SetItemListPosition()
 	}
 }
 
+void Shop::SetItemListUpdatePosition()
+{
+	if (ShopArrow_->GetCurrentPointItemIndex() == 1)
+	{
+
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() - 1]->GetTransform().SetWorldPosition({ 270, 120 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() - 1]->SetFontRendererMove();
+
+	}
+
+	else if (ShopArrow_->GetCurrentPointItemIndex() == 0)
+	{
+
+	}
+
+	else
+	{
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() - 2]->GetTransform().SetWorldPosition({ 270, 220 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() - 2]->SetFontRendererMove();
+
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() - 1]->GetTransform().SetWorldPosition({ 270, 120 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() - 1]->SetFontRendererMove();
+	}
+
+	
+	ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().SetWorldPosition({ 270, 20 });
+	ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->SetFontRendererMove();
+
+
+	if (ShopArrow_->GetCurrentPointItemIndex() + 3 == ShopItemList_.size() -1)
+	{
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 1]->GetTransform().SetWorldPosition({ 270, -80 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 1]->SetFontRendererMove();
+
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 2]->GetTransform().SetWorldPosition({ 270, -180 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 2]->SetFontRendererMove();
+
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 3]->GetTransform().SetWorldPosition({ 270, -280 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 3]->SetFontRendererMove();
+	}
+
+	if (ShopArrow_->GetCurrentPointItemIndex() + 2 == ShopItemList_.size() - 1)
+	{
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 1]->GetTransform().SetWorldPosition({ 270, -80 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 1]->SetFontRendererMove();
+
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 2]->GetTransform().SetWorldPosition({ 270, -180 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 2]->SetFontRendererMove();
+	}
+
+	if (ShopArrow_->GetCurrentPointItemIndex() + 1 == ShopItemList_.size() - 1)
+	{
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 1]->GetTransform().SetWorldPosition({ 270, -80 });
+		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 1]->SetFontRendererMove();
+
+	}
+}
+
 void Shop::ShopStillStart(const StateInfo& _Info)
 {
 }
@@ -237,9 +295,12 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("ItemSlideDown"))
-	{
-		ShopManager_.ChangeState("SHOP_MOVE_DOWN");
-		return;
+	{	
+		if (ShopArrow_->GetCurrentPointItemIndex() < ShopItemList_.size()-1)
+		{
+			ShopManager_.ChangeState("SHOP_MOVE_DOWN");
+			return;
+		}
 	}
 }
 
@@ -269,27 +330,64 @@ void Shop::ShopMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	for (int i = 0; i < ShopItemList_.size(); ++i)
 	{
-		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y < 20)
+		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y < ShopCurrentItemBackboardRenderer_->GetTransform().GetLocalPosition().y)
 		{
 			ShopManager_.ChangeState("SHOP_IDLE");
+			return;
+
 		}
 
-		ShopItemList_[i]->GetTransform().SetWorldMove(float4::DOWN * _DeltaTime * 700.f);
+
+		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
+		float4 Move = float4::DOWN * _DeltaTime * 700.f;
+		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
+		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
+
+
+
+		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+		ShopItemList_[i]->SetFontRendererMove();
+
 	}
 }
 
 void Shop::ShopMoveUpEnd(const StateInfo& _Info)
 {
+	SetItemListUpdatePosition();
+
 }
 
 void Shop::ShopMoveDownStart(const StateInfo& _Info)
 {
+	ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() + 1);
+
 }
 
 void Shop::ShopMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	for (int i = 0; i < ShopItemList_.size(); ++i)
+	{
+		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y > ShopCurrentItemBackboardRenderer_->GetTransform().GetLocalPosition().y)
+		{
+			ShopManager_.ChangeState("SHOP_IDLE");
+			return;
+		}
+
+		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
+		float4 Move = float4::UP * _DeltaTime * 700.f;
+		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
+		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
+
+
+
+		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+		ShopItemList_[i]->SetFontRendererMove();
+
+	}
 }
 
 void Shop::ShopMoveDownEnd(const StateInfo& _Info)
 {
+	SetItemListUpdatePosition();
+
 }
