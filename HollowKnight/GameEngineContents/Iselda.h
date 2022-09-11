@@ -27,12 +27,14 @@ protected:
 		if (b == true)
 		{
 			MapShop_->On();
+			MapShop_->SetShopPopup();
 			IseldaManager_.ChangeState("OPEN_SHOP");
 		}
 
 		else if (b == false)
 		{
-			MapShop_->Off();
+			MapShop_->SetShopPopDown();
+
 			IseldaManager_.ChangeState("IDLE");
 
 		}

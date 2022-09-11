@@ -268,10 +268,12 @@ private:
 	//================================
 	bool KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	bool KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
-	bool KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
-	bool NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
-	bool KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other);		//NPC
+	bool NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineCollision* _Other); //NPC : 대화록 진행, 대화 종료
+	bool ShopCloseCollision(GameEngineCollision* _This, GameEngineCollision* _Other);		// 상점 닫기 용
+
+	bool KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other);	//포탈
 
 
 }; 

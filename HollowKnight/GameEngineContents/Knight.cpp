@@ -137,6 +137,8 @@ void Knight::Start()
 
 		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
 		GameEngineInput::GetInst()->CreateKey("KnightTalking", 'Z');
+		GameEngineInput::GetInst()->CreateKey("KnightClose", 'Z');
+
 		GameEngineInput::GetInst()->CreateKey("KnightSit", 'T');
 
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
@@ -842,6 +844,24 @@ bool Knight::NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineColl
 	}
 
 	return true;
+}
+
+bool Knight::ShopCloseCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+
+	if (GameEngineInput::GetInst()->IsDown("KnightClose") == true)
+	{
+		MasterNPC* NPC = dynamic_cast<MasterNPC*>(_Other->GetActor());
+
+		if (NPC != nullptr)
+		{
+
+			NPC->SetisShop(false);
+			KnightManager_.ChangeState("STILL");
+		}
+	}
+
+	return false;
 }
 
 bool Knight::KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other)

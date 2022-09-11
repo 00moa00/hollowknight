@@ -2,7 +2,8 @@
 #include <GameEngineCore/CoreMinimal.h>
 #include <GameEngineCore/GameEngineCollision.h>
 
-#include <GameEngineCore/GameEngineFontRenderer.h>
+#include "ContentsFontRenderer.h"
+
 #include "ShopItem.h"
 #include "ShopArrow.h"
 
@@ -33,6 +34,13 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	
+	bool isLimitMoveUP_;
+	bool isLimitMoveDown_;
+
+	float LimitMoveTimer_;
+
+
 	GameEngineUIRenderer* ShopBackboardRenderer_;
 	GameEngineUIRenderer* ShopTopRenderer_;
 	GameEngineUIRenderer* ShopBottomRenderer_;
@@ -46,6 +54,9 @@ private:
 	GameEngineUIRenderer* FigureheadRenderer_;
 
 	ShopArrow* ShopArrow_;
+
+	ContentsFontRenderer* ItemName_;
+	ContentsFontRenderer* ItemInfo_;
 
 	SHOP_TYPE ShopType_;
 
@@ -72,11 +83,16 @@ public:
 
 	void SetShopPopup()
 	{
-
+		ShopTopRenderer_->ChangeFrameAnimation("POPUP_ANIMATION");
+		ShopBottomRenderer_->ChangeFrameAnimation("POPUP_ANIMATION");
+		FigureheadRenderer_->ChangeFrameAnimation("POPUP_ANIMATION");
 	}
 
 	void SetShopPopDown()
 	{
+		ShopTopRenderer_->ChangeFrameAnimation("POPDOWN_ANIMATION");
+		ShopBottomRenderer_->ChangeFrameAnimation("POPDOWN_ANIMATION");
+		FigureheadRenderer_->ChangeFrameAnimation("POPDOWN_ANIMATION");
 
 	}
 
@@ -117,5 +133,15 @@ public:
 	void ShopBuyItemMoveDownStart(const StateInfo& _Info);
 	void ShopBuyItemMoveDownUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShopBuyItemMoveDownEnd(const StateInfo& _Info);
+
+	void ShopItemMoveLimitStart(const StateInfo& _Info);
+	void ShopItemMoveLimitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ShopItemMoveLimitEnd(const StateInfo& _Info);
+
+	void ShopItemMoveLimitReturnStart(const StateInfo& _Info);
+	void ShopItemMoveLimitReturnUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ShopItemMoveLimitReturnEnd(const StateInfo& _Info);
+
+
 };
 

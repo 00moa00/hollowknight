@@ -1635,6 +1635,12 @@ void Knight::KnightShoppingStart(const StateInfo& _Info)
 
 void Knight::KnightShoppingUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::NPC, CollisionType::CT_OBB2D,
+		std::bind(&Knight::ShopCloseCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
+	{
+
+	}
+
 }
 
 void Knight::KnightShoppingEnd(const StateInfo& _Info)
