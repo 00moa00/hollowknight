@@ -139,6 +139,16 @@ void Mask::SetIdleState()
 	MaskManager_.ChangeState("IDLE");
 }
 
+void Mask::SetBrokenAnimation()
+{
+	//isBreakEnd_ = false;
+
+	GetRenderer()->ChangeFrameAnimation("MASK_BROKEN");
+	MaskManager_.ChangeState("BROKEN");
+
+
+}
+
 void Mask::MaskWaitStart(const StateInfo& _Info)
 {
 	IdleAnimationTimer_ = 0.0f;

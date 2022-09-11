@@ -23,7 +23,12 @@ void CrossroadsLevel2::Start()
 	GetMasterMap()->CreateBackGroundObject("Cross2_BackObject.png");
 	GetMasterMap()->CreateMapCollision("Cross2_Coll.png");
 
-	CreateKnightActor(); // 플레이어
+
+	if (GetKnight() == nullptr)
+	{
+		CreateKnightActor(); // 플레이어
+	}
+
 	CreateKingsPass1Monster();
 
 	GetMasterMap()->CreateTerrain("Cross2_Ground.png");
@@ -32,11 +37,12 @@ void CrossroadsLevel2::Start()
 	CreateUIActor();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, 0 });
+
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	SetMainMapSize({ 5580, 1080 });
 
-	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, 0 });
 }
 
 void CrossroadsLevel2::Update(float _DeltaTime)
@@ -45,4 +51,15 @@ void CrossroadsLevel2::Update(float _DeltaTime)
 
 void CrossroadsLevel2::End()
 {
+}
+
+void CrossroadsLevel2::LevelStartEvent()
+{
+
+}
+
+void CrossroadsLevel2::LevelEndEvent()
+{
+
+
 }

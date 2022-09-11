@@ -26,3 +26,11 @@ void KingsPassLevel3::Update(float _DeltaTime)
 void KingsPassLevel3::End()
 {
 }
+
+void KingsPassLevel3::LevelStartEvent()
+{
+}
+
+void KingsPassLevel3::LevelEndEvent()
+{
+}

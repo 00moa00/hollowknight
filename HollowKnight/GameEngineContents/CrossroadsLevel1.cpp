@@ -24,7 +24,13 @@ void CrossroadsLevel1::Start()
 	GetMasterMap()->CreateBackGroundObject("Cross1_BackObject.png");
 	GetMasterMap()->CreateMapCollision("Cross1_Coll.png");
 
-	CreateKnightActor(); // 플레이어
+
+	if (GetKnight() == nullptr)
+	{
+		CreateKnightActor(); // 플레이어
+	}
+
+
 	CreateKingsPass1Monster();
 
 	GetMasterMap()->CreateTerrain("Cross1_Ground.png");
@@ -32,12 +38,16 @@ void CrossroadsLevel1::Start()
 
 	CreateUIActor();
 
-	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	SetMainMapSize({ 6633, 1661 });
 
+	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, static_cast<float>(Z_ORDER::Knight) });
+
+
+
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 }
@@ -55,4 +65,9 @@ void CrossroadsLevel1::Update(float _DeltaTime)
 
 void CrossroadsLevel1::End()
 {
+}
+
+void CrossroadsLevel1::LevelStartEvent()
+{
+
 }

@@ -39,6 +39,10 @@ private:
 	int CharmNotches_; //가능한 부적 칸 수
 	int UsingCharmNotches_; // 현재 사용중인 부적 칸 수
 
+
+	bool isKnihgt_; // 플레이어가 있다
+	bool isHUD_;	// 허드가 있다.
+
 	bool isRefill_;
 	bool isNewMask_;
 	bool isBreak_;
@@ -63,6 +67,16 @@ public:
 	//================================
 	//    Getter
 	//================================
+
+	bool GetisHUD()
+	{
+		return isHUD_;
+	}
+
+	bool GetisKnight()
+	{
+		return isKnihgt_;
+	}
 
 	int GetUsingCharmNotches()
 	{
@@ -133,6 +147,15 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetisHUD(bool _b)
+	{
+		isHUD_ = _b;
+	}
+
+	void SetisKnight(bool _b)
+	{
+		isKnihgt_ = _b;
+	}
 
 	//부적을 장착한다.
 	bool SubUsingCharmNotches(int _i)

@@ -81,6 +81,41 @@ void HUD::Update(float _DeltaTime)
 	HUDManager_.Update(_DeltaTime);
 }
 
+void HUD::LevelStartEvent()
+{
+
+	if (KnightData::GetInst()->GetisHUD() == true)
+	{
+		HUDManager_.ChangeState("IDLE");
+		CurMask_ =KnightData::GetInst()->GetCurMask();
+
+		for (int i = 0; i < MaskesSize_  ; ++i)
+		{
+			
+
+			if (i > CurMask_)
+			{
+				Maskes_[i]->SetisBroken();
+				Maskes_[i]->SetBrokenAnimation();
+
+			}
+
+			else
+			{
+				Maskes_[i]->SetisIdle();
+			}
+
+		}
+	}
+	KnightData::GetInst()->SetisHUD(true);
+
+}
+
+void HUD::LevelEndEvent()
+{
+
+}
+
 void HUD::NewMask()
 {
 	Maskes_.push_back(GetLevel()->CreateActor<Mask>());
@@ -116,7 +151,7 @@ void HUD::BreakMask()
 		if (Maskes_[i]->GetisIdle() == true)
 		{
 			Maskes_[i]->SetisBroken();
-			CurMask_ = i;
+			--CurMask_;
 
 			KnightData::GetInst()->SetCurMask(CurMask_);
 			return;
@@ -137,6 +172,8 @@ void HUD::SetAppearAnimation()
 {
 
 }
+
+
 
 void HUD::MaskAppearStart(const StateInfo& _Info)
 {
@@ -213,6 +250,7 @@ void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 			Maskes_[i]->SetIdleState();
 		}
 		KnightData::GetInst()->SetCurMask(MaskesSize_-1);
+		CurMask_ = MaskesSize_ - 1;
 		Geo_->SetBreakState();
 	}
 

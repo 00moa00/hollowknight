@@ -23,6 +23,9 @@ protected:
 	void Update(float _DeltaTime) override;
 	void End() override;
 
+	void LevelStartEvent() override;
+	void LevelEndEvent() override;
+
 private:
 	Elderbug* Elderbug_;
 	RoomPotal* MapShopPotal_;

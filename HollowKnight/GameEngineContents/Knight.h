@@ -26,6 +26,7 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 	void End() override {}
+	void LevelStartEvent() override;
 
 private:
 	ContentsFontRenderer* ContentsFontRenderer_;

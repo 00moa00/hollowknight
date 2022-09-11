@@ -26,3 +26,11 @@ void DirtmouthLevel3::Update(float _DeltaTime)
 void DirtmouthLevel3::End()
 {
 }
+
+void DirtmouthLevel3::LevelStartEvent()
+{
+}
+
+void DirtmouthLevel3::LevelEndEvent()
+{
+}

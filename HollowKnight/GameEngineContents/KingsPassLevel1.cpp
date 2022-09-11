@@ -22,12 +22,6 @@ void KingsPassLevel1::Start()
 		GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
 	}
 
-	/*{
-		GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
-		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
-
-	}*/
 
 	CraateMasterMapActor();
 
@@ -35,7 +29,11 @@ void KingsPassLevel1::Start()
 	GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
 	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_1.png");
 
-	CreateKnightActor(); // 플레이어
+	if (GetKnight() == nullptr)
+	{
+		CreateKnightActor(); // 플레이어
+	}
+
 	CreateKingsPass1Monster();
 
 	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_1.png");
@@ -43,12 +41,14 @@ void KingsPassLevel1::Start()
 
 	CreateUIActor();
 
-	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	CreateSettingPageActor();
 
 	SetMainMapSize({7099, 4889});
+
+	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+
 	//GetMainCameraActor()->GetCameraComponent()->GetTransform().SetWorldPosition();
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 }
@@ -65,4 +65,15 @@ void KingsPassLevel1::Update(float _DeltaTime)
 }
 
 void KingsPassLevel1::End() {}
+
+void KingsPassLevel1::LevelStartEvent()
+{
+
+
+}
+
+void KingsPassLevel1::LevelEndEvent()
+{
+
+}
 

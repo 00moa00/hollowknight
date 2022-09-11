@@ -512,6 +512,7 @@ void Knight::Start()
 	ContentsFontRenderer_->CreateFontRenderer("가나다라마.바사", 24, {500,500}, false, 4);
 	ContentsFontRenderer_->FontOn();
 
+
 }
 
 void Knight::Update(float _DeltaTime)
@@ -534,6 +535,14 @@ void Knight::Update(float _DeltaTime)
 		KnightSmallLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
 	}
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
+}
+
+void Knight::LevelStartEvent()
+{
+
+	
+
+
 }
 
 

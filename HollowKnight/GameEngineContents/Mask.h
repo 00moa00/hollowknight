@@ -131,6 +131,8 @@ public:
 
 	void SetIdleState();
 
+	void SetBrokenAnimation();
+
 
 private:
 

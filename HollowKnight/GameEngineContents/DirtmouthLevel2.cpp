@@ -39,21 +39,23 @@ void DirtmouthLevel2::Start()
 	GetMasterMap()->CreateBackGroundObject("Dirtmouth_BackGround_Obj_2.png");
 	GetMasterMap()->CreateMapCollision("Dirtmouth_2_Coll.png");
 
-	CreateKnightActor(); // 플레이어
+	if (GetKnight() == nullptr)
+	{
+		CreateKnightActor(); // 플레이어
+
+	}
 
 	GetMasterMap()->CreateTerrain("Dirtmouth_Terrian_2.png");
 	GetMasterMap()->CreateFrontObject("Dirtmouth_MapObject_2.png");
 
 	CreateUIActor();
 
-	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
 
 	SetMainMapSize({ 6646, 3418 });
 
-	GetKnight()->GetTransform().SetLocalPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
 
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
@@ -78,7 +80,8 @@ void DirtmouthLevel2::Start()
 	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 
-	
+	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+	GetKnight()->GetTransform().SetLocalPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
 
 	//std::list<GameEnginePostEffect*> FindEffect = GetMainCamera()->GetCameraRenderTarget()->Effects;
 	
@@ -102,4 +105,15 @@ void DirtmouthLevel2::Update(float _DeltaTime)
 
 void DirtmouthLevel2::End()
 {
+}
+
+void DirtmouthLevel2::LevelStartEvent()
+{
+
+}
+
+void DirtmouthLevel2::LevelEndEvent()
+{
+
+
 }

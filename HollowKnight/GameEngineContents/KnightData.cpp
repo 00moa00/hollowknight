@@ -10,6 +10,7 @@ KnightData::KnightData()
 	isShadow_(false),
 	isGrowSoul_(false),
 	isSetting_(false),
+	isHUD_(false),
 	AllMask_(4),
 	CurMask_(4),
 	CharmNotches_(5),

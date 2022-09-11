@@ -29,22 +29,24 @@ void DirtmouthLevel1::Start()
 	GetMasterMap()->CreateBackGroundObject("Dirtmouth_BackGround_Obj_1.png");
 	GetMasterMap()->CreateMapCollision("Dirtmouth_1_Coll.png");
 
-	CreateKnightActor(); // 플레이어
-	//CreateKingsPass1Monster();
+	if (GetKnight() == nullptr)
+	{
+		CreateKnightActor(); // 플레이어
+
+	}	//CreateKingsPass1Monster();
 
 	GetMasterMap()->CreateTerrain("Dirtmouth_Terrian_1.png");
 	GetMasterMap()->CreateFrontObject("Dirtmouth_MapObject_1.png");
 
 	CreateUIActor();
 
-	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	CreateSettingPageActor();
 	SetMainMapSize({ 3700, 3418 });
 
+	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 500, -0, static_cast<float>(Z_ORDER::Knight) });
-
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 
@@ -63,4 +65,15 @@ void DirtmouthLevel1::Update(float _DeltaTime)
 
 void DirtmouthLevel1::End()
 {
+}
+
+void DirtmouthLevel1::LevelStartEvent()
+{
+
+}
+
+void DirtmouthLevel1::LevelEndEvent()
+{
+
+
 }

@@ -698,12 +698,14 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (isFocusEnd_ == true)
 	{
 		isFocusEnd_ = false;
+		KnightData::GetInst()->SetisRefill(true);
 		KnightManager_.ChangeState("STILL");
 	}
 }
 
 void Knight::KnightFocusEnd(const StateInfo& _Info)
 {
+
 }
 
 void Knight::KnightRunStart(const StateInfo& _Info)
@@ -816,7 +818,7 @@ void Knight::KnightRunEnd(const StateInfo& _Info)
 
 void Knight::KnightStunStart(const StateInfo& _Info)
 {
-	if (KnightData::GetInst()->GetCurMask() == 1)
+	if (KnightData::GetInst()->GetCurMask() == 0)
 	{
 		KnightData::GetInst()->SetisDeath(true);
 		KnightManager_.ChangeState("DEATH");
