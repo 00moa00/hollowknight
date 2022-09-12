@@ -32,3 +32,8 @@ void VesselFrame::Update(float _DeltaTime)
 {
 }
 
+void VesselFrame::SetIdleAnimation()
+{
+	GetRenderer()->ChangeFrameAnimation("VESSELFRAME_IDLE");
+}
+

@@ -51,6 +51,12 @@ void SettingPointer::PointerCharmPageMoveEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerCharmPageIdleStart(const StateInfo& _Info)
 {
+
+	//GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
+
+	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(" ", 21);
+	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(" ");
+
 	Sort_ = 0;
 	PointerMoveSpeed_ = 750.f;
 
@@ -63,17 +69,22 @@ void SettingPointer::PointerCharmPageIdleStart(const StateInfo& _Info)
 		findSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
+
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 21);
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
 
 	}
 
-	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
-	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 21);
-	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
+	if (findSlot->GetKnightHas() == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
+
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 21);
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
+	}
 
 }
-
+    
 void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("MoveRight"))

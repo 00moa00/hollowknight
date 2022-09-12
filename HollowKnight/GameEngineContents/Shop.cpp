@@ -1,5 +1,8 @@
 #include "PreCompile.h"
 #include "Shop.h"
+#include "KnightData.h"
+
+#include "HollowKnightLevel.h"
 
 Shop::Shop() 
 	:
@@ -455,6 +458,19 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 			if (ShopArrow_->GetCurrentPointItemIndex() == ShopItemList_.size() - 1)
 			{
+				
+				CHARM_SLOT Charm =  ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopCharm();
+				ITEM_LIST Item = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopItem();
+
+				if (Charm != CHARM_SLOT::None)
+				{
+					KnightData::GetInst()->PushKnihgtCharList(Charm);
+				}
+
+				if (Item != ITEM_LIST::NONE)
+				{
+					KnightData::GetInst()->PushKnihgtItemList(Item);
+				}
 
 				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
 
@@ -466,6 +482,21 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 			else
 			{
+				CHARM_SLOT Charm = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopCharm();
+				ITEM_LIST Item = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopItem();
+
+				if (Charm != CHARM_SLOT::None)
+				{
+					KnightData::GetInst()->PushKnihgtCharList(Charm);
+				}
+
+				if (Item != ITEM_LIST::NONE)
+				{
+
+					KnightData::GetInst()->PushKnihgtItemList(Item);
+
+				}
+
 				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
 
 				for (int i = ShopArrow_->GetCurrentPointItemIndex() + 1; i < ShopItemList_.size(); ++i)
@@ -474,12 +505,16 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 				}
 				ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
 
+
+
 				ShopManager_.ChangeState("BUY_ITEM_MOVE_UP");
 				return;
 			}
+			
+
 		}
 	}
-	}
+}
 
 	
 

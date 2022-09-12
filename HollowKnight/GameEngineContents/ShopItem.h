@@ -9,6 +9,11 @@ struct ShopItemState
 	std::string ItemName_;
 	std::string ItemInfo_;
 
+	CHARM_SLOT Charm_;
+	ITEM_LIST Item_;
+
+	bool InInventory_;
+
 	int ItemPrice_;
 };
 
@@ -66,11 +71,27 @@ public:
 		return ShopItemState_.ItemPrice_;
 	}
 
-
 	int GetSlideItemIndex()
 	{
 		return SlideItemIndex_;
 	}
+
+	bool GetinInventory()
+	{
+		return ShopItemState_.InInventory_;
+	}
+
+
+	CHARM_SLOT GetShopCharm()
+	{
+		return ShopItemState_.Charm_;
+	}
+
+	ITEM_LIST GetShopItem()
+	{
+		return ShopItemState_.Item_;
+	}
+
 
 	bool isCurrentSlideItemCenter()
 	{

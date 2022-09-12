@@ -60,16 +60,14 @@ private:
 
 	bool isDeath_;
 
-
-
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
 
 	float KnightSlashCollisionTimer_;
-	float KnightSlashTimer_; // 더블 공격 체크 타이머
+	float KnightSlashTimer_;	 // 더블 공격 체크 타이머
 	float KnightLookUpTimer_;
 	float KnightLookDownTimer_;
-	float KnightDashTimer_; // 대쉬 타이머
+	float KnightDashTimer_;		 // 대쉬 타이머
 	float KnightKnockbackTimer_; // 넉백 타이머
 
 	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도

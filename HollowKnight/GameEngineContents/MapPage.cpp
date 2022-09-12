@@ -37,3 +37,13 @@ void MapPage::Update(float _DeltaTime)
 {
 }
 
+void MapPage::AllOff()
+{
+	this->Off();
+}
+
+void MapPage::AllOn()
+{
+	this->On();
+}
+

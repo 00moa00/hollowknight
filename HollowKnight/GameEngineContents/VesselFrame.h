@@ -22,5 +22,8 @@ protected:
 
 private:
 
+public:
+	void SetIdleAnimation();
+
 };
 

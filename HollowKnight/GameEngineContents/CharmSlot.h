@@ -64,6 +64,7 @@ public:
 
 
 
+
 	//================================
 	//    Getter 
 	//================================
@@ -135,14 +136,14 @@ public:
 		
 		if (CharmState_.KnihgistHas_ == true)
 		{
-			Charm_->GetRenderer()->On();
-			this->GetRenderer()->Off();
+			Charm_->On();
+			//this->GetRenderer()->Off();
 		}
 
 		else
 		{
 			Charm_->GetRenderer()->Off();
-			this->GetRenderer()->On();
+			//this->GetRenderer()->On();
 		}
 	}
 

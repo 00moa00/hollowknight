@@ -308,13 +308,6 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 	}
 
 
-	switch (_Item)
-	{
-	
-	default:
-		break;
-	}
-
 	SetPointerSize({ Item_->GetRenderer()->GetCurTexture()->GetScale() });
 
 

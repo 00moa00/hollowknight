@@ -12,7 +12,7 @@ HUD::HUD()
 	MaskesAppearEnd_(false),
 
 	MaskesSize_(0),
-	CurMask_(0),
+	CurMask_(4),
 	MakesAppearCount_(0),
 	MaskAppearTimer_(0.f),
 
@@ -52,8 +52,9 @@ void HUD::Start()
 
 	//CurMask_ = Maskes_.size() - 1;
 
-	KnightData::GetInst()->SetAllMask(CurMask_);
-	KnightData::GetInst()->SetCurMask(CurMask_);
+	//KnightData::GetInst()->SetAllMask(CurMask_);
+//	KnightData::GetInst()->SetCurMask(CurMask_);
+	CurMask_ = KnightData::GetInst()->GetAllMask();
 
 	HUDManager_.CreateStateMember("MASK_APPEAR"
 		, std::bind(&HUD::MaskAppearUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -88,6 +89,8 @@ void HUD::LevelStartEvent()
 	{
 		HUDManager_.ChangeState("IDLE");
 		CurMask_ = KnightData::GetInst()->GetCurMask();
+		VesselFrame_->SetIdleAnimation();
+		Geo_->SetIdleState();
 
 		for (int i = 0; i < MaskesSize_  ; ++i)
 		{
@@ -113,6 +116,7 @@ void HUD::LevelStartEvent()
 
 void HUD::LevelEndEvent()
 {
+	CurMask_;
 	KnightData::GetInst()->SetCurSoul(Soul_->GetSoulLevel());
 }
 

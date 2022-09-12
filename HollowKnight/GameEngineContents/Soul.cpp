@@ -6,7 +6,7 @@ Soul::Soul()
 	isGrowEnd_(false),
 	isShrinkEnd_(false),
 
-	SoulLevel_(4),
+	//SoulLevel_(4),
 
 	SoulManager_()
 {
@@ -31,10 +31,10 @@ void Soul::Start()
 	GameEngineUIRenderer_->SetTexture("HUD Cln_soul_orb_shape.png");
 	GameEngineUIRenderer_->Off();
 
-
 	Soul_ = CreateComponent<MaskRenderer>();
 	Soul_->SetTexture("HUD Cln_soul_orb_eyes.png");
 	Soul_->GetTransform().SetLocalScale({ 130, 125, 1 });
+	//Soul_->SetSamplingModeLiner();
 
 	//Soul_->Option.IsMask = 1;
 	Soul_->ShaderResources.SetTexture("Test", GameEngineUIRenderer_->GetCurTexture());
@@ -95,7 +95,7 @@ void Soul::Start()
 	GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 80.f),
 	GameEngineWindow::GetInst()->GetScale().hy() - 87.f, -100 });
 
-	SoulLevel_ = 4;
+	//SoulLevel_ = 4;
 }
 
 void Soul::Update(float _DeltaTime)
@@ -202,11 +202,12 @@ void Soul::SoulIdleStart(const StateInfo& _Info)
 
 		Soul_->ChangeFrameAnimation("IDLE_ANIMATION");
 	}
+	SetLevelPosition(SoulLevel_);
+
 }
 
 void Soul::SoulIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	SetLevelPosition(4);
 }
 
 void Soul::SoulIdleEnd(const StateInfo& _Info)

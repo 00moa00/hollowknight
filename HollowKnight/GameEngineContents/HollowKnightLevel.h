@@ -86,6 +86,7 @@ public :
 	void PushNotches(Notches* _Notches, float4 _Position);
 
 	void PustItemInventroy(ITEM_LIST _Item);
+	void AllPopItemInventory();
 
 	GameEngineCameraActor* GetMapCameraActor();
 	GameEngineTransform& GetMapCameraActorTransform();

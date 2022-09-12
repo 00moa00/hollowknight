@@ -2,6 +2,7 @@
 #include "InventoryPage.h"
 #include "HollowKnightLevel.h"
 #include"PointActorComponent.h"
+#include "KnightData.h"
 
 #include <GameEngineBase/magic_enum.hpp>
 #include <GameEngineBase/magic_enum_format.hpp>
@@ -90,8 +91,7 @@ void InventoryPage::Start()
 		}
 	}
 
-	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Shade_Cloak);
-	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Mantis_Cloak);
+
 
 
 	//소비 아이템 등록
@@ -144,5 +144,60 @@ void InventoryPage::Start()
 void InventoryPage::Update(float _DeltaTime)
 {
 	
+}
+
+void InventoryPage::LevelStartEvent()
+{
+	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Shade_Cloak);
+	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Mantis_Cloak);
+
+	KnightData::GetInst()->PushKnihgtItemList(ITEM_LIST::Shade_Cloak);
+	KnightData::GetInst()->PushKnihgtItemList(ITEM_LIST::Mantis_Cloak);
+
+	for (int i = 10; i < 22; ++i)
+	{
+		int ValueNum = i;
+		auto ItemEnum = magic_enum::enum_cast<ITEM_LIST>(ValueNum);
+
+
+
+		if (KnightData::GetInst()->FindKnightItemList(ItemEnum.value()) == true)
+		{
+			GetLevel<HollowKnightLevel>()->PustItemInventroy(ItemEnum.value());
+
+		}
+
+
+		//std::string EnumString;
+
+	//	auto Name = magic_enum::enum_name(ItemEnum.value());
+		//EnumString = static_cast<std::string>(Name);
+
+
+	//	AllItem_.insert({ SlotNum, GetLevel()->CreateActor<ItemSlot>() });
+		//AllItem_[SlotNum]->CreateItemSlot(SlotNum, ItemEnum.value(), ITEM_TYPE::Normal_Item);
+
+		//AllItem_[SlotNum]->SetParent(this);
+		//AllItem_[SlotNum]->GetTransform().SetLocalPosition({ -150.f + MaginX, 200.f + MaginY , static_cast<float>(Z_ORDER::UI) });
+
+	}
+
+
+}
+
+void InventoryPage::LevelEndEvent()
+{
+	GetLevel<HollowKnightLevel>()->AllPopItemInventory();
+}
+
+void InventoryPage::AllOff()
+{
+	this->Off();
+}
+
+void InventoryPage::AllOn()
+{
+	this->On();
+
 }
 

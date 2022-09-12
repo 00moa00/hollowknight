@@ -22,8 +22,14 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
+	void LevelStartEvent()override;
+	void AllOff() override;
+	void AllOn() override;
 
 private:
+
+	int CharmSize_;
+
 	std::vector<CharmSlot*> AllCharmSlot_;
 	
 	ContentsFontRenderer* NotchesFont_;
@@ -32,8 +38,7 @@ private:
 	GameEngineUIRenderer* Line_;
 
 public:
-	void AllOff() override;
-	void AllOn() override ;
+
 
 	void CreateEquippedCharm(GameEngineUIRenderer* _CopyRenderer);
 

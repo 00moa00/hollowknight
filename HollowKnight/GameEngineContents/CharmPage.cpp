@@ -3,12 +3,16 @@
 #include "GlobalContentsValue.h"
 #include "PointActorComponent.h"
 
+#include "KnightData.h"
+
 #include <GameEngineBase/magic_enum.hpp>
 #include <GameEngineBase/magic_enum_format.hpp>
 #include <GameEngineBase/magic_enum_fuse.hpp>
 
 CharmPage::CharmPage() 
 	:
+	CharmSize_(0),
+
 	NotchesFont_(nullptr),
 	Line_(nullptr)
 {
@@ -63,6 +67,7 @@ void CharmPage::Start()
 
 			MaginX += 90.f;
 			++SlotNum;
+			CharmSize_ = SlotNum;
 		}
 
 		MaginX = 0.f;
@@ -142,6 +147,15 @@ void CharmPage::Update(float _DeltaTime)
 
 }
 
+void CharmPage::LevelStartEvent()
+{
+
+	
+
+
+
+}
+
 void CharmPage::AllOff()
 {
 	this->Off();
@@ -171,6 +185,38 @@ void CharmPage::AllOn()
 	for (int i = 0; i < GetLevel<HollowKnightLevel>()->AllNotes_.size(); ++i)
 	{
 		GetLevel<HollowKnightLevel>()->AllNotes_[i]->On();
+	}
+
+	for (int i = 0; i < CharmSize_; ++i)
+	{
+		int ValueNum = i;
+		auto CharmEnum = magic_enum::enum_cast<CHARM_SLOT>(ValueNum);
+
+		std::string EnumString;
+
+		auto Name = magic_enum::enum_name(CharmEnum.value());
+		EnumString = static_cast<std::string>(Name);
+
+		//std::string FilePathNum = std::to_string(ValueNum);
+
+		if (KnightData::GetInst()->FindKnightCharmList(CharmEnum.value()) == true)
+		{
+			AllCharmSlot_[ValueNum]->SetCharmisHas(true);
+
+		}
+
+
+
+	}
+
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(0)->second;
+	CharmSlot* findSlot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
+	if (findSlot != nullptr && findSlot->GetKnightHas() == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
+
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(findSlot->GetInfo(), 21);
+		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(findSlot->GetInfoName());
 	}
 
 }

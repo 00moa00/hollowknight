@@ -12,6 +12,11 @@ ShopItem::~ShopItem()
 
 void ShopItem::Start()
 {
+
+	ShopItemState_.Charm_ = CHARM_SLOT::None;
+	ShopItemState_.Item_ = ITEM_LIST::NONE;
+
+	ShopItemState_.InInventory_ = false;
 }
 
 void ShopItem::Update(float _DeltaTime)
@@ -76,7 +81,7 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 
 		ShopItemState_.ItemName_ = "변덕스런 나침반";
 		ShopItemState_.ItemInfo_ = "적극 추천해요! 우리 아래의 폐허의 미로에서 길을 찾는데 어려움을 느낀다면 이 부적을 써 보세요.";
-
+		ShopItemState_.Charm_ = CHARM_SLOT::Wayward_Compass;
 
 		break;
 	case SHOP_ITEM::Mark_of_Pride:
@@ -131,6 +136,7 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 
 		ShopItemState_.ItemName_ = "몽환 방패";
 		ShopItemState_.ItemInfo_ = "꿈을 형상화할 수 있는 부족이 사용하던 방어용 부적이래요.";
+		ShopItemState_.Charm_ = CHARM_SLOT::Dreamshield;
 
 		break;
 
@@ -160,6 +166,8 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 
 		ShopItemState_.ItemName_ = "가면 조각";
 		ShopItemState_.ItemInfo_ = "이 낡은 물건이요? 그냥 어떤 것의 파편이에요. 그래도 어쩌면 당신에게 유용할지도요?";
+		ShopItemState_.Item_ = ITEM_LIST::Heart_Piece;
+		//ShopItemState_.InInventory_ = true;
 
 		break;
 	default:

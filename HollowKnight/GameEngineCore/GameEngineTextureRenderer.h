@@ -294,7 +294,7 @@ protected:
 
 	void Update(float _Delta) override;
 
-private:
+protected:
 	PIVOTMODE PivotMode;
 	SCALEMODE ScaleMode;
 	float ScaleRatio;

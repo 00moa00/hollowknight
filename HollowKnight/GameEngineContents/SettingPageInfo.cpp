@@ -18,7 +18,7 @@ void SettingPageInfo::Start()
 
 
 	InfoName_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-	InfoName_->CreateFontRenderer("테스트 "
+	InfoName_->CreateFontRenderer(" "
 		, 40
 		, { 0, 0, static_cast<float>(Z_ORDER::UI) }
 	, false
@@ -32,7 +32,7 @@ void SettingPageInfo::Start()
 
 
 	Info_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-	Info_->CreateFontRenderer("테스트 "
+	Info_->CreateFontRenderer(" "
 		, 30
 		, { 0, 0, static_cast<float>(Z_ORDER::UI) }
 		, true

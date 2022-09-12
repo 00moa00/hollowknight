@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "CharmSlot.h"
+#include "KnightData.h"
 
 CharmSlot::CharmSlot() 
 	:
@@ -49,6 +50,11 @@ void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePat
 		CharmState_.SlotCount_ = 1;
 		SetInfoName( "변덕스런 납침반");
 		SetInfo( "지도가 열릴 때마다 착용자에게 위치를 속삭여 방랑자가 자신의 현재 위치를 정확히 파악할 수 있게 합니다.");
+
+
+		//나이트가 가지고 있지 않은 부적이라면 랜더러 오프.
+
+	
 
 		break;
 	case CHARM_SLOT::Gathering_Swarm:
@@ -290,6 +296,10 @@ void CharmSlot::CreateCharmSlot(std::string _SlotName, std::string _CharmFilePat
 		break;
 	}
 
+	if (KnightData::GetInst()->FindKnightCharmList(_slot) == false)
+	{
+		Charm_->Off();
+	}
 	//GetRenderer()->SetParent(this);
 
 }

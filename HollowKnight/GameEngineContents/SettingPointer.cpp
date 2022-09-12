@@ -247,6 +247,11 @@ void SettingPointer::AllOn()
 {
 	this->On();
 	SettingPointerBox_->On();
+
+
+
+
+
 }
 
 void SettingPointer::AllOff()

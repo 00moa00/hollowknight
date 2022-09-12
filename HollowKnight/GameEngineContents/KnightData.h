@@ -1,8 +1,23 @@
 #pragma once
+#include "GlobalContentsValue.h"
 
 // 관리해야하는 데이터 : 플레이어 체력, 영혼레벨, 부적, 맵 해금, 아이템
 // 현재는 레벨마다 생성되는 클래스의 변수에 넣어주고 있지만
 // 애초에 변수를 선언하지 않고 데이터 클래스에서 빼오는게 효율적일거같다
+
+struct KnightItemData
+{
+	bool isHas_;
+	int ItemCount_;
+	ITEM_LIST Item_;
+};
+
+struct KnightCharmData
+{
+	//bool isHas_;
+	CHARM_SLOT Charm_;
+};
+
 
 class KnightData
 {
@@ -45,6 +60,9 @@ private:
 	int CharmNotches_;		//가능한 부적 칸 수
 	int UsingCharmNotches_; // 현재 사용중인 부적 칸 수
 
+	std::vector<KnightCharmData> CharmList_;
+	std::vector<KnightItemData> ItemList_;
+
 	bool isKnihgt_;			// 플레이어가 있다. : 필요없는거같음 후에 삭제
 	bool isHUD_;			// 허드가 있다. 게임 첫 시작에만 애니메이션이 나오기 위함
 
@@ -64,9 +82,57 @@ private:
 	float4 KnightPosition_;
 
 
-	std::map<int, std::string> KnihgtItemList_;
+	//std::map<int, std::string> KnihgtItemList_;
 
 public:
+
+	//================================
+	//    아이템, 부적
+	//================================
+
+	bool FindKnightItemList(ITEM_LIST _Item)
+	{
+		for (std::vector<KnightItemData>::iterator It = ItemList_.begin(); It != ItemList_.end(); ++It)
+		{
+			if (It->Item_ == _Item)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool FindKnightCharmList(CHARM_SLOT _Charm)
+	{
+		for (std::vector<KnightCharmData>::iterator It = CharmList_.begin(); It != CharmList_.end(); ++It)
+		{
+			if (It->Charm_ == _Charm)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	void PushKnihgtItemList(ITEM_LIST _Item)
+	{
+		KnightItemData ItemData;
+		ItemData.Item_ = _Item;
+		//ItemData.ItemCount_ ;
+
+		ItemList_.push_back(ItemData);
+	}
+
+	void PushKnihgtCharList(CHARM_SLOT _Charm)
+	{
+		KnightCharmData CharmData;
+		CharmData.Charm_ = _Charm;
+
+		CharmList_.push_back(CharmData);
+	}
+
 
 	//================================
 	//    Getter

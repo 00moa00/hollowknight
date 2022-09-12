@@ -63,12 +63,20 @@ public:
 		return ItemState_.isItem_;
 	}
 
+	Item* GetItem()
+	{
+		return Item_;
+	}
 
 
 	//================================
 	//    Setter 
 	//================================
 
+	void SetisItem(bool _b)
+	{
+		ItemState_.isItem_ = _b;
+	}
 
 };
 

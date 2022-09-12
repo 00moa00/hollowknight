@@ -109,6 +109,7 @@ void HollowKnightLevel::PushNotches(Notches* _Notches, float4 _Position)
 
 void HollowKnightLevel::PustItemInventroy(ITEM_LIST _Item)
 {
+
 	for (int i = 10; i < 22; ++i)
 	{
 		PointActorComponent*  findComponent = PointActorListInventory.find(i)->second;
@@ -122,6 +123,24 @@ void HollowKnightLevel::PustItemInventroy(ITEM_LIST _Item)
 		}
 	}
 
+
+
+}
+
+void HollowKnightLevel::AllPopItemInventory()
+{
+	for (int i = 10; i < 22; ++i)
+	{
+		PointActorComponent* findComponent = PointActorListInventory.find(i)->second;
+
+
+		ItemSlot* slot = dynamic_cast<ItemSlot*>(findComponent->GetPointActor());
+		if (slot->GetisItem() == true)
+		{
+			slot->SetisItem(false);
+			slot->GetItem()->Death();
+		}
+	}
 
 }
 

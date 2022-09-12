@@ -135,6 +135,7 @@ enum class MAP_LIST
 
 enum class ITEM_LIST
 {
+	NONE = -2,
 	SPELL_MIN = -1,
 	Heart_Piece = 0,
 	Soul_Piece,
@@ -198,6 +199,8 @@ enum class ITEM_TYPE
 enum class SHOP_ITEM
 {
 	Crosslaod_Map,
+	Rancid_Egg,
+
 
 	MaskPiece,		// 가면조각
 	Wayward_Compass, //나침반
@@ -224,6 +227,7 @@ enum class NPC_TYPE
 
 enum class CHARM_SLOT
 {
+	None = -1 ,
 	Wayward_Compass, // 슬롯 1, 변덕스런납침반, 지도가 열릴 때마다 착용자에게 위치를 속삭여 방랑자가 자신의 현재 위치를 정확히 파악할 수 있게 합니다. 흙의 마을, 이셀다가 220지오에 판매
 	Gathering_Swarm, //슬롯 1, 수집벌레무리, 무리가 착용자를 따라다니며, 놓친 지오를 가져옵니다. 아무리 사소한 것이라도 남기는 것을 견디지 못하는 이들에게 유용합니다. 흙의 마을, 슬라이가 300지오에 판매
 	Stalwart_Shell, // 슬롯 2, 튼튼한 껍데기, 주술자들이 주위 세계로부터 더 많은 영혼을 끌어내기 위해 사용합니다. 대못으로 적을 공격할 때 얻는 영혼의 양을 증가시킵니다. 잊혀진 교차로 - 선조의 흙더미
