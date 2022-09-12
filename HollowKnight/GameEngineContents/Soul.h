@@ -70,6 +70,8 @@ public:
 		SoulManager_.ChangeState("SHRINK");
 	}
 
+	void SetSoul(int _Level);
+
 private:
 	void SetLevelPosition(int _Level);
 

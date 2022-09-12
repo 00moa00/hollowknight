@@ -50,7 +50,7 @@ void HUD::Start()
 	Maskes_.push_back(GetLevel()->CreateActor<Mask>());
 	Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size() - 1) * 60)), GameEngineWindow::GetInst()->GetScale().hy() - 55, -100 });
 
-	CurMask_ = Maskes_.size() - 1;
+	//CurMask_ = Maskes_.size() - 1;
 
 	KnightData::GetInst()->SetAllMask(CurMask_);
 	KnightData::GetInst()->SetCurMask(CurMask_);
@@ -87,7 +87,7 @@ void HUD::LevelStartEvent()
 	if (KnightData::GetInst()->GetisHUD() == true)
 	{
 		HUDManager_.ChangeState("IDLE");
-		CurMask_ =KnightData::GetInst()->GetCurMask();
+		CurMask_ = KnightData::GetInst()->GetCurMask();
 
 		for (int i = 0; i < MaskesSize_  ; ++i)
 		{
@@ -108,12 +108,12 @@ void HUD::LevelStartEvent()
 		}
 	}
 	KnightData::GetInst()->SetisHUD(true);
-
+	Soul_ -> SetSoul(KnightData::GetInst()->GetCurSoul());
 }
 
 void HUD::LevelEndEvent()
 {
-
+	KnightData::GetInst()->SetCurSoul(Soul_->GetSoulLevel());
 }
 
 void HUD::NewMask()

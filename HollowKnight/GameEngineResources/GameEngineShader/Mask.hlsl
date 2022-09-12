@@ -84,16 +84,18 @@ Texture2D Test : register(t1);
 
 float4 TextureAtlas_PS(Output _Input) : SV_Target0
 {
+    if (_Input.Tex0.x < Slice.x)
+    {
+        clip(-1);
+    }
+    
     float4 MaskColor = Test.Sample(Smp, _Input.Tex1.xy); //기준이 될 아이의 색상 정보를 가져와
     
-    if (1 == IsMask) //마스킹을 할거야
-    {     
-        if (MaskColor.a == 0.f) //투명하지 않은 부분은 그려내지 않을거야
-        {
-            discard;
-        }
-    
+    if (MaskColor.a == 0.f) //투명하지 않은 부분은 그려내지 않을거야
+    {
+        discard;
     }
+    
     
     return (Tex.Sample(Smp, _Input.Tex0.xy) * MulColor) + PlusColor;
 }

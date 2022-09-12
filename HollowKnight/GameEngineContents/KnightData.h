@@ -1,6 +1,8 @@
 #pragma once
 
 // 관리해야하는 데이터 : 플레이어 체력, 영혼레벨, 부적, 맵 해금, 아이템
+// 현재는 레벨마다 생성되는 클래스의 변수에 넣어주고 있지만
+// 애초에 변수를 선언하지 않고 데이터 클래스에서 빼오는게 효율적일거같다
 
 class KnightData
 {
@@ -34,28 +36,30 @@ public:
 	KnightData& operator=(KnightData&& _Other) noexcept = delete;
 
 private:
-	int AllMask_;
-	int CurMask_;
-	int CharmNotches_; //가능한 부적 칸 수
+	//================================
+	//    레벨이동 데이터
+	//================================
+	int AllMask_;			//내가 가질 수 있는 최대 가면
+	int CurMask_;			//나의 현재 가면
+	int CurSoul_;			//현재 영혼
+	int CharmNotches_;		//가능한 부적 칸 수
 	int UsingCharmNotches_; // 현재 사용중인 부적 칸 수
 
+	bool isKnihgt_;			// 플레이어가 있다. : 필요없는거같음 후에 삭제
+	bool isHUD_;			// 허드가 있다. 게임 첫 시작에만 애니메이션이 나오기 위함
 
-	bool isKnihgt_; // 플레이어가 있다
-	bool isHUD_;	// 허드가 있다.
 
-	bool isRefill_;
-	bool isNewMask_;
-	bool isBreak_;
-
-	bool isDeath_;
-
-	bool isShadow_;
-
-	bool isGrowSoul_; // 몬스터를 쳤을때 영혼이 찬다]
-
-	bool isSitting_; // 의자에 앉아있다.
-
-	bool isSetting_; //세팅 페이지 열었당
+	//================================
+	//    플래그
+	//================================
+	bool isRefill_;		//가면 -> 회복됐다
+	bool isNewMask_;	//가면 -> 새로 생겼땅
+	bool isBreak_;		// 가면 -> 깨졌다
+	bool isDeath_;		//죽었다
+	bool isShadow_;		// 죽었고 이미 그림자가 있다
+	bool isGrowSoul_;	// 몬스터를 쳤을때 영혼이 찬다
+	bool isSitting_;	// 의자에 앉아있다.
+	bool isSetting_;	//세팅 페이지 열었당
 
 	float4 KnightPosition_;
 
@@ -67,6 +71,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+
+	int GetCurSoul()
+	{
+		return CurSoul_;
+	}
 
 	bool GetisHUD()
 	{
@@ -234,6 +243,11 @@ public:
 	void SetisSoulGrow(bool _b)
 	{
 		isGrowSoul_ = _b;
+	}
+
+	void SetCurSoul(int _i)
+	{
+		CurSoul_ = _i;
 	}
 
 };

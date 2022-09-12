@@ -26,12 +26,10 @@ protected:
 	void LevelEndEvent() override;
 
 private:
-
 	bool MaskesAppearEnd_;
 
 	int MaskesSize_;
 	int MakesAppearCount_;
-
 	int CurMask_;
 
 	float MaskAppearTimer_;
@@ -39,9 +37,8 @@ private:
 	VesselFrame* VesselFrame_;
 	Geo* Geo_;
 	Soul* Soul_;
-	std::vector<Mask*> Maskes_;
 
-	
+	std::vector<Mask*> Maskes_;
 
 	GameEngineStateManager HUDManager_;
 
