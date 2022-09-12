@@ -139,6 +139,12 @@ void InventoryPage::Start()
 
 	GetLevel<HollowKnightLevel>()->CreateInventoryPageInfo(this);
 
+	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Shade_Cloak);
+	GetLevel<HollowKnightLevel>()->PustItemInventroy(ITEM_LIST::Mantis_Cloak);
+
+	KnightData::GetInst()->PushKnihgtItemList(ITEM_LIST::Shade_Cloak);
+	KnightData::GetInst()->PushKnihgtItemList(ITEM_LIST::Mantis_Cloak);
+
 }
 
 void InventoryPage::Update(float _DeltaTime)

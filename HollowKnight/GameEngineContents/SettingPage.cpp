@@ -245,6 +245,38 @@ void SettingPage::OnOffPage()
 
 void SettingPage::AllOff()
 {
+
+	AllPage_[0]->SetCurrentPage(CURRENT_PAGE_INDEX::CurrentPage);
+
+
+	AllPage_[1]->SetCurrentPage(CURRENT_PAGE_INDEX::NextPage);
+
+	AllPage_[2]->SetCurrentPage(CURRENT_PAGE_INDEX::SincePage);
+
+	SettingPointer_->SetFirstPosCharmPage();
+
+
+	for (int i = 0; i < AllPage_.size(); ++i)
+	{
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::SincePage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ -1920, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::CurrentPage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ 0, 0 });
+		}
+
+		if (AllPage_[i]->GetCurrentPage() == CURRENT_PAGE_INDEX::NextPage)
+		{
+			AllPage_[i]->GetTransform().SetWorldPosition({ 1920, 0 });
+		}
+	}
+
+
+
+
 	BackGround_->Off();
 	//CharmPage_->Off();
 	BorderCornerLeftTop_->Off();
