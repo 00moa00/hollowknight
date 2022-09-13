@@ -142,6 +142,9 @@
     <Filter Include="Actor\Cameara">
       <UniqueIdentifier>{3916fe62-b836-482a-a53f-a0aa6f3b4eb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{6133c054-d615-4921-a6b6-17b34b0553df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -449,6 +452,9 @@
     </ClInclude>
     <ClInclude Include="MainCameraManager.h">
       <Filter>Actor\Cameara</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraGUI.h">
+      <Filter>Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -769,6 +775,9 @@
     </ClCompile>
     <ClCompile Include="MainCameraManager.cpp">
       <Filter>Actor\Cameara</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraGUI.cpp">
+      <Filter>Debug</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

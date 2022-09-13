@@ -2,6 +2,7 @@
 #include <GameEngineCore/CoreMinimal.h>
 #include <GameEngineCore/GameEngineCollision.h>
 
+
 #include "PerlinNoise.h"
 
 enum class CameraMode
@@ -28,8 +29,6 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime)override;
-
-
 
 
 private:

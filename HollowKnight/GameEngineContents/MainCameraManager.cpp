@@ -2,12 +2,13 @@
 #include "MainCameraManager.h"
 #include "HollowKnightLevel.h"
 
+
 MainCameraManager::MainCameraManager() 
 	:
 	max_skew(5.00f),
-	max_sway(16.00f),
+	max_sway(0.70f),
 	seed(0),
-	seed_shifting_factor(3.00f)
+	seed_shifting_factor(10.00f)
 {
 }
 
@@ -39,7 +40,11 @@ void MainCameraManager::Start()
 void MainCameraManager::Update(float _DeltaTime)
 {
 	CameraStateManager_.Update(_DeltaTime);
+
+
 }
+
+
 
 
 void MainCameraManager::MainCameraMoveLimitWindow(float4 _TargetPos, float4 _MapSize)
@@ -123,10 +128,13 @@ void MainCameraManager::ShakingStart(const StateInfo& _Info)
 
 void MainCameraManager::ShakingUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	seed += _DeltaTime;
+
+	//GameEngineTime::GetInst()->SetTimeScale(1, 0.1f);
+
+	seed += (_DeltaTime);
 	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed * seed_shifting_factor, seed * seed_shifting_factor, 0)) - 1.0f;
 
-	float4 ShakePosition = { shake * max_sway/GameEngineWindow::GetInst()->GetScale().x , shake * max_sway/ GameEngineWindow::GetInst()->GetScale().y};
+	float4 ShakePosition = { shake * max_sway, shake * max_sway};
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
 
