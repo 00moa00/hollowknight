@@ -35,6 +35,7 @@ void CrossroadsLevel2::Start()
 	GetMasterMap()->CreateFrontObject("Cross2_FrontObject.png");
 
 	CreateUIActor();
+	CreateMainCameraManager();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, 0 });

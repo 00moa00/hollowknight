@@ -12,6 +12,9 @@
 #include "ForgottenCrossroadMap.h"
 #include "SettingPageInfo.h"
 
+#include "PerlinNoise.h"
+#include "MainCameraManager.h"
+
 class GameEngineTextureRenderer;
 class PointActorComponent;
 class HollowKnightLevel : public GameEngineLevel
@@ -29,7 +32,7 @@ public:
 
 private:
 	float4 MainCameraPosition_;
-	float4 MainMapSize_;
+	float4 MapSize_;
 
 	MasterMap* MasterMap_;
 	Knight* Knight_;
@@ -47,6 +50,9 @@ private:
 
 	GameEngineStateManager CameraStateManager_;
 
+	PerlinNoise Pn_;
+
+	MainCameraManager* MainCameraManager_;
 
 public:
 	std::map<int, PointActorComponent*> PointActorListCharm;
@@ -66,14 +72,15 @@ protected:
 	void CreateKnightShadowActor();
 	void CreateSettingPageActor();
 	void CreateForgottenCrossroadMap();
+	void CreateMainCameraManager();
 
 public:
 	void CreateCharmPageInfo(GameEngineActor* ParrentPage);
 	void CreateInventoryPageInfo(GameEngineActor* ParrentPage);
 
 protected:
-	void CameraMoveWindowLimit();
-	void CameraMoveKnightLimit();
+	//void CameraMoveWindowLimit();
+	//void CameraMoveKnightLimit();
 
 	void SetMainMapSize(float4 _MapSize);
 
@@ -90,6 +97,11 @@ public :
 
 	GameEngineCameraActor* GetMapCameraActor();
 	GameEngineTransform& GetMapCameraActorTransform();
+
+	MainCameraManager* GetMainCameraManager()
+	{
+		return MainCameraManager_;
+	}
 
 	ForgottenCrossroadMap* GetForgottenCrossroadMap()
 	{
@@ -120,6 +132,20 @@ public :
 	{
 		return 	InventoryPageInfo_;
 	}
+
+
+	float4 GetMapSize()
+	{
+		return MapSize_;
+	}
+
+	void SetMapSize(float4 _MapSize)
+	{
+		MapSize_ = _MapSize;
+
+	}
+
+
 
 };
 

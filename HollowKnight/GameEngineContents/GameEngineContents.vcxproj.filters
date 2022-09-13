@@ -136,6 +136,12 @@
     <Filter Include="Actor\Effect\Monster">
       <UniqueIdentifier>{4981cceb-2983-4f74-89e0-9008b985e1f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{090a9462-fa81-4df1-88d9-6b50cefbb760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Cameara">
+      <UniqueIdentifier>{3916fe62-b836-482a-a53f-a0aa6f3b4eb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -437,6 +443,12 @@
     </ClInclude>
     <ClInclude Include="MonsterHitEffect.h">
       <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="MainCameraManager.h">
+      <Filter>Actor\Cameara</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -751,6 +763,12 @@
     </ClCompile>
     <ClCompile Include="MonsterHitEffect.cpp">
       <Filter>Actor\Effect\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
+      <Filter>ThirdParty</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCameraManager.cpp">
+      <Filter>Actor\Cameara</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -37,11 +37,12 @@ void CrossroadsLevel1::Start()
 	GetMasterMap()->CreateFrontObject("Cross1_FrontObject.png");
 
 	CreateUIActor();
+	CreateMainCameraManager();
 
 
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
-	SetMainMapSize({ 6633, 1661 });
+	SetMapSize({ 6633, 1661 });
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, static_cast<float>(Z_ORDER::Knight) });
@@ -54,13 +55,8 @@ void CrossroadsLevel1::Start()
 
 void CrossroadsLevel1::Update(float _DeltaTime)
 {
-	if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
-	{
-		// ;
-		GetMainCameraActor()->FreeCameraModeOnOff();
-	}
+	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 
-	CameraMoveWindowLimit();
 }
 
 void CrossroadsLevel1::End()

@@ -53,8 +53,9 @@ void DirtmouthLevel2::Start()
 
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
+	CreateMainCameraManager();
 
-	SetMainMapSize({ 6646, 3418 });
+	SetMapSize({ 6646, 3418 });
 
 
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
@@ -94,13 +95,8 @@ void DirtmouthLevel2::Start()
 
 void DirtmouthLevel2::Update(float _DeltaTime)
 {
-	CameraMoveWindowLimit();
-	//std::list<GameEnginePostEffect*> Find = GetMainCamera()->GetCameraRenderTarget()->Effects;
+	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 
-	//for (GameEnginePostEffect* Effect : Find)
-	//{
-	//	Effect->Update(_DeltaTime);
-	//}
 }
 
 void DirtmouthLevel2::End()

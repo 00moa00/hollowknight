@@ -33,8 +33,9 @@ void SlyShopLevel::Start()
 
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
+	CreateMainCameraManager();
 
-	SetMainMapSize({ 1920, 1080 });
+	SetMapSize({ 1920, 1080 });
 
 	GetKnight()->GetTransform().SetLocalPosition({ 800, 0.f, static_cast<float>(Z_ORDER::Knight) });
 
@@ -43,7 +44,7 @@ void SlyShopLevel::Start()
 
 void SlyShopLevel::Update(float _DeltaTime)
 {
-	CameraMoveWindowLimit();
+	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 
 }
 

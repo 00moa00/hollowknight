@@ -44,8 +44,9 @@ void KingsPassLevel1::Start()
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	CreateSettingPageActor();
+	CreateMainCameraManager();
 
-	SetMainMapSize({7099, 4889});
+	SetMapSize({7099, 4889});
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
@@ -55,13 +56,9 @@ void KingsPassLevel1::Start()
 void KingsPassLevel1::Update(float _DeltaTime) 
 {
 
-	if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
-	{
-		// ;
-		GetMainCameraActor()->FreeCameraModeOnOff();
-	}
 
-	CameraMoveWindowLimit();
+
+	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 }
 
 void KingsPassLevel1::End() {}

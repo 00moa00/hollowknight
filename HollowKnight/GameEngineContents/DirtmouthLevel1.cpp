@@ -39,11 +39,12 @@ void DirtmouthLevel1::Start()
 	GetMasterMap()->CreateFrontObject("Dirtmouth_MapObject_1.png");
 
 	CreateUIActor();
+	CreateMainCameraManager();
 
 	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	CreateSettingPageActor();
-	SetMainMapSize({ 3700, 3418 });
+	SetMapSize({ 3700, 3418 });
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 500, -0, static_cast<float>(Z_ORDER::Knight) });
@@ -54,13 +55,8 @@ void DirtmouthLevel1::Start()
 
 void DirtmouthLevel1::Update(float _DeltaTime)
 {
-	if (GameEngineInput::GetInst()->IsDown("FreeCameraOnOff"))
-	{
-		// ;
-		GetMainCameraActor()->FreeCameraModeOnOff();
-	}
+	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 
-	CameraMoveWindowLimit();
 }
 
 void DirtmouthLevel1::End()
