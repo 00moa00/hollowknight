@@ -55,7 +55,8 @@ void DirtmouthLevel1::Start()
 
 void DirtmouthLevel1::Update(float _DeltaTime)
 {
-	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
+
+	//GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 
 }
 

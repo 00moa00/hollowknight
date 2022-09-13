@@ -11,7 +11,7 @@ KnihgtShadowSlashEffect::~KnihgtShadowSlashEffect()
 
 void KnihgtShadowSlashEffect::Start()
 {
-	CreateCollisionComponent(float4{ 140, 120, 10000 }, static_cast<int>(OBJECTORDER::Knight_Shadow_Slash));
+	CreateCollisionComponent(float4{ 140, 120, 10000 }, static_cast<int>(COLLISION_ORDER::Knight_Shadow_Slash));
 	CreateRendererComponent(float4{ 431, 287, 1 }, "Hollow Shade Cln_slash_effect007-Sheet.png", 2, static_cast<int>(RENDERORDER::Knight));
 
 	GetRenderer()->SetScaleModeImage();

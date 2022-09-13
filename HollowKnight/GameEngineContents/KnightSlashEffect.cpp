@@ -16,7 +16,7 @@ void KnightSlashEffect::Start()
 {
 	SetName("KnightSlashEffect");
 
-	CreateCollisionComponent(float4{ 140, 120, 1 }, static_cast<int>(OBJECTORDER::Knight_Slash));
+	CreateCollisionComponent(float4{ 140, 120, 1 }, static_cast<int>(COLLISION_ORDER::Knight_Slash));
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_double_slashes_effect-Sheet.png", 2, static_cast<int>(RENDERORDER::Knight));
 	
 	//GetRenderer()->GetTransform().SetLocalPosition({0,0,static_cast<float>(Z_ORDER::Knight_Slash) });
@@ -89,7 +89,7 @@ void KnightSlashEffect::SlashIdleStart(const StateInfo& _Info)
 
 void KnightSlashEffect::SlashIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Monster, CollisionType::CT_OBB2D,
+	GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&KnightSlashEffect::EffectVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 

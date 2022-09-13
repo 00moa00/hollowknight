@@ -33,7 +33,7 @@ void RoomPotal::CreatePotal(POTAL_TYPE _Type, bool isPromt)
 	}
 
 
-	CreateCollisionComponent(float4{ 300, 200, 1 }, static_cast<int>(OBJECTORDER::Potal));
+	CreateCollisionComponent(float4{ 300, 200, 1 }, static_cast<int>(COLLISION_ORDER::Potal));
 	PotalType_ = _Type;
 }
 

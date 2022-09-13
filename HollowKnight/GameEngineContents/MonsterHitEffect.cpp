@@ -95,7 +95,7 @@ void MonsterHitEffect::Start()
 
 void MonsterHitEffect::Update(float _DeltaTime)
 {
-	SacleY += 100.f * _DeltaTime;
+	SacleY += 20.f * _DeltaTime;
 	float4 MoveLeftTop = float4{ -1.0f, 0.3f };
 
 

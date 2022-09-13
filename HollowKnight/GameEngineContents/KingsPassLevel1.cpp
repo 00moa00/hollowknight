@@ -58,7 +58,7 @@ void KingsPassLevel1::Update(float _DeltaTime)
 
 
 
-	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
+	//GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 }
 
 void KingsPassLevel1::End() {}

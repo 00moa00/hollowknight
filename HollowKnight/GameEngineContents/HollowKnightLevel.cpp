@@ -68,7 +68,7 @@ void HollowKnightLevel::CreateForgottenCrossroadMap()
 
 void HollowKnightLevel::CreateMainCameraManager()
 {
-	MainCameraManager_ = CreateActor<MainCameraManager>();
+	MainCameraManager_ = CreateActor<MainCameraManager>(static_cast<int>(UPDATE_ORDER::CAMERA));
 }
 
 void HollowKnightLevel::CreateCharmPageInfo(GameEngineActor* ParrentPage)

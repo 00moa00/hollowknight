@@ -18,7 +18,7 @@ MapEditorLevel::~MapEditorLevel()
 void MapEditorLevel::Start()
 {
 	{
-		TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
+		TileMap = CreateActor<TileMapActor>(COLLISION_ORDER::TileMap);
 	}
 
 }

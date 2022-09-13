@@ -12,7 +12,7 @@ DropGeo::~DropGeo()
 void DropGeo::Start()
 {
 	CreateRendererComponent(float4{ 62, 62, 1 }, "HUD Cln_HUD_coin_v020000-Sheet.png", 4, static_cast<int>(RENDERORDER::UI));
-	CreateCollisionComponent(float4{ 60, 120, 1 }, static_cast<int>(OBJECTORDER::Geo));
+	CreateCollisionComponent(float4{ 60, 120, 1 }, static_cast<int>(COLLISION_ORDER::Geo));
 
 	//================================
 	//    Create Animation

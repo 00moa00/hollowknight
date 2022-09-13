@@ -55,7 +55,7 @@ void CrossroadsLevel1::Start()
 
 void CrossroadsLevel1::Update(float _DeltaTime)
 {
-	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
+	//GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 
 }
 

@@ -14,7 +14,7 @@ Bench::~Bench()
 void Bench::Start()
 {
 	CreateRendererComponent({187, 97, 1}, "bench.png");
-	CreateCollisionComponent({ 187, 97, 1 }, static_cast<int>(OBJECTORDER::Object));
+	CreateCollisionComponent({ 187, 97, 1 }, static_cast<int>(COLLISION_ORDER::Object));
 
 	GetTransform().SetLocalPosition({4600, -3080.f, static_cast<float>(Z_ORDER::Object)});
 }

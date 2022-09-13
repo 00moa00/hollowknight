@@ -27,7 +27,7 @@ void Elderbug::Start()
 	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
 	//GetRenderer()->GetPixelData().MulColor = { 1,1,1,1 };
 
-	CreateCollisionComponent(float4{ 600, 120, 1 }, static_cast<int>(OBJECTORDER::NPC));
+	CreateCollisionComponent(float4{ 600, 120, 1 }, static_cast<int>(COLLISION_ORDER::NPC));
 
 	CreateDialogueSet();
 	//GetDialogueSet()->SetParent(this);
@@ -81,7 +81,7 @@ void Elderbug::ElderWaitStart(const StateInfo& _Info)
 
 void Elderbug::ElderWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight, CollisionType::CT_OBB2D,
 		std::bind(&Elderbug::ThisVSKnightCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		ElderManager_.ChangeState("IDLE");
@@ -98,7 +98,7 @@ void Elderbug::ElderIdleStart(const StateInfo& _Info)
 
 void Elderbug::ElderIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight, CollisionType::CT_OBB2D,
 		std::bind(&Elderbug::ThisVSKnightCollision, this, std::placeholders::_1, std::placeholders::_2)) == false)
 	{		
 		ElderManager_.ChangeState("LEAVE");

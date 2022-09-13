@@ -12,7 +12,6 @@
 #include "ForgottenCrossroadMap.h"
 #include "SettingPageInfo.h"
 
-#include "PerlinNoise.h"
 #include "MainCameraManager.h"
 
 class GameEngineTextureRenderer;
@@ -48,9 +47,7 @@ private:
 	SettingPageInfo* CharmPageInfo_;
 	SettingPageInfo* InventoryPageInfo_;
 
-	GameEngineStateManager CameraStateManager_;
 
-	PerlinNoise Pn_;
 
 	MainCameraManager* MainCameraManager_;
 

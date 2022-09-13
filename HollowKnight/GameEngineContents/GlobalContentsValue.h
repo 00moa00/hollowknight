@@ -1,6 +1,13 @@
 #pragma once
 
-enum class OBJECTORDER
+enum class UPDATE_ORDER
+{
+	NORMAL,
+	CAMERA
+};
+
+
+enum class COLLISION_ORDER
 {
 	Background,
 	Background_Object,

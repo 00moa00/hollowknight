@@ -54,8 +54,7 @@ void MapShopLevel::Start()
 
 void MapShopLevel::Update(float _DeltaTime)
 {
-	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
-
+//	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 }
 
 void MapShopLevel::End()

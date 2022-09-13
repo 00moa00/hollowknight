@@ -3,6 +3,7 @@
 #include "KnightData.h"
 #include "KnightShadow.h"
 #include "KnightShadowData.h"
+#include "HollowKnightLevel.h"
 
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
@@ -18,14 +19,14 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Monster, CollisionType::CT_OBB2D,
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		KnightManager_.ChangeState("STUN");
 		KnightData::GetInst()->SetisBreak(true);
 	}
 
-	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Object, CollisionType::CT_OBB2D,
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Object, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnihgtVSBenchCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 		&& (GameEngineInput::GetInst()->IsDown("KnightUp") == true))
 	{
@@ -34,13 +35,13 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
-	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::NPC, CollisionType::CT_OBB2D,
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::NPC, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnihgtVSNPCCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
 	{
 
 	}
 
-	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Potal, CollisionType::CT_OBB2D,
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Potal, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSPotalCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
 	{
 
@@ -166,7 +167,7 @@ void Knight::KnightWalkStart(const StateInfo& _Info)
 
 void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 {	
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Monster, CollisionType::CT_OBB2D,
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		KnightData::GetInst()->SetisBreak(true);
@@ -235,7 +236,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	// ========== 스테이트 변경 ==========
 
-	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Potal, CollisionType::CT_OBB2D,
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Potal, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSPotalCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
 	{
 
@@ -828,6 +829,7 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 	//KnightKnockbackTimer_ = 1.0f;
 	KnightStunEffect_->StunEffectOn();
 	GetRenderer()->ChangeFrameAnimation("STUN_ANIMATION");
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Shaking);
 
 }
 
@@ -860,6 +862,8 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightStunEnd(const StateInfo& _Info)
 {
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
+
 	GameEngineTime::GetInst()->SetTimeScale(0, 1.0f);
 
 	KnightStunEffect_->StunEffectOff();
@@ -1638,7 +1642,7 @@ void Knight::KnightTalkingStart(const StateInfo& _Info)
 
 void Knight::KnightTalkingUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::NPC, CollisionType::CT_OBB2D,
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::NPC, CollisionType::CT_OBB2D,
 		std::bind(&Knight::NPCNextDialogueCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
 	{
 
@@ -1657,7 +1661,7 @@ void Knight::KnightShoppingStart(const StateInfo& _Info)
 
 void Knight::KnightShoppingUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::NPC, CollisionType::CT_OBB2D,
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::NPC, CollisionType::CT_OBB2D,
 		std::bind(&Knight::ShopCloseCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
 	{
 

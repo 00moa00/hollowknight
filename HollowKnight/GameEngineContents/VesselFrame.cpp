@@ -12,7 +12,7 @@ VesselFrame::~VesselFrame()
 
 void VesselFrame::Start()
 {
-	//CreateCollisionComponent(float4{ 257, 164, 1 }, static_cast<int>(OBJECTORDER::UI));
+	//CreateCollisionComponent(float4{ 257, 164, 1 }, static_cast<int>(COLLISION_ORDER::UI));
 	CreateRendererComponent(float4{ 257, 164, 1 }, "HUD Cln_HUD_frame_v020000-Sheet.png", 5, static_cast<int>(RENDERORDER::UI));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("VESSELFRAME_IDLE", FrameAnimation_DESC("HUD Cln_HUD_frame_v020000-Sheet.png", 5, 5, 0.050f, false));

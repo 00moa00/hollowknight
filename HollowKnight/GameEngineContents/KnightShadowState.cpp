@@ -100,13 +100,13 @@ void KnightShadow::ShadowFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 
 
 	// 플레이어하고 닿으면 FreeFly
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight, CollisionType::CT_OBB2D,
 		std::bind(&KnightShadow::ShadowVSKnihgtCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		KnightShadowManager_.ChangeState("FREE_FLY");
 	}
 
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight_Slash, CollisionType::CT_OBB2D,
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight_Slash, CollisionType::CT_OBB2D,
 		std::bind(&KnightShadow::ShadowVSKnihgtCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		KnightShadowManager_.ChangeState("HIT");
@@ -131,7 +131,7 @@ void KnightShadow::ShadowFreeFlyStart(const StateInfo& _Info)
 void KnightShadow::ShadowFreeFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight_Slash, CollisionType::CT_OBB2D,
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight_Slash, CollisionType::CT_OBB2D,
 		std::bind(&KnightShadow::ShadowVSKnihgtCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		KnightShadowManager_.ChangeState("HIT");

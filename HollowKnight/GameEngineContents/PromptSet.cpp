@@ -24,7 +24,7 @@ void PromptSet::Start()
 
 	PromptCollision_ = CreateComponent<GameEngineCollision>();
 	PromptCollision_->GetTransform().SetLocalScale({ 600, 120 });
-	PromptCollision_->ChangeOrder(OBJECTORDER::Prompt);
+	PromptCollision_->ChangeOrder(COLLISION_ORDER::Prompt);
 
 	GetCollision()->GetTransform().SetLocalPosition({ 0, -150.f });
 
@@ -139,7 +139,7 @@ void PromptSet::PromptWaitStart(const StateInfo& _Info)
 
 void PromptSet::PromptWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (PromptCollision_ ->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
+	if (PromptCollision_ ->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight, CollisionType::CT_OBB2D,
 		std::bind(&PromptSet::ThisVSKnightCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		PromptManager_.ChangeState("IDLE");
@@ -176,7 +176,7 @@ void PromptSet::PromptIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	//	}
 	//}
 
-	if (PromptCollision_->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
+	if (PromptCollision_->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight, CollisionType::CT_OBB2D,
 		std::bind(&PromptSet::ThisVSKnightCollision, this, std::placeholders::_1, std::placeholders::_2)) == false)
 	{
 		PromptManager_.ChangeState("LEAVE");

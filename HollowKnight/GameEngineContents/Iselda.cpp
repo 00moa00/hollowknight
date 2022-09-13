@@ -27,7 +27,7 @@ void Iselda::Start()
 	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
 	//GetRenderer()->GetPixelData().MulColor = { 1,1,1,1 };
 
-	CreateCollisionComponent(float4{ 600, 120, 1 }, static_cast<int>(OBJECTORDER::NPC));
+	CreateCollisionComponent(float4{ 600, 120, 1 }, static_cast<int>(COLLISION_ORDER::NPC));
 
 	CreateDialogueSet();
 	
@@ -120,7 +120,7 @@ void Iselda::IseldaWaitStart(const StateInfo& _Info)
 
 void Iselda::IseldaWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::Knight, CollisionType::CT_OBB2D,
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight, CollisionType::CT_OBB2D,
 		std::bind(&Iselda::ThisVSKnightCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		IseldaManager_.ChangeState("IDLE");

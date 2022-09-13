@@ -44,7 +44,7 @@ void SlyShopLevel::Start()
 
 void SlyShopLevel::Update(float _DeltaTime)
 {
-	GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
+	//GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 
 }
 
