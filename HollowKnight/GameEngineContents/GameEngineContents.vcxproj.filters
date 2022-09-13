@@ -429,6 +429,9 @@
     <ClInclude Include="ShopArrow.h">
       <Filter>Actor\Play\Npc\Shop</Filter>
     </ClInclude>
+    <ClInclude Include="KnightStunEffect.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -736,6 +739,9 @@
     </ClCompile>
     <ClCompile Include="ShopArrow.cpp">
       <Filter>Actor\Play\Npc\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightStunEffect.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

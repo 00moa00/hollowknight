@@ -1094,6 +1094,9 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_mantis_down_slash0001-Sheet.png", 2, 1);
 		GameEngineTexture::Cut("Knight_mantis_slash_left0001-Sheet.png", 2, 1);
 
+
+		GameEngineTexture::Cut("hit_crack_simple0000-Sheet.png", 3, 1);
+
 	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
