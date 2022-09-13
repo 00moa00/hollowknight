@@ -826,14 +826,19 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 	}
 
 	//KnightKnockbackTimer_ = 1.0f;
+	KnightStunEffect_->StunEffectOn();
 	GetRenderer()->ChangeFrameAnimation("STUN_ANIMATION");
+
 }
 
 void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	GameEngineTime::GetInst()->SetTimeScale(0, 0.2f);
+
+	KnightStunEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
 	KnightKnockbackTimer_ += _DeltaTime;
 
-	if (KnightKnockbackTimer_ > 0.3f)
+	if (KnightKnockbackTimer_ > 0.2f)
 	{
 		KnightKnockbackTimer_ = 0.f;
 		KnightManager_.ChangeState("STILL");
@@ -844,6 +849,10 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightStunEnd(const StateInfo& _Info)
 {
+	GameEngineTime::GetInst()->SetTimeScale(0, 1.0f);
+
+	KnightStunEffect_->StunEffectOff();
+
 }
 
 void Knight::KnightDeathStart(const StateInfo& _Info)

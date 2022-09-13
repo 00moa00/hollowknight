@@ -6,6 +6,7 @@
 #include "KnightSmallLightEffect.h"
 #include "SideDarkEffect.h"
 #include "ContentsFontRenderer.h"
+#include "KnightStunEffect.h"
 
 // Ό³Έν :
 class GameEngineTextureRenderer;
@@ -82,6 +83,7 @@ private:
 	KnightDonutLightEffect* KnightDonutLightEffect_;
 	KnightSmallLightEffect* KnightSmallLightEffect_;
 	SideDarkEffect* SideDarkEffect_;
+	KnightStunEffect* KnightStunEffect_;
 
 	GameEngineCollision* Test1_;
 	GameEngineCollision* Test2_;

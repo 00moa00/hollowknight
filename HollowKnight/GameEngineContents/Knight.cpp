@@ -52,6 +52,13 @@ Knight::Knight()
 	isSitEnd_(false),
 	isDoorEnd_(false),
 
+	KnightSlashEffect_(nullptr),
+	KnightStunEffect_(nullptr),
+	SideDarkEffect_(nullptr),
+	KnightSmallLightEffect_(nullptr),
+	KnightDonutLightEffect_(nullptr),
+	KnightLightEffect_(nullptr),
+
 	ChangeLevel_(""),
 
 	KnockbackDirection_(float4::ZERO)
@@ -103,15 +110,15 @@ void Knight::Start()
 	Test2_ = CreateComponent<GameEngineCollision>();
 	Test2_->GetTransform().SetLocalScale({ 15,15,1 });
 
-	//Test1_->ChangeOrder(_Order);
-	//GetRenderer()->GetPixelData().MulColor
-
 	GetTransform().SetWorldPosition({500,-4000,static_cast<float>(Z_ORDER::Knight) });
 	
 	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
 	KnightLightEffect_ = GetLevel()->CreateActor<KnightLightEffect>();
 	KnightDonutLightEffect_ = GetLevel()->CreateActor<KnightDonutLightEffect>();
 	KnightSmallLightEffect_ = GetLevel()->CreateActor<KnightSmallLightEffect>();
+	KnightStunEffect_ = GetLevel()->CreateActor<KnightStunEffect>();
+	KnightStunEffect_->StunEffectOff();
+
 	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 
