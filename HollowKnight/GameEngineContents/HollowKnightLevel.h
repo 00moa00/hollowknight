@@ -27,8 +27,6 @@ public:
 	HollowKnightLevel& operator=(const HollowKnightLevel& _Other) = delete;
 	HollowKnightLevel& operator=(HollowKnightLevel&& _Other) noexcept = delete;
 
-
-
 private:
 	float4 MainCameraPosition_;
 	float4 MainMapSize_;
@@ -46,6 +44,8 @@ private:
 
 	SettingPageInfo* CharmPageInfo_;
 	SettingPageInfo* InventoryPageInfo_;
+
+	GameEngineStateManager CameraStateManager_;
 
 
 public:

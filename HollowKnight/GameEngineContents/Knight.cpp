@@ -20,6 +20,8 @@
 #include "MasterNPC.h"
 #include "RoomPotal.h"
 
+#include "MonsterHitEffect.h"
+
 
 Knight::Knight()
 	:
@@ -778,6 +780,9 @@ void Knight::LookDownTimerAndChangeState(float _DeltaTime)
 bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	MasterActor* Monster = dynamic_cast<MasterActor*>(_Other->GetActor());
+	MonsterHitEffect* Effect = GetLevel()->CreateActor<MonsterHitEffect>();
+
+	Effect->GetTransform().SetWorldPosition({ Monster->GetTransform().GetWorldPosition().x,  Monster->GetTransform().GetWorldPosition().y + (Monster->GetRenderer()->GetTransform().GetWorldScale().y / 4) , static_cast<float>(Z_ORDER::Effect)});
 
 	if (Monster != nullptr)
 	{

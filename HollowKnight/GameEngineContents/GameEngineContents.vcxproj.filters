@@ -133,6 +133,9 @@
     <Filter Include="Actor\Play\UI\PromptSet">
       <UniqueIdentifier>{c37ca923-d779-47d1-a913-ae2aca7e6fdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\Monster">
+      <UniqueIdentifier>{4981cceb-2983-4f74-89e0-9008b985e1f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -431,6 +434,9 @@
     </ClInclude>
     <ClInclude Include="KnightStunEffect.h">
       <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterHitEffect.h">
+      <Filter>Actor\Effect\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -742,6 +748,9 @@
     </ClCompile>
     <ClCompile Include="KnightStunEffect.cpp">
       <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterHitEffect.cpp">
+      <Filter>Actor\Effect\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

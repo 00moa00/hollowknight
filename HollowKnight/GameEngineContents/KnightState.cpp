@@ -833,7 +833,18 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 
 void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	GameEngineTime::GetInst()->SetTimeScale(0, 0.2f);
+
+	if (KnightKnockbackTimer_ > 0.04f)
+	{
+		GameEngineTime::GetInst()->SetTimeScale(0, 1.0f);
+
+	}
+
+	else
+	{
+		GameEngineTime::GetInst()->SetTimeScale(0, 0.1f);
+
+	}
 
 	KnightStunEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
 	KnightKnockbackTimer_ += _DeltaTime;

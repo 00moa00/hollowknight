@@ -2,6 +2,8 @@
 #include "KnightStunEffect.h"
 
 KnightStunEffect::KnightStunEffect() 
+	:
+	AddScaleX_(0)
 {
 }
 
@@ -13,13 +15,29 @@ void KnightStunEffect::Start()
 {
 	CreateRendererComponent( "hit_crack_simple0000-Sheet.png");
 	GetRenderer()->GetTransform().SetWorldPosition({ 0, 0, 0 });
-	GetRenderer()->SetScaleModeImage();
+	GetRenderer()->GetTransform().SetWorldScale({699 * 1.3f,140 * 1.3f });
 	GetRenderer()->GetTransform().SetWorldPosition({ 0, 80,  0 });
 
 
-	GetRenderer()->CreateFrameAnimationCutTexture("STUN_ANIMATION", FrameAnimation_DESC("hit_crack_simple0000-Sheet.png", 0, 2, 0.070f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("STUN_IDLE_ANIMATION", FrameAnimation_DESC("hit_crack_simple0000-Sheet.png", 2, 2, 0.070f, false));
+	std::vector<unsigned int> CustomFrame;
 
+	CustomFrame.push_back(0);
+	CustomFrame.push_back(0);
+	CustomFrame.push_back(0);
+	CustomFrame.push_back(0);
+	CustomFrame.push_back(1);
+	CustomFrame.push_back(2);
+
+	GetRenderer()->CreateFrameAnimationCutTexture("STUN_ANIMATION", FrameAnimation_DESC("hit_crack_simple0000-Sheet.png", CustomFrame, 0.010f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("STUN_IDLE_ANIMATION", FrameAnimation_DESC("hit_crack_simple0000-Sheet.png", 2, 2, 0.042f, false));
+	PrevScale_ = GetRenderer()->GetTransform().GetWorldScale();
+	
+	
+	
+
+
+	
+	
 	//================================
 	//    Create Bind Animation
 	//================================
@@ -35,6 +53,8 @@ void KnightStunEffect::Start()
 
 void KnightStunEffect::Update(float _DeltaTime)
 {
+	AddScaleX_ += (200.f * _DeltaTime);
+	GetRenderer()->GetTransform().SetWorldScale({ GetRenderer()->GetTransform().GetWorldScale().x + AddScaleX_, GetRenderer()->GetTransform().GetWorldScale().y, 1 });
 }
 
 void KnightStunEffect::StunEffectOn()
@@ -46,7 +66,14 @@ void KnightStunEffect::StunEffectOn()
 
 void KnightStunEffect::StunEffectOff()
 {
+	AddScaleX_ = 0;
+	GetRenderer()->GetTransform().SetWorldScale(PrevScale_);
+
+
+
 	GetRenderer()->ChangeFrameAnimation("STUN_IDLE_ANIMATION");
 	this->Off();
+
+
 }
 

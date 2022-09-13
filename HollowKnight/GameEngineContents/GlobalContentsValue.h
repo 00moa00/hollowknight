@@ -52,6 +52,8 @@ enum class Z_ORDER
 
 	Terrain,
 
+	Effect,
+
 	Monster,
 
 	Knight_Shadow_Slash,
