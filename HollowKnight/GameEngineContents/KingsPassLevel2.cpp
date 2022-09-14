@@ -29,6 +29,12 @@ void KingsPassLevel2::End()
 {
 }
 
+void KingsPassLevel2::LevelStartEvent()
+{
+
+}
+
 void KingsPassLevel2::LevelEndEvent()
 {
+
 }

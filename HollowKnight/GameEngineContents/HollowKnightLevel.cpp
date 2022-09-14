@@ -14,6 +14,8 @@ HollowKnightLevel::HollowKnightLevel()
 	Knight_(nullptr),
 	HUD_(nullptr),
 	SettingPage_(nullptr),
+	EffectGUIActor_(nullptr),
+
 	MainCameraPosition_()
 {
 
@@ -38,15 +40,12 @@ HollowKnightLevel::HollowKnightLevel()
 		CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
 		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::UICAMERA);
 	}
-
-
-
-
 }
 
 HollowKnightLevel::~HollowKnightLevel() 
 {
 }
+
 
 void HollowKnightLevel::CraateMasterMapActor()
 {
@@ -88,6 +87,12 @@ void HollowKnightLevel::CreateForgottenCrossroadMap()
 void HollowKnightLevel::CreateMainCameraManager()
 {
 	MainCameraManager_ = CreateActor<MainCameraManager>(static_cast<int>(UPDATE_ORDER::CAMERA));
+}
+
+void HollowKnightLevel::CreateEffectGUIActor()
+{
+	
+	EffectGUIActor_ = CreateActor<EffectGUIActor>();
 }
 
 void HollowKnightLevel::CreateCharmPageInfo(GameEngineActor* ParrentPage)

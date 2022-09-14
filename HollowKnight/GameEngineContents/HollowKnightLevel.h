@@ -14,6 +14,8 @@
 
 #include "MainCameraManager.h"
 
+#include "EffectGUIActor.h"
+
 class GameEngineTextureRenderer;
 class PointActorComponent;
 class HollowKnightLevel : public GameEngineLevel
@@ -28,6 +30,10 @@ public:
 	HollowKnightLevel(HollowKnightLevel&& _Other) noexcept = delete;
 	HollowKnightLevel& operator=(const HollowKnightLevel& _Other) = delete;
 	HollowKnightLevel& operator=(HollowKnightLevel&& _Other) noexcept = delete;
+
+protected:
+	//void LevelStartEvent() override;
+	//void LevelEndEvent() override;
 
 private:
 	float4 MainCameraPosition_;
@@ -47,7 +53,7 @@ private:
 	SettingPageInfo* CharmPageInfo_;
 	SettingPageInfo* InventoryPageInfo_;
 
-
+	EffectGUIActor* EffectGUIActor_;
 
 	MainCameraManager* MainCameraManager_;
 
@@ -70,6 +76,7 @@ protected:
 	void CreateSettingPageActor();
 	void CreateForgottenCrossroadMap();
 	void CreateMainCameraManager();
+	void CreateEffectGUIActor();
 
 public:
 	void CreateCharmPageInfo(GameEngineActor* ParrentPage);
@@ -130,6 +137,11 @@ public :
 		return 	InventoryPageInfo_;
 	}
 
+
+	EffectGUIActor* GetEffectGUIActor()
+	{
+		return EffectGUIActor_;
+	}
 
 	float4 GetMapSize()
 	{

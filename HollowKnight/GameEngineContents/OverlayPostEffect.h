@@ -1,6 +1,16 @@
 #pragma once
 #include <GameEngineCore/GameEngineRenderTarget.h>
 #include <GameEngineCore/GameEngineRenderSet.h>
+
+struct OverlayColorData
+{
+	float4 OverlayColor;
+	int isOverlay_;
+
+};
+
+class HollowKnightLevel;
+
 // Ό³Έν :
 class OverlayPostEffect : public GameEnginePostEffect
 {
@@ -19,12 +29,24 @@ public:
 	virtual void EffectInit();
 	virtual void Effect(GameEngineRenderTarget* _Target);
 
-protected:
-	GameEngineRenderTarget* CopyTarget;
-	GameEngineRenderSet EffectSet;
-
 private:
+	GameEngineRenderSet EffectSet;
+	OverlayColorData OverlayColorData_;
+
+	GameEngineRenderTarget* CopyTarget;
 	GameEngineTexture* Overlay_;
-	 
+	HollowKnightLevel* HollowKnightLevel_;
+
+public:
+	HollowKnightLevel* GetHollowKnightLevel()
+	{
+		return HollowKnightLevel_;
+	}
+
+	 void SetHollowKnightLevel(HollowKnightLevel* _level)
+	 {
+		 HollowKnightLevel_ = _level;
+	 }
+
 };
 

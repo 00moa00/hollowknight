@@ -257,6 +257,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EffectGUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EffectGUIActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Elderbug.h">
       <SubType>
       </SubType>
@@ -670,6 +678,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="DropGeo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EffectGUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EffectGUIActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

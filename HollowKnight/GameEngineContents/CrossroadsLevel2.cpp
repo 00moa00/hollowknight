@@ -36,6 +36,7 @@ void CrossroadsLevel2::Start()
 
 	CreateUIActor();
 	CreateMainCameraManager();
+	CreateEffectGUIActor();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, 0 });
@@ -61,6 +62,5 @@ void CrossroadsLevel2::LevelStartEvent()
 
 void CrossroadsLevel2::LevelEndEvent()
 {
-
 
 }

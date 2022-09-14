@@ -28,3 +28,13 @@ void DirtmouthStationLevel::End()
 {
 }
 
+void DirtmouthStationLevel::LevelStartEvent()
+{
+
+}
+
+void DirtmouthStationLevel::LevelEndEvent()
+{
+
+}
+

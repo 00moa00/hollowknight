@@ -45,6 +45,7 @@ void KingsPassLevel1::Start()
 
 	CreateSettingPageActor();
 	CreateMainCameraManager();
+	CreateEffectGUIActor();
 
 	SetMapSize({7099, 4889});
 
@@ -65,7 +66,6 @@ void KingsPassLevel1::End() {}
 
 void KingsPassLevel1::LevelStartEvent()
 {
-
 
 }
 

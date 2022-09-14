@@ -28,8 +28,11 @@ void KingsPassLevel4::End()
 
 void KingsPassLevel4::LevelStartEvent()
 {
+
 }
 
 void KingsPassLevel4::LevelEndEvent()
 {
+
+
 }

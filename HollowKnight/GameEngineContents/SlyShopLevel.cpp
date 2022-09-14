@@ -34,6 +34,7 @@ void SlyShopLevel::Start()
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
 	CreateMainCameraManager();
+	CreateEffectGUIActor();
 
 	SetMapSize({ 1920, 1080 });
 
@@ -50,5 +51,15 @@ void SlyShopLevel::Update(float _DeltaTime)
 
 void SlyShopLevel::End()
 {
+}
+
+void SlyShopLevel::LevelStartEvent()
+{
+
+}
+
+void SlyShopLevel::LevelEndEvent()
+{
+
 }
 

@@ -1114,12 +1114,12 @@ void ContentsCore::Start()
 	//================================
 	CreateLevel<TitleLevel>("TitleLevel");
 
-	CreateLevel<KingsPassLevel1>("KingsPassLevel1");
 	//CreateLevel<KingsPassLevel2>("KingsPassLevel2");
 	//CreateLevel<KingsPassLevel3>("KingsPassLevel3");
 	//CreateLevel<KingsPassLevel4>("KingsPassLevel4");
 
 	CreateLevel<CrossroadsLevel1>("CrossroadsLevel1");
+	CreateLevel<KingsPassLevel1>("KingsPassLevel1");
 	//CreateLevel<CrossroadsLevel2>("CrossroadsLevel2");
 
 	CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");

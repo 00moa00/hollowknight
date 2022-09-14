@@ -32,7 +32,6 @@ void DirtmouthLevel2::Start()
 		GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
 	}
 
-
 	CraateMasterMapActor();
 
 	GetMasterMap()->CreateBackGround("Dirtmouth_BackGround_2.png");
@@ -42,7 +41,6 @@ void DirtmouthLevel2::Start()
 	if (GetKnight() == nullptr)
 	{
 		CreateKnightActor(); // 플레이어
-
 	}
 
 	GetMasterMap()->CreateTerrain("Dirtmouth_Terrian_2.png");
@@ -50,13 +48,12 @@ void DirtmouthLevel2::Start()
 
 	CreateUIActor();
 
-
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
 	CreateMainCameraManager();
+	CreateEffectGUIActor();
 
 	SetMapSize({ 6646, 3418 });
-
 
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
@@ -67,30 +64,16 @@ void DirtmouthLevel2::Start()
 	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop, true);
 	MapShopPotal_->GetTransform().SetWorldPosition({3840, -3045.f });
 
-
 	Elderbug_ = CreateActor<Elderbug>();
 
+	OverlayPostEffect* OverlayPostEffect_  = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	OverlayPostEffect_->SetHollowKnightLevel(this);
 
-	//OverlayBlend* OverlayBlend_;
-	//OverlayBlend_ = CreateActor<OverlayBlend>();
-	//GameEngineDevice::GetBackBuffer()->AddEffect<OverlayPostEffect>();
-
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
-
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
-
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
-
-	//std::list<GameEnginePostEffect*> FindEffect = GetMainCamera()->GetCameraRenderTarget()->Effects;
-	
-
-//	GetMainCamera()->GetCameraRenderTarget()->
-	//GameEngineTexture* GameEngineTexture_;
-	//GameEngineTexture_ = GameEngineTexture::Find("PostEffectOverlay.png");
-
 }
 
 void DirtmouthLevel2::Update(float _DeltaTime)
@@ -110,6 +93,5 @@ void DirtmouthLevel2::LevelStartEvent()
 
 void DirtmouthLevel2::LevelEndEvent()
 {
-
 
 }

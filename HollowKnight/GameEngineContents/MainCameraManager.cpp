@@ -22,13 +22,6 @@ void MainCameraManager::Start()
 {
 	GetLevel()->GetMainCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
-	if (KnightData::GetInst()->GetisCameraGUI() == false)
-	{
-		KnightData::GetInst()->SetisCameraGUI(true);
-		CameraGUI_ = GameEngineGUI::CreateGUIWindow<CameraGUI>("Camera", GetLevel());
-
-	}
-
 	CameraStateManager_.CreateStateMember("MOVE_TO_TARGET"
 		, std::bind(&MainCameraManager::MoveToTargetUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::MoveToTargetStart, this, std::placeholders::_1)
@@ -47,6 +40,17 @@ void MainCameraManager::Update(float _DeltaTime)
 	CameraStateManager_.Update(_DeltaTime);
 
 
+}
+
+void MainCameraManager::LevelStartEvent()
+{
+	CameraGUI_ = GameEngineGUI::CreateGUIWindow<CameraGUI>("Camera", GetLevel());
+
+}
+
+void MainCameraManager::LevelEndEvent()
+{
+	CameraGUI_->CameraGUIDeath();
 }
 
 

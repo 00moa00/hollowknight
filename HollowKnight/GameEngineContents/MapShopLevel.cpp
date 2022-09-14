@@ -38,6 +38,7 @@ void MapShopLevel::Start()
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
 	CreateMainCameraManager();
+	CreateEffectGUIActor();
 
 	SetMapSize({ 1920, 1080 });
 
@@ -59,5 +60,15 @@ void MapShopLevel::Update(float _DeltaTime)
 
 void MapShopLevel::End()
 {
+}
+
+void MapShopLevel::LevelStartEvent()
+{
+
+}
+
+void MapShopLevel::LevelEndEvent()
+{
+
 }
 

@@ -459,6 +459,12 @@
     <ClInclude Include="LowHealth.h">
       <Filter>Actor\Effect\Knight</Filter>
     </ClInclude>
+    <ClInclude Include="EffectGUI.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectGUIActor.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -784,6 +790,12 @@
     </ClCompile>
     <ClCompile Include="LowHealth.cpp">
       <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectGUI.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectGUIActor.cpp">
+      <Filter>Debug</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

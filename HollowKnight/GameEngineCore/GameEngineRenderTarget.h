@@ -131,11 +131,13 @@ public:
 
 public:
 	template<typename EffectType>
-	void AddEffect() 
+	EffectType* AddEffect()
 	{
 		EffectType* NewEffect = new EffectType();
 		NewEffect->EffectInit();
 		Effects.push_back(NewEffect);
+
+		return NewEffect;
 	}
 };
 

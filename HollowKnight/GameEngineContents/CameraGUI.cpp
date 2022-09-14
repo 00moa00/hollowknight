@@ -15,7 +15,9 @@ CameraGUI::~CameraGUI()
 
 void CameraGUI::Initialize(GameEngineLevel* _Level)
 {
-
+	max_skew = KnightData::GetInst()->GetMaxSkew();
+	max_sway = KnightData::GetInst()->GetMaxSway();
+	seed_shifting_factor = KnightData::GetInst()->GetSeedshiftingFactor();
 }
 
 void CameraGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)

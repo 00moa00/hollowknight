@@ -40,10 +40,9 @@ void DirtmouthLevel1::Start()
 
 	CreateUIActor();
 	CreateMainCameraManager();
-
-	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-
+	CreateEffectGUIActor();
 	CreateSettingPageActor();
+
 	SetMapSize({ 3700, 3418 });
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
@@ -71,6 +70,7 @@ void DirtmouthLevel1::LevelStartEvent()
 
 void DirtmouthLevel1::LevelEndEvent()
 {
+
 
 
 }

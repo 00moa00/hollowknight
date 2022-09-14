@@ -38,6 +38,7 @@ void CrossroadsLevel1::Start()
 
 	CreateUIActor();
 	CreateMainCameraManager();
+	CreateEffectGUIActor();
 
 
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
@@ -64,6 +65,10 @@ void CrossroadsLevel1::End()
 }
 
 void CrossroadsLevel1::LevelStartEvent()
+{
+}
+
+void CrossroadsLevel1::LevelEndEvent()
 {
 
 }

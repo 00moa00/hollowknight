@@ -1,7 +1,5 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
-#include <GameEngineCore/GameEngineCollision.h>
-
 
 #include "PerlinNoise.h"
 #include "CameraGUI.h"
@@ -31,7 +29,8 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime)override;
-
+	void LevelStartEvent() override;
+	void LevelEndEvent() override;
 
 private:
 	GameEngineStateManager CameraStateManager_;
@@ -47,15 +46,6 @@ private:
 public:
 	void MainCameraMoveLimitWindow(float4 _TargetPos, float4 _MapSize);
 	void ChangeCameraMove(CameraMode _Mode);
-
-	
-	float& MaxSkew()
-	{
-		return  max_skew;
-	}
-
-
-
 
 private:
 	//================================

@@ -71,6 +71,12 @@ private:
 	bool isKnihgt_;			// 플레이어가 있다. : 필요없는거같음 후에 삭제
 	bool isHUD_;			// 허드가 있다. 게임 첫 시작에만 애니메이션이 나오기 위함
 
+	float max_skew;			// unit is degrees angle.
+	float max_sway;			// unit is pixels in screen space.
+	float seed_shifting_factor;
+
+	float4 OverlayColor_;
+
 
 	//================================
 	//    플래그
@@ -84,7 +90,8 @@ private:
 	bool isSitting_;	// 의자에 앉아있다.
 	bool isSetting_;	//세팅 페이지 열었당
 	bool isCameraGUI_;	//카메라 GUi가 있다
-	bool isRevive_;
+	bool isEffectGUI_;
+	bool isRevive_;		//플레이어가 다시 태어난당		: 비네팅에 사용중
 
 	float4 KnightPosition_;
 
@@ -144,6 +151,35 @@ public:
 	//================================
 	//    Getter
 	//================================
+
+	float4 GetOverlayColor()
+	{
+		return OverlayColor_;
+	}
+
+	float GetMaxSkew() const
+	{
+		return max_skew;
+	}
+
+
+	float GetMaxSway() const
+	{
+		return max_sway;
+	}
+
+
+	float GetSeedshiftingFactor() const
+	{
+		return seed_shifting_factor;
+	}
+
+
+	bool GetisEffectGUI()
+	{
+		return isEffectGUI_;
+	}
+
 	bool GetisRevive()
 	{
 		return isRevive_;
@@ -239,9 +275,39 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetOverlayColor(float4 _f)
+	{
+		OverlayColor_ = _f;
+	}
+
+
+	void SetMaxSkew(float _f)
+	{
+		max_skew = _f;
+	}
+
+
+	void SetMaxSway(float _f)
+	{
+		max_sway = _f;
+	}
+
+
+	void SetSeedshiftingFactor(float _f) 
+	{
+		seed_shifting_factor = _f;
+	}
+
+
+
 	void SetisRevive(bool _b)
 	{
 		isRevive_ = _b;
+	}
+
+	void SetisEffectGUI(bool _b)
+	{
+		isEffectGUI_ = _b;
 	}
 
 	void SetisCameraGUI(bool _b)
