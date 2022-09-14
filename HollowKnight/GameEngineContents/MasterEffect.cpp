@@ -6,6 +6,11 @@ MasterEffect::MasterEffect()
 	MainRenderer_(nullptr),
 	MainCollision_(nullptr),
 
+	LightMulColor_(),
+	LightPlusColor_(),
+
+	BlendMode_(BlendMode::MAX),
+
 	Direction_(),
 	CollisionSize_()
 {
@@ -46,3 +51,41 @@ void MasterEffect::CreateCollisionComponent(float4 _LocalScale, int _Order)
 	MainCollision_->GetTransform().SetLocalScale(_LocalScale);
 	MainCollision_->ChangeOrder(_Order);
 }
+
+
+void MasterEffect::SetBlendMode(BlendMode _Mode)
+{
+	switch (_Mode)
+	{
+	case BlendMode::Alpha:
+		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend");
+
+		break;
+	case BlendMode::Overlay:
+		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
+
+		break;
+	case BlendMode::Lighten:
+		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("LightenBlend");
+
+		break;
+	case BlendMode::Multply:
+		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("MultplyBlend");
+
+		break;
+	case BlendMode::Add:
+		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+
+		break;
+	case BlendMode::Darken:
+		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("DarkenBlend");
+
+		break;
+	default:
+		break;
+	}
+
+	BlendMode_ = _Mode;
+
+}
+

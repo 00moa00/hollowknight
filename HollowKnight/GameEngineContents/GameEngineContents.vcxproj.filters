@@ -297,10 +297,10 @@
     <ClInclude Include="KnightDonutLightEffect.h">
       <Filter>Actor\Effect\Light</Filter>
     </ClInclude>
-    <ClInclude Include="KnightLightEffect.h">
+    <ClInclude Include="KnightMainLightEffect.h">
       <Filter>Actor\Effect\Light</Filter>
     </ClInclude>
-    <ClInclude Include="KnightSmallLightEffect.h">
+    <ClInclude Include="KnightSiblingLightEffect.h">
       <Filter>Actor\Effect\Light</Filter>
     </ClInclude>
     <ClInclude Include="SideDarkEffect.h">
@@ -620,10 +620,10 @@
     <ClCompile Include="KnightDonutLightEffect.cpp">
       <Filter>Actor\Effect\Light</Filter>
     </ClCompile>
-    <ClCompile Include="KnightLightEffect.cpp">
+    <ClCompile Include="KnightMainLightEffect.cpp">
       <Filter>Actor\Effect\Light</Filter>
     </ClCompile>
-    <ClCompile Include="KnightSmallLightEffect.cpp">
+    <ClCompile Include="KnightSiblingLightEffect.cpp">
       <Filter>Actor\Effect\Light</Filter>
     </ClCompile>
     <ClCompile Include="SideDarkEffect.cpp">

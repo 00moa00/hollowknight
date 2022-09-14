@@ -7,6 +7,11 @@
 #include "Monster.h"
 #include "KnightData.h"
 
+#include "OverlayPostEffect.h"
+#include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
+
+
 CrossroadsLevel1::CrossroadsLevel1() 
 {
 }
@@ -48,10 +53,13 @@ void CrossroadsLevel1::Start()
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 0, -0, static_cast<float>(Z_ORDER::Knight) });
 
+	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	OverlayPostEffect_->SetHollowKnightLevel(this);
 
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
-
 }
 
 void CrossroadsLevel1::Update(float _DeltaTime)

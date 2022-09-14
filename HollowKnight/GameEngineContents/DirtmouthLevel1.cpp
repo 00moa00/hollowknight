@@ -7,6 +7,10 @@
 #include "Monster.h"
 #include "KnightData.h"
 
+#include "OverlayPostEffect.h"
+#include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
+
 DirtmouthLevel1::DirtmouthLevel1() 
 {
 }
@@ -48,6 +52,15 @@ void DirtmouthLevel1::Start()
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 500, -0, static_cast<float>(Z_ORDER::Knight) });
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
+
+	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	OverlayPostEffect_->SetHollowKnightLevel(this);
+
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+
+
+
 
 
 }

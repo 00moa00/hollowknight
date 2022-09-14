@@ -22,7 +22,6 @@ OverlayPostEffect::~OverlayPostEffect()
 
 void OverlayPostEffect::EffectInit()
 {
-
 	CopyTarget = new GameEngineRenderTarget();
 	CopyTarget->CreateRenderTargetTexture(GameEngineWindow::GetScale(), DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, float4::ZERO);
 
@@ -31,8 +30,7 @@ void OverlayPostEffect::EffectInit()
 	EffectSet.SetPipeLine("Overlay");
 
 	OverlayColorData_.isOverlay_ = 0;
-	EffectSet.ShaderResources.SetConstantBufferLink("OverlayColorData", OverlayColorData_);
-	
+	EffectSet.ShaderResources.SetConstantBufferLink("OverlayColorData", OverlayColorData_);	
 }
 
 void OverlayPostEffect::Effect(GameEngineRenderTarget* _Target)
@@ -40,9 +38,8 @@ void OverlayPostEffect::Effect(GameEngineRenderTarget* _Target)
 	CopyTarget->Copy(_Target);
 
 	EffectSet.ShaderResources.SetTexture("Tex1", CopyTarget->GetRenderTargetTexture(0));
+
 	OverlayColorData_.isOverlay_ = HollowKnightLevel_->GetEffectGUIActor()->GetOverlayFlag();
-
-
 	OverlayColorData_.OverlayColor = HollowKnightLevel_->GetEffectGUIActor()->GetOverlayColor();
 
 	_Target->Clear();

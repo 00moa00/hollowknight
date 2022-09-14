@@ -1,4 +1,14 @@
 #pragma once
+enum class BlendMode
+{
+	Alpha,
+	Overlay,
+	Lighten,
+	Multply,
+	Add,
+	Darken,
+	MAX
+};
 
 enum class UPDATE_ORDER
 {

@@ -38,10 +38,10 @@ private:
 
 	PerlinNoise Pn_;
 
-	float max_skew;		// unit is degrees angle.
-	float max_sway;	// unit is pixels in screen space.
+	float MaxSkew;		// unit is degrees angle.
+	float MaxSway;	// unit is pixels in screen space.
 	float seed ;
-	float seed_shifting_factor ;
+	float SeedShiftingFactor ;
 
 public:
 	void MainCameraMoveLimitWindow(float4 _TargetPos, float4 _MapSize);

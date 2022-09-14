@@ -8,6 +8,11 @@
 #include "Monster.h"
 #include "KnightData.h"
 
+#include "OverlayPostEffect.h"
+#include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
+
+
 MapShopLevel::MapShopLevel() 
 	:
 	DirtmouthPotal_(nullptr)
@@ -44,13 +49,20 @@ void MapShopLevel::Start()
 
 	GetKnight()->GetTransform().SetLocalPosition({ 800, 0.f, static_cast<float>(Z_ORDER::Knight) });
 
-	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 	DirtmouthPotal_ = CreateActor<RoomPotal>();
 	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Dirt, false);
 	DirtmouthPotal_->GetTransform().SetWorldPosition({ 400, -870.f });
 
 	Iselda_ = CreateActor<Iselda>();
+
+	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	OverlayPostEffect_->SetHollowKnightLevel(this);
+
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+
+	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 }
 
 void MapShopLevel::Update(float _DeltaTime)

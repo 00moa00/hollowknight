@@ -378,7 +378,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="KnightLightEffect.h">
+    <ClInclude Include="KnightMainLightEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -390,7 +390,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="KnightSmallLightEffect.h">
+    <ClInclude Include="KnightSiblingLightEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -800,7 +800,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="KnightLightEffect.cpp">
+    <ClCompile Include="KnightMainLightEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -813,7 +813,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="KnightShadowState.cpp" />
-    <ClCompile Include="KnightSmallLightEffect.cpp">
+    <ClCompile Include="KnightSiblingLightEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -64,9 +64,9 @@ Knight::Knight()
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
 	SideDarkEffect_(nullptr),
-	KnightSmallLightEffect_(nullptr),
+	KnightSiblingLightEffect_(nullptr),
 	KnightDonutLightEffect_(nullptr),
-	KnightLightEffect_(nullptr),
+	KnightMainLightEffect_(nullptr),
 
 	ChangeLevel_(""),
 
@@ -122,9 +122,9 @@ void Knight::Start()
 	GetTransform().SetWorldPosition({500,-4000,static_cast<float>(Z_ORDER::Knight) });
 	
 	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
-	KnightLightEffect_ = GetLevel()->CreateActor<KnightLightEffect>();
+	KnightMainLightEffect_ = GetLevel()->CreateActor<KnightMainLightEffect>();
 	KnightDonutLightEffect_ = GetLevel()->CreateActor<KnightDonutLightEffect>();
-	KnightSmallLightEffect_ = GetLevel()->CreateActor<KnightSmallLightEffect>();
+	KnightSiblingLightEffect_ = GetLevel()->CreateActor<KnightSiblingLightEffect>();
 	KnightStunEffect_ = GetLevel()->CreateActor<KnightStunEffect>();
 	KnightStunEffect_->StunEffectOff();
 
@@ -543,9 +543,9 @@ void Knight::Update(float _DeltaTime)
 	ContentsFontRenderer_->SetActorToScreenPosition(GetTransform().GetWorldPosition(), GetLevel()->GetMainCameraActorTransform().GetWorldPosition());
 	KnightManager_.Update(_DeltaTime);
 
-	if (KnightLightEffect_ != nullptr)
+	if (KnightMainLightEffect_ != nullptr)
 	{
-		KnightLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });	
+		KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });	
 	}
 
 	if (KnightDonutLightEffect_ != nullptr)
@@ -553,9 +553,9 @@ void Knight::Update(float _DeltaTime)
 		KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
 	}
 
-	if (KnightSmallLightEffect_ != nullptr)
+	if (KnightSiblingLightEffect_ != nullptr)
 	{
-		KnightSmallLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
+		KnightSiblingLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
 	}
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 }

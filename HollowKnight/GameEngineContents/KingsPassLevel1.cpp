@@ -7,6 +7,14 @@
 #include "Monster.h"
 #include "KnightData.h"
 
+#include "OverlayPostEffect.h"
+#include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
+
+#include "OverlayPostEffect.h"
+#include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
+
 KingsPassLevel1::KingsPassLevel1() 
 {
 }
@@ -51,7 +59,13 @@ void KingsPassLevel1::Start()
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
-	//GetMainCameraActor()->GetCameraComponent()->GetTransform().SetWorldPosition();
+	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	OverlayPostEffect_->SetHollowKnightLevel(this);
+
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+
+
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 }
 void KingsPassLevel1::Update(float _DeltaTime) 

@@ -25,5 +25,6 @@ void EffectGUIActor::LevelStartEvent()
 
 void EffectGUIActor::LevelEndEvent()
 {
+	KnightData::GetInst()->SetOverlayflag(EffectGUI_->GetOverlayFlag());
 	EffectGUI_->EffectGUIDeath();
 }

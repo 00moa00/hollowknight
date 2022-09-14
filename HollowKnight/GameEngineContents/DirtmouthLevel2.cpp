@@ -7,11 +7,11 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
-#include "OverlayPostEffect.h"
 
 #include "Bench.h"
 #include "AreaTitle.h"
-#include "OverlayBlend.h"
+
+#include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 
@@ -55,7 +55,6 @@ void DirtmouthLevel2::Start()
 
 	SetMapSize({ 6646, 3418 });
 
-	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 	Bench* Test_ = CreateActor<Bench>();
 	AreaTitle* AreaTitle_ = CreateActor<AreaTitle>();
@@ -66,14 +65,18 @@ void DirtmouthLevel2::Start()
 
 	Elderbug_ = CreateActor<Elderbug>();
 
-	OverlayPostEffect* OverlayPostEffect_  = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+	GetKnight()->GetTransform().SetLocalPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
+	
+	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
-	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-	GetKnight()->GetTransform().SetLocalPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
+	//GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
+
+
 }
 
 void DirtmouthLevel2::Update(float _DeltaTime)

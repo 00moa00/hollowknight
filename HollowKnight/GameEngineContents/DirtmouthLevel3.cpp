@@ -7,6 +7,11 @@
 #include "Monster.h"
 #include "KnightData.h"
 
+#include "OverlayPostEffect.h"
+#include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
+
+
 DirtmouthLevel3::DirtmouthLevel3() 
 {
 }

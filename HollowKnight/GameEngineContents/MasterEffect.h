@@ -25,6 +25,11 @@ private:
 	float4 Direction_;
 	float4 CollisionSize_;
 
+	float4 LightMulColor_;
+	float4 LightPlusColor_;
+
+	BlendMode BlendMode_;
+
 public:
 
 	//================================
@@ -41,6 +46,16 @@ public:
 		return MainCollision_;
 	}
 
+	float4 GetLightMulColor() const
+	{
+		return LightMulColor_;
+	}
+
+	float4 GetLightPlusColor() const
+	{
+		return LightPlusColor_;
+	}
+
 
 	//================================
 	//    Setter
@@ -50,5 +65,7 @@ public:
 	void CreateRendererComponent(std::string _FileName);
 
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
+
+	void SetBlendMode(BlendMode _Mode);
 };
 

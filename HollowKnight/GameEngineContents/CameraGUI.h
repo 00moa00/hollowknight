@@ -24,34 +24,34 @@ protected:
 
 private:
 	
-	float max_skew;		// unit is degrees angle.
-	float max_sway;	// unit is pixels in screen space.
-	float seed_shifting_factor;
+	float MaxSkew;		// unit is degrees angle.
+	float MaxSway;	// unit is pixels in screen space.
+	float SeedShiftingFactor;
 
 public:
 
 	void CameraGUIDeath()
 	{
-		KnightData::GetInst()->SetMaxSway(max_sway);
-		KnightData::GetInst()->SetMaxSkew(max_skew);
-		KnightData::GetInst()->SetSeedshiftingFactor(seed_shifting_factor);
+		KnightData::GetInst()->SetMaxSway(MaxSway);
+		KnightData::GetInst()->SetMaxSkew(MaxSkew);
+		KnightData::GetInst()->SetSeedshiftingFactor(SeedShiftingFactor);
 
 		this->Death();
 	}
 
 	float GetMaxSkew() const
 	{
-		return max_skew;
+		return MaxSkew;
 	}
 
 	float GetMaxSway() const
 	{
-		return max_sway;
+		return MaxSway;
 	}
 
 	float GetSeedshiftingFactor() const
 	{
-		return seed_shifting_factor;
+		return SeedShiftingFactor;
 	}
 };
 

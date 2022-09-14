@@ -3,9 +3,9 @@
 
 CameraGUI::CameraGUI() 
 	:
-	max_skew(0.2f),
-	max_sway(1.5f),
-	seed_shifting_factor(10.00f)
+	MaxSkew(0.2f),
+	MaxSway(1.5f),
+	SeedShiftingFactor(10.00f)
 {
 }
 
@@ -15,9 +15,9 @@ CameraGUI::~CameraGUI()
 
 void CameraGUI::Initialize(GameEngineLevel* _Level)
 {
-	max_skew = KnightData::GetInst()->GetMaxSkew();
-	max_sway = KnightData::GetInst()->GetMaxSway();
-	seed_shifting_factor = KnightData::GetInst()->GetSeedshiftingFactor();
+	MaxSkew = KnightData::GetInst()->GetMaxSkew();
+	MaxSway = KnightData::GetInst()->GetMaxSway();
+	SeedShiftingFactor = KnightData::GetInst()->GetSeedshiftingFactor();
 }
 
 void CameraGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
@@ -25,9 +25,9 @@ void CameraGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 	ImGui::SameLine();
 	ImGui::Text("CameraShaking");
 
-	ImGui::SliderFloat("max_sway [pixel]", &max_sway, 0.0f, 64.0f);
-	ImGui::SliderFloat("max_skew [degree]", &max_skew, 0.0f, 10.0f);
-	ImGui::SliderFloat("seed_shifting_factor", &seed_shifting_factor, 0.0f, 20.f);
+	ImGui::SliderFloat("MaxSway [pixel]", &MaxSway, 0.0f, 64.0f);
+	ImGui::SliderFloat("MaxSkew [degree]", &MaxSkew, 0.0f, 10.0f);
+	ImGui::SliderFloat("SeedShiftingFactor", &SeedShiftingFactor, 0.0f, 20.f);
 
 	
 }

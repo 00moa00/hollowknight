@@ -6,6 +6,12 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+
+#include "OverlayPostEffect.h"
+#include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
+
+
 KingsPassLevel4::KingsPassLevel4() 
 {
 }

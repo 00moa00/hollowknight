@@ -21,14 +21,16 @@ protected:
 
 private:
 	static ImVec4 Overlaycolor;
+	static ImVec4 saved_palette[32];
+
 	//static ImVec4 color;
 
-	bool OverlayFlag_;
+	bool overlay_flag;
 	bool alpha_half_preview ;
 	bool drag_and_drop ;
 	bool options_menu;
 	bool hdr;
-	//bool 
+	bool saved_palette_init;
 
 public:
 	float4 GetColor()
@@ -45,12 +47,11 @@ public:
 
 	bool GetOverlayFlag()
 	{
-		return OverlayFlag_;
+		return overlay_flag;
 	}
 
 	void EffectGUIDeath()
 	{
-
 		float4 ReturnColor;
 
 		ReturnColor.x = Overlaycolor.x;
@@ -61,6 +62,8 @@ public:
 		
 		this->Death();
 	}
+
+
 
 
 };

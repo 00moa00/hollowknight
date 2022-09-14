@@ -14,8 +14,8 @@ SideDarkEffect::~SideDarkEffect()
 void SideDarkEffect::Start()
 {
 	CreateRendererComponent(float4{ 1920, 1080, 1 }, "Darkcloud.png");
-
-	GetRenderer()->GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
+	SetBlendMode(BlendMode::Overlay);
+	//GetRenderer()->GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
 	GetRenderer()->GetTransform().SetLocalPosition({ 0, 0,  0 });
 
 }

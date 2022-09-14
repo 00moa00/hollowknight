@@ -1,9 +1,9 @@
 #pragma once
 #include "MasterActor.h"
 #include "KnightSlashEffect.h"
-#include "KnightLightEffect.h"
+#include "KnightMainLightEffect.h"
 #include "KnightDonutLightEffect.h"
-#include "KnightSmallLightEffect.h"
+#include "KnightSiblingLightEffect.h"
 #include "SideDarkEffect.h"
 #include "ContentsFontRenderer.h"
 #include "KnightStunEffect.h"
@@ -86,9 +86,9 @@ private:
 	GameEngineStateManager KnightManager_;
 
 	KnightSlashEffect* KnightSlashEffect_;
-	KnightLightEffect* KnightLightEffect_;
+	KnightMainLightEffect* KnightMainLightEffect_;
 	KnightDonutLightEffect* KnightDonutLightEffect_;
-	KnightSmallLightEffect* KnightSmallLightEffect_;
+	KnightSiblingLightEffect* KnightSiblingLightEffect_;
 	SideDarkEffect* SideDarkEffect_;
 	KnightStunEffect* KnightStunEffect_;
 

@@ -59,23 +59,39 @@ private:
 	//================================
 	//    레벨이동 데이터
 	//================================
-	int AllMask_;			//내가 가질 수 있는 최대 가면
-	int CurMask_;			//나의 현재 가면
-	int CurSoul_;			//현재 영혼
-	int CharmNotches_;		//가능한 부적 칸 수
-	int UsingCharmNotches_; // 현재 사용중인 부적 칸 수
+	int AllMask_;							//내가 가질 수 있는 최대 가면
+	int CurMask_;							//나의 현재 가면
+	int CurSoul_;							//현재 영혼
+	int CharmNotches_;						//가능한 부적 칸 수
+	int UsingCharmNotches_;					// 현재 사용중인 부적 칸 수
 
 	std::vector<KnightCharmData> CharmList_;
 	std::vector<KnightItemData> ItemList_;
 
-	bool isKnihgt_;			// 플레이어가 있다. : 필요없는거같음 후에 삭제
-	bool isHUD_;			// 허드가 있다. 게임 첫 시작에만 애니메이션이 나오기 위함
+	bool isKnihgt_;							// 플레이어가 있다. : 필요없는거같음 후에 삭제
+	bool isHUD_;							// 허드가 있다. 게임 첫 시작에만 애니메이션이 나오기 위함
 
-	float max_skew;			// unit is degrees angle.
-	float max_sway;			// unit is pixels in screen space.
-	float seed_shifting_factor;
+	float MaxSkew;							// unit is degrees angle.
+	float MaxSway;							// unit is pixels in screen space.
+	float SeedShiftingFactor;
 
-	float4 OverlayColor_;
+	bool isOverlayflag_;					//오버레이 플러그
+	bool SavedPaletteInit_;					//팔레트...인데 사용 고민중
+
+	float4 OverlayColor_;					//오버레이 컬러
+
+	float4 MainLightMulColor_;				//메인 라이트 컬러
+	float4 MainLightPlusColor_;				//메인 라이트 플러스 컬러
+
+	float4 SlibingLightMulColor_;
+	float4 SlibingLightPlusColor_;
+
+	float4 DounutLightMulColor_;
+	float4 DounutLightPlusColor_;
+
+	BlendMode MainLighBlend_;
+	BlendMode SlibingLighBlend_;
+	BlendMode DounutLighBlend_;
 
 
 	//================================
@@ -152,6 +168,62 @@ public:
 	//    Getter
 	//================================
 
+	BlendMode GetMainLightBlend()
+	{
+		return MainLighBlend_;
+	}
+
+	BlendMode GetSlibingLightBlend()
+	{
+		return SlibingLighBlend_;
+	}
+
+	BlendMode GetDounutLightBlend()
+	{
+		return DounutLighBlend_;
+	}
+
+
+	float4 KnihgtMainLightMulColor()
+	{
+		return MainLightMulColor_;
+	}
+
+	float4 KnihgtMainLightPlusColor()
+	{
+		return MainLightPlusColor_;
+	}
+
+	float4 KnihgtSlibingLightMulColor()
+	{
+		return SlibingLightMulColor_;
+	}
+
+	float4 KnihgtSlibingLightPlusColor()
+	{
+		return SlibingLightPlusColor_;
+	}
+
+	float4 KnihgtDounutLightMulColor()
+	{
+		return DounutLightMulColor_;
+	}
+
+	float4 KnihgtDounutLightPlusColor()
+	{
+		return DounutLightPlusColor_;
+	}
+
+	bool GetSavedPaletteInit()
+	{
+		return SavedPaletteInit_;
+	}
+
+	bool GetOverlayFlag()const
+	{
+		return isOverlayflag_;
+	}
+
 	float4 GetOverlayColor()
 	{
 		return OverlayColor_;
@@ -159,19 +231,19 @@ public:
 
 	float GetMaxSkew() const
 	{
-		return max_skew;
+		return MaxSkew;
 	}
 
 
 	float GetMaxSway() const
 	{
-		return max_sway;
+		return MaxSway;
 	}
 
 
 	float GetSeedshiftingFactor() const
 	{
-		return seed_shifting_factor;
+		return SeedShiftingFactor;
 	}
 
 
@@ -275,6 +347,62 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetMainLightBlend(BlendMode _Mode)
+	{
+		MainLighBlend_ = _Mode;
+	}
+
+	void SetSlibingLightBlend(BlendMode _Mode)
+	{
+		SlibingLighBlend_ = _Mode;
+	}
+
+	void SetDounutLightBlend(BlendMode _Mode)
+	{
+		DounutLighBlend_ = _Mode;
+	}
+
+	void SetKnihgtMainLightMulColor(float4 _f4)
+	{
+		MainLightMulColor_ = _f4;
+	}
+
+	void SetKnihgtMainLightPlusColor(float4 _f4)
+	{
+		MainLightPlusColor_ = _f4;
+	}
+
+	void SetKnihgtSlibingLightMulColor(float4 _f4)
+	{
+		SlibingLightMulColor_ = _f4;
+	}
+
+	void SetKnihgtSlibingLightPlusColor(float4 _f4)
+	{
+		SlibingLightPlusColor_ = _f4;
+	}
+
+	void SetKnihgtDounutLightMulColor(float4 _f4)
+	{
+		DounutLightMulColor_ = _f4;
+	}
+
+	void SetKnihgtDounutLightPlusColor(float4 _f4)
+	{
+		DounutLightPlusColor_ = _f4;
+	}
+
+
+	void SetSavedPaletteInit(bool _b)
+	{
+		SlibingLightMulColor_ = _b;
+	}
+
+	void SetOverlayflag(bool _b)
+	{
+		isOverlayflag_ = _b;
+	}
+
 	void SetOverlayColor(float4 _f)
 	{
 		OverlayColor_ = _f;
@@ -283,19 +411,19 @@ public:
 
 	void SetMaxSkew(float _f)
 	{
-		max_skew = _f;
+		MaxSkew = _f;
 	}
 
 
 	void SetMaxSway(float _f)
 	{
-		max_sway = _f;
+		MaxSway = _f;
 	}
 
 
 	void SetSeedshiftingFactor(float _f) 
 	{
-		seed_shifting_factor = _f;
+		SeedShiftingFactor = _f;
 	}
 
 

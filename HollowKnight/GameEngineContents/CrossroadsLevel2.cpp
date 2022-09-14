@@ -7,6 +7,10 @@
 #include "Monster.h"
 #include "KnightData.h"
 
+#include "OverlayPostEffect.h"
+#include "NoisePostEffect.h"
+#include "VignettePostEffect.h"
+
 CrossroadsLevel2::CrossroadsLevel2() 
 {
 }
@@ -44,6 +48,13 @@ void CrossroadsLevel2::Start()
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	SetMainMapSize({ 5580, 1080 });
+
+	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
+	OverlayPostEffect_->SetHollowKnightLevel(this);
+
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+
 
 }
 

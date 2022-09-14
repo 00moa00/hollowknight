@@ -38,27 +38,6 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
-
-	{
-		D3D11_BLEND_DESC Desc = { 0 };
-
-		Desc.AlphaToCoverageEnable = FALSE;
-		Desc.IndependentBlendEnable = FALSE;
-		Desc.RenderTarget[0].BlendEnable = true;
-		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-
-		Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-		Desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-
-		// 알파쪽만 따로 처리하는 옵션
-		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MAX;
-		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
-
-		GameEngineBlend::Create("AlphaBlend2", Desc);
-	}
-
 	{
 		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("TextureAtlasMask");
 		NewPipe->SetVertexShader("Mask.hlsl");
@@ -89,6 +68,47 @@ void ContentsCore::Start()
 		NewPipe->SetPixelShader("Vignette.hlsl");
 	}
 
+
+	{
+		D3D11_BLEND_DESC Desc = { 0 };
+
+		Desc.AlphaToCoverageEnable = FALSE;
+		Desc.IndependentBlendEnable = FALSE;
+		Desc.RenderTarget[0].BlendEnable = true;
+		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+		Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		Desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+
+		// 알파쪽만 따로 처리하는 옵션
+		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MAX;
+		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+
+		GameEngineBlend::Create("AlphaBlend2", Desc);
+	}
+
+	{
+		// 1, 1, 1, 1 * 뭔가 + 0, 0ㅏ, * 뭔가
+		D3D11_BLEND_DESC Desc = { 0 };
+
+		Desc.AlphaToCoverageEnable = FALSE;
+		Desc.IndependentBlendEnable = FALSE;
+		Desc.RenderTarget[0].BlendEnable = true;
+		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+		Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_MAX;
+		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_ONE;
+		// Desc.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_DEST_COLOR;
+		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+
+		GameEngineBlend::Create("Overlay", Desc);
+	}
+
+
 	{
 		D3D11_BLEND_DESC Desc = { 0 };
 
@@ -109,7 +129,6 @@ void ContentsCore::Start()
 	}
 
 	{
-
 		D3D11_BLEND_DESC Desc = { 0 };
 
 		Desc.AlphaToCoverageEnable = FALSE;
@@ -125,8 +144,6 @@ void ContentsCore::Start()
 		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ZERO;
 		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
 
-
-
 		GameEngineBlend::Create("MultplyBlend", Desc);
 	}
 
@@ -137,7 +154,6 @@ void ContentsCore::Start()
 		Desc.IndependentBlendEnable = FALSE;
 		Desc.RenderTarget[0].BlendEnable = TRUE;
 		Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-
 
 		Desc.RenderTarget[0].SrcBlend = D3D11_BLEND::D3D11_BLEND_SRC_ALPHA;
 		Desc.RenderTarget[0].DestBlend = D3D11_BLEND::D3D11_BLEND_ONE;
@@ -150,7 +166,6 @@ void ContentsCore::Start()
 	}
 
 	{
-
 		D3D11_BLEND_DESC Desc = { 0 };
 
 		Desc.AlphaToCoverageEnable = FALSE;
@@ -164,8 +179,6 @@ void ContentsCore::Start()
 		Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
 		Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
 		Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_MIN;
-
-
 
 		GameEngineBlend::Create("DarkenBlend", Desc);
 	}
