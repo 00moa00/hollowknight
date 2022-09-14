@@ -20,6 +20,7 @@ MainCameraManager::~MainCameraManager()
 
 void MainCameraManager::Start()
 {
+	GetLevel()->GetMainCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 	if (KnightData::GetInst()->GetisCameraGUI() == false)
 	{

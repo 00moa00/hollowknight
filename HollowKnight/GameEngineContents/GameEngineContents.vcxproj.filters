@@ -456,6 +456,9 @@
     <ClInclude Include="CameraGUI.h">
       <Filter>Debug</Filter>
     </ClInclude>
+    <ClInclude Include="LowHealth.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -778,6 +781,9 @@
     </ClCompile>
     <ClCompile Include="CameraGUI.cpp">
       <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="LowHealth.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

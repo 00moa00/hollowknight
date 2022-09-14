@@ -277,6 +277,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LowHealth.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MainCameraManager.h">
       <SubType>
       </SubType>
@@ -686,6 +690,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="KnightStunEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="LowHealth.cpp">
       <SubType>
       </SubType>
     </ClCompile>

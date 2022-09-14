@@ -128,6 +128,8 @@ void Knight::Start()
 	KnightStunEffect_ = GetLevel()->CreateActor<KnightStunEffect>();
 	KnightStunEffect_->StunEffectOff();
 
+
+
 	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 

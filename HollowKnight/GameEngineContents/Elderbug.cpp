@@ -39,7 +39,7 @@ void Elderbug::Start()
 	GetDialogueSet()->PushDialogue("아마도 꿈은 그렇게 대단한 것이 아닐지도...");
 	GetDialogueSet()->SetDialogueOff();
 
-
+	
 	ElderManager_.CreateStateMember("WAIT"
 		, std::bind(&Elderbug::ElderWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Elderbug::ElderWaitStart, this, std::placeholders::_1)

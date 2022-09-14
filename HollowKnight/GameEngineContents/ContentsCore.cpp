@@ -38,6 +38,7 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
+
 	{
 		D3D11_BLEND_DESC Desc = { 0 };
 

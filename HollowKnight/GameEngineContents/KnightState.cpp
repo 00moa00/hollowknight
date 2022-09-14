@@ -1009,12 +1009,7 @@ void Knight::KnightRunEnd(const StateInfo& _Info)
 
 void Knight::KnightStunStart(const StateInfo& _Info)
 {
-	if (KnightData::GetInst()->GetCurMask() == 0)
-	{
-		KnightData::GetInst()->SetisDeath(true);
-		KnightManager_.ChangeState("DEATH");
-		return;
-	}
+
 
 	//KnightKnockbackTimer_ = 1.0f;
 	KnightStunEffect_->StunEffectOn();
@@ -1044,7 +1039,18 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (KnightKnockbackTimer_ > 0.2f)
 	{
 		KnightKnockbackTimer_ = 0.f;
-		KnightManager_.ChangeState("STILL");
+		if (KnightData::GetInst()->GetCurMask() == -1)
+		{
+
+			KnightData::GetInst()->SetisDeath(true);
+			KnightManager_.ChangeState("DEATH");
+		}
+
+		else
+		{
+			KnightManager_.ChangeState("STILL");
+
+		}
 	}
 
 	GetTransform().SetWorldMove(-GetMoveDirection() * GetSpeed() * _DeltaTime);
@@ -1052,6 +1058,14 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightStunEnd(const StateInfo& _Info)
 {
+	if (KnightData::GetInst()->GetCurMask() == 0)
+	{
+		LowHealth* LowHealth_ = GetLevel()->CreateActor<LowHealth>();
+	}
+
+
+
+
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
 
 	GameEngineTime::GetInst()->SetTimeScale(0, 1.0f);
