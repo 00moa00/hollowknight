@@ -11,6 +11,7 @@ KnightData::KnightData()
 	isGrowSoul_(false),
 	isSetting_(false),
 	isHUD_(false),
+	isRevive_(false),
 
 	CurSoul_(0),
 	AllMask_(4),

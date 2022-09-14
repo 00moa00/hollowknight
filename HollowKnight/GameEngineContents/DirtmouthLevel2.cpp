@@ -78,7 +78,7 @@ void DirtmouthLevel2::Start()
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 
-	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());

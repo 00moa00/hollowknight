@@ -84,6 +84,7 @@ private:
 	bool isSitting_;	// 의자에 앉아있다.
 	bool isSetting_;	//세팅 페이지 열었당
 	bool isCameraGUI_;	//카메라 GUi가 있다
+	bool isRevive_;
 
 	float4 KnightPosition_;
 
@@ -143,6 +144,12 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisRevive()
+	{
+		return isRevive_;
+	}
+
+
 	bool GetisCameraGUI()
 	{
 		return isCameraGUI_;
@@ -232,6 +239,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetisRevive(bool _b)
+	{
+		isRevive_ = _b;
+	}
+
 	void SetisCameraGUI(bool _b)
 	{
 		isCameraGUI_ = _b;

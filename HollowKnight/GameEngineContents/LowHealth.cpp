@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "LowHealth.h"
+#include "KnightData.h"
 
 LowHealth::LowHealth() 
 	:
@@ -51,6 +52,11 @@ void LowHealth::Start()
 void LowHealth::Update(float _DeltaTime)
 {
 	LowHealthManager_.Update(_DeltaTime);
+
+	if (KnightData::GetInst()->GetisRevive() == true)
+	{
+		this->Death();
+	}
 }
 
 void LowHealth::AddScaleStart(const StateInfo& _Info)

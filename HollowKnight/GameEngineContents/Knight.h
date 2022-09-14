@@ -58,12 +58,13 @@ private:
 
 	bool isLookMap_;
 	bool isRunMode_;
-	bool isLowHealth_;
 
 	bool isDeath_;
 
 	bool isInvincibility_;
 	bool isKnightBlack_;
+
+	bool isLowHealth_;					//Å»Áø
 
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;

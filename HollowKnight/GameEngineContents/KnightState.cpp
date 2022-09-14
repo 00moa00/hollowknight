@@ -13,7 +13,18 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 	}
 	else
 	{
-		GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
+		if (isLowHealth_ == true)
+		{
+			GetRenderer()->ChangeFrameAnimation("LOW_HEALTH_ANIMATION");
+
+
+		}
+
+		else
+		{
+			GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
+
+		}
 	}
 }
 
@@ -843,6 +854,7 @@ void Knight::KnightDashEnd(const StateInfo& _Info)
 
 void Knight::KnightFocusStart(const StateInfo& _Info)
 {
+	isLowHealth_ = false;
 	GetRenderer()->ChangeFrameAnimation("FOCUS_ANIMATION");
 }
 
@@ -1041,8 +1053,11 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightKnockbackTimer_ = 0.f;
 		if (KnightData::GetInst()->GetCurMask() == -1)
 		{
+			isLowHealth_ = false;
 
 			KnightData::GetInst()->SetisDeath(true);
+			KnightData::GetInst()->SetisRevive(true);
+
 			KnightManager_.ChangeState("DEATH");
 		}
 
@@ -1060,11 +1075,9 @@ void Knight::KnightStunEnd(const StateInfo& _Info)
 {
 	if (KnightData::GetInst()->GetCurMask() == 0)
 	{
+		isLowHealth_ = true;
 		LowHealth* LowHealth_ = GetLevel()->CreateActor<LowHealth>();
 	}
-
-
-
 
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
 
@@ -1077,6 +1090,8 @@ void Knight::KnightStunEnd(const StateInfo& _Info)
 
 void Knight::KnightDeathStart(const StateInfo& _Info)
 {
+	isInvincibility_ = false;
+
 	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
 }
 
@@ -1095,6 +1110,8 @@ void Knight::KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info)
 		Shadow->GetTransform().SetWorldPosition({this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, 0});
 		
 		KnightData::GetInst()->SetisShadow(true);
+		KnightData::GetInst()->SetisRevive(false);
+
 		KnightShadowData::GetInst()->SetShadowPosition({ this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Shadow) });
 		KnightManager_.ChangeState("GROUND_WAKE_UP");
 		return;

@@ -987,6 +987,9 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_idle_low_health000-Sheet.png", 10, 1);
 
 		GameEngineTexture::Cut("Knight_wake_up_ground0000-Sheet.png", 21, 1);
+		
+		GameEngineTexture::Cut("Knight_idle_low_health000-Sheet.png", 10, 1);
+
 
 
 		// º®Å¸±â

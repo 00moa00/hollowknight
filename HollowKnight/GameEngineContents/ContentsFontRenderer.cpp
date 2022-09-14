@@ -278,7 +278,7 @@ void ContentsFontRenderer::FontTypingUpdate(float _DeltaTime, const StateInfo& _
 		GameEngineFontRenderer_->SetText(test
 			, "Noto Serif KR");
 
-		int C = TypingCount_ ;
+		//int C = TypingCount_ ;
 		std::string Check = FontState_.Text_.substr(TypingCount_, 1);
 		if (Check == "\n" || Check == " ")
 		{

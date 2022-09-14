@@ -228,6 +228,11 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_GROUND_ANIMATION", FrameAnimation_DESC("Knight_wake_up_ground0000-Sheet.png", 0, 20, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_ANIMATION", FrameAnimation_DESC("Knight_wake0000-Sheet.png", 0, 4, 0.100f, false));
 
+	// ---- 탈진 ----
+//	GetRenderer()->CreateFrameAnimationCutTexture("LOW_HEALTH_ANIMATION", FrameAnimation_DESC("Knight_idle_low_health000-Sheet.png", 0, 9, 0.100f));
+
+
+
 	// ---- 슬라이드 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("SLIDE_ANIMATION", FrameAnimation_DESC("Knight_wall_slide0000-Sheet.png", 0, 3, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALL_JUMP_ANIMATION", FrameAnimation_DESC("Knight_wall_jump0000-Sheet.png", 0, 2, 0.100f));
