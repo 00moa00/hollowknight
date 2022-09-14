@@ -78,6 +78,7 @@ private:
 	bool isGrowSoul_;	// 몬스터를 쳤을때 영혼이 찬다
 	bool isSitting_;	// 의자에 앉아있다.
 	bool isSetting_;	//세팅 페이지 열었당
+	bool isCameraGUI_;	//카메라 GUi가 있다
 
 	float4 KnightPosition_;
 
@@ -137,6 +138,10 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisCameraGUI()
+	{
+		return isCameraGUI_;
+	}
 
 	int GetCurSoul()
 	{
@@ -222,6 +227,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetisCameraGUI(bool _b)
+	{
+		isCameraGUI_ = _b;
+	}
+
 	void SetisHUD(bool _b)
 	{
 		isHUD_ = _b;

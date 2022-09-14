@@ -1,15 +1,17 @@
 #include "PreCompile.h"
 #include "MainCameraManager.h"
 #include "HollowKnightLevel.h"
-
+#include "CameraGUI.h"
+#include "KnightData.h"
 
 MainCameraManager::MainCameraManager() 
 	:
 	max_skew(5.00f),
-	max_sway(0.70f),
+	max_sway(1.5f),
 	seed(0),
 	seed_shifting_factor(10.00f)
 {
+
 }
 
 MainCameraManager::~MainCameraManager() 
@@ -18,6 +20,14 @@ MainCameraManager::~MainCameraManager()
 
 void MainCameraManager::Start()
 {
+
+	if (KnightData::GetInst()->GetisCameraGUI() == false)
+	{
+		KnightData::GetInst()->SetisCameraGUI(true);
+		CameraGUI_ = GameEngineGUI::CreateGUIWindow<CameraGUI>("Camera", GetLevel());
+
+	}
+
 	CameraStateManager_.CreateStateMember("MOVE_TO_TARGET"
 		, std::bind(&MainCameraManager::MoveToTargetUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::MoveToTargetStart, this, std::placeholders::_1)
@@ -27,12 +37,6 @@ void MainCameraManager::Start()
 		, std::bind(&MainCameraManager::ShakingUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::ShakingStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::ShakingEnd, this, std::placeholders::_1));
-
-	CameraStateManager_.CreateStateMember("RETURN_TO_TARGET"
-		, std::bind(&MainCameraManager::ShakingUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&MainCameraManager::ShakingStart, this, std::placeholders::_1)
-		, std::bind(&MainCameraManager::ShakingEnd, this, std::placeholders::_1));
-
 
 	CameraStateManager_.ChangeState("MOVE_TO_TARGET");
 }
@@ -67,6 +71,10 @@ void MainCameraManager::ChangeCameraMove(CameraMode _Mode)
 		CameraStateManager_.ChangeState("SHAKING");
 
 		break;
+
+	case CameraMode::ReturnTargetMove:
+		CameraStateManager_.ChangeState("RETURN_TO_TARGET");
+
 	default:
 		break;
 	}
@@ -128,31 +136,47 @@ void MainCameraManager::ShakingStart(const StateInfo& _Info)
 
 void MainCameraManager::ShakingUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
-	//GameEngineTime::GetInst()->SetTimeScale(1, 0.1f);
-
 	seed += (_DeltaTime);
-	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed * seed_shifting_factor, seed * seed_shifting_factor, 0)) - 1.0f;
-
-	float4 ShakePosition = { shake * max_sway, shake * max_sway};
+	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed * CameraGUI_->GetSeedshiftingFactor(), seed * CameraGUI_->GetSeedshiftingFactor(), 0)) - 1.0f;
+	float4 ShakePosition = { shake * CameraGUI_->GetMaxSway(), shake * CameraGUI_->GetMaxSway() };
+	float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew()};
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
+	GetLevel()->GetMainCameraActorTransform().SetWorldRotation(ShakeRotation);
 
+
+
+
+
+	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
+	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
+
+	//카메라의 위치 - 윈도우 사이즈의 x가 0이라면
+	if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
 }
 
 void MainCameraManager::ShakingEnd(const StateInfo& _Info)
 {
 }
-
-void MainCameraManager::ReturnToTargetStart(const StateInfo& _Info)
-{
-}
-
-void MainCameraManager::ReturnToTargetUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void MainCameraManager::ReturnToTargetEnd(const StateInfo& _Info)
-{
-}
-

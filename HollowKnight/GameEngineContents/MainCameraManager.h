@@ -4,11 +4,13 @@
 
 
 #include "PerlinNoise.h"
+#include "CameraGUI.h"
 
 enum class CameraMode
 {
 	TargetMove,
-	Shaking
+	Shaking,
+	ReturnTargetMove,
 };
 
 // 설명 :
@@ -33,6 +35,7 @@ protected:
 
 private:
 	GameEngineStateManager CameraStateManager_;
+	CameraGUI* CameraGUI_;
 
 	PerlinNoise Pn_;
 
@@ -43,8 +46,16 @@ private:
 
 public:
 	void MainCameraMoveLimitWindow(float4 _TargetPos, float4 _MapSize);
-
 	void ChangeCameraMove(CameraMode _Mode);
+
+	
+	float& MaxSkew()
+	{
+		return  max_skew;
+	}
+
+
+
 
 private:
 	//================================
@@ -58,10 +69,6 @@ private:
 	void ShakingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShakingEnd(const StateInfo& _Info);
 
-	// 쉐이킹 이후 플레이어에게 돌아가는 
-	void ReturnToTargetStart(const StateInfo& _Info);
-	void ReturnToTargetUpdate(float _DeltaTime, const StateInfo& _Info);
-	void ReturnToTargetEnd(const StateInfo& _Info);
 
 
 };

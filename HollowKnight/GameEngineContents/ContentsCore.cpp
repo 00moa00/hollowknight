@@ -21,6 +21,7 @@
 #include "KnightShadowData.h"
 
 #include <GameEngineCore/GameEngineBlend.h>
+#include "CameraGUI.h"
 
 //#include <GameEngineCore/GameEngineLevel.h>
 
@@ -1127,6 +1128,7 @@ void ContentsCore::Start()
 
 	ChangeLevel("TitleLevel");
 	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);
+
 }
 
 void ContentsCore::Update(float _DeltaTime)
