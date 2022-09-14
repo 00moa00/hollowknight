@@ -86,13 +86,15 @@ private:
 	GameEngineStateManager KnightManager_;
 
 	KnightSlashEffect* KnightSlashEffect_;
+
 	KnightMainLightEffect* KnightMainLightEffect_;
 	KnightDonutLightEffect* KnightDonutLightEffect_;
 	KnightSiblingLightEffect* KnightSiblingLightEffect_;
+
 	SideDarkEffect* SideDarkEffect_;
+
 	KnightStunEffect* KnightStunEffect_;
 
-	//LowHealth* LowHealth_;
 
 	GameEngineCollision* Test1_;
 	GameEngineCollision* Test2_;
@@ -286,6 +288,27 @@ private:
 	bool ShopCloseCollision(GameEngineCollision* _This, GameEngineCollision* _Other);		// »óÁ¡ ´Ý±â ¿ë
 
 	bool KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other);	//Æ÷Å»
+
+	//================================
+	//   Getter
+	//================================
+
+	KnightMainLightEffect* GetKnightMainLightEffect() const
+	{
+		return KnightMainLightEffect_;
+
+	}
+
+	KnightDonutLightEffect* GetKnightDonutLightEffect() const
+	{
+		return KnightDonutLightEffect_;
+	}
+
+	KnightSiblingLightEffect* GetKnightSiblingLightEffect() const
+	{
+		return 	KnightSiblingLightEffect_;
+	}
+	
 
 
 }; 

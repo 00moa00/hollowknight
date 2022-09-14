@@ -86,6 +86,24 @@ void MasterEffect::SetBlendMode(BlendMode _Mode)
 	}
 
 	BlendMode_ = _Mode;
+}
+
+
+void MasterEffect::SetMulColor(float4 _MulColor)
+{
+	LightMulColor_ = _MulColor;
+	MainRenderer_->GetPixelData().MulColor = _MulColor;
+}
+
+void MasterEffect::SetPlusColor(float4 _PlusColor)
+{
+	LightPlusColor_ = _PlusColor;
+	MainRenderer_->GetPixelData().PlusColor.x = _PlusColor.x;
+	MainRenderer_->GetPixelData().PlusColor.y = _PlusColor.y;
+	MainRenderer_->GetPixelData().PlusColor.z = _PlusColor.z;
+
+
+
 
 }
 

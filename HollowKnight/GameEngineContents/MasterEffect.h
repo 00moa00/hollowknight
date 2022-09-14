@@ -67,5 +67,7 @@ public:
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
 
 	void SetBlendMode(BlendMode _Mode);
+	void SetMulColor(float4 _MulColor);
+	void SetPlusColor(float4 _PlusColor);
 };
 

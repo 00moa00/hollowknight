@@ -37,5 +37,41 @@ public:
 	{
 		return EffectGUI_->GetOverlayFlag();
 	}
+
+	float4 GetMainLightMulColor()
+	{
+		return EffectGUI_->GetMainLightMulColor();
+
+	}
+
+	float4 GetMainLightPlusColor()
+	{
+		return EffectGUI_->GetMainLightPlusColor();
+
+	}
+
+	float4 GetSlibingLightMulColor()
+	{
+		return EffectGUI_->GetSlibingLightMulColor();
+
+	}
+
+	float4 GetSlibingLightPlusColor()
+	{
+		return EffectGUI_->GetSlibingLightPlusColor();
+
+	}
+
+	float4 GetDounutLightMulColor()
+	{
+		return EffectGUI_->GetDounutLightMulColor();
+
+	}
+
+	float4 GetDounutLightPlusColor()
+	{
+		return EffectGUI_->GetDounutLightPlusColor();
+
+	}
 };
 

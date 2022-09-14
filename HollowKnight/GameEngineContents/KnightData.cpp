@@ -12,17 +12,17 @@ KnightData::KnightData()
 	isSetting_(false),
 	isHUD_(false),
 	isRevive_(false),
-	isOverlayflag_(false),
+	isOverlayflag_(true),
 	SavedPaletteInit_(false),
 
-	MainLightMulColor_(),
-	MainLightPlusColor_(),
+	MainLightMulColor_({1.0f, 1.0f, 1.0f, 0.7f}),
+	MainLightPlusColor_({ 0.0f, 0.0f, 0.0f, 0.0f }),
 		
-	SlibingLightMulColor_(),
-	SlibingLightPlusColor_(),
+	SlibingLightMulColor_({ 1.0f, 1.0f, 1.0f, 1.0f }),
+	SlibingLightPlusColor_({ 0.348f, 0.564f, 0.653f, 0.0f }),
 
-	DounutLightMulColor_(),
-	DounutLightPlusColor_(),
+	DounutLightMulColor_({ 1.0f, 1.0f, 1.0f, 0.3f }),
+	DounutLightPlusColor_({ 0.0f, 0.0f, 0.0f, 0.0f }),
 
 	MaxSkew(0.2f),
 	MaxSway(1.5f),
@@ -33,7 +33,7 @@ KnightData::KnightData()
 	CurMask_(4),
 	CharmNotches_(5),
 	UsingCharmNotches_(0),
-	OverlayColor_({0.282, 0.333, 0.482, 1.000}),
+	OverlayColor_(0.472, 0.565, 0.687, 1.0f),
 
 	MainLighBlend_(BlendMode::Alpha),
 	SlibingLighBlend_(BlendMode::Alpha),

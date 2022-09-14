@@ -1,18 +1,17 @@
 #include "PreCompile.h"
 #include "EffectGUI.h"
 
-ImVec4 EffectGUI::Overlaycolor = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
-ImVec4 EffectGUI::saved_palette[32] = {};
+//ImVec4 EffectGUI::Overlaycolor = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
+//ImVec4 EffectGUI::saved_palette[32] = {};
 
 EffectGUI::EffectGUI() 
 	:
-    overlay_flag(false),
-    saved_palette_init(false),
-	alpha_half_preview(true),
-	drag_and_drop(true),
-	options_menu(true),
-	hdr(true)
+    overlay_flag(true)
+
 {
+
+
+
 }
 
 EffectGUI::~EffectGUI() 
@@ -30,94 +29,113 @@ void EffectGUI::Initialize(GameEngineLevel* _Level)
 
     overlay_flag = KnightData::GetInst()->GetOverlayFlag();
 
-    saved_palette_init = KnightData::GetInst()->GetSavedPaletteInit();
+    //Overlaycolor = KnightData::GetInst()->GetOverlayColor();
+    Overlaycolor = ConvertFromFloat4(Overlaycolor, KnightData::GetInst()->GetOverlayColor());
+
+    MainLightMulColor_= ConvertFromFloat4(MainLightMulColor_, KnightData::GetInst()->GetKnihgtMainLightMulColor());
+    MainLightPlusColor_ = ConvertFromFloat4(MainLightPlusColor_, KnightData::GetInst()->GetKnihgtMainLightPlusColor());
+
+    SlibingLightMulColor_ = ConvertFromFloat4(SlibingLightMulColor_, KnightData::GetInst()->GetKnihgtSlibingLightMulColor());
+    SlibingLightPlusColor_ = ConvertFromFloat4(SlibingLightPlusColor_, KnightData::GetInst()->GetKnihgtSlibingLightPlusColor());
+
+
+    DounutLightMulColor_ = ConvertFromFloat4(DounutLightMulColor_, KnightData::GetInst()->GetKnihgtDounutLightMulColor());
+    DounutLightPlusColor_ = ConvertFromFloat4(DounutLightPlusColor_, KnightData::GetInst()->GetKnihgtDounutLightPlusColor());
+
+    //MainLightitemsCurrent = static_cast<int>(KnightData::GetInst()->GetMainLightBlend());
+    //SiblingLightitemsCurrent = static_cast<int>(KnightData::GetInst()->GetSlibingLightBlend());
+    //DonutLightitemsCurrent = static_cast<int>(KnightData::GetInst()->GetDounutLightBlend());
+
+
+
+  //saved_palette_init = KnightData::GetInst()->GetSavedPaletteInit();
 
 }
 
 void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
 	//Overlaycolor = ImVec4(114.0f / 255.0f, 144.0f / 255.0f, 154.0f / 255.0f, 200.0f / 255.0f);
-	ImGuiColorEditFlags misc_flags = (hdr ? ImGuiColorEditFlags_HDR : 0) | (drag_and_drop ? 0 : ImGuiColorEditFlags_NoDragDrop) | (alpha_half_preview ? ImGuiColorEditFlags_AlphaPreviewHalf : (overlay_flag ? ImGuiColorEditFlags_AlphaPreview : 0)) | (options_menu ? 0 : ImGuiColorEditFlags_NoOptions);
-	
+    ImGui::Text("PostEffect");
+	ImGuiColorEditFlags misc_flags = (true ? ImGuiColorEditFlags_HDR : 0) | (true ? 0 : ImGuiColorEditFlags_NoDragDrop) | (true ? ImGuiColorEditFlags_AlphaPreviewHalf : (false ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
+
 	ImGui::Text("Overlay Color");
 	ImGui::ColorEdit4("Overlay Color##2f", (float*)&Overlaycolor, ImGuiColorEditFlags_Float | misc_flags);
 
-    // Generate a default palette. The palette will persist and can be edited.
-   // static ImVec4 saved_palette[32] = {};
-
-    if (saved_palette_init == false)
+    if (ImGui::Button("overlay Reset"))
     {
-        for (int n = 0; n < IM_ARRAYSIZE(saved_palette); n++)
-        {
-            ImGui::ColorConvertHSVtoRGB(n / 31.0f, 0.8f, 0.8f,
-                saved_palette[n].x, saved_palette[n].y, saved_palette[n].z);
-            saved_palette[n].w = 1.0f; // Alpha
-        }
-        KnightData::GetInst()->SetSavedPaletteInit(true);
-       //saved_palette_init = false;
+        Overlaycolor = { 1.0f, 1.0f, 1.0f, 0.3f };
     }
 
-     ImGui::Checkbox("OverlayFlag", &overlay_flag);
 
+    ImGui::Checkbox("OverlayFlag", &overlay_flag);
 
+    ImGui::Separator();
 
-     ImGui::Text("KihgtMainLight");
-     ImGui::Text("KihgtSiblingLight");
-     ImGui::Text("KihgtDonutLight");
+    ImGui::Text("KihgtMainLight");
 
+    //const char* items[] = { "Alpha", "Overlay", "Lighten", "Multply", "Add", "Darken" };
+    
+      
+    //ImGui::Combo("MainLight_Blend", &MainLightitemsCurrent, items, IM_ARRAYSIZE(items));
 
+    //ImGui::SliderFloat4("MainLightMulColor", (float*)&MainLightMulColor_, 0.0f, 1.0f);
 
-	 //static ImVec4 backup_color;
+    ImGuiColorEditFlags MainLightMulColor = (true ? ImGuiColorEditFlags_HDR : 0) | (true ? 0 : ImGuiColorEditFlags_NoDragDrop) | (true ? ImGuiColorEditFlags_AlphaPreviewHalf : (false ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
+    ImGui::ColorEdit4("MainLightMulColor##2f", (float*)&MainLightMulColor_, ImGuiColorEditFlags_Float | MainLightMulColor);
 
-  //   bool open_popup = ImGui::ColorButton("MyColor##3b", Overlaycolor, misc_flags);
-  //   ImGui::SameLine(0, ImGui::GetStyle().ItemInnerSpacing.x);
-  //   open_popup |= ImGui::Button("Palette");
-  //   if (open_popup)
-  //   {
-  //       ImGui::OpenPopup("mypicker");
-  //       backup_color = Overlaycolor;
-  //   }
-  //   if (ImGui::BeginPopup("mypicker"))
-  //   {
-  //       ImGui::Text("Save Overlay Color");
-  //       ImGui::Separator();
-  //       ImGui::ColorPicker4("##picker", (float*)&Overlaycolor, misc_flags | ImGuiColorEditFlags_NoSidePreview | ImGuiColorEditFlags_NoSmallPreview);
-  //       ImGui::SameLine();
+    ImGuiColorEditFlags MainLightPlusColor = (true ? ImGuiColorEditFlags_HDR : 0) | (true ? 0 : ImGuiColorEditFlags_NoDragDrop) | (true ? ImGuiColorEditFlags_AlphaPreviewHalf : (false ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
+    ImGui::ColorEdit4("MainLightPlusColor##2f", (float*)&MainLightPlusColor_, ImGuiColorEditFlags_Float | MainLightPlusColor);
+    if (ImGui::Button("Reset MainLight"))
+    {
+        MainLightMulColor_ = { 1.0f, 1.0f, 1.0f, 1.0f };
+        MainLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
+    }
 
-  //       ImGui::BeginGroup(); // Lock X position
-  //       ImGui::Text("Current");
-  //       ImGui::ColorButton("##current", Overlaycolor, ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_AlphaPreviewHalf, ImVec2(60, 40));
-  //       ImGui::Text("Previous");
-  //       if (ImGui::ColorButton("##previous", backup_color, ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_AlphaPreviewHalf, ImVec2(60, 40)))
-  //           Overlaycolor = backup_color;
-  //       ImGui::Separator();
-  //       ImGui::Text("Palette");
-  //       for (int n = 0; n < IM_ARRAYSIZE(saved_palette); n++)
-  //       {
-  //           ImGui::PushID(n);
-  //           if ((n % 8) != 0)
-  //               ImGui::SameLine(0.0f, ImGui::GetStyle().ItemSpacing.y);
+    ImGui::Separator();
+    ImGui::Text("SiblingLight");
 
-  //           ImGuiColorEditFlags palette_button_flags = ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_NoTooltip;
-  //           if (ImGui::ColorButton("##palette", saved_palette[n], palette_button_flags, ImVec2(20, 20)))
-  //               Overlaycolor = ImVec4(saved_palette[n].x, saved_palette[n].y, saved_palette[n].z, Overlaycolor.w); // Preserve alpha!
+    ImGuiColorEditFlags SiblingLightMulColor = (true ? ImGuiColorEditFlags_HDR : 0) | (true ? 0 : ImGuiColorEditFlags_NoDragDrop) | (true ? ImGuiColorEditFlags_AlphaPreviewHalf : (false ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
+    ImGui::ColorEdit4("SiblingLightMulColor##2f", (float*)&SlibingLightMulColor_, ImGuiColorEditFlags_Float | SiblingLightMulColor);
 
-  //           // Allow user to drop colors into each palette entry. Note that ColorButton() is already a
-  //           // drag source by default, unless specifying the ImGuiColorEditFlags_NoDragDrop flag.
-  //           if (ImGui::BeginDragDropTarget())
-  //           {
-  //               if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(IMGUI_PAYLOAD_TYPE_COLOR_3F))
-  //                   memcpy((float*)&saved_palette[n], payload->Data, sizeof(float) * 3);
-  //               if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(IMGUI_PAYLOAD_TYPE_COLOR_4F))
-  //                   memcpy((float*)&saved_palette[n], payload->Data, sizeof(float) * 4);
-  //               ImGui::EndDragDropTarget();
-  //           }
+    ImGuiColorEditFlags SiblingLightPlusColor = (true ? ImGuiColorEditFlags_HDR : 0) | (true ? 0 : ImGuiColorEditFlags_NoDragDrop) | (true ? ImGuiColorEditFlags_AlphaPreviewHalf : (false ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
+    ImGui::ColorEdit4("SlibingLightPlusColor##2f", (float*)&SlibingLightPlusColor_, ImGuiColorEditFlags_Float | SiblingLightPlusColor);
+   
+    if (ImGui::Button("Reset SlibingLight"))
+    {
+        SlibingLightMulColor_ = { 1.0f, 1.0f, 1.0f, 1.0f };
+        SlibingLightPlusColor_ = { 0.348f, 0.564f, 0.653f, 0.0f };
+    }
 
-  //           ImGui::PopID();
-  //       }
-  //       ImGui::EndGroup();
-  //       ImGui::EndPopup();
-  //   }
+    ImGui::Separator();  
+    ImGui::Text("DonutLight");
+
+    ImGuiColorEditFlags DonutLightMulColor = (true ? ImGuiColorEditFlags_HDR : 0) | (true ? 0 : ImGuiColorEditFlags_NoDragDrop) | (true ? ImGuiColorEditFlags_AlphaPreviewHalf : (false ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
+    ImGui::ColorEdit4("DonutLightMulColor##2f", (float*)&DounutLightMulColor_, ImGuiColorEditFlags_Float | DonutLightMulColor);
+
+    ImGuiColorEditFlags DounutLightPlusColor = (true ? ImGuiColorEditFlags_HDR : 0) | (true ? 0 : ImGuiColorEditFlags_NoDragDrop) | (true ? ImGuiColorEditFlags_AlphaPreviewHalf : (false ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
+    ImGui::ColorEdit4("DounutLightPlusColor##2f", (float*)&DounutLightPlusColor_, ImGuiColorEditFlags_Float | DounutLightPlusColor);
+   
+    if (ImGui::Button("Reset DonutLight"))
+    {
+        DounutLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.3f };
+        DounutLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
+    }
+
+    ImGui::Separator();
+
+    if (ImGui::Button("Recommend Setting"))
+    {
+        MainLightMulColor_ = { 0.354f, 0.446f, 0.474f, 1.053f };
+        MainLightPlusColor_ = { 0.0f, 0.0f, 0.078f, 0.0f };
+
+        SlibingLightMulColor_ = { 1.0f, 1.0f, 1.0f, 1.0f };
+        SlibingLightPlusColor_ = { 0.348f, 0.564f, 0.653f, 0.0f };
+
+        DounutLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.4f };
+        DounutLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+        Overlaycolor = {0.406, 0.426, 0.730, 1.0f};
+    }
 
 }
 

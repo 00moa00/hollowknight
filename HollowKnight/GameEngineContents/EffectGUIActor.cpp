@@ -26,5 +26,16 @@ void EffectGUIActor::LevelStartEvent()
 void EffectGUIActor::LevelEndEvent()
 {
 	KnightData::GetInst()->SetOverlayflag(EffectGUI_->GetOverlayFlag());
+	KnightData::GetInst()->SetOverlayColor(EffectGUI_->GetoverlayColor());
+
+	KnightData::GetInst()->SetKnihgtMainLightMulColor(EffectGUI_->GetMainLightMulColor());
+	KnightData::GetInst()->SetKnihgtMainLightPlusColor(EffectGUI_->GetMainLightPlusColor());
+
+	KnightData::GetInst()->SetKnihgtSlibingLightMulColor(EffectGUI_->GetSlibingLightMulColor());
+	KnightData::GetInst()->SetKnihgtSlibingLightPlusColor(EffectGUI_->GetSlibingLightPlusColor());
+
+	KnightData::GetInst()->SetKnihgtDounutLightMulColor(EffectGUI_->GetDounutLightMulColor());
+	KnightData::GetInst()->SetKnihgtDounutLightPlusColor(EffectGUI_->GetDounutLightPlusColor());
+
 	EffectGUI_->EffectGUIDeath();
 }

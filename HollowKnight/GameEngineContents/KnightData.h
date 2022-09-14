@@ -184,32 +184,32 @@ public:
 	}
 
 
-	float4 KnihgtMainLightMulColor()
+	float4 GetKnihgtMainLightMulColor()
 	{
 		return MainLightMulColor_;
 	}
 
-	float4 KnihgtMainLightPlusColor()
+	float4 GetKnihgtMainLightPlusColor()
 	{
 		return MainLightPlusColor_;
 	}
 
-	float4 KnihgtSlibingLightMulColor()
+	float4 GetKnihgtSlibingLightMulColor()
 	{
 		return SlibingLightMulColor_;
 	}
 
-	float4 KnihgtSlibingLightPlusColor()
+	float4 GetKnihgtSlibingLightPlusColor()
 	{
 		return SlibingLightPlusColor_;
 	}
 
-	float4 KnihgtDounutLightMulColor()
+	float4 GetKnihgtDounutLightMulColor()
 	{
 		return DounutLightMulColor_;
 	}
 
-	float4 KnihgtDounutLightPlusColor()
+	float4 GetKnihgtDounutLightPlusColor()
 	{
 		return DounutLightPlusColor_;
 	}
