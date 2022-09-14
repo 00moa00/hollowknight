@@ -3,7 +3,7 @@
 
 CameraGUI::CameraGUI() 
 	:
-	max_skew(0.0f),
+	max_skew(0.2f),
 	max_sway(1.5f),
 	seed_shifting_factor(10.00f)
 {

@@ -26,12 +26,16 @@
 Knight::Knight()
 	:
 	KnightManager_(),
+
 	KnightJumpPower_(),
-	KnightSlashTimer_(),
-	KnightLookUpTimer_(),
-	KnightLookDownTimer_(),
-	KnightDashTimer_(),
-	KnightSlashCollisionTimer_(),
+
+	KnightSlashTimer_(0.0f),
+	KnightLookUpTimer_(0.0f),
+	KnightLookDownTimer_(0.0f),
+	KnightDashTimer_(0.0f),
+	KnightSlashCollisionTimer_(0.0f),
+	KnihgtInvincibilityTimer_(0.0f),
+	KnihgtInvincibilitingTimer_(0.0f),
 
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
@@ -53,6 +57,9 @@ Knight::Knight()
 	isDeathEnd_(false),
 	isSitEnd_(false),
 	isDoorEnd_(false),
+
+	isInvincibility_(false),
+	isKnightBlack_(false),
 
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
@@ -694,6 +701,43 @@ void Knight::KnihgtSlidePositiveRenderer()
 	}
 }
 
+void Knight::KnightInvincibiliting(float _DeltaTime)
+{
+	KnihgtInvincibilitingTimer_ += _DeltaTime;
+	KnihgtInvincibilityTimer_ += _DeltaTime;
+
+
+
+	if (KnihgtInvincibilityTimer_ > 1.f)
+	{
+		KnihgtInvincibilityTimer_ = 0.0f;
+		isInvincibility_ = false;
+		GetRenderer()->GetPixelData().MulColor.r = 1.f;
+		GetRenderer()->GetPixelData().MulColor.g = 1.f;
+		GetRenderer()->GetPixelData().MulColor.b = 1.f;
+	}
+
+	if (KnihgtInvincibilitingTimer_ > 0.1f)
+	{
+		isKnightBlack_ = !isKnightBlack_;
+		KnihgtInvincibilitingTimer_ = 0.0f;
+	}
+	if (isKnightBlack_ == true && isInvincibility_ == true)
+	{
+		GetRenderer()->GetPixelData().MulColor.r = 1.f;
+		GetRenderer()->GetPixelData().MulColor.g = 1.f;
+		GetRenderer()->GetPixelData().MulColor.b = 1.f;
+	}
+
+	else if (isKnightBlack_ == false && isInvincibility_ == true)
+	{
+		GetRenderer()->GetPixelData().MulColor.r = 0.f;
+		GetRenderer()->GetPixelData().MulColor.g = 0.f;
+		GetRenderer()->GetPixelData().MulColor.b = 0.f;
+	}
+
+}
+
 void Knight::KnightIsActtingCheck()
 {
 	if (false == GameEngineInput::GetInst()->IsPress("KnightLeft")
@@ -779,17 +823,24 @@ void Knight::LookDownTimerAndChangeState(float _DeltaTime)
 
 bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	MasterActor* Monster = dynamic_cast<MasterActor*>(_Other->GetActor());
-	MonsterHitEffect* Effect = GetLevel()->CreateActor<MonsterHitEffect>();
-
-	Effect->GetTransform().SetWorldPosition({ Monster->GetTransform().GetWorldPosition().x,  Monster->GetTransform().GetWorldPosition().y + (Monster->GetRenderer()->GetTransform().GetWorldScale().y / 4) , static_cast<float>(Z_ORDER::Effect)});
-
-	if (Monster != nullptr)
+	if (isInvincibility_ == false)
 	{
-		KnockbackDirection_ = Monster->GetMoveDirection();
-	}
+		MasterActor* Monster = dynamic_cast<MasterActor*>(_Other->GetActor());
+		MonsterHitEffect* Effect = GetLevel()->CreateActor<MonsterHitEffect>();
 
-	return true;
+		Effect->GetTransform().SetWorldPosition({ Monster->GetTransform().GetWorldPosition().x,  Monster->GetTransform().GetWorldPosition().y + (Monster->GetRenderer()->GetTransform().GetWorldScale().y / 4) , static_cast<float>(Z_ORDER::Effect) });
+
+		if (Monster != nullptr)
+		{
+			KnockbackDirection_ = Monster->GetMoveDirection();
+		}
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool Knight::KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
@@ -799,6 +850,7 @@ bool Knight::KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollis
 
 bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
+
 	MasterNPC* NPC = dynamic_cast<MasterNPC*>(_Other->GetActor());
 
 	if (NPC != nullptr)

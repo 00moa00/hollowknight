@@ -19,12 +19,23 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	// ======== Knight VS Monster ========
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
-		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
 	{
 		KnightManager_.ChangeState("STUN");
 		KnightData::GetInst()->SetisBreak(true);
 	}
+
+	// ======== Knight VS Bench ========
 
 	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Object, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnihgtVSBenchCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
@@ -35,11 +46,15 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
+	// ======== Knight VS NPC ========
+
 	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::NPC, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnihgtVSNPCCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
 	{
 
 	}
+
+	// ======== Knight VS POTAL ========
 
 	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Potal, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSPotalCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
@@ -47,16 +62,12 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-
-
-
-	// ========== UPDATE ==========
+	// ================================
+	// ============ UPDATE ============
+	// ================================
 
 	DoubleSlashTimer(_DeltaTime);
 	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
-
-
-
 
 	if (GameEngineInput::GetInst()->IsFree("KnightJump") == true && isPressJumppingKey_ == true)
 	{
@@ -78,15 +89,17 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		isRunMode_ = !isRunMode_;
 	}
 
-	// ========== 스테이트 변경 ==========
+
+	// ==================================
+	// ========== Change State ==========
+	// ==================================
 
 	if (true == GameEngineInput::GetInst()->IsDown("KnightFocus"))
 	{
 
 	}
 
-
- 	if (GetisKnightMove() == true && isRunMode_ == false)
+	 if (GetisKnightMove() == true && isRunMode_ == false)
 	{
 		KnightManager_.ChangeState("WALK");
 	}
@@ -167,8 +180,17 @@ void Knight::KnightWalkStart(const StateInfo& _Info)
 
 void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 {	
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
-		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
 	{
 		KnightData::GetInst()->SetisBreak(true);
 		KnightManager_.ChangeState("STUN");
@@ -245,6 +267,8 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
 	{
 		KnightManager_.ChangeState("JUMP");
+		return;
+
 	}
 
 	if (true == GameEngineInput::GetInst()->IsFree("KnightJump") )
@@ -255,11 +279,13 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
 	{
 		KnightManager_.ChangeState("SLASH");
+		return;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
 	{
 		KnightManager_.ChangeState("DOUBLE_SLASH");
+		return;
 	}
 
 	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
@@ -267,22 +293,26 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		isLookMap_ = true;
 		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
 		KnightManager_.ChangeState("MAP_WALKING");
+		return;
 	}
 
 	if (GetisKnightMove() == false)
 	{
 		KnightManager_.ChangeState("STILL");
+		return;
 	}
 
 	// 대쉬
 	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
 	{
 		KnightManager_.ChangeState("DASH");
+		return;
 	}
 
 	if (isRunMode_ == true)
 	{
 		KnightManager_.ChangeState("RUN");
+		return;
 	}
 
 }
@@ -302,6 +332,22 @@ void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 
 void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
 	if (isWalkTurnEnd_ == true) //애니메이션 end bool 값
 	{
 		isWalkTurnEnd_ = false;
@@ -309,11 +355,14 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 		if (isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
+			return;
+
 		}
 
 		else if (isRunMode_ == false)
 		{
 			KnightManager_.ChangeState("WALK");
+			return;
 		}
 	}
 }
@@ -325,9 +374,28 @@ void Knight::KnightLookDownStart(const StateInfo& _Info)
 
 void Knight::KnightLookDownUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
 	if (GameEngineInput::GetInst()->IsFree("KnightDown") == true)
 	{
 		KnightManager_.ChangeState("STILL");
+		KnightManager_.ChangeState("STUN");
+
 	}
 }
 
@@ -343,10 +411,29 @@ void Knight::KnightLookUpStart(const StateInfo& _Info)
 
 void Knight::KnightLookUpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
 	if (GameEngineInput::GetInst()->IsFree("KnightUp") == true)
 	{
 		KnightManager_.ChangeState("STILL");
+		return;
 	}
+
 }
 
 void Knight::KnightLookUpEnd(const StateInfo& _Info)
@@ -369,9 +456,30 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 
 void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+
+
+
 	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 	DoubleSlashTimer(_DeltaTime);
+
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
 
 	if (true == GameEngineInput::GetInst()->IsPress("KnightJump"))
 	{
@@ -522,10 +630,27 @@ void Knight::KnightLandStart(const StateInfo& _Info)
 
 void Knight::KnightLandUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
 	if (isLandEnd_ == true)
 	{
 		isLandEnd_ = false;
 		KnightManager_.ChangeState("STILL");
+		return;
 	}
 
 }
@@ -570,6 +695,22 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	else if (GetisOnGround() == true)
 	{
 		KnightManager_.ChangeState("LAND");
+		return;
+	}
+
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
 		return;
 	}
 
@@ -651,6 +792,22 @@ void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 	}
 
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
 	// ========== 스테이트 변경 ==========
 
 	//if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
@@ -702,6 +859,22 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightData::GetInst()->SetisRefill(true);
 		KnightManager_.ChangeState("STILL");
 	}
+
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
 }
 
 void Knight::KnightFocusEnd(const StateInfo& _Info)
@@ -729,6 +902,23 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 	this->KnightDirectionCheck();
 	this->isOnGroundCheck(_DeltaTime);
 	this->isWallCheck(_DeltaTime);
+
+
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
 
 	if (GetisWall() == true)
 	{
@@ -868,6 +1058,7 @@ void Knight::KnightStunEnd(const StateInfo& _Info)
 
 	KnightStunEffect_->StunEffectOff();
 
+	isInvincibility_ = true;
 }
 
 void Knight::KnightDeathStart(const StateInfo& _Info)
@@ -960,6 +1151,21 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	isOnGroundCheck(_DeltaTime);
 	isWallCheck(_DeltaTime);
 
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
 
 	if (GetisWall() == true)
 	{
@@ -1069,6 +1275,9 @@ void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -80, 50, 0 });
 
 	}
+
+
+
 }
 
 void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -1085,6 +1294,21 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	KnightDirectionCheck();
 	isOnGroundCheck(_DeltaTime);
 	isWallCheck(_DeltaTime);
+
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
 
 	if (GetisWall() == true)
 	{
@@ -1189,6 +1413,23 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	KnightDirectionCheck();
 	isOnGroundCheck(_DeltaTime);
 	isWallCheck(_DeltaTime);
+
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		 )
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
 
 	if (GetisWall() == true)
 	{

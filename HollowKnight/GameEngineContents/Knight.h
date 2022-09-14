@@ -61,17 +61,22 @@ private:
 
 	bool isDeath_;
 
+	bool isInvincibility_;
+	bool isKnightBlack_;
+
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
 
 	float KnightSlashCollisionTimer_;
-	float KnightSlashTimer_;	 // 더블 공격 체크 타이머
+	float KnightSlashTimer_;			// 더블 공격 체크 타이머
 	float KnightLookUpTimer_;
 	float KnightLookDownTimer_;
-	float KnightDashTimer_;		 // 대쉬 타이머
-	float KnightKnockbackTimer_; // 넉백 타이머
+	float KnightDashTimer_;				// 대쉬 타이머
+	float KnightKnockbackTimer_;		// 넉백 타이머
+	float KnihgtInvincibilityTimer_;	// 무적 지속 시간
+	float KnihgtInvincibilitingTimer_;	// 무적 스왑 시간
 
-	float4 ActtingMoveDirection_; //다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
+	float4 ActtingMoveDirection_;	//다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
 	float4 PrevDirection_;
 
 	float4 KnockbackDirection_;
@@ -106,6 +111,8 @@ private:
 
 	void KnihgtSlideNegativeRenderer(); //벽타기 점프 랜더러 반전용
 	void KnihgtSlidePositiveRenderer(); //벽타기 점프 랜더러 반전용
+
+	void KnightInvincibiliting(float _DeltaTime);
 
 
 	void DoubleSlashTimer(float _DeltaTime); //더블 공격(콤보) 타이머

@@ -8,7 +8,7 @@ MainCameraManager::MainCameraManager()
 	:
 	max_skew(5.00f),
 	max_sway(1.5f),
-	seed(0),
+	seed(0.2f),
 	seed_shifting_factor(10.00f)
 {
 
