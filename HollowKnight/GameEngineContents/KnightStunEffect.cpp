@@ -31,12 +31,7 @@ void KnightStunEffect::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("STUN_ANIMATION", FrameAnimation_DESC("hit_crack_simple0000-Sheet.png", CustomFrame, 0.010f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("STUN_IDLE_ANIMATION", FrameAnimation_DESC("hit_crack_simple0000-Sheet.png", 2, 2, 0.042f, false));
 	PrevScale_ = GetRenderer()->GetTransform().GetWorldScale();
-	
-	
-	
 
-
-	
 	
 	//================================
 	//    Create Bind Animation

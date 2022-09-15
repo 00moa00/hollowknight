@@ -145,6 +145,9 @@
     <Filter Include="Debug">
       <UniqueIdentifier>{6133c054-d615-4921-a6b6-17b34b0553df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\Knight\Spell">
+      <UniqueIdentifier>{f2b9da81-f6a2-4fa5-b60a-8eacb4bf8d95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -464,6 +467,15 @@
     </ClInclude>
     <ClInclude Include="EffectGUIActor.h">
       <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightBurstEffect.h">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightDoubleJumpEffect.h">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightFocusEffect.h">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -796,6 +808,15 @@
     </ClCompile>
     <ClCompile Include="EffectGUIActor.cpp">
       <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightBurstEffect.cpp">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightDoubleJumpEffect.cpp">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightFocusEffect.cpp">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

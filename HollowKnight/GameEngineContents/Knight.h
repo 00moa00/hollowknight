@@ -10,6 +10,12 @@
 #include "LowHealth.h"
 
 // 설명 :
+// 이팩트 관리 : 공격 - 이펙트는 온오프
+//				라이트 - 계속 따라다님
+//				스펠 - 순간에만 만들고 삭제
+
+//				* 이펙트는 객체 나눈걸로 통일
+
 class GameEngineTextureRenderer;
 class Knight : public MasterActor
 {

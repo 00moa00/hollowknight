@@ -1003,8 +1003,6 @@ void ContentsCore::Start()
 		
 		GameEngineTexture::Cut("Knight_idle_low_health000-Sheet.png", 10, 1);
 
-
-
 		// º®Å¸±â
 		GameEngineTexture::Cut("Knight_wall_slide0000-Sheet.png", 4, 1);
 		GameEngineTexture::Cut("Knight_wall_jump0000-Sheet.png", 3, 1);
@@ -1045,7 +1043,28 @@ void ContentsCore::Start()
 
 
 	}
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Kinght");
+		Dir.Move("Effect");
+		Dir.Move("Spell");
 
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Spell Effects_focus_effect0000-Sheet.png", 9, 1);
+		GameEngineTexture::Cut("Spell Effects_focus_appear0000-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Spell Effects_burst_effect0000-Sheet.png", 8, 1);
+
+
+	}
 
 	{
 		GameEngineDirectory Dir;

@@ -281,6 +281,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="KnightBurstEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightDoubleJumpEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightFocusEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="KnightStunEffect.h">
       <SubType>
       </SubType>
@@ -702,6 +714,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Iselda.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightBurstEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightDoubleJumpEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightFocusEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

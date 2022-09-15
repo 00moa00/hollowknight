@@ -137,5 +137,18 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         Overlaycolor = {0.406, 0.426, 0.730, 1.0f};
     }
 
+    if (ImGui::Button("Recommend Setting2"))
+    {
+        MainLightMulColor_ = { 1.0f, 1.0f, 1.0f, 1.0f };
+        MainLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+        SlibingLightMulColor_ = { 1.0f, 1.0f, 1.0f, 1.0f };
+        SlibingLightPlusColor_ = { 0.348f, 0.564f, 0.653f, 0.0f };
+
+        DounutLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.4f };
+        DounutLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+        Overlaycolor = { 0.406, 0.426, 0.730, 1.0f };
+    }
 }
 
