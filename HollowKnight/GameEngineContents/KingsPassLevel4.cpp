@@ -27,37 +27,31 @@ void KingsPassLevel4::Start()
 	GetMasterMap()->CreateBackGround("King's-Pass_Background_4.png");
 	GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_4.png");
 	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_4.png");
-
-	if (GetKnight() == nullptr)
-	{
-		CreateKnightActor(); // 플레이어
-	}
-
-	CreateKingsPass1Monster();
-
 	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_4.png");
 	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_4.png");
 
-	CreateUIActor();
+	CreateKnightActor(); // 플레이어
+	CreateKingsPass1Monster();
 
+
+
+	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+	GetKnight()->GetTransform().SetLocalPosition({ 347.f, -1169.f, static_cast<float>(Z_ORDER::Knight) });
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
+	SetMapSize({ 6210, 3271 });
+
+	CreateUIActor();
 	CreateSettingPageActor();
 	CreateMainCameraManager();
 	CreateEffectGUIActor();
-	SetMapSize({ 6210, 3271 });
 
-	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-	GetKnight()->GetTransform().SetLocalPosition({ 347.f, -1063.f, static_cast<float>(Z_ORDER::Knight) });
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
-
-
-	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 }
 

@@ -24,6 +24,12 @@ void MainCameraManager::Start()
 {
 	GetLevel()->GetMainCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({
+		GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x
+		,GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y
+		, -1800});
+	
+	
 	CameraStateManager_.CreateStateMember("MOVE_TO_TARGET"
 		, std::bind(&MainCameraManager::MoveToTargetUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::MoveToTargetStart, this, std::placeholders::_1)

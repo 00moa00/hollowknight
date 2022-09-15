@@ -29,6 +29,11 @@ void CameraGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 	ImGui::SliderFloat("MaxSkew [degree]", &MaxSkew, 0.0f, 10.0f);
 	ImGui::SliderFloat("SeedShiftingFactor", &SeedShiftingFactor, 0.0f, 20.f);
 
-	
+	ImGui::Separator();
+	ImGui::Text("Knight Pos");
+
+	ImGui::Text("Min: (%.2f, %.2f)", KnightData::GetInst()->GetKnightPosition().x, KnightData::GetInst()->GetKnightPosition().y);
+
+
 }
 
