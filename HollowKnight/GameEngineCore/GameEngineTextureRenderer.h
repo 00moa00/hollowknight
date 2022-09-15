@@ -63,6 +63,12 @@ public:
 	class GameEngineTextureRenderer* Renderer;
 
 public:
+
+	unsigned int GetCurFrame()
+	{
+		return CurFrame;
+	}
+
 	FrameAnimation_DESC()
 		: Loop(false)
 		, Inter(0.1f)
@@ -132,6 +138,11 @@ class FrameAnimation : public GameEngineNameObject
 	void Reset();
 public:
 	void Update(float _DeltaTime);
+
+	FrameAnimation_DESC& GetFrameAnimationDesc()
+	{
+		return Info;
+	}
 
 public:
 	FrameAnimation() 
@@ -235,6 +246,11 @@ public:
 	AtlasData& GetAtlasData()
 	{
 		return AtlasDataInst;
+	}
+
+	FrameAnimation* GetCurFrameAnimation()
+	{
+		return CurAni;
 	}
 
 

@@ -5,6 +5,11 @@
 #include "KnightShadowData.h"
 #include "HollowKnightLevel.h"
 
+#include "KnightDoubleJumpEffect.h"
+
+#include "KnightFocusEffect.h"
+#include "KnightBurstEffect.h"
+
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
 	if (_Info.PrevState == "RUN")
@@ -856,20 +861,42 @@ void Knight::KnightFocusStart(const StateInfo& _Info)
 {
 	isLowHealth_ = false;
 	GetRenderer()->ChangeFrameAnimation("FOCUS_ANIMATION");
+	KnightFocusEffect_ = GetLevel()->CreateActor<KnightFocusEffect>();
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Focus);
+
+	KnightFocusEffect_->GetTransform().SetWorldPosition(
+		{this->GetTransform().GetWorldPosition().x
+		, this->GetTransform().GetWorldPosition().y 
+		, static_cast<float>(Z_ORDER::Effect)});
 }
 
 void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (GameEngineInput::GetInst()->IsFree("KnightFocus") == true)
+	KnihgtFocusTimer_ += _DeltaTime;
+	if (GameEngineInput::GetInst()->IsFree("KnightFocus") == true && GetRenderer()->GetCurFrameAnimation()->GetFrameAnimationDesc().GetCurFrame() < 5)
 	{
+		KnightFocusEffect_->Death();
+		KnightFocusEffect_ = nullptr;
 		KnightManager_.ChangeState("STILL");
+		return;
 	}
 
-	if (isFocusEnd_ == true)
+
+
+	if (GetRenderer()->GetCurFrameAnimation()->GetFrameAnimationDesc().GetCurFrame() == 8)
 	{
-		isFocusEnd_ = false;
-		KnightData::GetInst()->SetisRefill(true);
-		KnightManager_.ChangeState("STILL");
+		KnightBurstEffect* KnightBurstEffect_= 	GetLevel()->CreateActor<KnightBurstEffect>();
+
+		KnightBurstEffect_->GetTransform().SetWorldPosition(
+			{ this->GetTransform().GetWorldPosition().x
+			, this->GetTransform().GetWorldPosition().y 
+			, static_cast<float>(Z_ORDER::Effect) });
+
+		KnightManager_.ChangeState("FOCUS_BURST");
+
+		return;
+
+
 	}
 
 	// 내가 만약 무적이면 깜빡거린다
@@ -891,6 +918,48 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightFocusEnd(const StateInfo& _Info)
 {
+	KnihgtFocusTimer_ = 0.f;
+
+	KnightFocusEffect_ = nullptr;
+}
+
+void Knight::KnightFocusBurstStart(const StateInfo& _Info)
+{
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::ReturnFocus);
+
+}
+
+void Knight::KnightFocusBurstUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	// 내가 만약 무적이면 깜빡거린다
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+
+	if (isFocusEnd_ == true)
+	{
+		isFocusEnd_ = false;
+		KnightData::GetInst()->SetisRefill(true);
+		KnightManager_.ChangeState("STILL"); 
+		return;
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+}
+
+void Knight::KnightFocusBurstEnd(const StateInfo& _Info)
+{
+	//GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
 
 }
 

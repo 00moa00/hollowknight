@@ -14,6 +14,7 @@ void KnightDoubleJumpEffect::Start()
 	CreateRendererComponent("Spell Effects 2_double_jump_wings0000-Sheet.png");
 
 	GetRenderer()->CreateFrameAnimationCutTexture("FOCUS_APPEAR", FrameAnimation_DESC("Spell Effects 2_double_jump_wings0000-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->SetScaleModeImage();
 
 	//================================
 	//    Create Bind Animation

@@ -8,7 +8,8 @@ enum class CameraMode
 {
 	TargetMove,
 	Shaking,
-	ReturnTargetMove,
+	Focus,
+	ReturnFocus
 };
 
 // Ό³Έν :
@@ -43,6 +44,8 @@ private:
 	float seed ;
 	float SeedShiftingFactor ;
 
+	float ReturnLenth_;
+
 public:
 	void MainCameraMoveLimitWindow(float4 _TargetPos, float4 _MapSize);
 	void ChangeCameraMove(CameraMode _Mode);
@@ -59,6 +62,13 @@ private:
 	void ShakingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShakingEnd(const StateInfo& _Info);
 
+	void FocusStart(const StateInfo& _Info);
+	void FocusUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FocusEnd(const StateInfo& _Info);
+
+	void FocusReturnStart(const StateInfo& _Info);
+	void FocusReturnUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FocusReturnEnd(const StateInfo& _Info);
 
 
 };

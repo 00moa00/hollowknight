@@ -6,6 +6,7 @@ enum class BlendMode
 	Lighten,
 	Multply,
 	Add,
+	Addition,
 	Darken,
 	MAX
 };
@@ -70,10 +71,10 @@ enum class Z_ORDER
 	Terrain,
 
 	Effect,
+	Knight_Shadow_Slash,
 
 	Monster,
 
-	Knight_Shadow_Slash,
 
 	Knight_Shadow,
 

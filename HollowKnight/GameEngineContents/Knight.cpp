@@ -23,6 +23,7 @@
 #include "MonsterHitEffect.h"
 
 
+
 Knight::Knight()
 	:
 	KnightManager_(),
@@ -36,6 +37,7 @@ Knight::Knight()
 	KnightSlashCollisionTimer_(0.0f),
 	KnihgtInvincibilityTimer_(0.0f),
 	KnihgtInvincibilitingTimer_(0.0f),
+	KnihgtFocusTimer_(0.0f),
 
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
@@ -67,6 +69,7 @@ Knight::Knight()
 	KnightSiblingLightEffect_(nullptr),
 	KnightDonutLightEffect_(nullptr),
 	KnightMainLightEffect_(nullptr),
+	KnightFocusEffect_(nullptr),
 
 	ChangeLevel_(""),
 
@@ -245,7 +248,7 @@ void Knight::Start()
 
 	// ---- 집중 ----
 
-	GetRenderer()->CreateFrameAnimationCutTexture("FOCUS_ANIMATION", FrameAnimation_DESC("Knight_focus_v020000-Sheet.png", 0, 11, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("FOCUS_ANIMATION", FrameAnimation_DESC("Knight_focus_v020000-Sheet.png", 0, 11, 0.140f, false));
 
 
 
@@ -414,6 +417,12 @@ void Knight::Start()
 		, std::bind(&Knight::KnightFocusUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
+
+
+	KnightManager_.CreateStateMember("FOCUS_BURST"
+		, std::bind(&Knight::KnightFocusBurstUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightFocusBurstStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightFocusBurstEnd, this, std::placeholders::_1));
 
 
 	// ---- 공격 ----

@@ -9,6 +9,8 @@
 #include "KnightStunEffect.h"
 #include "LowHealth.h"
 
+#include "KnightFocusEffect.h"
+
 // 설명 :
 // 이팩트 관리 : 공격 - 이펙트는 온오프
 //				라이트 - 계속 따라다님
@@ -83,6 +85,7 @@ private:
 	float KnightKnockbackTimer_;		// 넉백 타이머
 	float KnihgtInvincibilityTimer_;	// 무적 지속 시간
 	float KnihgtInvincibilitingTimer_;	// 무적 스왑 시간
+	float KnihgtFocusTimer_;
 
 	float4 ActtingMoveDirection_;	//다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
 	float4 PrevDirection_;
@@ -100,6 +103,8 @@ private:
 	SideDarkEffect* SideDarkEffect_;
 
 	KnightStunEffect* KnightStunEffect_;
+
+	KnightFocusEffect* KnightFocusEffect_;			//집중 이펙트 포인터 저장용
 
 
 	GameEngineCollision* Test1_;
@@ -183,6 +188,12 @@ private:
 	void KnightFocusStart(const StateInfo& _Info);
 	void KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightFocusEnd(const StateInfo& _Info);
+
+	// ---- 집중 폭발 ----
+	void KnightFocusBurstStart(const StateInfo& _Info);
+	void KnightFocusBurstUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightFocusBurstEnd(const StateInfo& _Info);
+
 
 	// ---- 달리기 ----
 	void KnightRunStart(const StateInfo& _Info);
@@ -281,6 +292,8 @@ private:
 	void KnightDoorStart(const StateInfo& _Info);
 	void KnightDoorUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightDoorEnd(const StateInfo& _Info);
+
+
 
 	 
 	//================================

@@ -77,6 +77,11 @@ void MasterEffect::SetBlendMode(BlendMode _Mode)
 		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("AddBlend");
 
 		break;
+
+	case BlendMode::Addition:
+		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("Addition");
+
+		break;
 	case BlendMode::Darken:
 		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("DarkenBlend");
 
