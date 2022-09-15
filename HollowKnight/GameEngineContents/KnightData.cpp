@@ -33,7 +33,7 @@ KnightData::KnightData()
 	CurMask_(4),
 	CharmNotches_(5),
 	UsingCharmNotches_(0),
-	OverlayColor_(0.472, 0.565, 0.687, 1.0f),
+	OverlayColor_(0.499, 0.592, 0.726, 1.0f),
 
 	MainLighBlend_(BlendMode::Alpha),
 	SlibingLighBlend_(BlendMode::Alpha),

@@ -40,6 +40,10 @@ void MainCameraManager::Start()
 		, std::bind(&MainCameraManager::FocusStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::FocusEnd, this, std::placeholders::_1));
 
+	CameraStateManager_.CreateStateMember("FOCUS_CANCLE"
+		, std::bind(&MainCameraManager::FocusCancleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&MainCameraManager::FocusCancleStart, this, std::placeholders::_1)
+		, std::bind(&MainCameraManager::FocusCancleEnd, this, std::placeholders::_1));
 
 	CameraStateManager_.CreateStateMember("FOCUS_RETURN"
 		, std::bind(&MainCameraManager::FocusReturnUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -84,6 +88,11 @@ void MainCameraManager::ChangeCameraMove(CameraMode _Mode)
 		break;
 	case CameraMode::Focus:
 		CameraStateManager_.ChangeState("FOCUS");
+
+		break;
+
+	case CameraMode::CancleFocus:
+		CameraStateManager_.ChangeState("FOCUS_CANCLE");
 
 		break;
 	case CameraMode::ReturnFocus:
@@ -258,7 +267,7 @@ void MainCameraManager::FocusReturnUpdate(float _DeltaTime, const StateInfo& _In
 
 
 	seed += (_DeltaTime);
-	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed * 10.0f, seed * 10.0f, 0)) - 1.0f;
+	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed * 5.0f, seed * 5.0f, 0)) - 1.0f;
 	float4 ShakePosition = { shake * 5.f, shake * 5.f };
 	float4 ShakeRotation = { 0,0, shake * 0.197f };
 
@@ -322,5 +331,74 @@ void MainCameraManager::FocusReturnUpdate(float _DeltaTime, const StateInfo& _In
 }
 
 void MainCameraManager::FocusReturnEnd(const StateInfo& _Info)
+{
+}
+
+
+void MainCameraManager::FocusCancleStart(const StateInfo& _Info)
+{
+
+
+
+}
+
+void MainCameraManager::FocusCancleUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+
+	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
+
+	float4 CurrentPos = { GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x
+		,GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y
+		, GetLevel()->GetMainCameraActorTransform().GetLocalPosition().z };
+
+	float4 DestPos = { GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x
+		,GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y
+		, -1800.f };
+
+
+	float4 Lenth = CurrentPos - DestPos;
+	ReturnLenth_ = Lenth.Length();
+
+	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.0f);
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MoveCamera);
+	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
+
+	//카메라의 위치 - 윈도우 사이즈의 x가 0이라면
+	if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+
+	if (ReturnLenth_ <= 0)
+	{
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ GetLevel()->GetMainCameraActorTransform().GetWorldPosition().x, GetLevel()->GetMainCameraActorTransform().GetWorldPosition().y , -1800.f });
+		CameraStateManager_.ChangeState("MOVE_TO_TARGET");
+
+	}
+}
+
+void MainCameraManager::FocusCancleEnd(const StateInfo& _Info)
 {
 }

@@ -9,6 +9,7 @@ enum class CameraMode
 	TargetMove,
 	Shaking,
 	Focus,
+	CancleFocus,
 	ReturnFocus
 };
 
@@ -65,6 +66,10 @@ private:
 	void FocusStart(const StateInfo& _Info);
 	void FocusUpdate(float _DeltaTime, const StateInfo& _Info);
 	void FocusEnd(const StateInfo& _Info);
+
+	void FocusCancleStart(const StateInfo& _Info);
+	void FocusCancleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FocusCancleEnd(const StateInfo& _Info);
 
 	void FocusReturnStart(const StateInfo& _Info);
 	void FocusReturnUpdate(float _DeltaTime, const StateInfo& _Info);

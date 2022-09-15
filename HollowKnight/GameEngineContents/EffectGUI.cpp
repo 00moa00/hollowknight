@@ -63,7 +63,7 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 
     if (ImGui::Button("overlay Reset"))
     {
-        Overlaycolor = { 1.0f, 1.0f, 1.0f, 0.3f };
+        Overlaycolor = { 0.0f, 0.0f, 0.0f, 1.0f };
     }
 
 
@@ -134,7 +134,7 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         DounutLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.4f };
         DounutLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
 
-        Overlaycolor = {0.406, 0.426, 0.730, 1.0f};
+        Overlaycolor = { 0.499, 0.592, 0.726, 1.0f };
     }
 
     if (ImGui::Button("Recommend Setting2"))
@@ -148,7 +148,7 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         DounutLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.4f };
         DounutLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
 
-        Overlaycolor = { 0.406, 0.426, 0.730, 1.0f };
+        Overlaycolor = {0.406, 0.539, 0.730, 1.0f };
     }
 }
 

@@ -877,6 +877,7 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightFocusEffect_->Death();
 		KnightFocusEffect_ = nullptr;
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::CancleFocus);
 		KnightManager_.ChangeState("STILL");
 		return;
 	}
