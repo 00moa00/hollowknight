@@ -11,9 +11,6 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 
-#include "OverlayPostEffect.h"
-#include "NoisePostEffect.h"
-#include "VignettePostEffect.h"
 
 KingsPassLevel1::KingsPassLevel1() 
 {
@@ -25,12 +22,6 @@ KingsPassLevel1::~KingsPassLevel1()
 
 void KingsPassLevel1::Start()
 {
-	if (false == GameEngineInput::GetInst()->IsKey("FreeCameraOnOff"))
-	{
-		GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
-	}
-
-
 	CraateMasterMapActor();
 
 	GetMasterMap()->CreateBackGround("King's-Pass_Background_1.png");
@@ -70,9 +61,6 @@ void KingsPassLevel1::Start()
 }
 void KingsPassLevel1::Update(float _DeltaTime) 
 {
-
-
-
 	//GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
 }
 

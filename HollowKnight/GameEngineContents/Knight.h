@@ -74,6 +74,8 @@ private:
 
 	bool isLowHealth_;					//Å»Áø
 
+	bool isKnihgtStillWall_;
+
 	float KnightJumpPower_;
 	float KnightDoubleJumpPower_;
 

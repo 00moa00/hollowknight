@@ -128,10 +128,10 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         MainLightMulColor_ = { 0.354f, 0.446f, 0.474f, 1.053f };
         MainLightPlusColor_ = { 0.0f, 0.0f, 0.078f, 0.0f };
 
-        SlibingLightMulColor_ = { 1.0f, 1.0f, 1.0f, 1.0f };
+        SlibingLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.384f };
         SlibingLightPlusColor_ = { 0.348f, 0.564f, 0.653f, 0.0f };
 
-        DounutLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.4f };
+        DounutLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.102f };
         DounutLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
 
         Overlaycolor = { 0.499, 0.592, 0.726, 1.0f };

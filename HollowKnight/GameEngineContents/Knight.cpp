@@ -63,6 +63,8 @@ Knight::Knight()
 	isInvincibility_(false),
 	isKnightBlack_(false),
 
+	isKnihgtStillWall_(false),
+
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
 	SideDarkEffect_(nullptr),
@@ -94,8 +96,8 @@ void Knight::Start()
 	SetSpeed(300.f);
 	SetisMove(true);
 	SetGravity(400.f);
-	SetJumpPower({ 300, 0 });
-	SetJumpSpeed(5);
+	SetJumpPower({ 200, 0 });
+	SetJumpSpeed(6);
 	SetCollisionSize({ 0, 0, 0 });
 	SetFallSpeed(2);
 
@@ -103,7 +105,7 @@ void Knight::Start()
 	SetRightBottom({ 15.f, 0, 0, 0 });
 	SetRightTop({ 15.f, 20.f, 0, 0 });
 	SetLeftTop({ -15.f, 20.f, 0, 0 });
-	SetCenterTop({ 0, 20.f, 0, 0 });
+	SetCenterTop({ 0, 50.f, 0, 0 });
 	SetLeftCenter({-30.f, 100.f, 0});
 	SetRightCenter({ 30.f, 100.f, 0 });
 	SetCenter({0, 20.f, 0, 0});
@@ -136,8 +138,8 @@ void Knight::Start()
 	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 
-	KnightJumpPower_ = 250.f;
-	KnightDoubleJumpPower_ = 180.f;
+	KnightJumpPower_ = 220.f;
+	KnightDoubleJumpPower_ = 160.f;
 
 	//================================
 	//    CreateKey
@@ -180,7 +182,7 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.100f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("LAND_ANIMATION", FrameAnimation_DESC("Knight_land0000-Sheet.png", 0, 2, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("LAND_ANIMATION", FrameAnimation_DESC("Knight_land0000-Sheet.png", 0, 2, 0.080f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 	

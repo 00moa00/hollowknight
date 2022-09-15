@@ -119,36 +119,36 @@ bool MasterActor::GetPixelRed(float4 _NextPos)
 
 bool MasterActor::GetPixelBlue(float4 _NextPos)
 {
-	float4 GetCenterPos = { GetTransform().GetLocalPosition().ix() + _NextPos.x ,
-		-(GetTransform().GetLocalPosition().iy() + _NextPos.y )};
+	//float4 GetCenterPos = { GetTransform().GetLocalPosition().x+ _NextPos.x ,
+	//	-(GetTransform().GetLocalPosition().y/* - _NextPos.y */)};
 
 
 	//GetCenterPos += GetCenter();
-	float4 CenterColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetCenterPos.ix(), GetCenterPos.iy());
+	//float4 CenterColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetCenterPos.ix(), GetCenterPos.iy());
 
 
-	float4 GetDirPos = { GetTransform().GetLocalPosition().ix() + _NextPos.x ,
-	-(GetTransform().GetLocalPosition().iy() + _NextPos.y) };
+	float4 GetDirPos = { GetTransform().GetLocalPosition().x+ _NextPos.x ,
+	-(GetTransform().GetLocalPosition().y/* - _NextPos.y*/) };
 
 
 	GetMoveDirection().Normalize();
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
 		GetDirPos.x += GetRightCenter().x;
-		GetDirPos.y -= GetRightCenter().y;
+		//GetDirPos.y -= GetRightCenter().y;
 	}
 
 	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
 		GetDirPos.x += GetLeftCenter().x;
-		GetDirPos.y -= GetLeftCenter().y;
+		//GetDirPos.y -= GetLeftCenter().y;
 	}
 
 	float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetDirPos.ix(), GetDirPos.iy());
 
 
 
-	if (CenterColor.CompareInt4D(float4(0, 0, 1, 1)) == true || DirColor.CompareInt4D(float4(0, 0, 1, 1)) == true)
+	if (/*CenterColor.CompareInt4D(float4(0, 0, 1, 1)) == true ||*/ DirColor.CompareInt4D(float4(0, 0, 1, 1)) == true)
 	{
 		return true;
 	}
@@ -166,7 +166,7 @@ bool MasterActor::GetPixelBlueUpPoint(float4 _NextPos)
 	-(GetTransform().GetLocalPosition().iy() + _NextPos.y) };
 
 	GetDirPos.x += GetCenterTop().x;
-	GetDirPos.y -= GetCenterTop().y;
+	GetDirPos.y += GetCenterTop().y;
 
 	float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetDirPos.ix(), GetDirPos.iy());
 
@@ -264,17 +264,27 @@ void MasterActor::isDownGroundCheck(float4 Dir)
 
 void MasterActor::isUpBlockCheck(float _DeltaTime)
 {
-	float4 NextPos = GetPixelBlueUpPoint(_DeltaTime);
 
 
-	if (GetPixelBlue(NextPos) == true)
+
+	float4 GetDirPos = { GetTransform().GetLocalPosition().x ,
+	-(GetTransform().GetLocalPosition().y ) };
+
+	//GetDirPos.x += GetCenterTop().x;
+	GetDirPos.y -= GetCenterTop().y;
+
+
+	float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetDirPos.ix(), GetDirPos.iy());
+
+
+
+	if (/*CenterColor.CompareInt4D(float4(0, 0, 1, 1)) == true ||*/ DirColor.CompareInt4D(float4(0, 0, 1, 1)) == true)
 	{
-		this->SetisUpBlock(true);
+		SetisUpBlock (true);
 	}
-
 	else
 	{
-		this->SetisUpBlock(false);
+		SetisUpBlock(false);
 	}
 }
 
