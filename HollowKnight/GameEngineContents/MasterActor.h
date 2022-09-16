@@ -67,18 +67,13 @@ public:
 	//================================
 
 	//bgr
-	bool GetPixelRed(float4 _NextPos);
 	bool GetPixelBlue(float4 _NextPos);
-	bool GetPixelBlueUpPoint(float4 _NextPos);
 
 	//픽셀 충돌 체크
-	void isOnGroundCheck(float _DeltaTime);
-	void isWallCheck(float _DeltaTime);
-	void isWallCheck(float _DeltaTime, float4 _Dir);
-	void isDownGroundCheck(float _DeltaTime);
-	void isDownGroundCheck(float _DeltaTime, float _Speed);
-	void isDownGroundCheck(float4 Dir);
+	void isPixelCheck(float _DeltaTime, float4 _CheckDir);
+	bool isPixelActtingCheck(float _DeltaTime, float4 _CheckDir);
 
+	//_CheckDir : 현재 위치 
 
 	void isUpBlockCheck(float _DeltaTime);
 

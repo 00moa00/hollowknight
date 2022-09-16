@@ -28,7 +28,9 @@ Knight::Knight()
 	:
 	KnightManager_(),
 
-	KnightJumpPower_(),
+	KnightJumpPower_(0.0f),
+	KnightRunSpeed_(0.0f),
+	KnightFallAccel_(0.0f),
 
 	KnightSlashTimer_(0.0f),
 	KnightLookUpTimer_(0.0f),
@@ -38,6 +40,7 @@ Knight::Knight()
 	KnihgtInvincibilityTimer_(0.0f),
 	KnihgtInvincibilitingTimer_(0.0f),
 	KnihgtFocusTimer_(0.0f),
+	KnightActtingMoveDirPower_(1.0f),
 
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
@@ -96,10 +99,10 @@ void Knight::Start()
 	SetSpeed(300.f);
 	SetisMove(true);
 	SetGravity(400.f);
-	SetJumpPower({ 200, 0 });
-	SetJumpSpeed(6);
+	SetJumpPower({ 130, 0 });
+	SetJumpSpeed(10);
 	SetCollisionSize({ 0, 0, 0 });
-	SetFallSpeed(2);
+	SetFallSpeed(200);
 
 	SetLeftBottom({ -15.f, 0 , 0,  0 });
 	SetRightBottom({ 15.f, 0, 0, 0 });
@@ -138,8 +141,13 @@ void Knight::Start()
 	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 
-	KnightJumpPower_ = 200.f;
-	KnightDoubleJumpPower_ = 160.f;
+	KnightJumpPower_ = 180.f;
+	KnightDoubleJumpPower_ = 150.f;
+	KnightRunSpeed_ = 400.f;
+	KnightActtingMoveDirPower_ = 1.5f;
+	KnightFallAccel_ = 0.0f;
+
+	isRunMode_ = true;
 
 	//================================
 	//    CreateKey
@@ -179,7 +187,7 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.070f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.100f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("LAND_ANIMATION", FrameAnimation_DESC("Knight_land0000-Sheet.png", 0, 2, 0.080f, false));
@@ -623,22 +631,18 @@ void Knight::isKnihgtActtingMoveChack()
 		isKnightActtingMove_ = true;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+	else if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 	{
 		isKnightActtingMove_ = true;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
+
+	else
 	{
-		isKnightActtingMove_ = true;
+		isKnightActtingMove_ = false;
+
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
-	{
-		isKnightActtingMove_ = true;
-	}
-
-	isKnightActtingMove_ = false;
 }
 
 void Knight::KnightDirectionCheck()
@@ -784,9 +788,9 @@ void Knight::KnightIsActtingCheck()
 
 void Knight::Walkking(float _DeltaTime)
 {
-	this->KnightDirectionCheck();
-	this->isOnGroundCheck(_DeltaTime);
-	this->isWallCheck(_DeltaTime);
+	KnightDirectionCheck();
+	this->isPixelCheck(_DeltaTime, GetMoveDirection());
+	//this->isWallCheck(_DeltaTime);
 
 	if (GetisWall() == true)
 	{

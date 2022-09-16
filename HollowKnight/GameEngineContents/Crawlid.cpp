@@ -61,8 +61,8 @@ void Crawlid::CrawlidWalkStart(const StateInfo& _Info)
 
 void Crawlid::CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	this->isOnGroundCheck(_DeltaTime);
-	this->isWallCheck(_DeltaTime);
+	this->isPixelCheck(_DeltaTime, GetMoveDirection());
+	//this->isWallCheck(_DeltaTime);
 
 	if (GetisWall() == true)
 	{
@@ -91,7 +91,7 @@ void Crawlid::CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	GetTransform().SetWorldMove((float4::DOWN) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
-	if (GetPixelRed(GetNextPos(_DeltaTime)) == true)
+	if ( GetisOnGround() == true)
 	{
 		this->SetisGround(true);
 		CrawlidManager_.ChangeState("WALK");
