@@ -532,7 +532,9 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 			float4 Move = (float4::UP)*GetGravity() * _DeltaTime;
 			SubJumpPower(Move);
 
-			if (GetJumpPower().y <= Move.Length()  || GetisUpBlock() == true)
+
+			float JumpLenth = GetJumpPower().Length();
+			if (JumpLenth <= Move.Length()  || GetisUpBlock() == true)
 			{
 				KnightManager_.ChangeState("FALL");
 				return;
@@ -543,12 +545,14 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		else
 		{
 			float4 Move = (float4::UP ) * GetGravity() * _DeltaTime;
-			Move.x = (-ActtingMoveDirection_.x * 2.f);
+			Move.x = (-ActtingMoveDirection_.x );
 
 
 			SubJumpPower(Move);
+			float JumpLenth = GetJumpPower().Length();
+			float MoveLenth = Move.Length();
 
-			if (GetJumpPower().y <= Move.Length()  || GetisUpBlock() == true)
+			if (JumpLenth <= MoveLenth || GetisUpBlock() == true)
 			{
 				KnightManager_.ChangeState("FALL");
 				return;
@@ -668,12 +672,15 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		else
 		{
 			float4 Move = (float4::UP)*GetGravity() * _DeltaTime;
-			Move.x = (-ActtingMoveDirection_.x * 2.f);
+			Move.x = (-ActtingMoveDirection_.x);
 
 
 			SubJumpPower(Move);
+			float JumpLenth = GetJumpPower().Length();
+			//Move.Normalize();
+			float MoveLenth = Move.Length();
 
-			if (GetJumpPower().y <= Move.Length() || GetisUpBlock() == true)
+			if (JumpLenth <= MoveLenth || GetisUpBlock() == true)
 			{
 				KnightManager_.ChangeState("FALL");
 				return;
@@ -793,7 +800,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 
 		float4 Move = (float4::DOWN) * (480.f * _DeltaTime);
-		Move.x = (ActtingMoveDirection_.x * 2.0f);
+		Move.x = (ActtingMoveDirection_.x );
 
 
 
