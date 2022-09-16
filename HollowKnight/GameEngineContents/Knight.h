@@ -82,6 +82,7 @@ private:
 	float KnightRunSpeed_;
 	float KnightActtingMoveDirPower_;
 	float KnightFallAccel_;
+	float JumpAccel_;
 
 	float KnightSlashCollisionTimer_;
 	float KnightSlashTimer_;			// 더블 공격 체크 타이머

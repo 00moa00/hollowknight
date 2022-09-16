@@ -41,6 +41,7 @@ Knight::Knight()
 	KnihgtInvincibilitingTimer_(0.0f),
 	KnihgtFocusTimer_(0.0f),
 	KnightActtingMoveDirPower_(1.0f),
+	JumpAccel_(0.0f),
 
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
@@ -99,10 +100,9 @@ void Knight::Start()
 	SetSpeed(300.f);
 	SetisMove(true);
 	SetGravity(400.f);
-	SetJumpPower({ 130, 0 });
-	SetJumpSpeed(10);
+	SetJumpSpeed(5);
 	SetCollisionSize({ 0, 0, 0 });
-	SetFallSpeed(200);
+	SetFallSpeed(140);
 
 	SetLeftBottom({ -15.f, 0 , 0,  0 });
 	SetRightBottom({ 15.f, 0, 0, 0 });
@@ -141,10 +141,10 @@ void Knight::Start()
 	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 
-	KnightJumpPower_ = 180.f;
+	KnightJumpPower_ = 370.f;
 	KnightDoubleJumpPower_ = 150.f;
 	KnightRunSpeed_ = 400.f;
-	KnightActtingMoveDirPower_ = 1.5f;
+	KnightActtingMoveDirPower_ = 2.0f;
 	KnightFallAccel_ = 0.0f;
 
 	isRunMode_ = true;

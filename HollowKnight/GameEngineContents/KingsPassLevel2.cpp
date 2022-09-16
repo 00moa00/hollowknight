@@ -27,11 +27,13 @@ void KingsPassLevel2::Start()
 	GetMasterMap()->CreateBackGround("King's-Pass_Background_2.png");
 	GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_2.png");
 	GetMasterMap()->CreateMapCollision("King's-Pass_CollMap_2.png");
-	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_2.png");
-	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_2.png");
+
 
 	CreateKnightActor(); // 플레이어
 	CreateKingsPass1Monster();
+
+	GetMasterMap()->CreateTerrain("King's-Pass_Terrain_2.png");
+	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_2.png");
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 509.f, -1826.f, static_cast<float>(Z_ORDER::Knight) });
