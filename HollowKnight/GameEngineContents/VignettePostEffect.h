@@ -18,7 +18,8 @@ public:
 public:
 	virtual void EffectInit();
 	virtual void Effect(GameEngineRenderTarget* _Target);
-protected:
+
+private:
 	GameEngineRenderTarget* CopyTarget;
 	GameEngineRenderSet EffectSet;
 

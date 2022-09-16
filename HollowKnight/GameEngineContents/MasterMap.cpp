@@ -60,7 +60,7 @@ void MasterMap::CreateFrontObject(std::string _FileName)
 	FrontObjectRenderer_->SetTexture(_FileName);
 	FrontObjectRenderer_->GetTransform().SetLocalScale(FrontObjectRenderer_->GetCurTexture()->GetScale());
 	FrontObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
-	FrontObjectRenderer_->GetTransform().SetWorldPosition({0,0, static_cast<float>(Z_ORDER::FrontObject) });
+	FrontObjectRenderer_->GetTransform().SetWorldPosition({0,0, -100 });
 	FrontObjectRenderer_->SetSamplingModePoint();
 
 }

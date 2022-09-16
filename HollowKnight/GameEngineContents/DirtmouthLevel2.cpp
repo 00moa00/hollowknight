@@ -14,6 +14,7 @@
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "BloomPostEffect.h"
 
 DirtmouthLevel2::DirtmouthLevel2() 
 	:
@@ -66,13 +67,14 @@ void DirtmouthLevel2::Start()
 	Elderbug_ = CreateActor<Elderbug>();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-	GetKnight()->GetTransform().SetLocalPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
+	GetKnight()->GetTransform().SetWorldPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
 	
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
 
 	//GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 

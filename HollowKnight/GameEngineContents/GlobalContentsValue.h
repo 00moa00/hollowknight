@@ -73,7 +73,6 @@ enum class Z_ORDER
 	Effect,
 	Knight_Shadow_Slash,
 
-	Monster,
 
 
 	Knight_Shadow,
@@ -83,6 +82,7 @@ enum class Z_ORDER
 	Geo,
 
 	Knight,
+	Monster,
 
 	NPC,
 

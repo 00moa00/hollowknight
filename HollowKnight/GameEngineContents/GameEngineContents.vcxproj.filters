@@ -477,6 +477,9 @@
     <ClInclude Include="KnightFocusEffect.h">
       <Filter>Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
+    <ClInclude Include="BloomPostEffect.h">
+      <Filter>Actor\Effect\PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -817,6 +820,9 @@
     </ClCompile>
     <ClCompile Include="KnightFocusEffect.cpp">
       <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="BloomPostEffect.cpp">
+      <Filter>Actor\Effect\PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
