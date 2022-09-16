@@ -682,7 +682,7 @@ void Knight::KnightActtingDirectionCheck()
 		ActtingMoveDirection_ = float4::LEFT;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+	else if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
@@ -690,15 +690,21 @@ void Knight::KnightActtingDirectionCheck()
 		ActtingMoveDirection_ = float4::RIGHT;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
+	else
 	{
-		//ActtingMoveDirection_ = float4::DOWN;
+		ActtingMoveDirection_ = float4::ZERO;
+
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
-	{
-		//ActtingMoveDirection_ = float4::UP;
-	}
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
+	//{
+	//	//ActtingMoveDirection_ = float4::DOWN;
+	//}
+
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
+	//{
+	//	//ActtingMoveDirection_ = float4::UP;
+	//}
 }
 
 void Knight::KnihgtSlideNegativeRenderer()
