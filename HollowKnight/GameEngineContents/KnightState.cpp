@@ -521,7 +521,7 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		
 		isKnihgtActtingMoveChack();
 		KnightActtingDirectionCheck();
-	//	isPixelCheckUp()
+		isPixelCheckUp(_DeltaTime);
 		ActtingMoveDirection_.Normalize();
 		JumpAccel_ -= 20.f *_DeltaTime;
 
@@ -542,7 +542,7 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 
 			float JumpLenth = GetJumpPower().Length();
-			if (JumpLenth <= Move.Length() /*|| GetisWall() == true*/)
+			if (JumpLenth <= Move.Length() || GetisUpBlock() == true /*|| GetisWall() == true*/)
 			{
 				KnightManager_.ChangeState("FALL");
 				return;
@@ -565,8 +565,8 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 			this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
 
-
-   			if (JumpLenth <= 0.0f || GetisWall() == true)
+			 
+   			if (JumpLenth <= 0.0f || GetisWall() == true || GetisUpBlock() == true)
 			{
 				KnightManager_.ChangeState("FALL");
 				return;
@@ -667,6 +667,7 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		isKnihgtActtingMoveChack();
 		KnightActtingDirectionCheck();
 		KnightIsActtingCheck();
+		isPixelCheckUp(_DeltaTime);
 
 		ActtingMoveDirection_.Normalize();
 
@@ -681,9 +682,9 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 			float4 Move = (float4::UP)*GetGravity() * _DeltaTime;
 			SubJumpPower(Move);
 
-			if (GetJumpPower().y <= Move.Length()/* || GetisUpBlock() == true*/)
+			if (GetJumpPower().y <= Move.Length() || GetisUpBlock() == true)
 			{
-				KnightManager_.ChangeState("FALL");
+	 			KnightManager_.ChangeState("FALL");
 				return;
 
 			}
@@ -702,7 +703,7 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 			this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
 
-			if (JumpLenth <= 0.0f || GetisWall() == true)
+			if (JumpLenth <= 0.0f || GetisWall() == true || GetisUpBlock() == true)
 			{
 				KnightManager_.ChangeState("FALL");
 				return;

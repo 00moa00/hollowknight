@@ -144,7 +144,7 @@ void MasterActor::isPixelCheck(float _DeltaTime, float4 _CheckDir)
 void MasterActor::isPixelCheckUp(float _DeltaTime)
 {
 	float4 UpPos = { GetTransform().GetLocalPosition().x ,
-	-(GetTransform().GetLocalPosition().y - 170.f) };
+	-(GetTransform().GetLocalPosition().y + 10e0.f) };
 
 	float4 UpColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(UpPos.ix(), UpPos.iy());
 
@@ -156,7 +156,7 @@ void MasterActor::isPixelCheckUp(float _DeltaTime)
 	}
 	else
 	{
-		SetisUpBlock(false);
+ 		SetisUpBlock(false);
 	}
 }
 
