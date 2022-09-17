@@ -579,10 +579,11 @@ void Knight::Update(float _DeltaTime)
 
 void Knight::LevelStartEvent()
 {
+	//KnightData::GetInst()->SetCurrentLevel(GetLevel()->GetNameConstRef());
 
 	//GetLevel()->Get
 
-
+	
 }
 
 void Knight::LevelEndEvent()

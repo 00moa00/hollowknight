@@ -37,7 +37,10 @@ KnightData::KnightData()
 
 	MainLighBlend_(BlendMode::Alpha),
 	SlibingLighBlend_(BlendMode::Alpha),
-	DounutLighBlend_ (BlendMode::Alpha)
+	DounutLighBlend_ (BlendMode::Alpha),
+
+	PrevLevel_(""),
+	CurrentLevel_("")
 {
 }
 
