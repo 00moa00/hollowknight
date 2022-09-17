@@ -132,6 +132,7 @@
     <FxCompile Include="Blur.hlsl" />
     <FxCompile Include="Color.hlsl" />
     <FxCompile Include="Debug3D.hlsl" />
+    <FxCompile Include="ITextureAtlas.hlsl" />
     <FxCompile Include="LightCut.hlsl" />
     <FxCompile Include="Mask.hlsl" />
     <FxCompile Include="Noise.hlsl" />
