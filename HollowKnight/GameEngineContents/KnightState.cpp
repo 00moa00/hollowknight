@@ -553,13 +553,15 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		else
 		{
 			float4 Move = (float4::UP ) * GetGravity() * _DeltaTime;
-			Move.x = (-ActtingMoveDirection_.x * KnightActtingMoveDirPower_ * 2);
+			Move.x += (-ActtingMoveDirection_.x * KnightActtingMoveDirPower_ );
 			Move.y += abs(Move.x);
 			//Move.Length
 
 			SubJumpPower(Move);
 			float JumpLenth = GetJumpPower().y /*+ abs(GetJumpPower().x*/;
 			float MoveLenth = Move.Length();
+
+			this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
 
 
    			if (JumpLenth <= 0.0f || GetisWall() == true)
@@ -698,6 +700,7 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 			float JumpLenth = GetJumpPower().y /*+ abs(GetJumpPower().x*/;
 			float MoveLenth = Move.Length();
 
+			this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
 
 			if (JumpLenth <= 0.0f || GetisWall() == true)
 			{
