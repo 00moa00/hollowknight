@@ -12,6 +12,8 @@
 
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
+	isPossibleDoubleJump_ = true;
+
 	if (_Info.PrevState == "RUN")
 	{
 		GetRenderer()->ChangeFrameAnimation("RUN_TO_IDLE_ANIMATION");
@@ -203,6 +205,8 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightWalkStart(const StateInfo& _Info)
 {
+	isPossibleDoubleJump_ = true;
+
 	GetRenderer()->ChangeFrameAnimation("WALK_ANIMATION");
 }
 
@@ -517,17 +521,15 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		
 		isKnihgtActtingMoveChack();
 		KnightActtingDirectionCheck();
+	//	isPixelCheckUp()
 		ActtingMoveDirection_.Normalize();
-
-		isUpBlockCheck(_DeltaTime);
-
 		JumpAccel_ -= 20.f *_DeltaTime;
 
 
 		this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
 		//isWallRedCheck(ActtingMoveDirection_);
 
-		if (isKnightActtingMove_ == true && GetMoveDirection().CompareInt2D(ActtingMoveDirection_) == false)
+		if (isKnightActtingMove_ == true && float4::ZERO.CompareInt2D(ActtingMoveDirection_) == false)
 		{
 			isKnihgtStillWall_ = false;
 		}
@@ -666,15 +668,13 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightActtingDirectionCheck();
 		KnightIsActtingCheck();
 
-		this->isUpBlockCheck(_DeltaTime);
-
-
-
 		ActtingMoveDirection_.Normalize();
-		if (isKnightActtingMove_ == true && GetMoveDirection().CompareInt2D(ActtingMoveDirection_) == false)
+
+		if (isKnightActtingMove_ == true && float4::ZERO.CompareInt2D(ActtingMoveDirection_) == false)
 		{
 			isKnihgtStillWall_ = false;
 		}
+
 
 		if (ActtingMoveDirection_.CompareInt2D(float4::ZERO) || isKnihgtStillWall_ == true || GetisWall() == true)
 		{
@@ -805,8 +805,9 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	KnightIsActtingCheck();
 
 	ActtingMoveDirection_.Normalize();
+	isDoubleCheckAreaCheck(_DeltaTime);
 
-	this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
+	isPixelCheck(_DeltaTime, ActtingMoveDirection_);
 
 	if (GetisOnGround() == true)
 	{
@@ -834,7 +835,8 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	KnightFallAccel_ += 10.f * _DeltaTime;
 
 
-	if (isKnightActtingMove_ == true && GetMoveDirection().CompareInt2D(ActtingMoveDirection_) == false)
+
+	if (isKnightActtingMove_ == true && float4::ZERO.CompareInt2D(ActtingMoveDirection_) == false)
 	{
 		isKnihgtStillWall_ = false;
 	}
@@ -936,7 +938,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	// 더블 점프
-	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true)
+	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true && GetisDoubleJumpPossible() == true)
 	{
 		isPossibleDoubleJump_ = false;
 		KnightManager_.ChangeState("DOUBLE_JUMP");
@@ -946,7 +948,6 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightFallEnd(const StateInfo& _Info)
 {
 	KnightFallAccel_ = 0.0f;
-	isPossibleDoubleJump_ = true;
 
 	if (isKnightActtingMove_ == true)
 	{
@@ -1141,6 +1142,8 @@ void Knight::KnightFocusBurstEnd(const StateInfo& _Info)
 
 void Knight::KnightRunStart(const StateInfo& _Info)
 {
+	isPossibleDoubleJump_ = true;
+
 	if (_Info.PrevState == "STILL" || _Info.PrevState == "WALK")
 	{
 		GetRenderer()->ChangeFrameAnimation("IDLE_TO_RUN_ANIMATION");

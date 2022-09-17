@@ -4,19 +4,6 @@
 
 class GameEngineTextureRenderer;
 
-class PixelPOINT
-{
-public:
-	float4 RightBottom_;
-	float4 LeftBottom_;
-	float4 RightTop_;
-	float4 LeftTop_;
-	float4 CenterTop_;
-	float4 RightCenter_;
-	float4 LeftCenter_;
-	float4 Center_;
-
-};
 
 
 class MasterActor : public GameEngineActor
@@ -46,6 +33,7 @@ protected:
 	bool isOnGround_;
 	bool isWall_;
 	bool isUpBlock_; // 위에 지형 지물이 있는지
+	bool isDoubleJumpPossible_;
 
 	float GravityY;
 	float JumpSpeed_;
@@ -58,7 +46,6 @@ protected:
 protected:
 protected:
 
-	PixelPOINT Point_;
 
 public:
 
@@ -67,15 +54,14 @@ public:
 	//================================
 
 	//bgr
-	bool GetPixelBlue(float4 _NextPos);
 
 	//픽셀 충돌 체크
 	void isPixelCheck(float _DeltaTime, float4 _CheckDir);
-	bool isPixelActtingCheck(float _DeltaTime, float4 _CheckDir);
+	void isPixelCheckUp(float _DeltaTime);
+	void isDoubleCheckAreaCheck(float _DeltaTime);
 
 	//_CheckDir : 현재 위치 
 
-	void isUpBlockCheck(float _DeltaTime);
 
 	float4 GetNextPos(float4 _DeltaTime);
 	float4 GetNextPos(float4 _DeltaTime, float4 Dir);
@@ -94,89 +80,6 @@ public:
 	GameEngineCollision* GetCollision() const
 	{
 		return MainCollision_;
-	}
-
-	float4 GetRightBottom()
-	{
-		return Point_.RightBottom_;
-	}
-
-	float4 GetLeftBottom()
-	{
-		return Point_.LeftBottom_;
-	}
-
-	float4 GetRightTop()
-	{
-		return Point_.RightTop_;
-	}
-
-	float4 GetLeftTop()
-	{
-		return Point_.LeftTop_;
-	}
-
-	float4 GetCenterTop()
-	{
-		return Point_.CenterTop_;
-	}
-
-	float4 GetRightCenter()
-	{
-		return  Point_.RightCenter_;
-	}
-
-	float4 GetLeftCenter()
-	{
-		return Point_.LeftCenter_;
-	}
-
-	float4 GetCenter()
-	{
-		return Point_.Center_;
-	}
-
-
-
-	void SetRightBottom(float4 _f)
-	{
-		Point_.RightBottom_ = _f;
-	}
-
-	void SetLeftBottom(float4 _f)
-	{
-		Point_.LeftBottom_ = _f;
-	}
-
-	void SetRightTop(float4 _f)
-	{
-		Point_.RightTop_ = _f;
-	}
-
-	void SetLeftTop(float4 _f)
-	{
-		Point_.LeftTop_ = _f;
-	}
-
-	void SetCenterTop(float4 _f)
-	{
-		Point_.CenterTop_ = _f;
-	}
-
-	void SetLeftCenter(float4 _f)
-	{
-		Point_.LeftCenter_ = _f;
-	}
-
-
-	void SetRightCenter(float4 _f)
-	{
-		Point_.RightCenter_ = _f;
-	}
-
-	void SetCenter(float4 _f)
-	{
-		Point_.Center_ = _f;
 	}
 
 
@@ -235,6 +138,11 @@ public:
 	bool GetisUpBlock() const
 	{
 		return isUpBlock_;
+	}
+
+	bool GetisDoubleJumpPossible() const
+	{
+		return isDoubleJumpPossible_;
 	}
 
 	//================================

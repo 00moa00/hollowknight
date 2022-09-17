@@ -104,14 +104,6 @@ void Knight::Start()
 	SetCollisionSize({ 0, 0, 0 });
 	SetFallSpeed(140);
 
-	SetLeftBottom({ -15.f, 0 , 0,  0 });
-	SetRightBottom({ 15.f, 0, 0, 0 });
-	SetRightTop({ 15.f, 20.f, 0, 0 });
-	SetLeftTop({ -15.f, 20.f, 0, 0 });
-	SetCenterTop({ 0, 50.f, 0, 0 });
-	SetLeftCenter({-30.f, 100.f, 0});
-	SetRightCenter({ 30.f, 100.f, 0 });
-	SetCenter({0, 20.f, 0, 0});
 
 	CreateCollisionComponent(float4{60, 120, 1}, static_cast<int>(COLLISION_ORDER::Knight));
 	GetCollision()->GetTransform().SetWorldPosition({0, 120/2, static_cast<float>(Z_ORDER::Knight) });

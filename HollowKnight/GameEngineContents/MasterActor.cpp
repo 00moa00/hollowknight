@@ -68,13 +68,6 @@ void MasterActor::isPixelCheck(float _DeltaTime, float4 _CheckDir)
 
 
 
-	//float4 GroudCheck = Pos;
-
-
-	//GroudCheck.y -= 50.f;
-
-
-
 
 
 	float4 WallPoint = float4::ZERO;
@@ -148,32 +141,49 @@ void MasterActor::isPixelCheck(float _DeltaTime, float4 _CheckDir)
 
 }
 
-
-void MasterActor::isUpBlockCheck(float _DeltaTime)
+void MasterActor::isPixelCheckUp(float _DeltaTime)
 {
+	float4 UpPos = { GetTransform().GetLocalPosition().x ,
+	-(GetTransform().GetLocalPosition().y - 170.f) };
+
+	float4 UpColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(UpPos.ix(), UpPos.iy());
 
 
 
-	float4 GetDirPos = { GetTransform().GetLocalPosition().x ,
-	-(GetTransform().GetLocalPosition().y ) };
-
-	//GetDirPos.x += GetCenterTop().x;
-	GetDirPos.y -= GetCenterTop().y;
-
-
-	float4 DirColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GetDirPos.ix(), GetDirPos.iy());
-
-
-
-	if (/*CenterColor.CompareInt4D(float4(0, 0, 1, 1)) == true ||*/ DirColor.CompareInt4D(float4(0, 0, 1, 1)) == true)
+	if (UpColor.CompareInt4D(float4(0, 0, 1, 1)) == true/* && DirColor.CompareInt2D(float4(1.f, 0, 0, 1.f)) == true*/)
 	{
-		SetisUpBlock (true);
+		SetisUpBlock(true);
 	}
 	else
 	{
 		SetisUpBlock(false);
 	}
 }
+
+void MasterActor::isDoubleCheckAreaCheck(float _DeltaTime)
+{
+
+	//현재 위치
+	float4 GroundPos = { GetTransform().GetLocalPosition().x ,
+	-(GetTransform().GetLocalPosition().y - 20.f) };
+
+
+
+	float4 GrondColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GroundPos.ix(), GroundPos.iy());
+
+
+
+	if (GrondColor.CompareInt4D(float4(0, 0, 1, 1)) == true/* && DirColor.CompareInt2D(float4(1.f, 0, 0, 1.f)) == true*/)
+	{
+		isDoubleJumpPossible_ = false;
+	}
+	else
+	{
+		isDoubleJumpPossible_ = true;
+	}
+
+}
+
 
 float4 MasterActor::GetNextPos(float4 _DeltaTime)
 {
