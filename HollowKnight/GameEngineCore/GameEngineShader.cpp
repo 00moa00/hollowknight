@@ -61,13 +61,13 @@ void GameEngineShader::AutoCompile(const std::string& _Path)
 
 }
 
-GameEngineShader::GameEngineShader() 
+GameEngineShader::GameEngineShader()
 	: Version("")
 	, BinaryPtr(nullptr)
 {
 }
 
-GameEngineShader::~GameEngineShader() 
+GameEngineShader::~GameEngineShader()
 {
 	if (nullptr != BinaryPtr)
 	{
@@ -103,10 +103,10 @@ void GameEngineShader::ShaderResCheck()
 	ID3D11ShaderReflection* CompileInfo = nullptr;
 
 	if (S_OK != D3DReflect(
-		BinaryPtr->GetBufferPointer(), 
+		BinaryPtr->GetBufferPointer(),
 		BinaryPtr->GetBufferSize(),
 		IID_ID3D11ShaderReflection,
-		reinterpret_cast<void**>( & CompileInfo)
+		reinterpret_cast<void**>(&CompileInfo)
 	))
 	{
 		MsgBoxAssert("쉐이더 쉐이더 리플렉션이 잘못 돼었습니다.");
@@ -177,6 +177,25 @@ void GameEngineShader::ShaderResCheck()
 			NewSetter.Res = GameEngineSampler::Find("EngineSamplerLinear");
 			NewSetter.BindPoint = ResInfo.BindPoint;
 			SamplerMap.insert(std::make_pair(Name, NewSetter));
+			break;
+		}
+		case D3D_SIT_STRUCTURED:
+		{
+			// 스트럭처드 버퍼를 만든다.
+			ID3D11ShaderReflectionConstantBuffer* CBufferPtr = CompileInfo->GetConstantBufferByName(ResInfo.Name);
+			D3D11_SHADER_BUFFER_DESC BufferDesc;
+			CBufferPtr->GetDesc(&BufferDesc);
+
+			GameEngineStructuredBufferSetter NewSetter;
+			NewSetter.ParentShader = this;
+			NewSetter.SetName(Name);
+			NewSetter.ShaderType = ShaderSettingType;
+			// NewSetter.Res = GameEngineStructuredBuffer::Create(Name, BufferDesc, CBufferPtr);
+			NewSetter.BindPoint = ResInfo.BindPoint;
+
+			StructuredBufferMap.insert(std::make_pair(Name, NewSetter));
+			// StructuredBufferMap = 
+
 			break;
 		}
 		default:

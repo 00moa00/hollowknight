@@ -20,6 +20,7 @@
     <FxCompile Include="Vignette.hlsl" />
     <FxCompile Include="LightCut.hlsl" />
     <FxCompile Include="AtlasBlur.hlsl" />
+    <FxCompile Include="TextureAtlas_Inst.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
