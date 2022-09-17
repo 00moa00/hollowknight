@@ -90,6 +90,7 @@ void Crawlid::CrawlidFallStart(const StateInfo& _Info)
 void Crawlid::CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	GetTransform().SetWorldMove((float4::DOWN) * GetGravity() * GetFallSpeed() * _DeltaTime);
+	this->isPixelCheck(_DeltaTime, GetMoveDirection());
 
 	if ( GetisOnGround() == true)
 	{
