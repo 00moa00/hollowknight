@@ -63,6 +63,8 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightManager_.ChangeState("STUN");
 		KnightData::GetInst()->SetisBreak(true);
+		return;
+
 	}
 
 	// ======== Knight VS Bench ========
@@ -143,6 +145,8 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GameEngineInput::GetInst()->IsDown("KnightJump") == true && isPressJumppingKey_ == false)
 	{
 		KnightManager_.ChangeState("JUMP");
+		return;
+
 	}
 
 	// 위 공격
@@ -150,6 +154,7 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		&& GameEngineInput::GetInst()->IsPress("KnightUp") == true)
 	{
 		KnightManager_.ChangeState("UP_SLASH");
+		return;
 	}
 
 	// 기본 공격
@@ -159,6 +164,8 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		&& isPossibleDoubleSlash_ == false)
 	{
 		KnightManager_.ChangeState("SLASH");
+		return;
+
 	}
 
 	 //콤보 공격
@@ -167,18 +174,24 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		&& isPossibleDoubleSlash_ == true)
 	{
 		KnightManager_.ChangeState("DOUBLE_SLASH");
+		return;
+
 	}
 
 	// 아래 바라보기
 	if (GameEngineInput::GetInst()->IsPress("KnightDown") == true )
 	{
 		LookDownTimerAndChangeState(_DeltaTime);
+		return;
+
 	}
 
 	// 위 바라보기
 	if (GameEngineInput::GetInst()->IsPress("KnightUp") == true)
 	{
 		LookUpTimerAndChangeState(_DeltaTime);
+		return;
+
 	}
 
 	// 맵 보기
@@ -187,6 +200,8 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		isLookMap_ = true;
 		//GetRenderer()->ChangeFrameAnimation("MAP_OPEN_ANIMATION");
 		KnightManager_.ChangeState("MAP_STILL");
+		return;
+
 
 	}
 
@@ -194,12 +209,16 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
 	{
 		KnightManager_.ChangeState("DASH");
+		return;
+
 	}
 
 	// 집중
 	if (GameEngineInput::GetInst()->IsDown("KnightFocus") == true)
 	{
 		KnightManager_.ChangeState("FOCUS");
+		return;
+
 	}
 }
 
@@ -225,6 +244,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightData::GetInst()->SetisBreak(true);
 		KnightManager_.ChangeState("STUN");
+		return;
 	}
 
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
@@ -522,6 +542,7 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		isKnihgtActtingMoveChack();
 		KnightActtingDirectionCheck();
 		isPixelCheckUp(_DeltaTime);
+		//isDoubleCheckAreaCheck(_DeltaTime);
 		ActtingMoveDirection_.Normalize();
 		JumpAccel_ -= 20.f *_DeltaTime;
 
@@ -575,7 +596,7 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 			//float4 Resulut = GetJumpPower()* GetJumpSpeed()* _DeltaTime;
 
 
-			GetTransform().SetWorldMove({ (GetJumpPower() + JumpAccel_) * GetJumpSpeed() * _DeltaTime });
+			GetTransform().SetWorldMove({ (GetJumpPower() ) * GetJumpSpeed() * _DeltaTime });
 		}
 		
 
@@ -671,6 +692,7 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		ActtingMoveDirection_.Normalize();
 
+
 		if (isKnightActtingMove_ == true && float4::ZERO.CompareInt2D(ActtingMoveDirection_) == false)
 		{
 			isKnihgtStillWall_ = false;
@@ -679,21 +701,25 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		if (ActtingMoveDirection_.CompareInt2D(float4::ZERO) || isKnihgtStillWall_ == true || GetisWall() == true)
 		{
-			float4 Move = (float4::UP)*GetGravity() * _DeltaTime;
+			float4 Move = (float4::UP) * (GetGravity() * 1.7f) * _DeltaTime;
 			SubJumpPower(Move);
 
-			if (GetJumpPower().y <= Move.Length() || GetisUpBlock() == true)
+
+			float JumpLenth = GetJumpPower().Length();
+			if (JumpLenth <= Move.Length() || GetisUpBlock() == true /*|| GetisWall() == true*/)
 			{
-	 			KnightManager_.ChangeState("FALL");
+				KnightManager_.ChangeState("FALL");
 				return;
 
 			}
+			GetTransform().SetWorldMove(GetJumpPower() * (GetJumpSpeed()) * _DeltaTime);
+
 		}
 
 		else
 		{
 			float4 Move = (float4::UP)*GetGravity() * _DeltaTime;
-			Move.x = (-ActtingMoveDirection_.x);
+			Move.x += (-ActtingMoveDirection_.x * KnightActtingMoveDirPower_);
 			Move.y += abs(Move.x);
 			//Move.Length
 
@@ -703,15 +729,21 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 			this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
 
+
 			if (JumpLenth <= 0.0f || GetisWall() == true || GetisUpBlock() == true)
 			{
 				KnightManager_.ChangeState("FALL");
 				return;
 			}
+
+			//float4 Resulut = GetJumpPower()* GetJumpSpeed()* _DeltaTime;
+
+
+			GetTransform().SetWorldMove({ (GetJumpPower() + JumpAccel_) * GetJumpSpeed() * _DeltaTime });
 		}
 
 
-		GetTransform().SetWorldMove(GetJumpPower() * (GetJumpSpeed() - JumpAccel_) * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetJumpPower() * (GetJumpSpeed() - JumpAccel_) * _DeltaTime);
 
 
 		//if (GetJumpPower().y <= 5.f || GetisUpBlock() == true)
@@ -945,7 +977,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	// 더블 점프
-	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true && GetisDoubleJumpPossible() == true)
+	if (true == GameEngineInput::GetInst()->IsDown("KnightJump") && isPossibleDoubleJump_ == true /*&& GetisDoubleJumpPossible() == true*/)
 	{
 		isPossibleDoubleJump_ = false;
 		KnightManager_.ChangeState("DOUBLE_JUMP");
@@ -954,6 +986,8 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightFallEnd(const StateInfo& _Info)
 {
+	isPossibleDoubleJump_ = true;
+
 	KnightFallAccel_ = 0.0f;
 
 	if (isKnightActtingMove_ == true)
@@ -1177,6 +1211,7 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightData::GetInst()->SetisBreak(true);
 		KnightManager_.ChangeState("STUN");
+		return;
 	}
 
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
@@ -1213,6 +1248,7 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 			{
 				PrevDirection_ = float4::LEFT;
 				KnightManager_.ChangeState("WALK_TURN");
+				return;
 			}
 
 			GetTransform().SetWorldMove(float4::LEFT * KnightRunSpeed_ * _DeltaTime);
@@ -1226,6 +1262,7 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 			{
 				PrevDirection_ = float4::RIGHT;
 				KnightManager_.ChangeState("WALK_TURN");
+				return;
 			}
 
 			GetTransform().SetWorldMove(float4::RIGHT * KnightRunSpeed_ * _DeltaTime);
@@ -1457,6 +1494,7 @@ void Knight::KnightSlashStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("SLASH_ANIMATION");
 	KnightSlashEffect_->GetCollision()->On();
 	KnightSlashEffect_->SetAnimationSlash();
+
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 80, 50, 0 });
@@ -1566,9 +1604,29 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	//애니메이션이 끝나면 
 	if (isSlashEnd_ == true)
 	{
-		//KnightSlashEffect_->Off();
+
 		isSlashEnd_ = false;
-		KnightManager_.ChangeState("STILL");
+
+		if (_Info.PrevState == "RUN")
+		{
+			KnightManager_.ChangeState("RUN");
+		}
+
+		if (_Info.PrevState == "STILL")
+		{
+			KnightManager_.ChangeState("STILL");
+		}
+
+		if (_Info.PrevState == "WALK")
+		{
+			KnightManager_.ChangeState("WALK");
+		}
+
+
+
+
+		//KnightSlashEffect_->Off();
+
 	}
 }
 
@@ -1585,8 +1643,8 @@ void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH_ANIMATION");
 
-	KnightSlashEffect_->SetAnimationDoubleSlash();
 	KnightSlashEffect_->GetCollision()->On();
+	KnightSlashEffect_->SetAnimationDoubleSlash();
 
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
@@ -1674,13 +1732,13 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
-		if (isSlashEnd_ == true)
+		if (isDoubleSlashEnd_ == true)
 		{
 			KnightManager_.ChangeState("FALL");
 		}
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Slash) });
+	//KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Slash) });
 
 
 	// ========== 스테이트 변경 ==========
@@ -1703,11 +1761,31 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	//}
 
-	//애니메이션이 끝나면 
 	if (isDoubleSlashEnd_ == true)
 	{
+
 		isDoubleSlashEnd_ = false;
-		KnightManager_.ChangeState("STILL");
+
+		if (_Info.PrevState == "RUN")
+		{
+			KnightManager_.ChangeState("RUN");
+		}
+
+		if (_Info.PrevState == "STILL")
+		{
+			KnightManager_.ChangeState("STILL");
+		}
+
+		if (_Info.PrevState == "WALK")
+		{
+			KnightManager_.ChangeState("WALK");
+		}
+
+
+
+
+		//KnightSlashEffect_->Off();
+
 	}
 
 }
@@ -1822,8 +1900,29 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	//애니메이션이 끝나면 
 	if (isUpSlashEnd_ == true)
 	{
+
 		isUpSlashEnd_ = false;
-		KnightManager_.ChangeState("STILL");
+
+		if (_Info.PrevState == "RUN")
+		{
+			KnightManager_.ChangeState("RUN");
+		}
+
+		if (_Info.PrevState == "STILL")
+		{
+			KnightManager_.ChangeState("STILL");
+		}
+
+		if (_Info.PrevState == "WALK")
+		{
+			KnightManager_.ChangeState("WALK");
+		}
+
+
+
+
+		//KnightSlashEffect_->Off();
+
 	}
 }
 
@@ -1912,8 +2011,29 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	//애니메이션이 끝나면 
 	if (isDownSlashEnd_ == true)
 	{
+
 		isDownSlashEnd_ = false;
-		KnightManager_.ChangeState("STILL");
+
+		if (_Info.PrevState == "RUN")
+		{
+			KnightManager_.ChangeState("RUN");
+		}
+
+		if (_Info.PrevState == "STILL")
+		{
+			KnightManager_.ChangeState("STILL");
+		}
+
+		if (_Info.PrevState == "WALK")
+		{
+			KnightManager_.ChangeState("WALK");
+		}
+
+
+
+
+		//KnightSlashEffect_->Off();
+
 	}
 }
 

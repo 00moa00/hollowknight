@@ -152,7 +152,7 @@ void MasterActor::isPixelCheck(float _DeltaTime, float4 _CheckDir)
 void MasterActor::isPixelCheckUp(float _DeltaTime)
 {
 	float4 UpPos = { GetTransform().GetLocalPosition().x ,
-	-(GetTransform().GetLocalPosition().y + 100.f) };
+	-(GetTransform().GetLocalPosition().y + 70.f) };
 
 	float4 UpColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(UpPos.ix(), UpPos.iy());
 
@@ -173,7 +173,7 @@ void MasterActor::isDoubleCheckAreaCheck(float _DeltaTime)
 
 	//현재 위치
 	float4 GroundPos = { GetTransform().GetLocalPosition().x ,
-	-(GetTransform().GetLocalPosition().y - 20.f) };
+	-(GetTransform().GetLocalPosition().y - 50.f) };
 
 
 
