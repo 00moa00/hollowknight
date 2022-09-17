@@ -2,7 +2,6 @@
 #include "GameEngineTransformComponent.h"
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngineBase/GameEngineWindow.h>
-#include "GameEngineRenderingPipeLine.h"
 
 enum class CAMERAPROJECTIONMODE
 {
@@ -19,6 +18,7 @@ class RenderingInstancing
 class GameEngineLevel;
 class GameEngineCamera;
 class GameEngineRenderTarget;
+class GameEngineRenderingPipeLine;
 class GameEngineCamera : public GameEngineTransformComponent
 {
 	friend GameEngineLevel;
