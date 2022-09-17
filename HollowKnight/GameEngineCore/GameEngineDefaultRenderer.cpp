@@ -2,11 +2,12 @@
 #include "GameEngineDefaultRenderer.h"
 #include "GameEngineRenderingPipeLine.h"
 
+
 GameEngineDefaultRenderer::GameEngineDefaultRenderer()
-	:PipeLine(nullptr)
+	:PipeLine(nullptr),
+	IsInstancing(false)
 {
 }
-
 GameEngineDefaultRenderer::~GameEngineDefaultRenderer()
 {
 }
@@ -66,4 +67,12 @@ GameEngineRenderingPipeLine* GameEngineDefaultRenderer::GetPipeLine()
 
 	PipeLine = GetClonePipeLine(PipeLine);
 	return PipeLine;
+}
+
+
+void GameEngineDefaultRenderer::InstanceOn()
+{
+	IsInstancing = true;
+
+	InstanceSetting();
 }

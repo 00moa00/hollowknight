@@ -62,9 +62,11 @@ public:
 
 	void SetOutputMergerDepthStencil(const std::string& _Name);
 
-	void Rendering();
+	// 랜더러 자체가 들어올 가능성이 높네요.
+	void Rendering(bool IsInstancing = false);
 
-	inline GameEngineVertexShader* GetVertexShader() 
+
+	inline GameEngineVertexShader* GetVertexShader()
 	{
 		return VertexShader;
 	}
@@ -78,7 +80,7 @@ public:
 
 protected:
 
-	
+
 private:
 	GameEngineInputLayOut* InputLayOut; // 인풋어셈블러1 세팅
 	GameEngineVertexBuffer* VertexBuffer; // 인풋어셈블러1 세팅
@@ -128,6 +130,10 @@ private:
 
 	void Draw();
 
+	void InstancingDraw();
+
+	void InstancingDataCollect();
 };
 
 
+r
