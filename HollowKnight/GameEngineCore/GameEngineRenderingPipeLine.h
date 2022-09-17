@@ -135,5 +135,3 @@ private:
 	void InstancingDataCollect();
 };
 
-
-r

@@ -22,6 +22,7 @@
     <FxCompile Include="AtlasBlur.hlsl" />
     <FxCompile Include="TextureAtlas_Inst.hlsl" />
     <FxCompile Include="ITextureAtlas.hlsl" />
+    <FxCompile Include="YEffect.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">

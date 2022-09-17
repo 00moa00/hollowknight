@@ -34,11 +34,30 @@
 
 class GameEnginePostEffect
 {
+private:
+	bool IsUpdate_ = true;
+
+public:
+	bool IsUpdate()
+	{
+		return IsUpdate_;
+	}
+
+	virtual void On()
+	{
+		IsUpdate_ = true;
+	}
+
+	virtual void Off()
+	{
+		IsUpdate_ = false;
+	}
+
 public:
 	virtual void EffectInit() = 0;
 	virtual void Effect(class GameEngineRenderTarget* _Render) = 0;
 
-	virtual ~GameEnginePostEffect() 
+	virtual ~GameEnginePostEffect()
 	{
 
 	}
@@ -92,7 +111,7 @@ public:
 
 	void CreateDepthTexture(int _Index = 0);
 
-	inline GameEngineTexture* GetDepthTexture() 
+	inline GameEngineTexture* GetDepthTexture()
 	{
 		return DepthTexture;
 	}
@@ -102,7 +121,7 @@ public:
 	void Copy(GameEngineRenderTarget* _Other, int _Index = 0);
 
 	void Merge(GameEngineRenderTarget* _Other, int _Index = 0);
-	
+
 	void Effect(GameEngineRenderingPipeLine* _Other, GameEngineShaderResourcesHelper* _ShaderResourcesHelper);
 
 	void Effect(class GameEngineRenderSet& _RenderSet);
@@ -126,18 +145,18 @@ protected:
 	GameEngineTexture* DepthTexture;
 
 	// Post¿Ã∆Â∆Æ ∫Œ∫–
-public:
+private:
 	std::list<GameEnginePostEffect*> Effects;
 
 public:
 	template<typename EffectType>
 	EffectType* AddEffect()
 	{
-		EffectType* NewEffect = new EffectType();
+		GameEnginePostEffect* NewEffect = new EffectType();
 		NewEffect->EffectInit();
 		Effects.push_back(NewEffect);
 
-		return NewEffect;
+		return reinterpret_cast<EffectType*>(NewEffect);
 	}
 };
 

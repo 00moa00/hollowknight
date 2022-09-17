@@ -10,9 +10,9 @@
 #include "GameEngineCoreDebug.h"
 #include "GEngine.h"
 
-GameEngineLevel::GameEngineLevel() 
+GameEngineLevel::GameEngineLevel()
 {
-	Cameras.resize(static_cast<unsigned int>(CAMERAORDER::MAX) );
+	Cameras.resize(static_cast<unsigned int>(CAMERAORDER::UICAMERA));
 
 	{
 		GameEngineCameraActor* CameraActor = CreateActor<GameEngineCameraActor>();
@@ -21,11 +21,15 @@ GameEngineLevel::GameEngineLevel()
 		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::MAINCAMERA);
 	}
 
-
-
+	{
+		GameEngineCameraActor* CameraActor = CreateActor<GameEngineCameraActor>();
+		CameraActor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
+		CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::UICAMERA);
+	}
 }
 
-GameEngineLevel::~GameEngineLevel() 
+GameEngineLevel::~GameEngineLevel()
 {
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
 	{
@@ -59,7 +63,7 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 	}
 }
 
-void GameEngineLevel::ActorLevelStartEvent() 
+void GameEngineLevel::ActorLevelStartEvent()
 {
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
 	{
@@ -175,6 +179,7 @@ void GameEngineLevel::Render(float _DelataTime)
 		Cameras[i]->Render(_DelataTime);
 	}
 
+	// 포스트 이펙트 처리.
 	for (size_t i = 0; i < Cameras.size(); i++)
 	{
 		if (nullptr == Cameras[i])
@@ -278,11 +283,11 @@ void GameEngineLevel::Release(float _DelataTime)
 			{
 				GroupStart = Group.erase(GroupStart);
 			}
-			else 
+			else
 			{
 				++GroupStart;
 			}
-			
+
 		}
 	}
 
@@ -329,7 +334,7 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _NextLevel)
 	}
 
 	// 플레이 레벨
-	
+
 	// 로그인 레벨
 	// _NextLevel
 	{
@@ -415,7 +420,7 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _NextLevel)
 	}
 }
 
-void GameEngineLevel::AllClear() 
+void GameEngineLevel::AllClear()
 {
 	{
 		std::map<int, std::list<GameEngineActor*>>::iterator StartGroupIter = AllActors.begin();
@@ -430,7 +435,7 @@ void GameEngineLevel::AllClear()
 			std::list<GameEngineActor*>::iterator GroupEnd = Group.end();
 			for (; GroupStart != GroupEnd; ++GroupStart)
 			{
-				delete *GroupStart;
+				delete* GroupStart;
 			}
 		}
 	}
