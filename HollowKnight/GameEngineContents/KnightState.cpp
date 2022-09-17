@@ -754,6 +754,13 @@ void Knight::KnightLandStart(const StateInfo& _Info)
 
 void Knight::KnightLandUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	// 점프
+	if (GameEngineInput::GetInst()->IsDown("KnightJump") == true)
+	{
+		KnightManager_.ChangeState("JUMP");
+	}
+
+
 	// 내가 만약 무적이면 깜빡거린다
 	if (isInvincibility_ == true)
 	{
@@ -776,7 +783,6 @@ void Knight::KnightLandUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STILL");
 		return;
 	}
-
 
 
 }
