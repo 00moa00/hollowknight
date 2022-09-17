@@ -138,11 +138,11 @@ void GameEngineShaderResourcesHelper::SetConstantBufferLink(
 	const void* _Data, 
 	UINT _Size)
 {
-	if (false == IsConstantBuffer(_Name))
-	{
-		MsgBoxAssertString(_Name + "쉐이더에서 이러한 이름의 상수버퍼를 사용한 적이 없습니다.");
-		return;
-	}
+	//if (false == IsConstantBuffer(_Name))
+	//{
+	//	MsgBoxAssertString(_Name + "쉐이더에서 이러한 이름의 상수버퍼를 사용한 적이 없습니다.");
+	//	return;
+	//}
 
 	if (16 > _Size)
 	{

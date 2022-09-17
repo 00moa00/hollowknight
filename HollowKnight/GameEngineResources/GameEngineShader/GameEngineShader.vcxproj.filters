@@ -18,7 +18,8 @@
     <FxCompile Include="Noise.hlsl" />
     <FxCompile Include="Overlay.hlsl" />
     <FxCompile Include="Vignette.hlsl" />
-    <FxCompile Include="Bloom.hlsl" />
+    <FxCompile Include="LightCut.hlsl" />
+    <FxCompile Include="AtlasBlur.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">

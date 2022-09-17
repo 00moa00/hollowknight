@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "MasterActor.h"
-
+#include "BloomRenderer.h"
 MasterActor::MasterActor() 
 	:
 	MainRenderer_(nullptr),
@@ -48,6 +48,14 @@ void MasterActor::CreateRendererComponent(std::string _FileName)
 	MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	MainRenderer_->SetTexture(_FileName);
 	MainRenderer_->GetTransform().SetLocalScale(MainRenderer_->GetCurTexture()->GetScale());
+	MainRenderer_->SetPivot(PIVOTMODE::BOT);
+}
+
+void MasterActor::CreateBloomRendererComponent(float4 _LocalScale, std::string _FileName)
+{
+	MainRenderer_ = CreateComponent<BloomRenderer>();
+	MainRenderer_->SetTexture(_FileName, 0);
+	MainRenderer_->GetTransform().SetLocalScale(_LocalScale);
 	MainRenderer_->SetPivot(PIVOTMODE::BOT);
 }
 
@@ -144,7 +152,7 @@ void MasterActor::isPixelCheck(float _DeltaTime, float4 _CheckDir)
 void MasterActor::isPixelCheckUp(float _DeltaTime)
 {
 	float4 UpPos = { GetTransform().GetLocalPosition().x ,
-	-(GetTransform().GetLocalPosition().y + 10e0.f) };
+	-(GetTransform().GetLocalPosition().y + 100.f) };
 
 	float4 UpColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(UpPos.ix(), UpPos.iy());
 

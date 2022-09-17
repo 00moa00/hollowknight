@@ -53,11 +53,9 @@ void ContentsCore::Start()
 	}
 
 	{
-		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("Bloom");
-		NewPipe->SetInputAssembler1VertexBuffer("FullRect");
-		NewPipe->SetInputAssembler2IndexBuffer("FullRect");
-		NewPipe->SetVertexShader("Bloom.hlsl");
-		NewPipe->SetPixelShader("Bloom.hlsl");
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("LightCut");
+		NewPipe->SetVertexShader("LightCut.hlsl");
+		NewPipe->SetPixelShader("LightCut.hlsl");
 	}
 
 	{

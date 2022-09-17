@@ -110,8 +110,9 @@ void Knight::Start()
 
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
 	
-	GetRenderer()->GetTransform().PixLocalNegativeX();
+	   
 
+	GetRenderer()->GetTransform().PixLocalNegativeX();
 
 	Test1_ = CreateComponent<GameEngineCollision>();
 	Test1_->GetTransform().SetLocalScale({ 15,15,1 });

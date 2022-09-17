@@ -480,6 +480,9 @@
     <ClInclude Include="BloomPostEffect.h">
       <Filter>Actor\Effect\PostEffect</Filter>
     </ClInclude>
+    <ClInclude Include="BloomRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -823,6 +826,9 @@
     </ClCompile>
     <ClCompile Include="BloomPostEffect.cpp">
       <Filter>Actor\Effect\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="BloomRenderer.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

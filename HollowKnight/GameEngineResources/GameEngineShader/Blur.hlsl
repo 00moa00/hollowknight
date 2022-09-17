@@ -54,6 +54,7 @@ float4 Blur_PS(Output _Input) : SV_Target0
     float2 StartUV = PixelUVCenter + (-PixelUVSize * 2);
     float2 CurUV = StartUV;
     
+    
     float4 Result = (float4) 0.0f;
     
     for (int y = 0; y < 5; ++y)
