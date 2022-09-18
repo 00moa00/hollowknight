@@ -18,7 +18,9 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
+
 private:
+	bool ObjectVSEffectCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 };
 

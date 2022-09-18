@@ -26,5 +26,16 @@ void TutorialBreakDoor::Start()
 
 void TutorialBreakDoor::Update(float _DeltaTime)
 {
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight_Slash, CollisionType::CT_OBB2D,
+		std::bind(&TutorialBreakDoor::ObjectVSEffectCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
+	{
+		this->Death();
+	}
+}
+
+bool TutorialBreakDoor::ObjectVSEffectCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+
+	return true;
 }
 

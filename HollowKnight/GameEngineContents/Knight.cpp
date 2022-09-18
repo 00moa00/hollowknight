@@ -139,6 +139,17 @@ void Knight::Start()
 	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 
+	KnightSlashEffect_->GetCollision()->Off();
+	KnightMainLightEffect_->SetParent(this);
+	KnightDonutLightEffect_->SetParent(this);
+	KnightSiblingLightEffect_->SetParent(this);
+
+	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
+	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
+	KnightSiblingLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
+
+
+
 	KnightJumpPower_ = 330.f;
 	KnightDoubleJumpPower_ = 320.f;
 	KnightRunSpeed_ = 400.f;
@@ -569,6 +580,9 @@ void Knight::Start()
 	ContentsFontRenderer_->FontOn();
 
 
+	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
+
+
 }
 
 void Knight::Update(float _DeltaTime)
@@ -576,20 +590,20 @@ void Knight::Update(float _DeltaTime)
 	ContentsFontRenderer_->SetActorToScreenPosition(GetTransform().GetWorldPosition(), GetLevel()->GetMainCameraActorTransform().GetWorldPosition());
 	KnightManager_.Update(_DeltaTime);
 
-	if (KnightMainLightEffect_ != nullptr)
-	{
-		KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });	
-	}
+	//if (KnightMainLightEffect_ != nullptr)
+	//{
+	//	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });	
+	//}
 
-	if (KnightDonutLightEffect_ != nullptr)
-	{
-		KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
-	}
+	//if (KnightDonutLightEffect_ != nullptr)
+	//{
+	//	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
+	//}
 
-	if (KnightSiblingLightEffect_ != nullptr)
-	{
-		KnightSiblingLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
-	}
+	//if (KnightSiblingLightEffect_ != nullptr)
+	//{
+	//	KnightSiblingLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
+	//}
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 }
 
