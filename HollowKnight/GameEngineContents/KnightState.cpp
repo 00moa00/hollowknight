@@ -417,37 +417,48 @@ void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 {
 	if (PrevDirection_.CompareInt2D(float4::LEFT) == true)
 	{
-		GetRenderer()->ChangeFrameAnimation("WALK_TURN_RIGHT_ANIMATION");
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+
+		if (isRunMode_ == true)
+		{
+			GetRenderer()->ChangeFrameAnimation("RUN_TURN_ANIMATION");
+		}
+		else
+		{
+			GetRenderer()->ChangeFrameAnimation("WALK_TURN_LEFT_ANIMATION");
+
+		}
+
+
+
 	}
 
-	if (PrevDirection_.CompareInt2D(float4::RIGHT) == true)
+	else if (PrevDirection_.CompareInt2D(float4::RIGHT) == true)
 	{
-		GetRenderer()->ChangeFrameAnimation("WALK_TURN_LEFT_ANIMATION");
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+
+		if (isRunMode_ == true)
+		{
+			GetRenderer()->ChangeFrameAnimation("RUN_TURN_ANIMATION");
+		}
+		else
+		{
+			GetRenderer()->ChangeFrameAnimation("WALK_TURN_RIGHT_ANIMATION");
+
+		}
+
 	}
 }
 
 void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	// 내가 만약 무적이면 깜빡거린다
-	if (isInvincibility_ == true)
-	{
-		KnightInvincibiliting(_DeltaTime);
+//	GetRenderer()->ChangeFrameAnimation("RUN_TURN_ANIMATION");
 
-	}
 
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
-		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
-		 )
-	{
-		KnightData::GetInst()->SetisBreak(true);
-		KnightManager_.ChangeState("STUN");
-		return;
-	}
-
-	if (isWalkTurnEnd_ == true) //애니메이션 end bool 값
+	if (isWalkTurnEnd_ == true || isRunTurnEnd_ == true) //애니메이션 end bool 값
 	{
 		isWalkTurnEnd_ = false;
-
+		isRunTurnEnd_ = false;
 		if (isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
@@ -462,7 +473,21 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 	}
 
-	// ======== Knight VS WallColl ========
+	if (isInvincibility_ == true)
+	{
+		KnightInvincibiliting(_DeltaTime);
+
+	}
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
 	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
 		)
@@ -474,6 +499,116 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 		SetisCollWall(false);
 
 	}
+
+	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
+	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
+
+	DoubleSlashTimer(_DeltaTime);
+
+	//KnightDirectionCheck();
+	this->isPixelCheck(_DeltaTime, GetMoveDirection());
+
+
+	if (GetisWall() == true || GetisCollWall() == true)
+	{
+		isKnihgtStillWall_ = true;
+	}
+
+	else
+	{
+		isKnihgtStillWall_ = false;
+	}
+	if (GetisWall() == true || GetisCollWall() == true)
+	{
+		GetTransform().SetWorldMove(float4::ZERO * KnightRunSpeed_ * _DeltaTime);
+
+	}
+	else if (GetisOnGround() == true)
+	{
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		{
+
+			GetTransform().SetWorldMove(float4::LEFT * KnightRunSpeed_ * _DeltaTime);
+		}
+
+
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		{
+
+			GetTransform().SetWorldMove(float4::RIGHT * KnightRunSpeed_ * _DeltaTime);
+		}
+	}
+
+
+
+	else if (GetisOnGround() == false && isKnightPotal_ == false)
+	{
+		KnightManager_.ChangeState("FALL");
+		return;
+	}
+
+
+	if (GameEngineInput::GetInst()->IsDown("KnightRunMode") == true)
+	{
+		isRunMode_ = !isRunMode_;
+	}
+	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
+	{
+		isPressJumppingKey_ = false;
+	}
+	// ========== 스테이트 변경 ==========
+
+	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Potal, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSPotalCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
+	{
+
+	}
+
+
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	{
+		KnightManager_.ChangeState("JUMP");
+		return;
+
+	}
+
+
+
+	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
+	{
+		KnightManager_.ChangeState("SLASH");
+		return;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
+	{
+		KnightManager_.ChangeState("DOUBLE_SLASH");
+		return;
+	}
+
+	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
+	{
+		isLookMap_ = true;
+		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
+		KnightManager_.ChangeState("MAP_WALKING");
+		return;
+	}
+
+	if (GetisKnightMove() == false)
+	{
+		//isKnihgtStillWall_ = false;
+
+		KnightManager_.ChangeState("STILL");
+		return;
+	}
+
+	// 대쉬
+	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
+	{
+		KnightManager_.ChangeState("DASH");
+		return;
+	}
+
 }
 
 void Knight::KnightLookDownStart(const StateInfo& _Info)
@@ -1436,6 +1571,8 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 			if (PrevDirection_.CompareInt2D(float4::LEFT) == false)
 			{
 				PrevDirection_ = float4::LEFT;
+				//GetRenderer()->GetTransform().PixLocalNegativeX();
+
 				KnightManager_.ChangeState("WALK_TURN");
 				return;
 			}
@@ -1450,6 +1587,8 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
 			{
 				PrevDirection_ = float4::RIGHT;
+			//	GetRenderer()->GetTransform().PixLocalNegativeX();
+
 				KnightManager_.ChangeState("WALK_TURN");
 				return;
 			}

@@ -59,6 +59,8 @@ private:
 	bool isSitEnd_;
 	bool isDoorEnd_;
 
+	bool isRunTurnEnd_;
+
 	bool isTalkingNPC_;
 
 	bool isKnightActtingMove_;
@@ -168,6 +170,10 @@ private:
 	void KnightWalkTurnStart(const StateInfo& _Info);
 	void KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info);
 
+	void KnightRunStart(const StateInfo& _Info);
+	void KnightRunUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightRunEnd(const StateInfo& _Info);
+
 	void KnightLookDownStart(const StateInfo& _Info);
 	void KnightLookDownUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightLookDownEnd(const StateInfo& _Info);
@@ -205,11 +211,6 @@ private:
 	void KnightFocusBurstUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightFocusBurstEnd(const StateInfo& _Info);
 
-
-	// ---- 달리기 ----
-	void KnightRunStart(const StateInfo& _Info);
-	void KnightRunUpdate(float _DeltaTime, const StateInfo& _Info);
-	void KnightRunEnd(const StateInfo& _Info);
 
 	// ---- 스턴 ----
 	void KnightStunStart(const StateInfo& _Info);

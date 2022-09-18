@@ -63,6 +63,7 @@ Knight::Knight()
 	isDeathEnd_(false),
 	isSitEnd_(false),
 	isDoorEnd_(false),
+	isRunTurnEnd_(false),
 
 	isInvincibility_(false),
 	isKnightBlack_(false),
@@ -191,8 +192,11 @@ void Knight::Start()
 
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 	
-	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 0, 0.050f, false ));
-	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 1, 1, 0.050f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.080f, false ));
+	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.080f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("RUN_TURN_ANIMATION", FrameAnimation_DESC("Knight_idle_to_run0000-Sheet.png", 0, 4, 0.120f, false));
+
+
 
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_DOWN_ANIMATION", FrameAnimation_DESC("Knight_look_down0000-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));
@@ -265,6 +269,12 @@ void Knight::Start()
 	//================================
 	//    Create Bind Animation
 	//================================
+
+	GetRenderer()->AnimationBindEnd("RUN_TURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isRunTurnEnd_ = true;
+
+		});
 
 	GetRenderer()->AnimationBindEnd("SIT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
