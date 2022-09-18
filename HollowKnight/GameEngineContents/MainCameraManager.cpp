@@ -129,7 +129,7 @@ void MainCameraManager::MoveToTargetUpdate(float _DeltaTime, const StateInfo& _I
 	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
 	float4 CurrentPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
 	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
-	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 10.f);
+	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 5.f);
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x,MoveCamera.y,  -1800.0f });
 	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
