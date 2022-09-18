@@ -27,6 +27,9 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
+	void LevelStartEvent() override;
+
+	void LevelEndEvent() override;
 
 private:
 	std::string Level_;

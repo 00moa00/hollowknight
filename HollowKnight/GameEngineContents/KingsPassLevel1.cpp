@@ -47,6 +47,20 @@ void KingsPassLevel1::Start()
 	CreateMainCameraManager();
 	CreateEffectGUIActor();
 
+	{
+		Potal* Potal_ = CreateActor<Potal>();
+
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel2);
+		EnumString = static_cast<std::string>(PrevName);
+
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
+		Potal_->GetTransform().SetWorldPosition({ 6895 + 60, -4639, });
+
+	}
+
 
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
@@ -73,7 +87,7 @@ void KingsPassLevel1::LevelStartEvent()
 
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 	std::string EnumString;
-	auto PrevName = magic_enum::enum_name(LevelList::CrossroadsLevel2);
+	auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel2);
 	EnumString = static_cast<std::string>(PrevName);
 
 	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);

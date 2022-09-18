@@ -6,7 +6,7 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
-#include "FadeIn.h"
+#include "Potal.h"
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
@@ -48,6 +48,35 @@ void KingsPassLevel2::Start()
 	CreateEffectGUIActor();
 
 
+	{
+		Potal* Potal_ = CreateActor<Potal>();
+
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel1);
+		EnumString = static_cast<std::string>(PrevName);
+
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
+		Potal_->GetTransform().SetWorldPosition({ 209.f - 60.f, -1826.f });
+
+	}
+
+	{
+		Potal* Potal_ = CreateActor<Potal>();
+
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel3);
+		EnumString = static_cast<std::string>(PrevName);
+
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
+		Potal_->GetTransform().SetWorldPosition({ 172.f - 60, -532.f, });
+
+	}
+
+
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
@@ -69,8 +98,6 @@ void KingsPassLevel2::LevelStartEvent()
 
 	CreateActor<FadeIn>();
 
-
-
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 	std::string EnumString;
 	auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel1);
@@ -81,7 +108,7 @@ void KingsPassLevel2::LevelStartEvent()
 
 	if (KnightData::GetInst()->GetPreLevel() == UpperName)
 	{
-		GetKnight()->GetTransform().SetLocalPosition({ 509.f, -1826.f, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->GetTransform().SetLocalPosition({ 209.f, -1826.f, static_cast<float>(Z_ORDER::Knight) });
 		GetKnight()->SetDirInit(float4::RIGHT);
 
 	}

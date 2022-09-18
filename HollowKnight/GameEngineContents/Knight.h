@@ -42,6 +42,7 @@ protected:
 private:
 	ContentsFontRenderer* ContentsFontRenderer_;
 
+	bool isKnightPotal_;	// 포탈하고 닿았다
 	bool isSlashEnd_;		// 공격 애니메이션 종료
 	bool isDoubleSlashEnd_; // 더블 공격 애니메이션 종료
 	bool isUpSlashEnd_;
@@ -123,7 +124,7 @@ private:
 public:
 
 	void SetDirInit(float4 _Dir);					// 레벨 세팅때 텍스처 반전
-
+	void SetKnightisPotal(bool _b);
 
 private:
 

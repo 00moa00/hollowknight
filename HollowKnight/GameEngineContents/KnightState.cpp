@@ -223,7 +223,7 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	if (GetisOnGround() == false)
+	if (GetisOnGround() == false && isKnightPotal_ == false)
 	{
 		KnightManager_.ChangeState("FALL");
 		return;
@@ -309,7 +309,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 	}
 
-	else if(GetisOnGround() == false)
+	else if(GetisOnGround() == false && isKnightPotal_ == false)
 	{
 		KnightManager_.ChangeState("FALL");
 		return;
@@ -1278,7 +1278,7 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 	}
 
-	else if (GetisOnGround() == false)
+	else if (GetisOnGround() == false && isKnightPotal_ == false)
 	{
 		KnightManager_.ChangeState("FALL");
 		return;

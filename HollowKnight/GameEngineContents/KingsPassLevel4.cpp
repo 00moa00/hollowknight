@@ -47,6 +47,33 @@ void KingsPassLevel4::Start()
 	CreateMainCameraManager();
 	CreateEffectGUIActor();
 
+	{
+		Potal* Potal_ = CreateActor<Potal>();
+
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel3);
+		EnumString = static_cast<std::string>(PrevName);
+
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
+		Potal_->GetTransform().SetWorldPosition({ 3492.f - 60, -3119.f });
+
+	}
+
+	{
+		Potal* Potal_ = CreateActor<Potal>();
+
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel1);
+		EnumString = static_cast<std::string>(PrevName);
+
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
+		Potal_->GetTransform().SetWorldPosition({ 5891.f + 60, -1169.f });
+
+	}
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);

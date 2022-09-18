@@ -69,6 +69,8 @@ Knight::Knight()
 
 	isKnihgtStillWall_(false),
 
+	isKnightPotal_(false),
+
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
 	SideDarkEffect_(nullptr),
@@ -584,8 +586,7 @@ void Knight::LevelStartEvent()
 	//KnightData::GetInst()->SetCurrentLevel(GetLevel()->GetNameConstRef());
 
 	//GetLevel()->Get
-
-	
+	isKnightPotal_ = false;
 }
 
 void Knight::LevelEndEvent()
@@ -617,6 +618,11 @@ void Knight::SetDirInit(float4 _Dir)
 
 		this->SetMoveDirection(float4::RIGHT);
 	}
+}
+
+void Knight::SetKnightisPotal(bool _b)
+{
+	isKnightPotal_ = _b;
 }
 
 bool Knight::GetisKnightMove()

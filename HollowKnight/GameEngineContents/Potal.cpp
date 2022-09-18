@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Potal.h"
 #include "FadeOut.h"
+#include "Knight.h"
 
 Potal::Potal() 
 	:
@@ -46,15 +47,32 @@ void Potal::Update(float _DeltaTime)
 	{
 		if (FadeOut_->GetDeathflag() == true)
 		{
-			FadeOut_->Death();
-			FadeOut_ = nullptr;
 			GEngine::ChangeLevel(Level_);
+			//FadeOut_->Death();
+			//FadeOut_ = nullptr;
 		}
 	}
 
 
 
 
+}
+
+void Potal::LevelStartEvent()
+{
+}
+
+void Potal::LevelEndEvent()
+{
+	if (FadeOut_ != nullptr)
+	{
+		if (FadeOut_->GetDeathflag() == true)
+		{
+		//	GEngine::ChangeLevel(Level_);
+			FadeOut_->Death();
+			FadeOut_ = nullptr;
+		}
+	}
 }
 
 void Potal::CreatePotal(std::string _ChangeLevel, FadeMode _Mode)
@@ -65,6 +83,8 @@ void Potal::CreatePotal(std::string _ChangeLevel, FadeMode _Mode)
 
 bool Potal::PotalVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
+	Knight* Knight_ = dynamic_cast<Knight*>(_Other->GetActor());
+	Knight_->SetKnightisPotal(true);
 	return true;
 }
 
