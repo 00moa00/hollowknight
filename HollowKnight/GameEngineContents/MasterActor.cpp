@@ -18,7 +18,8 @@ MasterActor::MasterActor()
 	isMove_(true),
 	isOnGround_(false),
 	isWall_(false),
-	isUpBlock_(false)
+	isUpBlock_(false),
+	isCollWall_(false)
 {
 }
 

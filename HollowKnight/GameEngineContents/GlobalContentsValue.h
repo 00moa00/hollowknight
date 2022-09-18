@@ -31,6 +31,7 @@ enum class COLLISION_ORDER
 	Knight_Wall,
 	Prompt,
 	Object,
+	Bench,
 	Geo,
 	Knight_Slash,
 	Knight_Shadow,
@@ -68,11 +69,11 @@ enum class Z_ORDER
 
 	TileMap,
 
-	FrontObject,
+	FrontObject ,
 
-	Terrain,
+	Terrain ,
 
-	Effect,
+	Effect ,
 	Knight_Shadow_Slash,
 
 

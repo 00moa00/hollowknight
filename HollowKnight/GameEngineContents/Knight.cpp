@@ -679,7 +679,7 @@ void Knight::KnightDirectionCheck()
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
-		GetWallCollision()->GetTransform().SetLocalPosition({-20, 50});
+		GetWallCollision()->GetTransform().SetLocalPosition({-10, 50});
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalPositiveX();
 
 		this->SetMoveDirection(float4::LEFT);
@@ -690,7 +690,7 @@ void Knight::KnightDirectionCheck()
 		GetRenderer()->GetTransform().PixLocalNegativeX();
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalNegativeX();
-		GetWallCollision()->GetTransform().SetLocalPosition({ 20, 50 });
+		GetWallCollision()->GetTransform().SetLocalPosition({ 10, 50 });
 
 
 		this->SetMoveDirection(float4::RIGHT);

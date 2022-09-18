@@ -49,7 +49,7 @@ void MasterMap::CreateTerrain(std::string _FileName)
 	TerrainRenderer_->SetTexture(_FileName);
 	TerrainRenderer_->GetTransform().SetLocalScale(TerrainRenderer_->GetCurTexture()->GetScale());
 	TerrainRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
-	TerrainRenderer_->GetTransform().SetWorldPosition({ 0, 0, static_cast<float>(Z_ORDER::Terrain) });
+	TerrainRenderer_->GetTransform().SetWorldPosition({ 0, 0, -10 });
 	TerrainRenderer_->SetSamplingModePoint();
 
 }
@@ -60,7 +60,7 @@ void MasterMap::CreateFrontObject(std::string _FileName)
 	FrontObjectRenderer_->SetTexture(_FileName);
 	FrontObjectRenderer_->GetTransform().SetLocalScale(FrontObjectRenderer_->GetCurTexture()->GetScale());
 	FrontObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
-	FrontObjectRenderer_->GetTransform().SetWorldPosition({0,0, -100 });
+	FrontObjectRenderer_->GetTransform().SetWorldPosition({0,0, - 100 });
 	FrontObjectRenderer_->SetSamplingModePoint();
 
 }

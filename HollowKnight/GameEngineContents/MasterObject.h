@@ -36,6 +36,12 @@ protected:
 		return Collision_;
 	}
 
+
+	GameEngineCollision* GetWallCollision() const
+	{
+		return WallCollision_;
+	}
+
 	//================================
 	//    Setter
 	//================================

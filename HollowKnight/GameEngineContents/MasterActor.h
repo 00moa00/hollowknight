@@ -33,6 +33,7 @@ protected:
 
 	bool isOnGround_;
 	bool isWall_;
+	bool isCollWall_;
 	bool isUpBlock_; // 위에 지형 지물이 있는지
 	bool isDoubleJumpPossible_;
 
@@ -125,6 +126,11 @@ public:
 		return Speed_;
 	}
 
+	bool GetisCollWall() const
+	{
+		return isCollWall_;
+	}
+
 	bool GetisMove() const
 	{
 		return isMove_;
@@ -164,7 +170,10 @@ public:
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
 	void CreateWallCollisionComponent(float4 _LocalScale);
 
-
+	void SetisCollWall(bool _b)
+	{
+		isCollWall_ = _b;
+	}
 
 	void SetJumpSpeed(float _JumpSpeed)
 	{

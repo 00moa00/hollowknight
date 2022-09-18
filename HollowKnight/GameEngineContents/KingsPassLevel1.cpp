@@ -8,6 +8,7 @@
 #include "KnightData.h"
 #include "Potal.h"
 
+#include "TutorialBreakDoor.h"
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
@@ -61,6 +62,30 @@ void KingsPassLevel1::Start()
 
 	}
 
+
+	{
+
+		TutorialBreakDoor* TutorialBreakDoor_ = CreateActor<TutorialBreakDoor>();
+		TutorialBreakDoor_->GetTransform().SetLocalPosition({ 2452, -4639, static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+
+		TutorialBreakDoor* TutorialBreakDoor_ = CreateActor<TutorialBreakDoor>();
+		TutorialBreakDoor_->GetTransform().SetLocalPosition({ 3276, -4639, static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+
+		TutorialBreakDoor* TutorialBreakDoor_ = CreateActor<TutorialBreakDoor>();
+		TutorialBreakDoor_->GetTransform().SetLocalPosition({ 4120, -4639, static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+
+		TutorialBreakDoor* TutorialBreakDoor_ = CreateActor<TutorialBreakDoor>();
+		TutorialBreakDoor_->GetTransform().SetLocalPosition({ 5265, -4639 , static_cast<float>(Z_ORDER::Object) });
+	}
 
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
