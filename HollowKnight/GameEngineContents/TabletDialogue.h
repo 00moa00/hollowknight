@@ -2,38 +2,40 @@
 #include <GameEngineCore/CoreMinimal.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "ContentsFontRenderer.h"
-
 // Ό³Έν :
-class DialogueSet : public GameEngineActor
+class TabletDialogue : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	DialogueSet();
-	~DialogueSet();
+	TabletDialogue();
+	~TabletDialogue();
 
 	// delete Function
-	DialogueSet(const DialogueSet& _Other) = delete;
-	DialogueSet(DialogueSet&& _Other) noexcept = delete;
-	DialogueSet& operator=(const DialogueSet& _Other) = delete;
-	DialogueSet& operator=(DialogueSet&& _Other) noexcept = delete;
+	TabletDialogue(const TabletDialogue& _Other) = delete;
+	TabletDialogue(TabletDialogue&& _Other) noexcept = delete;
+	TabletDialogue& operator=(const TabletDialogue& _Other) = delete;
+	TabletDialogue& operator=(TabletDialogue&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
 private:
+
 	bool isDialougueFull_;
 
-	GameEngineUIRenderer* DialogueTop_;
-	GameEngineUIRenderer* DialogueBottom_;
-	GameEngineUIRenderer* DialogueBack_;
+	int CurrentDialoguePage_;
+
+	float Alpha_;
+	float4 SaveDialogueScale_;
+
+	std::vector<ContentsFontRenderer*> DialogueList_;
 
 	GameEngineUIRenderer* NextArrow_;
+	GameEngineUIRenderer* DialogueBack_;
+	GameEngineUIRenderer* Back_;
 
-private:
-
-	int CurrentDialoguePage_;
-	std::vector<ContentsFontRenderer*> DialogueList_;
+	GameEngineStateManager TabletDoalogueManager_;
 
 public:
 	//================================
@@ -45,16 +47,22 @@ public:
 	}
 
 
+
 	//================================
 	//    Setter
 	//================================
+
 	void SetDialogueOn()
 	{
 		this->On();
-		DialogueBottom_->ChangeFrameAnimation("BOTTOM_APPEAR_ANIMATION");
-		DialogueTop_->ChangeFrameAnimation("TOP_APPEAR_ANIMATION");
+		Back_->On();
+		DialogueBack_->On();
+		NextArrow_->On();
+
 		DialogueList_.front()->GetFontRenderer()->On();
 		DialogueList_.front()->FontOn();
+		TabletDoalogueManager_.ChangeState("APPEAR");
+
 	}
 
 	void SetDialogueOff()
@@ -67,23 +75,30 @@ public:
 			DialogueList_[i]->GetFontRenderer()->Off();
 		}
 
-		this->Off();
+		NextArrow_->Off();
+		TabletDoalogueManager_.ChangeState("CLOSE");
+
+
 	}
+
 
 	void PushDialogue(std::string _Dialougue)
 	{
 		DialogueList_.push_back(GetLevel()->CreateActor<ContentsFontRenderer>());
 		DialogueList_.back()->CreateFontRenderer(
 			_Dialougue
-			, 36
-			, {GameEngineWindow::GetInst()->GetScale().hx() - 430, GameEngineWindow::GetInst()->GetScale().hy()-300 },
+			, 37
+			, { GameEngineWindow::GetInst()->GetScale().hx() , GameEngineWindow::GetInst()->GetScale().hy()-370.f },
 			true,
 			true,
-			31
-			);
+			27
+		);
 
 		//DialogueList_.back()->Ge SetParent(this);
 		DialogueList_.back()->Off();
+		DialogueList_.back()->GetFontRenderer()->SetLeftAndRightSort(LeftAndRightSort::CENTER);
+
+
 	}
 
 	void SetNextDialogue()
@@ -91,11 +106,12 @@ public:
 		if (isDialougueFull_ == false)
 		{
 			++CurrentDialoguePage_;
-			if (CurrentDialoguePage_ == DialogueList_.size() - 1)
+			if (CurrentDialoguePage_ == DialogueList_.size() )
 			{
 				isDialougueFull_ = true;
 				NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
 				return;
+
 			}
 
 			for (int i = 0; i < DialogueList_.size(); ++i)
@@ -104,7 +120,7 @@ public:
 				{
 					continue;
 				}
-				DialogueList_[i]->GetFontRenderer()-> Off();
+				DialogueList_[i]->GetFontRenderer()->Off();
 			}
 
 			DialogueList_[CurrentDialoguePage_]->GetFontRenderer()->On();
@@ -114,5 +130,18 @@ public:
 		}
 	}
 
+private:
+	void DialougeIdleStart(const StateInfo& _Info);
+	void DialougeIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void DialougeIdleEnd(const StateInfo& _Info);
+
+
+	void DialougeAppearStart(const StateInfo& _Info);
+	void DialougeAppearUpdate(float _DeltaTime, const StateInfo& _Info);
+	void DialougeAppearEnd(const StateInfo& _Info);
+
+	void DialougeCloseStart(const StateInfo& _Info);
+	void DialougeCloseUpdate(float _DeltaTime, const StateInfo& _Info);
+	void DialougeCloseEnd(const StateInfo& _Info);
 };
 

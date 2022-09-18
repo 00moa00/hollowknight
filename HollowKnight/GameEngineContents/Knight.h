@@ -58,6 +58,7 @@ private:
 	bool isWakeUpEnd_;
 	bool isSitEnd_;
 	bool isDoorEnd_;
+	bool isReturnToIdle_;
 
 	bool isRunTurnEnd_;
 
@@ -306,6 +307,17 @@ private:
 	void KnightDoorEnd(const StateInfo& _Info);
 
 
+	// ----  타블렛 본당 ----
+	void KnightTabletStart(const StateInfo& _Info);
+	void KnightTabletUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightTabletEnd(const StateInfo& _Info);
+
+	// ----  타블렛에서 대기로 간다 ----
+
+	void KnightTabletReturnToIdleStart(const StateInfo& _Info);
+	void KnightTabletReturnToIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightTabletReturnToIdleEnd(const StateInfo& _Info);
+
 
 	 
 	//================================
@@ -313,13 +325,14 @@ private:
 	//================================
 	bool KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	bool KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+
 
 	bool KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other);		//NPC
 	bool NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineCollision* _Other); //NPC : 대화록 진행, 대화 종료
 	bool ShopCloseCollision(GameEngineCollision* _This, GameEngineCollision* _Other);		// 상점 닫기 용
 
 	bool KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other);	//포탈
-
 
 	bool KnightVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);	//벽
 

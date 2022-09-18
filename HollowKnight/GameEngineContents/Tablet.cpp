@@ -4,13 +4,17 @@
 
 Tablet::Tablet() 
 	:
+	isOpenDialogue_(false),
+
 	Alpha_(0.0f),
 
 	BackRenderer_(nullptr),
 	LightRenderer_(nullptr),
 
 	Collision_(nullptr),
-	PromptSet_(nullptr)
+	PromptSet_(nullptr),
+	TabletDialogue_(nullptr)
+
 {
 }
 
@@ -39,7 +43,7 @@ void Tablet::Update(float _DeltaTime)
 	TabletManager_.Update(_DeltaTime);
 }
 
-void Tablet::CreateTablet(std::string _BackFilePath, std::string _LightFilePath, float4 _CollSize)
+void Tablet::CreateTablet(std::string _BackFilePath, std::string _LightFilePath, float4 _CollSize, TabletType _TabletType)
 {
 	BackRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	BackRenderer_->SetTexture(_BackFilePath);
@@ -63,6 +67,48 @@ void Tablet::CreateTablet(std::string _BackFilePath, std::string _LightFilePath,
 	PromptSet_->SetParent(this);
 	PromptSet_->GetTransform().SetLocalPosition({0, 350});
 	PromptSet_->GetCollision()->GetTransform().SetLocalPosition({0, -350});
+
+	TabletDialogue_ = GetLevel()->CreateActor<TabletDialogue>();
+
+	switch (_TabletType)
+	{
+	case TabletType::FocusSpell:
+		SpellFocusInfo_ = GetLevel()->CreateActor<SpellFocusInfo>();
+		SpellFocusInfo_->SetSpellFocusInfoOff();
+
+		TabletDialogue_->PushDialogue("고귀한 존재들, 당신들을 위해 말한다.\n우리 일원이기에 위대한 힘이 있다.영혼을 집중해 꿈만 같은 일을 이룰 수 있다.");
+
+		break;
+	case TabletType::Tu_Story:
+		TabletDialogue_->PushDialogue("고귀한 존재들, 당신들을 위해 말한다.이곳 너머엔 왕과 창조주의 땅에 들어서게 된다.이 경계를 건넌다면, 우리의 법을 준수하라.");
+		TabletDialogue_->PushDialogue("최후이자 유일한 문명, 영원한 왕국을 목격하라.신성둥지");
+
+		break;
+	default:
+		break;
+	}
+
+
+}
+
+void Tablet::TabletDialogueOn()
+{
+	TabletDialogue_->SetDialogueOn();
+
+	if (SpellFocusInfo_ != nullptr)
+	{
+		SpellFocusInfo_->SetSpellFocusInfoOn();
+	}
+
+
+	isOpenDialogue_ = true;
+}
+
+void Tablet::TabletDialogueOff()
+{
+	TabletDialogue_->SetDialogueOff();
+	isOpenDialogue_ = false;
+
 }
 
 void Tablet::TabletIdleStart(const StateInfo& _Info)
@@ -121,6 +167,30 @@ void Tablet::TabletAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 void Tablet::TabletAppearEnd(const StateInfo& _Info)
 {
 	//Alpha_ = 1.0f;
+}
+
+void Tablet::TabletOnDialougueStart(const StateInfo& _Info)
+{
+}
+
+void Tablet::TabletOnDialougueUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Tablet::TabletOnDialougueEnd(const StateInfo& _Info)
+{
+}
+
+void Tablet::TabletOffDialougueStart(const StateInfo& _Info)
+{
+}
+
+void Tablet::TabletOffDialougueUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Tablet::TabletOffDialougueEnd(const StateInfo& _Info)
+{
 }
 
 bool Tablet::TabletVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other)

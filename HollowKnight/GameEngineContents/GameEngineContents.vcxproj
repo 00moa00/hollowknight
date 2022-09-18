@@ -514,7 +514,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SpellFocusInfo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Tablet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TabletDialogue.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -985,7 +993,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="SpellFocusInfo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Tablet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TabletDialogue.cpp">
       <SubType>
       </SubType>
     </ClCompile>

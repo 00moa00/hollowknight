@@ -58,6 +58,23 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
+	// ======== Knight VS Tablet ========
+
+	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Tablet, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnihgtVSTabletCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+
+		if (GameEngineInput::GetInst()->IsDown("KnightUp") == true)
+		{
+			KnightManager_.ChangeState("SEE");
+			return;
+
+		}
+
+	}
+
+
 	// ======== Knight VS Monster ========
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
@@ -2797,5 +2814,48 @@ void Knight::KnightDoorUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightDoorEnd(const StateInfo& _Info)
 {
 	ChangeLevel_ = "";
+}
+
+void Knight::KnightTabletStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("SEE_ANIMATION");
+
+}
+
+void Knight::KnightTabletUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	// ======== Knight VS Tablet ========
+
+	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Tablet, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnihgtVSTabletCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+
+	}
+
+}
+
+void Knight::KnightTabletEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightTabletReturnToIdleStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("SEE_RETURN_ANIMATION");
+
+}
+
+void Knight::KnightTabletReturnToIdleUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isReturnToIdle_ == true)
+	{
+		isReturnToIdle_ = false;
+		KnightManager_.ChangeState("STILL");
+
+	}
+}
+
+void Knight::KnightTabletReturnToIdleEnd(const StateInfo& _Info)
+{
 }
 

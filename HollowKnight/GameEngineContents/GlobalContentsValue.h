@@ -92,7 +92,7 @@ enum class Z_ORDER
 
 	Object,
 
-	Small_Light,
+	Small_Light = 30,
 
 	Light,
 

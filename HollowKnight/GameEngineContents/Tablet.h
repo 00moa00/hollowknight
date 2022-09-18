@@ -3,6 +3,18 @@
 #include <GameEngineCore/GameEngineCollision.h>
 
 #include "PromptSet.h"
+#include "TabletDialogue.h"
+
+#include "ContentsFontRenderer.h"
+#include "SpellFocusInfo.h"
+
+enum class TabletType
+{
+
+	FocusSpell,
+	Tu_Story
+
+};
 
 // Ό³Έν :
 class Tablet : public GameEngineActor
@@ -24,9 +36,9 @@ protected:
 
 private:
 
-	float Alpha_;
+	bool isOpenDialogue_;
 
-	GameEngineStateManager TabletManager_;
+	float Alpha_;
 
 
 	GameEngineTextureRenderer* BackRenderer_;
@@ -35,9 +47,39 @@ private:
 	GameEngineCollision* Collision_;
 
 	PromptSet* PromptSet_;
-public:
-	void CreateTablet(std::string _BackFilePath, std::string _LightFilePath, float4 _CollSize);
 
+	TabletDialogue* TabletDialogue_;
+	SpellFocusInfo* SpellFocusInfo_;
+
+
+
+	//TabletType TabletType_;
+	GameEngineStateManager TabletManager_;
+
+public:
+	void CreateTablet(std::string _BackFilePath, std::string _LightFilePath, float4 _CollSize, TabletType _TabletType);
+
+	void TabletDialogueOn();
+	void TabletDialogueOff();
+
+	bool GetisOpenDialogue() const
+	{
+		return isOpenDialogue_;
+	}
+
+	TabletDialogue* GetTabletDialogue() const
+	{
+		return TabletDialogue_;
+	}
+
+private:
+
+
+	void SetFocusSpell();
+
+	//================================
+	//    Bind 
+	//================================
 	void TabletIdleStart(const StateInfo& _Info);
 	void TabletIdleUpdate(float _DeltaTime, const StateInfo& _Info);
 	void TabletIdleEnd(const StateInfo& _Info);
@@ -45,6 +87,15 @@ public:
 	void TabletAppearStart(const StateInfo& _Info);
 	void TabletAppearUpdate(float _DeltaTime, const StateInfo& _Info);
 	void TabletAppearEnd(const StateInfo& _Info);
+
+	void TabletOnDialougueStart(const StateInfo& _Info);
+	void TabletOnDialougueUpdate(float _DeltaTime, const StateInfo& _Info);
+	void TabletOnDialougueEnd(const StateInfo& _Info);
+
+
+	void TabletOffDialougueStart(const StateInfo& _Info);
+	void TabletOffDialougueUpdate(float _DeltaTime, const StateInfo& _Info);
+	void TabletOffDialougueEnd(const StateInfo& _Info);
 
 
 	//================================

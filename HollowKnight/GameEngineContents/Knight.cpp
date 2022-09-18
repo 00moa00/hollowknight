@@ -19,6 +19,7 @@
 
 #include "MasterNPC.h"
 #include "RoomPotal.h"
+#include "Tablet.h"
 
 #include "MonsterHitEffect.h"
 
@@ -64,7 +65,7 @@ Knight::Knight()
 	isSitEnd_(false),
 	isDoorEnd_(false),
 	isRunTurnEnd_(false),
-
+	isReturnToIdle_(false),
 	isInvincibility_(false),
 	isKnightBlack_(false),
 
@@ -265,7 +266,23 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("SIT_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 0, 4, 0.070f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SIT_IDLE_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 3, 3, 0.100f));
 	
+	// ---- 문 들어가기 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("DOOR_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 9, 0.100f, false));
+
+	GetRenderer()->CreateFrameAnimationCutTexture("SEE_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 2, 0.100f, false));
+
+	{
+		std::vector<unsigned int>BackAni;
+
+		for (int i = 2; i > -1; --i)
+		{
+			BackAni.push_back(i);
+		}
+		GetRenderer()->CreateFrameAnimationCutTexture("SEE_RETURN_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", BackAni, 0.070f, false));
+	}
+
+
+	//GetRenderer()->CreateFrameAnimationCutTexture("SEE_RETURN_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 2, 0.100f, false));
 
 
 	// ---- 집중 ----
@@ -280,6 +297,12 @@ void Knight::Start()
 	//================================
 	//    Create Bind Animation
 	//================================
+
+	GetRenderer()->AnimationBindEnd("SEE_RETURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isReturnToIdle_ = true;
+
+		});
 
 	GetRenderer()->AnimationBindEnd("RUN_TURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -572,6 +595,16 @@ void Knight::Start()
 		, std::bind(&Knight::KnightDoorUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightDoorStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightDoorEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("SEE"
+		, std::bind(&Knight::KnightTabletUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightTabletStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightTabletEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("SEE_RETURN_TO_IDLE"
+		, std::bind(&Knight::KnightTabletReturnToIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightTabletReturnToIdleStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightTabletReturnToIdleEnd, this, std::placeholders::_1));
 
 	KnightManager_.ChangeState("STILL");
 
@@ -936,6 +969,47 @@ bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineColl
 
 bool Knight::KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
+	return true;
+}
+
+bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	Tablet* Tablet_ = dynamic_cast<Tablet*>(_Other->GetActor());
+	if (Tablet_ != nullptr)
+	{
+		if (Tablet_->GetisOpenDialogue() == false)
+		{
+			if (GameEngineInput::GetInst()->IsDown("KnightUp") == true)
+			{
+				Tablet_->TabletDialogueOn();
+
+			}
+		}
+
+		if (Tablet_->GetisOpenDialogue() == true)
+		{
+			if (GameEngineInput::GetInst()->IsDown("KnightUp") == true)
+			{
+
+				if (Tablet_->GetTabletDialogue()->GetDialougueFull() == true)
+				{
+					Tablet_->TabletDialogueOff();
+					KnightManager_.ChangeState("SEE_RETURN_TO_IDLE");
+
+
+				}
+				else 
+				{
+					Tablet_->GetTabletDialogue()->SetNextDialogue();
+
+				}
+
+
+
+			}
+		}
+	}
+
 	return true;
 }
 
