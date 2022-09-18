@@ -1006,6 +1006,8 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
 {
+	//isPossibleDoubleJump_ = true;
+
 	JumpAccel_ = 0.f;
 	//GetRenderer()->GetTransform().SetLocalScale({ 349, 186, 1 });
 	//GetRenderer()->SetPivot(PIVOTMODE::BOT);
@@ -1259,7 +1261,6 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightFallEnd(const StateInfo& _Info)
 {
-	isPossibleDoubleJump_ = true;
 
 	KnightFallAccel_ = 0.0f;
 

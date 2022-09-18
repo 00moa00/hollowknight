@@ -151,7 +151,7 @@ void Knight::Start()
 
 
 	KnightJumpPower_ = 330.f;
-	KnightDoubleJumpPower_ = 320.f;
+	KnightDoubleJumpPower_ = 300.f;
 	KnightRunSpeed_ = 400.f;
 	KnightActtingMoveDirPower_ = 2.0f;
 	KnightFallAccel_ = 0.0f;
