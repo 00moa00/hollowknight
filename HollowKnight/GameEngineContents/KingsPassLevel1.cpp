@@ -6,6 +6,8 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+#include "Potal.h"
+
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
@@ -65,6 +67,8 @@ void KingsPassLevel1::End() {}
 
 void KingsPassLevel1::LevelStartEvent()
 {
+	CreateActor<FadeIn>();
+
 	GetKnight()->SetDirInit(float4::RIGHT);
 
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());

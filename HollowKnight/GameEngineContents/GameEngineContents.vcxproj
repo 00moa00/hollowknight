@@ -277,6 +277,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="FadeIn.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FadeOut.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="FontActor.h">
       <SubType>
       </SubType>
@@ -334,6 +342,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PerlinNoise.h" />
+    <ClInclude Include="Potal.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PromptSet.h">
       <SubType>
       </SubType>
@@ -495,6 +507,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Soul.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TutorialBreakDoor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TutorialBreakLargeDoor.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -721,6 +741,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="FadeIn.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FadeOut.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="FontActor.cpp">
       <SubType>
       </SubType>
@@ -778,6 +806,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="PerlinNoise.cpp" />
+    <ClCompile Include="Potal.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PromptSet.cpp">
       <SubType>
       </SubType>
@@ -938,6 +970,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Soul.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TutorialBreakDoor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TutorialBreakLargeDoor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

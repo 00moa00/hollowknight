@@ -148,6 +148,9 @@
     <Filter Include="Actor\Effect\Knight\Spell">
       <UniqueIdentifier>{f2b9da81-f6a2-4fa5-b60a-8eacb4bf8d95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\Etc">
+      <UniqueIdentifier>{0ea2b947-c34d-4f71-b5cd-2b6ffcccfbe3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -482,6 +485,21 @@
     </ClInclude>
     <ClInclude Include="BloomRenderer.h">
       <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialBreakDoor.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialBreakLargeDoor.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Potal.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeIn.h">
+      <Filter>Actor\Effect\Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeOut.h">
+      <Filter>Actor\Effect\Etc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -829,6 +847,21 @@
     </ClCompile>
     <ClCompile Include="BloomRenderer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialBreakDoor.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialBreakLargeDoor.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Potal.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeIn.cpp">
+      <Filter>Actor\Effect\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeOut.cpp">
+      <Filter>Actor\Effect\Etc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+#include "Potal.h"
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
@@ -65,6 +66,9 @@ void KingsPassLevel4::End()
 
 void KingsPassLevel4::LevelStartEvent()
 {
+
+	CreateActor<FadeIn>();
+
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 	std::string EnumString;
 	auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel3);
@@ -86,7 +90,7 @@ void KingsPassLevel4::LevelStartEvent()
 
 	if (KnightData::GetInst()->GetPreLevel() == UpperName)
 	{
-		GetKnight()->GetTransform().SetLocalPosition({ 347.f, -1169.f, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->GetTransform().SetLocalPosition({ 5891.f, -1169.f, static_cast<float>(Z_ORDER::Knight) });
 
 
 	}

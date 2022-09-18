@@ -6,10 +6,12 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+#include "Potal.h"
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "Potal.h"
 
 DirtmouthLevel1::DirtmouthLevel1() 
 {
@@ -47,6 +49,34 @@ void DirtmouthLevel1::Start()
 	CreateEffectGUIActor();
 	CreateSettingPageActor();
 
+	{
+		Potal* KingsPassLevel4Potal_ = CreateActor<Potal>();
+
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel4);
+		EnumString = static_cast<std::string>(PrevName);
+
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+		KingsPassLevel4Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
+		KingsPassLevel4Potal_->GetTransform().SetWorldPosition({ 252 - 60, -973 });
+
+	}
+
+	{
+		Potal* DirtmouthLevel2Potal_ = CreateActor<Potal>();
+
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel2);
+		EnumString = static_cast<std::string>(PrevName);
+
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+		DirtmouthLevel2Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
+		DirtmouthLevel2Potal_->GetTransform().SetWorldPosition({ 3492 + 60, -3119 });
+
+	}
+
 	SetMapSize({ 3700, 3418 });
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
@@ -78,6 +108,8 @@ void DirtmouthLevel1::End()
 
 void DirtmouthLevel1::LevelStartEvent()
 {
+	CreateActor<FadeIn>();
+
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 	std::string EnumString;
 	auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel4);

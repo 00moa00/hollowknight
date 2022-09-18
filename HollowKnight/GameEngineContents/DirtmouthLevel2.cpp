@@ -10,6 +10,7 @@
 
 #include "Bench.h"
 #include "AreaTitle.h"
+#include "Potal.h"
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
@@ -93,6 +94,9 @@ void DirtmouthLevel2::End()
 
 void DirtmouthLevel2::LevelStartEvent()
 {
+	CreateActor<FadeIn>();
+
+
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 	std::string EnumString;
 	auto PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel3);

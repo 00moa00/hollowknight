@@ -9,6 +9,7 @@
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "Potal.h"
 
 
 KingsPassLevel3::KingsPassLevel3() 
@@ -67,6 +68,9 @@ void KingsPassLevel3::End()
 
 void KingsPassLevel3::LevelStartEvent()
 {
+	CreateActor<FadeIn>();
+
+
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 	std::string EnumString;
 	auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel2);

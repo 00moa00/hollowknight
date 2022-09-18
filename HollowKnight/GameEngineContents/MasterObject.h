@@ -19,6 +19,8 @@ public:
 protected:
 	GameEngineTextureRenderer* Renderer_;
 	GameEngineCollision* Collision_;
+	GameEngineCollision* WallCollision_;
+
 
 protected:
 	//================================

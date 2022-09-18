@@ -6,6 +6,7 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+#include "Potal.h"
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
@@ -70,6 +71,9 @@ void DirtmouthLevel3::End()
 
 void DirtmouthLevel3::LevelStartEvent()
 {
+	CreateActor<FadeIn>();
+
+
 }
 
 void DirtmouthLevel3::LevelEndEvent()

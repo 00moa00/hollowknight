@@ -6,6 +6,7 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+#include "Potal.h"
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
@@ -74,6 +75,9 @@ void CrossroadsLevel1::End()
 
 void CrossroadsLevel1::LevelStartEvent()
 {
+	CreateActor<FadeIn>();
+
+
 }
 
 void CrossroadsLevel1::LevelEndEvent()
