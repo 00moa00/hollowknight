@@ -23,6 +23,12 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+
+	float Alpha_;
+
+	GameEngineStateManager TabletManager_;
+
+
 	GameEngineTextureRenderer* BackRenderer_;
 	GameEngineTextureRenderer* LightRenderer_;
 
@@ -31,5 +37,20 @@ private:
 	PromptSet* PromptSet_;
 public:
 	void CreateTablet(std::string _BackFilePath, std::string _LightFilePath, float4 _CollSize);
+
+	void TabletIdleStart(const StateInfo& _Info);
+	void TabletIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void TabletIdleEnd(const StateInfo& _Info);
+
+	void TabletAppearStart(const StateInfo& _Info);
+	void TabletAppearUpdate(float _DeltaTime, const StateInfo& _Info);
+	void TabletAppearEnd(const StateInfo& _Info);
+
+
+	//================================
+	//    Bind 
+	//================================
+	bool TabletVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+
 };
 

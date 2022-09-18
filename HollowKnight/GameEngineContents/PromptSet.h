@@ -9,6 +9,7 @@ enum class PromptSetType
 {
 	TALK,
 	INTER,
+	SEARCH
 };
 
 class GameEngineTextureRenderer;

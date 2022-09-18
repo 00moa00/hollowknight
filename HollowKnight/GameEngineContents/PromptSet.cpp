@@ -112,6 +112,14 @@ void PromptSet::CreatePrompSet(PromptSetType _Type)
 		PromptSetType_ = _Type;
 
 		break;
+
+	case PromptSetType::SEARCH:
+		PromptName_->SetTexture("Search.png");
+		PromptName_->GetTransform().SetLocalScale(PromptName_->GetCurTexture()->GetScale());
+		PromptSetType_ = _Type;
+
+		break;
+
 	default:
 		break;
 	}
