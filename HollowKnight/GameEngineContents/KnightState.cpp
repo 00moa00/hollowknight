@@ -583,34 +583,34 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
-	{
-		KnightManager_.ChangeState("JUMP");
-		return;
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	//{
+	//	KnightManager_.ChangeState("JUMP");
+	//	return;
 
-	}
+	//}
 
 
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
-	{
-		KnightManager_.ChangeState("SLASH");
-		return;
-	}
+	//if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
+	//{
+	//	KnightManager_.ChangeState("SLASH");
+	//	return;
+	//}
 
-	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
-	{
-		KnightManager_.ChangeState("DOUBLE_SLASH");
-		return;
-	}
+	//if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
+	//{
+	//	KnightManager_.ChangeState("DOUBLE_SLASH");
+	//	return;
+	//}
 
-	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
-	{
-		isLookMap_ = true;
-		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
-		KnightManager_.ChangeState("MAP_WALKING");
-		return;
-	}
+	//if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
+	//{
+	//	isLookMap_ = true;
+	//	GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
+	//	KnightManager_.ChangeState("MAP_WALKING");
+	//	return;
+	//}
 
 	//if (GetisKnightMove() == false)
 	//{

@@ -19,6 +19,8 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	bool isTurnEnd_;
+
 	GameEngineStateManager CrawlidManager_;
 
 	GameEngineRenderer* GameEngineRenderer_;
@@ -46,5 +48,12 @@ private:
 	void CrawlidStunStart(const StateInfo& _Info);
 	void CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info);
 	void CrawlidStunEnd(const StateInfo& _Info);
+
+
+	//================================
+	//    Bind
+	//================================
+	bool MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);	//º®
+
 };
 

@@ -72,7 +72,7 @@ void MasterActor::CreateWallCollisionComponent(float4 _LocalScale)
 {
 	WallCollision_ = CreateComponent<GameEngineCollision>();
 	WallCollision_->GetTransform().SetLocalScale(_LocalScale);
-	WallCollision_->ChangeOrder(COLLISION_ORDER::Knight_Wall);
+	WallCollision_->ChangeOrder(COLLISION_ORDER::Wall_Actor);
 	WallCollision_->GetTransform().SetWorldPosition({0, 50});
 }
 

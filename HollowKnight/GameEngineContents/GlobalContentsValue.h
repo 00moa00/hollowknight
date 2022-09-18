@@ -29,7 +29,7 @@ enum class COLLISION_ORDER
 	Tablet,
 	//Elderbug,
 	Knight,
-	Knight_Wall,
+	Wall_Actor,
 	Prompt,
 	Object,
 	Bench,

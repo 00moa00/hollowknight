@@ -3,6 +3,7 @@
 
 Crawlid::Crawlid() 
 	:
+	isTurnEnd_(false),
 	CrawlidManager_()
 {
 }
@@ -15,29 +16,62 @@ void Crawlid::Start()
 {
 	SetName("Crawlid");
 
-	SetMoveDirection(float4::ZERO);
 
 	CreateCollisionComponent(float4{ 100, 100, 1 }, static_cast<int>(COLLISION_ORDER::Monster));
 	GetCollision()->GetTransform().SetWorldPosition({0, 50, 0});
 
+	CreateWallCollisionComponent(float4{ 20, 20, 1 });
+
+
 	CreateRendererComponent(float4{ 303, 177, 1 }, "Crawler_goomba_death0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
-	GetTransform().SetLocalPosition({ 700,-4000, static_cast<float>(Z_ORDER::Monster) });
+	GetTransform().SetLocalPosition({ 4650,-4638, static_cast<float>(Z_ORDER::Monster) });
 
 	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Crawler_goomba_death0000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Crawler_goomba_turn_r_0000-Sheet.png", 0, 1, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("TURN_LEFT_ANIMATION", FrameAnimation_DESC("Crawler_goomba_turn0000-Sheet.png", 0, 1, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("TURN_WALK_ANIMATION", FrameAnimation_DESC("Crawler_goomba_walk0000-Sheet.png", 0, 3, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Crawler_goomba_walk0000-Sheet.png", 0, 3, 0.100f));
 	
-	GetRenderer()->ChangeFrameAnimation("TURN_WALK_ANIMATION");
+	GetRenderer()->ChangeFrameAnimation("WALK_ANIMATION");
 
-
+	GetRenderer()->GetTransform().SetLocalPosition({0,-5.f});
 	CrawlidManager_.CreateStateMember("WALK"
-		, std::bind(&Crawlid::CrawlidWalkUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Crawlid::CrawlidWalkStart, this, std::placeholders::_1));
+		, std::bind(&Crawlid::CrawlidWalkUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Crawlid::CrawlidWalkStart, this, std::placeholders::_1));
 
 	CrawlidManager_.CreateStateMember("FALL"
-		, std::bind(&Crawlid::CrawlidFallUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Crawlid::CrawlidFallStart, this, std::placeholders::_1), std::bind(&Crawlid::CrawlidFallEnd, this, std::placeholders::_1));
+		, std::bind(&Crawlid::CrawlidFallUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Crawlid::CrawlidFallStart, this, std::placeholders::_1)
+		, std::bind(&Crawlid::CrawlidFallEnd, this, std::placeholders::_1));
+
+
+	CrawlidManager_.CreateStateMember("TURN"
+		, std::bind(&Crawlid::CrawlidTurnUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Crawlid::CrawlidTurnStart, this, std::placeholders::_1)
+		, std::bind(&Crawlid::CrawlidTurnEnd, this, std::placeholders::_1));
+
+	CrawlidManager_.CreateStateMember("STUN"
+		, std::bind(&Crawlid::CrawlidStunUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Crawlid::CrawlidStunStart, this, std::placeholders::_1)
+		, std::bind(&Crawlid::CrawlidStunEnd, this, std::placeholders::_1));
+
 
 	CrawlidManager_.ChangeState("WALK");
+
+	//================================
+	//    Create Bind Animation
+	//================================
+
+	GetRenderer()->AnimationBindEnd("TURN_RIGHT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isTurnEnd_ = true;
+
+		});
+
+	GetRenderer()->AnimationBindEnd("TURN_LEFT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isTurnEnd_ = true;
+
+		});
 
 	SetFallSpeed(2);
 	SetGravity(400.f);
@@ -68,29 +102,54 @@ void Crawlid::CrawlidStillEnd(float _DeltaTime, const StateInfo& _Info)
 
 void Crawlid::CrawlidWalkStart(const StateInfo& _Info)
 {
-	GetRenderer()->ChangeFrameAnimation("TURN_WALK_ANIMATION");
+	GetRenderer()->ChangeFrameAnimation("WALK_ANIMATION");
 }
 
 void Crawlid::CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	SetMonsterDirection();
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
-	//this->isWallCheck(_DeltaTime);
 
-	if (GetisWall() == true)
+	// ======== Crawlid VS WallColl ========
+	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
+		std::bind(&Crawlid::MonsterVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
 	{
-		SetMoveDirection(float4::ZERO);
-		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
+		SetisCollWall(true);
+	}
+	else
+	{
+		SetisCollWall(false);
+
 	}
 
-	else if (GetisOnGround() == true)
+
+
+	if (GetisWall() == true || GetisOnGround() == false || GetisCollWall() == true)
 	{
-		//GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
+
+		if (GetMoveDirection().CompareInt2D(float4::LEFT))
+		{
+			GetRenderer()->ChangeFrameAnimation("TURN_RIGHT_ANIMATION");
+			CrawlidManager_.ChangeState("TURN");
+			return;
+
+		}
+
+		if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+		{
+			GetRenderer()->ChangeFrameAnimation("TURN_LEFT_ANIMATION");
+			CrawlidManager_.ChangeState("TURN");
+			return;
+
+		}
 	}
 
 	else
 	{
-		CrawlidManager_.ChangeState("FALL");
+		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 	}
+
 
 }
 
@@ -126,10 +185,26 @@ void Crawlid::CrawlidTurnStart(const StateInfo& _Info)
 
 void Crawlid::CrawlidTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isTurnEnd_ == true)
+	{
+		isTurnEnd_ = false;
+		CrawlidManager_.ChangeState("WALK");
+	}
 }
 
 void Crawlid::CrawlidTurnEnd(const StateInfo& _Info)
 {
+	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		SetMoveDirection(float4::RIGHT);
+	}
+
+	else if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		SetMoveDirection(float4::LEFT);
+	}
+	SetMonsterDirection();
+
 }
 
 void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -138,6 +213,11 @@ void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Crawlid::CrawlidStunEnd(const StateInfo& _Info)
 {
+}
+
+bool Crawlid::MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	return true;
 }
 
 void Crawlid::CrawlidStunStart(const StateInfo& _Info)

@@ -21,7 +21,8 @@ protected:
 	//void Update(float _DeltaTime) {}
 	//void End() {}
 
-private:
+protected:
+	void SetMonsterDirection();
 
 };
 
