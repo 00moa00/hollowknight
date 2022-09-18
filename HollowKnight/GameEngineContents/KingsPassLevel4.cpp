@@ -65,7 +65,31 @@ void KingsPassLevel4::End()
 
 void KingsPassLevel4::LevelStartEvent()
 {
+	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
+	std::string EnumString;
+	auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel3);
+	EnumString = static_cast<std::string>(PrevName);
 
+	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+
+	if (KnightData::GetInst()->GetPreLevel() == UpperName)
+	{
+		GetKnight()->GetTransform().SetLocalPosition({ 3492.f, -3119.f, static_cast<float>(Z_ORDER::Knight) });
+
+	}
+
+	PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel1);
+	EnumString = static_cast<std::string>(PrevName);
+
+	UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+	if (KnightData::GetInst()->GetPreLevel() == UpperName)
+	{
+		GetKnight()->GetTransform().SetLocalPosition({ 347.f, -1169.f, static_cast<float>(Z_ORDER::Knight) });
+
+
+	}
 }
 
 void KingsPassLevel4::LevelEndEvent()

@@ -122,9 +122,11 @@ private:
 
 public:
 
+	void SetDirInit(float4 _Dir);					// 레벨 세팅때 텍스처 반전
 
 
 private:
+
 
 	bool GetisKnightMove();
 	void KnightDirectionCheck();

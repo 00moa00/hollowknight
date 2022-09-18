@@ -93,7 +93,32 @@ void DirtmouthLevel2::End()
 
 void DirtmouthLevel2::LevelStartEvent()
 {
+	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
+	std::string EnumString;
+	auto PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel3);
+	EnumString = static_cast<std::string>(PrevName);
 
+	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+
+	if (KnightData::GetInst()->GetPreLevel() == UpperName)
+	{
+		GetKnight()->GetTransform().SetLocalPosition({ 252, -973, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::LEFT);
+
+	}
+
+	PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel1);
+	EnumString = static_cast<std::string>(PrevName);
+
+	UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+	if (KnightData::GetInst()->GetPreLevel() == UpperName)
+	{
+		GetKnight()->GetTransform().SetLocalPosition({ 252, -3127, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::RIGHT);
+
+	}
 }
 
 void DirtmouthLevel2::LevelEndEvent()

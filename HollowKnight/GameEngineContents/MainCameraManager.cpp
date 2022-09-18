@@ -67,6 +67,10 @@ void MainCameraManager::Update(float _DeltaTime)
 void MainCameraManager::LevelStartEvent()
 {
 	CameraGUI_ = GameEngineGUI::CreateGUIWindow<CameraGUI>("Camera", GetLevel());
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({
+	GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x
+	,GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y
+	, -1800 });
 
 }
 

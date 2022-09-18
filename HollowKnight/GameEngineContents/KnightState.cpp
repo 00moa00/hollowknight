@@ -37,6 +37,8 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 
 void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	this->isPixelCheck(_DeltaTime, GetMoveDirection());
+
 	//this->isPixelCheck(_DeltaTime, GetMoveDirection());
 
 	//if (GetisWall() == true)
@@ -219,6 +221,12 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("FOCUS");
 		return;
 
+	}
+
+	if (GetisOnGround() == false)
+	{
+		KnightManager_.ChangeState("FALL");
+		return;
 	}
 }
 

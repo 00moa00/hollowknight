@@ -65,6 +65,22 @@ void KingsPassLevel1::End() {}
 
 void KingsPassLevel1::LevelStartEvent()
 {
+	GetKnight()->SetDirInit(float4::RIGHT);
+
+	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
+	std::string EnumString;
+	auto PrevName = magic_enum::enum_name(LevelList::CrossroadsLevel2);
+	EnumString = static_cast<std::string>(PrevName);
+
+	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+
+	if (KnightData::GetInst()->GetPreLevel() == UpperName)
+	{
+		GetKnight()->GetTransform().SetLocalPosition({ 6895, -4639, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::LEFT);
+
+	}
 
 }
 

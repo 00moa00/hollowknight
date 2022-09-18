@@ -548,7 +548,7 @@ void Knight::Start()
 		, std::bind(&Knight::KnightDoorStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightDoorEnd, this, std::placeholders::_1));
 
-	KnightManager_.ChangeState("FALL");
+	KnightManager_.ChangeState("STILL");
 
 	ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
 	ContentsFontRenderer_->CreateFontRenderer("가나다라마.바사", 24, {500,500}, false, 4);
@@ -594,6 +594,30 @@ void Knight::LevelEndEvent()
 
 
 
+
+void Knight::SetDirInit(float4 _Dir)
+{
+	SetMoveDirection(_Dir);
+
+	if (_Dir.CompareInt2D(float4::LEFT))
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
+		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalPositiveX();
+
+		this->SetMoveDirection(float4::LEFT);
+	}
+
+	if (_Dir.CompareInt2D(float4::RIGHT))
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
+		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalNegativeX();
+
+
+		this->SetMoveDirection(float4::RIGHT);
+	}
+}
 
 bool Knight::GetisKnightMove()
 {
