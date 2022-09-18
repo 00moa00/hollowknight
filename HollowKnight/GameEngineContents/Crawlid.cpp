@@ -54,6 +54,18 @@ void Crawlid::Update(float _DeltaTime)
 
 
 
+void Crawlid::CrawlidStillStart(const StateInfo& _Info)
+{
+}
+
+void Crawlid::CrawlidStillUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Crawlid::CrawlidStillEnd(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
 void Crawlid::CrawlidWalkStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("TURN_WALK_ANIMATION");
@@ -82,6 +94,10 @@ void Crawlid::CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 }
 
+void Crawlid::CrawlidWalkEnd(const StateInfo& _Info)
+{
+}
+
 void Crawlid::CrawlidFallStart(const StateInfo& _Info)
 {
 	//GetRenderer()->ChangeFrameAnimation("TURN_WALK_ANIMATION");
@@ -102,4 +118,28 @@ void Crawlid::CrawlidFallUpdate(float _DeltaTime, const StateInfo& _Info)
 void Crawlid::CrawlidFallEnd(const StateInfo& _Info)
 {
 
+}
+
+void Crawlid::CrawlidTurnStart(const StateInfo& _Info)
+{
+}
+
+void Crawlid::CrawlidTurnUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Crawlid::CrawlidTurnEnd(const StateInfo& _Info)
+{
+}
+
+void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Crawlid::CrawlidStunEnd(const StateInfo& _Info)
+{
+}
+
+void Crawlid::CrawlidStunStart(const StateInfo& _Info)
+{
 }

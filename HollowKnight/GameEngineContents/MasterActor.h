@@ -19,13 +19,14 @@ public:
 	MasterActor& operator=(const MasterActor& _Other) = delete;
 	MasterActor& operator=(MasterActor&& _Other) noexcept = delete;
 
-protected:
+private:
 	GameEngineTextureRenderer* MainRenderer_;
 	GameEngineTextureRenderer* CollisionMap_;
 	GameEngineCollision* MainCollision_;
 	GameEngineCollision* WallCollision_;
 
 	float4 MoveDirection_;
+	float4 PrevDirection_;
 
 	float Speed_;
 
@@ -89,6 +90,10 @@ public:
 		return WallCollision_;
 	}
 
+	float4 GetPrevDirection() const
+	{
+		return PrevDirection_;
+	}
 
 	float4 GetJumpPower() const
 	{
@@ -169,6 +174,11 @@ public:
 	
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
 	void CreateWallCollisionComponent(float4 _LocalScale);
+
+	void SetPrevDirection(float4 _Dir)
+	{
+		PrevDirection_ = _Dir;
+	}
 
 	void SetisCollWall(bool _b)
 	{

@@ -316,27 +316,28 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 		{
-			if (PrevDirection_.CompareInt2D( float4::LEFT) == false)
+			if (GetPrevDirection().CompareInt2D(float4::LEFT) == false)
 			{
-				PrevDirection_ = float4::LEFT;
+				SetPrevDirection(float4::LEFT);
+				//PrevDirection_ = float4::LEFT;
 				KnightManager_.ChangeState("WALK_TURN");
 			}
 
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
-			PrevDirection_ = float4::LEFT;
+			SetPrevDirection(float4::LEFT);
 		}
 
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
-			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
+			if (GetPrevDirection().CompareInt2D(float4::RIGHT) == false)
 			{
-				PrevDirection_ = float4::RIGHT;
+				SetPrevDirection(float4::RIGHT);
 				KnightManager_.ChangeState("WALK_TURN");
 			}
 
 			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
-			PrevDirection_ = float4::RIGHT;
+			SetPrevDirection(float4::RIGHT);
 		}
 	}
 
@@ -432,7 +433,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 {
-	if (PrevDirection_.CompareInt2D(float4::LEFT) == true)
+	if (GetPrevDirection().CompareInt2D(float4::LEFT) == true)
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 
@@ -450,7 +451,7 @@ void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 
 	}
 
-	else if (PrevDirection_.CompareInt2D(float4::RIGHT) == true)
+	else if (GetPrevDirection().CompareInt2D(float4::RIGHT) == true)
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
 
@@ -611,13 +612,13 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
-	if (GetisKnightMove() == false)
-	{
-		//isKnihgtStillWall_ = false;
+	//if (GetisKnightMove() == false)
+	//{
+	//	//isKnihgtStillWall_ = false;
 
-		KnightManager_.ChangeState("STILL");
-		return;
-	}
+	//	KnightManager_.ChangeState("STILL");
+	//	return;
+	//}
 
 	// ´ë½¬
 	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
@@ -1582,39 +1583,41 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 		//KnightManager_.ChangeState("FALL");
 	}
 
+
+
 	else if (GetisOnGround() == true)
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 		{
-			if (PrevDirection_.CompareInt2D(float4::LEFT) == false)
+			if (GetPrevDirection().CompareInt2D(float4::LEFT) == false)
 			{
-				PrevDirection_ = float4::LEFT;
-				//GetRenderer()->GetTransform().PixLocalNegativeX();
-
+				SetPrevDirection(float4::LEFT);
+				//PrevDirection_ = float4::LEFT;
 				KnightManager_.ChangeState("WALK_TURN");
 				return;
 			}
 
 			GetTransform().SetWorldMove(float4::LEFT * KnightRunSpeed_ * _DeltaTime);
-			PrevDirection_ = float4::LEFT;
+			SetPrevDirection(float4::LEFT);
 		}
 
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
-			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
+			if (GetPrevDirection().CompareInt2D(float4::RIGHT) == false)
 			{
-				PrevDirection_ = float4::RIGHT;
-			//	GetRenderer()->GetTransform().PixLocalNegativeX();
-
+				SetPrevDirection(float4::RIGHT);
 				KnightManager_.ChangeState("WALK_TURN");
 				return;
+
 			}
 
 			GetTransform().SetWorldMove(float4::RIGHT * KnightRunSpeed_ * _DeltaTime);
-			PrevDirection_ = float4::RIGHT;
+			SetPrevDirection(float4::RIGHT);
 		}
 	}
+
+
 
 	else if (GetisOnGround() == false && isKnightPotal_ == false)
 	{
@@ -2514,29 +2517,28 @@ void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 		{
-
-			if (PrevDirection_.CompareInt2D(float4::LEFT) == false)
+			if (GetPrevDirection().CompareInt2D(float4::LEFT) == false)
 			{
-				PrevDirection_ = float4::LEFT;
-				KnightManager_.ChangeState("MAP_WALKING_TURN");
+				SetPrevDirection(float4::LEFT);
+				//PrevDirection_ = float4::LEFT;
+				KnightManager_.ChangeState("WALK_TURN");
 			}
 
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
-			PrevDirection_ = float4::LEFT;
+			SetPrevDirection(float4::LEFT);
 		}
 
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
-
-			if (PrevDirection_.CompareInt2D(float4::RIGHT) == false)
+			if (GetPrevDirection().CompareInt2D(float4::RIGHT) == false)
 			{
-				PrevDirection_ = float4::RIGHT;
-				KnightManager_.ChangeState("MAP_WALKING_TURN");
+				SetPrevDirection(float4::RIGHT);
+				KnightManager_.ChangeState("WALK_TURN");
 			}
 
 			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
-			PrevDirection_ = float4::RIGHT;
+			SetPrevDirection(float4::RIGHT);
 		}
 	}
 
@@ -2569,12 +2571,12 @@ void Knight::KnightMapWalkinglEnd(const StateInfo& _Info)
 
 void Knight::KnightMapWalkingTurnlStart(const StateInfo& _Info)
 {
-	if (PrevDirection_.CompareInt2D(float4::LEFT) == true)
+	if (GetPrevDirection().CompareInt2D(float4::LEFT) == true)
 	{
 		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_TURN_RIGHT_ANIMATION");
 	}
 
-	if (PrevDirection_.CompareInt2D(float4::RIGHT) == true)
+	if (GetPrevDirection().CompareInt2D(float4::RIGHT) == true)
 	{
 		GetRenderer()->ChangeFrameAnimation("MAP_WALKING_TURN_LEFT_ANIMATION");
 	}

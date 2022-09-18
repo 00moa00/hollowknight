@@ -99,7 +99,6 @@ private:
 	float KnihgtFocusTimer_;
 
 	float4 ActtingMoveDirection_;	//다른 행동중일 때 방향이 바뀌면 임시로 넣는 용도
-	float4 PrevDirection_;
 
 	float4 KnockbackDirection_;
 
