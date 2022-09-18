@@ -107,6 +107,10 @@ void Tablet::TabletDialogueOn()
 void Tablet::TabletDialogueOff()
 {
 	TabletDialogue_->SetDialogueOff();
+	if (SpellFocusInfo_ != nullptr)
+	{
+		SpellFocusInfo_->SetSpellFocusInfoOff();
+	}
 	isOpenDialogue_ = false;
 
 }
