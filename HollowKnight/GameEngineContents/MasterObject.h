@@ -16,7 +16,7 @@ public:
 	MasterObject& operator=(const MasterObject& _Other) = delete;
 	MasterObject& operator=(MasterObject&& _Other) noexcept = delete;
 
-protected:
+private:
 	GameEngineTextureRenderer* Renderer_;
 	GameEngineCollision* Collision_;
 	GameEngineCollision* WallCollision_;

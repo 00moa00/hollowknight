@@ -10,6 +10,7 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 #include "Potal.h"
+#include "Tablet.h"
 
 
 KingsPassLevel3::KingsPassLevel3() 
@@ -72,6 +73,10 @@ void KingsPassLevel3::Start()
 		Potal_->GetTransform().SetWorldPosition({ 3435.f + 60, -1169.f });
 
 	}
+
+	Tablet* Tablet_ = CreateActor<Tablet>();
+	Tablet_->CreateTablet("Mines_Layered_0017_a.png", "lit_tablet.png", {700, 500});
+	Tablet_->GetTransform().SetWorldPosition({ 4295,-3259, static_cast<float>(Z_ORDER::Back_Object)});
 
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();

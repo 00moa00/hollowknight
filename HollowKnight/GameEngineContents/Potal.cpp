@@ -53,9 +53,6 @@ void Potal::Update(float _DeltaTime)
 		}
 	}
 
-
-
-
 }
 
 void Potal::LevelStartEvent()

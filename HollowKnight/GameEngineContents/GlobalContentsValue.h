@@ -26,6 +26,7 @@ enum class COLLISION_ORDER
 	NPC,
 	Potal,
 	Wall,
+	Tablet,
 	//Elderbug,
 	Knight,
 	Knight_Wall,
@@ -99,6 +100,7 @@ enum class Z_ORDER
 
 	Side_Dark,
 
+	Back_Object,
 
 
 	Background_Object = 40 ,

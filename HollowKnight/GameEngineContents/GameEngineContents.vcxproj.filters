@@ -507,6 +507,9 @@
     <ClInclude Include="AmblentLife.h">
       <Filter>Actor\Effect\Map</Filter>
     </ClInclude>
+    <ClInclude Include="Tablet.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -871,6 +874,9 @@
     </ClCompile>
     <ClCompile Include="AmblentLife.cpp">
       <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Tablet.cpp">
+      <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
