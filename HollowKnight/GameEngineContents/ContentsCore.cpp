@@ -1042,6 +1042,25 @@ void ContentsCore::Start()
 		}
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Object");
+		Dir.Move("Amblent Life");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Ambient Life_cave_glow_bug0000-Sheet.png", 4, 1);
+
+	}
 
 
 	//================================

@@ -151,6 +151,9 @@
     <Filter Include="Actor\Effect\Etc">
       <UniqueIdentifier>{0ea2b947-c34d-4f71-b5cd-2b6ffcccfbe3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\Map">
+      <UniqueIdentifier>{cea18bcf-d031-48bf-827b-e5b1759807fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -500,6 +503,9 @@
     </ClInclude>
     <ClInclude Include="FadeOut.h">
       <Filter>Actor\Effect\Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="AmblentLife.h">
+      <Filter>Actor\Effect\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -862,6 +868,9 @@
     </ClCompile>
     <ClCompile Include="FadeOut.cpp">
       <Filter>Actor\Effect\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="AmblentLife.cpp">
+      <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

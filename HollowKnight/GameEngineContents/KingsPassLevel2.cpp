@@ -12,6 +12,8 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 
+#include "AmblentLife.h"
+
 
 KingsPassLevel2::KingsPassLevel2() 
 {
@@ -74,6 +76,31 @@ void KingsPassLevel2::Start()
 		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
 		Potal_->GetTransform().SetWorldPosition({ 172.f - 60, -532.f, });
 
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 1217.f , -2000.f }, 150);
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 1607.f , -1600.f }, 150);
+	} 
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 1317.f , -1300.f }, 150);
+	}
+
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 1817.f , -1000.f }, 150);
 	}
 
 
