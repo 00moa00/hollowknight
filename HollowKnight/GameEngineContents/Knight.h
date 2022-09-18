@@ -319,6 +319,9 @@ private:
 
 	bool KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other);	//Æ÷Å»
 
+
+	bool KnightVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);	//º®
+
 	//================================
 	//   Getter
 	//================================

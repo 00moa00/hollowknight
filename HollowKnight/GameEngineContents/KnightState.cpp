@@ -1222,6 +1222,18 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		SetisWall(true);
+	}
+	else
+	{
+		SetisWall(false);
+
+	}
+
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 

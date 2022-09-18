@@ -23,6 +23,7 @@ protected:
 	GameEngineTextureRenderer* MainRenderer_;
 	GameEngineTextureRenderer* CollisionMap_;
 	GameEngineCollision* MainCollision_;
+	GameEngineCollision* WallCollision_;
 
 	float4 MoveDirection_;
 
@@ -80,6 +81,11 @@ public:
 	GameEngineCollision* GetCollision() const
 	{
 		return MainCollision_;
+	}
+
+	GameEngineCollision* GetWallCollision() const
+	{
+		return WallCollision_;
 	}
 
 
@@ -156,6 +162,9 @@ public:
 
 	
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
+	void CreateWallCollisionComponent(float4 _LocalScale);
+
+
 
 	void SetJumpSpeed(float _JumpSpeed)
 	{

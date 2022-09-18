@@ -2,6 +2,10 @@
 #include "MasterObject.h"
 
 MasterObject::MasterObject() 
+	:
+	Renderer_(nullptr),
+	Collision_(nullptr),
+	WallCollision_(nullptr)
 {
 }
 
@@ -28,5 +32,12 @@ void MasterObject::CreateCollisionComponent(float4 _LocalScale, int _Order)
 	Collision_ = CreateComponent<GameEngineCollision>();
 	Collision_->GetTransform().SetLocalScale(_LocalScale);
 	Collision_->ChangeOrder(_Order);
+}
+
+void MasterObject::CreateWallCollisionComponent(float4 _LocalScale)
+{
+	WallCollision_ = CreateComponent<GameEngineCollision>();
+	WallCollision_->GetTransform().SetLocalScale(_LocalScale);
+	WallCollision_->ChangeOrder(COLLISION_ORDER::Wall);
 }
 

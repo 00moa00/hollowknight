@@ -43,6 +43,7 @@ protected:
 	void CreateRendererComponent(std::string _FileName);
 
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
+	void CreateWallCollisionComponent(float4 _LocalScale);
 
 
 };

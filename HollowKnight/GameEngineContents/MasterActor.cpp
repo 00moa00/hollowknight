@@ -6,6 +6,7 @@ MasterActor::MasterActor()
 	MainRenderer_(nullptr),
 	CollisionMap_(nullptr),
 	MainCollision_(nullptr),
+	WallCollision_(nullptr),
 	GravityY(),
 	JumpPower_(),
 	CollisionSize_(),
@@ -64,6 +65,14 @@ void MasterActor::CreateCollisionComponent(float4 _LocalScale, int _Order)
 	MainCollision_ = CreateComponent<GameEngineCollision>();
 	MainCollision_->GetTransform().SetLocalScale(_LocalScale);
 	MainCollision_->ChangeOrder(_Order);
+}
+
+void MasterActor::CreateWallCollisionComponent(float4 _LocalScale)
+{
+	WallCollision_ = CreateComponent<GameEngineCollision>();
+	WallCollision_->GetTransform().SetLocalScale(_LocalScale);
+	WallCollision_->ChangeOrder(COLLISION_ORDER::Knight_Wall);
+	WallCollision_->GetTransform().SetWorldPosition({0, 50});
 }
 
 

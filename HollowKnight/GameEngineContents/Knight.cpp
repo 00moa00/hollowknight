@@ -108,6 +108,8 @@ void Knight::Start()
 
 
 	CreateCollisionComponent(float4{60, 120, 1}, static_cast<int>(COLLISION_ORDER::Knight));
+	CreateWallCollisionComponent(float4{ 20, 20, 1 });
+
 	GetCollision()->GetTransform().SetWorldPosition({0, 120/2, static_cast<float>(Z_ORDER::Knight) });
 
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
@@ -677,6 +679,7 @@ void Knight::KnightDirectionCheck()
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
+		GetWallCollision()->GetTransform().SetLocalPosition({-20, 50});
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalPositiveX();
 
 		this->SetMoveDirection(float4::LEFT);
@@ -687,6 +690,7 @@ void Knight::KnightDirectionCheck()
 		GetRenderer()->GetTransform().PixLocalNegativeX();
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalNegativeX();
+		GetWallCollision()->GetTransform().SetLocalPosition({ 20, 50 });
 
 
 		this->SetMoveDirection(float4::RIGHT);
@@ -1033,6 +1037,12 @@ bool Knight::KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollis
 	}
 
 	return true;
+}
+
+bool Knight::KnightVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	return true;
+	//SetisWall(true);
 }
 
 
