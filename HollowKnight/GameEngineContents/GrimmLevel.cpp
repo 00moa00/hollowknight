@@ -17,6 +17,8 @@
 #include "VignettePostEffect.h"
 
 GrimmLevel::GrimmLevel() 
+	:
+	Grimm_(nullptr)
 {
 }
 
@@ -48,6 +50,10 @@ void GrimmLevel::Start()
 	CreateSettingPageActor();
 	CreateMainCameraManager();
 	CreateEffectGUIActor();
+
+	Grimm_ = CreateActor<Grimm>();
+	Grimm_->GetTransform().SetWorldPosition({5380,-930 , static_cast<float>(Z_ORDER::Monster) });
+
 
 	//{
 	//	Potal* Potal_ = CreateActor<Potal>();

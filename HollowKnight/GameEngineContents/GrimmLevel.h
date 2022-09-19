@@ -2,6 +2,8 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include "HollowKnightLevel.h"
 
+#include "Grimm.h"
+
 // Ό³Έν :
 class GrimmLevel : public HollowKnightLevel
 {
@@ -23,7 +25,8 @@ protected:
 
 	void LevelStartEvent() override;
 	void LevelEndEvent() override;
-private:
 
+private:
+	Grimm* Grimm_;
 };
 
