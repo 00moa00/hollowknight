@@ -20,7 +20,6 @@ void Crawlid::Start()
 {
 	SetName("Crawlid");
 
-
 	CreateCollisionComponent(float4{ 100, 100, 1 }, static_cast<int>(COLLISION_ORDER::Monster));
 	GetCollision()->GetTransform().SetWorldPosition({0, 50, 0});
 

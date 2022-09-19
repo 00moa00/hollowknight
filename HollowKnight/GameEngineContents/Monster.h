@@ -22,6 +22,7 @@ public:
 	//void End() {}
 
 	virtual void SetMonsterHit(int _Damage, float4 _StunDir) {};
+
 private:
 
 	bool isMonsterDeath_;

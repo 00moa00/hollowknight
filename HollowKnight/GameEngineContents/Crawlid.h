@@ -17,6 +17,7 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
+
 public:
 	void SetMonsterHit(int _Damage, float4 _StunDir) override;
 
@@ -29,7 +30,7 @@ private:
 
 	GameEngineStateManager CrawlidManager_;
 
-	GameEngineRenderer* GameEngineRenderer_;
+	//GameEngineRenderer* GameEngineRenderer_;
 
 private:
 	//================================
