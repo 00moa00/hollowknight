@@ -851,7 +851,6 @@ void ContentsCore::Start()
 
 	}
 
-
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -868,10 +867,36 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
-		GameEngineTexture::Cut("Buzzer_death0000-Sheet.png", 3, 1);
-
-
+		GameEngineTexture::Cut("Grimm Cln_Grimm_air_dash0000-Sheet.png", 18, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_anims_v050000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_arm0000-Sheet.png", 10, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_boss_balloon_attack0000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Grimm Cln_grimm_boss_flame_pillar_talk_loop0000-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_Boss_ground_spike_attack0003-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_bow0000-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_cast0000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_death_stun0000-Sheet.png", 2, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_evade0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_flame_pillar0000-Sheet.png", 15, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_idle_right0000-Sheet.png", 13, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_idle0000-Sheet.png", 12, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_roar0000-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_slash_antic0000-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_slash0000-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_slash0000-Sheet-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_stun_bat0000-Sheet.png", 9, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_stun_explode0000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_teleport0000-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Grimm NPC_Grimm_arm0000-Sheet.png", 10, 1);
+		GameEngineTexture::Cut("Grimm NPC_grimm_boss_flame_pillar_talk_loop0000-Sheet.png", 4, 1);
+		GameEngineTexture::Cut("Grimm NPC_Grimm_bow0000-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Grimm NPC_Grimm_flame_pillar0000-Sheet.png", 15, 1);
+		GameEngineTexture::Cut("Grimm NPC_Grimm_idle_right0000-Sheet.png", 13, 1);
+		GameEngineTexture::Cut("Grimm NPC_Grimm_idle0000-Sheet.png", 12, 1);
+		GameEngineTexture::Cut("Grimm NPC_Grimm_teleport0000-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Grimm_crowd0000-Sheet.png", 8, 1);
 	}
+
 
 	{
 		GameEngineDirectory Dir;
@@ -889,7 +914,10 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
-		GameEngineTexture::Cut("Buzzer_death0000-Sheet.png", 3, 1);
+		GameEngineTexture::Cut("Grimm Cln_Flame_bat0000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Grimm Cln_Flame_Pillar_flash0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Grimm Cln_ground_dash_effect0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Grimmkin Cln_grimm_fireball0000-Sheet.png", 8, 1);
 
 
 	}
