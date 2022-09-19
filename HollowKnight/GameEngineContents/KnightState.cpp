@@ -583,12 +583,12 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 
-	//if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
-	//{
-	//	KnightManager_.ChangeState("JUMP");
-	//	return;
+	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
+	{
+		KnightManager_.ChangeState("JUMP");
+		return;
 
-	//}
+	}
 
 
 
