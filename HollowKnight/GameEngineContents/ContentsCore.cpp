@@ -14,6 +14,8 @@
 #include "DirtmouthLevel1.h"
 #include "DirtmouthLevel2.h"
 
+#include "GrimmLevel.h"
+
 #include "MapShopLevel.h"
 #include "SlyShopLevel.h"
 
@@ -809,6 +811,29 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Monster");
+		Dir.Move("Crawler");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Crawler_goomba_death0000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Crawler_goomba_turn_r_0000-Sheet.png", 2, 1);
+		GameEngineTexture::Cut("Crawler_goomba_turn0000-Sheet.png", 2, 1);
+		GameEngineTexture::Cut("Crawler_goomba_walk0000-Sheet.png", 4, 1);
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Monster");
+		Dir.Move("Buzzer");
 
 
 		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
@@ -824,10 +849,49 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Buzzer_startle_01-Sheet.png", 4, 1);
 		GameEngineTexture::Cut("Buzzer_turn001-Sheet.png", 2, 1);
 
-		GameEngineTexture::Cut("Crawler_goomba_death0000-Sheet.png", 5, 1);
-		GameEngineTexture::Cut("Crawler_goomba_turn_r_0000-Sheet.png", 2, 1);
-		GameEngineTexture::Cut("Crawler_goomba_turn0000-Sheet.png", 2, 1);
-		GameEngineTexture::Cut("Crawler_goomba_walk0000-Sheet.png", 4, 1);
+	}
+
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Monster");
+		Dir.Move("Grimm");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Buzzer_death0000-Sheet.png", 3, 1);
+
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Monster");
+		Dir.Move("GrimmEffect");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Buzzer_death0000-Sheet.png", 3, 1);
+
+
 	}
 
 	//================================
@@ -1026,6 +1090,31 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
+
+
+
+	//================================
+	//    텍스처 / 맵 / Grimm
+	//================================
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("Dirtmouth");
+		Dir.Move("Grimm");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
+
+
 	//================================
 	//    텍스처 / 오브젝트
 	//================================
@@ -1330,6 +1419,10 @@ void ContentsCore::Start()
 
 	CreateLevel<CrossroadsLevel1>("CrossroadsLevel1");
 
+	CreateLevel<GrimmLevel>("GrimmmLevel");
+
+
+	
 	//CreateLevel<CrossroadsLevel2>("CrossroadsLevel2");
 
 	CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");

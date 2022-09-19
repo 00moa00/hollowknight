@@ -157,6 +157,9 @@
     <Filter Include="Actor\Play\UI\Tablet">
       <UniqueIdentifier>{121b324e-625d-4fa6-adc6-8c18392b050f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\Monster\Boss">
+      <UniqueIdentifier>{19190a24-b197-4d62-bce6-446ff9cb8440}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -518,6 +521,12 @@
     </ClInclude>
     <ClInclude Include="SpellFocusInfo.h">
       <Filter>Actor\Play\UI\Tablet</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmLevel.h">
+      <Filter>Level\Levels\Dirtmouth\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="Grimm.h">
+      <Filter>Actor\Play\Monster\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -892,6 +901,12 @@
     </ClCompile>
     <ClCompile Include="SpellFocusInfo.cpp">
       <Filter>Actor\Play\UI\Tablet</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmLevel.cpp">
+      <Filter>Level\Levels\Dirtmouth\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="Grimm.cpp">
+      <Filter>Actor\Play\Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

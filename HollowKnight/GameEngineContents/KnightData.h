@@ -29,9 +29,12 @@ enum class LevelList
 	DirtmouthLevel2,
 	DirtmouthLevel3,
 
+	GrimmmLevel,
+
 
 	SlyShopLevel,
 	MapShopLevel,
+
 	DirtmouthStationLevel
 
 

@@ -991,7 +991,6 @@ bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineColli
 			{
 				Tablet_->TabletDialogueOn();
 				return true;
-
 			}
 		}
 
@@ -1004,16 +1003,11 @@ bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineColli
 				{
 					Tablet_->TabletDialogueOff();
 					KnightManager_.ChangeState("SEE_RETURN_TO_IDLE");
-
-
 				}
 				else 
 				{
 					Tablet_->GetTabletDialogue()->SetNextDialogue();
-
 				}
-
-
 
 			}
 		}
