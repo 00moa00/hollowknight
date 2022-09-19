@@ -72,6 +72,12 @@ public:
 		return TabletDialogue_;
 	}
 
+	PromptSet* GetPromptSet() const
+	{
+		return PromptSet_;
+	}
+
+
 private:
 
 

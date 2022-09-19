@@ -46,11 +46,23 @@ public:
 		return isDialougueFull_;
 	}
 
+	GameEngineUIRenderer* GetArrow()
+	{
+		return NextArrow_;
+	}
 
 
 	//================================
 	//    Setter
 	//================================
+
+	void SetOnePage()
+	{
+		isDialougueFull_ = true;
+		NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
+		NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
+
+	}
 
 	void SetDialogueOn()
 	{
@@ -82,13 +94,13 @@ public:
 	}
 
 
-	void PushDialogue(std::string _Dialougue)
+	void PushDialogue(std::string _Dialougue, float _MarginY)
 	{
 		DialogueList_.push_back(GetLevel()->CreateActor<ContentsFontRenderer>());
 		DialogueList_.back()->CreateFontRenderer(
 			_Dialougue
 			, 37
-			, { GameEngineWindow::GetInst()->GetScale().hx() , GameEngineWindow::GetInst()->GetScale().hy()-370.f },
+			, { GameEngineWindow::GetInst()->GetScale().hx() , GameEngineWindow::GetInst()->GetScale().hy()-(370.f - _MarginY) },
 			true,
 			true,
 			27
@@ -105,12 +117,30 @@ public:
 	{
 		if (isDialougueFull_ == false)
 		{
+
+			//if (CurrentDialoguePage_ == DialogueList_.size() - 1)
+			//{
+			//	isDialougueFull_ = true;
+			//	return;
+			//}
+
 			++CurrentDialoguePage_;
-			if (CurrentDialoguePage_ == DialogueList_.size() )
+
+
+			if (CurrentDialoguePage_ == DialogueList_.size()-1 )
 			{
 				isDialougueFull_ = true;
 				NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
-				return;
+				NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
+
+				//return;
+
+			}
+			else
+			{
+				NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
+				NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
+
 
 			}
 
@@ -125,7 +155,6 @@ public:
 
 			DialogueList_[CurrentDialoguePage_]->GetFontRenderer()->On();
 			DialogueList_[CurrentDialoguePage_]->FontOn();
-			NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
 
 		}
 	}

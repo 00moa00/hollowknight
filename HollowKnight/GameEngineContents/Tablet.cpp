@@ -76,12 +76,14 @@ void Tablet::CreateTablet(std::string _BackFilePath, std::string _LightFilePath,
 		SpellFocusInfo_ = GetLevel()->CreateActor<SpellFocusInfo>();
 		SpellFocusInfo_->SetSpellFocusInfoOff();
 
-		TabletDialogue_->PushDialogue("고귀한 존재들, 당신들을 위해 말한다.\n우리 일원이기에 위대한 힘이 있다.영혼을 집중해 꿈만 같은 일을 이룰 수 있다.");
+		TabletDialogue_->PushDialogue("고귀한 존재들, 당신들을 위해 말한다.\n우리 일원이기에 위대한 힘이 있다.영혼을 집중해 꿈만 같은 일을 이룰 수 있다.", 0);
 
 		break;
 	case TabletType::Tu_Story:
-		TabletDialogue_->PushDialogue("고귀한 존재들, 당신들을 위해 말한다.이곳 너머엔 왕과 창조주의 땅에 들어서게 된다.이 경계를 건넌다면, 우리의 법을 준수하라.");
-		TabletDialogue_->PushDialogue("최후이자 유일한 문명, 영원한 왕국을 목격하라.신성둥지");
+		TabletDialogue_->PushDialogue("고귀한 존재들, 당신들을 위해 말한다.\n이곳 너머엔 왕과 창조주의 땅에 들어서게 된다.이 경계를 건넌다면, 우리의 법을 준수하라.", 100);
+		TabletDialogue_->PushDialogue("최후이자 유일한 문명, 영원한 왕국을 목격하라.\n신성둥지", 100);
+		TabletDialogue_->GetArrow()->GetTransform().SetLocalPosition({0,-50});
+		PromptSet_->GetTransform().SetLocalPosition({ 0, 450 });
 
 		break;
 	default:
@@ -102,6 +104,7 @@ void Tablet::TabletDialogueOn()
 
 
 	isOpenDialogue_ = true;
+	PromptSet_->Off();
 }
 
 void Tablet::TabletDialogueOff()
@@ -112,6 +115,7 @@ void Tablet::TabletDialogueOff()
 		SpellFocusInfo_->SetSpellFocusInfoOff();
 	}
 	isOpenDialogue_ = false;
+	PromptSet_->On();
 
 }
 

@@ -7,6 +7,7 @@
 #include "Monster.h"
 #include "KnightData.h"
 #include "Potal.h"
+#include "Tablet.h"
 
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
@@ -74,6 +75,11 @@ void KingsPassLevel4::Start()
 		Potal_->GetTransform().SetWorldPosition({ 5891.f + 60, -1169.f });
 
 	}
+
+	Tablet* Tablet_ = CreateActor<Tablet>();
+	Tablet_->CreateTablet("Mines_Layered_0018_a.png", "lit_tablet_02.png", { 700, 500 }, TabletType::Tu_Story);
+	Tablet_->GetTransform().SetWorldPosition({ 4388,-1169, static_cast<float>(Z_ORDER::Back_Object) });
+
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);

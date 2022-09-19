@@ -35,7 +35,7 @@ void KingsPassLevel2::Start()
 	GetMasterMap()->CreateFrontObject("King's-Pass_FrontObject_2.png");
 
 	CreateKnightActor(); // 플레이어
-	CreateKingsPass1Monster();
+	CreateKingsPass2Monster();
 
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());

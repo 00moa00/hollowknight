@@ -64,6 +64,13 @@ void HollowKnightLevel::CreateKingsPass1Monster()
 	Crawlid_ = CreateActor<Crawlid>();
 }
 
+void HollowKnightLevel::CreateKingsPass2Monster()
+{
+	Crawlid_ = CreateActor<Crawlid>();
+	Crawlid_->GetTransform().SetWorldPosition({1756, -2265});
+
+}
+
 void HollowKnightLevel::CreateUIActor()
 {
 	HUD_ = CreateActor<HUD>();

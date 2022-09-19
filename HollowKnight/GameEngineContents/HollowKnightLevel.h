@@ -71,6 +71,8 @@ protected:
 	void CraateMasterMapActor();
 	void CreateKnightActor();
 	void CreateKingsPass1Monster();
+	void CreateKingsPass2Monster();
+
 	void CreateUIActor();
 	void CreateKnightShadowActor();
 	void CreateSettingPageActor();

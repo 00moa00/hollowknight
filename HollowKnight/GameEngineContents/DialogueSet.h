@@ -95,7 +95,13 @@ public:
 			{
 				isDialougueFull_ = true;
 				NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
-				return;
+				//return;
+			}
+
+			else
+			{
+				NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
+
 			}
 
 			for (int i = 0; i < DialogueList_.size(); ++i)
@@ -109,7 +115,6 @@ public:
 
 			DialogueList_[CurrentDialoguePage_]->GetFontRenderer()->On();
 			DialogueList_[CurrentDialoguePage_]->FontOn();
-			NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
 
 		}
 	}

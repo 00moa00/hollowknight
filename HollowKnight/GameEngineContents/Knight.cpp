@@ -990,6 +990,7 @@ bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineColli
 			if (GameEngineInput::GetInst()->IsDown("KnightUp") == true)
 			{
 				Tablet_->TabletDialogueOn();
+				return true;
 
 			}
 		}
