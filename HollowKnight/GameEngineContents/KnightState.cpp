@@ -470,12 +470,27 @@ void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 		}
 
 	}
+
+	isWalkTurnEnd_ = false;
+	isRunTurnEnd_ = false;
 }
 
 void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-//	GetRenderer()->ChangeFrameAnimation("RUN_TURN_ANIMATION");
 
+	this->isPixelCheck(_DeltaTime, GetMoveDirection());
+
+	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		SetisCollWall(true);
+	}
+	else
+	{
+		SetisCollWall(false);
+
+	}
 
 	if (isWalkTurnEnd_ == true || isRunTurnEnd_ == true) //애니메이션 end bool 값
 	{
@@ -510,36 +525,14 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
-	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
-		std::bind(&Knight::KnightVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
-		)
-	{
-		SetisCollWall(true);
-	}
-	else
-	{
-		SetisCollWall(false);
-
-	}
-
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
 
 	DoubleSlashTimer(_DeltaTime);
 
 	//KnightDirectionCheck();
-	this->isPixelCheck(_DeltaTime, GetMoveDirection());
 
 
-	if (GetisWall() == true || GetisCollWall() == true)
-	{
-		isKnihgtStillWall_ = true;
-	}
-
-	else
-	{
-		isKnihgtStillWall_ = false;
-	}
 	if (GetisWall() == true || GetisCollWall() == true)
 	{
 		GetTransform().SetWorldMove(float4::ZERO * KnightRunSpeed_ * _DeltaTime);
@@ -596,33 +589,33 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 
 
 
-	//if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
-	//{
-	//	KnightManager_.ChangeState("SLASH");
-	//	return;
-	//}
+	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == false)
+	{
+		KnightManager_.ChangeState("SLASH");
+		return;
+	}
 
-	//if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
-	//{
-	//	KnightManager_.ChangeState("DOUBLE_SLASH");
-	//	return;
-	//}
+	if (true == GameEngineInput::GetInst()->IsDown("KnightSlash") && isPossibleDoubleSlash_ == true)
+	{
+		KnightManager_.ChangeState("DOUBLE_SLASH");
+		return;
+	}
 
-	//if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
-	//{
-	//	isLookMap_ = true;
-	//	GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
-	//	KnightManager_.ChangeState("MAP_WALKING");
-	//	return;
-	//}
+	if (GameEngineInput::GetInst()->IsDown("KnightLookMap") == true)
+	{
+		isLookMap_ = true;
+		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
+		KnightManager_.ChangeState("MAP_WALKING");
+		return;
+	}
 
-	//if (GetisKnightMove() == false)
-	//{
-	//	//isKnihgtStillWall_ = false;
+	if (GetisKnightMove() == false)
+	{
+		//isKnihgtStillWall_ = false;
 
-	//	KnightManager_.ChangeState("STILL");
-	//	return;
-	//}
+		KnightManager_.ChangeState("STILL");
+		return;
+	}
 
 	// 대쉬
 	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
@@ -1986,7 +1979,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		isSlashEnd_ = false;
 
-		if (_Info.PrevState == "RUN")
+		if (_Info.PrevState == "RUN" || isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
 		}
@@ -2000,6 +1993,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
+
 
 
 
@@ -2171,7 +2165,7 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		isDoubleSlashEnd_ = false;
 
-		if (_Info.PrevState == "RUN")
+		if (_Info.PrevState == "RUN" || isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
 		}
@@ -2320,7 +2314,7 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		isUpSlashEnd_ = false;
 
-		if (_Info.PrevState == "RUN")
+		if (_Info.PrevState == "RUN" || isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
 		}
@@ -2334,6 +2328,7 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
+
 
 
 
@@ -2430,8 +2425,7 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 
 		isDownSlashEnd_ = false;
-
-		if (_Info.PrevState == "RUN")
+		if (_Info.PrevState == "RUN" || isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
 		}
@@ -2445,6 +2439,7 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
+
 
 
 
