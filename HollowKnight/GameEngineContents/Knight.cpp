@@ -108,6 +108,7 @@ void Knight::Start()
 	SetCollisionSize({ 0, 0, 0 });
 	SetFallSpeed(140);
 
+	KnightData::GetInst()->SetHitDamage(1);
 
 	CreateCollisionComponent(float4{60, 120, 1}, static_cast<int>(COLLISION_ORDER::Knight));
 	CreateWallCollisionComponent(float4{ 20, 20, 1 });
@@ -662,6 +663,7 @@ void Knight::SetDirInit(float4 _Dir)
 	if (_Dir.CompareInt2D(float4::LEFT))
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
+		KnightSlashEffect_->SetEffectDirection(float4::LEFT);
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalPositiveX();
 
@@ -671,6 +673,8 @@ void Knight::SetDirInit(float4 _Dir)
 	if (_Dir.CompareInt2D(float4::RIGHT))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
+		KnightSlashEffect_->SetEffectDirection(float4::RIGHT);
+
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalNegativeX();
 
@@ -736,6 +740,8 @@ void Knight::KnightDirectionCheck()
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalPositiveX();
+		KnightSlashEffect_->SetEffectDirection(float4::LEFT);
+
 		GetWallCollision()->GetTransform().SetLocalPosition({-10, 50});
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalPositiveX();
 
@@ -746,6 +752,8 @@ void Knight::KnightDirectionCheck()
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
 		KnightSlashEffect_->GetRenderer()->GetTransform().PixLocalNegativeX();
+		KnightSlashEffect_->SetEffectDirection(float4::RIGHT);
+
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalNegativeX();
 		GetWallCollision()->GetTransform().SetLocalPosition({ 10, 50 });
 

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "KnightSlashEffect.h"
 #include "KnightData.h"
+#include "Monster.h"
 
 KnightSlashEffect::KnightSlashEffect() 
 	:
@@ -109,7 +110,8 @@ void KnightSlashEffect::SlashHitEnemyUpdate(float _DeltaTime, const StateInfo& _
 		isSlashEnd_ = false;
 		KnightSlashEffectManager_.ChangeState("IDLE");
 	}
-
+	GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&KnightSlashEffect::EffectVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 void KnightSlashEffect::SlashHitEnemyEnd(const StateInfo& _Info)
@@ -155,7 +157,12 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 {
 	if (_Other != nullptr)
 	{
+		Monster* Monster_ = dynamic_cast<Monster*>(_Other->GetActor());
+		Monster_->SetMonsterHit(KnightData::GetInst()->GetHitDamage(), GetEffectDirection());
+
+
 		KnightData::GetInst()->SetisSoulGrow(true);
+
 		//_Other->GetActor()->Death();
 		KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
 

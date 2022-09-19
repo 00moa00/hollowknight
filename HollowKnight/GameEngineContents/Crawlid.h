@@ -17,9 +17,15 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
+public:
+	void SetMonsterHit(int _Damage, float4 _StunDir) override;
 
 private:
 	bool isTurnEnd_;
+	bool isDeathEnd_;
+
+	float CrawildKnockbackTimer_;
+
 
 	GameEngineStateManager CrawlidManager_;
 
@@ -49,6 +55,9 @@ private:
 	void CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info);
 	void CrawlidStunEnd(const StateInfo& _Info);
 
+	void CrawlidDeathStart(const StateInfo& _Info);
+	void CrawlidDeathUpdate(float _DeltaTime, const StateInfo& _Info);
+	void CrawlidDeathEnd(const StateInfo& _Info);
 
 	//================================
 	//    Bind

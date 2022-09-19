@@ -321,6 +321,8 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 				SetPrevDirection(float4::LEFT);
 				//PrevDirection_ = float4::LEFT;
 				KnightManager_.ChangeState("WALK_TURN");
+				return;
+
 			}
 
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
@@ -334,6 +336,8 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 			{
 				SetPrevDirection(float4::RIGHT);
 				KnightManager_.ChangeState("WALK_TURN");
+				return;
+
 			}
 
 			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
@@ -1095,7 +1099,7 @@ void Knight::KnightLandEnd(const StateInfo& _Info)
 void Knight::KnightFallStart(const StateInfo& _Info)
 {
 	isKnightActtingMove_ = false;
-	ActtingMoveDirection_ = float4::ZERO;
+	//ActtingMoveDirection_ = float4::ZERO;
 	KnightFallAccel_ = 0.0f;
 
 	//SetMoveDirection(float4::DOWN);
@@ -2522,6 +2526,8 @@ void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 				SetPrevDirection(float4::LEFT);
 				//PrevDirection_ = float4::LEFT;
 				KnightManager_.ChangeState("WALK_TURN");
+				return;
+
 			}
 
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
@@ -2535,6 +2541,8 @@ void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 			{
 				SetPrevDirection(float4::RIGHT);
 				KnightManager_.ChangeState("WALK_TURN");
+				return;
+
 			}
 
 			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);

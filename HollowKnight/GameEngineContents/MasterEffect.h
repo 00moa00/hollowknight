@@ -56,6 +56,11 @@ public:
 		return LightPlusColor_;
 	}
 
+	float4 GetEffectDirection() const
+	{
+		return Direction_;
+	}
+
 
 	//================================
 	//    Setter
@@ -69,5 +74,11 @@ public:
 	void SetBlendMode(BlendMode _Mode);
 	void SetMulColor(float4 _MulColor);
 	void SetPlusColor(float4 _PlusColor);
+
+	void SetEffectDirection(float4 _Dir)
+	{
+		Direction_ = _Dir;
+
+	}
 };
 

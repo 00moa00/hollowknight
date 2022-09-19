@@ -3,6 +3,8 @@
 #include <GameEngineCore/GameEngineDefaultRenderer.h>
 
 Monster::Monster()
+	:
+	isMonsterDeath_(false)
 {
 }
 

@@ -93,6 +93,8 @@ private:
 	int CharmNotches_;						//가능한 부적 칸 수
 	int UsingCharmNotches_;					// 현재 사용중인 부적 칸 수
 
+	int HitDamage_;							// 공격 데미지
+
 	std::vector<KnightCharmData> CharmList_;
 	std::vector<KnightItemData> ItemList_;
 
@@ -141,6 +143,7 @@ private:
 	bool isRevive_;		//플레이어가 다시 태어난당		: 비네팅에 사용중
 
 	float4 KnightPosition_;
+	//float4 CurDir_;
 
 
 	//std::map<int, std::string> KnihgtItemList_;
@@ -198,6 +201,10 @@ public:
 	//================================
 	//    Getter
 	//================================
+	int GetHitDamage() const
+	{
+		return HitDamage_;
+	}
 
 	std::string& GetPreLevel()
 	{
@@ -388,6 +395,12 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetHitDamage(int _i)
+	{
+		HitDamage_ = _i;
+	}
+
+
 	void PushLevelNameList(std::string _Name)
 	{
 		AllLevelNameList_.push_back(_Name);
