@@ -15,6 +15,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
+	float4 KnightPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
 
 	// 텔레포트 나타나면서 팝업 위치를 여기서 정한다.
 	auto castType_ = magic_enum::enum_cast<PatternType>(ChangeState_);
@@ -24,19 +25,66 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	switch (PatternType_)
 	{
 	case PatternType::BATTLE_BALLOON_START:
-		GetTransform().SetWorldPosition({4800,-600, static_cast<float>(Z_ORDER::Monster)});
+		GetTransform().SetWorldPosition({ MapCenterX_,-600, static_cast<float>(Z_ORDER::Monster)});
 		break;
 	case PatternType::BATTLE_SLASH_START:
+		if (KnightPos.x > MapCenterX_)
+		{
+			GetTransform().SetWorldPosition({ KnightPos.x - 300.f,KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+
+		}
+
+		else
+		{
+			GetTransform().SetWorldPosition({ KnightPos.x + 300.f,KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+
+		}
+
+
+
 		break;
 	case PatternType::BATTLE_AIR_DASH_START:
+
+		if (KnightPos.x > MapCenterX_)
+		{
+			GetTransform().SetWorldPosition({ KnightPos.x - 300.f, -600.f, static_cast<float>(Z_ORDER::Monster) });
+		}
+
+		else
+		{
+			GetTransform().SetWorldPosition({ KnightPos.x + 300.f,-600.f, static_cast<float>(Z_ORDER::Monster) });
+		}
+
 		break;
 	case PatternType::BATTLE_SPIKE_START:
+
+		if (KnightPos.x > MapCenterX_)
+		{
+			GetTransform().SetWorldPosition({ MapCenterX_ - 300.f, KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+		}
+
+		else
+		{
+			GetTransform().SetWorldPosition({ MapCenterX_ + 300.f,KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+		}
+
 		break;
 	case PatternType::BATTLE_CAST_START:
+
+		if (KnightPos.x > MapCenterX_)
+		{
+			GetTransform().SetWorldPosition({ MapCenterX_ - 300.f, KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+		}
+
+		else
+		{
+			GetTransform().SetWorldPosition({ MapCenterX_ + 300.f,KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+		}
 		break;
 	default:
 		break;
 	}
+	GetRenderer()->On();
 
 
 }
@@ -66,16 +114,19 @@ void Grimm::GrimmBattleTeleportDisappearStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isTeleportDiappearEnd_ == true)
+	{
+		isTeleportDiappearEnd_ = false;
+		GetRenderer()->Off();
+
+	}
 	if (_Info.StateTime > 1.f)
 	{
-		//_Info.StateTime = 0.f;
-		if (isTeleportDiappearEnd_ == true)
-		{
-			isTeleportDiappearEnd_ = false;
-			GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_APPEAR");
-			return;
+		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_APPEAR");
+		return;
 
-		}
+		//_Info.StateTime = 0.f;
+	
 
 	}
 

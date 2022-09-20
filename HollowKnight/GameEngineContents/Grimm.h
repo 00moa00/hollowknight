@@ -78,6 +78,8 @@ private:
 
 	bool isStunHitEnd_;
 
+	float MapCenterX_;
+
 	std::string ChangeState_;
 
 	//bool isTeleportEnd_;

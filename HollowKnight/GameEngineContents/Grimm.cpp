@@ -27,6 +27,8 @@ Grimm::Grimm()
 	isCastStartEnd_(false),
 	isSprikeStartEnd_(false),
 
+	MapCenterX_(0.0f),
+
 	ChangeState_(""),
 
 
@@ -45,6 +47,7 @@ Grimm::~Grimm()
 void Grimm::Start()
 {
 	SetName("Grimm");
+	MapCenterX_ = 4800.f;
 
 	CreateCollisionComponent(float4{ 150, 200, 1 }, static_cast<int>(COLLISION_ORDER::Monster));
 	//GetCollision()->GetTransform().SetWorldPosition({ 0, 50, 0 });
@@ -53,7 +56,7 @@ void Grimm::Start()
 
 	CreateRendererComponent(float4{ 309, 508, 1 }, "Grimm Cln_Grimm_idle_right0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
 	GetRenderer()->ScaleToCutTexture(0);
-
+	GetRenderer()->GetTransform().SetLocalPosition({0,-50});
 	GetTransform().SetLocalPosition({ 300,-500, static_cast<float>(Z_ORDER::Monster) });
 	SetHP(50);
 

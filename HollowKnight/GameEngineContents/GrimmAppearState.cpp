@@ -42,7 +42,7 @@ void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
 
 
 	GrimmSpotLight_ = GetLevel()->CreateActor<GrimmSpotLight>();
-	GrimmSpotLight_->GetTransform().SetWorldMove({ 0,5, -100 });
+	GrimmSpotLight_->GetTransform().SetWorldMove({ 0,-40, -100 });
 	GrimmSpotLight_->SetParent(this);
 
 
