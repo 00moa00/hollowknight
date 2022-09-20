@@ -846,6 +846,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GrimmAppearState.cpp" />
+    <ClCompile Include="GrimmBattleState.cpp" />
     <ClCompile Include="GrimmBeam.cpp">
       <SubType>
       </SubType>

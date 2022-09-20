@@ -46,6 +46,17 @@ private:
 	bool isBowEnd_;
 	bool isRoarEnd_;
 
+	bool isCastEndEnd_;
+
+	bool isSlashStartEnd_;
+	bool isSlashEnd_;
+	bool isSlashEndEnd_;
+
+	bool isDashStartEnd_;
+	bool isDashUpEnd_;
+
+	bool isStunHitEnd_;
+
 	//bool isTeleportEnd_;
 
 	GrimmBeam* GrimmBeam_;
@@ -68,11 +79,9 @@ private:
 	//    Bind State | Appear
 	//================================
 
-
 	void GrimmAppearWaitStart(const StateInfo& _Info);
 	void GrimmAppearWaitUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmAppearWaitEnd(const StateInfo& _Info);
-
 
 	void GrimmAppearTeleportStart(const StateInfo& _Info);
 	void GrimmAppearTeleportUpdate(float _DeltaTime, const StateInfo& _Info);
@@ -105,6 +114,47 @@ private:
 	void GrimmAppearRoarStart(const StateInfo& _Info);
 	void GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmAppearRoarEnd(const StateInfo& _Info);
+
+
+	//================================
+	//    Bind State | Battle
+	//================================
+
+	void GrimmBattleTeleportAppearStart(const StateInfo& _Info);
+	void GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleTeleportAppearEnd(const StateInfo& _Info);
+
+	void GrimmBattleTeleportDisappearStart(const StateInfo& _Info);
+	void GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleTeleportDisappearEnd(const StateInfo& _Info);
+
+	void GrimmBattleBalloonStart(const StateInfo& _Info);
+	void GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleBalloonEnd(const StateInfo& _Info);
+
+	void GrimmBattleSlashStart(const StateInfo& _Info);
+	void GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleSlashEnd(const StateInfo& _Info);
+
+	void GrimmBattleFireStart(const StateInfo& _Info);
+	void GrimmBattleFireUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleFireEnd(const StateInfo& _Info);
+
+	void GrimmBattleSpikeStart(const StateInfo& _Info);
+	void GrimmBattleSpikeUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleSpikeEnd(const StateInfo& _Info);
+
+	void GrimmBattlCastStart(const StateInfo& _Info);
+	void GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattlCastEnd(const StateInfo& _Info);
+
+	void GrimmBattlStunStart(const StateInfo& _Info);
+	void GrimmBattlStunUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattlStunEnd(const StateInfo& _Info);
+
+	void GrimmBattlStunBatStart(const StateInfo& _Info);
+	void GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattlStunBatEnd(const StateInfo& _Info);
 
 	//================================
 	//    Bind 

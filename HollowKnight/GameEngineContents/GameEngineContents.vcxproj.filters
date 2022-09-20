@@ -968,5 +968,8 @@
     <ClCompile Include="BossGateEffect.cpp">
       <Filter>Actor\Effect\Object</Filter>
     </ClCompile>
+    <ClCompile Include="GrimmBattleState.cpp">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
