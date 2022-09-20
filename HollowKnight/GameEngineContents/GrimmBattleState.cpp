@@ -14,9 +14,26 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
 
 
+	// 텔레포트 나타나면서 팝업 위치를 여기서 정한다.
+	auto castType_ = magic_enum::enum_cast<PatternType>(ChangeState_);
+	PatternType PatternType_ = castType_.value();
 
 
-
+	switch (PatternType_)
+	{
+	case PatternType::BATTLE_BALLOON_START:
+		break;
+	case PatternType::BATTLE_SLASH_START:
+		break;
+	case PatternType::BATTLE_AIR_DASH_START:
+		break;
+	case PatternType::BATTLE_SPIKE_START:
+		break;
+	case PatternType::BATTLE_CAST_START:
+		break;
+	default:
+		break;
+	}
 
 
 }

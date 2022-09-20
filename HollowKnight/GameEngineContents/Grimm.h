@@ -18,6 +18,11 @@ enum class PatternType
 
 
 //각 스프라이트 시트마다 프레임 크기가 다르니 애니메이션 변경할때면 ScaleToCutTexture 할것
+//규칙
+//1. 모든 스테이트 이동의 시작과 끝에는 텔레포트가 있따
+//2. 중심값(6092) 기준으로 좌우 팝업
+//3. 칼질, 에어 대쉬는 플레이어 거리를 계산해서 한다.
+
 
 enum class EventState
 {
@@ -95,6 +100,9 @@ public:
 	}
 
 private:
+	void SetChangeStateString(PatternType _type);
+
+
 	//================================
 	//    Bind State | Appear
 	//================================
