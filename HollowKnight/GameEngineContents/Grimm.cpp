@@ -1,5 +1,8 @@
 #include "PreCompile.h"
 #include "Grimm.h"
+#include "KnightData.h"
+#include "HollowKnightLevel.h"
+#include "FadePink.h"
 
 Grimm::Grimm() 
 	:
@@ -37,6 +40,7 @@ void Grimm::Start()
 	SetHP(50);
 
 	SetMoveDirection(float4::RIGHT);
+	//SetDirRendererXScale();
 
 	//================================
 	//    Create Animation
@@ -64,7 +68,7 @@ void Grimm::Start()
 
 
 
-	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
+	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
 
 
 	//================================
@@ -105,6 +109,10 @@ void Grimm::Start()
 	//================================
 	//    Create State | Appear
 	//================================
+	GrimmAppearManager_.CreateStateMember("WAIT"
+		, std::bind(&Grimm::GrimmAppearWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmAppearWaitStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmAppearWaitEnd, this, std::placeholders::_1));
 
 	GrimmAppearManager_.CreateStateMember("APPEAR_TELETPORT"
 		, std::bind(&Grimm::GrimmAppearTeleportUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -131,6 +139,11 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmAppearIdle2Start, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmAppearIdle2End, this, std::placeholders::_1));
 
+	GrimmAppearManager_.CreateStateMember("APPEAR_CHANGE_MAP"
+		, std::bind(&Grimm::GrimmAppearChangeMapUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmAppearChangeMapStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmAppearChangeMapEnd, this, std::placeholders::_1));
+
 
 	GrimmAppearManager_.CreateStateMember("APPEAR_BOW"
 		, std::bind(&Grimm::GrimmAppearBowUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -142,9 +155,10 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmAppearRoarStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmAppearRoarEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.ChangeState("APPEAR_TELETPORT");
+	GrimmAppearManager_.ChangeState("WAIT");
 
 	EventState_ = EventState::Appear;
+	GetRenderer()->Off();
 }
 
 void Grimm::Update(float _DeltaTime)
@@ -169,12 +183,42 @@ void Grimm::SetMonsterHit(int _Damage, float4 _StunDir)
 {
 }
 
+void Grimm::GrimmAppearWaitStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmAppearWaitUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x > 5000)
+	{
+		GrimmAppearManager_.ChangeState("APPEAR_TELETPORT");
+
+	}
+	
+}
+
+void Grimm::GrimmAppearWaitEnd(const StateInfo& _Info)
+{
+}
+
 void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
 {
+	GetRenderer()->On();
+	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
+	GetRenderer()->ScaleToCutTexture(0);
+
+	ReSetAccTime();
+
 }
 
 void Grimm::GrimmAppearTeleportUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isTeleportAppearEnd_ == true)
+	{
+		isTeleportAppearEnd_ = false;
+		GrimmAppearManager_.ChangeState("APPEAR_IDLE1");
+
+	}
 }
 
 void Grimm::GrimmAppearTeleportEnd(const StateInfo& _Info)
@@ -183,10 +227,19 @@ void Grimm::GrimmAppearTeleportEnd(const StateInfo& _Info)
 
 void Grimm::GrimmAppearIdle1Start(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
+	GetRenderer()->ScaleToCutTexture(0);
+
+	ReSetAccTime();
+
 }
 
 void Grimm::GrimmAppearIdle1Update(float _DeltaTime, const StateInfo& _Info)
 {
+	if (GetAccTime() > 2.5f)
+	{
+		GrimmAppearManager_.ChangeState("APPEAR_PILLAR");
+	}
 }
 
 void Grimm::GrimmAppearIdle1End(const StateInfo& _Info)
@@ -197,10 +250,23 @@ void Grimm::GrimmAppearIdle1End(const StateInfo& _Info)
 
 void Grimm::GrimmAppearPillarStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("PILLAR_ANIMATION");
+	FadePink* FadePink_ = GetLevel()->CreateActor<FadePink>();
+	FadePink_->GetTransform().SetWorldPosition({5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200});
+
+
+	GetRenderer()->ScaleToCutTexture(0);
+
 }
 
 void Grimm::GrimmAppearPillarUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isPillarEnd_ == true)
+	{
+		isPillarEnd_ = false;
+		GrimmAppearManager_.ChangeState("APPEAR_PILLAR_LOOP");
+
+	}
 }
 
 void Grimm::GrimmAppearPillarEnd(const StateInfo& _Info)
@@ -210,10 +276,19 @@ void Grimm::GrimmAppearPillarEnd(const StateInfo& _Info)
 
 void Grimm::GrimmAppearPillarLoopStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("PILLAR_LOOP_ANIMATION");
+	GetRenderer()->ScaleToCutTexture(0);
+
+	ReSetAccTime();
+
 }
 
 void Grimm::GrimmAppearPillarLoopUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (GetAccTime() > 2.5f)
+	{
+		GrimmAppearManager_.ChangeState("APPEAR_IDLE2");
+	}
 }
 
 void Grimm::GrimmAppearPillarLoopEnd(const StateInfo& _Info)
@@ -222,23 +297,61 @@ void Grimm::GrimmAppearPillarLoopEnd(const StateInfo& _Info)
 
 void Grimm::GrimmAppearIdle2Start(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
+	GetRenderer()->ScaleToCutTexture(0);
+
+	ReSetAccTime();
+
 }
 
 void Grimm::GrimmAppearIdle2Update(float _DeltaTime, const StateInfo& _Info)
 {
+	if (GetAccTime() > 1.5f)
+	{
+		GrimmAppearManager_.ChangeState("APPEAR_CHANGE_MAP");
+	}
 }
 
 void Grimm::GrimmAppearIdle2End(const StateInfo& _Info)
 {
 }
 
+void Grimm::GrimmAppearChangeMapStart(const StateInfo& _Info)
+{
+	GetLevel<HollowKnightLevel>()->GetMasterMap()->ChangeGrimmMap();
+	FadePink* FadePink_ = GetLevel()->CreateActor<FadePink>();
+	FadePink_->GetTransform().SetWorldPosition({ 5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200 });
+	ReSetAccTime();
+}
+
+void Grimm::GrimmAppearChangeMapUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (GetAccTime() > 2.0f)
+	{
+		GrimmAppearManager_.ChangeState("APPEAR_BOW");
+	}
+}
+
+void Grimm::GrimmAppearChangeMapEnd(const StateInfo& _Info)
+{
+}
+
 
 void Grimm::GrimmAppearBowStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("BOW_ANIMATION");
+	GetRenderer()->ScaleToCutTexture(0);
+
 }
 
 void Grimm::GrimmAppearBowUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isBowEnd_ == true)
+	{
+		isBowEnd_ = false;
+		GrimmAppearManager_.ChangeState("APPEAR_ROAR");
+
+	}
 }
 
 void Grimm::GrimmAppearBowEnd(const StateInfo& _Info)
@@ -248,10 +361,19 @@ void Grimm::GrimmAppearBowEnd(const StateInfo& _Info)
 
 void Grimm::GrimmAppearRoarStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("ROAR_ANIMATION");
+	GetRenderer()->ScaleToCutTexture(0);
+
 }
 
 void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isRoarEnd_ == true)
+	{
+		isRoarEnd_ = false;
+		//GrimmAppearManager_.ChangeState("APPEAR_ROAR");
+
+	}
 }
 
 void Grimm::GrimmAppearRoarEnd(const StateInfo& _Info)

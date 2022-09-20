@@ -26,7 +26,7 @@ void FadeOut::Start()
 
 void FadeOut::Update(float _DeltaTime)
 {
-	Alpha_ += 0.7f * _DeltaTime;
+	Alpha_ += 1.3f * _DeltaTime;
 
 	Renderer_->GetPixelData().MulColor.a = Alpha_;
 

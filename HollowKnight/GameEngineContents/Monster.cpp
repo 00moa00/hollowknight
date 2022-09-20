@@ -30,3 +30,20 @@ void Monster::SetMonsterDirection()
 
 }
 
+void Monster::SetDirRendererXScale()
+{
+	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+	//	GetWallCollision()->GetTransform().SetLocalPosition({ -10, 50 });
+
+	}
+
+	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+		//GetWallCollision()->GetTransform().SetLocalPosition({ 10, 50 });
+
+	}
+}
+

@@ -31,7 +31,7 @@ void GrimmLevel::Start()
 	CraateMasterMapActor();
 
 	GetMasterMap()->CreateBackGround("Grimm_Background.png");
-	//GetMasterMap()->CreateBackGroundObject("King's-Pass_Background_Object_1.png");
+	GetMasterMap()->CreateBackGroundObject("Grimm_Background_Object.png");
 	GetMasterMap()->CreateMapCollision("Grimm_Coll.png");
 
 	GetMasterMap()->CreateTerrain("Grimm_Terrian.png");
@@ -52,7 +52,7 @@ void GrimmLevel::Start()
 	CreateEffectGUIActor();
 
 	Grimm_ = CreateActor<Grimm>();
-	Grimm_->GetTransform().SetWorldPosition({5380,-930 , static_cast<float>(Z_ORDER::Monster) });
+	Grimm_->GetTransform().SetWorldPosition({5380,-950 , static_cast<float>(Z_ORDER::Monster) });
 
 
 	//{

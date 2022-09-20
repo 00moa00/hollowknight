@@ -33,7 +33,7 @@ private:
 
 protected:
 	void SetMonsterDirection();
-
+	void SetDirRendererXScale();
 
 
 public:

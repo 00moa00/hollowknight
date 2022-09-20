@@ -6,6 +6,7 @@
 
 enum class EventState
 {
+	Wait,
 	Appear,
 	Battle,
 	Talking,
@@ -41,9 +42,6 @@ private:
 	bool isBowEnd_;
 	bool isRoarEnd_;
 
-
-
-
 	//bool isTeleportEnd_;
 
 	EventState EventState_;
@@ -51,10 +49,23 @@ private:
 	GameEngineStateManager GrimmAppearManager_;
 	GameEngineStateManager GrimmManager_;
 
+public:
+	void SetEventState(EventState _State)
+	{
+		EventState_ = _State;
+	}
+
 private:
 	//================================
 	//    Bind State | Appear
 	//================================
+
+
+	void GrimmAppearWaitStart(const StateInfo& _Info);
+	void GrimmAppearWaitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmAppearWaitEnd(const StateInfo& _Info);
+
+
 	void GrimmAppearTeleportStart(const StateInfo& _Info);
 	void GrimmAppearTeleportUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmAppearTeleportEnd(const StateInfo& _Info);
@@ -75,6 +86,10 @@ private:
 	void GrimmAppearIdle2Update(float _DeltaTime, const StateInfo& _Info);
 	void GrimmAppearIdle2End(const StateInfo& _Info);
 
+	void GrimmAppearChangeMapStart(const StateInfo& _Info);
+	void GrimmAppearChangeMapUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmAppearChangeMapEnd(const StateInfo& _Info);
+
 	void GrimmAppearBowStart(const StateInfo& _Info);
 	void GrimmAppearBowUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmAppearBowEnd(const StateInfo& _Info);
@@ -82,6 +97,12 @@ private:
 	void GrimmAppearRoarStart(const StateInfo& _Info);
 	void GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmAppearRoarEnd(const StateInfo& _Info);
+
+	//================================
+	//    Bind 
+	//================================
+
+
 
 };
 

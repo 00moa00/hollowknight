@@ -79,7 +79,10 @@ float4 Blur_PS(Output _Input) : SV_Target0
             Result.b = Color1.b * Color2.b * 2;
         else
            Result.b = 2 * (Color1.b + Color2.b - Color1.b * Color2.b) - 1.0f;
+        
+       // Color2.a = 0.5f;
             Result.a = Color2.a;
+        
     }
     else
     {

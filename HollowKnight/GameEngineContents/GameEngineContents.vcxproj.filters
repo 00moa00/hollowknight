@@ -528,6 +528,9 @@
     <ClInclude Include="Grimm.h">
       <Filter>Actor\Play\Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="FadePink.h">
+      <Filter>Actor\Effect\Etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -907,6 +910,9 @@
     </ClCompile>
     <ClCompile Include="Grimm.cpp">
       <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="FadePink.cpp">
+      <Filter>Actor\Effect\Etc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

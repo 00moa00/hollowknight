@@ -47,5 +47,9 @@ public:
 		}
 	}
 
+	void ChangeGrimmMap();
+
+
+
 };
 

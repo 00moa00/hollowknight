@@ -964,6 +964,8 @@ bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineColl
 
 		if (Monster != nullptr)
 		{
+
+			//if()
 			KnockbackDirection_ = Monster->GetMoveDirection();
 		}
 
