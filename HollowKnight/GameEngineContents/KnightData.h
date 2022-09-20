@@ -144,6 +144,7 @@ private:
 	bool isCameraGUI_;	//카메라 GUi가 있다
 	bool isEffectGUI_;
 	bool isRevive_;		//플레이어가 다시 태어난당		: 비네팅에 사용중
+	bool isBossBattle_;
 
 	float4 KnightPosition_;
 	//float4 CurDir_;
@@ -204,6 +205,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisBossBattle() const
+	{
+		return isBossBattle_;
+	}
+
 	int GetHitDamage() const
 	{
 		return HitDamage_;
@@ -398,6 +404,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetisBossBattle(bool _b)
+	{
+		isBossBattle_ = _b;
+	}
+
 	void SetHitDamage(int _i)
 	{
 		HitDamage_ = _i;

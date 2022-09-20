@@ -21,4 +21,15 @@ void KnightSiblingLightEffect::Update(float _DeltaTime)
 {
 	SetMulColor(GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetSlibingLightMulColor());
 	SetPlusColor(GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetSlibingLightPlusColor());
+
+	if (GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetisSiblingLightOnOff() == true)
+	{
+		GetRenderer()->On();
+	}
+
+	else
+	{
+		GetRenderer()->Off();
+	}
+
 }

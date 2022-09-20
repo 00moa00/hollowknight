@@ -22,7 +22,15 @@ void KnightMainLightEffect::Update(float _DeltaTime)
 {
 	SetMulColor(GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetMainLightMulColor());
 	SetPlusColor(GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetMainLightPlusColor());
+	if (GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetisMainLightOnOff() == true)
+	{
+		GetRenderer()->On();
+	}
 
+	else
+	{
+		GetRenderer()->Off();
+	}
 }
 
 

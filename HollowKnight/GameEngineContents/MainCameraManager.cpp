@@ -153,17 +153,19 @@ void MainCameraManager::ChangeCameraMove(CameraMode _Mode)
 	}
 }
 
+void MainCameraManager::SetRoomCamera(float4 _RoomSize, float4 _RoomPos)
+{
+	RoomSize_ = _RoomSize;
+	RoomPos_ = _RoomPos;
+}
+
 void MainCameraManager::MoveToTargetStart(const StateInfo& _Info)
 {
+
 }
 
 void MainCameraManager::MoveToTargetUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	//카메라가 없다면
-	if (GetLevel()->GetMainCameraActor() == nullptr)
-	{
-		return;
-	}
 
 	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
 	float4 CurrentPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
@@ -209,6 +211,80 @@ void MainCameraManager::MoveToTargetInRoomStart(const StateInfo& _Info)
 
 void MainCameraManager::MoveToTargetInRoomUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
+	float4 CurrentPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
+	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 5.f);
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x,MoveCamera.y,  -1800.0f });
+	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
+
+	if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	//왼쪽
+	if (RoomPos_.x  - RoomSize_.x/2 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = RoomPos_.x - RoomSize_.x / 2 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+
+		/*if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+		{
+			MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+			GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+		}*/
+
+	}
+
+	//오른쪽
+
+	if (RoomPos_.x + RoomSize_.x / 2 < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = RoomPos_.x + RoomSize_.x / 2 - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+
+		/*if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+		{
+			MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+			GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+		}*/
+	}
+
+	//위
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	//아래
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
 }
 
 void MainCameraManager::MoveToTargetInRoomEnd(const StateInfo& _Info)
@@ -261,6 +337,7 @@ void MainCameraManager::ShakingUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void MainCameraManager::ShakingEnd(const StateInfo& _Info)
 {
+
 }
 
 void MainCameraManager::BossShakingStart(const StateInfo& _Info)
@@ -337,7 +414,7 @@ void MainCameraManager::PivotMoveToTargetEnd(const StateInfo& _Info)
 
 void MainCameraManager::FocusStart(const StateInfo& _Info)
 {
-	;
+	
 }
 
 void MainCameraManager::FocusUpdate(float _DeltaTime, const StateInfo& _Info)

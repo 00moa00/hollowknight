@@ -6,7 +6,10 @@
 
 EffectGUI::EffectGUI() 
 	:
-    overlay_flag(true)
+    overlay_flag(true),
+    isMainLightOnOff_(true),
+    isSiblingLightOnOff_(true),
+    isDonutLightOnOff_(true)
 
 {
 
@@ -90,6 +93,11 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         MainLightMulColor_ = { 1.0f, 1.0f, 1.0f, 1.0f };
         MainLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
     }
+    if (ImGui::Button("OnOff MainLight"))
+    {
+        isMainLightOnOff_ = !isMainLightOnOff_;
+    }
+
 
     ImGui::Separator();
     ImGui::Text("SiblingLight");
@@ -106,6 +114,11 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         SlibingLightPlusColor_ = { 0.348f, 0.564f, 0.653f, 0.0f };
     }
 
+    if (ImGui::Button("OnOff SlibingLight"))
+    {
+        isSiblingLightOnOff_ = !isSiblingLightOnOff_;
+    }
+
     ImGui::Separator();  
     ImGui::Text("DonutLight");
 
@@ -119,6 +132,10 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
     {
         DounutLightMulColor_ = { 1.0f, 1.0f, 1.0f, 0.3f };
         DounutLightPlusColor_ = { 0.0f, 0.0f, 0.0f, 0.0f };
+    }
+    if (ImGui::Button("OnOff DonutLight"))
+    {
+        isDonutLightOnOff_ = !isDonutLightOnOff_;
     }
 
     ImGui::Separator();

@@ -21,4 +21,13 @@ void KnightDonutLightEffect::Update(float _DeltaTime)
 {
 	SetMulColor(GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetDounutLightMulColor());
 	SetPlusColor(GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetDounutLightPlusColor());
+	if (GetLevel<HollowKnightLevel>()->GetEffectGUIActor()->GetisDonutLightOnOff() == true)
+	{
+		GetRenderer()->On();
+	}
+
+	else
+	{
+		GetRenderer()->Off();
+	}
 }

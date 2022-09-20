@@ -1767,8 +1767,17 @@ void Knight::KnightStunEnd(const StateInfo& _Info)
 		isLowHealth_ = true;
 		LowHealth* LowHealth_ = GetLevel()->CreateActor<LowHealth>();
 	}
+	if (KnightData::GetInst()->GetisBossBattle() == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
 
-	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
+	}
+
+	else
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
+
+	}
 
 	GameEngineTime::GetInst()->SetTimeScale(0, 1.0f);
 

@@ -32,6 +32,10 @@ private:
 	int SiblingLightitemsCurrent;
 	int DonutLightitemsCurrent;
 
+	bool isMainLightOnOff_;
+	bool isSiblingLightOnOff_;
+	bool isDonutLightOnOff_;
+
 
 	ImVec4 MainLightMulColor_;				//메인 라이트 컬러
 	ImVec4 MainLightPlusColor_;				//메인 라이트 플러스 컬러
@@ -44,6 +48,10 @@ private:
 
 	//bool 
 private:
+
+
+
+
 	ImVec4& ConvertFromFloat4(ImVec4 _Im, float4 f4)
 	{
 		_Im.x = f4.x;
@@ -65,6 +73,23 @@ private:
 	}
 
 public:
+
+	bool GetisMainLightOnOff() const
+	{
+		return isMainLightOnOff_;
+	}
+
+	bool GetisSiblingLightOnOff() const
+	{
+		return isSiblingLightOnOff_;
+	}
+
+	bool GetisDonutLightOnOff() const
+	{
+		return isDonutLightOnOff_;
+	}
+
+
 	float4 GetColor()
 	{
 		float4 ReturnColor;

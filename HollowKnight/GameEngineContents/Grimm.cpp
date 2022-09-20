@@ -194,6 +194,7 @@ void Grimm::GrimmAppearWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x > 5000)
 	{
+		KnightData::GetInst()->SetisBossBattle(true);
 		GrimmAppearManager_.ChangeState("APPEAR_TELETPORT");
 
 	}
@@ -387,22 +388,29 @@ void Grimm::GrimmAppearRoarStart(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 	BossRoarEffect* BossRoarEffect_ = GetLevel()->CreateActor<BossRoarEffect>();
 	BossRoarEffect_->SetParent(this);
-	BossRoarEffect_->GetTransform().SetLocalPosition({ 0, 130 });
+	BossRoarEffect_->GetTransform().SetLocalPosition({ -100, 250 });
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
-
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->SetRoomCamera(float4(2600, 1080), float4(5091,-923));
 }
 
 void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (isRoarEnd_ == true)
+
+	if (_Info.StateTime > 3.0f)
 	{
-		isRoarEnd_ = false;
-		//GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
-
-
-		//GrimmAppearManager_.ChangeState("APPEAR_ROAR");
-
+		EventState_ = EventState::Battle;
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
 	}
+
+	//if (isRoarEnd_ == true)
+	//{
+	//	isRoarEnd_ = false;
+
+
+
+	//	//GrimmAppearManager_.ChangeState("APPEAR_ROAR");
+
+	//}
 }
 
 void Grimm::GrimmAppearRoarEnd(const StateInfo& _Info)

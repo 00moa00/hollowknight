@@ -14,6 +14,7 @@ KnightData::KnightData()
 	isRevive_(false),
 	isOverlayflag_(true),
 	SavedPaletteInit_(false),
+	isBossBattle_(false),
 
 	MainLightMulColor_({1.0f, 1.0f, 1.0f, 0.7f}),
 	MainLightPlusColor_({ 0.0f, 0.0f, 0.0f, 0.0f }),

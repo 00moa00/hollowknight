@@ -28,6 +28,23 @@ private:
 	EffectGUI* EffectGUI_;
 
 public:
+	bool GetisMainLightOnOff() const
+	{
+		return EffectGUI_->GetisMainLightOnOff();
+	}
+
+	bool GetisSiblingLightOnOff() const
+	{
+		return EffectGUI_->GetisSiblingLightOnOff();
+	}
+
+	bool GetisDonutLightOnOff() const
+	{
+		return EffectGUI_->GetisDonutLightOnOff();
+	}
+
+
+
 	float4 GetOverlayColor()
 	{
 		return EffectGUI_->GetColor();
