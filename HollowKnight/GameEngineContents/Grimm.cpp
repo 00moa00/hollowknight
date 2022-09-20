@@ -7,6 +7,8 @@
 #include "FadePink.h"
 #include "BossRoarEffect.h"
 
+#include <GameEngineBase/GameEngineRandom.h>
+
 Grimm::Grimm() 
 	:
 	isTeleportAppearEnd_(false),
@@ -109,7 +111,7 @@ void Grimm::Start()
 
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 5, 7, 0.050f, true));
-	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 1, 0.050f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 15, 0.050f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash_antic0000-Sheet.png", 0, 3, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_SLASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash0000-Sheet.png", 0, 3, 0.050f, false));
@@ -173,6 +175,12 @@ void Grimm::Start()
 
 		});
 
+	GetRenderer()->AnimationBindEnd("CASTS_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isCastStartEnd_ = true;
+		});
+
+
 	GetRenderer()->AnimationBindEnd("CAST_END_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isCastEndEnd_ = true;
@@ -221,15 +229,7 @@ void Grimm::Start()
 			isSprikeStartEnd_ = true;
 		});
 
-	GetRenderer()->AnimationBindEnd("CASTS_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isCastStartEnd_ = true;
-		});
 
-	GetRenderer()->AnimationBindEnd("CAST_END_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isCastEndEnd_ = true;
-		});
 
 
 	//================================
@@ -367,6 +367,10 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmBattlCastStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattlCastEnd, this, std::placeholders::_1));
 
+	GrimmBattleManager_.CreateStateMember("BATTLE_CAST_END"
+		, std::bind(&Grimm::GrimmBattlCastEndUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattlCastEndStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattlCastEndEnd, this, std::placeholders::_1));
 
 	GrimmBattleManager_.CreateStateMember("BATTLE_STUN"
 		, std::bind(&Grimm::GrimmBattlStunUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -378,7 +382,6 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmBattlStunBatStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattlStunBatEnd, this, std::placeholders::_1));
 
-	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 	EventState_ = EventState::Appear;
 	GetRenderer()->Off();
@@ -408,3 +411,26 @@ void Grimm::SetMonsterHit(int _Damage, float4 _StunDir)
 {
 }
 
+void Grimm::SetChangeStateString(PatternType _type)
+{
+	std::string EnumString;
+	auto PrevName = magic_enum::enum_name(_type);
+	EnumString = static_cast<std::string>(PrevName);
+
+	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+	ChangeState_ = UpperName;
+
+}
+
+void Grimm::SetRamdomPattern()
+{
+	int Ramdom = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+	//auto Type_ = magic_enum::E
+
+
+	SetChangeStateString(static_cast<PatternType>(Ramdom));
+	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
+
+
+}

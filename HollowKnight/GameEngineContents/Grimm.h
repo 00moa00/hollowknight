@@ -13,6 +13,7 @@ enum class PatternType
 	BATTLE_AIR_DASH_START,
 	BATTLE_SPIKE_START,
 	BATTLE_CAST_START,
+	MAX,
 };
 
 
@@ -22,7 +23,7 @@ enum class PatternType
 //1. 모든 스테이트 이동의 시작과 끝에는 텔레포트가 있따
 //2. 중심값(6092) 기준으로 좌우 팝업
 //3. 칼질, 에어 대쉬는 플레이어 거리를 계산해서 한다.
-
+ 
 
 enum class EventState
 {
@@ -53,7 +54,6 @@ protected:
 
 public:
 	void SetMonsterHit(int _Damage, float4 _StunDir) override;
-
 
 private:
 	bool isTeleportAppearEnd_;
@@ -101,6 +101,7 @@ public:
 
 private:
 	void SetChangeStateString(PatternType _type);
+	void SetRamdomPattern();
 
 
 	//================================
@@ -207,6 +208,10 @@ private:
 	void GrimmBattlCastStart(const StateInfo& _Info);
 	void GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmBattlCastEnd(const StateInfo& _Info);
+
+	void GrimmBattlCastEndStart(const StateInfo& _Info);
+	void GrimmBattlCastEndUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattlCastEndEnd(const StateInfo& _Info);
 
 	void GrimmBattlStunStart(const StateInfo& _Info);
 	void GrimmBattlStunUpdate(float _DeltaTime, const StateInfo& _Info);

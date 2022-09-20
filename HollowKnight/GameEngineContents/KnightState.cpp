@@ -901,7 +901,7 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightJumpEnd(const StateInfo& _Info)
 {
 	JumpAccel_ = 0.f;
-	ActtingMoveDirection_ = float4::ZERO;
+	//ActtingMoveDirection_ = float4::ZERO;
 
 	SetJumpPower({ 0, KnightJumpPower_, 0 });
 	//isPressJumppingKey_ = false;
@@ -1137,7 +1137,6 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	KnightFallAccel_ += 10.f * _DeltaTime;
 
 		// ======== Knight VS WallColl ========
 	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
@@ -1196,6 +1195,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
+	KnightFallAccel_ += 10.f * _DeltaTime;
 
 	//if (GetisWall() == true /*&& isKnihgtStillWall_ == false*/)
 	//{

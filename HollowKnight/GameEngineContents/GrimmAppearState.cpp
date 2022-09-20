@@ -7,17 +7,7 @@
 #include "FadePink.h"
 #include "BossRoarEffect.h"
 
-void Grimm::SetChangeStateString(PatternType _type)
-{
-	std::string EnumString;
-	auto PrevName = magic_enum::enum_name(_type);
-	EnumString = static_cast<std::string>(PrevName);
 
-	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
-
-	ChangeState_ = UpperName;
-
-}
 
 void Grimm::GrimmAppearWaitStart(const StateInfo& _Info)
 {
@@ -235,9 +225,10 @@ void Grimm::GrimmAppearRoarStart(const StateInfo& _Info)
 void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
-	if (_Info.StateTime > 3.0f)
+	if (_Info.StateTime > 2.0f)
 	{
 		EventState_ = EventState::Battle;
+		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 		SetChangeStateString(PatternType::BATTLE_BALLOON_START);
 
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
