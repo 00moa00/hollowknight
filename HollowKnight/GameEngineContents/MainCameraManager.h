@@ -7,7 +7,11 @@
 enum class CameraMode
 {
 	TargetMove,
+	TargetInRoomMove,
 	Shaking,
+	PivotCamera,
+	PivotCamera,
+	BossShaking,
 	Focus,
 	CancleFocus,
 	ReturnFocus
@@ -48,6 +52,8 @@ private:
 
 	float ReturnLenth_;
 
+	float4 RoomPos_;
+
 public:
 	void MainCameraMoveLimitWindow(float4 _TargetPos, float4 _MapSize);
 	void ChangeCameraMove(CameraMode _Mode);
@@ -60,9 +66,25 @@ private:
 	void MoveToTargetUpdate(float _DeltaTime, const StateInfo& _Info);
 	void MoveToTargetEnd(const StateInfo& _Info);
 
+	void MoveToTargetInRoomStart(const StateInfo& _Info);
+	void MoveToTargetInRoomUpdate(float _DeltaTime, const StateInfo& _Info);
+	void MoveToTargetInRoomEnd(const StateInfo& _Info);
+
 	void ShakingStart(const StateInfo& _Info);
 	void ShakingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShakingEnd(const StateInfo& _Info);
+
+	void BossShakingStart(const StateInfo& _Info);
+	void BossShakingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void BossShakingEnd(const StateInfo& _Info);
+
+	void ChangePivotStart(const StateInfo& _Info);
+	void ChangePivotUpdate(float _DeltaTime, const StateInfo& _Info);
+	void ChangePivotEnd(const StateInfo& _Info);
+
+	void PivotMoveToTargetStart(const StateInfo& _Info);
+	void PivotMoveToTargetUpdate(float _DeltaTime, const StateInfo& _Info);
+	void PivotMoveToTargetEnd(const StateInfo& _Info);
 
 	void FocusStart(const StateInfo& _Info);
 	void FocusUpdate(float _DeltaTime, const StateInfo& _Info);

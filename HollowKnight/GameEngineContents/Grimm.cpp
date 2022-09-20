@@ -2,6 +2,8 @@
 #include "Grimm.h"
 #include "KnightData.h"
 #include "HollowKnightLevel.h"
+#include "GrimmLevel.h"
+
 #include "FadePink.h"
 #include "BossRoarEffect.h"
 
@@ -14,10 +16,10 @@ Grimm::Grimm()
 	isRoarEnd_(false),
 
 
+	EventState_(EventState::MAX),
 
-
-
-	EventState_(EventState::MAX)
+	GrimmBeam_(nullptr),
+	GrimmSpotLight_(nullptr)
 {
 }
 
@@ -204,6 +206,20 @@ void Grimm::GrimmAppearWaitEnd(const StateInfo& _Info)
 
 void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
 {
+	GrimmBeam_ = GetLevel()->CreateActor<GrimmBeam>();
+	GrimmBeam_->SetParent(this);
+	GrimmBeam_->GetTransform().SetWorldMove({ 50,680, static_cast<float>(Z_ORDER::Object)});
+	GrimmBeam_->GetTransform().SetWorldRotation({0,0,-7});
+
+
+	GrimmSpotLight_ = GetLevel()->CreateActor<GrimmSpotLight>();
+	GrimmSpotLight_->GetTransform().SetWorldMove({ 0,5, -100 });
+	GrimmSpotLight_->SetParent(this);
+
+
+
+
+
 	GetRenderer()->On();
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
@@ -322,6 +338,12 @@ void Grimm::GrimmAppearChangeMapStart(const StateInfo& _Info)
 	GetLevel<HollowKnightLevel>()->GetMasterMap()->ChangeGrimmMap();
 	FadePink* FadePink_ = GetLevel()->CreateActor<FadePink>();
 	FadePink_->GetTransform().SetWorldPosition({ 5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200 });
+	
+	GrimmBeam_->Death();
+	GrimmSpotLight_->Death();
+
+	GetLevel<GrimmLevel>()->GetGrimmCrowds()->On();
+
 	ReSetAccTime();
 }
 
@@ -342,7 +364,6 @@ void Grimm::GrimmAppearBowStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("BOW_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
-
 }
 
 void Grimm::GrimmAppearBowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -367,6 +388,8 @@ void Grimm::GrimmAppearRoarStart(const StateInfo& _Info)
 	BossRoarEffect* BossRoarEffect_ = GetLevel()->CreateActor<BossRoarEffect>();
 	BossRoarEffect_->SetParent(this);
 	BossRoarEffect_->GetTransform().SetLocalPosition({ 0, 130 });
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Shaking);
+
 }
 
 void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -374,6 +397,9 @@ void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (isRoarEnd_ == true)
 	{
 		isRoarEnd_ = false;
+		//GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
+
+
 		//GrimmAppearManager_.ChangeState("APPEAR_ROAR");
 
 	}

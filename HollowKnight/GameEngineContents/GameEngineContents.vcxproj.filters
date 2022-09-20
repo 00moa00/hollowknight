@@ -537,6 +537,18 @@
     <ClInclude Include="BossRoarRingEffect.h">
       <Filter>Actor\Effect\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmCrowd.h">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmCrowds.h">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmSpotLight.h">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmBeam.h">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -925,6 +937,21 @@
     </ClCompile>
     <ClCompile Include="BossRoarRingEffect.cpp">
       <Filter>Actor\Effect\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmCrowd.cpp">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmAppearState.cpp">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmCrowds.cpp">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmSpotLight.cpp">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmBeam.cpp">
+      <Filter>Actor\Play\Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

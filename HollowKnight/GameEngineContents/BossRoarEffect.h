@@ -1,5 +1,5 @@
 #pragma once
-
+#include <GameEngineCore/CoreMinimal.h>
 
 // Ό³Έν :
 class BossRoarEffect : public GameEngineActor

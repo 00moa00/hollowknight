@@ -313,7 +313,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GrimmBeam.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmCrowd.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmCrowds.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GrimmLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmSpotLight.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -813,7 +829,24 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GrimmAppearState.cpp" />
+    <ClCompile Include="GrimmBeam.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmCrowd.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmCrowds.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GrimmLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmSpotLight.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -16,9 +16,11 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 
+
 GrimmLevel::GrimmLevel() 
 	:
-	Grimm_(nullptr)
+	Grimm_(nullptr),
+	GrimmCrowds_(nullptr)
 {
 }
 
@@ -38,11 +40,11 @@ void GrimmLevel::Start()
 	GetMasterMap()->CreateFrontObject("Grimm_FrontObject.png");
 
 	CreateKnightActor(); // 플레이어
-	CreateKingsPass1Monster();
+	//CreateKingsPass1Monster();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 100, -500.f, static_cast<float>(Z_ORDER::Knight) });
-	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	SetMapSize({ 6092, 1079 });
 
@@ -53,6 +55,16 @@ void GrimmLevel::Start()
 
 	Grimm_ = CreateActor<Grimm>();
 	Grimm_->GetTransform().SetWorldPosition({5380,-950 , static_cast<float>(Z_ORDER::Monster) });
+
+	GrimmCrowds_ = CreateActor<GrimmCrowds>();
+	GrimmCrowds_->Off();
+
+
+	//{
+	//	GrimmCrowd* GrimmCrowd_ = CreateActor<GrimmCrowd>();
+	//	GrimmCrowd_->GetTransform().SetWorldPosition({ 5500,-400 , static_cast<float>(Z_ORDER::Back_Back_Object) });
+	//}
+
 
 
 	//{

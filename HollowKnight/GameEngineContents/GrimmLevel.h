@@ -3,6 +3,7 @@
 #include "HollowKnightLevel.h"
 
 #include "Grimm.h"
+#include "GrimmCrowds.h"
 #include "OverlayPostEffect.h"
 
 // Ό³Έν :
@@ -29,9 +30,13 @@ protected:
 
 private:
 	Grimm* Grimm_;
+	GrimmCrowds* GrimmCrowds_;
 	OverlayPostEffect* EventOverlayPostEffect_;
 
 public:
-	//OverlayPostEffect* Get
+	GrimmCrowds* GetGrimmCrowds()
+	{
+		return GrimmCrowds_;
+	}
 };
 

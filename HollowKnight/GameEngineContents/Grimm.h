@@ -1,5 +1,7 @@
 #pragma once
 #include "Monster.h"
+#include "GrimmBeam.h"
+#include "GrimmSpotLight.h"
 
 //각 스프라이트 시트마다 프레임 크기가 다르니 애니메이션 변경할때면 ScaleToCutTexture 할것.
 
@@ -43,6 +45,9 @@ private:
 	bool isRoarEnd_;
 
 	//bool isTeleportEnd_;
+
+	GrimmBeam* GrimmBeam_;
+	GrimmSpotLight* GrimmSpotLight_;
 
 	EventState EventState_;
 

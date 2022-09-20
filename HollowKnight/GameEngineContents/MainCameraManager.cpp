@@ -35,10 +35,21 @@ void MainCameraManager::Start()
 		, std::bind(&MainCameraManager::MoveToTargetStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::MoveToTargetEnd, this, std::placeholders::_1));
 
+	CameraStateManager_.CreateStateMember("MOVE_TO_TARGET_INROOM"
+		, std::bind(&MainCameraManager::MoveToTargetInRoomUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&MainCameraManager::MoveToTargetInRoomStart, this, std::placeholders::_1)
+		, std::bind(&MainCameraManager::MoveToTargetInRoomEnd, this, std::placeholders::_1));
+
+
 	CameraStateManager_.CreateStateMember("SHAKING"
 		, std::bind(&MainCameraManager::ShakingUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::ShakingStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::ShakingEnd, this, std::placeholders::_1));
+
+	CameraStateManager_.CreateStateMember("BOSS_SHAKING"
+		, std::bind(&MainCameraManager::BossShakingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&MainCameraManager::BossShakingStart, this, std::placeholders::_1)
+		, std::bind(&MainCameraManager::BossShakingEnd, this, std::placeholders::_1));
 
 
 	CameraStateManager_.CreateStateMember("FOCUS"
@@ -55,6 +66,18 @@ void MainCameraManager::Start()
 		, std::bind(&MainCameraManager::FocusReturnUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::FocusReturnStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::FocusReturnEnd, this, std::placeholders::_1));
+
+	CameraStateManager_.CreateStateMember("CHANGE_FOCUS"
+		, std::bind(&MainCameraManager::ChangePivotUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&MainCameraManager::ChangePivotStart, this, std::placeholders::_1)
+		, std::bind(&MainCameraManager::ChangePivotEnd, this, std::placeholders::_1));
+
+
+	CameraStateManager_.CreateStateMember("PIVOT_MOVE_TO_TARGET"
+		, std::bind(&MainCameraManager::PivotMoveToTargetUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&MainCameraManager::PivotMoveToTargetStart, this, std::placeholders::_1)
+		, std::bind(&MainCameraManager::PivotMoveToTargetEnd, this, std::placeholders::_1));
+
 
 	CameraStateManager_.ChangeState("MOVE_TO_TARGET");
 }
