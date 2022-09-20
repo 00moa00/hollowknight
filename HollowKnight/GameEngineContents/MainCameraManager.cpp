@@ -67,7 +67,7 @@ void MainCameraManager::Start()
 		, std::bind(&MainCameraManager::FocusReturnStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::FocusReturnEnd, this, std::placeholders::_1));
 
-	CameraStateManager_.CreateStateMember("CHANGE_FOCUS"
+	CameraStateManager_.CreateStateMember("CHANGE_PIVOT"
 		, std::bind(&MainCameraManager::ChangePivotUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::ChangePivotStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::ChangePivotEnd, this, std::placeholders::_1));
@@ -115,10 +115,26 @@ void MainCameraManager::ChangeCameraMove(CameraMode _Mode)
 		CameraStateManager_.ChangeState("MOVE_TO_TARGET");
 
 		break;
-	case CameraMode::Shaking:
-		CameraStateManager_.ChangeState("SHAKING");
+
+	case CameraMode::TargetInRoomMove:
+		CameraStateManager_.ChangeState("MOVE_TO_TARGET_INROOM");
 
 		break;
+	case CameraMode::Shaking:
+		CameraStateManager_.ChangeState("SHAKING");
+		break;
+
+	case CameraMode::BossShaking:
+		CameraStateManager_.ChangeState("BOSS_SHAKING");
+
+		break;
+
+	case CameraMode::PivotTargetMove:
+		CameraStateManager_.ChangeState("CHANGE_PIVOT");
+
+
+		break;
+
 	case CameraMode::Focus:
 		CameraStateManager_.ChangeState("FOCUS");
 
@@ -187,6 +203,18 @@ void MainCameraManager::MoveToTargetEnd(const StateInfo& _Info)
 {
 }
 
+void MainCameraManager::MoveToTargetInRoomStart(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::MoveToTargetInRoomUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::MoveToTargetInRoomEnd(const StateInfo& _Info)
+{
+}
+
 void MainCameraManager::ShakingStart(const StateInfo& _Info)
 {
 }
@@ -232,6 +260,78 @@ void MainCameraManager::ShakingUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void MainCameraManager::ShakingEnd(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::BossShakingStart(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::BossShakingUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	seed += (_DeltaTime);
+	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed *15.f, seed * 15.f, 0)) - 1.0f;
+	float4 ShakePosition = { shake *10.f, shake * 10.f };
+	//float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew() };
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
+	//GetLevel()->GetMainCameraActorTransform().SetWorldRotation(ShakeRotation);
+
+
+	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
+	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
+
+	//카메라의 위치 - 윈도우 사이즈의 x가 0이라면
+	if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+}
+
+void MainCameraManager::BossShakingEnd(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::ChangePivotStart(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::ChangePivotUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::ChangePivotEnd(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::PivotMoveToTargetStart(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::PivotMoveToTargetUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::PivotMoveToTargetEnd(const StateInfo& _Info)
 {
 }
 

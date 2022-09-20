@@ -9,9 +9,8 @@ enum class CameraMode
 	TargetMove,
 	TargetInRoomMove,
 	Shaking,
-	PivotCamera,
-	PivotCamera,
 	BossShaking,
+	PivotTargetMove,
 	Focus,
 	CancleFocus,
 	ReturnFocus

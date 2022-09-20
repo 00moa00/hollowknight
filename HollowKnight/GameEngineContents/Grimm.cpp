@@ -388,7 +388,7 @@ void Grimm::GrimmAppearRoarStart(const StateInfo& _Info)
 	BossRoarEffect* BossRoarEffect_ = GetLevel()->CreateActor<BossRoarEffect>();
 	BossRoarEffect_->SetParent(this);
 	BossRoarEffect_->GetTransform().SetLocalPosition({ 0, 130 });
-	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Shaking);
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
 
 }
 
