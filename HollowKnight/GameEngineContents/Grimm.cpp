@@ -14,18 +14,18 @@ Grimm::Grimm()
 	isPillarEnd_(false),
 	isBowEnd_(false),
 	isRoarEnd_(false),
-
 	isCastEndEnd_(false),
-
 	isSlashStartEnd_(false),
 	isSlashEnd_(false),
 	isSlashEndEnd_(false),
-
 	isDashStartEnd_(false),
 	isDashUpEnd_(false),
-
 	isStunHitEnd_(false),
+	isBllonStartEnd_(false),
+	isCastStartEnd_(false),
+	isSprikeStartEnd_(false),
 
+	ChangeState_(""),
 
 
 	EventState_(EventState::MAX),
@@ -93,7 +93,7 @@ void Grimm::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("BALLON_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_boss_balloon_attack0000-Sheet.png", 1, 4, 0.050f, true));
 
 	
-	
+	GetRenderer()->CreateFrameAnimationCutTexture("CASTS_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_cast0000-Sheet.png", 0, 3, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("CAST_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_cast0000-Sheet.png", 0, 7, 0.050f, false));
 
 	{
@@ -117,7 +117,7 @@ void Grimm::Start()
 
 	GetRenderer()->CreateFrameAnimationCutTexture("STUN_HIT_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_stun_explode0000-Sheet.png", 0, 4, 0.050f, false));
 	
-	GetRenderer()->CreateFrameAnimationCutTexture("SPRIKE_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_Boss_ground_spike_attack0003-Sheet.png", 0, 3, 0.050f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SPRIKE_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_Boss_ground_spike_attack0003-Sheet.png", 0, 6, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SPRIKE_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_Boss_ground_spike_attack0003-Sheet.png", 4, 6, 0.050f, true));
 
 
@@ -169,7 +169,7 @@ void Grimm::Start()
 	//======================================
 	GetRenderer()->AnimationBindEnd("BALLON_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
-			GetRenderer()->ChangeFrameAnimation("BALLON_ANIMATION");
+			isBllonStartEnd_ = true;
 
 		});
 
@@ -218,9 +218,19 @@ void Grimm::Start()
 
 	GetRenderer()->AnimationBindEnd("SPRIKE_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
-			GetRenderer()->ChangeFrameAnimation("SPRIKE_ANIMATION");
-
+			isSprikeStartEnd_ = true;
 		});
+
+	GetRenderer()->AnimationBindEnd("CASTS_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isCastStartEnd_ = true;
+		});
+
+	GetRenderer()->AnimationBindEnd("CAST_END_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			isCastEndEnd_ = true;
+		});
+
 
 	//================================
 	//    Create State | Appear
@@ -270,57 +280,105 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmAppearRoarStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmAppearRoarEnd, this, std::placeholders::_1));
 
+	GrimmAppearManager_.ChangeState("WAIT");
 
 	//================================
 	//    Create State | Battle
 	//================================
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_TELEPORT_APPEAR"
+	GrimmBattleManager_.CreateStateMember("BATTLE_TELEPORT_APPEAR"
 		, std::bind(&Grimm::GrimmBattleTeleportAppearUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleTeleportAppearStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleTeleportAppearEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_TELEPORT_DISAPPEAR"
+	GrimmBattleManager_.CreateStateMember("BATTLE_TELEPORT_DISAPPEAR"
 		, std::bind(&Grimm::GrimmBattleTeleportDisappearUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleTeleportDisappearStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleTeleportDisappearEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_BALLOON"
+	GrimmBattleManager_.CreateStateMember("BATTLE_BALLOON_START"
+		, std::bind(&Grimm::GrimmBattleBalloonStartUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattleBalloonStartStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattleBalloonStartEnd, this, std::placeholders::_1));
+
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_BALLOON"
 		, std::bind(&Grimm::GrimmBattleBalloonUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleBalloonStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleBalloonEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_SLASH"
+	GrimmBattleManager_.CreateStateMember("BATTLE_SLASH_START"
+		, std::bind(&Grimm::GrimmBattleSlashStartUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattleSlashStartStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattleSlashStartEnd, this, std::placeholders::_1));
+
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_SLASH"
 		, std::bind(&Grimm::GrimmBattleSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleSlashStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleSlashEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_FIRE"
+	GrimmBattleManager_.CreateStateMember("BATTLE_SLASH_UP"
+		, std::bind(&Grimm::GrimmBattleSlashUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattleSlashUpStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattleSlashUpEnd, this, std::placeholders::_1));
+
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_AIR_DASH_START"
+		, std::bind(&Grimm::GrimmBattleAirDashStartUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattleAirDashStartStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattleAirDashStartEnd, this, std::placeholders::_1));
+
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_AIR_DASH"
+		, std::bind(&Grimm::GrimmBattleAirDashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattleAirDashStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattleAirDashEnd, this, std::placeholders::_1));
+
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_AIR_DASH_END"
+		, std::bind(&Grimm::GrimmBattleAirDashEndtUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattleAirDashEndtStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattleAirDashEndtEnd, this, std::placeholders::_1));
+
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_FIRE"
 		, std::bind(&Grimm::GrimmBattleFireUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleFireStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleFireEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_SPIKE"
+	GrimmBattleManager_.CreateStateMember("BATTLE_SPIKE_START"
+		, std::bind(&Grimm::GrimmBattleSpikeStartUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattleSpikeStartStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattleSpikeStartEnd, this, std::placeholders::_1));
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_SPIKE"
 		, std::bind(&Grimm::GrimmBattleSpikeUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleSpikeStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleSpikeEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_CAST"
+	GrimmBattleManager_.CreateStateMember("BATTLE_CAST_START"
+		, std::bind(&Grimm::GrimmBattlCastStartUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattlCastStartStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattlCastStartEnd, this, std::placeholders::_1));
+	
+	GrimmBattleManager_.CreateStateMember("BATTLE_CAST"
 		, std::bind(&Grimm::GrimmBattlCastUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattlCastStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattlCastEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_STUN"
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_STUN"
 		, std::bind(&Grimm::GrimmBattlStunUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattlStunStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattlStunEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.CreateStateMember("BATTLE_STUN_BAT"
+	GrimmBattleManager_.CreateStateMember("BATTLE_STUN_BAT"
 		, std::bind(&Grimm::GrimmBattlStunBatUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattlStunBatStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattlStunBatEnd, this, std::placeholders::_1));
 
-	GrimmAppearManager_.ChangeState("WAIT");
+	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 	EventState_ = EventState::Appear;
 	GetRenderer()->Off();
@@ -334,6 +392,8 @@ void Grimm::Update(float _DeltaTime)
 		GrimmAppearManager_.Update(_DeltaTime);
 		break;
 	case EventState::Battle:
+		GrimmBattleManager_.Update(_DeltaTime);
+
 		break;
 	case EventState::Talking:
 		break;
@@ -348,170 +408,3 @@ void Grimm::SetMonsterHit(int _Damage, float4 _StunDir)
 {
 }
 
-void Grimm::GrimmAppearWaitStart(const StateInfo& _Info)
-{
-}
-
-void Grimm::GrimmAppearWaitUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	if (GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x > 5000)
-	{
-		KnightData::GetInst()->SetisBossBattle(true);
-		GrimmAppearManager_.ChangeState("APPEAR_TELETPORT");
-
-	}
-	
-}
-
-void Grimm::GrimmAppearWaitEnd(const StateInfo& _Info)
-{
-}
-
-void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
-{
-
-	BossRoomGate_ = GetLevel()->CreateActor<BossRoomGate>();
-	BossRoomGate_->GetTransform().SetWorldPosition({3643, -925});
-	//BossRoomGate_-
-
-
-	GrimmBeam_ = GetLevel()->CreateActor<GrimmBeam>();
-	GrimmBeam_->SetParent(this);
-	GrimmBeam_->GetTransform().SetWorldMove({ 50,680, static_cast<float>(Z_ORDER::Object)});
-	GrimmBeam_->GetTransform().SetWorldRotation({0,0,-7});
-
-
-	GrimmSpotLight_ = GetLevel()->CreateActor<GrimmSpotLight>();
-	GrimmSpotLight_->GetTransform().SetWorldMove({ 0,5, -100 });
-	GrimmSpotLight_->SetParent(this);
-
-
-
-
-
-	GetRenderer()->On();
-	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
-	GetRenderer()->ScaleToCutTexture(0);
-
-	ReSetAccTime();
-
-}
-
-void Grimm::GrimmAppearTeleportUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	if (isTeleportAppearEnd_ == true)
-	{
-		isTeleportAppearEnd_ = false;
-		GrimmAppearManager_.ChangeState("APPEAR_IDLE1");
-
-	}
-}
-
-void Grimm::GrimmAppearTeleportEnd(const StateInfo& _Info)
-{
-}
-
-void Grimm::GrimmAppearIdle1Start(const StateInfo& _Info)
-{
-	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
-	GetRenderer()->ScaleToCutTexture(0);
-
-	ReSetAccTime();
-
-}
-
-void Grimm::GrimmAppearIdle1Update(float _DeltaTime, const StateInfo& _Info)
-{
-	if (GetAccTime() > 2.5f)
-	{
-		GrimmAppearManager_.ChangeState("APPEAR_PILLAR");
-	}
-}
-
-void Grimm::GrimmAppearIdle1End(const StateInfo& _Info)
-{
-}
-
-
-
-void Grimm::GrimmAppearPillarStart(const StateInfo& _Info)
-{
-	GetRenderer()->ChangeFrameAnimation("PILLAR_ANIMATION");
-	FadePink* FadePink_ = GetLevel()->CreateActor<FadePink>();
-	FadePink_->GetTransform().SetWorldPosition({5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200});
-
-
-	GetRenderer()->ScaleToCutTexture(0);
-
-}
-
-void Grimm::GrimmAppearPillarUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	if (isPillarEnd_ == true)
-	{
-		isPillarEnd_ = false;
-		GrimmAppearManager_.ChangeState("APPEAR_PILLAR_LOOP");
-
-	}
-}
-
-void Grimm::GrimmAppearPillarEnd(const StateInfo& _Info)
-{
-}
-
-
-void Grimm::GrimmAppearPillarLoopStart(const StateInfo& _Info)
-{
-	GetRenderer()->ChangeFrameAnimation("PILLAR_LOOP_ANIMATION");
-	GetRenderer()->ScaleToCutTexture(0);
-
-	ReSetAccTime();
-
-}
-
-void Grimm::GrimmAppearPillarLoopUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	if (GetAccTime() > 2.5f)
-	{
-		GrimmAppearManager_.ChangeState("APPEAR_IDLE2");
-	}
-}
-
-void Grimm::GrimmAppearPillarLoopEnd(const StateInfo& _Info)
-{
-}
-
-void Grimm::GrimmAppearIdle2Start(const StateInfo& _Info)
-{
-	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
-	GetRenderer()->ScaleToCutTexture(0);
-
-	ReSetAccTime();
-
-}
-
-void Grimm::GrimmAppearIdle2Update(float _DeltaTime, const StateInfo& _Info)
-{
-	if (GetAccTime() > 1.5f)
-	{
-		GrimmAppearManager_.ChangeState("APPEAR_CHANGE_MAP");
-	}
-}
-
-void Grimm::GrimmAppearIdle2End(const StateInfo& _Info)
-{
-}
-
-void Grimm::GrimmAppearChangeMapStart(const StateInfo& _Info)
-{
-	GetLevel<HollowKnightLevel>()->GetMasterMap()->ChangeGrimmMap();
-	FadePink* FadePink_ = GetLevel()->CreateActor<FadePink>();
-	FadePink_->GetTransform().SetWorldPosition({ 5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200 });
-	
-	GrimmBeam_->Death();
-	GrimmSpotLight_->Death();
-
-	GetLevel<GrimmLevel>()->GetGrimmCrowds()->On();
-
-	ReSetAccTime();
-}

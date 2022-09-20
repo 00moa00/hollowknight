@@ -11,10 +11,26 @@
 
 void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
+
+
+
+
+
+
+
 }
 
 void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (isTeleportAppearEnd_ == true)
+	{
+		isTeleportAppearEnd_ = false;
+		GrimmBattleManager_.ChangeState(ChangeState_);
+		return;
+
+	}
 }
 
 void Grimm::GrimmBattleTeleportAppearEnd(const StateInfo& _Info)
@@ -23,12 +39,36 @@ void Grimm::GrimmBattleTeleportAppearEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleTeleportDisappearStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("TELEPORT_DISAPPEAR_ANIMATION");
+
 }
 
 void Grimm::GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (isTeleportDiappearEnd_ == true)
+	{
+		isTeleportDiappearEnd_ = false;
+		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_APPEAR");
+		return;
+
+	}
+
+
 }
 void Grimm::GrimmBattleTeleportDisappearEnd(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleBalloonStartStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleBalloonStartUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleBalloonStartEnd(const StateInfo& _Info)
 {
 }
 
@@ -45,6 +85,54 @@ void Grimm::GrimmBattleBalloonEnd(const StateInfo& _Info)
 {
 }
 
+void Grimm::GrimmBattleAirDashStartStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleAirDashStartUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleAirDashStartEnd(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleAirDashStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleAirDashEnd(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleAirDashEndtStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleAirDashEndtUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleAirDashEndtEnd(const StateInfo& _Info)
+{
+}
+
+
+void Grimm::GrimmBattleSlashStartStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleSlashStartUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleSlashStartEnd(const StateInfo& _Info)
+{
+}
 
 void Grimm::GrimmBattleSlashStart(const StateInfo& _Info)
 {
@@ -55,6 +143,18 @@ void Grimm::GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Grimm::GrimmBattleSlashEnd(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleSlashUpStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleSlashUpUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleSlashUpEnd(const StateInfo& _Info)
 {
 }
 
@@ -71,6 +171,18 @@ void Grimm::GrimmBattleFireEnd(const StateInfo& _Info)
 {
 }
 
+void Grimm::GrimmBattleSpikeStartStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleSpikeStartUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattleSpikeStartEnd(const StateInfo& _Info)
+{
+}
+
 
 void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 {
@@ -81,6 +193,18 @@ void Grimm::GrimmBattleSpikeUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Grimm::GrimmBattleSpikeEnd(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattlCastStartStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattlCastStartUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattlCastStartEnd(const StateInfo& _Info)
 {
 }
 

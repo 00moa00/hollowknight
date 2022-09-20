@@ -5,8 +5,19 @@
 
 #include "BossRoomGate.h"
 
-//각 스프라이트 시트마다 프레임 크기가 다르니 애니메이션 변경할때면 ScaleToCutTexture 할것.
 
+enum class PatternType
+{
+	BATTLE_BALLOON_START,
+	BATTLE_SLASH_START,
+	BATTLE_AIR_DASH_START,
+	BATTLE_SPIKE_START,
+	BATTLE_CAST_START,
+};
+
+
+
+//각 스프라이트 시트마다 프레임 크기가 다르니 애니메이션 변경할때면 ScaleToCutTexture 할것
 
 enum class EventState
 {
@@ -46,6 +57,11 @@ private:
 	bool isBowEnd_;
 	bool isRoarEnd_;
 
+	bool isBllonStartEnd_;
+
+	bool isSprikeStartEnd_;
+
+	bool isCastStartEnd_;
 	bool isCastEndEnd_;
 
 	bool isSlashStartEnd_;
@@ -57,6 +73,8 @@ private:
 
 	bool isStunHitEnd_;
 
+	std::string ChangeState_;
+
 	//bool isTeleportEnd_;
 
 	GrimmBeam* GrimmBeam_;
@@ -66,6 +84,8 @@ private:
 	EventState EventState_;
 
 	GameEngineStateManager GrimmAppearManager_;
+	GameEngineStateManager GrimmBattleManager_;
+
 	GameEngineStateManager GrimmManager_;
 
 public:
@@ -128,21 +148,53 @@ private:
 	void GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmBattleTeleportDisappearEnd(const StateInfo& _Info);
 
+	void GrimmBattleBalloonStartStart(const StateInfo& _Info);
+	void GrimmBattleBalloonStartUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleBalloonStartEnd(const StateInfo& _Info);
+
 	void GrimmBattleBalloonStart(const StateInfo& _Info);
 	void GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmBattleBalloonEnd(const StateInfo& _Info);
+
+	void GrimmBattleAirDashStartStart(const StateInfo& _Info);
+	void GrimmBattleAirDashStartUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleAirDashStartEnd(const StateInfo& _Info);
+
+	void GrimmBattleAirDashStart(const StateInfo& _Info);
+	void GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleAirDashEnd(const StateInfo& _Info);
+
+	void GrimmBattleAirDashEndtStart(const StateInfo& _Info);
+	void GrimmBattleAirDashEndtUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleAirDashEndtEnd(const StateInfo& _Info);
+
+	void GrimmBattleSlashStartStart(const StateInfo& _Info);
+	void GrimmBattleSlashStartUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleSlashStartEnd(const StateInfo& _Info);
 
 	void GrimmBattleSlashStart(const StateInfo& _Info);
 	void GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmBattleSlashEnd(const StateInfo& _Info);
 
+	void GrimmBattleSlashUpStart(const StateInfo& _Info);
+	void GrimmBattleSlashUpUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleSlashUpEnd(const StateInfo& _Info);
+
 	void GrimmBattleFireStart(const StateInfo& _Info);
 	void GrimmBattleFireUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmBattleFireEnd(const StateInfo& _Info);
 
+	void GrimmBattleSpikeStartStart(const StateInfo& _Info);
+	void GrimmBattleSpikeStartUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattleSpikeStartEnd(const StateInfo& _Info);
+
 	void GrimmBattleSpikeStart(const StateInfo& _Info);
 	void GrimmBattleSpikeUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmBattleSpikeEnd(const StateInfo& _Info);
+
+	void GrimmBattlCastStartStart(const StateInfo& _Info);
+	void GrimmBattlCastStartUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattlCastStartEnd(const StateInfo& _Info);
 
 	void GrimmBattlCastStart(const StateInfo& _Info);
 	void GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info);
