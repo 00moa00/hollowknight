@@ -3,6 +3,7 @@
 #include "KnightData.h"
 #include "HollowKnightLevel.h"
 #include "FadePink.h"
+#include "BossRoarEffect.h"
 
 Grimm::Grimm() 
 	:
@@ -363,7 +364,9 @@ void Grimm::GrimmAppearRoarStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("ROAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
-
+	BossRoarEffect* BossRoarEffect_ = GetLevel()->CreateActor<BossRoarEffect>();
+	BossRoarEffect_->SetParent(this);
+	BossRoarEffect_->GetTransform().SetLocalPosition({ 0, 130 });
 }
 
 void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)

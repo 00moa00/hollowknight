@@ -531,6 +531,12 @@
     <ClInclude Include="FadePink.h">
       <Filter>Actor\Effect\Etc</Filter>
     </ClInclude>
+    <ClInclude Include="BossRoarEffect.h">
+      <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BossRoarRingEffect.h">
+      <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -913,6 +919,12 @@
     </ClCompile>
     <ClCompile Include="FadePink.cpp">
       <Filter>Actor\Effect\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRoarEffect.cpp">
+      <Filter>Actor\Effect\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRoarRingEffect.cpp">
+      <Filter>Actor\Effect\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

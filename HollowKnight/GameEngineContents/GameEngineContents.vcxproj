@@ -205,6 +205,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BossRoarEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="BossRoarRingEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="CameraGUI.h">
       <SubType>
       </SubType>
@@ -693,6 +701,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="BorderTop.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BossRoarEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BossRoarRingEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

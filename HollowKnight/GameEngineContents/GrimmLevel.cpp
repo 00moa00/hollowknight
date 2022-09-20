@@ -75,7 +75,7 @@ void GrimmLevel::Start()
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 }
 
 void GrimmLevel::Update(float _DeltaTime)
