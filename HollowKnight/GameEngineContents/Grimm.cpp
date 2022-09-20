@@ -19,7 +19,8 @@ Grimm::Grimm()
 	EventState_(EventState::MAX),
 
 	GrimmBeam_(nullptr),
-	GrimmSpotLight_(nullptr)
+	GrimmSpotLight_(nullptr),
+	BossRoomGate_(nullptr)
 {
 }
 
@@ -48,8 +49,6 @@ void Grimm::Start()
 	//================================
 	//    Create Animation
 	//================================
-
-
 
 	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_idle0000-Sheet.png", 0, 11, 0.100f, true));
 	GetRenderer()->CreateFrameAnimationCutTexture("TELEPORT_APPEAR_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_teleport0000-Sheet.png", 0, 6, 0.100f, true));
@@ -207,6 +206,12 @@ void Grimm::GrimmAppearWaitEnd(const StateInfo& _Info)
 
 void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
 {
+
+	BossRoomGate_ = GetLevel()->CreateActor<BossRoomGate>();
+	BossRoomGate_->GetTransform().SetWorldPosition({3643, -925});
+	//BossRoomGate_-
+
+
 	GrimmBeam_ = GetLevel()->CreateActor<GrimmBeam>();
 	GrimmBeam_->SetParent(this);
 	GrimmBeam_->GetTransform().SetWorldMove({ 50,680, static_cast<float>(Z_ORDER::Object)});
@@ -390,7 +395,7 @@ void Grimm::GrimmAppearRoarStart(const StateInfo& _Info)
 	BossRoarEffect_->SetParent(this);
 	BossRoarEffect_->GetTransform().SetLocalPosition({ -100, 250 });
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
-	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->SetRoomCamera(float4(2600, 1080), float4(5091,-923));
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->SetRoomCamera(float4(3000, 1080), float4(5000,-923));
 }
 
 void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)

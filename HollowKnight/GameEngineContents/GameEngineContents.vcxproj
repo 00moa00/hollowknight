@@ -205,11 +205,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BossGateEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BossRoarEffect.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="BossRoarRingEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="BossRoomGate.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -720,11 +728,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="BossGateEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BossRoarEffect.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="BossRoarRingEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BossRoomGate.cpp">
       <SubType>
       </SubType>
     </ClCompile>

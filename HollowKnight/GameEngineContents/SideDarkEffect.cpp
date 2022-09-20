@@ -18,6 +18,8 @@ void SideDarkEffect::Start()
 	//GetRenderer()->GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
 	GetRenderer()->GetTransform().SetLocalPosition({ 0, 0,  0 });
 
+
+
 }
 
 void SideDarkEffect::Update(float _DeltaTime)

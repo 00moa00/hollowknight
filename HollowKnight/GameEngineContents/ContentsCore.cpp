@@ -1188,6 +1188,27 @@ void ContentsCore::Start()
 		Dir.Move("Texture");
 		Dir.Move("Object");
 		Dir.Move("door");
+		Dir.Move("Gate");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Switches and gates_gate_resize0000-Sheet.png", 6, 1);
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Object");
+		Dir.Move("door");
 		Dir.Move("Boss Door Cln");
 
 
@@ -1428,6 +1449,11 @@ void ContentsCore::Start()
 
 
 		GameEngineTexture::Cut("hit_crack_simple0000-Sheet.png", 3, 1);
+
+		GameEngineTexture::Cut("Switches and gates_gate_effect0000-Sheet.png", 4, 1);
+
+
+
 
 	}
 
