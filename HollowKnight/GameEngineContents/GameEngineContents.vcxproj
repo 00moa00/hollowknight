@@ -345,10 +345,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GrimmfireParticle.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="GrimmLevel.h">
       <SubType>
       </SubType>
@@ -884,10 +880,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GrimmFireBallSpectrumActor.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GrimmfireParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>

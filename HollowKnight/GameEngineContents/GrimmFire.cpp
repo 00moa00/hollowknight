@@ -108,7 +108,7 @@ void GrimmFire::Update(float _DeltaTime)
 	{
 		GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
 		//GrimmFireBallSpectrumActor_->SetParent(this);
-		GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition(this->GetTransform().GetWorldPosition());
+		GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y  });
 		ReSetAccTime();
 	}
 

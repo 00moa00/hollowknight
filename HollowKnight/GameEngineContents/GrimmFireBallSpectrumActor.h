@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include "GrimmFireBallSpectrum.h"
 
 // Ό³Έν :
 class GrimmFireBallSpectrumActor : public GameEngineActor
@@ -27,7 +28,7 @@ private:
 
 	float Count_;
 
-	//std::vector<GameEngineTextureRenderer*> AllFireSpectrum_;
+	std::vector<GrimmFireBallSpectrum*> AllFireSpectrum_;
 
 };
 

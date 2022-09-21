@@ -564,9 +564,6 @@
     <ClInclude Include="GrimmFire.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
-    <ClInclude Include="GrimmfireParticle.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
-    </ClInclude>
     <ClInclude Include="GrimmFireBallSpectrum.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
@@ -987,9 +984,6 @@
       <Filter>Actor\Play\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFire.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
-    </ClCompile>
-    <ClCompile Include="GrimmfireParticle.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFireBallSpectrum.cpp">
