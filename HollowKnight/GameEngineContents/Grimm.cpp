@@ -51,7 +51,7 @@ void Grimm::Start()
 
 	CreateCollisionComponent(float4{ 150, 200, 1 }, static_cast<int>(COLLISION_ORDER::Monster));
 	//GetCollision()->GetTransform().SetWorldPosition({ 0, 50, 0 });
-	//CreateWallCollisionComponent(float4{ 20, 20, 1 });
+	CreateWallCollisionComponent(float4{ 20, 20, 1 });
 
 
 	CreateRendererComponent(float4{ 309, 508, 1 }, "Grimm Cln_Grimm_idle_right0000-Sheet.png", 0, static_cast<int>(RENDERORDER::Knight));
@@ -61,6 +61,8 @@ void Grimm::Start()
 	SetHP(50);
 
 	SetMoveDirection(float4::RIGHT);
+	//SetMonsterDirection();
+
 	//SetDirRendererXScale();
 
 	//================================
@@ -112,7 +114,7 @@ void Grimm::Start()
 		GetRenderer()->CreateFrameAnimationCutTexture("CAST_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_cast0000-Sheet.png", BackAni, 0.050f, false));
 	}
 
-	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.050f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.030f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 5, 7, 0.050f, true));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 15, 0.050f, false));
 	

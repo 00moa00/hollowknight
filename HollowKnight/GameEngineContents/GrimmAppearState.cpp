@@ -33,6 +33,9 @@ void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
 
 	BossRoomGate_ = GetLevel()->CreateActor<BossRoomGate>();
 	BossRoomGate_->GetTransform().SetWorldPosition({ 3643, -925 });
+	BossRoomRightGate_ = GetLevel()->CreateActor<BossRoomGate>();
+	BossRoomRightGate_->GetTransform().SetWorldPosition({ 6000, -925 });
+	BossRoomRightGate_->GetTransform().PixLocalNegativeX();
 
 
 	GrimmBeam_ = GetLevel()->CreateActor<GrimmBeam>();
@@ -229,7 +232,7 @@ void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		EventState_ = EventState::Battle;
 		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
-		SetChangeStateString(PatternType::BATTLE_BALLOON_START);
+		SetChangeStateString(PatternType::BATTLE_AIR_DASH_START);
 
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
 	}

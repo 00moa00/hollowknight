@@ -55,6 +55,7 @@ void GrimmLevel::Start()
 
 	Grimm_ = CreateActor<Grimm>();
 	Grimm_->GetTransform().SetWorldPosition({5380,-900 , static_cast<float>(Z_ORDER::Monster) });
+	Grimm_->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	GrimmCrowds_ = CreateActor<GrimmCrowds>();
 	GrimmCrowds_->Off();

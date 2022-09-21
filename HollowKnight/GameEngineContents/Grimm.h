@@ -80,6 +80,9 @@ private:
 
 	float MapCenterX_;
 
+	float4 AirDashDest_;
+	float AirDashRotation_;
+
 	std::string ChangeState_;
 
 	//bool isTeleportEnd_;
@@ -87,6 +90,7 @@ private:
 	GrimmBeam* GrimmBeam_;
 	GrimmSpotLight* GrimmSpotLight_;
 	BossRoomGate* BossRoomGate_;
+	BossRoomGate* BossRoomRightGate_;
 
 	EventState EventState_;
 
@@ -226,8 +230,6 @@ private:
 	//================================
 	//    Bind 
 	//================================
-
-
-
+	bool MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 };
 

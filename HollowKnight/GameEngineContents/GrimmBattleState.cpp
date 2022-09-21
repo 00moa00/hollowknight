@@ -30,13 +30,17 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	case PatternType::BATTLE_SLASH_START:
 		if (KnightPos.x > MapCenterX_)
 		{
-			GetTransform().SetWorldPosition({ KnightPos.x - 300.f,KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ KnightPos.x - 300.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
+			SetMoveDirection(float4::RIGHT);
+			GetRenderer()->GetTransform().PixLocalNegativeX();
 
 		}
 
 		else
 		{
-			GetTransform().SetWorldPosition({ KnightPos.x + 300.f,KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ KnightPos.x + 300.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
+			SetMoveDirection(float4::LEFT);
+			GetRenderer()->GetTransform().PixLocalPositiveX();
 
 		}
 
@@ -48,11 +52,18 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 		if (KnightPos.x > MapCenterX_)
 		{
 			GetTransform().SetWorldPosition({ KnightPos.x - 300.f, -600.f, static_cast<float>(Z_ORDER::Monster) });
+			SetMoveDirection(float4::RIGHT);
+			//GetRenderer()->GetTransform().PixLocalNegativeX();
+
+
 		}
 
 		else
 		{
 			GetTransform().SetWorldPosition({ KnightPos.x + 300.f,-600.f, static_cast<float>(Z_ORDER::Monster) });
+			SetMoveDirection(float4::LEFT);
+			//GetRenderer()->GetTransform().PixLocalPositiveX();
+
 		}
 
 		break;
@@ -60,12 +71,17 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 
 		if (KnightPos.x > MapCenterX_)
 		{
-			GetTransform().SetWorldPosition({ MapCenterX_ - 300.f, KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ MapCenterX_ - 400.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
+			SetMoveDirection(float4::RIGHT);
+			GetRenderer()->GetTransform().PixLocalPositiveX();
 		}
 
 		else
 		{
-			GetTransform().SetWorldPosition({ MapCenterX_ + 300.f,KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ MapCenterX_ + 400.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
+			SetMoveDirection(float4::LEFT);
+			GetRenderer()->GetTransform().PixLocalNegativeX();
+
 		}
 
 		break;
@@ -73,31 +89,36 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 
 		if (KnightPos.x > MapCenterX_)
 		{
-			GetTransform().SetWorldPosition({ MapCenterX_ - 300.f, KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ MapCenterX_ - 400.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
+			SetMoveDirection(float4::RIGHT);
+			GetRenderer()->GetTransform().PixLocalNegativeX();
+
 		}
 
 		else
 		{
-			GetTransform().SetWorldPosition({ MapCenterX_ + 300.f,KnightPos.y, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ MapCenterX_ + 400.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
+			SetMoveDirection(float4::LEFT);
+			GetRenderer()->GetTransform().PixLocalPositiveX();
+
+
 		}
 		break;
 	default:
 		break;
 	}
 	GetRenderer()->On();
-
+	SetMonsterDirection();
 
 }
 
 void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	if (isTeleportAppearEnd_ == true)
 	{
 		isTeleportAppearEnd_ = false;
 		GrimmBattleManager_.ChangeState(ChangeState_);
 		return;
-
 	}
 }
 
@@ -180,12 +201,52 @@ void Grimm::GrimmBattleAirDashStartStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+
+	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+
+	}
+
+	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+
+	}
+
+
+
+
+
+	AirDashDest_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+
+	float4 KnihgtVec = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	float4 GrimmVec = float4({ GetTransform().GetWorldPosition().x, -925 }) - GetTransform().GetWorldPosition();
+
+	GrimmVec.Normalize();
+	KnihgtVec.Normalize();
+
+	float4 Ro ;
+	
+	Ro = float4::DotProduct3D(GrimmVec, AirDashDest_);
+
+	AirDashRotation_ = (Ro.x * GameEngineMath::PI / 180.f);
+
+
+
+	AirDashDest_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
+	AirDashDest_ = float4::NormalizeReturn(AirDashDest_);
+
+
 }
 
 void Grimm::GrimmBattleAirDashStartUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 2.0f)
+	if (isDashStartEnd_ == true)
 	{
+		isDashStartEnd_ = false;
 		GrimmBattleManager_.ChangeState("BATTLE_AIR_DASH");
 		return;
 	}
@@ -197,14 +258,40 @@ void Grimm::GrimmBattleAirDashStartEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleAirDashStart(const StateInfo& _Info)
 {
+
+
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+	GetRenderer()->GetTransform().PixLocalPositiveX();
+
+	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		//GetRenderer()->GetTransform().PixLocalNegativeX();
+		AirDashRotation_ = -AirDashRotation_;
+
+	}
+
+	GetRenderer()->GetTransform().SetWorldRotation({ 0,0,AirDashRotation_ });
 }
 
 void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 2.0f)
+
+	float4 CurrentPos = GetTransform().GetWorldPosition();
+
+	//float4 DestPos =  AirDashDest_;
+
+	float4 Move = AirDashDest_ * 1000.f * _DeltaTime;
+
+	GetTransform().SetWorldMove(Move);
+	this->isPixelCheck(_DeltaTime, float4::ZERO);
+
+	//float4 Lenth = AirDashDest_.y - GetTransform().GetWorldPosition().y;
+
+	//float LenthResult = Lenth.Length();
+	if (GetisOnGround() == true)
 	{
+		//int a = 0;
 		GrimmBattleManager_.ChangeState("BATTLE_AIR_DASH_END");
 		return;
 	}
@@ -212,17 +299,61 @@ void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmBattleAirDashEnd(const StateInfo& _Info)
 {
-
+	GetRenderer()->GetTransform().SetWorldRotation({ 0,0,0 });
 }
 
 void Grimm::GrimmBattleAirDashEndtStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_END_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+
+	}
+
+	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+
+	}
 }
 
 void Grimm::GrimmBattleAirDashEndtUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	//SetMonsterDirection();
+	this->isPixelCheck(_DeltaTime, GetMoveDirection());
+
+	// ======== Crawlid VS WallColl ========
+	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
+		std::bind(&Grimm::MonsterVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		SetisCollWall(true);
+	}
+	else
+	{
+		SetisCollWall(false);
+
+	}
+
+
+	if (GetisWall() == false)
+	{
+		GetTransform().SetWorldMove(GetMoveDirection() * 1000.f * _DeltaTime);
+
+	}
+
+	else
+	{
+		GetTransform().SetWorldMove(float4::ZERO * 1000.f * _DeltaTime);
+
+	}
+
+
 	if (_Info.StateTime > 2.0f)
 	{
 		SetRamdomPattern();
@@ -263,6 +394,38 @@ void Grimm::GrimmBattleSlashStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	//SetMonsterDirection();
+	//this->isPixelCheck(_DeltaTime, GetMoveDirection());
+
+	// ======== Monster VS WallColl ========
+	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
+		std::bind(&Grimm::MonsterVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		SetisCollWall(true);
+	}
+	else
+	{
+		SetisCollWall(false);
+
+	}
+
+
+	if (GetisWall() == false)
+	{
+		float4 Move = GetMoveDirection() * 1000.f * _DeltaTime;
+		GetTransform().SetWorldMove(Move);
+	}
+
+
+	if (GetisWall() == true)
+	{
+		//int a = 0;
+		GrimmBattleManager_.ChangeState("BATTLE_SLASH_UP");
+		return;
+	}
+
+
 	if (isSlashEnd_ == true)
 	{
 		isSlashEnd_ = false;
@@ -284,6 +447,35 @@ void Grimm::GrimmBattleSlashUpStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattleSlashUpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	// ======== Monster VS WallColl ========
+	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
+		std::bind(&Grimm::MonsterVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		SetisCollWall(true);
+	}
+	else
+	{
+		SetisCollWall(false);
+
+	}
+
+
+	if (GetisWall() == false)
+	{
+		float4 Move = float4::UP * 1000.f * _DeltaTime;
+		GetTransform().SetWorldMove(Move);
+	}
+
+
+
+	if (GetisWall() == true)
+	{
+		//int a = 0;
+		GrimmBattleManager_.ChangeState("BATTLE_FIRE");
+		return;
+	}
+
 	if (isSlashEndEnd_ == true)
 	{
 		isSlashEndEnd_ = false;
@@ -299,6 +491,7 @@ void Grimm::GrimmBattleSlashUpEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleFireStart(const StateInfo& _Info)
 {
+	GetRenderer()->Off();
 }
 
 void Grimm::GrimmBattleFireUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -443,4 +636,9 @@ void Grimm::GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunBatEnd(const StateInfo& _Info)
 {
+}
+
+bool Grimm::MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	return true;
 }
