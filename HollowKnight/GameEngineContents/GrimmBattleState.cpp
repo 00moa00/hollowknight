@@ -8,6 +8,7 @@
 #include "FadePink.h"
 #include "BossRoarEffect.h"
 
+#include "GrimmFire.h"
 
 
 void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
@@ -161,6 +162,7 @@ void Grimm::GrimmBattleBalloonStartStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("BALLON_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
 
 }
 
@@ -476,10 +478,10 @@ void Grimm::GrimmBattleSlashUpUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
-	if (isSlashEndEnd_ == true)
+	if (GetTransform().GetWorldPosition().y > -600)
 	{
 		isSlashEndEnd_ = false;
-		GrimmBattleManager_.ChangeState("BATTLE_FIRE");
+		SetRamdomPattern();		
 		return;
 	}
 }

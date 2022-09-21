@@ -163,6 +163,9 @@
     <Filter Include="Actor\Effect\Object">
       <UniqueIdentifier>{fef8bef6-e9bd-4cfd-864a-937bf5e596c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\Monster\Grimm">
+      <UniqueIdentifier>{397f0ed2-1964-4657-8adc-b4c599abaef3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -557,6 +560,18 @@
     </ClInclude>
     <ClInclude Include="BossGateEffect.h">
       <Filter>Actor\Effect\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmFire.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmfireParticle.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmFireBallSpectrum.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmFireBallSpectrumActor.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -970,6 +985,18 @@
     </ClCompile>
     <ClCompile Include="GrimmBattleState.cpp">
       <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmFire.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmfireParticle.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmFireBallSpectrum.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmFireBallSpectrumActor.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

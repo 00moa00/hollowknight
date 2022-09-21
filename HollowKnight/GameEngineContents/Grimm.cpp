@@ -7,6 +7,8 @@
 #include "FadePink.h"
 #include "BossRoarEffect.h"
 
+#include "GrimmFire.h"
+
 #include <GameEngineBase/GameEngineRandom.h>
 
 Grimm::Grimm() 
@@ -390,6 +392,15 @@ void Grimm::Start()
 
 	EventState_ = EventState::Appear;
 	GetRenderer()->Off();
+
+
+
+	GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+
+	GrimmFire_->GetTransform().SetLocalPosition(this->GetTransform().GetWorldPosition());
+
+	//GrimmFire_->SetParent(this);    
+
 }
 
 void Grimm::Update(float _DeltaTime)

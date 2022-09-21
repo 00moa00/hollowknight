@@ -333,6 +333,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GrimmFire.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmFireBallSpectrum.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmFireBallSpectrumActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmfireParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GrimmLevel.h">
       <SubType>
       </SubType>
@@ -856,6 +872,22 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GrimmCrowds.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmFire.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmFireBallSpectrum.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmFireBallSpectrumActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmfireParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>
