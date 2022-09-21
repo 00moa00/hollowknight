@@ -25,5 +25,9 @@ private:
 	float CreateTimer_;
 	float UpdateTimer_;
 
+	float Count_;
+
+	//std::vector<GameEngineTextureRenderer*> AllFireSpectrum_;
+
 };
 

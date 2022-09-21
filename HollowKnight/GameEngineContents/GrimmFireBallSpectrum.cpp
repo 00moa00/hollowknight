@@ -27,7 +27,7 @@ void GrimmFireBallSpectrum::Update(float _DeltaTime)
 {
 
 	GetRenderer()->GetPixelData().MulColor.a = Alpha_;
-	Alpha_ -= 0.3f * _DeltaTime;
+	Alpha_ -= 0.2f * _DeltaTime;
 
 	if (Alpha_ <= 0.f)
 	{

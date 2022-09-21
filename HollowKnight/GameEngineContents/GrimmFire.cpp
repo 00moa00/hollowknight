@@ -102,15 +102,15 @@ void GrimmFire::Start()
 void GrimmFire::Update(float _DeltaTime)
 {
 
-	//GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 100.f);
+	GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 100.f);
 
-	//if (GetAccTime() > 0.4f)
-	//{
-	//	GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
-	//	GrimmFireBallSpectrumActor_->SetParent(this);
-	//	GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition(this->GetTransform().GetWorldPosition());
-	//	ReSetAccTime();
-	//}
+	if (GetAccTime() > 0.4f)
+	{
+		GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
+		//GrimmFireBallSpectrumActor_->SetParent(this);
+		GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition(this->GetTransform().GetWorldPosition());
+		ReSetAccTime();
+	}
 
 
 
