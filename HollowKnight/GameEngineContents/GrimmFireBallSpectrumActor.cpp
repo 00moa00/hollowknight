@@ -26,7 +26,7 @@ void GrimmFireBallSpectrumActor::Update(float _DeltaTime)
 	{
 		CreateTimer_ = 0.0f;
 		GrimmFireBallSpectrum* GrimmFireBallSpectrum_ = GetLevel()->CreateActor<GrimmFireBallSpectrum>();
-		GrimmFireBallSpectrum_->SetParent(this);
+		//GrimmFireBallSpectrum_->SetParent(this);
 
 		GrimmFireBallSpectrum_->GetTransform().SetLocalPosition(this->GetTransform().GetWorldPosition());
 		GrimmFireBallSpectrum_->GetTransform().SetLocalMove({ GameEngineRandom::MainRandom.RandomFloat(-10,10) +50.f, GameEngineRandom::MainRandom.RandomFloat(-10,10) });
