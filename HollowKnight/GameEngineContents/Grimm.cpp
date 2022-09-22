@@ -395,10 +395,6 @@ void Grimm::Start()
 
 
 
-	GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
-
-	GrimmFire_->GetTransform().SetWorldPosition({ 5000, -650, -20 });
-
 	//GrimmFire_->SetParent(this);    
 
 }

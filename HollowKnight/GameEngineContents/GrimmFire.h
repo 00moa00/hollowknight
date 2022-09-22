@@ -1,5 +1,6 @@
 #pragma once
 #include "MasterEffect.h"
+#include "GrimmFireBallSpectrumActor.h"
 
 // Ό³Έν :
 class GrimmFire : public MasterEffect
@@ -22,15 +23,16 @@ protected:
 private:
 	//GameEngineTextureRenderer* MainRenderer_;
 
-	float4 sprite_position;
+	float4 MovePos_;
 
-	float RamdomRangeX_;
-	float RamdomRangeY_;
+	float CreateTimer_;
 
+	int Count_;
 
+	std::vector<GrimmFireBallSpectrumActor*> AllSpecturumActor_;
 
 public:
-	//void CreateGrimmFireparticle(float4 ramX, float4 ramY);
+	void SetMoveDir(float4 _Dir);
 };
 
  

@@ -182,14 +182,42 @@ void Grimm::GrimmBattleBalloonStartEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleBalloonStart(const StateInfo& _Info)
 {
+	FireCreateTimer_ = 0.0f;
 	GetRenderer()->ChangeFrameAnimation("BALLON_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+
 
 }
 
 void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 3.0f)
+
+	FireCreateTimer_ += _DeltaTime;
+	if (FireCreateTimer_ > 2.0f)
+	{
+		FireCreateTimer_ = 0.0f;
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, -20});
+			GrimmFire_->SetMoveDir(float4::DOWN);
+		}
+
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, -20 });
+			GrimmFire_->SetMoveDir(float4::RIGHT);
+		}
+
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, -20 });
+			GrimmFire_->SetMoveDir(float4::LEFT);
+		}
+		
+	}
+
+	if (_Info.StateTime > 4.0f)
 	{
 		SetRamdomPattern();
 	}

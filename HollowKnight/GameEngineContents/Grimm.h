@@ -79,9 +79,10 @@ private:
 	bool isStunHitEnd_;
 
 	float MapCenterX_;
+	float AirDashRotation_;
+	float FireCreateTimer_;
 
 	float4 AirDashDest_;
-	float AirDashRotation_;
 
 	std::string ChangeState_;
 

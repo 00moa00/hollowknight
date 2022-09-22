@@ -16,11 +16,14 @@ void GrimmFireBallSpectrum::Start()
 
 	CreateRendererComponent("grimm_smoke.png");
 	GetRenderer()->SetTexture("grimm_smoke.png", index);
-	GetRenderer()->SetPivot(PIVOTMODE::BOT);
+	GetRenderer()->GetTransform().SetWorldPosition({0, 0});
+	//GetRenderer()->SetPivot(PIVOTMODE::TOP);
 	SetBlendMode(BlendMode::Add);
 
 	GetRenderer()->ScaleToCutTexture(index);
 	Alpha_ = 1.0f;
+
+	
 }
 
 void GrimmFireBallSpectrum::Update(float _DeltaTime)
@@ -38,14 +41,14 @@ void GrimmFireBallSpectrum::Update(float _DeltaTime)
 	else
 	{
 		GetRenderer()->GetPixelData().MulColor.a = Alpha_;
-		Alpha_ -= 0.2f * _DeltaTime;
+		Alpha_ -= 1.8f * _DeltaTime;
 
 		static float timer = 0; // 0 - 4(sec)
 		timer += _DeltaTime;
 
-		float a = GameEngineRandom::MainRandom.RandomFloat(0, 20.0f); // angle(degree)
-		float r = GameEngineRandom::MainRandom.RandomFloat(0, 10.f); // angle(degree)
-
+		float a = GameEngineRandom::MainRandom.RandomFloat(10, 30.0f); // angle(degree)
+		float r = GameEngineRandom::MainRandom.RandomFloat(10, 20.f); // angle(degree)
+	
 		GetTransform().SetLocalPosition({ cosf(a * 0.01745f) * r, sinf(a * 0.01745f) * r });
 	//	GetRenderer()->GetPixelData().MulColor.a = fabsf(sinf(3.141592f * timer * 0.5f * 0.5f));
 	}
