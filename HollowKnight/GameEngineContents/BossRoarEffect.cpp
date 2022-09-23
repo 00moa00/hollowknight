@@ -24,7 +24,7 @@ void BossRoarEffect::Start()
 
 	RoarLineRenderer = CreateComponent<GameEngineTextureRenderer>();
 	RoarLineRenderer->SetTexture("Roar_lines_white.png");
-	RoarLineRenderer->GetTransform().SetLocalScale({ 294 * 0.8, 283 * 0.8 });
+	RoarLineRenderer->GetTransform().SetLocalScale({ 294.f * 0.8f, 283.f * 0.8f });
 }
 
 void BossRoarEffect::Update(float _DeltaTime)

@@ -14,7 +14,7 @@ OverlayPostEffect::OverlayPostEffect()
 	HollowKnightLevel_(nullptr)
 
 {
-	OverlayColorData_.OverlayColor = { 0.499, 0.592, 0.726, 1.0f };
+	OverlayColorData_.OverlayColor = { 0.499f, 0.592f, 0.726f, 1.0f };
 	OverlayColorData_.isOverlay_ = 0;
 }
 
@@ -36,7 +36,7 @@ void OverlayPostEffect::EffectInit()
 
 	EffectSet.SetPipeLine("Overlay");
 
-	OverlayColorData_.OverlayColor = { 0.499, 0.592, 0.726, 1.0f };
+	OverlayColorData_.OverlayColor = { 0.499f, 0.592f, 0.726f, 1.0f };
 	OverlayColorData_.isOverlay_ = 0;
 	EffectSet.ShaderResources.SetConstantBufferLink("OverlayColorData", OverlayColorData_);	
 }

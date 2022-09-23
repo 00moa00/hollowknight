@@ -139,7 +139,7 @@ void MetaSpriteWindow::MetaFileButton(GameEngineLevel* _Level)
 
     if (nullptr != TargetTexture && 0 != TargetTexture->GetCutCount())
     {
-        ImGui::SliderInt("ImageIndex", &CurFrame, 0, TargetTexture->GetCutCount() - 1);
+        ImGui::SliderInt("ImageIndex", &CurFrame, 0, TargetTexture->GetCutCount() - (size_t)1);
         Renderer->SetTexture(TargetTexture, CurFrame);
         Renderer->ScaleToCutTexture(CurFrame);
     }
@@ -155,8 +155,8 @@ void MetaSpriteWindow::MetaFileButton(GameEngineLevel* _Level)
 
         for (size_t i = 0; i < TargetTexture->GetCutCount(); i++)
         {
-            float4 Pos = TargetTexture->GetCutPos(i);
-            float4 Scale = TargetTexture->GetCutScale(i);
+            float4 Pos = TargetTexture->GetCutPos((int)i);
+            float4 Scale = TargetTexture->GetCutScale((int)i);
 
             Pos.y = -Pos.y;
             Pos.x += Scale.x * 0.5f;

@@ -15,6 +15,13 @@ KnightData::KnightData()
 	isOverlayflag_(true),
 	SavedPaletteInit_(false),
 	isBossBattle_(false),
+	isBreak_(false),
+	isCameraGUI_(false),
+	isDeath_(false),
+	isKnihgt_(false),
+	isNewMask_(false),
+	isSitting_(false),
+	isEffectGUI_(false),
 
 	MainLightMulColor_({1.0f, 1.0f, 1.0f, 0.7f}),
 	MainLightPlusColor_({ 0.0f, 0.0f, 0.0f, 0.0f }),
@@ -34,7 +41,10 @@ KnightData::KnightData()
 	CurMask_(4),
 	CharmNotches_(5),
 	UsingCharmNotches_(0),
-	OverlayColor_(0.499, 0.592, 0.726, 1.0f),
+	HitDamage_(0),
+
+
+	OverlayColor_(0.499f, 0.592f, 0.726f, 1.0f),
 
 	MainLighBlend_(BlendMode::Alpha),
 	SlibingLighBlend_(BlendMode::Alpha),

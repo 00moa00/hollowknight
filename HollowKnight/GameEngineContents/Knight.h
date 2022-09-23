@@ -40,7 +40,6 @@ protected:
 	void LevelEndEvent() override;
 
 private:
-	ContentsFontRenderer* ContentsFontRenderer_;
 
 	bool isKnightPotal_;	// 포탈하고 닿았다
 	bool isSlashEnd_;		// 공격 애니메이션 종료
@@ -116,13 +115,7 @@ private:
 
 	KnightFocusEffect* KnightFocusEffect_;			//집중 이펙트 포인터 저장용
 
-
-	GameEngineCollision* Test1_;
-	GameEngineCollision* Test2_;
-
 	std::string ChangeLevel_;
-
-
 public:
 
 	void SetDirInit(float4 _Dir);					// 레벨 세팅때 텍스처 반전

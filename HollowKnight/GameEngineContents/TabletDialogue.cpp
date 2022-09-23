@@ -32,7 +32,7 @@ void TabletDialogue::Start()
 
 	DialogueBack_ = CreateComponent<GameEngineUIRenderer>();
 	DialogueBack_->SetTexture("lore_prompt_new.png");
-	DialogueBack_->GetTransform().SetLocalScale(DialogueBack_->GetCurTexture()->GetScale()*1.6);
+	DialogueBack_->GetTransform().SetLocalScale(DialogueBack_->GetCurTexture()->GetScale()*1.6f);
 	DialogueBack_->GetPixelData().MulColor.a = 0.3f;
 
 	SaveDialogueScale_ = DialogueBack_->GetTransform().GetWorldScale();

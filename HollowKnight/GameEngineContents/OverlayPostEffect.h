@@ -4,7 +4,7 @@
 
 struct OverlayColorData
 {
-	float4 OverlayColor = { 0.499, 0.592, 0.726, 1.0f };
+	float4 OverlayColor = { 0.499f, 0.592f, 0.726f, 1.0f };
 	int isOverlay_ = true;
 
 };

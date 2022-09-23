@@ -45,6 +45,11 @@ public:
 			return CollisionMap_;
 
 		}
+
+		else
+		{
+			return nullptr;
+		}
 	}
 
 	void ChangeGrimmMap();

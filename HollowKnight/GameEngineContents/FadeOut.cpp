@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "FadeOut.h"6
+#include "FadeOut.h"
 #include "GlobalContentsValue.h"
 
 FadeOut::FadeOut()

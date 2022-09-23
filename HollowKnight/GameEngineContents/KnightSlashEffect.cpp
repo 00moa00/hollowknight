@@ -168,6 +168,10 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 
 		return true;
 	}
+	else
+	{
+		return false;
+	}
 
 }
 

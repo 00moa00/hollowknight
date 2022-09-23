@@ -2062,7 +2062,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 
 
-		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2f) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 		if (isSlashEnd_ == true)
 		{
@@ -2278,7 +2278,7 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 			ActtingMoveDirection_ = float4::ZERO;
 		}
 
-		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2f) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 		if (isDoubleSlashEnd_ == true)
 		{
@@ -2431,7 +2431,7 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 			ActtingMoveDirection_ = float4::ZERO;
 		}
 
-		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2f) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 		if (isUpSlashEnd_ == true)
 		{
@@ -2543,7 +2543,7 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 			ActtingMoveDirection_ = float4::ZERO;
 		}
 
-		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2) * GetGravity() * GetFallSpeed() * _DeltaTime);
+		GetTransform().SetWorldMove((float4::DOWN + ActtingMoveDirection_ / 1.2f) * GetGravity() * GetFallSpeed() * _DeltaTime);
 
 		if (isDownSlashEnd_ == true)
 		{

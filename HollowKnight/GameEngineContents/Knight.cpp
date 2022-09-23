@@ -43,6 +43,7 @@ Knight::Knight()
 	KnihgtFocusTimer_(0.0f),
 	KnightActtingMoveDirPower_(1.0f),
 	JumpAccel_(0.0f),
+	KnightDoubleJumpPower_(0.0f),
 
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
@@ -68,10 +69,13 @@ Knight::Knight()
 	isReturnToIdle_(false),
 	isInvincibility_(false),
 	isKnightBlack_(false),
-
+	isWakeUpEnd_(false),
+	isTalkingNPC_(false),
 	isKnihgtStillWall_(false),
-
+	isMapWalkTurnEnd_(false),
 	isKnightPotal_(false),
+	isGroundWakeUpEnd_(false),
+
 
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
@@ -120,12 +124,6 @@ void Knight::Start()
 	   
 
 	GetRenderer()->GetTransform().PixLocalNegativeX();
-
-	Test1_ = CreateComponent<GameEngineCollision>();
-	Test1_->GetTransform().SetLocalScale({ 15,15,1 });
-
-	Test2_ = CreateComponent<GameEngineCollision>();
-	Test2_->GetTransform().SetLocalScale({ 15,15,1 });
 
 	GetTransform().SetWorldPosition({500,-4000,static_cast<float>(Z_ORDER::Knight) });
 	
@@ -609,9 +607,9 @@ void Knight::Start()
 
 	KnightManager_.ChangeState("STILL");
 
-	ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-	ContentsFontRenderer_->CreateFontRenderer("가나다라마.바사", 24, {500,500}, false, 4);
-	ContentsFontRenderer_->FontOn();
+	//ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
+	//ContentsFontRenderer_->CreateFontRenderer("가나다라마.바사", 24, {500,500}, false, 4);
+	//ContentsFontRenderer_->FontOn();
 
 
 	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
@@ -621,7 +619,6 @@ void Knight::Start()
 
 void Knight::Update(float _DeltaTime)
 {
-	ContentsFontRenderer_->SetActorToScreenPosition(GetTransform().GetWorldPosition(), GetLevel()->GetMainCameraActorTransform().GetWorldPosition());
 	KnightManager_.Update(_DeltaTime);
 
 	//if (KnightMainLightEffect_ != nullptr)

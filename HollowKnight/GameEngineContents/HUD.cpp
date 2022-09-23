@@ -123,7 +123,7 @@ void HUD::LevelEndEvent()
 void HUD::NewMask()
 {
 	Maskes_.push_back(GetLevel()->CreateActor<Mask>());
-	Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size() - 1) * 60)), GameEngineWindow::GetInst()->GetScale().hy() - 55, -100 });
+	Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size() - 1.f) * 60.f)), GameEngineWindow::GetInst()->GetScale().hy() - 55.f, -100.f });
 	MaskesSize_ = Maskes_.size();
 
 	
@@ -165,7 +165,7 @@ void HUD::BreakMask()
 
 void HUD::AllRefillMask()
 {
-	for (int i = 0; i < MaskesSize_; ++i)
+	for (int   i = 0; i < MaskesSize_; ++i)
 	{
 		Maskes_[i]->SetisRefill();
 	}
@@ -181,7 +181,7 @@ void HUD::SetAppearAnimation()
 
 void HUD::MaskAppearStart(const StateInfo& _Info)
 {
-	MaskesSize_ = Maskes_.size();
+	MaskesSize_ = static_cast<int>(Maskes_.size());
 }
 
 void HUD::MaskAppearUpdate(float _DeltaTime, const StateInfo& _Info)

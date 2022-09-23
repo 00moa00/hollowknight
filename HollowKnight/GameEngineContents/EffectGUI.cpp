@@ -17,7 +17,7 @@ EffectGUI::EffectGUI()
     SiblingLightitemsCurrent(0),
     DonutLightitemsCurrent(0),
 
-    Overlaycolor({ 0.499, 0.592, 0.726, 1.0f }),
+    Overlaycolor({ 0.499f, 0.592f, 0.726f, 1.0f }),
 
     MainLightMulColor_(),
     MainLightPlusColor_(),
