@@ -30,6 +30,22 @@ GrimmLevel::~GrimmLevel()
 
 void GrimmLevel::Start()
 {
+
+
+
+	if (false == GameEngineInput::GetInst()->IsKey("CamMoveForward"))
+	{
+		GameEngineInput::GetInst()->CreateKey("CamMoveForward", 'W');
+		GameEngineInput::GetInst()->CreateKey("CamMoveBack", 'S');
+		GameEngineInput::GetInst()->CreateKey("CamMoveUp", 'Q');
+		GameEngineInput::GetInst()->CreateKey("CamMoveDown", 'E');
+		GameEngineInput::GetInst()->CreateKey("CamMoveLeft", 'A');
+		GameEngineInput::GetInst()->CreateKey("CamMoveRight", 'D');
+
+		GameEngineInput::GetInst()->CreateKey("CamMoveBoost", VK_LSHIFT);
+		GameEngineInput::GetInst()->CreateKey("CamRot", VK_RBUTTON);
+	}
+
 	CraateMasterMapActor();
 
 	GetMasterMap()->CreateBackGround("Grimm_Background.png");
@@ -93,6 +109,8 @@ void GrimmLevel::Start()
 
 void GrimmLevel::Update(float _DeltaTime)
 {
+
+
 }
 
 void GrimmLevel::End()

@@ -13,7 +13,8 @@ enum class CameraMode
 	PivotTargetMove,
 	Focus,
 	CancleFocus,
-	ReturnFocus
+	ReturnFocus,
+	FreeCamera,
 };
 
 // Ό³Έν :
@@ -100,6 +101,8 @@ private:
 	void FocusReturnUpdate(float _DeltaTime, const StateInfo& _Info);
 	void FocusReturnEnd(const StateInfo& _Info);
 
-
+	void FreeCameraStart(const StateInfo& _Info);
+	void FreeCameraUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FreeCameraEnd(const StateInfo& _Info);
 };
 

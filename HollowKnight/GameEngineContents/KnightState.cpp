@@ -73,6 +73,16 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 
 	}
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
+	}
 
 
 	// ======== Knight VS Monster ========
@@ -276,6 +286,18 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightInvincibiliting(_DeltaTime);
 
 	}
+
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
+	}
+
 
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
@@ -515,7 +537,16 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightInvincibiliting(_DeltaTime);
 
 	}
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
 
+	}
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
 		)
@@ -649,6 +680,16 @@ void Knight::KnightLookDownUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STUN");
 		return;
 	}
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
+	}
 
 	if (GameEngineInput::GetInst()->IsFree("KnightDown") == true)
 	{
@@ -690,6 +731,7 @@ void Knight::KnightLookUpUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightInvincibiliting(_DeltaTime);
 
 	}
+	// ======== Knight VS Monster ========
 
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
@@ -698,6 +740,16 @@ void Knight::KnightLookUpUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightData::GetInst()->SetisBreak(true);
 		KnightManager_.ChangeState("STUN");
 		return;
+	}
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
 	}
 
 	// ======== Knight VS WallColl ========
@@ -1016,6 +1068,28 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightManager_.ChangeState("FALL");
 	}
+	// ======== Knight VS Monster ========
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
+
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
+	}
+
 
 }
 
@@ -1210,6 +1284,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
+	// ======== Knight VS Monster ========
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
 		 )
@@ -1217,6 +1292,17 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightData::GetInst()->SetisBreak(true);
 		KnightManager_.ChangeState("STUN");
 		return;
+	}
+
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
 	}
 
 	// ======== Knight VS WallColl ========
@@ -1320,7 +1406,7 @@ void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightInvincibiliting(_DeltaTime);
 
 	}
-
+	// ======== Knight VS Monster ========
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
 		 )
@@ -1342,6 +1428,19 @@ void Knight::KnightDashUpdate(float _DeltaTime, const StateInfo& _Info)
 		SetisCollWall(false);
 
 	}
+
+
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
+	}
+
 
 	// ========== 스테이트 변경 ==========
 
@@ -1425,6 +1524,7 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightInvincibiliting(_DeltaTime);
 
 	}
+	// ======== Knight VS Monster ========
 
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
@@ -1434,6 +1534,18 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STUN");
 		return;
 	}
+
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
+	}
+
 
 	// ======== Knight VS WallColl ========
 	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
@@ -1887,6 +1999,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightInvincibiliting(_DeltaTime);
 
 	}
+	// ======== Knight VS Monster ========
 
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
@@ -1896,6 +2009,19 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STUN");
 		return;
 	}
+
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
+	}
+
+
 
 	if (GetisWall() == true || GetisCollWall() == true)
 	{
@@ -2076,6 +2202,7 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightInvincibiliting(_DeltaTime);
 
 	}
+	// ======== Knight VS Monster ========
 
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
@@ -2084,6 +2211,19 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STUN");
 		return;
 	}
+
+	// ======== Knight VS MonsterAttack ========
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster_Attack, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterAttackCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		KnightManager_.ChangeState("STUN");
+		KnightData::GetInst()->SetisBreak(true);
+		return;
+
+	}
+
+
 
 	// ======== Knight VS WallColl ========
 	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,

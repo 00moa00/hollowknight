@@ -123,6 +123,12 @@ void GameEngineCamera::Release(float _DelataTime)
 			if (true == (*GroupStart)->IsDeath())
 			{
 				GroupStart = Group.erase(GroupStart);
+				GroupEnd = Group.end();
+
+				if (GroupStart == GroupEnd)
+				{
+					break;
+				}
 			}
 			else
 			{

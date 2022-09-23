@@ -22,6 +22,13 @@ MainCameraManager::~MainCameraManager()
 
 void MainCameraManager::Start()
 {
+
+	if (false == GameEngineInput::GetInst()->IsKey("FreeCameraOnOff"))
+	{
+		GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
+	}
+
+
 	GetLevel()->GetMainCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({
@@ -77,6 +84,13 @@ void MainCameraManager::Start()
 		, std::bind(&MainCameraManager::PivotMoveToTargetUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::PivotMoveToTargetStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::PivotMoveToTargetEnd, this, std::placeholders::_1));
+
+
+	CameraStateManager_.CreateStateMember("FREE_CAMERA"
+		, std::bind(&MainCameraManager::FreeCameraUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&MainCameraManager::FreeCameraStart, this, std::placeholders::_1)
+		, std::bind(&MainCameraManager::FreeCameraEnd, this, std::placeholders::_1));
+
 
 
 	CameraStateManager_.ChangeState("MOVE_TO_TARGET");
@@ -148,6 +162,12 @@ void MainCameraManager::ChangeCameraMove(CameraMode _Mode)
 		CameraStateManager_.ChangeState("FOCUS_RETURN");
 
 		break;
+
+	case CameraMode::FreeCamera:
+		CameraStateManager_.ChangeState("FREE_CAMERA");
+
+		break;
+
 	default:
 		break;
 	}
@@ -302,6 +322,9 @@ void MainCameraManager::ShakingUpdate(float _DeltaTime, const StateInfo& _Info)
 	float4 ShakePosition = { shake * CameraGUI_->GetMaxSway(), shake * CameraGUI_->GetMaxSway() };
 	float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew()};
 
+	float4 Knihgt = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ Knihgt.x, Knihgt .y , -1800});
 	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
 	GetLevel()->GetMainCameraActorTransform().SetWorldRotation(ShakeRotation);
 
@@ -541,6 +564,58 @@ void MainCameraManager::FocusReturnUpdate(float _DeltaTime, const StateInfo& _In
 }
 
 void MainCameraManager::FocusReturnEnd(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::FreeCameraStart(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::FreeCameraUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+
+
+	float MoveSpeed = 700.f;
+
+	if (GameEngineInput::GetInst()->IsPress("CamMoveBoost"))
+	{
+		MoveSpeed *= 3.0f;
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("CamMoveForward"))
+	{
+		GetLevel()->GetMainCameraActorTransform().SetWorldForwardMove(MoveSpeed, _DeltaTime);
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("CamMoveBack"))
+	{
+		GetLevel()->GetMainCameraActorTransform().SetWorldBackMove(MoveSpeed, _DeltaTime);
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("CamMoveUp"))
+	{
+		GetLevel()->GetMainCameraActorTransform().SetWorldUpMove(MoveSpeed, _DeltaTime);
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("CamMoveDown"))
+	{
+		GetLevel()->GetMainCameraActorTransform().SetWorldDownMove(MoveSpeed, _DeltaTime);
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("CamMoveLeft"))
+	{
+		GetLevel()->GetMainCameraActorTransform().SetWorldLeftMove(MoveSpeed, _DeltaTime);
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("CamMoveRight"))
+	{
+		GetLevel()->GetMainCameraActorTransform().SetWorldRightMove(MoveSpeed, _DeltaTime);
+	}
+
+}
+
+void MainCameraManager::FreeCameraEnd(const StateInfo& _Info)
 {
 }
 

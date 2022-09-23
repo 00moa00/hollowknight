@@ -24,10 +24,6 @@ DirtmouthLevel1::~DirtmouthLevel1()
 
 void DirtmouthLevel1::Start()
 {
-	if (false == GameEngineInput::GetInst()->IsKey("FreeCameraOnOff"))
-	{
-		GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
-	}
 
 
 	CraateMasterMapActor();

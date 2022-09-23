@@ -28,7 +28,10 @@ private:
 
 	float Count_;
 
-	std::vector<GrimmFireBallSpectrum*> AllFireSpectrum_;
+	std::vector<GameEngineTextureRenderer*> AllFireSpectrum_;
 
+
+public :
+	void CreateFireBallSpectrum(int _count);
 };
 

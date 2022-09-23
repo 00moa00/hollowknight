@@ -26,7 +26,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	switch (PatternType_)
 	{
 	case PatternType::BATTLE_BALLOON_START:
-		GetTransform().SetWorldPosition({ MapCenterX_,-600, static_cast<float>(Z_ORDER::Monster)});
+		GetTransform().SetWorldPosition({ MapCenterX_, -700, static_cast<float>(Z_ORDER::Monster)});
 		break;
 	case PatternType::BATTLE_SLASH_START:
 		if (KnightPos.x > MapCenterX_)
@@ -182,16 +182,71 @@ void Grimm::GrimmBattleBalloonStartEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleBalloonStart(const StateInfo& _Info)
 {
+
+
 	FireCreateTimer_ = 0.0f;
 	GetRenderer()->ChangeFrameAnimation("BALLON_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+		GrimmFire_->SetMoveDir(float4::DOWN, MoveType::Down);
+	}
 
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x ,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+		GrimmFire_->SetMoveDir(float4::DOWN, MoveType::DownRight);
+	}
+
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x ,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+		GrimmFire_->SetMoveDir(float4::DOWN, MoveType::DownLeft);
+	}
+
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2 , -20 });
+		GrimmFire_->SetMoveDir(float4::RIGHT, MoveType::Right);
+	}
+
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+		GrimmFire_->SetMoveDir(float4::RIGHT, MoveType::RightDown);
+	}
+
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2 , -20 });
+		GrimmFire_->SetMoveDir(float4::RIGHT, MoveType::RightUp);
+	}
+
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+		GrimmFire_->SetMoveDir(float4::LEFT, MoveType::Left);
+	}
+
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+		GrimmFire_->SetMoveDir(float4::LEFT, MoveType::LeftUp);
+	}
+
+	{
+		GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+		GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2 , -20 });
+		GrimmFire_->SetMoveDir(float4::LEFT, MoveType::LeftDown);
+	}
 
 
 }
 
 void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::FreeCamera);
 
 	FireCreateTimer_ += _DeltaTime;
 	if (FireCreateTimer_ > 2.0f)
@@ -199,25 +254,63 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 		FireCreateTimer_ = 0.0f;
 		{
 			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
-			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, -20});
-			GrimmFire_->SetMoveDir(float4::DOWN);
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500/2, -20 });
+			GrimmFire_->SetMoveDir(float4::DOWN, MoveType::Down);
 		}
 
 		{
 			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
-			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, -20 });
-			GrimmFire_->SetMoveDir(float4::RIGHT);
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x ,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+			GrimmFire_->SetMoveDir(float4::DOWN, MoveType::DownRight);
 		}
 
 		{
 			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
-			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, -20 });
-			GrimmFire_->SetMoveDir(float4::LEFT);
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x ,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+			GrimmFire_->SetMoveDir(float4::DOWN, MoveType::DownLeft);
 		}
+
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2 , -20 });
+			GrimmFire_->SetMoveDir(float4::RIGHT, MoveType::Right);
+		}
+
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+			GrimmFire_->SetMoveDir(float4::RIGHT, MoveType::RightDown);
+		}
+
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2 , -20 });
+			GrimmFire_->SetMoveDir(float4::RIGHT, MoveType::RightUp);
+		}
+
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+			GrimmFire_->SetMoveDir(float4::LEFT, MoveType::Left);
+		}
+
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2, -20 });
+			GrimmFire_->SetMoveDir(float4::LEFT, MoveType::LeftUp);
+		}
+
+		{
+			GrimmFire* GrimmFire_ = GetLevel()->CreateActor<GrimmFire>();
+			GrimmFire_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 500 / 2 , -20 });
+			GrimmFire_->SetMoveDir(float4::LEFT, MoveType::LeftDown);
+		}
+
+
 		
 	}
 
-	if (_Info.StateTime > 4.0f)
+	if (_Info.StateTime > 7.0f)
 	{
 		SetRamdomPattern();
 	}
@@ -225,6 +318,8 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmBattleBalloonEnd(const StateInfo& _Info)
 {
+	//GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
+
 }
 
 void Grimm::GrimmBattleAirDashStartStart(const StateInfo& _Info)

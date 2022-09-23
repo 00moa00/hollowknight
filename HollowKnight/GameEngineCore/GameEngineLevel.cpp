@@ -226,34 +226,76 @@ void GameEngineLevel::PushActor(GameEngineActor* _Actor, int _ObjectGroupIndex)
 
 void GameEngineLevel::Release(float _DelataTime)
 {
-	for (GameEngineUpdateObject* Object : DeleteObject)
 	{
-		Object->ReleaseHierarchy();
-	}
 
-	DeleteObject.clear();
+		std::list<GameEngineUpdateObject*>::iterator StartGroupIter = DeleteObject.begin();
+		std::list<GameEngineUpdateObject*>::iterator EndGroupIter = DeleteObject.end();
 
-	for (size_t i = 0; i < Cameras.size(); i++)
-	{
-		if (nullptr == Cameras[i])
+		for (; StartGroupIter!= EndGroupIter ; ++StartGroupIter)
 		{
-			continue;
-		}
 
-		Cameras[i]->Release(_DelataTime);
+			if ((*StartGroupIter) != nullptr)
+
+			{
+				(*StartGroupIter)->ReleaseHierarchy();
+			}
+
+		}
+		
+
+		DeleteObject.clear();
+
+
 	}
+
 	{
-		std::map<int, std::list<GameEngineCollision*>>::iterator StartGroupIter = AllCollisions.begin();
-		std::map<int, std::list<GameEngineCollision*>>::iterator EndGroupIter = AllCollisions.end();
+
+		for (size_t i = 0; i < Cameras.size(); i++)
+		{
+			if (nullptr == Cameras[i])
+			{
+				continue;
+			}
+
+			Cameras[i]->Release(_DelataTime);
+		}
+		{
+			std::map<int, std::list<GameEngineCollision*>>::iterator StartGroupIter = AllCollisions.begin();
+			std::map<int, std::list<GameEngineCollision*>>::iterator EndGroupIter = AllCollisions.end();
+
+			for (; StartGroupIter != EndGroupIter; ++StartGroupIter)
+			{
+				std::list<GameEngineCollision*>& Group = StartGroupIter->second;
+
+				std::list<GameEngineCollision*>::iterator GroupStart = Group.begin();
+				std::list<GameEngineCollision*>::iterator GroupEnd = Group.end();
+				for (; GroupStart != GroupEnd; )
+				{
+					if (true == (*GroupStart)->IsDeath())
+					{
+						GroupStart = Group.erase(GroupStart);
+					}
+					else
+					{
+						++GroupStart;
+					}
+				}
+			}
+		}
+		std::map<int, std::list<GameEngineActor*>>::iterator StartGroupIter = AllActors.begin();
+		std::map<int, std::list<GameEngineActor*>>::iterator EndGroupIter = AllActors.end();
 
 		for (; StartGroupIter != EndGroupIter; ++StartGroupIter)
 		{
-			std::list<GameEngineCollision*>& Group = StartGroupIter->second;
+			std::list<GameEngineActor*>& Group = StartGroupIter->second;
 
-			std::list<GameEngineCollision*>::iterator GroupStart = Group.begin();
-			std::list<GameEngineCollision*>::iterator GroupEnd = Group.end();
+			std::list<GameEngineActor*>::iterator GroupStart = Group.begin();
+			std::list<GameEngineActor*>::iterator GroupEnd = Group.end();
+
 			for (; GroupStart != GroupEnd; )
 			{
+				(*GroupStart)->ReleaseObject(DeleteObject);
+
 				if (true == (*GroupStart)->IsDeath())
 				{
 					GroupStart = Group.erase(GroupStart);
@@ -262,33 +304,11 @@ void GameEngineLevel::Release(float _DelataTime)
 				{
 					++GroupStart;
 				}
+
 			}
 		}
-	}
-	std::map<int, std::list<GameEngineActor*>>::iterator StartGroupIter = AllActors.begin();
-	std::map<int, std::list<GameEngineActor*>>::iterator EndGroupIter = AllActors.end();
 
-	for (; StartGroupIter != EndGroupIter; ++StartGroupIter)
-	{
-		std::list<GameEngineActor*>& Group = StartGroupIter->second;
 
-		std::list<GameEngineActor*>::iterator GroupStart = Group.begin();
-		std::list<GameEngineActor*>::iterator GroupEnd = Group.end();
-
-		for (; GroupStart != GroupEnd; )
-		{
-			(*GroupStart)->ReleaseObject(DeleteObject);
-
-			if (true == (*GroupStart)->IsDeath())
-			{
-				GroupStart = Group.erase(GroupStart);
-			}
-			else
-			{
-				++GroupStart;
-			}
-
-		}
 	}
 
 }

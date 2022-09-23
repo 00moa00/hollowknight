@@ -39,13 +39,13 @@ void GrimmFireBallSpectrumActor::Update(float _DeltaTime)
 		else
 		{
 			GrimmFireBallSpectrum* GrimmFireBallSpectrum_ = GetLevel()->CreateActor<GrimmFireBallSpectrum>();
-			GrimmFireBallSpectrum_->SetParent(this);
+			//GrimmFireBallSpectrum_->SetParent(this);
 
-			GrimmFireBallSpectrum_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
-			GrimmFireBallSpectrum_->GetRenderer()->GetTransform().SetLocalMove({ GameEngineRandom::MainRandom.RandomFloat(-15,15), GameEngineRandom::MainRandom.RandomFloat(-25,25)});
-			GrimmFireBallSpectrum_->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,  GameEngineRandom::MainRandom.RandomFloat(-30,30) });
+			//GrimmFireBallSpectrum_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+			//GrimmFireBallSpectrum_->GetRenderer()->GetTransform().SetLocalMove({ GameEngineRandom::MainRandom.RandomFloat(-15,15), GameEngineRandom::MainRandom.RandomFloat(-25,25)});
+			//GrimmFireBallSpectrum_->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,  GameEngineRandom::MainRandom.RandomFloat(-30,30) });
 
-			AllFireSpectrum_.push_back(GrimmFireBallSpectrum_);
+			//AllFireSpectrum_.push_back(GrimmFireBallSpectrum_);
 			++Count_;
 		}
 
@@ -55,14 +55,15 @@ void GrimmFireBallSpectrumActor::Update(float _DeltaTime)
 
 	if (GetAccTime() > 0.7f && Count_ >= 10)
 	{
-		for (int i = 0; i < AllFireSpectrum_.size(); ++i)
-		{
-			if (AllFireSpectrum_[i] != nullptr)
-			{
-				AllFireSpectrum_[i]->Death(0);
+		//for (int i = 0; i < AllFireSpectrum_.size(); ++i)
+		//{
+		//	if (AllFireSpectrum_[i] != nullptr)
+		//	{
+		//		//AllFireSpectrum_[i]->ReleaseHierarchy();
+		//		AllFireSpectrum_[i]->Death();
 
-			}
-		}
+		//	}
+		//}
 
 
 		Death();

@@ -39,6 +39,7 @@ enum class COLLISION_ORDER
 	Knight_Shadow,
 	Knight_Shadow_Slash,
 	Monster,
+	Monster_Attack,
 	FrontObject,
 	TileMap,
 	UI

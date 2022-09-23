@@ -977,6 +977,26 @@ bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineColl
 	}
 }
 
+bool Knight::KnightVSMonsterAttackCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	if (isInvincibility_ == false && _Other != nullptr)
+	{
+		MasterEffect* Attack = dynamic_cast<MasterEffect*>(_Other->GetActor());
+		MonsterHitEffect* Effect = GetLevel()->CreateActor<MonsterHitEffect>();
+		if (Effect != nullptr && Attack != nullptr )
+		{
+			Effect->GetTransform().SetWorldPosition({ _Other->GetTransform().GetWorldPosition().x,  _Other->GetTransform().GetWorldPosition().y + (Attack->GetCollision()->GetTransform().GetWorldScale().y / 4) , static_cast<float>(Z_ORDER::Effect) });
+
+		}
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool Knight::KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	return true;

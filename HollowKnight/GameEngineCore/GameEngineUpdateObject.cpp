@@ -23,7 +23,22 @@ void GameEngineUpdateObject::ReleaseHierarchy()
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		(*StartIter)->ReleaseHierarchy();
+
+
+		//EndIter = Childs.end();
+
+		//if (StartIter == EndIter)
+		//{
+		//	break; 
+		//}
+
+
+		if ((*StartIter) != nullptr)
+		{
+			(*StartIter)->ReleaseHierarchy();
+		}
+
+
 	}
 
 	delete this;

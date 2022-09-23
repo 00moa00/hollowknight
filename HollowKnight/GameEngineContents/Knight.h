@@ -323,6 +323,9 @@ private:
 	//    Bind 
 	//================================
 	bool KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool KnightVSMonsterAttackCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+
+
 	bool KnihgtVSBenchCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	bool KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
