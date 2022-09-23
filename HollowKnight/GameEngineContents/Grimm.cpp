@@ -32,7 +32,8 @@ Grimm::Grimm()
 	MapCenterX_(0.0f),
 
 	ChangeState_(""),
-
+	PrevChangeState_(0),
+	PatternRamdom_(0),
 
 	EventState_(EventState::MAX),
 
@@ -432,16 +433,27 @@ void Grimm::SetChangeStateString(PatternType _type)
 	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
 
 	ChangeState_ = UpperName;
-
 }
 
 void Grimm::SetRamdomPattern()
 {
-	int Ramdom = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+	PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
 	//auto Type_ = magic_enum::E
 
+	//if (Ramdom == PrevChangeState_)
+	//{
 
-	SetChangeStateString(static_cast<PatternType>(Ramdom));
+	//}
+
+	while (PatternRamdom_ != PrevChangeState_)
+	{
+		PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+	}
+
+
+	PrevChangeState_ = PatternRamdom_;
+
+	SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
 	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 

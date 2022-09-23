@@ -78,6 +78,9 @@ private:
 
 	bool isStunHitEnd_;
 
+	int PrevChangeState_;
+	int PatternRamdom_;
+
 	float MapCenterX_;
 	float AirDashRotation_;
 	float FireCreateTimer_;
