@@ -3,6 +3,8 @@
 #include "EffectGUIActor.h"
 
 EffectGUIActor::EffectGUIActor() 
+	:
+	EffectGUI_(nullptr)
 {
 }
 

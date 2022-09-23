@@ -85,7 +85,7 @@ void KingsPassLevel4::Start()
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 }
 

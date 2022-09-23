@@ -87,12 +87,7 @@ void DirtmouthLevel1::Start()
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
-
-
-
-
-
+	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 }
 
 void DirtmouthLevel1::Update(float _DeltaTime)

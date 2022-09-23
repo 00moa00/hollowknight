@@ -31,7 +31,7 @@ protected:
 private:
 	Grimm* Grimm_;
 	GrimmCrowds* GrimmCrowds_;
-	OverlayPostEffect* EventOverlayPostEffect_;
+	//OverlayPostEffect* EventOverlayPostEffect_;
 
 public:
 	GrimmCrowds* GetGrimmCrowds()

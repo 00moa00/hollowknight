@@ -9,14 +9,28 @@
 
 HollowKnightLevel::HollowKnightLevel() 
 	:
+	
+	CharmPageInfo_(nullptr),
+	InventoryPageInfo_(nullptr),
+
+	ForgottenCrossroadMap_(nullptr),
+
+	NewKnihgtShadow_(nullptr),
+	CurKnightShadow_(nullptr),
 	MasterMap_(nullptr),
 	BackgroundRenderer_(nullptr),
 	Knight_(nullptr),
 	HUD_(nullptr),
 	SettingPage_(nullptr),
 	EffectGUIActor_(nullptr),
+	Crawlid_(nullptr),
 
-	MainCameraPosition_()
+	MainCameraManager_(nullptr),
+
+	//EffectGUIActor_(nullptr),
+
+	MainCameraPosition_(),
+	MapSize_()
 {
 
 	{

@@ -6,10 +6,28 @@
 
 EffectGUI::EffectGUI() 
 	:
+    isBlendClick_(false),
+
     overlay_flag(true),
     isMainLightOnOff_(true),
     isSiblingLightOnOff_(true),
-    isDonutLightOnOff_(true)
+    isDonutLightOnOff_(true),
+
+    MainLightitemsCurrent(0),
+    SiblingLightitemsCurrent(0),
+    DonutLightitemsCurrent(0),
+
+    Overlaycolor({ 0.499, 0.592, 0.726, 1.0f }),
+
+    MainLightMulColor_(),
+    MainLightPlusColor_(),
+
+    SlibingLightMulColor_(),
+    SlibingLightPlusColor_(),
+
+    DounutLightMulColor_(),
+    DounutLightPlusColor_()
+
 
 {
 
@@ -66,7 +84,7 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 
     if (ImGui::Button("overlay Reset"))
     {
-        Overlaycolor = { 0.0f, 0.0f, 0.0f, 1.0f };
+        Overlaycolor = { 0.499, 0.592, 0.726, 1.0f };
     }
 
 

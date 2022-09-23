@@ -7,6 +7,8 @@
 #include "MapEditorWindow.h"
 
 MapEditorLevel::MapEditorLevel()
+	:
+	TileMap(nullptr)
 {
 }
 

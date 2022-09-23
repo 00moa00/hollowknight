@@ -94,8 +94,16 @@ public:
 	{
 		float4 ReturnColor;
 		
+		ReturnColor.x = Overlaycolor.x;
+		ReturnColor.y = Overlaycolor.y;
+		ReturnColor.z = Overlaycolor.z;
+		ReturnColor.w = Overlaycolor.w;
+
+
+
+		return ReturnColor;
 		//ReturnColor.x = Overlaycolor.x;
-		return ConvertToFloat4(ReturnColor, Overlaycolor);
+		//return ConvertToFloat4(ReturnColor, Overlaycolor);
 
 	}
 
