@@ -35,6 +35,7 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+
 private:
 	//GameEngineTextureRenderer* MainRenderer_;
 
@@ -44,16 +45,36 @@ private:
 	float CreateTimer_;
 	float Speed_;
 	float CurvPower_;
+	float SubScale_;
 
 	int Count_;
 
 	MoveType MoveType_;
 
-	std::vector<GrimmFireBallSpectrumActor*> AllSpecturumActor_;
+	GameEngineStateManager GrimmFireStateManager;
+
+	GameEngineTextureRenderer* FireBallRenderer1;
+	GameEngineTextureRenderer* FireBallRenderer2;
+	GameEngineTextureRenderer* FireBallRenderer3;
+
+
+	//std::vector<GrimmFireBallSpectrumActor*> AllSpecturumActor_;
 
 public:
 	void SetMoveDir(float4 _Dir, MoveType _Type);
 	//void SetStartMoveDir(float4 _Dir);
+
+private:
+
+	void FireMoveStart(const StateInfo& _Info);
+	void FireMoveUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FireMoveEnd(const StateInfo& _Info);
+
+
+	void FireDeathStart(const StateInfo& _Info);
+	void FireDeathUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FireDeathEnd(const StateInfo& _Info);
+
 };
 
  

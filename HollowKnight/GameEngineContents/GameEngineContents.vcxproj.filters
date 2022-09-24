@@ -570,6 +570,9 @@
     <ClInclude Include="GrimmFireBallSpectrumActor.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmBird.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -990,6 +993,9 @@
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFireBallSpectrumActor.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmBird.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
   </ItemGroup>

@@ -10,6 +10,7 @@ enum class CameraMode
 	TargetInRoomMove,
 	Shaking,
 	BossShaking,
+	BossActtingShaking,
 	PivotTargetMove,
 	Focus,
 	CancleFocus,
@@ -80,6 +81,13 @@ private:
 	void BossShakingStart(const StateInfo& _Info);
 	void BossShakingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void BossShakingEnd(const StateInfo& _Info);
+
+
+	void BossActtingShakingStart(const StateInfo& _Info);
+	void BossActtingShakingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void BossActtingShakingEnd(const StateInfo& _Info);
+
+
 
 	void ChangePivotStart(const StateInfo& _Info);
 	void ChangePivotUpdate(float _DeltaTime, const StateInfo& _Info);

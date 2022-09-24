@@ -9,7 +9,15 @@ GrimmFire::GrimmFire()
 	:
 	CreateTimer_(0.f),
 	Speed_(0.0f),
-	CurvPower_(0.0f)
+	CurvPower_(0.0f),
+	Count_(0),
+	SubScale_(0),
+	MoveType_(MoveType::Down),
+	GrimmFireStateManager(),
+
+	FireBallRenderer1(nullptr),
+	FireBallRenderer2(nullptr),
+	FireBallRenderer3(nullptr)
 {
 }
 
@@ -21,20 +29,20 @@ void GrimmFire::Start()
 {
 
 	CreateCollisionComponent({60,60}, static_cast<int>(COLLISION_ORDER::Monster_Attack));
-
+	SubScale_ = 1.0f;
 	Speed_ = 600.f;
 	CurvPower_ = 1.2f;
 
 	{
-		GameEngineTextureRenderer* MainRenderer_;
 
-		MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-		MainRenderer_->SetTexture("Grimmkin Cln_grimm_fireball0000-Sheet.png");
-		MainRenderer_->GetTransform().SetLocalScale(MainRenderer_->GetCurTexture()->GetScale());
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("AddBlend");
-		MainRenderer_->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", 0, 7, 0.040f, true));
-		MainRenderer_->ChangeFrameAnimation("ANIMATION");
-		MainRenderer_->SetScaleModeImage();
+		FireBallRenderer1 = CreateComponent<GameEngineTextureRenderer>();
+		FireBallRenderer1->SetTexture("Grimmkin Cln_grimm_fireball0000-Sheet.png");
+		//FireBallRenderer1->ScaleToCutTexture(0);
+
+		FireBallRenderer1->GetTransform().SetLocalScale({151, 164});
+		FireBallRenderer1->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+		FireBallRenderer1->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", 0, 7, 0.040f, true));
+		FireBallRenderer1->ChangeFrameAnimation("ANIMATION");
 	}
 
 	
@@ -51,15 +59,15 @@ void GrimmFire::Start()
 		CustomAni.push_back(7);
 		CustomAni.push_back(0);
 
-		GameEngineTextureRenderer* MainRenderer_;
 
-		MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-		MainRenderer_->SetTexture("Grimmkin Cln_grimm_fireball0000-Sheet.png");
-		MainRenderer_->GetTransform().SetLocalScale(MainRenderer_->GetCurTexture()->GetScale());
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("AddBlend");
-		MainRenderer_->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", CustomAni, 0.040f, true));
-		MainRenderer_->ChangeFrameAnimation("ANIMATION");
-		MainRenderer_->SetScaleModeImage();
+		FireBallRenderer2 = CreateComponent<GameEngineTextureRenderer>();
+		FireBallRenderer2->SetTexture("Grimmkin Cln_grimm_fireball0000-Sheet.png");
+		FireBallRenderer2->GetTransform().SetLocalScale({ 151, 164 });
+
+		//FireBallRenderer2->GetTransform().SetLocalScale(FireBallRenderer2->GetCurTexture()->GetScale());
+		FireBallRenderer2->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+		FireBallRenderer2->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", CustomAni, 0.040f, true));
+		FireBallRenderer2->ChangeFrameAnimation("ANIMATION");
 	}
 
 	{
@@ -77,131 +85,43 @@ void GrimmFire::Start()
 
 
 
-		GameEngineTextureRenderer* MainRenderer_;
 
-		MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-		MainRenderer_->SetTexture("Grimmkin Cln_grimm_fireball0000-Sheet.png");
-		MainRenderer_->GetTransform().SetLocalScale(MainRenderer_->GetCurTexture()->GetScale());
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("AddBlend");
-		MainRenderer_->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", CustomAni, 0.040f, true));
-		MainRenderer_->ChangeFrameAnimation("ANIMATION");
+		FireBallRenderer3 = CreateComponent<GameEngineTextureRenderer>();
+		FireBallRenderer3->SetTexture("Grimmkin Cln_grimm_fireball0000-Sheet.png");
+
+		//FireBallRenderer3->GetTransform().SetLocalScale(FireBallRenderer3->GetCurTexture()->GetScale());
+		FireBallRenderer3->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+		FireBallRenderer3->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", CustomAni, 0.040f, true));
+		FireBallRenderer3->ChangeFrameAnimation("ANIMATION");
+		FireBallRenderer3->GetTransform().SetLocalScale({ 151, 164 });
 		//MainRenderer_->ScaleToCutTexture(0);
-		MainRenderer_->SetScaleModeImage();
 	}
 
-	GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
-	//GrimmFireBallSpectrumActor_->SetParent(this);
-	GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
-	AllSpecturumActor_.push_back(GrimmFireBallSpectrumActor_);
+	//GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
+	////GrimmFireBallSpectrumActor_->SetParent(this);
+	//GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
+	////AllSpecturumActor_.push_back(GrimmFireBallSpectrumActor_);
 
 	CreateTimer_ = 0.0f;
+
+
+	GrimmFireStateManager.CreateStateMember("MOVE"
+		, std::bind(&GrimmFire::FireMoveUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&GrimmFire::FireMoveStart, this, std::placeholders::_1)
+		, std::bind(&GrimmFire::FireMoveEnd, this, std::placeholders::_1));
+
+	GrimmFireStateManager.CreateStateMember("DEATH"
+		, std::bind(&GrimmFire::FireDeathUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&GrimmFire::FireDeathStart, this, std::placeholders::_1)
+		, std::bind(&GrimmFire::FireDeathEnd, this, std::placeholders::_1));
+
+	GrimmFireStateManager.ChangeState("MOVE");
 }
 
 void GrimmFire::Update(float _DeltaTime)
 {
-
-	switch (MoveType_)
-	{
-	case MoveType::RightDown:
-		StartMoveDir_.y += CurvPower_ * _DeltaTime;
-	//	Speed_ += 10.f;
-		if (StartMoveDir_.y > 0.0f)
-		{
-			MoveType_ = MoveType::Right;
-			break;
-		}
-
-		break;
-	case MoveType::RightUp:
-		StartMoveDir_.y -= CurvPower_ * _DeltaTime;
-		//Speed_ += 10.f;
-
-		if (StartMoveDir_.y < 0.0f)
-		{
-			MoveType_ = MoveType::Right;
-			break;
-		}
-		break;
-	case MoveType::Right:
-
-		StartMoveDir_ =float4::ZERO;
-		//Speed_ = 400.f;
-
-		break;
-	case MoveType::LeftDown:
-		StartMoveDir_.y += CurvPower_ * _DeltaTime;
-		//Speed_ += 10.f;
-
-		if (StartMoveDir_.y > 0.0f)
-		{
-			MoveType_ = MoveType::Right;
-			break;
-		}
-
-		break;
-	case MoveType::LeftUp:
-		StartMoveDir_.y -= CurvPower_ * _DeltaTime;
-		//Speed_ += 10.f;
-
-		if (StartMoveDir_.y < 0.0f)
-		{
-			MoveType_ = MoveType::Right;
-			break;
-		}
-		break;
-	case MoveType::Left:
-		StartMoveDir_ = float4::ZERO;
-		//Speed_ = 400.f;
-
-		break;
-	case MoveType::DownRight:
-		StartMoveDir_.x -= CurvPower_ * _DeltaTime;
-		//Speed_ += 10.f;
-
-		if (StartMoveDir_.x < 0.0f)
-		{
-			MoveType_ = MoveType::Down;
-			break;
-		}
-		break;
-	case MoveType::DownLeft:
-		StartMoveDir_.x += CurvPower_ * _DeltaTime;
-		//Speed_ += 10.f;
-
-		if (StartMoveDir_.x > 0.0f)
-		{
-			MoveType_ = MoveType::Down;
-			break;
-		}
-		break;
-	case MoveType::Down:
-		StartMoveDir_ = float4::ZERO;
-		//Speed_ = 400.f;
-
-		break;
-	default:
-		break;
-	}
-
-
-	CreateTimer_ += _DeltaTime;
-	GetTransform().SetWorldMove((MovePos_ + (StartMoveDir_)) * _DeltaTime * Speed_);
-
-	if (GetAccTime() > 2.0f)
-	{
-
-		this->Death();
-	}
-
-	if (CreateTimer_ > 0.1f /*&& Count_ < 7*/)
-	{
-		//GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
-		////GrimmFireBallSpectrumActor_->SetParent(this);
-		//GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
-
-		//++Count_;
-		//CreateTimer_ = 0.0f;
-	}
+	GrimmFireStateManager.Update(_DeltaTime);
+	
 
 }
 void GrimmFire::SetMoveDir(float4 _Dir, MoveType _Type)
@@ -252,6 +172,148 @@ void GrimmFire::SetMoveDir(float4 _Dir, MoveType _Type)
 	Speed_ = GameEngineRandom::MainRandom.RandomFloat(380.f, 550.f);
 
 
+}
+
+void GrimmFire::FireMoveStart(const StateInfo& _Info)
+{
+}
+
+void GrimmFire::FireMoveUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	switch (MoveType_)
+	{
+	case MoveType::RightDown:
+		StartMoveDir_.y += CurvPower_ * _DeltaTime;
+		if (StartMoveDir_.y > 0.0f)
+		{
+			MoveType_ = MoveType::Right;
+			break;
+		}
+
+		break;
+	case MoveType::RightUp:
+		StartMoveDir_.y -= CurvPower_ * _DeltaTime;
+
+		if (StartMoveDir_.y < 0.0f)
+		{
+			MoveType_ = MoveType::Right;
+			break;
+		}
+
+		break;
+	case MoveType::Right:
+
+		StartMoveDir_ = float4::ZERO;
+
+		break;
+	case MoveType::LeftDown:
+		StartMoveDir_.y += CurvPower_ * _DeltaTime;
+
+		if (StartMoveDir_.y > 0.0f)
+		{
+			MoveType_ = MoveType::Right;
+			break;
+		}
+
+		break;
+	case MoveType::LeftUp:
+		StartMoveDir_.y -= CurvPower_ * _DeltaTime;
+
+		if (StartMoveDir_.y < 0.0f)
+		{
+			MoveType_ = MoveType::Right;
+			break;
+		}
+
+		break;
+	case MoveType::Left:
+		StartMoveDir_ = float4::ZERO;
+		break;
+	case MoveType::DownRight:
+		StartMoveDir_.x -= CurvPower_ * _DeltaTime;
+
+		if (StartMoveDir_.x < 0.0f)
+		{
+			MoveType_ = MoveType::Down;
+			break;
+		}
+		break;
+	case MoveType::DownLeft:
+		StartMoveDir_.x += CurvPower_ * _DeltaTime;
+
+		if (StartMoveDir_.x > 0.0f)
+		{
+			MoveType_ = MoveType::Down;
+			break;
+		}
+		break;
+	case MoveType::Down:
+		StartMoveDir_ = float4::ZERO;
+		break;
+	default:
+		break;
+	}
+
+	CreateTimer_ += _DeltaTime;
+	GetTransform().SetWorldMove((MovePos_ + (StartMoveDir_)) * _DeltaTime * Speed_);
+
+	//if (GetAccTime() > 2.0f)
+	//{
+	//	this->Death();
+	//}
+
+	if (GetTransform().GetWorldPosition().x < 3700.f
+		|| GetTransform().GetWorldPosition().x > 5931.f
+		|| GetTransform().GetWorldPosition().y < -950.f
+		
+		)
+	{
+		GrimmFireStateManager.ChangeState("DEATH");
+		return;
+
+	}
+
+	if (CreateTimer_ > 0.1f /*&& Count_ < 7*/)
+	{
+
+		
+		//GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
+		////GrimmFireBallSpectrumActor_->SetParent(this);
+		//GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
+
+		//++Count_;
+		//CreateTimer_ = 0.0f;
+
+	}
+}
+
+void GrimmFire::FireMoveEnd(const StateInfo& _Info)
+{
+}
+
+void GrimmFire::FireDeathStart(const StateInfo& _Info)
+{
+	SubScale_ = 1.0f;
+
+}
+
+void GrimmFire::FireDeathUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	SubScale_ -= 0.1 * _DeltaTime;
+
+	FireBallRenderer1->GetTransform().SetLocalScale(FireBallRenderer1->GetTransform().GetLocalScale() * SubScale_);
+	FireBallRenderer2->GetTransform().SetLocalScale(FireBallRenderer1->GetTransform().GetLocalScale() * SubScale_);
+	FireBallRenderer3->GetTransform().SetLocalScale(FireBallRenderer1->GetTransform().GetLocalScale() * SubScale_);
+
+
+	if (SubScale_ <= 0.f)
+	{
+		Death();
+	}
+}
+
+void GrimmFire::FireDeathEnd(const StateInfo& _Info)
+{
 }
 
 

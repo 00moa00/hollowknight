@@ -58,6 +58,11 @@ void MainCameraManager::Start()
 		, std::bind(&MainCameraManager::BossShakingStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::BossShakingEnd, this, std::placeholders::_1));
 
+	CameraStateManager_.CreateStateMember("BOSS_ACTTING_SHAKING"
+		, std::bind(&MainCameraManager::BossActtingShakingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&MainCameraManager::BossActtingShakingStart, this, std::placeholders::_1)
+		, std::bind(&MainCameraManager::BossActtingShakingEnd, this, std::placeholders::_1));
+
 
 	CameraStateManager_.CreateStateMember("FOCUS"
 		, std::bind(&MainCameraManager::FocusUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -140,6 +145,11 @@ void MainCameraManager::ChangeCameraMove(CameraMode _Mode)
 
 	case CameraMode::BossShaking:
 		CameraStateManager_.ChangeState("BOSS_SHAKING");
+
+		break;
+
+	case CameraMode::BossActtingShaking:
+		CameraStateManager_.ChangeState("BOSS_ACTTING_SHAKING");
 
 		break;
 
@@ -369,9 +379,10 @@ void MainCameraManager::BossShakingStart(const StateInfo& _Info)
 
 void MainCameraManager::BossShakingUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
 	seed += (_DeltaTime);
-	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed *15.f, seed * 15.f, 0)) - 1.0f;
-	float4 ShakePosition = { shake *10.f, shake * 10.f };
+	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed * 15.f, seed * 15.f, 0)) - 1.0f;
+	float4 ShakePosition = { shake * 10.f, shake * 10.f };
 	//float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew() };
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
@@ -405,9 +416,104 @@ void MainCameraManager::BossShakingUpdate(float _DeltaTime, const StateInfo& _In
 		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
 		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
 	}
+
 }
 
 void MainCameraManager::BossShakingEnd(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::BossActtingShakingStart(const StateInfo& _Info)
+{
+}
+
+void MainCameraManager::BossActtingShakingUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	seed += (_DeltaTime);
+	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed *60.f, seed * 60.f, 0)) - 1.0f;
+	float4 ShakePosition = { shake * 100.f, shake * 100.f };
+	//float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew() };
+	//float4 Knihgt = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
+	float4 CurrentPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition() ;
+	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() + ShakePosition;
+	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 5.f);
+
+
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x,MoveCamera.y,  -1800.0f });
+	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
+
+	if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	//왼쪽
+	if (RoomPos_.x - RoomSize_.x / 2 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = RoomPos_.x - RoomSize_.x / 2 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+
+		/*if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+		{
+			MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+			GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+		}*/
+
+	}
+
+	//오른쪽
+
+	if (RoomPos_.x + RoomSize_.x / 2 < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = RoomPos_.x + RoomSize_.x / 2 - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+
+		/*if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+		{
+			MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+			GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+		}*/
+	}
+
+	//위
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	//아래
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+}
+
+void MainCameraManager::BossActtingShakingEnd(const StateInfo& _Info)
 {
 }
 
