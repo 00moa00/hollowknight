@@ -5,6 +5,8 @@
 
 #include "BossRoomGate.h"
 
+#include "GrimmStunBat.h"
+
 
 enum class PatternType
 {
@@ -87,6 +89,7 @@ private:
 	float BirdCreateTimer_;
 
 	float4 AirDashDest_;
+	float4 BirdDir_;
 
 	std::string ChangeState_;
 
@@ -103,6 +106,8 @@ private:
 	GameEngineStateManager GrimmBattleManager_;
 
 	GameEngineStateManager GrimmManager_;
+
+	std::vector<GrimmStunBat*> GrimmStunBatList_;
 
 public:
 	void SetEventState(EventState _State)

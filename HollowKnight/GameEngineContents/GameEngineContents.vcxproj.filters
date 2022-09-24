@@ -576,6 +576,9 @@
     <ClInclude Include="GrimmSpike.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmStunBat.h">
+      <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1003,6 +1006,9 @@
     </ClCompile>
     <ClCompile Include="GrimmSpike.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmStunBat.cpp">
+      <Filter>Actor\Play\Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

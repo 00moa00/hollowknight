@@ -139,7 +139,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState(ChangeState_);
+		GrimmBattleManager_.ChangeState("BATTLE_STUN_BAT");
 		return;
 	}
 }
@@ -553,7 +553,7 @@ void Grimm::GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisWall() == false)
 	{
-		float4 Move = GetMoveDirection() * 1600.f * _DeltaTime;
+		float4 Move = GetMoveDirection() * 2000.f * _DeltaTime;
 		GetTransform().SetWorldMove(Move);
 	}
 
@@ -788,33 +788,18 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 	GrimmBird_->SetMoveDir(Dir_.NormalizeReturn());
 
 
-	float RenderRo;
-	float4 KnihgtVec = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
-	float4 GrimmVec = float4({ GetTransform().GetWorldPosition().x, -925 }) - GetTransform().GetWorldPosition();
-
-	GrimmVec.Normalize();
-	KnihgtVec.Normalize();
-
-	float4 Ro;
-
-	Ro = float4::DotProduct3D(GrimmVec, KnihgtVec);
-
-	RenderRo = (Ro.x * GameEngineMath::PI / 180.f);
-
-	if (Dir_.CompareInt2D(float4::LEFT))
-	{
-		RenderRo = -RenderRo;
-
-	}
-
-	GrimmBird_->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,RenderRo });
-
-
 }
 
 void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	BirdCreateTimer_ += _DeltaTime;
+
+
+
+	if (BirdCreateTimer_ < 0.2f)
+	{		
+		BirdDir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
+	}
 
 	if (BirdCreateTimer_ > 0.8f)
 	{
@@ -822,43 +807,11 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 		GrimmBird* GrimmBird_ = GetLevel()->CreateActor<GrimmBird>();
 		GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, -20 });
 		
-		float4 Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
 		
 		
-		GrimmBird_->SetMoveDir(Dir_.NormalizeReturn());
+		
+		GrimmBird_->SetMoveDir(BirdDir_.NormalizeReturn());
 
-		float RenderRo;
-		float4 KnihgtVec = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
-		float4 GrimmVec ;
-
-		if (Dir_.NormalizeReturn().x > 0.0f)
-		{
-			GrimmVec = float4::RIGHT - GetTransform().GetWorldPosition();
-		}
-		else
-		{
-			GrimmVec = float4::LEFT - GetTransform().GetWorldPosition();
-
-		}
-
-
-
-		GrimmVec.Normalize();
-		KnihgtVec.Normalize();
-
-		float4 Ro;
-
-		Ro = float4::DotProduct3D(GrimmVec, KnihgtVec);
-
-		RenderRo = (Ro.x * GameEngineMath::PI / 180.f);
-
-		if (Dir_.x <= 0.0f)
-		{
-			RenderRo = -RenderRo;
-
-		}
-
-  		GrimmBird_->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,RenderRo });
 	}
 
 	
@@ -913,6 +866,17 @@ void Grimm::GrimmBattlStunEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunBatStart(const StateInfo& _Info)
 {
+	for (int i = 0; i < 10; ++i)
+	{
+		GrimmStunBatList_.push_back(GetLevel()->CreateActor<GrimmStunBat>());
+		float X = GameEngineRandom::MainRandom.RandomFloat(4400.f, 5200.f);
+		float Y = GameEngineRandom::MainRandom.RandomFloat(-890.f, -700.f);
+
+
+		GrimmStunBatList_.back()->GetTransform().SetWorldPosition({ X, Y, static_cast<float>(Z_ORDER::Monster)});
+
+
+	}
 }
 
 void Grimm::GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info)

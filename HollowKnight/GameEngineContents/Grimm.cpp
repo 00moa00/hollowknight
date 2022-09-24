@@ -36,6 +36,8 @@ Grimm::Grimm()
 	PatternRamdom_(0),
 	BirdCreateTimer_(0.0f),
 
+	BirdDir_(float4::ZERO),
+
 	EventState_(EventState::MAX),
 
 	GrimmBeam_(nullptr),
@@ -435,6 +437,8 @@ void Grimm::SetChangeStateString(PatternType _type)
 	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
 
 	ChangeState_ = UpperName;
+
+	//ChangeState_ = "BATTLE_STUN_BAT";
 }
 
 void Grimm::SetRamdomPattern()

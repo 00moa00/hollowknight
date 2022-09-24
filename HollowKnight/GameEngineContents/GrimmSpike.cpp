@@ -5,6 +5,7 @@
 GrimmSpike::GrimmSpike() 
 	:
 	Speed_(0.0f),
+	CollMove_(0.0f),
 	GrimmBirdStateManager()
 
 {
@@ -16,7 +17,6 @@ GrimmSpike::~GrimmSpike()
 
 void GrimmSpike::Start()
 {
-
 	Speed_ = 1300.f;
 
 	CreateCollisionComponent({ 30,1500 }, static_cast<int>(COLLISION_ORDER::Monster_Attack));
@@ -39,9 +39,6 @@ void GrimmSpike::Start()
 			this->Death();
 
 		});
-
-
-
 
 	GrimmBirdStateManager.CreateStateMember("WAIT"
 		, std::bind(&GrimmSpike::SpikeWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -99,10 +96,19 @@ void GrimmSpike::SpikeMoveUpStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("GROW_UP");
 	GetCollision()->On();
+	GetCollision()->GetTransform().SetLocalPosition({0, -1500/2});
 }
 
 void GrimmSpike::SpikeMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (GetCollision()->GetTransform().GetLocalPosition().y < 0.f)
+	{
+		CollMove_ += 1000.f;
+
+		GetCollision()->GetTransform().SetLocalPosition({ 0, _DeltaTime  * CollMove_ });
+
+	}
+
 	if (_Info.StateTime > 1.0f)
 	{
 		GrimmBirdStateManager.ChangeState("MOVE_UP_WAIT");
@@ -121,7 +127,7 @@ void GrimmSpike::SpikeMoveUpWaitStart(const StateInfo& _Info)
 
 void GrimmSpike::SpikeMoveUpWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 0.6f)
+	if (_Info.StateTime > 0.5f)
 	{
 		GrimmBirdStateManager.ChangeState("MOVE_DOWN");
 		return;

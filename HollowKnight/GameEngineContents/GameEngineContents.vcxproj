@@ -361,6 +361,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GrimmStunBat.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Iselda.h">
       <SubType>
       </SubType>
@@ -904,6 +908,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GrimmSpotLight.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmStunBat.cpp">
       <SubType>
       </SubType>
     </ClCompile>

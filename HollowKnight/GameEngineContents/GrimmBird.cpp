@@ -19,7 +19,7 @@ void GrimmBird::Start()
 	Speed_ = 1300.f;
 
 	CreateCollisionComponent({ 60,60 }, static_cast<int>(COLLISION_ORDER::Monster_Attack));
-	
+
 	CreateRendererComponent("Grimm Cln_Flame_bat0000-Sheet.png");
 	GetRenderer()->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimm Cln_Flame_bat0000-Sheet.png", 0, 4, 0.040f, true));
 	GetRenderer()->ChangeFrameAnimation("ANIMATION");
@@ -35,6 +35,7 @@ void GrimmBird::Start()
 	BirdDeathEffect_->ChangeFrameAnimation("DEATH_EFFECT");
 	BirdDeathEffect_->ScaleToCutTexture(0);
 	BirdDeathEffect_->Off();
+	GetCollision()->GetTransform().SetLocalPosition({ 0, BirdDeathEffect_->GetCurTexture()->GetScale().y / 2 });
 
 	BirdDeathEffect_->AnimationBindEnd("DEATH_EFFECT", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -81,8 +82,13 @@ void GrimmBird::SetMoveDir(float4 _Dir)
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
 		//GetWallCollision()->GetTransform().SetLocalPosition({ 10, 50 });
-
 	}
+
+	if (MoveDir_.y > 0.2f)
+	{
+  		MoveDir_.y = 0.2f;
+	}
+	
 }
 
 void GrimmBird::BirdMoveStart(const StateInfo& _Info)

@@ -22,6 +22,8 @@ protected:
 private:
 	float Speed_;
 
+	float CollMove_;
+
 	GameEngineStateManager GrimmBirdStateManager;
 
 private:
