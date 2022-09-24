@@ -18,6 +18,13 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 
 	float4 KnightPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	//if (ChangeState_ == "BATTLE_AIR_DASH_START")
+	//{
+	//	if (GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y > -910)
+	//	{
+	//		SetRamdomPatternIgnoreAir();
+	//	}
+	//}
 
 	// 텔레포트 나타나면서 팝업 위치를 여기서 정한다.
 	auto castType_ = magic_enum::enum_cast<PatternType>(ChangeState_);
@@ -116,9 +123,22 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (ChangeState_ == "BATTLE_AIR_DASH_START")
+	{
+		if (GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y > -910)
+		{
+ 			SetRamdomPatternIgnoreAir();
+			GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_APPEAR");
+			return;
+		}
+	}
+
 	if (isTeleportAppearEnd_ == true)
 	{
 		isTeleportAppearEnd_ = false;
+
+
+
 		GrimmBattleManager_.ChangeState(ChangeState_);
 		return;
 	}
@@ -250,7 +270,7 @@ void Grimm::GrimmBattleBalloonStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Battle_Shaking);
 
 	FireCreateTimer_ += _DeltaTime;
 	if (FireCreateTimer_ > 2.0f)
@@ -406,7 +426,7 @@ void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	//float4 DestPos =  AirDashDest_;
 
-	float4 Move = AirDashDest_ * 1000.f * _DeltaTime;
+	float4 Move = AirDashDest_ * 2000.f * _DeltaTime;
 
 	GetTransform().SetWorldMove(Move);
 	this->isPixelCheck(_DeltaTime, float4::ZERO);
@@ -468,7 +488,7 @@ void Grimm::GrimmBattleAirDashEndtUpdate(float _DeltaTime, const StateInfo& _Inf
 
 	if (GetisWall() == false)
 	{
-		GetTransform().SetWorldMove(GetMoveDirection() * 1000.f * _DeltaTime);
+		GetTransform().SetWorldMove(GetMoveDirection() * 1600.f * _DeltaTime);
 
 	}
 

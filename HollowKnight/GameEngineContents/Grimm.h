@@ -113,7 +113,7 @@ public:
 private:
 	void SetChangeStateString(PatternType _type);
 	void SetRamdomPattern();
-
+	void SetRamdomPatternIgnoreAir();
 
 	//================================
 	//    Bind State | Appear

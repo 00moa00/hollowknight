@@ -447,9 +447,28 @@ void Grimm::SetRamdomPattern()
 
 	//}
 
-	while (PatternRamdom_ == PrevChangeState_)
+	if (PatternRamdom_ == PrevChangeState_)
 	{
-		PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+		SetRamdomPattern();
+	}
+
+
+	PrevChangeState_ = PatternRamdom_;
+	SetChangeStateString(PatternType::BATTLE_AIR_DASH_START);
+
+	//SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
+	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
+
+
+}
+
+void Grimm::SetRamdomPatternIgnoreAir()
+{
+	PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+
+	if (PatternRamdom_ == PrevChangeState_)
+	{
+		SetRamdomPatternIgnoreAir();
 	}
 
 
@@ -457,7 +476,6 @@ void Grimm::SetRamdomPattern()
 	//SetChangeStateString(PatternType::BATTLE_SLASH_START);
 
 	SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
-	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
-
+	//GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 }

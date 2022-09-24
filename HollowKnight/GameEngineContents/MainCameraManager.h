@@ -9,6 +9,7 @@ enum class CameraMode
 	TargetMove,
 	TargetInRoomMove,
 	Shaking,
+	Battle_Shaking,
 	BossShaking,
 	BossActtingShaking,
 	PivotTargetMove,
@@ -78,16 +79,18 @@ private:
 	void ShakingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void ShakingEnd(const StateInfo& _Info);
 
+
+	void BattleShakingStart(const StateInfo& _Info);
+	void BattleShakingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void BattleShakingEnd(const StateInfo& _Info);
+
 	void BossShakingStart(const StateInfo& _Info);
 	void BossShakingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void BossShakingEnd(const StateInfo& _Info);
 
-
 	void BossActtingShakingStart(const StateInfo& _Info);
 	void BossActtingShakingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void BossActtingShakingEnd(const StateInfo& _Info);
-
-
 
 	void ChangePivotStart(const StateInfo& _Info);
 	void ChangePivotUpdate(float _DeltaTime, const StateInfo& _Info);

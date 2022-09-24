@@ -1814,7 +1814,17 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 	//KnightKnockbackTimer_ = 1.0f;
 	KnightStunEffect_->StunEffectOn();
 	GetRenderer()->ChangeFrameAnimation("STUN_ANIMATION");
-	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Shaking);
+	if (KnightData::GetInst()->GetisBossBattle() == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Battle_Shaking);
+
+	}
+	else
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Shaking);
+
+	}
+
 
 }
 
