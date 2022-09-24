@@ -532,21 +532,23 @@ void MainCameraManager::BossActtingShakingStart(const StateInfo& _Info)
 void MainCameraManager::BossActtingShakingUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	seed += (_DeltaTime);
-	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed *60.f, seed * 60.f, 0)) - 1.0f;
-	float4 ShakePosition = { shake * 100.f, shake * 100.f };
-	//float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew() };
-	//float4 Knihgt = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed * 12.f, seed * 12.f, 0)) - 1.0f;
+	float4 ShakePosition = { shake * 19.f, shake * 19.f };
+	float4 ShakeRotation = { 0,0, shake * 0.5f };
+
+	float4 Knihgt = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ Knihgt.x, Knihgt.y , -1800 });
+	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
+	GetLevel()->GetMainCameraActorTransform().SetWorldRotation(ShakeRotation);
+
+
+	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
 	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
 
-	float4 CurrentPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
-	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() + ShakePosition;
-	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
 
 
-
-	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x,MoveCamera.y,  -1800.0f });
-	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
-
+	//카메라의 위치 - 윈도우 사이즈의 x가 0이라면
 	if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
 	{
 		MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
@@ -570,6 +572,7 @@ void MainCameraManager::BossActtingShakingUpdate(float _DeltaTime, const StateIn
 		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
 		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
 	}
+
 
 	//왼쪽
 	if (RoomPos_.x - RoomSize_.x / 2 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())

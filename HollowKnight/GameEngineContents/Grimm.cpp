@@ -454,7 +454,7 @@ void Grimm::SetRamdomPattern()
 
 
 	PrevChangeState_ = PatternRamdom_;
-	SetChangeStateString(PatternType::BATTLE_AIR_DASH_START);
+	SetChangeStateString(PatternType::BATTLE_BALLOON_START);
 
 	//SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
 	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
