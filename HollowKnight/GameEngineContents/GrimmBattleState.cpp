@@ -424,16 +424,11 @@ void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	float4 CurrentPos = GetTransform().GetWorldPosition();
 
-	//float4 DestPos =  AirDashDest_;
-
 	float4 Move = AirDashDest_ * 2000.f * _DeltaTime;
 
 	GetTransform().SetWorldMove(Move);
 	this->isPixelCheck(_DeltaTime, float4::ZERO);
 
-	//float4 Lenth = AirDashDest_.y - GetTransform().GetWorldPosition().y;
-
-	//float LenthResult = Lenth.Length();
 	if (GetisOnGround() == true)
 	{
 		//int a = 0;
@@ -785,6 +780,36 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("CAST_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+	GrimmBird* GrimmBird_ = GetLevel()->CreateActor<GrimmBird>();
+	GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, -20 });
+
+	float4 Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
+	GrimmBird_->SetMoveDir(Dir_.NormalizeReturn());
+
+
+	float RenderRo;
+	float4 KnihgtVec = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	float4 GrimmVec = float4({ GetTransform().GetWorldPosition().x, -925 }) - GetTransform().GetWorldPosition();
+
+	GrimmVec.Normalize();
+	KnihgtVec.Normalize();
+
+	float4 Ro;
+
+	Ro = float4::DotProduct3D(GrimmVec, KnihgtVec);
+
+	RenderRo = (Ro.x * GameEngineMath::PI / 180.f);
+
+	if (Dir_.CompareInt2D(float4::LEFT))
+	{
+		RenderRo = -RenderRo;
+
+	}
+
+	GrimmBird_->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,RenderRo });
+
+
 }
 
 void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -801,6 +826,39 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 		
 		
 		GrimmBird_->SetMoveDir(Dir_.NormalizeReturn());
+
+		float RenderRo;
+		float4 KnihgtVec = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
+		float4 GrimmVec ;
+
+		if (Dir_.NormalizeReturn().x > 0.0f)
+		{
+			GrimmVec = float4::RIGHT - GetTransform().GetWorldPosition();
+		}
+		else
+		{
+			GrimmVec = float4::LEFT - GetTransform().GetWorldPosition();
+
+		}
+
+
+
+		GrimmVec.Normalize();
+		KnihgtVec.Normalize();
+
+		float4 Ro;
+
+		Ro = float4::DotProduct3D(GrimmVec, KnihgtVec);
+
+		RenderRo = (Ro.x * GameEngineMath::PI / 180.f);
+
+		if (Dir_.x <= 0.0f)
+		{
+			RenderRo = -RenderRo;
+
+		}
+
+  		GrimmBird_->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,RenderRo });
 	}
 
 	
