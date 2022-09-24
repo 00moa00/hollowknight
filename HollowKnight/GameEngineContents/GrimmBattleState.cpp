@@ -9,6 +9,7 @@
 #include "BossRoarEffect.h"
 
 #include "GrimmFire.h"
+#include "GrimmBird.h"
 
 
 void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
@@ -340,10 +341,6 @@ void Grimm::GrimmBattleAirDashStartStart(const StateInfo& _Info)
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 
 	}
-
-
-
-
 
 	AirDashDest_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
 
@@ -704,7 +701,24 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 2.f)
+	BirdCreateTimer_ += _DeltaTime;
+
+	if (BirdCreateTimer_ > 0.8f)
+	{
+		BirdCreateTimer_ = 0.0f;
+		GrimmBird* GrimmBird_ = GetLevel()->CreateActor<GrimmBird>();
+		GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, -20 });
+		
+		float4 Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
+		
+		
+		GrimmBird_->SetMoveDir(Dir_.NormalizeReturn());
+	}
+
+	
+
+
+	if (_Info.StateTime > 3.f)
 	{
 		GrimmBattleManager_.ChangeState("BATTLE_CAST_END");
 		return;

@@ -920,6 +920,8 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Grimm Cln_ground_dash_effect0000-Sheet.png", 6, 1);
 		GameEngineTexture::Cut("Grimmkin Cln_grimm_fireball0000-Sheet.png", 8, 1);
 		GameEngineTexture::Cut("Grimmkin Cln_grimm_fireball0000-Sheet2.png", 8, 1);
+		GameEngineTexture::Cut("Grimmkin Cln_grimm_fireball_explode0000-Sheet.png", 4, 1);
+
 		GameEngineTexture::Cut("grimm_smoke.png", 1, 5);
 
 

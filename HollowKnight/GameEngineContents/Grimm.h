@@ -84,6 +84,7 @@ private:
 	float MapCenterX_;
 	float AirDashRotation_;
 	float FireCreateTimer_;
+	float BirdCreateTimer_;
 
 	float4 AirDashDest_;
 

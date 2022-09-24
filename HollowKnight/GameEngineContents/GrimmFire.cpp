@@ -263,7 +263,7 @@ void GrimmFire::FireMoveUpdate(float _DeltaTime, const StateInfo& _Info)
 	//}
 
 	if (GetTransform().GetWorldPosition().x < 3700.f
-		|| GetTransform().GetWorldPosition().x > 5931.f
+		|| GetTransform().GetWorldPosition().x > 5900.f
 		|| GetTransform().GetWorldPosition().y < -950.f
 		
 		)

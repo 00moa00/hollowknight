@@ -34,6 +34,7 @@ Grimm::Grimm()
 	ChangeState_(""),
 	PrevChangeState_(0),
 	PatternRamdom_(0),
+	BirdCreateTimer_(0.0f),
 
 	EventState_(EventState::MAX),
 
@@ -437,23 +438,24 @@ void Grimm::SetChangeStateString(PatternType _type)
 
 void Grimm::SetRamdomPattern()
 {
-	PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
-	//auto Type_ = magic_enum::E
+	//PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+	////auto Type_ = magic_enum::E
 
-	//if (Ramdom == PrevChangeState_)
+	////if (Ramdom == PrevChangeState_)
+	////{
+
+	////}
+
+	//while (PatternRamdom_ == PrevChangeState_)
 	//{
-
+	//	PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
 	//}
 
-	while (PatternRamdom_ != PrevChangeState_)
-	{
-		PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
-	}
 
+	//PrevChangeState_ = PatternRamdom_;
+	SetChangeStateString(PatternType::BATTLE_CAST_START);
 
-	PrevChangeState_ = PatternRamdom_;
-
-	SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
+	//SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
 	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 

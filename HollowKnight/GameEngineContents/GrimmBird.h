@@ -23,7 +23,24 @@ private:
 	float4 MoveDir_;
 	float Speed_;
 
+	GameEngineTextureRenderer* BirdDeathEffect_;
+
+
+	GameEngineStateManager GrimmBirdStateManager;
+
 public :
 	void SetMoveDir(float4 _Dir);
+
+private:
+
+	void BirdMoveStart(const StateInfo& _Info);
+	void BirdMoveUpdate(float _DeltaTime, const StateInfo& _Info);
+	void BirdMoveEnd(const StateInfo& _Info);
+
+
+	void BirdDeathStart(const StateInfo& _Info);
+	void BirdDeathUpdate(float _DeltaTime, const StateInfo& _Info);
+	void BirdDeathEnd(const StateInfo& _Info);
+
 };
 

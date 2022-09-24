@@ -232,7 +232,7 @@ void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		EventState_ = EventState::Battle;
 		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
-		SetChangeStateString(PatternType::BATTLE_BALLOON_START);
+		SetChangeStateString(PatternType::BATTLE_CAST_START);
 
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
 	}
