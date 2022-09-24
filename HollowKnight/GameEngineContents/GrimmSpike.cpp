@@ -24,8 +24,8 @@ void GrimmSpike::Start()
 
 	CreateRendererComponent("Grimm Cln_Grimm_ground_spike0000-Sheet.png");
 	GetRenderer()->CreateFrameAnimationCutTexture("START_UP", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 0, 2, 0.040f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("GROW_UP", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 3, 7, 0.040f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("GROW_DOWN", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 8, 13, 0.040f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("GROW_UP", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 3, 8, 0.020f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("GROW_DOWN", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 8, 13, 0.020f, false));
 
 
 
@@ -121,7 +121,7 @@ void GrimmSpike::SpikeMoveUpWaitStart(const StateInfo& _Info)
 
 void GrimmSpike::SpikeMoveUpWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 1.0f)
+	if (_Info.StateTime > 0.6f)
 	{
 		GrimmBirdStateManager.ChangeState("MOVE_DOWN");
 		return;

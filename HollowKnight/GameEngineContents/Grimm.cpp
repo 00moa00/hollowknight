@@ -119,11 +119,11 @@ void Grimm::Start()
 		GetRenderer()->CreateFrameAnimationCutTexture("CAST_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_cast0000-Sheet.png", BackAni, 0.050f, false));
 	}
 
-	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.030f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.010f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 5, 7, 0.050f, true));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 15, 0.050f, false));
 	
-	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash_antic0000-Sheet.png", 0, 3, 0.050f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash_antic0000-Sheet.png", 0, 3, 0.030f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_SLASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash0000-Sheet.png", 0, 3, 0.060f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_UP_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_anims_v050000-Sheet.png", 0, 5, 0.050f, false));
 
@@ -454,9 +454,9 @@ void Grimm::SetRamdomPattern()
 
 
 	PrevChangeState_ = PatternRamdom_;
-	SetChangeStateString(PatternType::BATTLE_BALLOON_START);
+//	SetChangeStateString(PatternType::BATTLE_BALLOON_START);
 
-	//SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
+	SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
 	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 

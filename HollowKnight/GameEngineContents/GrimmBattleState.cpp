@@ -98,7 +98,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 
 		if (KnightPos.x > MapCenterX_)
 		{
-			GetTransform().SetWorldPosition({ MapCenterX_ - 400.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ MapCenterX_ - 500.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::RIGHT);
 			GetRenderer()->GetTransform().PixLocalNegativeX();
 
@@ -106,7 +106,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 
 		else
 		{
-			GetTransform().SetWorldPosition({ MapCenterX_ + 400.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ MapCenterX_ + 500.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::LEFT);
 			GetRenderer()->GetTransform().PixLocalPositiveX();
 
@@ -558,7 +558,7 @@ void Grimm::GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisWall() == false)
 	{
-		float4 Move = GetMoveDirection() * 1300.f * _DeltaTime;
+		float4 Move = GetMoveDirection() * 1600.f * _DeltaTime;
 		GetTransform().SetWorldMove(Move);
 	}
 
@@ -749,7 +749,7 @@ void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattleSpikeUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 2.0f)
+	if (_Info.StateTime > 1.0f)
 	{
 		SetRamdomPattern();
 		return;
