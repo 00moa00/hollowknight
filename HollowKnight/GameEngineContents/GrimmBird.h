@@ -32,7 +32,6 @@ public :
 	void SetMoveDir(float4 _Dir);
 
 private:
-
 	void BirdMoveStart(const StateInfo& _Info);
 	void BirdMoveUpdate(float _DeltaTime, const StateInfo& _Info);
 	void BirdMoveEnd(const StateInfo& _Info);

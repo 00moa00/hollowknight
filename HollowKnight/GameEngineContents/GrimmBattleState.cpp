@@ -10,7 +10,7 @@
 
 #include "GrimmFire.h"
 #include "GrimmBird.h"
-
+#include "GrimmSpike.h"
 
 void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 {
@@ -126,12 +126,15 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 void Grimm::GrimmBattleTeleportAppearEnd(const StateInfo& _Info)
 {
+	GetCollision()->On();
+
 }
 
 void Grimm::GrimmBattleTeleportDisappearStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_DISAPPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+	GetCollision()->Off();
 
 }
 
@@ -535,7 +538,7 @@ void Grimm::GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisWall() == false)
 	{
-		float4 Move = GetMoveDirection() * 1000.f * _DeltaTime;
+		float4 Move = GetMoveDirection() * 1300.f * _DeltaTime;
 		GetTransform().SetWorldMove(Move);
 	}
 
@@ -547,13 +550,19 @@ void Grimm::GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
+	//if (_Info.StateTime > 0.3f)
+	//{
+	//	isSlashEnd_ = false;
+	//	GrimmBattleManager_.ChangeState("BATTLE_SLASH_UP");
+	//	return;
+
+	//}
 
 	if (isSlashEnd_ == true)
 	{
 		isSlashEnd_ = false;
 		GrimmBattleManager_.ChangeState("BATTLE_SLASH_UP");
 		return;
-
 	}
 }
 
@@ -635,17 +644,74 @@ void Grimm::GrimmBattleSpikeStartStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("SPRIKE_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 5350,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 5200,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 5050,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 4900,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 4750,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 4600,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 4450,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 4300,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 4150,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 4000,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
 }
 
 
 void Grimm::GrimmBattleSpikeStartUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (isSprikeStartEnd_ == true)
+	if (_Info.StateTime > 1.f)
 	{
 		isSprikeStartEnd_ = false;
 		GrimmBattleManager_.ChangeState("BATTLE_SPIKE");
 		return;
 	}
+	//if (isSprikeStartEnd_ == true)
+	//{
+
+	//}
+
 }
 
 void Grimm::GrimmBattleSpikeStartEnd(const StateInfo& _Info)
@@ -657,6 +723,8 @@ void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("SPRIKE_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+
 }
 
 void Grimm::GrimmBattleSpikeUpdate(float _DeltaTime, const StateInfo& _Info)

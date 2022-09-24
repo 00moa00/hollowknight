@@ -294,6 +294,7 @@ void GrimmFire::FireMoveEnd(const StateInfo& _Info)
 void GrimmFire::FireDeathStart(const StateInfo& _Info)
 {
 	SubScale_ = 1.0f;
+	GetCollision()->Death();
 
 }
 

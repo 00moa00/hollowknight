@@ -53,7 +53,8 @@ void Grimm::Start()
 	SetName("Grimm");
 	MapCenterX_ = 4800.f;
 
-	CreateCollisionComponent(float4{ 150, 200, 1 }, static_cast<int>(COLLISION_ORDER::Monster));
+	CreateCollisionComponent(float4{ 90, 350, 1 }, static_cast<int>(COLLISION_ORDER::Monster));
+	GetCollision()->GetTransform().SetLocalPosition({0, 350.f /3});
 	//GetCollision()->GetTransform().SetWorldPosition({ 0, 50, 0 });
 	CreateWallCollisionComponent(float4{ 20, 20, 1 });
 
@@ -123,7 +124,7 @@ void Grimm::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 15, 0.050f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash_antic0000-Sheet.png", 0, 3, 0.050f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_SLASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash0000-Sheet.png", 0, 3, 0.050f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_SLASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash0000-Sheet.png", 0, 3, 0.060f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_UP_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_anims_v050000-Sheet.png", 0, 5, 0.050f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("STUN_HIT_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_stun_explode0000-Sheet.png", 0, 4, 0.050f, false));
@@ -438,24 +439,24 @@ void Grimm::SetChangeStateString(PatternType _type)
 
 void Grimm::SetRamdomPattern()
 {
-	//PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
-	////auto Type_ = magic_enum::E
+	PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+	//auto Type_ = magic_enum::E
 
-	////if (Ramdom == PrevChangeState_)
-	////{
-
-	////}
-
-	//while (PatternRamdom_ == PrevChangeState_)
+	//if (Ramdom == PrevChangeState_)
 	//{
-	//	PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+
 	//}
 
+	while (PatternRamdom_ == PrevChangeState_)
+	{
+		PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+	}
 
-	//PrevChangeState_ = PatternRamdom_;
-	SetChangeStateString(PatternType::BATTLE_CAST_START);
 
-	//SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
+	PrevChangeState_ = PatternRamdom_;
+	//SetChangeStateString(PatternType::BATTLE_SLASH_START);
+
+	SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
 	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 
