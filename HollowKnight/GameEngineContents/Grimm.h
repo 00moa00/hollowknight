@@ -63,28 +63,26 @@ private:
 	bool isPillarEnd_;
 	bool isBowEnd_;
 	bool isRoarEnd_;
-
 	bool isBllonStartEnd_;
-
 	bool isSprikeStartEnd_;
-
 	bool isCastStartEnd_;
 	bool isCastEndEnd_;
-
 	bool isSlashStartEnd_;
 	bool isSlashEnd_;
 	bool isSlashEndEnd_;
-
 	bool isDashStartEnd_;
 	bool isDashUpEnd_;
-
 	bool isStunHitEnd_;
+
+	bool isHitWhiteEffect_;
 
 	int PrevChangeState_;
 	int PatternRamdom_;
 
 	float MapCenterX_;
 	float AirDashRotation_;
+	float SubHitWhiteColor_;
+
 	float FireCreateTimer_;
 	float BirdCreateTimer_;
 
@@ -92,8 +90,6 @@ private:
 	float4 BirdDir_;
 
 	std::string ChangeState_;
-
-	//bool isTeleportEnd_;
 
 	GrimmBeam* GrimmBeam_;
 	GrimmSpotLight* GrimmSpotLight_;
@@ -119,6 +115,7 @@ private:
 	void SetChangeStateString(PatternType _type);
 	void SetRamdomPattern();
 	void SetRamdomPatternIgnoreAir();
+	void SetDamageEffecct(float _DeltaTime);
 
 	//================================
 	//    Bind State | Appear
@@ -241,5 +238,7 @@ private:
 	//    Bind 
 	//================================
 	bool MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	//bool MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+
 };
 

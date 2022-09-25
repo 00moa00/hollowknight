@@ -11,7 +11,7 @@
 
 #include <GameEngineBase/GameEngineRandom.h>
 
-Grimm::Grimm() 
+Grimm::Grimm()
 	:
 	isTeleportAppearEnd_(false),
 	isTeleportDiappearEnd_(false),
@@ -29,7 +29,10 @@ Grimm::Grimm()
 	isCastStartEnd_(false),
 	isSprikeStartEnd_(false),
 
+	isHitWhiteEffect_(false),
+
 	MapCenterX_(0.0f),
+	SubHitWhiteColor_(0.0f),
 
 	ChangeState_(""),
 	PrevChangeState_(0),
@@ -413,6 +416,7 @@ void Grimm::Update(float _DeltaTime)
 		break;
 	case EventState::Battle:
 		GrimmBattleManager_.Update(_DeltaTime);
+		SetDamageEffecct(_DeltaTime);
 
 		break;
 	case EventState::Talking:
@@ -426,6 +430,17 @@ void Grimm::Update(float _DeltaTime)
 
 void Grimm::SetMonsterHit(int _Damage, float4 _StunDir)
 {
+	if (isHitWhiteEffect_ == false)
+	{
+		SubHP(_Damage);
+
+		GetRenderer()->GetPixelData().PlusColor.r = 1.f;
+		GetRenderer()->GetPixelData().PlusColor.g = 1.f;
+		GetRenderer()->GetPixelData().PlusColor.b = 1.f;
+
+		isHitWhiteEffect_ = true;
+		SubHitWhiteColor_ = 1.0f;
+	}
 }
 
 void Grimm::SetChangeStateString(PatternType _type)
@@ -481,5 +496,25 @@ void Grimm::SetRamdomPatternIgnoreAir()
 
 	SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
 	//GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
+
+}
+
+void Grimm::SetDamageEffecct(float _DeltaTime)
+{
+	if (isHitWhiteEffect_ == true)
+	{
+		SubHitWhiteColor_ -= 1.5f* _DeltaTime;
+		GetRenderer()->GetPixelData().PlusColor.r = SubHitWhiteColor_;
+		GetRenderer()->GetPixelData().PlusColor.g = SubHitWhiteColor_;
+		GetRenderer()->GetPixelData().PlusColor.b = SubHitWhiteColor_;
+
+		if (SubHitWhiteColor_ <= 0.f)
+		{
+			isHitWhiteEffect_ = false;
+			SubHitWhiteColor_ = 1.0f;
+		}
+	}
+
+
 
 }
