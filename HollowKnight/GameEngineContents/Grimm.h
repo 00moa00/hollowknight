@@ -116,6 +116,8 @@ private:
 	void SetRamdomPattern();
 	void SetRamdomPatternIgnoreAir();
 	void SetDamageEffecct(float _DeltaTime);
+	
+	void SetChangeBatScaleX();
 
 	//================================
 	//    Bind State | Appear

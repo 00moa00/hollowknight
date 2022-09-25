@@ -124,7 +124,7 @@ void Grimm::Start()
 		GetRenderer()->CreateFrameAnimationCutTexture("CAST_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_cast0000-Sheet.png", BackAni, 0.050f, false));
 	}
 
-	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.010f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.040f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 5, 7, 0.050f, true));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 15, 0.050f, false));
 	
@@ -136,6 +136,21 @@ void Grimm::Start()
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("SPRIKE_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_Boss_ground_spike_attack0003-Sheet.png", 0, 6, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SPRIKE_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_Boss_ground_spike_attack0003-Sheet.png", 4, 6, 0.050f, true));
+
+	GetRenderer()->CreateFrameAnimationCutTexture("BAT_APPEAR_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_stun_bat0000-Sheet.png", 0, 1, 0.060f, false));
+	GetRenderer()->ScaleToCutTexture(0);
+	GetRenderer()->GetTransform().SetLocalScale(GetRenderer()->GetTransform().GetLocalScale() * 0.7f);
+	std::vector<unsigned int> CustomAni;
+
+	CustomAni.push_back(1);
+	CustomAni.push_back(2);
+	CustomAni.push_back(3);
+	CustomAni.push_back(5);
+	CustomAni.push_back(6);
+
+
+	GetRenderer()->CreateFrameAnimationCutTexture("BAT_FLY_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_stun_bat0000-Sheet.png", CustomAni, 0.060f, true));
+	GetRenderer()->CreateFrameAnimationCutTexture("BAT_DEATH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_stun_bat0000-Sheet.png", 7, 8, 0.060f, true));
 
 
 
@@ -184,6 +199,15 @@ void Grimm::Start()
 	//======================================
 	//    Create Bind Animation | Battle
 	//======================================
+
+	GetRenderer()->AnimationBindEnd("BAT_APPEAR_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+
+			GetRenderer()->ChangeFrameAnimation("BAT_FLY_ANIMATION");
+
+		});
+
+
 	GetRenderer()->AnimationBindEnd("BALLON_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isBllonStartEnd_ = true;
@@ -456,32 +480,27 @@ void Grimm::SetChangeStateString(PatternType _type)
 
 	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
 
-	ChangeState_ = "BATTLE_BALLOON_START";
+	ChangeState_ = UpperName;
 
 	//ChangeState_ = "BATTLE_STUN_BAT";
 }
 
 void Grimm::SetRamdomPattern()
 {
-	//PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
-	////auto Type_ = magic_enum::E
-
-	////if (Ramdom == PrevChangeState_)
-	////{
-
-	////}
-
-	//if (PatternRamdom_ == PrevChangeState_)
-	//{
-	//	SetRamdomPattern();
-	//}
+	PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
 
 
-	//PrevChangeState_ = "PatternRamdom_";
-	SetChangeStateString(PatternType::BATTLE_BALLOON_START);
+	if (PatternRamdom_ == PrevChangeState_)
+	{
+		SetRamdomPattern();
+	}
 
-	//SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
-	//GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
+
+	PrevChangeState_ = PatternRamdom_;
+	//SetChangeStateString(PatternType::BATTLE_BALLOON_START);
+
+	SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
+	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 
 }
@@ -522,4 +541,19 @@ void Grimm::SetDamageEffecct(float _DeltaTime)
 
 
 
+}
+
+void Grimm::SetChangeBatScaleX()
+{
+	if (GetMoveDirection().x <= 0.f)
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+
+	}
+
+	if (GetMoveDirection().x >= 0.f)
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+
+	}
 }

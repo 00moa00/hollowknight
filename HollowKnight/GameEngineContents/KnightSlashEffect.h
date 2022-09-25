@@ -22,6 +22,8 @@ protected:
 private:
 	bool isSlashEnd_;
 
+	bool isColl_;
+
 	GameEngineStateManager KnightSlashEffectManager_;
 
 private:
@@ -40,12 +42,18 @@ private:
 
 
 public:
+	bool GetisColl()
+	{
+		return isColl_;
+	}
 
+	
 	void SetAnimationSlash();
 	void SetAnimationDoubleSlash();
 	void SetAnimationUpSlash();
 	void SetAnimationDownSlash();
 	void SetAnimationStill();
+
 
 	bool EffectVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 	//bool EffectVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);

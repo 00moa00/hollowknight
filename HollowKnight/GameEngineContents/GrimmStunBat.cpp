@@ -6,6 +6,7 @@ GrimmStunBat::GrimmStunBat()
 	isMoveGrimm_(false),
 	Speed_(0.f),
 	MoveDir_(float4::ZERO),
+	TargetPos_(float4::ZERO),
 	GrimmBirdStateManager()
 {
 }
@@ -46,6 +47,13 @@ void GrimmStunBat::Start()
 
 		});
 
+	GetRenderer()->AnimationBindEnd("DEATH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+
+			isMoveGrimm_ = true;
+
+		});
+
 
 	GrimmBirdStateManager.CreateStateMember("FLY"
 		, std::bind(&GrimmStunBat::BatFlyUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -57,10 +65,22 @@ void GrimmStunBat::Start()
 		, std::bind(&GrimmStunBat::BatMoveToGrimmStart, this, std::placeholders::_1)
 		, std::bind(&GrimmStunBat::BatMoveToGrimmEnd, this, std::placeholders::_1));
 
+
+	GrimmBirdStateManager.CreateStateMember("DEATH_WAIT"
+		, std::bind(&GrimmStunBat::BatDeathWaitUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&GrimmStunBat::BatDeathWaitStart, this, std::placeholders::_1)
+		, std::bind(&GrimmStunBat::BatDeathWaitEnd, this, std::placeholders::_1));
+
+
 	GrimmBirdStateManager.ChangeState("FLY");
 
 	MoveDir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 	MoveDir_.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+
+	GetRenderer()->GetPixelData().MulColor.r = 0.f;
+	GetRenderer()->GetPixelData().MulColor.g = 0.f;
+	GetRenderer()->GetPixelData().MulColor.b = 0.f;
+
 }
 
 void GrimmStunBat::Update(float _DeltaTime)
@@ -68,6 +88,13 @@ void GrimmStunBat::Update(float _DeltaTime)
 	GrimmBirdStateManager.Update(_DeltaTime);
 }
 
+
+void GrimmStunBat::SetMoveToGrimm(float4 _TargetPos)
+{
+	TargetPos_ = _TargetPos;
+	GrimmBirdStateManager.ChangeState("MOVE_TO_GRIMM");
+
+}
 
 void GrimmStunBat::ChangeScaleX()
 {
@@ -110,13 +137,13 @@ void GrimmStunBat::BatFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	float4 CurrentPos = GetTransform().GetWorldPosition();
 	float4 DestPos = GetTransform().GetWorldPosition() + (Position * MoveDir_);
-	float4 Move = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 10.f);
+	float4 Move = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 13.f);
 
 	GetTransform().SetWorldPosition(Move);
 
-	if (GetTransform().GetWorldPosition().x <= 3643.f)
+	if (GetTransform().GetWorldPosition().x <= 4127.f)
 	{
-		float4 Position{ 643.f, GetTransform().GetWorldPosition().y };
+		float4 Position{ 4127.f, GetTransform().GetWorldPosition().y };
 
 		GetTransform().SetWorldPosition(Position);
 		MoveDir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
@@ -171,12 +198,52 @@ void GrimmStunBat::BatFlyEnd(const StateInfo& _Info)
 
 void GrimmStunBat::BatMoveToGrimmStart(const StateInfo& _Info)
 {
+	float4 Move = TargetPos_ - GetTransform().GetWorldPosition();
+	MoveDir_ = Move.NormalizeReturn();
+
+
 }
 
 void GrimmStunBat::BatMoveToGrimmUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	GetTransform().SetWorldMove(MoveDir_ * 2000.f * _DeltaTime);
+
+	float4 Len;
+	Len.x = TargetPos_.x - GetTransform().GetWorldPosition().x;
+	Len.y = TargetPos_.y - GetTransform().GetWorldPosition().y;
+	Len.z = 0;
+
+	ChangeScaleX();
+
+	float LenResult = Len.Length();
+
+	if (LenResult <= 2000.f * _DeltaTime)
+	{
+		GrimmBirdStateManager.ChangeState("DEATH_WAIT");
+		return;
+	}
+
+
 }
 
 void GrimmStunBat::BatMoveToGrimmEnd(const StateInfo& _Info)
+{
+}
+
+void GrimmStunBat::BatDeathWaitStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
+
+}
+
+void GrimmStunBat::BatDeathWaitUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isMoveGrimm_ == true)
+	{
+		GetRenderer()->Off();
+	}
+}
+
+void GrimmStunBat::BatDeathWaitEnd(const StateInfo& _Info)
 {
 }

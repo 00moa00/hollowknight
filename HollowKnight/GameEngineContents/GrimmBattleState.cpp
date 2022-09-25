@@ -117,7 +117,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 		break;
 	}
 	GetRenderer()->On();
-	SetMonsterDirection();
+	//SetMonsterDirection();
 
 }
 
@@ -273,7 +273,7 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossActtingShaking);
 
 	FireCreateTimer_ += _DeltaTime;
-	if (FireCreateTimer_ > 2.0f)
+	/*if (FireCreateTimer_ > 2.0f)
 	{
 		FireCreateTimer_ = 0.0f;
 		{
@@ -332,7 +332,7 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 
 
 		
-	}
+	}*/
 
 	if (_Info.StateTime > 7.0f)
 	{
@@ -853,12 +853,18 @@ void Grimm::GrimmBattlCastEndEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunStart(const StateInfo& _Info)
 {
-	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
+	GetRenderer()->ChangeFrameAnimation("STUN_HIT_ANIMATION");
 
 }
 
 void Grimm::GrimmBattlStunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isStunHitEnd_ == true)
+	{
+		isStunHitEnd_ = false;
+		GrimmBattleManager_.ChangeState("BATTLE_STUN_BAT");
+		return;
+	}
 }
 
 void Grimm::GrimmBattlStunEnd(const StateInfo& _Info)
@@ -868,6 +874,11 @@ void Grimm::GrimmBattlStunEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunBatStart(const StateInfo& _Info)
 {
+
+
+	GetRenderer()->ChangeFrameAnimation("BAT_APPEAR_ANIMATION");
+
+
 	for (int i = 0; i < 10; ++i)
 	{
 		GrimmStunBatList_.push_back(GetLevel()->CreateActor<GrimmStunBat>());
@@ -883,6 +894,109 @@ void Grimm::GrimmBattlStunBatStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (GetAccTime() > 5.0f)
+	{
+		float4 MoveDir;
+
+		MoveDir.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		MoveDir.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+
+
+		SetMoveDirection(MoveDir);
+		SetChangeBatScaleX();
+		ReSetAccTime();
+	}
+
+
+	float4 Position{ };
+	Position.x = GameEngineRandom::MainRandom.RandomFloat(0, 100);
+	Position.y = GameEngineRandom::MainRandom.RandomFloat(0, 100);
+
+
+	float4 CurrentPos = GetTransform().GetWorldPosition();
+	float4 DestPos = GetTransform().GetWorldPosition() + (Position * GetMoveDirection());
+	float4 Move = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 10.f);
+
+	GetTransform().SetWorldPosition(Move);
+
+	if (GetTransform().GetWorldPosition().x <= 3643.f)
+	{
+		float4 Position{ 643.f, GetTransform().GetWorldPosition().y };
+
+		GetTransform().SetWorldPosition(Position);
+
+
+		float4 MoveDir;
+
+		MoveDir.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		MoveDir.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+
+
+		SetMoveDirection(MoveDir);
+		SetChangeBatScaleX();
+
+		ReSetAccTime();
+	}
+
+	if (GetTransform().GetWorldPosition().x >= 6000.f)
+	{
+		float4 Position{ 6000.f, GetTransform().GetWorldPosition().y };
+
+		GetTransform().SetWorldPosition(Position);
+		float4 MoveDir;
+
+		MoveDir.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		MoveDir.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+
+
+		SetMoveDirection(MoveDir);
+		SetChangeBatScaleX();
+
+		ReSetAccTime();
+	}
+
+	if (GetTransform().GetWorldPosition().y >= -600.f)
+	{
+		float4 Position{ GetTransform().GetWorldPosition().x,  -600.f };
+
+		GetTransform().SetWorldPosition(Position);
+		float4 MoveDir;
+
+		MoveDir.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		MoveDir.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+
+
+		SetMoveDirection(MoveDir);
+		SetChangeBatScaleX();
+
+		ReSetAccTime();
+
+	}
+
+	if (GetTransform().GetWorldPosition().y <= -900.f)
+	{
+
+		float4 Position{ GetTransform().GetWorldPosition().x, -900.f };
+
+		GetTransform().SetWorldPosition(Position);
+		float4 MoveDir;
+
+		MoveDir.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		MoveDir.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+
+
+		SetMoveDirection(MoveDir);
+		SetChangeBatScaleX();
+
+		ReSetAccTime();
+	}
+
+	if (_Info.StateTime > 3.0f)
+	{
+		GrimmBattleManager_.ChangeState("BATTLE_STUN_BAT_END");
+
+	}
 }
 
 void Grimm::GrimmBattlStunBatEnd(const StateInfo& _Info)
@@ -891,14 +1005,71 @@ void Grimm::GrimmBattlStunBatEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunBatEndStart(const StateInfo& _Info)
 {
+
+	GetRenderer()->GetPixelData().MulColor.r = 0.f;
+	GetRenderer()->GetPixelData().MulColor.g = 0.f;
+	GetRenderer()->GetPixelData().MulColor.b = 0.f;
+
+	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
+
+	GetTransform().SetWorldPosition({ MapCenterX_ + 400.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
+
+	for (int i = 0; i < 10; ++i)
+	{
+		GrimmStunBatList_[i]->SetMoveToGrimm({ MapCenterX_ + 400.f, -950.f, 0 });
+	}
+
 }
 
 void Grimm::GrimmBattlStunBatEndUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	for (int i = 0; i < GrimmStunBatList_.size(); ++i)
+	{
+
+		if (GrimmStunBatList_[i]->GetisMovetoGrimm() == false)
+		{
+			break;
+		}	
+	
+		if (i == 9)
+		{
+			isTeleportAppearEnd_ = false;
+			GetRenderer()->ChangeFrameAnimation("TELEPORT_DISAPPEAR_ANIMATION");
+		}
+	
+	}
+
+	if(isTeleportDiappearEnd_ == true)
+	{
+		isTeleportDiappearEnd_ = false;
+		PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+
+
+		PrevChangeState_ = PatternRamdom_;
+
+		SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
+		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_APPEAR");
+		return;
+	}
 }
 
 void Grimm::GrimmBattlStunBatEndEnd(const StateInfo& _Info)
 {
+	for (int i = 0; i < GrimmStunBatList_.size(); ++i)
+	{
+
+		if (GrimmStunBatList_[i] != nullptr)
+		{
+			GrimmStunBatList_[i]->Death();
+
+		}
+	}
+
+	GrimmStunBatList_.clear();
+	GetRenderer()->GetPixelData().MulColor.r = 1.f;
+	GetRenderer()->GetPixelData().MulColor.g = 1.f;
+	GetRenderer()->GetPixelData().MulColor.b = 1.f;
 }
 
 bool Grimm::MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other)

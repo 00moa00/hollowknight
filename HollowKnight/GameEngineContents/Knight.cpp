@@ -195,7 +195,7 @@ void Knight::Start()
 	// ---- ±âº» ----
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
 	
-	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.150f, true));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.040f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
@@ -441,6 +441,18 @@ void Knight::Start()
 	KnightManager_.CreateStateMember("LOOK_DOWN"
 		, std::bind(&Knight::KnightLookDownUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightLookDownStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookDownEnd, this, std::placeholders::_1));
+	
+	KnightManager_.CreateStateMember("FOCUS"
+		, std::bind(&Knight::KnightFocusUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
+
+
+	KnightManager_.CreateStateMember("SLASH_JUMP"
+		, std::bind(&Knight::KnightUpSlashJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightUpSlashJumpStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightUpSlashJumpEnd, this, std::placeholders::_1));
+
 
 	KnightManager_.CreateStateMember("JUMP"
 		, std::bind(&Knight::KnightJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -465,10 +477,6 @@ void Knight::Start()
 		, std::bind(&Knight::KnightDashStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightDashEnd, this, std::placeholders::_1));
 	
-	KnightManager_.CreateStateMember("FOCUS"
-		, std::bind(&Knight::KnightFocusUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
 
 
 	KnightManager_.CreateStateMember("FOCUS_BURST"

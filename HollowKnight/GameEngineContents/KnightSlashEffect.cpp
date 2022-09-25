@@ -3,9 +3,10 @@
 #include "KnightData.h"
 #include "Monster.h"
 
-KnightSlashEffect::KnightSlashEffect() 
+KnightSlashEffect::KnightSlashEffect()
 	:
-	isSlashEnd_(false)
+	isSlashEnd_(false),
+	isColl_(false)
 {
 }
 
@@ -110,8 +111,17 @@ void KnightSlashEffect::SlashHitEnemyUpdate(float _DeltaTime, const StateInfo& _
 		isSlashEnd_ = false;
 		KnightSlashEffectManager_.ChangeState("IDLE");
 	}
-	GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
-		std::bind(&KnightSlashEffect::EffectVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&KnightSlashEffect::EffectVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+	{
+
+	}
+
+	else
+	{
+		isColl_ = false;
+	}
 }
 
 void KnightSlashEffect::SlashHitEnemyEnd(const StateInfo& _Info)
@@ -164,6 +174,7 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 		KnightData::GetInst()->SetisSoulGrow(true);
 
 		//_Other->GetActor()->Death();
+		isColl_ = true;
 		KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
 
 		return true;

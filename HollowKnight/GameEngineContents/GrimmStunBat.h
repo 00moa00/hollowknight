@@ -26,8 +26,17 @@ private:
 
 
 	float4 MoveDir_;
+	float4 TargetPos_;
 
 	GameEngineStateManager GrimmBirdStateManager;
+
+public:
+	void SetMoveToGrimm(float4 _TargetPos);
+
+	bool GetisMovetoGrimm() const
+	{
+		return isMoveGrimm_;
+	}
 
 private:
 	void ChangeScaleX();
@@ -39,6 +48,10 @@ private:
 	void BatMoveToGrimmStart(const StateInfo& _Info);
 	void BatMoveToGrimmUpdate(float _DeltaTime, const StateInfo& _Info);
 	void BatMoveToGrimmEnd(const StateInfo& _Info);
+
+	void BatDeathWaitStart(const StateInfo& _Info);
+	void BatDeathWaitUpdate(float _DeltaTime, const StateInfo& _Info);
+	void BatDeathWaitEnd(const StateInfo& _Info);
 
 };
 

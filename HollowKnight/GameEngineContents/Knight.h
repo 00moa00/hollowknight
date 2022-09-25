@@ -175,6 +175,10 @@ private:
 	void KnightLookUpUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightLookUpEnd(const StateInfo& _Info);
 
+	void KnightUpSlashJumpStart(const StateInfo& _Info);
+	void KnightUpSlashJumpUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightUpSlashJumpEnd(const StateInfo& _Info);
+
 	void KnightJumpStart(const StateInfo& _Info);
 	void KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightJumpEnd(const StateInfo& _Info);
