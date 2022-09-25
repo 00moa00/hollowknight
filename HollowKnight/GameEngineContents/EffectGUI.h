@@ -49,10 +49,7 @@ private:
 	//bool 
 private:
 
-
-
-
-	ImVec4& ConvertFromFloat4(ImVec4 _Im, float4 f4)
+	ImVec4 ConvertFromFloat4(ImVec4 _Im, float4 f4)
 	{
 		_Im.x = f4.x;
 		_Im.y = f4.y;
@@ -62,7 +59,7 @@ private:
 		return _Im;
 	}
 
-	float4& ConvertToFloat4(float4 f4, ImVec4 _Im)
+	float4 ConvertToFloat4(float4 f4, ImVec4 _Im)
 	{
 		f4.x = _Im.x;
 		f4.y = _Im.y;

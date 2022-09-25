@@ -127,7 +127,7 @@ void GrimmSpike::SpikeMoveUpWaitStart(const StateInfo& _Info)
 
 void GrimmSpike::SpikeMoveUpWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 0.5f)
+	if (_Info.StateTime > 0.3f)
 	{
 		GrimmBirdStateManager.ChangeState("MOVE_DOWN");
 		return;

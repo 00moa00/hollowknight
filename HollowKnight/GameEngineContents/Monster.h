@@ -70,7 +70,10 @@ public:
 		return isMonsterDeath_;
 	}
 
-
+	int GetHP()
+	{
+		return CurHp_;
+	}
 
 
 

@@ -1333,7 +1333,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		float4 MoveLerp = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * ((GetFallSpeed() )));
 
 
-		GetTransform().SetWorldPosition(DestPos);
+		GetTransform().SetWorldPosition(MoveLerp);
 	}
 
 	else
@@ -1352,12 +1352,13 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		float4 MoveLerp = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * GetFallSpeed());
 
-		GetTransform().SetWorldPosition(MoveLerp );
+		GetTransform().SetWorldPosition(MoveLerp);
+
 
 
 	}
+	KnightFallAccel_ += (10.f * _DeltaTime);
 
-	KnightFallAccel_ += 10.f * _DeltaTime;
 
 	//if (GetisWall() == true /*&& isKnihgtStillWall_ == false*/)
 	//{

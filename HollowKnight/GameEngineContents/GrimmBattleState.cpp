@@ -1,4 +1,3 @@
-
 #include "PreCompile.h"
 #include "Grimm.h"
 #include "KnightData.h"
@@ -11,6 +10,9 @@
 #include "GrimmFire.h"
 #include "GrimmBird.h"
 #include "GrimmSpike.h"
+
+#include "GrimmGroundDashEffect.h"
+#include "GrimmAirDashEffect.h"
 
 void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 {
@@ -34,12 +36,12 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	switch (PatternType_)
 	{
 	case PatternType::BATTLE_BALLOON_START:
-		GetTransform().SetWorldPosition({ MapCenterX_, -700, static_cast<float>(Z_ORDER::Monster)});
+		GetTransform().SetWorldPosition({ MapCenterX_, -650, static_cast<float>(Z_ORDER::Monster)});
 		break;
 	case PatternType::BATTLE_SLASH_START:
 		if (KnightPos.x > MapCenterX_)
 		{
-			GetTransform().SetWorldPosition({ KnightPos.x - 300.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ KnightPos.x - 400.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::RIGHT);
 			GetRenderer()->GetTransform().PixLocalNegativeX();
 
@@ -47,7 +49,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 
 		else
 		{
-			GetTransform().SetWorldPosition({ KnightPos.x + 300.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ KnightPos.x + 400.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::LEFT);
 			GetRenderer()->GetTransform().PixLocalPositiveX();
 
@@ -60,7 +62,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 
 		if (KnightPos.x > MapCenterX_)
 		{
-			GetTransform().SetWorldPosition({ KnightPos.x - 300.f, -600.f, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ KnightPos.x - 400.f, -550.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::RIGHT);
 			//GetRenderer()->GetTransform().PixLocalNegativeX();
 
@@ -69,7 +71,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 
 		else
 		{
-			GetTransform().SetWorldPosition({ KnightPos.x + 300.f,-600.f, static_cast<float>(Z_ORDER::Monster) });
+			GetTransform().SetWorldPosition({ KnightPos.x + 400.f,-550.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::LEFT);
 			//GetRenderer()->GetTransform().PixLocalPositiveX();
 
@@ -139,7 +141,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState("BATTLE_BALLOON_START");
+		GrimmBattleManager_.ChangeState(ChangeState_);
 		return;
 	}
 }
@@ -164,19 +166,13 @@ void Grimm::GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo
 	{
 		isTeleportDiappearEnd_ = false;
 		GetRenderer()->Off();
-
 	}
+
 	if (_Info.StateTime > 1.f)
 	{
 		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_APPEAR");
 		return;
-
-		//_Info.StateTime = 0.f;
-	
-
 	}
-
-
 }
 void Grimm::GrimmBattleTeleportDisappearEnd(const StateInfo& _Info)
 {
@@ -186,8 +182,6 @@ void Grimm::GrimmBattleBalloonStartStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("BALLON_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
-
-
 }
 
 void Grimm::GrimmBattleBalloonStartUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -206,8 +200,6 @@ void Grimm::GrimmBattleBalloonStartEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleBalloonStart(const StateInfo& _Info)
 {
-
-
 	FireCreateTimer_ = 0.0f;
 	GetRenderer()->ChangeFrameAnimation("BALLON_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
@@ -343,7 +335,6 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 void Grimm::GrimmBattleBalloonEnd(const StateInfo& _Info)
 {
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
-
 }
 
 void Grimm::GrimmBattleAirDashStartStart(const StateInfo& _Info)
@@ -404,19 +395,21 @@ void Grimm::GrimmBattleAirDashStartEnd(const StateInfo& _Info)
 void Grimm::GrimmBattleAirDashStart(const StateInfo& _Info)
 {
 
-
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 	GetRenderer()->GetTransform().PixLocalPositiveX();
 
 	if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
-		//GetRenderer()->GetTransform().PixLocalNegativeX();
 		AirDashRotation_ = -AirDashRotation_;
-
 	}
 
 	GetRenderer()->GetTransform().SetWorldRotation({ 0,0,AirDashRotation_ });
+
+	GrimmAirDashEffect* GrimmAirDashEffect_ = GetLevel()->CreateActor<GrimmAirDashEffect>();
+
+	GrimmAirDashEffect_ ->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,AirDashRotation_ });
+	GrimmAirDashEffect_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
 }
 
 void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)

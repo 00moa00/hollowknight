@@ -579,6 +579,12 @@
     <ClInclude Include="GrimmStunBat.h">
       <Filter>Actor\Play\Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmGroundDashEffect.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmAirDashEffect.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1009,6 +1015,12 @@
     </ClCompile>
     <ClCompile Include="GrimmStunBat.cpp">
       <Filter>Actor\Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmGroundDashEffect.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmAirDashEffect.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

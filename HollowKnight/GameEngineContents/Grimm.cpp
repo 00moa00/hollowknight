@@ -68,7 +68,7 @@ void Grimm::Start()
 	GetRenderer()->ScaleToCutTexture(0);
 	GetRenderer()->GetTransform().SetLocalPosition({0,-50});
 	GetTransform().SetLocalPosition({ 300,-500, static_cast<float>(Z_ORDER::Monster) });
-	SetHP(50);
+	SetHP(30);
 
 	SetMoveDirection(float4::RIGHT);
 	//SetMonsterDirection();
@@ -223,38 +223,32 @@ void Grimm::Start()
 	GetRenderer()->AnimationBindEnd("CAST_END_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isCastEndEnd_ = true;
-
 		});
 
 	GetRenderer()->AnimationBindEnd("AIR_DASH_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isDashStartEnd_ = true;
-
 		});
 
 	GetRenderer()->AnimationBindEnd("AIR_DASH_END_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isDashUpEnd_ = true;
-
 		});
 
 
 	GetRenderer()->AnimationBindEnd("SLASH_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isSlashStartEnd_ = true;
-
 		});
 
 	GetRenderer()->AnimationBindEnd("SLASH_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isSlashEnd_ = true;
-
 		});
 
 	GetRenderer()->AnimationBindEnd("SLASH_UP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isSlashEndEnd_ = true;
-
 		});
 
 	GetRenderer()->AnimationBindEnd("STUN_HIT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
@@ -340,7 +334,6 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmBattleBalloonStartStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleBalloonStartEnd, this, std::placeholders::_1));
 
-
 	GrimmBattleManager_.CreateStateMember("BATTLE_BALLOON"
 		, std::bind(&Grimm::GrimmBattleBalloonUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleBalloonStart, this, std::placeholders::_1)
@@ -350,7 +343,6 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmBattleSlashStartUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleSlashStartStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleSlashStartEnd, this, std::placeholders::_1));
-
 
 	GrimmBattleManager_.CreateStateMember("BATTLE_SLASH"
 		, std::bind(&Grimm::GrimmBattleSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -362,24 +354,20 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmBattleSlashUpStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleSlashUpEnd, this, std::placeholders::_1));
 
-
 	GrimmBattleManager_.CreateStateMember("BATTLE_AIR_DASH_START"
 		, std::bind(&Grimm::GrimmBattleAirDashStartUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleAirDashStartStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleAirDashStartEnd, this, std::placeholders::_1));
-
 
 	GrimmBattleManager_.CreateStateMember("BATTLE_AIR_DASH"
 		, std::bind(&Grimm::GrimmBattleAirDashUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleAirDashStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleAirDashEnd, this, std::placeholders::_1));
 
-
 	GrimmBattleManager_.CreateStateMember("BATTLE_AIR_DASH_END"
 		, std::bind(&Grimm::GrimmBattleAirDashEndtUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Grimm::GrimmBattleAirDashEndtStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattleAirDashEndtEnd, this, std::placeholders::_1));
-
 
 	GrimmBattleManager_.CreateStateMember("BATTLE_FIRE"
 		, std::bind(&Grimm::GrimmBattleFireUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -463,12 +451,21 @@ void Grimm::SetMonsterHit(int _Damage, float4 _StunDir)
 	{
 		SubHP(_Damage);
 
-		GetRenderer()->GetPixelData().PlusColor.r = 1.f;
-		GetRenderer()->GetPixelData().PlusColor.g = 1.f;
-		GetRenderer()->GetPixelData().PlusColor.b = 1.f;
+		if (GetHP() == 25)
+		{
+			GrimmBattleManager_.ChangeState("BATTLE_STUN");
+		}
+		else
+		{
+			GetRenderer()->GetPixelData().PlusColor.r = 1.f;
+			GetRenderer()->GetPixelData().PlusColor.g = 1.f;
+			GetRenderer()->GetPixelData().PlusColor.b = 1.f;
 
-		isHitWhiteEffect_ = true;
-		SubHitWhiteColor_ = 1.0f;
+			isHitWhiteEffect_ = true;
+			SubHitWhiteColor_ = 1.0f;
+		}
+
+
 	}
 }
 

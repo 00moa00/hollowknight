@@ -37,8 +37,6 @@ protected:
 
 
 private:
-	//GameEngineTextureRenderer* MainRenderer_;
-
 	float4 MovePos_;
 	float4 StartMoveDir_;
 
@@ -57,19 +55,13 @@ private:
 	GameEngineTextureRenderer* FireBallRenderer2;
 	GameEngineTextureRenderer* FireBallRenderer3;
 
-
-	//std::vector<GrimmFireBallSpectrumActor*> AllSpecturumActor_;
-
 public:
 	void SetMoveDir(float4 _Dir, MoveType _Type);
-	//void SetStartMoveDir(float4 _Dir);
 
 private:
-
 	void FireMoveStart(const StateInfo& _Info);
 	void FireMoveUpdate(float _DeltaTime, const StateInfo& _Info);
 	void FireMoveEnd(const StateInfo& _Info);
-
 
 	void FireDeathStart(const StateInfo& _Info);
 	void FireDeathUpdate(float _DeltaTime, const StateInfo& _Info);
