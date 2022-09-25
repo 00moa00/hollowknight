@@ -273,7 +273,7 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossActtingShaking);
 
 	FireCreateTimer_ += _DeltaTime;
-	/*if (FireCreateTimer_ > 2.0f)
+	if (FireCreateTimer_ > 2.0f)
 	{
 		FireCreateTimer_ = 0.0f;
 		{
@@ -332,7 +332,7 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 
 
 		
-	}*/
+	}
 
 	if (_Info.StateTime > 7.0f)
 	{
