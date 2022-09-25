@@ -30,6 +30,8 @@ private:
 	GameEngineStateManager GrimmBirdStateManager;
 
 private:
+	void ChangeScaleX();
+
 	void BatFlyStart(const StateInfo& _Info);
 	void BatFlyUpdate(float _DeltaTime, const StateInfo& _Info);
 	void BatFlyEnd(const StateInfo& _Info);

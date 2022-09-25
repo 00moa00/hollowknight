@@ -23,7 +23,7 @@ void GrimmStunBat::Start()
 	CreateRendererComponent("Grimm Cln_Grimm_stun_bat0000-Sheet.png");
 	GetRenderer()->CreateFrameAnimationCutTexture("APPEAR_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_stun_bat0000-Sheet.png", 0, 1, 0.060f, false));
 	GetRenderer()->ScaleToCutTexture(0);
-
+	GetRenderer()->GetTransform().SetLocalScale(GetRenderer()->GetTransform().GetLocalScale() * 0.7f);
 	std::vector<unsigned int> CustomAni;
 
 	CustomAni.push_back(1);
@@ -69,17 +69,36 @@ void GrimmStunBat::Update(float _DeltaTime)
 }
 
 
+void GrimmStunBat::ChangeScaleX()
+{
+	if (MoveDir_.x <= 0.f)
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+
+	}
+
+	if (MoveDir_.x >= 0.f)
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+
+	}
+}
+
 void GrimmStunBat::BatFlyStart(const StateInfo& _Info)
 {
 }
 
 void GrimmStunBat::BatFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+
+
 	if (GetAccTime() > 5.0f)
 	{
 
 		MoveDir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 		MoveDir_.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		ChangeScaleX();
 		ReSetAccTime();
 	}
 
@@ -91,7 +110,7 @@ void GrimmStunBat::BatFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	float4 CurrentPos = GetTransform().GetWorldPosition();
 	float4 DestPos = GetTransform().GetWorldPosition() + (Position * MoveDir_);
-	float4 Move = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 5.f);
+	float4 Move = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 10.f);
 
 	GetTransform().SetWorldPosition(Move);
 
@@ -102,6 +121,8 @@ void GrimmStunBat::BatFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldPosition(Position);
 		MoveDir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 		MoveDir_.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		ChangeScaleX();
+
 		ReSetAccTime();
 	}
 
@@ -112,6 +133,8 @@ void GrimmStunBat::BatFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldPosition(Position);
 		MoveDir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 		MoveDir_.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		ChangeScaleX();
+
 		ReSetAccTime();
 	}
 
@@ -122,6 +145,8 @@ void GrimmStunBat::BatFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldPosition(Position);
 		MoveDir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 		MoveDir_.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		ChangeScaleX();
+
 		ReSetAccTime();
 
 	}
@@ -134,6 +159,8 @@ void GrimmStunBat::BatFlyUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldPosition(Position);
 		MoveDir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 		MoveDir_.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
+		ChangeScaleX();
+
 		ReSetAccTime();
 	}
 }
