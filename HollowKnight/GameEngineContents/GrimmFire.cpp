@@ -97,10 +97,10 @@ void GrimmFire::Start()
 		//MainRenderer_->ScaleToCutTexture(0);
 	}
 
-	//GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
-	////GrimmFireBallSpectrumActor_->SetParent(this);
-	//GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
-	////AllSpecturumActor_.push_back(GrimmFireBallSpectrumActor_);
+	GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
+	//GrimmFireBallSpectrumActor_->SetParent(this);
+	GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
+	//AllSpecturumActor_.push_back(GrimmFireBallSpectrumActor_);
 
 	CreateTimer_ = 0.0f;
 
@@ -277,12 +277,12 @@ void GrimmFire::FireMoveUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 
 		
-		//GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
-		////GrimmFireBallSpectrumActor_->SetParent(this);
-		//GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
+		GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
+		//GrimmFireBallSpectrumActor_->SetParent(this);
+		GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
 
-		//++Count_;
-		//CreateTimer_ = 0.0f;
+		++Count_;
+		CreateTimer_ = 0.0f;
 
 	}
 }

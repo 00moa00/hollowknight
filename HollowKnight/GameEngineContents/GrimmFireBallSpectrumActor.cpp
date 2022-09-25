@@ -39,11 +39,11 @@ void GrimmFireBallSpectrumActor::Update(float _DeltaTime)
 		else
 		{
 			GrimmFireBallSpectrum* GrimmFireBallSpectrum_ = GetLevel()->CreateActor<GrimmFireBallSpectrum>();
-			//GrimmFireBallSpectrum_->SetParent(this);
+			GrimmFireBallSpectrum_->SetParent(this);
 
-			//GrimmFireBallSpectrum_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
-			//GrimmFireBallSpectrum_->GetRenderer()->GetTransform().SetLocalMove({ GameEngineRandom::MainRandom.RandomFloat(-15,15), GameEngineRandom::MainRandom.RandomFloat(-25,25)});
-			//GrimmFireBallSpectrum_->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,  GameEngineRandom::MainRandom.RandomFloat(-30,30) });
+			GrimmFireBallSpectrum_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+			GrimmFireBallSpectrum_->GetRenderer()->GetTransform().SetLocalMove({ GameEngineRandom::MainRandom.RandomFloat(-15,15), GameEngineRandom::MainRandom.RandomFloat(-25,25)});
+			GrimmFireBallSpectrum_->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,  GameEngineRandom::MainRandom.RandomFloat(-30,30) });
 
 			//AllFireSpectrum_.push_back(GrimmFireBallSpectrum_);
 			++Count_;

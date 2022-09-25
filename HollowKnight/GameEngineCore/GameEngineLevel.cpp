@@ -31,6 +31,16 @@ GameEngineLevel::GameEngineLevel()
 
 GameEngineLevel::~GameEngineLevel()
 {
+	for (GameEngineUpdateObject* Object : DeleteObject)
+	{
+		//delete Object;
+
+		Object->ReleaseHierarchy();
+	}
+
+	DeleteObject.clear();
+
+
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
 	{
 		for (GameEngineActor* Actor : Group.second)

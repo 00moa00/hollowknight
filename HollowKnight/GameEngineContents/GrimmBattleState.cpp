@@ -139,7 +139,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState("BATTLE_STUN_BAT");
+		GrimmBattleManager_.ChangeState("BATTLE_BALLOON_START");
 		return;
 	}
 }
@@ -853,6 +853,8 @@ void Grimm::GrimmBattlCastEndEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
+
 }
 
 void Grimm::GrimmBattlStunUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -884,6 +886,18 @@ void Grimm::GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Grimm::GrimmBattlStunBatEnd(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattlStunBatEndStart(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattlStunBatEndUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmBattlStunBatEndEnd(const StateInfo& _Info)
 {
 }
 

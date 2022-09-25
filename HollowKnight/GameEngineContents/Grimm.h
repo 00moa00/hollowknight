@@ -233,6 +233,10 @@ private:
 	void GrimmBattlStunBatStart(const StateInfo& _Info);
 	void GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmBattlStunBatEnd(const StateInfo& _Info);
+	
+	void GrimmBattlStunBatEndStart(const StateInfo& _Info);
+	void GrimmBattlStunBatEndUpdate(float _DeltaTime, const StateInfo& _Info);
+	void GrimmBattlStunBatEndEnd(const StateInfo& _Info);
 
 	//================================
 	//    Bind 

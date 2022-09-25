@@ -397,6 +397,11 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmBattlStunBatStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattlStunBatEnd, this, std::placeholders::_1));
 
+	GrimmBattleManager_.CreateStateMember("BATTLE_STUN_BAT_END"
+		, std::bind(&Grimm::GrimmBattlStunBatEndUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmBattlStunBatEndStart, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmBattlStunBatEndEnd, this, std::placeholders::_1));
+
 
 	EventState_ = EventState::Appear;
 	GetRenderer()->Off();
@@ -451,32 +456,32 @@ void Grimm::SetChangeStateString(PatternType _type)
 
 	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
 
-	ChangeState_ = UpperName;
+	ChangeState_ = "BATTLE_BALLOON_START";
 
 	//ChangeState_ = "BATTLE_STUN_BAT";
 }
 
 void Grimm::SetRamdomPattern()
 {
-	PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
-	//auto Type_ = magic_enum::E
+	//PatternRamdom_ = GameEngineRandom::MainRandom.RandomInt(0, static_cast<int>(PatternType::MAX) - 1);
+	////auto Type_ = magic_enum::E
 
-	//if (Ramdom == PrevChangeState_)
+	////if (Ramdom == PrevChangeState_)
+	////{
+
+	////}
+
+	//if (PatternRamdom_ == PrevChangeState_)
 	//{
-
+	//	SetRamdomPattern();
 	//}
 
-	if (PatternRamdom_ == PrevChangeState_)
-	{
-		SetRamdomPattern();
-	}
 
+	//PrevChangeState_ = "PatternRamdom_";
+	SetChangeStateString(PatternType::BATTLE_BALLOON_START);
 
-	PrevChangeState_ = PatternRamdom_;
-//	SetChangeStateString(PatternType::BATTLE_BALLOON_START);
-
-	SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
-	GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
+	//SetChangeStateString(static_cast<PatternType>(PatternRamdom_));
+	//GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
 
 
 }
