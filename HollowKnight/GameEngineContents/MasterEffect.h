@@ -75,6 +75,8 @@ public:
 	void SetMulColor(float4 _MulColor);
 	void SetPlusColor(float4 _PlusColor);
 
+	void SetDirScaleX(float4 _Dir);
+
 	void SetEffectDirection(float4 _Dir)
 	{
 		Direction_ = _Dir;

@@ -399,23 +399,29 @@ void Grimm::GrimmBattleAirDashStart(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 	GetRenderer()->GetTransform().PixLocalPositiveX();
 
+	GrimmAirDashEffect* GrimmAirDashEffect_ = GetLevel()->CreateActor<GrimmAirDashEffect>();
+
+	float Xmagin = 0.f;
 	if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
 		AirDashRotation_ = -AirDashRotation_;
+		Xmagin = GrimmAirDashEffect_->GetRenderer()->GetCurTexture()->GetScale().x;
 	}
 
+	
 	GetRenderer()->GetTransform().SetWorldRotation({ 0,0,AirDashRotation_ });
 
-	GrimmAirDashEffect* GrimmAirDashEffect_ = GetLevel()->CreateActor<GrimmAirDashEffect>();
 
+	GrimmAirDashEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x + Xmagin,  GetTransform().GetWorldPosition() .y, static_cast<float>(Z_ORDER::Effect)});
 	GrimmAirDashEffect_ ->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,AirDashRotation_ });
-	GrimmAirDashEffect_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
+
+
 }
 
 void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
-	float4 CurrentPos = GetTransform().GetWorldPosition();
+	//float4 CurrentPos = GetTransform().GetWorldPosition();
 
 	float4 Move = AirDashDest_ * 2000.f * _DeltaTime;
 
@@ -452,6 +458,12 @@ void Grimm::GrimmBattleAirDashEndtStart(const StateInfo& _Info)
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 
 	}
+
+
+	//GrimmAirDashEffect* GrimmAirDashEffect_ = GetLevel()->CreateActor<GrimmAirDashEffect>();
+	//GrimmAirDashEffect_->SetDirScaleX(GetMoveDirection());
+	//GrimmAirDashEffect_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
+
 }
 
 void Grimm::GrimmBattleAirDashEndtUpdate(float _DeltaTime, const StateInfo& _Info)

@@ -108,9 +108,9 @@ void Knight::Start()
 	SetSpeed(300.f);
 	SetisMove(true);
 	SetGravity(400.f);
-	SetJumpSpeed(5);
+	SetJumpSpeed(11.f);
 	SetCollisionSize({ 0, 0, 0 });
-	SetFallSpeed(140);
+	SetFallSpeed(150);
 
 	KnightData::GetInst()->SetHitDamage(1);
 
@@ -150,8 +150,8 @@ void Knight::Start()
 
 
 
-	KnightJumpPower_ = 300.f;
-	KnightDoubleJumpPower_ = 280.f;
+	KnightJumpPower_ = 120.f;
+	KnightDoubleJumpPower_ = 100.f;
 	KnightRunSpeed_ = 400.f;
 	KnightActtingMoveDirPower_ = 2.0f;
 	KnightFallAccel_ = 0.0f;

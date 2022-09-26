@@ -112,3 +112,20 @@ void MasterEffect::SetPlusColor(float4 _PlusColor)
 
 }
 
+void MasterEffect::SetDirScaleX(float4 _Dir)
+{
+	if (_Dir.x <= 0.f)
+	{
+		GetRenderer()->GetTransform().PixLocalPositiveX();
+		//	GetWallCollision()->GetTransform().SetLocalPosition({ -10, 50 });
+
+	}
+
+	if (_Dir.x >= 0.f)
+	{
+		GetRenderer()->GetTransform().PixLocalNegativeX();
+		//GetWallCollision()->GetTransform().SetLocalPosition({ 10, 50 });
+
+	}
+}
+
