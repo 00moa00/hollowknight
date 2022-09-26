@@ -412,7 +412,7 @@ void Grimm::GrimmBattleAirDashStart(const StateInfo& _Info)
 	GetRenderer()->GetTransform().SetWorldRotation({ 0,0,AirDashRotation_ });
 
 
-	GrimmAirDashEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x + Xmagin,  GetTransform().GetWorldPosition() .y, static_cast<float>(Z_ORDER::Effect)});
+	GrimmAirDashEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x + Xmagin,  GetTransform().GetWorldPosition() .y - 50.f, static_cast<float>(Z_ORDER::Effect)});
 	GrimmAirDashEffect_ ->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,AirDashRotation_ });
 
 
@@ -458,7 +458,7 @@ void Grimm::GrimmBattleAirDashEndtStart(const StateInfo& _Info)
 
 	GrimmGroundDashEffect* GrimmGroundDashEffect_ = GetLevel()->CreateActor<GrimmGroundDashEffect>();
 	GrimmGroundDashEffect_->SetDirScaleX(GetMoveDirection());
-	GrimmGroundDashEffect_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
+	GrimmGroundDashEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
 
 }
 
