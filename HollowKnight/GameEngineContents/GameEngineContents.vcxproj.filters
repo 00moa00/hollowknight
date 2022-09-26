@@ -588,6 +588,15 @@
     <ClInclude Include="GrimmFlamePillarEffect.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmSmoke.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmSmokeConst.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmSmokeDynamic.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1026,6 +1035,15 @@
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFlamePillarEffect.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmSmoke.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmSmokeConst.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmSmokeDynamic.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
   </ItemGroup>

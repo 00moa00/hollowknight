@@ -104,6 +104,9 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
 	GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
 
+	GrimmSmoke_->SetSmokeOn();
+	GrimmSmoke_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
+
 }
 
 void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -132,7 +135,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 void Grimm::GrimmBattleTeleportAppearEnd(const StateInfo& _Info)
 {
 	GetCollision()->On();
-
+	GrimmSmoke_->SetSmokeOff();
 }
 
 void Grimm::GrimmBattleTeleportDisappearStart(const StateInfo& _Info)
@@ -140,8 +143,13 @@ void Grimm::GrimmBattleTeleportDisappearStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_DISAPPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 	GetCollision()->Off();
+
+	GrimmSmoke_->SetSmokeOn();
+	GrimmSmoke_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
+
 	GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
 	GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
+
 }
 
 void Grimm::GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -160,6 +168,9 @@ void Grimm::GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo
 }
 void Grimm::GrimmBattleTeleportDisappearEnd(const StateInfo& _Info)
 {
+	GetCollision()->On();
+	GrimmSmoke_->SetSmokeOff();
+
 }
 
 void Grimm::GrimmBattleBalloonStartStart(const StateInfo& _Info)

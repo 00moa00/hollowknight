@@ -6,6 +6,7 @@
 #include "BossRoomGate.h"
 
 #include "GrimmStunBat.h"
+#include "GrimmSmoke.h"
 
 
 enum class PatternType
@@ -95,6 +96,7 @@ private:
 	GrimmSpotLight* GrimmSpotLight_;
 	BossRoomGate* BossRoomGate_;
 	BossRoomGate* BossRoomRightGate_;
+	GrimmSmoke* GrimmSmoke_;
 
 	EventState EventState_;
 

@@ -925,6 +925,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Grimm Cln_ground_dash_effect0000-Sheet.png", 6, 1);
 
 		GameEngineTexture::Cut("grimm_smoke.png", 1, 5);
+		GameEngineTexture::Cut("grimm_smoke2.png", 1, 5);
 
 
 	}

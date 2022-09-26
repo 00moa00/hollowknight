@@ -418,9 +418,8 @@ void Grimm::Start()
 	EventState_ = EventState::Appear;
 	GetRenderer()->Off();
 
-
-
-	//GrimmFire_->SetParent(this);    
+	GrimmSmoke_ = GetLevel()->CreateActor<GrimmSmoke>();
+	GrimmSmoke_->Off();
 
 }
 

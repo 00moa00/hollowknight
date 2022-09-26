@@ -365,6 +365,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GrimmSmoke.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmSmokeConst.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmSmokeDynamic.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GrimmSpike.h">
       <SubType>
       </SubType>
@@ -924,6 +936,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GrimmLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmSmoke.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmSmokeConst.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmSmokeDynamic.cpp">
       <SubType>
       </SubType>
     </ClCompile>
