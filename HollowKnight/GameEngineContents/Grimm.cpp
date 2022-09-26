@@ -422,7 +422,7 @@ void Grimm::Start()
 	GrimmSmoke_ = GetLevel()->CreateActor<GrimmSmoke>();
 	GrimmSmoke_->Off();
 
-	for (int i = 0; i < 25; ++i)
+	for (int i = 0; i < 60; ++i)
 	{
 		GrimmFlameBallparticleList_.push_back(GetLevel()->CreateActor<GrimmFlameBallparticle>());
 

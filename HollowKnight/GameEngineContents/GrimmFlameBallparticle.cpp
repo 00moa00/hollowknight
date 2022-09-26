@@ -71,11 +71,13 @@ void GrimmFlameBallparticle::Update(float _DeltaTime)
 void GrimmFlameBallparticle::FlameBallparticleOn()
 {
 	On();
+	Scale_ = 1.0f;
+
 	for (int i = 0; i < 35; ++i)
 	{
 
-		BallParticleList_.back()->GetTransform().SetWorldScale(ScaleList_[i]);
-		BallParticleList_.back()->GetTransform().SetLocalPosition(InitPos_[i]);
+		BallParticleList_[i]->GetTransform().SetWorldScale(ScaleList_[i]);
+		BallParticleList_[i]->GetTransform().SetLocalPosition(InitPos_[i]);
 
 	}
 }

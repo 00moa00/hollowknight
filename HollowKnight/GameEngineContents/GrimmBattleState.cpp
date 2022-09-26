@@ -128,7 +128,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState(ChangeState_);
+		GrimmBattleManager_.ChangeState("BATTLE_BALLOON_START");
 		return;
 	}
 }
@@ -266,9 +266,9 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (FireFlameCreateTimer_ > 0.08f)
 	{
 		FireFlameCreateTimer_ = 0.0f;
+		GrimmFlameBallparticleList_[GrimmFlameBallparticleCount_]->FlameBallparticleOn();
 		GrimmFlameBallparticleList_[GrimmFlameBallparticleCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  (GetTransform().GetWorldPosition().y + GetRenderer()->GetCurTexture()->GetScale().y / 2) - 100.f, static_cast<float>(Z_ORDER::Back_Effect) });
 		GrimmFlameBallparticleList_[GrimmFlameBallparticleCount_]->SetLength((GetRenderer()->GetCurTexture()->GetScale().x / 2));
-		GrimmFlameBallparticleList_[GrimmFlameBallparticleCount_]->FlameBallparticleOn();
 
 
 		++GrimmFlameBallparticleCount_;
@@ -348,7 +348,7 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 		
 	}
 
-	if (_Info.StateTime > 7.0f)
+	if (_Info.StateTime > 6.5f)
 	{
 		SetRamdomPattern();
 	}
@@ -356,6 +356,7 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmBattleBalloonEnd(const StateInfo& _Info)
 {
+	GrimmFlameBallparticleCount_ = 0;
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
 }
 
