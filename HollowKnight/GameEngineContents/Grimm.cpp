@@ -107,7 +107,7 @@ void Grimm::Start()
 	//    Create Animation | Battle
 	//================================
 	GetRenderer()->CreateFrameAnimationCutTexture("BALLON_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_boss_balloon_attack0000-Sheet.png", 0, 1, 0.050f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("BALLON_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_boss_balloon_attack0000-Sheet.png", 1, 4, 0.050f, true));
+	GetRenderer()->CreateFrameAnimationCutTexture("BALLON_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_boss_balloon_attack0000-Sheet.png", 1, 4, 0.090f, true));
 
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("CASTS_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_cast0000-Sheet.png", 0, 3, 0.050f, false));
@@ -420,6 +420,7 @@ void Grimm::Start()
 
 	GrimmSmoke_ = GetLevel()->CreateActor<GrimmSmoke>();
 	GrimmSmoke_->Off();
+	
 
 }
 

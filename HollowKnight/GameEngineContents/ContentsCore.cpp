@@ -927,6 +927,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("grimm_smoke.png", 1, 5);
 		GameEngineTexture::Cut("grimm_smoke2.png", 1, 5);
 
+		GameEngineTexture::Cut("Grimm_flame_ball_particle.png", 3, 1);
 
 	}
 

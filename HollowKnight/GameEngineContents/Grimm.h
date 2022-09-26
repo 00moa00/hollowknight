@@ -86,6 +86,7 @@ private:
 
 	float FireCreateTimer_;
 	float BirdCreateTimer_;
+	float FireFlameCreateTimer_;
 
 	float4 AirDashDest_;
 	float4 BirdDir_;
