@@ -449,20 +449,16 @@ void Grimm::GrimmBattleAirDashEndtStart(const StateInfo& _Info)
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
-
 	}
-
 	if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
-
 		GetRenderer()->GetTransform().PixLocalPositiveX();
-
 	}
 
 
-	//GrimmAirDashEffect* GrimmAirDashEffect_ = GetLevel()->CreateActor<GrimmAirDashEffect>();
-	//GrimmAirDashEffect_->SetDirScaleX(GetMoveDirection());
-	//GrimmAirDashEffect_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
+	GrimmGroundDashEffect* GrimmGroundDashEffect_ = GetLevel()->CreateActor<GrimmGroundDashEffect>();
+	GrimmGroundDashEffect_->SetDirScaleX(GetMoveDirection());
+	GrimmGroundDashEffect_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
 
 }
 

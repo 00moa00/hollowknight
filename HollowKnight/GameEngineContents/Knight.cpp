@@ -107,7 +107,7 @@ void Knight::Start()
 	SetMoveDirection(float4::RIGHT);
 	SetSpeed(300.f);
 	SetisMove(true);
-	SetGravity(400.f);
+	SetGravity(200.f);
 	SetJumpSpeed(11.f);
 	SetCollisionSize({ 0, 0, 0 });
 	SetFallSpeed(150);

@@ -961,7 +961,7 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		if (ActtingMoveDirection_.CompareInt2D(float4::ZERO) || isKnihgtStillWall_ == true || GetisWall() == true || GetisCollWall() == true)
 		{
 			float4 Move = (float4::UP) ;
-			SubJumpPower(Move);
+			SubJumpPower(Move * _DeltaTime * GetGravity());
 
 
 			float JumpLenth = GetJumpPower().Length();
@@ -979,10 +979,10 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			float4 Move = (float4::UP );
 			Move.x += (-ActtingMoveDirection_.x/2 );
-			Move.y += abs(Move.x);
+			//Move.y += abs(Move.x) * 2;
 			//Move.Length
 
-			SubJumpPower(Move);
+			SubJumpPower(Move * _DeltaTime * GetGravity());
 			float JumpLenth = GetJumpPower().y /*+ abs(GetJumpPower().x*/;
 			float MoveLenth = Move.Length();
 
@@ -1113,7 +1113,7 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		if (ActtingMoveDirection_.CompareInt2D(float4::ZERO) || isKnihgtStillWall_ == true || GetisWall() == true || GetisCollWall() == true)
 		{
 			float4 Move = (float4::UP) ;
-			SubJumpPower(Move);
+			SubJumpPower(Move * _DeltaTime * GetGravity());
 
 
 			float JumpLenth = GetJumpPower().Length();
@@ -1133,9 +1133,9 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 			float4 Move = (float4::UP);
 			Move.x += (-ActtingMoveDirection_.x /2);
-			Move.y += abs(Move.x);
+		//	Move.y += abs(Move.x) * 2;
 
-			SubJumpPower(Move);
+			SubJumpPower(Move * _DeltaTime * GetGravity());
 			float JumpLenth = GetJumpPower().y /*+ abs(GetJumpPower().x*/;
 			float MoveLenth = Move.Length();
 
