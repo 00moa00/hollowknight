@@ -37,6 +37,7 @@ Grimm::Grimm()
 	ChangeState_(""),
 	PrevChangeState_(0),
 	PatternRamdom_(0),
+	GrimmFlameBallparticleCount_(0),
 	BirdCreateTimer_(0.0f),
 
 	BirdDir_(float4::ZERO),
@@ -420,6 +421,13 @@ void Grimm::Start()
 
 	GrimmSmoke_ = GetLevel()->CreateActor<GrimmSmoke>();
 	GrimmSmoke_->Off();
+
+	for (int i = 0; i < 25; ++i)
+	{
+		GrimmFlameBallparticleList_.push_back(GetLevel()->CreateActor<GrimmFlameBallparticle>());
+
+		GrimmFlameBallparticleList_.back()->Off();
+	}
 	
 
 }

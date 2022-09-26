@@ -27,11 +27,11 @@ void GrimmFlameBallparticle::Start()
 		BallParticleList_.back()->GetTransform().SetWorldScale(BallParticleList_.back()->GetTransform().GetWorldScale() * Scale);
 		BallParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.1f, 0.7f);
 		Dir_.push_back({ GameEngineRandom::MainRandom.RandomFloat(-1.f, 1.f), GameEngineRandom::MainRandom.RandomFloat(-1.f, 1.f)});
-
 		float4 Len = Length_;
 		float4 Move = Len * Dir_.back().NormalizeReturn();
 
 		BallParticleList_.back()->GetTransform().SetLocalMove(Move);
+		InitPos_.push_back(BallParticleList_.back()->GetTransform().GetLocalPosition());
 
 		ScaleList_.push_back(BallParticleList_.back()->GetTransform().GetWorldScale() * Scale);
 		//InitScale_ = BallParticleList_.back()->GetTransform().GetWorldScale() * 3.5f;
@@ -47,7 +47,7 @@ void GrimmFlameBallparticle::Update(float _DeltaTime)
 	if (Scale_ <= 0.f)
 	{
 		Scale_ = 0.f;
-		this->Death();
+		this->Off();
 	}
 
 	//if (Alpha_ <= 0.0f)
@@ -65,6 +65,18 @@ void GrimmFlameBallparticle::Update(float _DeltaTime)
 
 
 		//BallParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
+	}
+}
+
+void GrimmFlameBallparticle::FlameBallparticleOn()
+{
+	On();
+	for (int i = 0; i < 35; ++i)
+	{
+
+		BallParticleList_.back()->GetTransform().SetWorldScale(ScaleList_[i]);
+		BallParticleList_.back()->GetTransform().SetLocalPosition(InitPos_[i]);
+
 	}
 }
 

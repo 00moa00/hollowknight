@@ -7,6 +7,7 @@
 
 #include "GrimmStunBat.h"
 #include "GrimmSmoke.h"
+#include "GrimmFlameBallparticle.h"
 
 
 enum class PatternType
@@ -80,6 +81,8 @@ private:
 	int PrevChangeState_;
 	int PatternRamdom_;
 
+	int GrimmFlameBallparticleCount_;
+
 	float MapCenterX_;
 	float AirDashRotation_;
 	float SubHitWhiteColor_;
@@ -107,7 +110,7 @@ private:
 	GameEngineStateManager GrimmManager_;
 
 	std::vector<GrimmStunBat*> GrimmStunBatList_;
-
+	std::vector<GrimmFlameBallparticle*> GrimmFlameBallparticleList_;
 public:
 	void SetEventState(EventState _State)
 	{

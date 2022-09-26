@@ -31,11 +31,16 @@ private:
 	std::vector<GameEngineTextureRenderer*> BallParticleList_;
 	std::vector<float4> Dir_;
 	std::vector<float4> ScaleList_;
+	std::vector<float4> InitPos_;
 
 public:
 	void SetLength(float _f)
 	{
 		Length_ = _f;
 	}
+
+public :
+	void FlameBallparticleOn();
+
 };
 

@@ -266,9 +266,21 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (FireFlameCreateTimer_ > 0.08f)
 	{
 		FireFlameCreateTimer_ = 0.0f;
-		GrimmFlameBallparticle* GrimmFlameBallparticle_ = GetLevel()->CreateActor<GrimmFlameBallparticle>();
-		GrimmFlameBallparticle_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  (GetTransform().GetWorldPosition().y + GetRenderer()->GetCurTexture()->GetScale().y / 2) - 100.f, static_cast<float>(Z_ORDER::Back_Effect) });
-		GrimmFlameBallparticle_->SetLength((GetRenderer()->GetCurTexture()->GetScale().x / 2));
+		GrimmFlameBallparticleList_[GrimmFlameBallparticleCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  (GetTransform().GetWorldPosition().y + GetRenderer()->GetCurTexture()->GetScale().y / 2) - 100.f, static_cast<float>(Z_ORDER::Back_Effect) });
+		GrimmFlameBallparticleList_[GrimmFlameBallparticleCount_]->SetLength((GetRenderer()->GetCurTexture()->GetScale().x / 2));
+		GrimmFlameBallparticleList_[GrimmFlameBallparticleCount_]->FlameBallparticleOn();
+
+
+		++GrimmFlameBallparticleCount_;
+
+		if (GrimmFlameBallparticleCount_ >= GrimmFlameBallparticleList_.size()-1)
+		{
+			GrimmFlameBallparticleCount_ = GrimmFlameBallparticleList_.size() - 1;
+		}
+
+		//GrimmFlameBallparticle* GrimmFlameBallparticle_ = GetLevel()->CreateActor<GrimmFlameBallparticle>();
+		//GrimmFlameBallparticle_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  (GetTransform().GetWorldPosition().y + GetRenderer()->GetCurTexture()->GetScale().y / 2) - 100.f, static_cast<float>(Z_ORDER::Back_Effect) });
+		//GrimmFlameBallparticle_->SetLength((GetRenderer()->GetCurTexture()->GetScale().x / 2));
 
 	}
 
