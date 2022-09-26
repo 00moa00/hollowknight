@@ -585,6 +585,9 @@
     <ClInclude Include="GrimmAirDashEffect.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmFlamePillarEffect.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1020,6 +1023,9 @@
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmAirDashEffect.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmFlamePillarEffect.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
   </ItemGroup>

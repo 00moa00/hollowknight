@@ -430,7 +430,6 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Prompts Cln_prompt_appear0009-Sheet.png", 10, 1);
 		GameEngineTexture::Cut("Prompts Cln_prompt_idle0000-Sheet.png", 5, 1);
 
-
 	}
 
 	{

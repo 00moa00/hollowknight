@@ -13,6 +13,7 @@
 
 #include "GrimmGroundDashEffect.h"
 #include "GrimmAirDashEffect.h"
+#include "GrimmFlamePillarEffect.h"
 
 void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 {
@@ -20,13 +21,6 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 
 	float4 KnightPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
-	//if (ChangeState_ == "BATTLE_AIR_DASH_START")
-	//{
-	//	if (GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y > -910)
-	//	{
-	//		SetRamdomPatternIgnoreAir();
-	//	}
-	//}
 
 	// 텔레포트 나타나면서 팝업 위치를 여기서 정한다.
 	auto castType_ = magic_enum::enum_cast<PatternType>(ChangeState_);
@@ -37,6 +31,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	{
 	case PatternType::BATTLE_BALLOON_START:
 		GetTransform().SetWorldPosition({ MapCenterX_, -650, static_cast<float>(Z_ORDER::Monster)});
+		
 		break;
 	case PatternType::BATTLE_SLASH_START:
 		if (KnightPos.x > MapCenterX_)
@@ -44,18 +39,13 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 			GetTransform().SetWorldPosition({ KnightPos.x - 400.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::RIGHT);
 			GetRenderer()->GetTransform().PixLocalNegativeX();
-
 		}
-
 		else
 		{
 			GetTransform().SetWorldPosition({ KnightPos.x + 400.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::LEFT);
 			GetRenderer()->GetTransform().PixLocalPositiveX();
-
 		}
-
-
 
 		break;
 	case PatternType::BATTLE_AIR_DASH_START:
@@ -65,16 +55,12 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 			GetTransform().SetWorldPosition({ KnightPos.x - 400.f, -550.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::RIGHT);
 			//GetRenderer()->GetTransform().PixLocalNegativeX();
-
-
 		}
-
 		else
 		{
 			GetTransform().SetWorldPosition({ KnightPos.x + 400.f,-550.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::LEFT);
 			//GetRenderer()->GetTransform().PixLocalPositiveX();
-
 		}
 
 		break;
@@ -86,13 +72,11 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 			SetMoveDirection(float4::RIGHT);
 			GetRenderer()->GetTransform().PixLocalPositiveX();
 		}
-
 		else
 		{
 			GetTransform().SetWorldPosition({ MapCenterX_ + 400.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::LEFT);
 			GetRenderer()->GetTransform().PixLocalNegativeX();
-
 		}
 
 		break;
@@ -103,23 +87,22 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 			GetTransform().SetWorldPosition({ MapCenterX_ - 500.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::RIGHT);
 			GetRenderer()->GetTransform().PixLocalNegativeX();
-
 		}
-
 		else
 		{
 			GetTransform().SetWorldPosition({ MapCenterX_ + 500.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::LEFT);
 			GetRenderer()->GetTransform().PixLocalPositiveX();
-
-
 		}
 		break;
 	default:
 		break;
 	}
+
 	GetRenderer()->On();
-	//SetMonsterDirection();
+
+	GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
+	GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
 
 }
 
@@ -157,7 +140,8 @@ void Grimm::GrimmBattleTeleportDisappearStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_DISAPPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 	GetCollision()->Off();
-
+	GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
+	GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
 }
 
 void Grimm::GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo& _Info)

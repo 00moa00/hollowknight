@@ -79,8 +79,6 @@ enum class Z_ORDER
 	Effect ,
 	Knight_Shadow_Slash,
 
-
-
 	Knight_Shadow,
 
 	Knight_Slash,
@@ -89,6 +87,8 @@ enum class Z_ORDER
 
 	Knight,
 	Monster,
+
+	Back_Effect,
 
 	NPC,
 
