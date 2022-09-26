@@ -54,7 +54,7 @@ void GrimmFireBallSpectrum::Update(float _DeltaTime)
 	}
 
 
-	if (GetAccTime() > 1.0f)
+	if (GetAccTime() > 0.7f)
 	{
 		Death();
 	}

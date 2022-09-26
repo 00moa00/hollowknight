@@ -28,11 +28,11 @@ void GrimmFireBallSpectrumActor::Start()
 void GrimmFireBallSpectrumActor::Update(float _DeltaTime)
 {
 	CreateTimer_ += _DeltaTime;
-	if (CreateTimer_ > 0.01f && Count_ < 10)
+	if (CreateTimer_ > 0.01f && Count_ < 6)
 	{
 		CreateTimer_ = 0.0f;
 
-		if (Count_ == 10)
+		if (Count_ == 6)
 		{
 			ReSetAccTime();
 		}
@@ -53,7 +53,7 @@ void GrimmFireBallSpectrumActor::Update(float _DeltaTime)
 	
 }
 
-	if (GetAccTime() > 0.7f && Count_ >= 10)
+	if (GetAccTime() > 0.7f && Count_ >= 6)
 	{
 		//for (int i = 0; i < AllFireSpectrum_.size(); ++i)
 		//{

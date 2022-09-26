@@ -7,7 +7,7 @@
 #include "FadePink.h"
 #include "BossRoarEffect.h"
 
-
+#include "GrimmFlamePillarEffect.h"
 
 void Grimm::GrimmAppearWaitStart(const StateInfo& _Info)
 {
@@ -50,6 +50,8 @@ void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
 
 
 
+	GrimmSmoke_->SetSmokeOn();
+	GrimmSmoke_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
 
 
 	GetRenderer()->On();
@@ -72,6 +74,8 @@ void Grimm::GrimmAppearTeleportUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmAppearTeleportEnd(const StateInfo& _Info)
 {
+	GetCollision()->Off();
+
 }
 
 void Grimm::GrimmAppearIdle1Start(const StateInfo& _Info)
@@ -99,6 +103,7 @@ void Grimm::GrimmAppearIdle1End(const StateInfo& _Info)
 
 void Grimm::GrimmAppearPillarStart(const StateInfo& _Info)
 {
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
 	GetRenderer()->ChangeFrameAnimation("PILLAR_ANIMATION");
 	FadePink* FadePink_ = GetLevel()->CreateActor<FadePink>();
 	FadePink_->GetTransform().SetWorldPosition({ 5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200 });
@@ -106,6 +111,8 @@ void Grimm::GrimmAppearPillarStart(const StateInfo& _Info)
 
 	GetRenderer()->ScaleToCutTexture(0);
 
+	GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
+	GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
 }
 
 void Grimm::GrimmAppearPillarUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -120,6 +127,7 @@ void Grimm::GrimmAppearPillarUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmAppearPillarEnd(const StateInfo& _Info)
 {
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
 }
 
 
