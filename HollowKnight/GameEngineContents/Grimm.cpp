@@ -444,7 +444,7 @@ void Grimm::Start()
 	MonsterHitParticle* MonsterHitParticle_ = GetLevel()->CreateActor<MonsterHitParticle>();
 	MonsterHitParticle_->GetTransform().SetWorldPosition({ 500, -700 });
 
-	MonsterHitParticle_->SetDir(float4::DOWN);
+	MonsterHitParticle_->SetDir(float4::RIGHT);
 
 }
 

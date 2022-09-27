@@ -4,7 +4,8 @@
 
 MonsterHitParticle::MonsterHitParticle() 
 	:
-	Scale_(1.0f)
+	Scale_(1.0f),
+	Speed_(0.0f)
 {
 }
 
@@ -14,6 +15,8 @@ MonsterHitParticle::~MonsterHitParticle()
 
 void MonsterHitParticle::Start()
 {
+	Speed_ = 550.f;
+
 	for (int i = 0; i < 10; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
@@ -27,8 +30,15 @@ void MonsterHitParticle::Start()
 		);
 
 		ParticleList_.back()->CreateFrameAnimationCutTexture("IDLE", FrameAnimation_DESC("white_hit_particle_Orange.png", RamdomIndex, RamdomIndex, 0.100f, false));
-		ParticleList_.back()->CreateFrameAnimationCutTexture("SHOT_ANIMATION", FrameAnimation_DESC("Projectiles_shot_impact0001-Sheet.png", 0, 5, 0.100f, false));
+		ParticleList_.back()->CreateFrameAnimationCutTexture("SHOT_ANIMATION", FrameAnimation_DESC("Projectiles_shot_impact0001-Sheet.png", 0, 6, 0.100f, false));
 		ParticleList_.back()->ChangeFrameAnimation("IDLE");
+		InitScale_.push_back(ParticleList_.back()->GetTransform().GetLocalScale());
+		//ParticleList_.back()->AnimationBindEnd("SHOT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		//	{
+		//		ParticleList_.back()->Off();
+		//	});
+
+		isEndMove_.push_back(false);
 	}
 
 	//Off();
@@ -41,9 +51,12 @@ void MonsterHitParticle::Update(float _DeltaTime)
 		if (StartDirList_[i].CompareInt2D(float4::RIGHT))
 		{
 			DirList_[i].x += 0.0001f;
-
 			DirList_[i].y -= 0.01f;
-			ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * 300.f * _DeltaTime);
+
+			if (isEndMove_[i] == false)
+			{
+				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);
+			}
 		}
 
 		if (StartDirList_[i].CompareInt2D(float4::LEFT))
@@ -51,7 +64,10 @@ void MonsterHitParticle::Update(float _DeltaTime)
 			DirList_[i].x -= 0.0001f;
 
 			DirList_[i].y -= 0.01f;
-			ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * 300.f * _DeltaTime);
+			if (isEndMove_[i] == false)
+			{
+				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);
+			}
 		}
 
 		if (StartDirList_[i].CompareInt2D(float4::UP))
@@ -59,17 +75,17 @@ void MonsterHitParticle::Update(float _DeltaTime)
 			if (InitDir_[i].x >= 0.f)
 			{
 				DirList_[i].x += 0.0001f;
-
 			}
 
 			else
 			{
 				DirList_[i].x -= 0.0001f;
-
 			}
-
 			DirList_[i].y -= 0.01f;
-			ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * 300.f * _DeltaTime);
+			if (isEndMove_[i] == false)
+			{
+				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);
+			}
 		}
 
 		if (StartDirList_[i].CompareInt2D(float4::DOWN))
@@ -78,40 +94,90 @@ void MonsterHitParticle::Update(float _DeltaTime)
 			if (InitDir_[i].x >= 0.f)
 			{
 				DirList_[i].x += 0.0001f;
-
 			}
 
 			else
 			{
 				DirList_[i].x -= 0.0001f;
-
 			}
 
 			DirList_[i].y += -0.01f;
-			ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * 300.f * _DeltaTime);
+			if (isEndMove_[i] == false)
+			{
+				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);
+			}
 		}
 
+		if (isEndMove_[i] == true)
+		{
+
+			if (ParticleList_[i]->GetCurFrameAnimation()->GetFrameAnimationDesc().GetCurFrame() == 6)
+			{
+				ParticleList_[i]->Off();
+			}
+		}
+
+		Scale_ -= 0.12f * _DeltaTime;
+		if (Scale_ <= 0.f)
+		{
+			ParticleList_[i]->Off();
+			Scale_ = 0.f;
+			this->Off();
+		}
+		if (isEndMove_[i] == false)
+		{
+			ParticleList_[i]->GetTransform().SetWorldScale(InitScale_[i] * Scale_);
+
+		}
 	}
+
+	isPixelCheck(_DeltaTime);
 }
 
 void MonsterHitParticle::isPixelCheck(float _DeltaTime)
 {
-
-	float4 UpPos = { GetTransform().GetLocalPosition().x ,
-	-(GetTransform().GetLocalPosition().y + 70.f) };
-
-	float4 UpColor = GetLevel<HollowKnightLevel>()->GetMasterMap()->GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(UpPos.ix(), UpPos.iy());
-
-
-
-	if (UpColor.CompareInt4D(float4(0, 0, 1, 1)) == true/* && DirColor.CompareInt2D(float4(1.f, 0, 0, 1.f)) == true*/)
+	for (int i = 0; i < ParticleList_.size(); ++i)
 	{
-		//SetisUpBlock(true);
+		float4 DowmPos = { ParticleList_[i] -> GetTransform().GetWorldPosition().x ,
+		-(ParticleList_[i]->GetTransform().GetWorldPosition().y - ((ParticleList_[i] ->GetTransform().GetWorldScale().y/3 ))) };
+
+		float4 UpColor = GetLevel<HollowKnightLevel>()->GetMasterMap()->GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(DowmPos.ix(), DowmPos.iy());
+		if (UpColor.CompareInt4D(float4(0, 0, 1, 1)) == true/* && DirColor.CompareInt2D(float4(1.f, 0, 0, 1.f)) == true*/)
+		{
+			//int i = 0;
+			if (isEndMove_[i] == false && Scale_ > 0.f)
+			{
+				int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 7);
+
+
+				if (RamdomIndex == 1)
+				{
+					ParticleList_[i]->ChangeFrameAnimation("SHOT_ANIMATION");
+					ParticleList_[i]->ScaleToCutTexture(0);
+					ParticleList_[i]->GetTransform().SetWorldScale({
+	ParticleList_[i]->GetTransform().GetLocalScale().x + GameEngineRandom::MainRandom.RandomFloat(-50.f, 50.f)
+	,	ParticleList_[i]->GetTransform().GetLocalScale().y + GameEngineRandom::MainRandom.RandomFloat(-50.f, 50.f) }
+					);
+					isEndMove_[i] = true;
+				}
+
+				else
+				{
+
+				}
+
+			}
+		}
+		else
+		{
+			//	SetisUpBlock(false);
+		}
+
 	}
-	else
-	{
-	//	SetisUpBlock(false);
-	}
+
+
+
+	
 }
 
 void MonsterHitParticle::SetDir(float4 _Dir)

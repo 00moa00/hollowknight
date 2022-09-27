@@ -1460,9 +1460,6 @@ void ContentsCore::Start()
 
 		GameEngineTexture::Cut("Switches and gates_gate_effect0000-Sheet.png", 4, 1);
 
-
-
-
 	}
 
 
@@ -1484,7 +1481,7 @@ void ContentsCore::Start()
 
 
 		GameEngineTexture::Cut("white_hit_particle_Orange.png", 1, 3);
-		GameEngineTexture::Cut("Projectiles_shot_impact0001-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Projectiles_shot_impact0001-Sheet.png", 7, 1);
 
 
 
