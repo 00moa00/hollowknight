@@ -30,8 +30,5 @@ private:
 
 	std::vector<GameEngineTextureRenderer*> AllFireSpectrum_;
 
-
-public :
-	void CreateFireBallSpectrum(int _count);
 };
 

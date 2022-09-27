@@ -21,7 +21,8 @@ void GrimmFireBallSpectrum::Start()
 	SetBlendMode(BlendMode::Add);
 
 	GetRenderer()->ScaleToCutTexture(index);
-	Alpha_ = 1.0f;
+	Alpha_ = GameEngineRandom::MainRandom.RandomFloat(0.4f, 1.0f);
+	GetRenderer()->GetPixelData().MulColor.a = Alpha_;
 
 	
 }

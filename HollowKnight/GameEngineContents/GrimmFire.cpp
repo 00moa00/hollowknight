@@ -273,15 +273,12 @@ void GrimmFire::FireMoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	if (CreateTimer_ > 0.1f /*&& Count_ < 7*/)
+	if (CreateTimer_ > 0.1f)
 	{
 
-		
 		GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
-		//GrimmFireBallSpectrumActor_->SetParent(this);
 		GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y });
 
-		++Count_;
 		CreateTimer_ = 0.0f;
 
 	}

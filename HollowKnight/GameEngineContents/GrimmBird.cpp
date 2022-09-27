@@ -1,10 +1,12 @@
 #include "PreCompile.h"
 #include "GrimmBird.h"
+#include "GrimmFireBallSpectrumActor.h"
 
 GrimmBird::GrimmBird()
 	:
 	MoveDir_(float4::ZERO),
 	Speed_(0.f),
+	ParticleCreateTimer_(0.0f),
 
 	BirdDeathEffect_(nullptr)
 {
@@ -97,6 +99,16 @@ void GrimmBird::BirdMoveStart(const StateInfo& _Info)
 
 void GrimmBird::BirdMoveUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	ParticleCreateTimer_ += _DeltaTime;
+
+	if (ParticleCreateTimer_ > 0.04f)
+	{
+		ParticleCreateTimer_ = 0.0f;
+		GrimmFireBallSpectrumActor* GrimmFireBallSpectrumActor_ = GetLevel()->CreateActor< GrimmFireBallSpectrumActor>();
+		GrimmFireBallSpectrumActor_->GetTransform().SetLocalPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y + GetRenderer()->GetCurTexture()->GetScale().y / 2});
+	}
+
 	float4 Move = MoveDir_ * Speed_ * _DeltaTime;
 	GetTransform().SetWorldMove(Move);
 

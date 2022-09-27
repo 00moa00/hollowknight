@@ -128,7 +128,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState("BATTLE_BALLOON_START");
+		GrimmBattleManager_.ChangeState(ChangeState_);
 		return;
 	}
 }

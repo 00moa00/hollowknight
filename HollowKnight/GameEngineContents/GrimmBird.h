@@ -20,8 +20,10 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-	float4 MoveDir_;
 	float Speed_;
+	float ParticleCreateTimer_;
+
+	float4 MoveDir_;
 
 	GameEngineTextureRenderer* BirdDeathEffect_;
 

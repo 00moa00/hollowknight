@@ -35,7 +35,6 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
-
 private:
 	float4 MovePos_;
 	float4 StartMoveDir_;
