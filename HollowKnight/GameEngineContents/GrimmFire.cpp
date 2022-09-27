@@ -30,7 +30,7 @@ void GrimmFire::Start()
 
 	CreateCollisionComponent({60,60}, static_cast<int>(COLLISION_ORDER::Monster_Attack));
 	SubScale_ = 1.0f;
-	Speed_ = 600.f;
+	Speed_ = 800.f;
 	CurvPower_ = 1.2f;
 
 	{
@@ -121,8 +121,6 @@ void GrimmFire::Start()
 void GrimmFire::Update(float _DeltaTime)
 {
 	GrimmFireStateManager.Update(_DeltaTime);
-	
-
 }
 void GrimmFire::SetMoveDir(float4 _Dir, MoveType _Type)
 {
@@ -169,9 +167,7 @@ void GrimmFire::SetMoveDir(float4 _Dir, MoveType _Type)
 
 
 	CurvPower_ =  GameEngineRandom::MainRandom.RandomFloat(0.4f, 1.1f);
-	Speed_ = GameEngineRandom::MainRandom.RandomFloat(380.f, 550.f);
-
-
+	Speed_ = GameEngineRandom::MainRandom.RandomFloat(480.f, 580.f);
 }
 
 void GrimmFire::FireMoveStart(const StateInfo& _Info)
@@ -292,7 +288,6 @@ void GrimmFire::FireDeathStart(const StateInfo& _Info)
 {
 	SubScale_ = 1.0f;
 	GetCollision()->Death();
-
 }
 
 void GrimmFire::FireDeathUpdate(float _DeltaTime, const StateInfo& _Info)

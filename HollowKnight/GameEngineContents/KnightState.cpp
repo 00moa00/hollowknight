@@ -808,7 +808,6 @@ void Knight::KnightUpSlashJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 	else
 	{
 		SetisCollWall(false);
-
 	}
 
 
@@ -2092,6 +2091,14 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
 	//isWallCheck(_DeltaTime);
 
+	KnightSlashCollisionTimer_ += _DeltaTime;
+	if (KnightSlashCollisionTimer_ > 0.1f)
+	{
+		KnightSlashCollisionTimer_ = 0.f;
+		KnightSlashEffect_->GetCollision()->Off();
+
+	}
+
 	// 내가 만약 무적이면 깜빡거린다
 	if (isInvincibility_ == true)
 	{
@@ -2119,8 +2126,6 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 
 	}
-
-
 
 	if (GetisWall() == true || GetisCollWall() == true)
 	{
@@ -2196,29 +2201,22 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Slash) });
-
 	// ======== Knight VS WallColl ========
 	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
-		std::bind(&Knight::KnightVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
-		)
+		std::bind(&Knight::KnightVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		SetisCollWall(true);
 	}
 	else
 	{
 		SetisCollWall(false);
-
 	}
 
 	// ========== 스테이트 변경 ==========
-
-
 	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
 	{
 		isPressJumppingKey_ = false;
 	}
-
 
 	//애니메이션이 끝나면 
 	if (isSlashEnd_ == true)
@@ -2241,13 +2239,6 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
-
-
-
-
-
-		//KnightSlashEffect_->Off();
-
 	}
 }
 
@@ -2408,9 +2399,6 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 	}
 
-	//KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x/* + (100.f * GetMoveDirection().x)*/, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Slash) });
-
-
 	// ========== 스테이트 변경 ==========
 
 	//if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
@@ -2423,13 +2411,13 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		isPressJumppingKey_ = false;
 	}
 
-	//KnightSlashCollisionTimer_ += _DeltaTime;
-	//if (KnightSlashCollisionTimer_ > 0.2f)
-	//{
-	//	KnightSlashCollisionTimer_ = 0.f;
-	//	KnightSlashEffect_->GetCollision()->Off();
+	KnightSlashCollisionTimer_ += _DeltaTime;
+	if (KnightSlashCollisionTimer_ > 0.1f)
+	{
+		KnightSlashCollisionTimer_ = 0.f;
+		KnightSlashEffect_->GetCollision()->Off();
 
-	//}
+	}
 
 	if (isDoubleSlashEnd_ == true)
 	{
@@ -2471,6 +2459,7 @@ void Knight::KnightDoubleSlashEnd(const StateInfo& _Info)
 void Knight::KnightUpSlashStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("UP_SLASH_ANIMATION");
+
 	KnightSlashEffect_->GetCollision()->On();
 	KnightSlashEffect_->SetAnimationUpSlash();
 
@@ -2481,24 +2470,24 @@ void Knight::KnightUpSlashStart(const StateInfo& _Info)
 
 void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
-	//KnightSlashEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
-
-
 	KnightDirectionCheck();
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
 	//isWallCheck(_DeltaTime);
+	KnightSlashCollisionTimer_ += _DeltaTime;
+	if (KnightSlashCollisionTimer_ > 0.1f)
+	{
+		KnightSlashCollisionTimer_ = 0.f;
+		KnightSlashEffect_->GetCollision()->Off();
 
+	}
 	// 내가 만약 무적이면 깜빡거린다
 	if (isInvincibility_ == true)
 	{
 		KnightInvincibiliting(_DeltaTime);
-
 	}
 
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
-		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
-		 )
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true )
 	{
 		KnightData::GetInst()->SetisBreak(true);
 		KnightManager_.ChangeState("STUN");
@@ -2507,15 +2496,13 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	// ======== Knight VS WallColl ========
 	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
-		std::bind(&Knight::KnightVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
-		)
+		std::bind(&Knight::KnightVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 		SetisCollWall(true);
 	}
 	else
 	{
 		SetisCollWall(false);
-
 	}
 
 	if (GetisWall() == true || GetisCollWall() == true)
@@ -2531,7 +2518,6 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
 		}
-
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
@@ -2561,7 +2547,6 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		if (ActtingMoveDirection_.CompareInt2D(float4::ZERO) || isKnihgtStillWall_ == true || GetisWall() == true || GetisCollWall() == true)
 		{
-
 			this->isPixelCheck(_DeltaTime, float4::DOWN);
 			float4 Move = (float4::DOWN * GetGravity() * _DeltaTime);
 
@@ -2579,26 +2564,15 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 			Move.y -= KnightFallAccel_;
 
 			GetTransform().SetWorldMove(Move);
-
-
 		}
-
-
-
 
 		if (isSlashEnd_ == true)
 		{
 			KnightManager_.ChangeState("FALL");
-
 		}
-
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, 0 });
-
-
 	// ========== 스테이트 변경 ==========
-
 	if (true == GameEngineInput::GetInst()->IsPress("KnightJump") && isPressJumppingKey_ == false)
 	{
 		KnightManager_.ChangeState("JUMP");
@@ -2608,7 +2582,6 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		isPressJumppingKey_ = false;
 	}
-
 
 	//애니메이션이 끝나면 
 	if (isUpSlashEnd_ == true)
@@ -2631,13 +2604,6 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
-
-
-
-
-
-		//KnightSlashEffect_->Off();
-
 	}
 }
 
@@ -2646,7 +2612,6 @@ void Knight::KnightUpSlashEnd(const StateInfo& _Info)
 	KnightSlashCollisionTimer_ = 0.f;
 	KnightSlashEffect_->GetCollision()->Off();
 	isPossibleDoubleSlash_ = true;
-
 }
 
 void Knight::KnightDownSlashStart(const StateInfo& _Info)
@@ -2654,8 +2619,8 @@ void Knight::KnightDownSlashStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("DOWN_SLASH_ANIMATION");
 	KnightSlashEffect_->GetCollision()->On();
 	KnightSlashEffect_->SetAnimationDownSlash();
+	KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 0, -10, 0 });
 
-	KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 0, -100, 0 });
 }
 
 void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -2667,14 +2632,20 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 
 	}
+	KnightSlashCollisionTimer_ += _DeltaTime;
+	if (KnightSlashCollisionTimer_ > 0.1f)
+	{
+		KnightSlashCollisionTimer_ = 0.f;
+		KnightSlashEffect_->GetCollision()->Off();
 
+	}
 	KnightDirectionCheck();
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
 	//isWallCheck(_DeltaTime);
 
 	if (GetisWall() == true || GetisCollWall() == true)
 	{
-		SetMoveDirection(float4::ZERO);
+		//SetMoveDirection(float4::ZERO);
 		GetTransform().SetWorldMove(float4::ZERO * GetSpeed() * _DeltaTime);
 		//KnightManager_.ChangeState("FALL");
 	}
@@ -2734,23 +2705,21 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 			Move.y -= KnightFallAccel_;
 
 			GetTransform().SetWorldMove(Move);
-
-
 		}
-
-
-
 
 		if (isSlashEnd_ == true)
 		{
 			KnightManager_.ChangeState("FALL");
-
 		}
-
 	}
 
-	KnightSlashEffect_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y -100.f, 0 });
-
+	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+	{
+		KnightData::GetInst()->SetisBreak(true);
+		KnightManager_.ChangeState("STUN");
+		return;
+	}
 
 	// ========== 스테이트 변경 ==========
 
@@ -2768,9 +2737,9 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	//애니메이션이 끝나면 
 	if (isDownSlashEnd_ == true)
 	{
+		isDownSlashEnd_ = false;
 		KnightFallAccel_ = 0.0f;
 
-		isDownSlashEnd_ = false;
 		if (_Info.PrevState == "RUN" || isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");

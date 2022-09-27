@@ -27,7 +27,7 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 	auto castType_ = magic_enum::enum_cast<PatternType>(ChangeState_);
 	PatternType PatternType_ = castType_.value();
 
-
+	PrevDir_ = GetMoveDirection();
 	switch (PatternType_)
 	{
 	case PatternType::BATTLE_BALLOON_START:
@@ -96,7 +96,9 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 			SetMoveDirection(float4::LEFT);
 			GetRenderer()->GetTransform().PixLocalPositiveX();
 
+		
 		}
+
 		break;
 	default:
 		break;
@@ -130,7 +132,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState("BATTLE_CAST_START");
+		GrimmBattleManager_.ChangeState(ChangeState_);
 		return;
 	}
 }
@@ -163,7 +165,7 @@ void Grimm::GrimmBattleTeleportDisappearUpdate(float _DeltaTime, const StateInfo
 		GetRenderer()->Off();
 	}
 
-	if (_Info.StateTime > 1.f)
+	if (_Info.StateTime > 0.5f)
 	{
 		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_APPEAR");
 		return;
@@ -180,6 +182,11 @@ void Grimm::GrimmBattleBalloonStartStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("BALLON_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.5f, GetRenderer()->GetTransform().GetLocalScale().y *0.5f});
+
+	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y ) / 3 });
 }
 
 void Grimm::GrimmBattleBalloonStartUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -287,7 +294,7 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	FireCreateTimer_ += _DeltaTime;
-	if (FireCreateTimer_ > 2.0f)
+	if (FireCreateTimer_ > 0.8f)
 	{
 
 
@@ -367,7 +374,6 @@ void Grimm::GrimmBattleAirDashStartStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
-
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
@@ -424,6 +430,9 @@ void Grimm::GrimmBattleAirDashStart(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 	GetRenderer()->GetTransform().PixLocalPositiveX();
 
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.2f, GetRenderer()->GetTransform().GetLocalScale().y * 0.8f });
+	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
+
 	GrimmAirDashEffect* GrimmAirDashEffect_ = GetLevel()->CreateActor<GrimmAirDashEffect>();
 
 	float Xmagin = 0.f;
@@ -470,6 +479,9 @@ void Grimm::GrimmBattleAirDashEndtStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_END_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y * 0.5f });
+	GetCollision()->GetTransform().SetLocalPosition({ 50, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
 
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
@@ -762,6 +774,9 @@ void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("SPRIKE_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y * 0.7f });
+	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
+
 
 }
 
@@ -802,6 +817,20 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("CAST_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y * 0.7f });
+	
+	if (GetMoveDirection().CompareInt2D(float4::LEFT))
+	{
+		GetCollision()->GetTransform().SetLocalPosition({ -80, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
+
+	}
+	else
+	{
+		GetCollision()->GetTransform().SetLocalPosition({ 80, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
+
+	}
+	
 
 	GrimmBird* GrimmBird_ = GetLevel()->CreateActor<GrimmBird>();
 	GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, -20 });
@@ -911,7 +940,10 @@ void Grimm::GrimmBattlStunBatStart(const StateInfo& _Info)
 
 
 	GetRenderer()->ChangeFrameAnimation("BAT_APPEAR_ANIMATION");
+	GetRenderer()->ScaleToCutTexture(0);
 
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.2f, GetRenderer()->GetTransform().GetLocalScale().y * 0.2f });
+	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
 
 	for (int i = 0; i < 10; ++i)
 	{
@@ -1045,6 +1077,11 @@ void Grimm::GrimmBattlStunBatEndStart(const StateInfo& _Info)
 	GetRenderer()->GetPixelData().MulColor.b = 0.f;
 
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
+	GetRenderer()->ScaleToCutTexture(0);
+
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.8f, GetRenderer()->GetTransform().GetLocalScale().y * 0.8f });
+	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
+
 
 	GetTransform().SetWorldPosition({ MapCenterX_ + 400.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
 

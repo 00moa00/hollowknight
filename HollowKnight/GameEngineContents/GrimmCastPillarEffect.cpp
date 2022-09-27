@@ -15,7 +15,7 @@ GrimmCastPillarEffect::~GrimmCastPillarEffect()
 
 void GrimmCastPillarEffect::Start()
 {
-	for (int i = 0; i < 40; ++i)
+	for (int i = 0; i < 50; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
 		int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 4);
@@ -23,7 +23,7 @@ void GrimmCastPillarEffect::Start()
 		ParticleList_.back()->ScaleToCutTexture(RamdomIndex);
 		ParticleList_.back()->GetTransform().SetWorldScale({
 		 150.f + GameEngineRandom::MainRandom.RandomFloat(-10.f, 10.f)
-		,700.f + GameEngineRandom::MainRandom.RandomFloat(-100.f, 100.f) }
+		,800.f + GameEngineRandom::MainRandom.RandomFloat(-100.f, 100.f) }
 		);
 
 
@@ -42,6 +42,7 @@ void GrimmCastPillarEffect::Start()
 			//ParticleList_.back()->GetPixelData().MulColor.r = 1.0f;
 			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.7f, 0.9f);
 			ParticleList_.back()->GetPipeLine()->SetOutputMergerBlend("Overlay");
+			//ParticleList_.back()->SetTexture("grimm_smoke2.png");
 
 		}
 
@@ -52,6 +53,7 @@ void GrimmCastPillarEffect::Start()
 			//ParticleList_.back()->GetPixelData().PlusColor.r = 1.0f;
 			//ParticleList_.back()->GetPixelData().MulColor.r = 1.0f;
 			ParticleList_.back()->GetPipeLine()->SetOutputMergerBlend("Overlay");
+			//ParticleList_.back()->SetTexture("grimm_smoke2.png");
 
 			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.7f, 0.9f);
 
@@ -67,7 +69,7 @@ void GrimmCastPillarEffect::Start()
 			 100.f + GameEngineRandom::MainRandom.RandomFloat(-10.f, 10.f)
 			,550.f + GameEngineRandom::MainRandom.RandomFloat(-50.f, 50.f) }
 			);
-			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.2f, 0.7f);
+			//ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.2f, 0.7f);
 
 		}
 
@@ -127,8 +129,8 @@ void GrimmCastPillarEffect::CastPillarFireUpdate(float _DeltaTime, const StateIn
 
 	for (int i = 0; i < ParticleList_.size(); ++i)
 	{
-		a = GameEngineRandom::MainRandom.RandomFloat(10, 30.0f); // angle(degree)
 		r = GameEngineRandom::MainRandom.RandomFloat(10, 20.f); // angle(degree)
+		a = GameEngineRandom::MainRandom.RandomFloat(10, 20.0f); // angle(degree)
 		ParticleList_[i]->GetTransform().SetLocalPosition({ cosf(a * 0.01745f) * r,sinf(a * 0.01745f) * r });
 		float4 MoveUp;
 		MoveUp.y = GameEngineRandom::MainRandom.RandomFloat(200.f, 500.f);

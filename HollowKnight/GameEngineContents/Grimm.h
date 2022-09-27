@@ -95,6 +95,7 @@ private:
 
 	float4 AirDashDest_;
 	float4 BirdDir_;
+	float4 PrevDir_;
 
 	std::string ChangeState_;
 

@@ -37,24 +37,25 @@ void KnightSlashEffect::Start()
 	GetRenderer()->AnimationBindEnd("SLASH", [=](const FrameAnimation_DESC& _Info)
 		{
 			isSlashEnd_ = true;
+			GetRenderer()->ChangeFrameAnimation("STILL");
 		});
 
 	GetRenderer()->AnimationBindEnd("DOUBLE_SLASH", [=](const FrameAnimation_DESC& _Info)
 		{
 			isSlashEnd_ = true;
-
+			GetRenderer()->ChangeFrameAnimation("STILL");
 		});
 
 	GetRenderer()->AnimationBindEnd("UP_SLASH", [=](const FrameAnimation_DESC& _Info)
 		{
 			isSlashEnd_ = true;
-
+			GetRenderer()->ChangeFrameAnimation("STILL");
 		});
 
 	GetRenderer()->AnimationBindEnd("DOWN_SLASH", [=](const FrameAnimation_DESC& _Info)
 		{
 			isSlashEnd_ = true;
-
+			GetRenderer()->ChangeFrameAnimation("STILL");
 		});
 
 	//================================
@@ -85,8 +86,7 @@ void KnightSlashEffect::Update(float _DeltaTime)
 
 void KnightSlashEffect::SlashIdleStart(const StateInfo& _Info)
 {
-	GetRenderer()->ChangeFrameAnimation("STILL");
-
+	
 }
 
 void KnightSlashEffect::SlashIdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -101,65 +101,67 @@ void KnightSlashEffect::SlashIdleEnd(const StateInfo& _Info)
 
 void KnightSlashEffect::SlashHitEnemyStart(const StateInfo& _Info)
 {
+	isColl_ = true;
 
+	GetCollision()->Off();
 }
 
 void KnightSlashEffect::SlashHitEnemyUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (isSlashEnd_ == true)
 	{
+	//	isColl_ = false;
+
 		isSlashEnd_ = false;
 		KnightSlashEffectManager_.ChangeState("IDLE");
+		return;
 	}
 
-	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
+	/*if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&KnightSlashEffect::EffectVSWallFalseCheckCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 
 	}
-
 	else
 	{
 		isColl_ = false;
-	}
+	}*/
 }
 
 void KnightSlashEffect::SlashHitEnemyEnd(const StateInfo& _Info)
 {
+	isColl_ = false;
+
 }
 
 void KnightSlashEffect::SetAnimationSlash()
 {
 	GetRenderer()->ChangeFrameAnimation("SLASH");
-	KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
-
+	KnightSlashEffectManager_.ChangeState("IDLE");
 }
 
 void KnightSlashEffect::SetAnimationDoubleSlash()
 {
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH");
-	KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
-
+	KnightSlashEffectManager_.ChangeState("IDLE");
 }
 
 void KnightSlashEffect::SetAnimationUpSlash()
 {
 	GetRenderer()->ChangeFrameAnimation("UP_SLASH");
-	KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
-
+	KnightSlashEffectManager_.ChangeState("IDLE");
 }
 
 void KnightSlashEffect::SetAnimationDownSlash()
 {
 	GetRenderer()->ChangeFrameAnimation("DOWN_SLASH");
-	KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
-
+	KnightSlashEffectManager_.ChangeState("IDLE");
 }
 
 void KnightSlashEffect::SetAnimationStill()
 {
 	GetRenderer()->ChangeFrameAnimation("STILL");
-	KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
+	KnightSlashEffectManager_.ChangeState("IDLE");
 
 }
 

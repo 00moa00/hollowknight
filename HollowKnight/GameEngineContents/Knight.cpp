@@ -766,15 +766,15 @@ void Knight::KnightDirectionCheck()
 		this->SetMoveDirection(float4::RIGHT);
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
-	{
-		this->SetMoveDirection(float4::DOWN);
-	}
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightDown"))
+	//{
+	//	this->SetMoveDirection(float4::DOWN);
+	//}
 
-	if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
-	{
-		this->SetMoveDirection(float4::UP);
-	}
+	//if (true == GameEngineInput::GetInst()->IsPress("KnightUp"))
+	//{
+	//	this->SetMoveDirection(float4::UP);
+	//}
 }
 
 void Knight::KnightActtingDirectionCheck()
