@@ -132,7 +132,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState(ChangeState_);
+		GrimmBattleManager_.ChangeState("BATTLE_SPIKE_START");
 		return;
 	}
 }
@@ -696,8 +696,6 @@ void Grimm::GrimmBattleSpikeStartStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("SPRIKE_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
-
-
 	{
 		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
 		GrimmSpike_->GetTransform().SetWorldPosition({ 5350,-1000,static_cast<float>(Z_ORDER::Object) });
@@ -876,9 +874,6 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 
 
 		++GrimmCastPillarEffectCount_;
-
-
-
 	}
 
 }
@@ -905,7 +900,6 @@ void Grimm::GrimmBattlCastEndUpdate(float _DeltaTime, const StateInfo& _Info)
 		SetRamdomPattern();
 		return;
 	}
-
 }
 
 void Grimm::GrimmBattlCastEndEnd(const StateInfo& _Info)
@@ -931,13 +925,11 @@ void Grimm::GrimmBattlStunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunEnd(const StateInfo& _Info)
 {
-}
 
+}
 
 void Grimm::GrimmBattlStunBatStart(const StateInfo& _Info)
 {
-
-
 	GetRenderer()->ChangeFrameAnimation("BAT_APPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
@@ -952,14 +944,11 @@ void Grimm::GrimmBattlStunBatStart(const StateInfo& _Info)
 
 
 		GrimmStunBatList_.back()->GetTransform().SetWorldPosition({ X, Y, static_cast<float>(Z_ORDER::Monster)});
-
-
 	}
 }
 
 void Grimm::GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	if (GetAccTime() > 5.0f)
 	{
 		float4 MoveDir;

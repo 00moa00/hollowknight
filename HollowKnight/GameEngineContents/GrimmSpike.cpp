@@ -28,17 +28,17 @@ void GrimmSpike::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("START_UP", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 0, 2, 0.040f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("GROW_UP", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 3, 8, 0.020f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("GROW_DOWN", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 8, 13, 0.020f, false));
-	GetRenderer()->GetTransform().SetWorldRotation({0,0,GameEngineRandom::MainRandom.RandomFloat(-5.f, 5.f)});
+	
+	GetTransform().SetWorldRotation({0,0,GameEngineRandom::MainRandom.RandomFloat(-2.5.f, 2.5.f)});
 
 
 
 	GetRenderer()->ChangeFrameAnimation("START_UP");
 	//GetRenderer()->ScaleToCutTexture(0);
-	GetTransform().SetWorldScale({148, 1600});
+	GetRenderer()->GetTransform().SetWorldScale({148, 1600});
 
 	GetRenderer()->AnimationBindEnd("GROW_DOWN", [=](const FrameAnimation_DESC& _Info)
-		{
-			
+		{		
 			this->Death();
 
 		});
