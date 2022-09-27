@@ -88,12 +88,14 @@ void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 			GetTransform().SetWorldPosition({ MapCenterX_ - 500.f, -950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::RIGHT);
 			GetRenderer()->GetTransform().PixLocalNegativeX();
+
 		}
 		else
 		{
 			GetTransform().SetWorldPosition({ MapCenterX_ + 500.f,-950.f, static_cast<float>(Z_ORDER::Monster) });
 			SetMoveDirection(float4::LEFT);
 			GetRenderer()->GetTransform().PixLocalPositiveX();
+
 		}
 		break;
 	default:
@@ -128,7 +130,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState(ChangeState_);
+		GrimmBattleManager_.ChangeState("BATTLE_CAST_START");
 		return;
 	}
 }
@@ -809,6 +811,11 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 
 	GrimmCastPillarEffectCount_ = 0;
 	BirdCreateTimer_ = 0.f;
+
+	for (int i = 0; i < GrimmCastPillarEffectList_.size(); ++i)
+	{
+		GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
+	}
 }
 
 void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -836,8 +843,8 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	
 
+		GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 350.f, static_cast<float>(Z_ORDER::Back_Effect) });
 		GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->CastPillarEffectOn();
-		GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  (GetTransform().GetWorldPosition().y + GetRenderer()->GetCurTexture()->GetScale().y / 2) - 100.f, static_cast<float>(Z_ORDER::Back_Effect) });
 
 
 		++GrimmCastPillarEffectCount_;
@@ -850,6 +857,10 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmBattlCastEnd(const StateInfo& _Info)
 {
+	for (int i = 0; i < GrimmCastPillarEffectList_.size(); ++i)
+	{
+		GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
+	}
 }
 
 void Grimm::GrimmBattlCastEndStart(const StateInfo& _Info)

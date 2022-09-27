@@ -437,7 +437,7 @@ void Grimm::Start()
 	for (int i = 0; i < GrimmCastPillarEffectCount_; ++i)
 	{
 		GrimmCastPillarEffectList_.push_back(GetLevel()->CreateActor<GrimmCastPillarEffect>());
-		GrimmCastPillarEffectList_.back()->Off();
+		GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
 	}
 
 }
