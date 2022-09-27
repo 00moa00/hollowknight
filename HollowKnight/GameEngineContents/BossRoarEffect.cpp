@@ -45,7 +45,7 @@ void BossRoarEffect::Update(float _DeltaTime)
 		BossRoarRingEffect_->SetParent(this);
 	}
 
-	if (GetAccTime() > 2.f)
+	if (GetAccTime() > 1.f)
 	{
 		this->Death();
 	}

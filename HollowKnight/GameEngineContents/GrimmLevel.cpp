@@ -17,6 +17,7 @@
 #include "VignettePostEffect.h"
 
 
+
 GrimmLevel::GrimmLevel() 
 	:
 	Grimm_(nullptr),
@@ -75,7 +76,6 @@ void GrimmLevel::Start()
 
 	GrimmCrowds_ = CreateActor<GrimmCrowds>();
 	GrimmCrowds_->Off();
-
 
 	//{
 	//	GrimmCrowd* GrimmCrowd_ = CreateActor<GrimmCrowd>();

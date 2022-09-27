@@ -1465,6 +1465,32 @@ void ContentsCore::Start()
 
 	}
 
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Kinght");
+		Dir.Move("Effect");
+		Dir.Move("Hit");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+
+		GameEngineTexture::Cut("white_hit_particle_Orange.png", 1, 3);
+		GameEngineTexture::Cut("Projectiles_shot_impact0001-Sheet.png", 6, 1);
+
+
+
+
+	}
+
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
 	{
 		GameEngineInput::GetInst()->CreateKey("LevelChangeKey", 'P');

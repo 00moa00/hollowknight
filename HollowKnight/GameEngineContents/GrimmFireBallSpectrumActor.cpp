@@ -1,8 +1,8 @@
 #include "PreCompile.h"
 #include "GrimmFireBallSpectrumActor.h"
 
-
 #include <GameEngineBase/GameEngineRandom.h>
+
 GrimmFireBallSpectrumActor::GrimmFireBallSpectrumActor() 
 {
 }

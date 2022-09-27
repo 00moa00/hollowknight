@@ -780,7 +780,7 @@ void Knight::KnightLookUpEnd(const StateInfo& _Info)
 void Knight::KnightUpSlashJumpStart(const StateInfo& _Info)
 {
 	isDoubleJumpEnd_ = false;
-	SetJumpPower({ 0, KnightDoubleJumpPower_/2 , 0 });
+	SetJumpPower({ 0, KnightDoubleJumpPower_ , 0 });
 }
 
 void Knight::KnightUpSlashJumpUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -2625,20 +2625,19 @@ void Knight::KnightDownSlashStart(const StateInfo& _Info)
 
 void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	if (KnightSlashEffect_->GetisColl() == true)
 	{
 		KnightManager_.ChangeState("SLASH_JUMP");
 		return;
-
 	}
+
 	KnightSlashCollisionTimer_ += _DeltaTime;
 	if (KnightSlashCollisionTimer_ > 0.1f)
 	{
 		KnightSlashCollisionTimer_ = 0.f;
 		KnightSlashEffect_->GetCollision()->Off();
-
 	}
+
 	KnightDirectionCheck();
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
 	//isWallCheck(_DeltaTime);

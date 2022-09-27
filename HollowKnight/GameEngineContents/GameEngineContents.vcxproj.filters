@@ -603,6 +603,12 @@
     <ClInclude Include="GrimmCastPillarEffect.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmHitEffect.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterHitParticle.h">
+      <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1057,6 +1063,12 @@
     </ClCompile>
     <ClCompile Include="GrimmCastPillarEffect.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmHitEffect.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterHitParticle.cpp">
+      <Filter>Actor\Effect\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -102,22 +102,17 @@ void MasterActor::isPixelCheck(float _DeltaTime, float4 _CheckDir)
 		WallPoint.x = -20.f;
 		WallPoint.y = 2.f;
 	}
-
 	else
 	{
 		WallPoint.x = 0.f;
 		WallPoint.y = 0.f;
-
 	}
-
 
 	float4 WallPos = { GetTransform().GetLocalPosition().x + (  WallPoint.x ),
 	-(GetTransform().GetLocalPosition().y + WallPoint.y) };
 
-
 	float4 GrondColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(GroundPos.ix(), GroundPos.iy());
 	float4 WallColor = GetCollisionMap()->GetCurTexture()->GetPixelToFloat4(WallPos.ix(), WallPos.iy());
-
 
 	while (true)
 	{

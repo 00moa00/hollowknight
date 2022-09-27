@@ -15,6 +15,8 @@ GrimmCastPillarEffect::~GrimmCastPillarEffect()
 
 void GrimmCastPillarEffect::Start()
 {
+
+	GetTransform().SetWorldPosition({ 0, -50 });
 	for (int i = 0; i < 50; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
@@ -29,6 +31,7 @@ void GrimmCastPillarEffect::Start()
 
 		float4 Move;
 		Move.x = 0.f;
+
 		Move.x = { GameEngineRandom::MainRandom.RandomFloat(100.f, 200.f) };
 		Move.y= { GameEngineRandom::MainRandom.RandomFloat(100.f, 200.f) };
 
@@ -165,7 +168,7 @@ void GrimmCastPillarEffect::CastPillarDisappearUpdate(float _DeltaTime, const St
 		MoveUp.y = GameEngineRandom::MainRandom.RandomFloat(1200.f, 1300.f);
 		ParticleList_[i]->GetTransform().SetLocalMove(MoveUp * _DeltaTime);
 
-		int Ram = GameEngineRandom::MainRandom.RandomInt(0, 10);
+		int Ram = GameEngineRandom::MainRandom.RandomInt(0, 5);
 		if (Ram == 0)
 		{
 			ParticleList_[i]->Off();

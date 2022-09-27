@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 
 #include "GrimmSpike.h"
+#include <GameEngineBase/GameEngineRandom.h>
+
 
 GrimmSpike::GrimmSpike() 
 	:
@@ -26,12 +28,13 @@ void GrimmSpike::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("START_UP", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 0, 2, 0.040f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("GROW_UP", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 3, 8, 0.020f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("GROW_DOWN", FrameAnimation_DESC("Grimm Cln_Grimm_ground_spike0000-Sheet.png", 8, 13, 0.020f, false));
+	GetRenderer()->GetTransform().SetWorldRotation({0,0,GameEngineRandom::MainRandom.RandomFloat(-5.f, 5.f)});
 
 
 
 	GetRenderer()->ChangeFrameAnimation("START_UP");
 	//GetRenderer()->ScaleToCutTexture(0);
-	GetRenderer()->GetTransform().SetWorldScale({148, 1600});
+	GetTransform().SetWorldScale({148, 1600});
 
 	GetRenderer()->AnimationBindEnd("GROW_DOWN", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -109,7 +112,7 @@ void GrimmSpike::SpikeMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	if (_Info.StateTime > 1.0f)
+	if (_Info.StateTime > 0.3f)
 	{
 		GrimmBirdStateManager.ChangeState("MOVE_UP_WAIT");
 		return;
@@ -127,7 +130,7 @@ void GrimmSpike::SpikeMoveUpWaitStart(const StateInfo& _Info)
 
 void GrimmSpike::SpikeMoveUpWaitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 0.3f)
+	if (_Info.StateTime > 0.2f)
 	{
 		GrimmBirdStateManager.ChangeState("MOVE_DOWN");
 		return;

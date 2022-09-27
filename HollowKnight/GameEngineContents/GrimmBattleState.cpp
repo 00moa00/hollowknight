@@ -544,7 +544,6 @@ void Grimm::GrimmBattleAirDashEndtEnd(const StateInfo& _Info)
 {
 }
 
-
 void Grimm::GrimmBattleSlashStartStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("SLASH_START_ANIMATION");
@@ -774,7 +773,7 @@ void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("SPRIKE_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
-	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y * 0.7f });
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y *2.0f });
 	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
 
 

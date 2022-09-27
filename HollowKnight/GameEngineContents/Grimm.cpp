@@ -8,6 +8,7 @@
 #include "BossRoarEffect.h"
 
 #include "GrimmFire.h"
+#include "MonsterHitParticle.h"
 
 #include <GameEngineBase/GameEngineRandom.h>
 
@@ -439,6 +440,11 @@ void Grimm::Start()
 		GrimmCastPillarEffectList_.push_back(GetLevel()->CreateActor<GrimmCastPillarEffect>());
 		GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
 	}
+
+	MonsterHitParticle* MonsterHitParticle_ = GetLevel()->CreateActor<MonsterHitParticle>();
+	MonsterHitParticle_->GetTransform().SetWorldPosition({ 500, -700 });
+
+	MonsterHitParticle_->SetDir(float4::DOWN);
 
 }
 
