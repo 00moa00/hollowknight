@@ -37,6 +37,8 @@ Grimm::Grimm()
 	ChangeState_(""),
 	PrevChangeState_(0),
 	PatternRamdom_(0),
+	GrimmCastPillarEffectCount_(0),
+
 	GrimmFlameBallparticleCount_(0),
 	BirdCreateTimer_(0.0f),
 
@@ -58,6 +60,7 @@ void Grimm::Start()
 {
 	SetName("Grimm");
 	MapCenterX_ = 4800.f;
+	GrimmCastPillarEffectCount_ = 4;
 
 	CreateCollisionComponent(float4{ 90, 350, 1 }, static_cast<int>(COLLISION_ORDER::Monster));
 	GetCollision()->GetTransform().SetLocalPosition({0, 350.f /3});
@@ -429,6 +432,13 @@ void Grimm::Start()
 		GrimmFlameBallparticleList_.back()->Off();
 	}
 	
+
+
+	for (int i = 0; i < GrimmCastPillarEffectCount_; ++i)
+	{
+		GrimmCastPillarEffectList_.push_back(GetLevel()->CreateActor<GrimmCastPillarEffect>());
+		GrimmCastPillarEffectList_.back()->Off();
+	}
 
 }
 

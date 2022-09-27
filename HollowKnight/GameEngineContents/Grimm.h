@@ -8,6 +8,7 @@
 #include "GrimmStunBat.h"
 #include "GrimmSmoke.h"
 #include "GrimmFlameBallparticle.h"
+#include "GrimmCastPillarEffect.h"
 
 
 enum class PatternType
@@ -82,6 +83,7 @@ private:
 	int PatternRamdom_;
 
 	int GrimmFlameBallparticleCount_;
+	int GrimmCastPillarEffectCount_;
 
 	float MapCenterX_;
 	float AirDashRotation_;
@@ -109,6 +111,7 @@ private:
 
 	GameEngineStateManager GrimmManager_;
 
+	std::vector<GrimmCastPillarEffect*> GrimmCastPillarEffectList_;
 	std::vector<GrimmStunBat*> GrimmStunBatList_;
 	std::vector<GrimmFlameBallparticle*> GrimmFlameBallparticleList_;
 public:

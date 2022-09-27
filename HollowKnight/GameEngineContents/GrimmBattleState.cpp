@@ -658,7 +658,6 @@ void Grimm::GrimmBattleSlashUpEnd(const StateInfo& _Info)
 {
 }
 
-
 void Grimm::GrimmBattleFireStart(const StateInfo& _Info)
 {
 	GetRenderer()->Off();
@@ -737,7 +736,6 @@ void Grimm::GrimmBattleSpikeStartStart(const StateInfo& _Info)
 	}
 }
 
-
 void Grimm::GrimmBattleSpikeStartUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (_Info.StateTime > 1.f)
@@ -756,7 +754,6 @@ void Grimm::GrimmBattleSpikeStartUpdate(float _DeltaTime, const StateInfo& _Info
 void Grimm::GrimmBattleSpikeStartEnd(const StateInfo& _Info)
 {
 }
-
 
 void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 {
@@ -799,7 +796,6 @@ void Grimm::GrimmBattlCastStartEnd(const StateInfo& _Info)
 {
 }
 
-
 void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("CAST_ANIMATION");
@@ -811,7 +807,8 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 	float4 Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
 	GrimmBird_->SetMoveDir(Dir_.NormalizeReturn());
 
-
+	GrimmCastPillarEffectCount_ = 0;
+	BirdCreateTimer_ = 0.f;
 }
 
 void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -819,34 +816,36 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 	BirdCreateTimer_ += _DeltaTime;
 
 
-
 	if (BirdCreateTimer_ < 0.2f)
 	{		
 		BirdDir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
 	}
 
-	if (BirdCreateTimer_ > 0.8f)
+	if (BirdCreateTimer_ > 0.5f)
 	{
 		BirdCreateTimer_ = 0.0f;
+		if (GrimmCastPillarEffectCount_ >= GrimmCastPillarEffectList_.size())
+		{
+			GrimmBattleManager_.ChangeState("BATTLE_CAST_END");
+			return;
+		}
+
 		GrimmBird* GrimmBird_ = GetLevel()->CreateActor<GrimmBird>();
 		GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, -20 });
-		
-		
-		
-		
 		GrimmBird_->SetMoveDir(BirdDir_.NormalizeReturn());
-
-	}
 
 	
 
+		GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->CastPillarEffectOn();
+		GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  (GetTransform().GetWorldPosition().y + GetRenderer()->GetCurTexture()->GetScale().y / 2) - 100.f, static_cast<float>(Z_ORDER::Back_Effect) });
 
-	if (_Info.StateTime > 3.f)
-	{
-		GrimmBattleManager_.ChangeState("BATTLE_CAST_END");
-		return;
+
+		++GrimmCastPillarEffectCount_;
+
+
 
 	}
+
 }
 
 void Grimm::GrimmBattlCastEnd(const StateInfo& _Info)
