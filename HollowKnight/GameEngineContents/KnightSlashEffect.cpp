@@ -113,7 +113,7 @@ void KnightSlashEffect::SlashHitEnemyUpdate(float _DeltaTime, const StateInfo& _
 	}
 
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
-		std::bind(&KnightSlashEffect::EffectVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
+		std::bind(&KnightSlashEffect::EffectVSWallFalseCheckCollision, this, std::placeholders::_1, std::placeholders::_2)) == true)
 	{
 
 	}
@@ -169,11 +169,8 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 	{
 		Monster* Monster_ = dynamic_cast<Monster*>(_Other->GetActor());
 		Monster_->SetMonsterHit(KnightData::GetInst()->GetHitDamage(), GetEffectDirection());
-
-
 		KnightData::GetInst()->SetisSoulGrow(true);
 
-		//_Other->GetActor()->Death();
 		isColl_ = true;
 		KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
 
@@ -184,5 +181,17 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 		return false;
 	}
 
+}
+
+bool KnightSlashEffect::EffectVSWallFalseCheckCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	if (_Other != nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 

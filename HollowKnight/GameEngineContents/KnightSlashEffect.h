@@ -56,7 +56,7 @@ public:
 
 
 	bool EffectVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
-	//bool EffectVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool EffectVSWallFalseCheckCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 };
 

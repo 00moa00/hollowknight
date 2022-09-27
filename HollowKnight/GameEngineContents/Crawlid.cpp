@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Crawlid.h"
+#include "KnightData.h"
 
 Crawlid::Crawlid() 
 	:
@@ -123,6 +124,7 @@ void Crawlid::SetMonsterHit(int _Damage, float4 _StunDir)
 	}
 
 	SetMonsterDirection();
+	KnightData::GetInst()->SetisSoulGrow(true);
 	CrawlidManager_.ChangeState("STUN");
 
 
