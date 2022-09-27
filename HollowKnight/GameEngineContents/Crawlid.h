@@ -19,7 +19,7 @@ protected:
 	void Update(float _DeltaTime) override;
 
 public:
-	void SetMonsterHit(int _Damage, float4 _StunDir) override;
+	void SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir) override;
 
 private:
 	bool isTurnEnd_;

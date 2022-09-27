@@ -98,8 +98,8 @@ void Crawlid::Start()
 	SetFallSpeed(2);
 	SetGravity(400.f);
 	SetSpeed(100.f);
-	SetHP(5);
-
+	SetHP(10);
+	CreateMonsterHitParticle(10);
 	SetMoveDirection(float4::RIGHT);
 
 }
@@ -109,10 +109,10 @@ void Crawlid::Update(float _DeltaTime)
 	CrawlidManager_.Update(_DeltaTime);
 }
 
-void Crawlid::SetMonsterHit(int _Damage, float4 _StunDir)
+void Crawlid::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 {
 	SubHP(_Damage);
-
+	SetCreateMonsterHitParticleOn(_KnightDir, float4{ 280, 177});
 	if (_StunDir.CompareInt2D(float4::RIGHT))
 	{
 		SetMoveDirection(float4::LEFT);

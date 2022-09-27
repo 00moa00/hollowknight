@@ -2,11 +2,14 @@
 #include "KnightSlashEffect.h"
 #include "KnightData.h"
 #include "Monster.h"
+#include "HollowKnightLevel.h"
 
 KnightSlashEffect::KnightSlashEffect()
 	:
 	isSlashEnd_(false),
-	isColl_(false)
+	isColl_(false),
+
+	Dir_(float4::ZERO)
 {
 }
 
@@ -138,24 +141,30 @@ void KnightSlashEffect::SetAnimationSlash()
 {
 	GetRenderer()->ChangeFrameAnimation("SLASH");
 	KnightSlashEffectManager_.ChangeState("IDLE");
+	Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetMoveDirection();
 }
 
 void KnightSlashEffect::SetAnimationDoubleSlash()
 {
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH");
 	KnightSlashEffectManager_.ChangeState("IDLE");
+	Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetMoveDirection();
+
 }
 
 void KnightSlashEffect::SetAnimationUpSlash()
 {
 	GetRenderer()->ChangeFrameAnimation("UP_SLASH");
 	KnightSlashEffectManager_.ChangeState("IDLE");
+	Dir_ = float4::UP;
 }
 
 void KnightSlashEffect::SetAnimationDownSlash()
 {
 	GetRenderer()->ChangeFrameAnimation("DOWN_SLASH");
 	KnightSlashEffectManager_.ChangeState("IDLE");
+	Dir_ = float4::DOWN;
+
 }
 
 void KnightSlashEffect::SetAnimationStill()
@@ -170,7 +179,7 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 	if (_Other != nullptr)
 	{
 		Monster* Monster_ = dynamic_cast<Monster*>(_Other->GetActor());
-		Monster_->SetMonsterHit(KnightData::GetInst()->GetHitDamage(), GetEffectDirection());
+		Monster_->SetMonsterHit(KnightData::GetInst()->GetHitDamage(), GetEffectDirection(), Dir_);
 		KnightData::GetInst()->SetisSoulGrow(true);
 
 		isColl_ = true;

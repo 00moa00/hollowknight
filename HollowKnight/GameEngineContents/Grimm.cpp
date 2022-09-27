@@ -469,7 +469,7 @@ void Grimm::Update(float _DeltaTime)
 	}
 }
 
-void Grimm::SetMonsterHit(int _Damage, float4 _StunDir)
+void Grimm::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 {
 	if (isHitWhiteEffect_ == false)
 	{

@@ -24,6 +24,8 @@ private:
 
 	bool isColl_;
 
+	float4 Dir_;
+
 	GameEngineStateManager KnightSlashEffectManager_;
 
 private:

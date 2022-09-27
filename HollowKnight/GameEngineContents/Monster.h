@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 #include "MasterActor.h"
+#include "MonsterHitParticle.h"
 
 // Ό³Έν :
 class Monster : public MasterActor
@@ -21,7 +22,7 @@ public:
 	//void Update(float _DeltaTime) {}
 	//void End() {}
 
-	virtual void SetMonsterHit(int _Damage, float4 _StunDir) {};
+	virtual void SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir) {};
 
 private:
 
@@ -30,6 +31,9 @@ private:
 	int AllHP_;
 	int CurHp_;
 
+	int Count_;
+
+	std::vector<MonsterHitParticle*>MonsterHitParticleList_;
 
 protected:
 	void SetMonsterDirection();
@@ -41,7 +45,53 @@ public:
 	//    Setter
 	//================================
 
+	void CreateMonsterHitParticle(int _i)
+	{
+		for (int i = 0; i < _i ; ++i)
+		{
+			MonsterHitParticleList_.push_back(GetLevel()->CreateActor<MonsterHitParticle>());
+			//MonsterHitParticleList_.back()->SetParent(this);
+			MonsterHitParticleList_.back()->Off();
+		}
+	}
 
+	void SetCreateMonsterHitParticleOn(float4 _Dir, float4 _Scale)
+	{
+		if (Count_ < MonsterHitParticleList_.size())
+		{
+			MonsterHitParticleList_[Count_]->On();
+			MonsterHitParticleList_[Count_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50});
+			MonsterHitParticleList_[Count_]->SetDir(_Dir);
+
+			if (_Dir.CompareInt2D(float4::RIGHT))
+			{
+				MonsterHitParticleList_[Count_]->GetTransform().SetWorldMove({
+					_Scale.x/4,
+					_Scale.y/4, });
+			}
+			else if (_Dir.CompareInt2D(float4::LEFT))
+			{
+				MonsterHitParticleList_[Count_]->GetTransform().SetWorldMove({
+					-_Scale.x / 4,
+					_Scale.y / 4, });
+			}
+			else if (_Dir.CompareInt2D(float4::UP))
+			{
+				MonsterHitParticleList_[Count_]->GetTransform().SetWorldMove({
+					0,
+					+_Scale.y / 4, });
+			}
+			else if (_Dir.CompareInt2D(float4::DOWN))
+			{
+				MonsterHitParticleList_[Count_]->GetTransform().SetWorldMove({
+					0,
+					+_Scale.y / 4, });
+			}
+
+
+			++Count_;
+		}
+	}
 
 	void SubHP(int _i)
 	{
