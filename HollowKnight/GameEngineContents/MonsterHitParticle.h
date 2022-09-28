@@ -4,7 +4,8 @@
 
 // 각 랜더러는 애니메이션이 있다.
 // 바닥에 닿으면 애니메이션 재생하고 죽는당
-// 설명 :
+// 임팩트 온 -> 땅에 닿았았을 때 터진다. 
+// 임펙트 오프 -> 땅에 닿았을때 터지지 않고(픽셀충돌을 하지 않고), 스케일이 작아진다. 
 class MonsterHitParticle : public GameEngineActor
 {
 public:
@@ -23,8 +24,10 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-	float Scale_;
+	bool isImpact_;
 
+
+	float Scale_;
 	float Speed_;
 
 	std::vector<GameEngineTextureRenderer*> ParticleList_;
@@ -40,5 +43,7 @@ private:
 
 public:
 	void SetDir(float4 _Dir);
+	void SetTexWhite();
+	void SetisImpact(bool _b);
 };
 

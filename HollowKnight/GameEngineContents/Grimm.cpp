@@ -74,11 +74,36 @@ void Grimm::Start()
 	GetRenderer()->GetTransform().SetLocalPosition({0,-50});
 	GetTransform().SetLocalPosition({ 300,-500, static_cast<float>(Z_ORDER::Monster) });
 	SetHP(30);
+	CreateMonsterHitParticle(30);
+	SetMonsterHitEffectWhiteTex();
+	SetMonsterHitEffectisImpact();
 
 	SetMoveDirection(float4::RIGHT);
-	//SetMonsterDirection();
 
-	//SetDirRendererXScale();
+	EventState_ = EventState::Appear;
+
+	GrimmSmoke_ = GetLevel()->CreateActor<GrimmSmoke>();
+	GrimmSmoke_->Off();
+
+	for (int i = 0; i < 60; ++i)
+	{
+		GrimmFlameBallparticleList_.push_back(GetLevel()->CreateActor<GrimmFlameBallparticle>());
+
+		GrimmFlameBallparticleList_.back()->Off();
+	}
+
+	for (int i = 0; i < GrimmCastPillarEffectCount_; ++i)
+	{
+		GrimmCastPillarEffectList_.push_back(GetLevel()->CreateActor<GrimmCastPillarEffect>());
+		GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
+	}
+
+	MonsterHitParticle* MonsterHitParticle_ = GetLevel()->CreateActor<MonsterHitParticle>();
+	MonsterHitParticle_->GetTransform().SetWorldPosition({ 500, -700 });
+
+	MonsterHitParticle_->SetDir(float4::RIGHT);
+
+
 
 	//================================
 	//    Create Animation | Common
@@ -269,6 +294,7 @@ void Grimm::Start()
 
 
 
+	GetRenderer()->Off();
 
 	//================================
 	//    Create State | Appear
@@ -420,32 +446,6 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmBattlStunBatEndEnd, this, std::placeholders::_1));
 
 
-	EventState_ = EventState::Appear;
-	GetRenderer()->Off();
-
-	GrimmSmoke_ = GetLevel()->CreateActor<GrimmSmoke>();
-	GrimmSmoke_->Off();
-
-	for (int i = 0; i < 60; ++i)
-	{
-		GrimmFlameBallparticleList_.push_back(GetLevel()->CreateActor<GrimmFlameBallparticle>());
-
-		GrimmFlameBallparticleList_.back()->Off();
-	}
-	
-
-
-	for (int i = 0; i < GrimmCastPillarEffectCount_; ++i)
-	{
-		GrimmCastPillarEffectList_.push_back(GetLevel()->CreateActor<GrimmCastPillarEffect>());
-		GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
-	}
-
-	MonsterHitParticle* MonsterHitParticle_ = GetLevel()->CreateActor<MonsterHitParticle>();
-	MonsterHitParticle_->GetTransform().SetWorldPosition({ 500, -700 });
-
-	MonsterHitParticle_->SetDir(float4::RIGHT);
-
 }
 
 void Grimm::Update(float _DeltaTime)
@@ -474,6 +474,7 @@ void Grimm::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 	if (isHitWhiteEffect_ == false)
 	{
 		SubHP(_Damage);
+		SetCreateMonsterHitParticleOn(_KnightDir, float4{ 309.f, 508.f });
 
 		if (GetHP() == 25)
 		{

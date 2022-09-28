@@ -55,6 +55,22 @@ public:
 		}
 	}
 
+	void SetMonsterHitEffectWhiteTex()
+	{
+		for (int i = 0; i < MonsterHitParticleList_.size(); ++i)
+		{
+			MonsterHitParticleList_[i]->SetTexWhite();
+		}
+	}
+
+	void SetMonsterHitEffectisImpact()
+	{
+		for (int i = 0; i < MonsterHitParticleList_.size(); ++i)
+		{
+			MonsterHitParticleList_[i]->SetisImpact(false);
+		}
+	}
+
 	void SetCreateMonsterHitParticleOn(float4 _Dir, float4 _Scale)
 	{
 		if (Count_ < MonsterHitParticleList_.size())

@@ -4,6 +4,8 @@
 
 MonsterHitParticle::MonsterHitParticle() 
 	:
+	isImpact_(true),
+
 	Scale_(1.0f),
 	Speed_(0.0f)
 {
@@ -24,9 +26,12 @@ void MonsterHitParticle::Start()
 		ParticleList_.back()->SetTexture("white_hit_particle_Orange.png", RamdomIndex);
 		ParticleList_.back()->ScaleToCutTexture(RamdomIndex);
 
-		ParticleList_.back()->GetTransform().SetWorldScale({
-		ParticleList_.back()->GetTransform().GetLocalScale().x + GameEngineRandom::MainRandom.RandomFloat(-10.f, 0.f)
-		,	ParticleList_.back()->GetTransform().GetLocalScale().y  }
+	//	int RamdomScale= GameEngineRandom::MainRandom.RandomFloat(0.6f, 0.9f);
+
+
+		ParticleList_.back()->GetTransform().SetLocalScale({
+		ParticleList_.back()->GetTransform().GetLocalScale().x 
+		,	ParticleList_.back()->GetTransform().GetLocalScale().y }
 		);
 
 		ParticleList_.back()->CreateFrameAnimationCutTexture("IDLE", FrameAnimation_DESC("white_hit_particle_Orange.png", RamdomIndex, RamdomIndex, 0.100f, false));
@@ -117,21 +122,29 @@ void MonsterHitParticle::Update(float _DeltaTime)
 			}
 		}
 
-		//Scale_ -= 0.12f * _DeltaTime;
-		//if (Scale_ <= 0.f)
-		//{
-		//	ParticleList_[i]->Off();
-		//	Scale_ = 0.f;
-		//	this->Death();
-		//}
+		if (isImpact_ == false)
+		{
+			Scale_ -= 0.12f * _DeltaTime;
+			if (Scale_ <= 0.f)
+			{
+				ParticleList_[i]->Off();
+				Scale_ = 0.f;
+				this->Death();
+			}
+
+			ParticleList_[i]->GetTransform().SetLocalScale(InitScale_[i] * Scale_);
+		}
+
 		if (isEndMove_[i] == false)
 		{
 			ParticleList_[i]->GetTransform().SetLocalScale(InitScale_[i]);
 
 		}
 	}
-
-	isPixelCheck(_DeltaTime);
+	if (isImpact_ == true)
+	{
+		isPixelCheck(_DeltaTime);
+	}
 }
 
 void MonsterHitParticle::isPixelCheck(float _DeltaTime)
@@ -223,5 +236,18 @@ void MonsterHitParticle::SetDir(float4 _Dir)
 
 		InitDir_.push_back(Dir);
 	}
+}
+
+void MonsterHitParticle::SetTexWhite()
+{
+	for (int i = 0; i < ParticleList_.size(); ++i)
+	{
+		ParticleList_[i]->SetTexture("white_hit_particle_Orange.png");
+	}
+}
+
+void MonsterHitParticle::SetisImpact(bool _b)
+{
+	isImpact_ = _b;
 }
 
