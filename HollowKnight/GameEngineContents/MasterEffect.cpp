@@ -58,32 +58,32 @@ void MasterEffect::SetBlendMode(BlendMode _Mode)
 	switch (_Mode)
 	{
 	case BlendMode::Alpha:
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend");
+		MainRenderer_->GetClonePipeLine()->SetOutputMergerBlend("AlphaBlend");
 
 		break;
 	case BlendMode::Overlay:
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
+		MainRenderer_->GetClonePipeLine()->SetOutputMergerBlend("TransparentBlend");
 
 		break;
 	case BlendMode::Lighten:
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("LightenBlend");
+		MainRenderer_->GetClonePipeLine()->SetOutputMergerBlend("LightenBlend");
 
 		break;
 	case BlendMode::Multply:
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("MultplyBlend");
+		MainRenderer_->GetClonePipeLine()->SetOutputMergerBlend("MultplyBlend");
 
 		break;
 	case BlendMode::Add:
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+		MainRenderer_->GetClonePipeLine()->SetOutputMergerBlend("AddBlend");
 
 		break;
 
 	case BlendMode::Addition:
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("Addition");
+		MainRenderer_->GetClonePipeLine()->SetOutputMergerBlend("Addition");
 
 		break;
 	case BlendMode::Darken:
-		MainRenderer_->GetPipeLine()->SetOutputMergerBlend("DarkenBlend");
+		MainRenderer_->GetClonePipeLine()->SetOutputMergerBlend("DarkenBlend");
 
 		break;
 	default:

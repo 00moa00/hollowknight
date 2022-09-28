@@ -63,7 +63,7 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		break;
 	case ITEM_LIST::Nail:
 		GetTransform().SetLocalPosition({ -710.f, -150.f });
-		Item_->GetRenderer()->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
+		Item_->GetRenderer()->GetClonePipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
 		SetInfoName("낡은 대못");
 		SetInfo("신성둥지의 전통적인 무기. 세월과 마모로 인해 날이 무디어져 있습니다.");
@@ -74,7 +74,7 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		//SpellRing_ = CreateComponent<GameEngineUIRenderer>();
 		SpellRing_->SetTexture("spell_ring.png");
 		SpellRing_->GetTransform().SetLocalScale({ 100,100 });
-		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
+		SpellRing_->GetClonePipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
 		GetTransform().SetLocalPosition({ -500.f, -30 });
 
@@ -86,7 +86,7 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		//SpellRing_ = CreateComponent<GameEngineUIRenderer>();
 		SpellRing_->SetTexture("spell_ring.png");
 		SpellRing_->GetTransform().SetLocalScale({ 100,100 });
-		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
+		SpellRing_->GetClonePipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
 		GetTransform().SetLocalPosition({ -340.f, -30 });
 
@@ -101,7 +101,7 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		SpellRing_->SetTexture("spell_ring.png");
 
 		SpellRing_->GetTransform().SetLocalScale(Item_->GetRenderer()->GetCurTexture()->GetScale());
-		SpellRing_->GetPipeLine()->SetOutputMergerBlend("AlphaBlend2");
+		SpellRing_->GetClonePipeLine()->SetOutputMergerBlend("AlphaBlend2");
 
 		GetTransform().SetLocalPosition({ -420.f, -100.f });
 

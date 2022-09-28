@@ -132,7 +132,7 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 
 
 
-		GrimmBattleManager_.ChangeState("BATTLE_SPIKE_START");
+		GrimmBattleManager_.ChangeState(ChangeState_);
 		return;
 	}
 }

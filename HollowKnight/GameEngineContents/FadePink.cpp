@@ -17,7 +17,7 @@ void FadePink::Start()
 	PinkRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	PinkRenderer_->SetTexture("FadePink.png");
 	PinkRenderer_->GetTransform().SetLocalScale(PinkRenderer_->GetCurTexture()->GetScale());
-	PinkRenderer_->GetPipeLine()->SetOutputMergerBlend("LightenBlend");
+	PinkRenderer_->GetClonePipeLine()->SetOutputMergerBlend("LightenBlend");
 	//PinkRenderer_->GetPixelData().MulColor.a = 0.f;
 
 	PinkRenderer_->GetTransform().SetWorldPosition({ 0,0, -500 });

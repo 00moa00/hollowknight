@@ -14,7 +14,7 @@ void OverlayBlend::Start()
 	Renderer_ = CreateComponent<GameEngineTextureRenderer>();
 	Renderer_->SetTexture("PostEffectOverlay.png");
 	Renderer_->GetTransform().SetLocalScale(GameEngineWindow::GetInst()->GetScale());
-	Renderer_->GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
+	Renderer_->GetClonePipeLine()->SetOutputMergerBlend("TransparentBlend");
 
 }
 

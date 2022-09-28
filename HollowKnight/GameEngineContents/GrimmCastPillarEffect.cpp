@@ -44,7 +44,7 @@ void GrimmCastPillarEffect::Start()
 			//ParticleList_.back()->GetPixelData().PlusColor.r = 1.0f;
 			//ParticleList_.back()->GetPixelData().MulColor.r = 1.0f;
 			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.7f, 0.9f);
-			ParticleList_.back()->GetPipeLine()->SetOutputMergerBlend("Overlay");
+			ParticleList_.back()->GetClonePipeLine()->SetOutputMergerBlend("Overlay");
 			//ParticleList_.back()->SetTexture("grimm_smoke2.png");
 
 		}
@@ -55,7 +55,7 @@ void GrimmCastPillarEffect::Start()
 			Move.y = { GameEngineRandom::MainRandom.RandomFloat(-300.f, -100.f) };
 			//ParticleList_.back()->GetPixelData().PlusColor.r = 1.0f;
 			//ParticleList_.back()->GetPixelData().MulColor.r = 1.0f;
-			ParticleList_.back()->GetPipeLine()->SetOutputMergerBlend("Overlay");
+			ParticleList_.back()->GetClonePipeLine()->SetOutputMergerBlend("Overlay");
 			//ParticleList_.back()->SetTexture("grimm_smoke2.png");
 
 			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.7f, 0.9f);
@@ -65,7 +65,7 @@ void GrimmCastPillarEffect::Start()
 		{
 			Move.x = { GameEngineRandom::MainRandom.RandomFloat(-20.f, 20.f) };
 			Move.y = 0.f;
-			ParticleList_.back()->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+			ParticleList_.back()->GetClonePipeLine()->SetOutputMergerBlend("AddBlend");
 
 			//ParticleList_.back()->SetTexture("grimm_smoke.png");
 			ParticleList_.back()->GetTransform().SetWorldScale({

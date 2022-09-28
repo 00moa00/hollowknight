@@ -40,7 +40,7 @@ void GrimmFire::Start()
 		//FireBallRenderer1->ScaleToCutTexture(0);
 
 		FireBallRenderer1->GetTransform().SetLocalScale({151, 164});
-		FireBallRenderer1->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+		FireBallRenderer1->GetClonePipeLine()->SetOutputMergerBlend("AddBlend");
 		FireBallRenderer1->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", 0, 7, 0.040f, true));
 		FireBallRenderer1->ChangeFrameAnimation("ANIMATION");
 	}
@@ -65,7 +65,7 @@ void GrimmFire::Start()
 		FireBallRenderer2->GetTransform().SetLocalScale({ 151, 164 });
 
 		//FireBallRenderer2->GetTransform().SetLocalScale(FireBallRenderer2->GetCurTexture()->GetScale());
-		FireBallRenderer2->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+		FireBallRenderer2->GetClonePipeLine()->SetOutputMergerBlend("AddBlend");
 		FireBallRenderer2->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", CustomAni, 0.040f, true));
 		FireBallRenderer2->ChangeFrameAnimation("ANIMATION");
 	}
@@ -90,7 +90,7 @@ void GrimmFire::Start()
 		FireBallRenderer3->SetTexture("Grimmkin Cln_grimm_fireball0000-Sheet.png");
 
 		//FireBallRenderer3->GetTransform().SetLocalScale(FireBallRenderer3->GetCurTexture()->GetScale());
-		FireBallRenderer3->GetPipeLine()->SetOutputMergerBlend("AddBlend");
+		FireBallRenderer3->GetClonePipeLine()->SetOutputMergerBlend("AddBlend");
 		FireBallRenderer3->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Grimmkin Cln_grimm_fireball0000-Sheet.png", CustomAni, 0.040f, true));
 		FireBallRenderer3->ChangeFrameAnimation("ANIMATION");
 		FireBallRenderer3->GetTransform().SetLocalScale({ 151, 164 });
