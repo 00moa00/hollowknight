@@ -181,6 +181,11 @@ void Grimm::Start()
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("SPRIKE_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_Boss_ground_spike_attack0003-Sheet.png", 0, 6, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SPRIKE_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_Boss_ground_spike_attack0003-Sheet.png", 4, 6, 0.050f, true));
+	
+	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_death_stun0000-Sheet.png", 0, 1, 0.050f, true));
+
+
+
 
 	GetRenderer()->CreateFrameAnimationCutTexture("BAT_APPEAR_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_stun_bat0000-Sheet.png", 0, 1, 0.060f, false));
 	GetRenderer()->ScaleToCutTexture(0);
@@ -505,9 +510,23 @@ void Grimm::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 		SubHP(_Damage);
 		SetCreateMonsterHitParticleOn(_KnightDir, float4{ 309.f, 508.f });
 
-		if (GetHP() == 25)
+		if (GetHP() == 3)
+		{
+			GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE1");
+			return;
+
+		}
+		else if (GetHP() == 14)
 		{
 			GrimmBattleManager_.ChangeState("BATTLE_STUN");
+			return;
+
+		}
+		else if (GetHP() == 7)
+		{
+			GrimmBattleManager_.ChangeState("BATTLE_STUN");
+			return;
+
 		}
 		else
 		{

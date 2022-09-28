@@ -232,13 +232,11 @@ void Grimm::GrimmAppearRoarUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (_Info.StateTime > 2.0f)
 	{
-		//BossRoarEffect_->Death();
 		EventState_ = EventState::Battle;
-		GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE1");
-		return;
-		//SetChangeStateString(PatternType::BATTLE_BALLOON_START);
+		GrimmBattleManager_.ChangeState("BATTLE_TELEPORT_DISAPPEAR");
+		SetChangeStateString(PatternType::BATTLE_BALLOON_START);
 
-		//GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
 	}
 }
 
