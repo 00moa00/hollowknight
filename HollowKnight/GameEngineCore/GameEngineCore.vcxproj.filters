@@ -168,6 +168,9 @@
     <ClInclude Include="GameEngineInstancingBuffer.h">
       <Filter>Resources\InputAssembler</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineInstancing.h">
+      <Filter>Resources\InputAssembler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -325,6 +328,9 @@
       <Filter>Object\Component\Rendering\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineInstancingBuffer.cpp">
+      <Filter>Resources\InputAssembler</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineInstancing.cpp">
       <Filter>Resources\InputAssembler</Filter>
     </ClCompile>
   </ItemGroup>
