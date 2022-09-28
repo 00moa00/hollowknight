@@ -19,14 +19,14 @@ void MonsterHitParticle::Start()
 {
 	Speed_ = 1500.f;
 
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 25; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
 		int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 2);
 		ParticleList_.back()->SetTexture("white_hit_particle_Orange.png", RamdomIndex);
 		ParticleList_.back()->ScaleToCutTexture(RamdomIndex);
 
-	//	int RamdomScale= GameEngineRandom::MainRandom.RandomFloat(0.6f, 0.9f);
+		//int RamdomScale= GameEngineRandom::MainRandom.RandomFloat(0.6f, 0.9f);
 
 
 		ParticleList_.back()->GetTransform().SetLocalScale({
@@ -36,7 +36,7 @@ void MonsterHitParticle::Start()
 
 		//ParticleList_.back()->CreateFrameAnimationCutTexture("IDLE", FrameAnimation_DESC("white_hit_particle_Orange.png", RamdomIndex, RamdomIndex, 0.100f, false));
 		ParticleList_.back()->CreateFrameAnimationCutTexture("SHOT_ANIMATION", FrameAnimation_DESC("Projectiles_shot_impact0001-Sheet.png", 0, 6, 0.02f, false));
-	//	ParticleList_.back()->ChangeFrameAnimation("IDLE");
+		//ParticleList_.back()->ChangeFrameAnimation("IDLE");
 
 		//ParticleList_.back()->InstancingOn();
 
@@ -196,19 +196,47 @@ void MonsterHitParticle::SetDir(float4 _Dir)
 		_Dir.Normalize();
 		if (_Dir.CompareInt2D(float4::RIGHT))
 		{
-			Dir.x = GameEngineRandom::MainRandom.RandomFloat(0.f, 1.f);
-			Dir.y= GameEngineRandom::MainRandom.RandomFloat(-1.0f, 1.5f);
-			
-			StartDirList_.push_back(float4::RIGHT);
-			DirList_.push_back(Dir);
+			int RamDir = GameEngineRandom::MainRandom.RandomInt(0, 4);
+			if(RamDir == 0)
+			{
+				Dir.x = GameEngineRandom::MainRandom.RandomFloat(-1.f, 0.f);
+				Dir.y = GameEngineRandom::MainRandom.RandomFloat(-1.0f, 1.5f);
+
+				StartDirList_.push_back(float4::LEFT);
+				DirList_.push_back(Dir);
+			}
+			else
+			{
+				Dir.x = GameEngineRandom::MainRandom.RandomFloat(0.f, 1.f);
+				Dir.y = GameEngineRandom::MainRandom.RandomFloat(-1.0f, 1.5f);
+
+				StartDirList_.push_back(float4::RIGHT);
+				DirList_.push_back(Dir);
+			}
+
+
 		}
 		else if (_Dir.CompareInt2D(float4::LEFT))
 		{
-			Dir.x = GameEngineRandom::MainRandom.RandomFloat(-1.f, 0.f);
-			Dir.y = GameEngineRandom::MainRandom.RandomFloat(-1.0f, 1.5f);
 
-			StartDirList_.push_back(float4::LEFT);
-			DirList_.push_back(Dir);
+			int RamDir = GameEngineRandom::MainRandom.RandomInt(0, 4);
+			if (RamDir == 0)
+			{
+				Dir.x = GameEngineRandom::MainRandom.RandomFloat(0.f, 1.f);
+				Dir.y = GameEngineRandom::MainRandom.RandomFloat(-1.0f, 1.5f);
+
+				StartDirList_.push_back(float4::RIGHT);
+				DirList_.push_back(Dir);
+			}
+			else
+			{
+				Dir.x = GameEngineRandom::MainRandom.RandomFloat(-1.f, 0.f);
+				Dir.y = GameEngineRandom::MainRandom.RandomFloat(-1.0f, 1.5f);
+
+				StartDirList_.push_back(float4::LEFT);
+				DirList_.push_back(Dir);
+			}
+
 		}
 		else if (_Dir.CompareInt2D(float4::UP))
 		{
