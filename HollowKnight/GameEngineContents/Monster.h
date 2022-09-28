@@ -3,6 +3,7 @@
 #include "MasterActor.h"
 #include "MonsterHitParticle.h"
 #include "MonsterHitPuffEffect.h"
+#include "MonsterDeathPuffParticle.h"
 
 // Ό³Έν :
 class Monster : public MasterActor
@@ -35,6 +36,7 @@ private:
 	int HitParticleCount_;
 	int HitParticlePuffCount_;
 
+	MonsterDeathPuffParticle* MonsterDeathPuffParticle_;
 
 	std::vector<MonsterHitParticle*>MonsterHitParticleList_;
 	std::vector<MonsterHitPuffEffect*>MonsterHitPuffEffectList_;
@@ -48,7 +50,9 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void CreateMonsterDeathPuffParticle();
 
+	void SetMonsterDeathPuffParticleOn();
 
 	void CreateMonsterHitPuffParticle(int _i)
 	{
@@ -97,8 +101,6 @@ public:
 			++HitParticlePuffCount_;
 		}
 	}
-
-
 
 	void CreateMonsterHitParticle(int _i)
 	{

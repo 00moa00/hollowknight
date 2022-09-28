@@ -101,6 +101,10 @@ void MonsterHitPuffEffect::Update(float _DeltaTime)
 
 	}
 
+	if (GetAccTime() > 5.0f)
+	{
+		this->Death();
+	}
 }
 
 void MonsterHitPuffEffect::SetDir(float4 _Dir)

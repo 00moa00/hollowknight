@@ -42,7 +42,6 @@ void GrimmFlameBallparticle::Start()
 void GrimmFlameBallparticle::Update(float _DeltaTime)
 {
 	Scale_ -= 2.0f * _DeltaTime;
-	////Alpha_ -= 2.7f * _DeltaTime;
 
 	if (Scale_ <= 0.f)
 	{
@@ -50,21 +49,12 @@ void GrimmFlameBallparticle::Update(float _DeltaTime)
 		this->Off();
 	}
 
-	//if (Alpha_ <= 0.0f)
-	//{
-	//	Alpha_ = 0.f;
-	//}
-
 	for (int i = 0; i < 30; ++i)
 	{
-		
 		float4 Move = Dir_[i].NormalizeReturn() * GameEngineRandom::MainRandom.RandomFloat(450.f, 650.f) * _DeltaTime;
 
 		BallParticleList_[i]->GetTransform().SetLocalMove(Move);
 		BallParticleList_[i]->GetTransform().SetWorldScale(ScaleList_[i] * Scale_);
-
-
-		//BallParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
 	}
 }
 

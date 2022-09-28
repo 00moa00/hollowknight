@@ -26,8 +26,6 @@ private:
 	float Length_;
 	float Alpha_;
 
-	//float4 Dir_;
-
 	std::vector<GameEngineTextureRenderer*> BallParticleList_;
 	std::vector<float4> Dir_;
 	std::vector<float4> ScaleList_;

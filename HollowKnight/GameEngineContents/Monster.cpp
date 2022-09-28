@@ -50,3 +50,15 @@ void Monster::SetDirRendererXScale()
 	}
 }
 
+void Monster::CreateMonsterDeathPuffParticle()
+{
+	MonsterDeathPuffParticle_ = GetLevel()->CreateActor<MonsterDeathPuffParticle>();
+	MonsterDeathPuffParticle_->Off();
+}
+
+void Monster::SetMonsterDeathPuffParticleOn()
+{
+	MonsterDeathPuffParticle_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50 });
+	MonsterDeathPuffParticle_->FlameBallparticleOn();
+}
+

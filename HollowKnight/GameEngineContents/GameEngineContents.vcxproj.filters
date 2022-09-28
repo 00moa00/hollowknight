@@ -591,12 +591,6 @@
     <ClInclude Include="GrimmSmoke.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
-    <ClInclude Include="GrimmSmokeConst.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
-    </ClInclude>
-    <ClInclude Include="GrimmSmokeDynamic.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
-    </ClInclude>
     <ClInclude Include="GrimmFlameBallparticle.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
@@ -611,6 +605,9 @@
     </ClInclude>
     <ClInclude Include="MonsterHitPuffEffect.h">
       <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterDeathPuffParticle.h">
+      <Filter>Actor\Play\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1055,12 +1052,6 @@
     <ClCompile Include="GrimmSmoke.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
-    <ClCompile Include="GrimmSmokeConst.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
-    </ClCompile>
-    <ClCompile Include="GrimmSmokeDynamic.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
-    </ClCompile>
     <ClCompile Include="GrimmFlameBallparticle.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
@@ -1075,6 +1066,9 @@
     </ClCompile>
     <ClCompile Include="MonsterHitPuffEffect.cpp">
       <Filter>Actor\Effect\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterDeathPuffParticle.cpp">
+      <Filter>Actor\Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

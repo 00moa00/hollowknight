@@ -98,9 +98,10 @@ void Crawlid::Start()
 	SetFallSpeed(2);
 	SetGravity(400.f);
 	SetSpeed(100.f);
-	SetHP(10);
-	CreateMonsterHitParticle(10);
-	CreateMonsterHitPuffParticle(10);
+	SetHP(2);
+	CreateMonsterHitParticle(2);
+	CreateMonsterHitPuffParticle(2);
+	CreateMonsterDeathPuffParticle();
 
 	SetMoveDirection(float4::RIGHT);
 
@@ -273,7 +274,7 @@ void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
 		CrawildKnockbackTimer_ = 0.f;
 		if (GetisMonsterDeath() == true)
 		{
-
+			SetMonsterDeathPuffParticleOn();
 			CrawlidManager_.ChangeState("DEATH");
 		}
 

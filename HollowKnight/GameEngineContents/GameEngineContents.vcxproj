@@ -381,14 +381,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GrimmSmokeConst.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GrimmSmokeDynamic.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="GrimmSpike.h">
       <SubType>
       </SubType>
@@ -430,6 +422,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="MapShopLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MonsterDeathPuffParticle.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -975,14 +971,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="GrimmSmokeConst.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GrimmSmokeDynamic.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="GrimmSpike.cpp">
       <SubType>
       </SubType>
@@ -1024,6 +1012,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MapShopLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MonsterDeathPuffParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>
