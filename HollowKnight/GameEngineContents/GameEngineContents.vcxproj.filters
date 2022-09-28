@@ -166,6 +166,9 @@
     <Filter Include="Actor\Effect\Monster\Grimm">
       <UniqueIdentifier>{397f0ed2-1964-4657-8adc-b4c599abaef3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\Monster\Grimm\Death">
+      <UniqueIdentifier>{4665597b-2af8-461d-8df4-e9754acdd754}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -611,6 +614,15 @@
     </ClInclude>
     <ClInclude Include="MonsterHitOrangeLight.h">
       <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmDeathCircleParticle.h">
+      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmDeathSmallParticle.h">
+      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmDeathExplosionParticle.h">
+      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1075,6 +1087,15 @@
     </ClCompile>
     <ClCompile Include="MonsterHitOrangeLight.cpp">
       <Filter>Actor\Effect\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmDeathCircleParticle.cpp">
+      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmDeathSmallParticle.cpp">
+      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmDeathExplosionParticle.cpp">
+      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

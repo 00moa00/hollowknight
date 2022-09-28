@@ -484,7 +484,7 @@ void MainCameraManager::BossShakingUpdate(float _DeltaTime, const StateInfo& _In
 
 	seed += (_DeltaTime);
 	const float shake = 2.0f * static_cast<float>(Pn_.noise(seed * 15.f, seed * 15.f, 0)) - 1.0f;
-	float4 ShakePosition = { shake * 10.f, shake * 10.f };
+	float4 ShakePosition = { shake * 15.f, shake * 15.f };
 	//float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew() };
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);

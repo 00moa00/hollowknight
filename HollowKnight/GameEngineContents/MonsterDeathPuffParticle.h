@@ -1,6 +1,5 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
-#include <GameEngineCore/GameEngineCollision.h>
 
 // Ό³Έν :
 class MonsterDeathPuffParticle : public GameEngineActor
@@ -28,10 +27,10 @@ private:
 
 	std::vector<GameEngineTextureRenderer*> ParticleList_;
 	std::vector<float4> Dir_;
-	std::vector<float4> ScaleList_;
-	std::vector<float4> InitPos_;
+	//std::vector<float4> ScaleList_;
+	//std::vector<float4> InitPos_;
 
 public:
-	void FlameBallparticleOn();
+	void ParticleOn();
 };
 

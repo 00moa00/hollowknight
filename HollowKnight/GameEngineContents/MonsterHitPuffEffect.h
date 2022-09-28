@@ -20,20 +20,20 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-
 	float Speed_;
-
 
 	std::vector<GameEngineTextureRenderer*> ParticleList_;
 	std::vector<float4> DirList_;
 	std::vector<float4> InitDir_;
-	std::vector<float4> InitScale_;
-	std::vector<bool> isEndMove_;
+	//std::vector<float4> InitScale_;
+	//std::vector<bool> isEndMove_;
 
 	std::vector<float4> StartDirList_;
 
 public:
 	void SetDir(float4 _Dir);
 
+public:
 };
 
+ 

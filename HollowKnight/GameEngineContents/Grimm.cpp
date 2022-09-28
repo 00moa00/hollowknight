@@ -104,6 +104,21 @@ void Grimm::Start()
 	MonsterHitParticle_->SetDir(float4::RIGHT);
 
 
+	for (int i = 0; i < 30; ++i)
+	{
+		GrimmDeathCircleParticleList_.push_back(GetLevel()->CreateActor<GrimmDeathCircleParticle>());
+		GrimmDeathSmallParticleList_.push_back(GetLevel()->CreateActor<GrimmDeathSmallParticle>());
+		GrimmDeathCircleParticleList_.back()->Off();
+		GrimmDeathSmallParticleList_.back()->Off();
+
+	}
+
+
+	for (int i = 0; i < 15; ++i)
+	{
+		GrimmDeathExplosionParticleList_.push_back(GetLevel()->CreateActor<GrimmDeathExplosionParticle>());
+		GrimmDeathExplosionParticleList_.back() ->Off();
+	}
 
 	//================================
 	//    Create Animation | Common
@@ -445,6 +460,20 @@ void Grimm::Start()
 		, std::bind(&Grimm::GrimmBattlStunBatEndStart, this, std::placeholders::_1)
 		, std::bind(&Grimm::GrimmBattlStunBatEndEnd, this, std::placeholders::_1));
 
+	GrimmBattleManager_.CreateStateMember("BATTLE_DEATH_SCENE1"
+		, std::bind(&Grimm::GrimmDeathScene1Update, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmDeathScene1Start, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmDeathScene1End, this, std::placeholders::_1));
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_DEATH_SCENE2"
+		, std::bind(&Grimm::GrimmDeathScene2Update, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmDeathScene2Start, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmDeathScene2End, this, std::placeholders::_1));
+
+	GrimmBattleManager_.CreateStateMember("BATTLE_DEATH_SCENE3"
+		, std::bind(&Grimm::GrimmDeathScene3Update, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Grimm::GrimmDeathScene3Start, this, std::placeholders::_1)
+		, std::bind(&Grimm::GrimmDeathScene3End, this, std::placeholders::_1));
 
 }
 
@@ -578,4 +607,9 @@ void Grimm::SetChangeBatScaleX()
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 
 	}
+}
+
+bool Grimm::MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	return true;
 }

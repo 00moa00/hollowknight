@@ -345,6 +345,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GrimmDeathCircleParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmDeathExplosionParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmDeathSmallParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GrimmFire.h">
       <SubType>
       </SubType>
@@ -936,6 +948,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GrimmCrowds.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmDeathCircleParticle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmDeathExplosionParticle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmDeathSmallParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>

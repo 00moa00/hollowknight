@@ -42,10 +42,11 @@ void BossRoarEffect::Update(float _DeltaTime)
 	{
 		CreateTimer_ = 0.0f;
 		BossRoarRingEffect* BossRoarRingEffect_ = GetLevel()->CreateActor<BossRoarRingEffect>();
-		BossRoarRingEffect_->SetParent(this);
+		BossRoarRingEffect_->GetTransform().SetWorldPosition({GetTransform().GetWorldPosition()});
+		//BossRoarRingEffect_->SetParent(this);
 	}
 
-	if (GetAccTime() > 1.f)
+	if (GetAccTime() > 2.f)
 	{
 		this->Death();
 	}

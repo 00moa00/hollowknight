@@ -26,7 +26,7 @@ void BossRoarRingEffect::Start()
 
 void BossRoarRingEffect::Update(float _DeltaTime)
 {
-	AddScale_ += 50.f * _DeltaTime;
+	AddScale_ += 100.f * _DeltaTime;
 	Alpha_ -= 1.0f * _DeltaTime;
 	RoarRingRenderer_->GetTransform().SetWorldScale({ RoarRingRenderer_->GetTransform().GetWorldScale().x + AddScale_.x, RoarRingRenderer_->GetTransform().GetWorldScale().y + AddScale_.y });
 	RoarRingRenderer_->GetPixelData().MulColor.a = Alpha_;

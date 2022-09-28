@@ -17,12 +17,12 @@ MonsterDeathPuffParticle::~MonsterDeathPuffParticle()
 
 void MonsterDeathPuffParticle::Start()
 {
-	for (int i = 0; i < 75; ++i)
+	for (int i = 0; i < 40; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
 		ParticleList_.back()->SetTexture("orange_puff_animated.png");
 
-		ParticleList_.back()->CreateFrameAnimationCutTexture("SHOT_ANIMATION", FrameAnimation_DESC("orange_puff_animated.png", 0, 9, 0.080f, false));
+		ParticleList_.back()->CreateFrameAnimationCutTexture("SHOT_ANIMATION", FrameAnimation_DESC("orange_puff_animated.png", 0, 9, 0.070f, false));
 		ParticleList_.back()->ChangeFrameAnimation("SHOT_ANIMATION");
 
 		float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(0.6f, 0.9f);
@@ -37,15 +37,17 @@ void MonsterDeathPuffParticle::Start()
 		ParticleList_.back()->GetPixelData().MulColor.a = RamdomAlpha;
 				
 		Dir_.push_back({ GameEngineRandom::MainRandom.RandomFloat(-1.f, 1.f), GameEngineRandom::MainRandom.RandomFloat(-1.f, 1.f) });
-		float4 Len = GameEngineRandom::MainRandom.RandomFloat(0.f, 120.f);
+		float4 Len = GameEngineRandom::MainRandom.RandomFloat(0.f, 140.f);
 
+		float RamdomRo = GameEngineRandom::MainRandom.RandomFloat(-10.f, 10.f);
+		ParticleList_.back()->GetTransform().SetWorldRotation({0,0,RamdomRo });
 
 
 		float4 Move = Len * Dir_.back().NormalizeReturn();
 
 		ParticleList_.back()->GetTransform().SetLocalMove(Move);
-		InitPos_.push_back(ParticleList_.back()->GetTransform().GetLocalPosition());
-		ScaleList_.push_back(ParticleList_.back()->GetTransform().GetLocalScale());
+		//InitPos_.push_back(ParticleList_.back()->GetTransform().GetLocalPosition());
+		//ScaleList_.push_back(ParticleList_.back()->GetTransform().GetLocalScale());
 	}
 }
 
@@ -59,10 +61,10 @@ void MonsterDeathPuffParticle::Update(float _DeltaTime)
 		this->Off();
 	}
 
-	for (int i = 0; i < 30; ++i)
+	for (int i = 0; i < ParticleList_.size(); ++i)
 	{
 
-		float4 Move = Dir_[i].NormalizeReturn() * GameEngineRandom::MainRandom.RandomFloat(110.f, 450.f) * _DeltaTime;
+		float4 Move = Dir_[i].NormalizeReturn() * GameEngineRandom::MainRandom.RandomFloat(5.f, 100.f) * _DeltaTime;
 
 		ParticleList_[i]->GetTransform().SetLocalMove(Move);
 		if (ParticleList_[i]->GetCurFrameAnimation()->GetFrameAnimationDesc().GetCurFrame() == 9)
@@ -78,7 +80,7 @@ void MonsterDeathPuffParticle::Update(float _DeltaTime)
 	}
 }
 
-void MonsterDeathPuffParticle::FlameBallparticleOn()
+void MonsterDeathPuffParticle::ParticleOn()
 {
 	On();
 	Scale_ = 1.0f;

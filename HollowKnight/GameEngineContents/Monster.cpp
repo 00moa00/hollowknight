@@ -60,6 +60,6 @@ void Monster::CreateMonsterDeathPuffParticle()
 void Monster::SetMonsterDeathPuffParticleOn()
 {
 	MonsterDeathPuffParticle_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50 });
-	MonsterDeathPuffParticle_->FlameBallparticleOn();
+	MonsterDeathPuffParticle_->ParticleOn();
 }
 

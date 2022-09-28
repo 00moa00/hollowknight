@@ -929,6 +929,7 @@ void ContentsCore::Start()
 
 		GameEngineTexture::Cut("Grimm_flame_ball_particle.png", 3, 1);
 		GameEngineTexture::Cut("grimm_particle_flame.png", 9, 1);
+		GameEngineTexture::Cut("white_hit_particle_Pink.png", 1, 3);
 	}
 
 	//================================
@@ -1485,6 +1486,7 @@ void ContentsCore::Start()
 
 		GameEngineTexture::Cut("Projectiles_shot_impact0001-Sheet.png", 7, 1);
 		GameEngineTexture::Cut("orange_puff_animated.png", 10, 1);
+
 
 
 

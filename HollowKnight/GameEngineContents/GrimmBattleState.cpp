@@ -1131,7 +1131,79 @@ void Grimm::GrimmBattlStunBatEndEnd(const StateInfo& _Info)
 	GetRenderer()->GetPixelData().MulColor.b = 1.f;
 }
 
-bool Grimm::MonsterVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+void Grimm::GrimmDeathScene1Start(const StateInfo& _Info)
 {
-	return true;
 }
+
+void Grimm::GrimmDeathScene1Update(float _DeltaTime, const StateInfo& _Info)
+{
+	static int Count = 0;
+
+	if (GetAccTime() > 0.1f)
+	{
+		ReSetAccTime();
+		GrimmDeathCircleParticleList_[Count]->ParticleOn();
+		GrimmDeathCircleParticleList_[Count]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50 });
+
+		GrimmDeathSmallParticleList_[Count]->ParticleOn();
+		GrimmDeathSmallParticleList_[Count]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50 });
+
+
+		++Count;
+
+		if (Count > GrimmDeathCircleParticleList_.size() - 1)
+		{
+			GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE2");
+			return;
+
+			Count = GrimmDeathCircleParticleList_.size() - 1;
+		}
+
+	}
+}
+
+void Grimm::GrimmDeathScene1End(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmDeathScene2Start(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmDeathScene2Update(float _DeltaTime, const StateInfo& _Info)
+{
+	static int Count = 0;
+
+	if (GetAccTime() > 0.1f)
+	{
+		ReSetAccTime();
+		GrimmDeathExplosionParticleList_[Count]->ParticleOn();
+		GrimmDeathExplosionParticleList_[Count]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 200.f, -50 });
+
+		++Count;
+		if (Count >= GrimmDeathExplosionParticleList_.size() - 1)
+		{
+			GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE3");
+			return;
+
+			Count = GrimmDeathExplosionParticleList_.size() - 1;
+		}
+	}
+}
+
+void Grimm::GrimmDeathScene2End(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmDeathScene3Start(const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmDeathScene3Update(float _DeltaTime, const StateInfo& _Info)
+{
+}
+
+void Grimm::GrimmDeathScene3End(const StateInfo& _Info)
+{
+}
+

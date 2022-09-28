@@ -36,9 +36,9 @@ void MonsterHitPuffEffect::Start()
 		ParticleList_.back()->GetPixelData().MulColor.a = RamdomAlpha;
 
 
-		InitScale_.push_back(ParticleList_.back()->GetTransform().GetLocalScale());
+		//InitScale_.push_back(ParticleList_.back()->GetTransform().GetLocalScale());
 
-		isEndMove_.push_back(false);
+		//isEndMove_.push_back(false);
 	}
 }
 

@@ -9,7 +9,11 @@
 #include "GrimmSmoke.h"
 #include "GrimmFlameBallparticle.h"
 #include "GrimmCastPillarEffect.h"
+#include "GrimmDeathCircleParticle.h"
+#include "GrimmDeathSmallParticle.h"
+#include "GrimmDeathExplosionParticle.h"
 
+#include "BossRoarEffect.h"
 
 enum class PatternType
 {
@@ -104,6 +108,7 @@ private:
 	BossRoomGate* BossRoomGate_;
 	BossRoomGate* BossRoomRightGate_;
 	GrimmSmoke* GrimmSmoke_;
+	BossRoarEffect* BossRoarEffect_;
 
 	EventState EventState_;
 
@@ -115,6 +120,11 @@ private:
 	std::vector<GrimmCastPillarEffect*> GrimmCastPillarEffectList_;
 	std::vector<GrimmStunBat*> GrimmStunBatList_;
 	std::vector<GrimmFlameBallparticle*> GrimmFlameBallparticleList_;
+
+	std::vector<GrimmDeathCircleParticle*> GrimmDeathCircleParticleList_;
+	std::vector<GrimmDeathSmallParticle*> GrimmDeathSmallParticleList_;
+	std::vector<GrimmDeathExplosionParticle*> GrimmDeathExplosionParticleList_;
+
 public:
 	void SetEventState(EventState _State)
 	{
@@ -249,6 +259,18 @@ private:
 	void GrimmBattlStunBatEndStart(const StateInfo& _Info);
 	void GrimmBattlStunBatEndUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GrimmBattlStunBatEndEnd(const StateInfo& _Info);
+
+	void GrimmDeathScene1Start(const StateInfo& _Info);
+	void GrimmDeathScene1Update(float _DeltaTime, const StateInfo& _Info);
+	void GrimmDeathScene1End(const StateInfo& _Info);
+
+	void GrimmDeathScene2Start(const StateInfo& _Info);
+	void GrimmDeathScene2Update(float _DeltaTime, const StateInfo& _Info);
+	void GrimmDeathScene2End(const StateInfo& _Info);
+
+	void GrimmDeathScene3Start(const StateInfo& _Info);
+	void GrimmDeathScene3Update(float _DeltaTime, const StateInfo& _Info);
+	void GrimmDeathScene3End(const StateInfo& _Info);
 
 	//================================
 	//    Bind 
