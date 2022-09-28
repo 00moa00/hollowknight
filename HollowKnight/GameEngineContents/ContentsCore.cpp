@@ -1484,6 +1484,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("white_hit_particle.png", 1, 3);
 
 		GameEngineTexture::Cut("Projectiles_shot_impact0001-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("orange_puff_animated.png", 10, 1);
 
 
 

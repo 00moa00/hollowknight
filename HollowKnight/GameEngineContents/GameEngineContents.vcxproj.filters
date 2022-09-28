@@ -609,6 +609,9 @@
     <ClInclude Include="MonsterHitParticle.h">
       <Filter>Actor\Effect\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="MonsterHitPuffEffect.h">
+      <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1068,6 +1071,9 @@
       <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="MonsterHitParticle.cpp">
+      <Filter>Actor\Effect\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterHitPuffEffect.cpp">
       <Filter>Actor\Effect\Monster</Filter>
     </ClCompile>
   </ItemGroup>

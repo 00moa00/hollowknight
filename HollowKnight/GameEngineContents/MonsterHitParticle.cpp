@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "MonsterHitParticle.h"
 #include "HollowKnightLevel.h"
-
+#include <GameEngineBase/GameEngineRandom.h>
 MonsterHitParticle::MonsterHitParticle() 
 	:
 	isImpact_(true),
@@ -37,6 +37,9 @@ void MonsterHitParticle::Start()
 		//ParticleList_.back()->CreateFrameAnimationCutTexture("IDLE", FrameAnimation_DESC("white_hit_particle_Orange.png", RamdomIndex, RamdomIndex, 0.100f, false));
 		ParticleList_.back()->CreateFrameAnimationCutTexture("SHOT_ANIMATION", FrameAnimation_DESC("Projectiles_shot_impact0001-Sheet.png", 0, 6, 0.02f, false));
 	//	ParticleList_.back()->ChangeFrameAnimation("IDLE");
+
+		//ParticleList_.back()->InstancingOn();
+
 		InitScale_.push_back(ParticleList_.back()->GetTransform().GetLocalScale());
 		//ParticleList_.back()->AnimationBindEnd("SHOT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		//	{

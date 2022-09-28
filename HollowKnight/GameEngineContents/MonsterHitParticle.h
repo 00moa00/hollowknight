@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
-#include <GameEngineBase/GameEngineRandom.h>
+
 
 // 각 랜더러는 애니메이션이 있다.
 // 바닥에 닿으면 애니메이션 재생하고 죽는당
@@ -25,7 +25,6 @@ protected:
 
 private:
 	bool isImpact_;
-
 
 	float Scale_;
 	float Speed_;

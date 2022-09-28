@@ -4,7 +4,10 @@
 
 Monster::Monster()
 	:
-	isMonsterDeath_(false)
+	isMonsterDeath_(false),
+	HitParticleCount_(0),
+	HitParticlePuffCount_(0)
+
 {
 }
 

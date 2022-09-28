@@ -77,6 +77,7 @@ void GrimmCastPillarEffect::Start()
 		}
 
 		ParticleList_.back()->GetTransform().SetLocalMove(Move);
+		//ParticleList_.back()->InstancingOn();
 		InitPos_.push_back(ParticleList_.back()->GetTransform().GetLocalPosition());
 	}
 

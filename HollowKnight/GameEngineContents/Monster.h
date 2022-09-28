@@ -2,6 +2,7 @@
 #include <GameEngineCore/GameEngineActor.h>
 #include "MasterActor.h"
 #include "MonsterHitParticle.h"
+#include "MonsterHitPuffEffect.h"
 
 // Ό³Έν :
 class Monster : public MasterActor
@@ -31,9 +32,12 @@ private:
 	int AllHP_;
 	int CurHp_;
 
-	int Count_;
+	int HitParticleCount_;
+	int HitParticlePuffCount_;
+
 
 	std::vector<MonsterHitParticle*>MonsterHitParticleList_;
+	std::vector<MonsterHitPuffEffect*>MonsterHitPuffEffectList_;
 
 protected:
 	void SetMonsterDirection();
@@ -44,6 +48,57 @@ public:
 	//================================
 	//    Setter
 	//================================
+
+
+	void CreateMonsterHitPuffParticle(int _i)
+	{
+		for (int i = 0; i < _i; ++i)
+		{
+			MonsterHitPuffEffectList_.push_back(GetLevel()->CreateActor<MonsterHitPuffEffect>());
+			//MonsterHitParticleList_.back()->SetParent(this);
+			MonsterHitPuffEffectList_.back()->Off();
+		}
+	}
+
+	void SetCreateMonsterHitPuffParticleOn(float4 _Dir, float4 _Scale)
+	{
+		if (HitParticlePuffCount_ < MonsterHitParticleList_.size())
+		{
+			MonsterHitPuffEffectList_[HitParticlePuffCount_]->On();
+			MonsterHitPuffEffectList_[HitParticlePuffCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50 });
+			MonsterHitPuffEffectList_[HitParticlePuffCount_]->SetDir(_Dir);
+
+			if (_Dir.CompareInt2D(float4::RIGHT))
+			{
+				MonsterHitPuffEffectList_[HitParticlePuffCount_]->GetTransform().SetWorldMove({
+					_Scale.x / 4,
+					_Scale.y / 4, });
+			}
+			else if (_Dir.CompareInt2D(float4::LEFT))
+			{
+				MonsterHitPuffEffectList_[HitParticlePuffCount_]->GetTransform().SetWorldMove({
+					-_Scale.x / 4,
+					_Scale.y / 4, });
+			}
+			else if (_Dir.CompareInt2D(float4::UP))
+			{
+				MonsterHitPuffEffectList_[HitParticlePuffCount_]->GetTransform().SetWorldMove({
+					0,
+					+_Scale.y / 4, });
+			}
+			else if (_Dir.CompareInt2D(float4::DOWN))
+			{
+				MonsterHitPuffEffectList_[HitParticlePuffCount_]->GetTransform().SetWorldMove({
+					0,
+					+_Scale.y / 4, });
+			}
+
+
+			++HitParticlePuffCount_;
+		}
+	}
+
+
 
 	void CreateMonsterHitParticle(int _i)
 	{
@@ -73,39 +128,39 @@ public:
 
 	void SetCreateMonsterHitParticleOn(float4 _Dir, float4 _Scale)
 	{
-		if (Count_ < MonsterHitParticleList_.size())
+		if (HitParticleCount_ < MonsterHitParticleList_.size())
 		{
-			MonsterHitParticleList_[Count_]->On();
-			MonsterHitParticleList_[Count_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50});
-			MonsterHitParticleList_[Count_]->SetDir(_Dir);
+			MonsterHitParticleList_[HitParticleCount_]->On();
+			MonsterHitParticleList_[HitParticleCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50});
+			MonsterHitParticleList_[HitParticleCount_]->SetDir(_Dir);
 
 			if (_Dir.CompareInt2D(float4::RIGHT))
 			{
-				MonsterHitParticleList_[Count_]->GetTransform().SetWorldMove({
+				MonsterHitParticleList_[HitParticleCount_]->GetTransform().SetWorldMove({
 					_Scale.x/4,
 					_Scale.y/4, });
 			}
 			else if (_Dir.CompareInt2D(float4::LEFT))
 			{
-				MonsterHitParticleList_[Count_]->GetTransform().SetWorldMove({
+				MonsterHitParticleList_[HitParticleCount_]->GetTransform().SetWorldMove({
 					-_Scale.x / 4,
 					_Scale.y / 4, });
 			}
 			else if (_Dir.CompareInt2D(float4::UP))
 			{
-				MonsterHitParticleList_[Count_]->GetTransform().SetWorldMove({
+				MonsterHitParticleList_[HitParticleCount_]->GetTransform().SetWorldMove({
 					0,
 					+_Scale.y / 4, });
 			}
 			else if (_Dir.CompareInt2D(float4::DOWN))
 			{
-				MonsterHitParticleList_[Count_]->GetTransform().SetWorldMove({
+				MonsterHitParticleList_[HitParticleCount_]->GetTransform().SetWorldMove({
 					0,
 					+_Scale.y / 4, });
 			}
 
 
-			++Count_;
+			++HitParticleCount_;
 		}
 	}
 
