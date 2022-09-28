@@ -165,6 +165,9 @@
     <ClInclude Include="YNoiseEffect.h">
       <Filter>Object\Component\Rendering\PostEffect</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineInstancingBuffer.h">
+      <Filter>Resources\InputAssembler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -320,6 +323,9 @@
     </ClCompile>
     <ClCompile Include="YNoiseEffect.cpp">
       <Filter>Object\Component\Rendering\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineInstancingBuffer.cpp">
+      <Filter>Resources\InputAssembler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
