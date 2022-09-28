@@ -609,6 +609,9 @@
     <ClInclude Include="MonsterDeathPuffParticle.h">
       <Filter>Actor\Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="MonsterHitOrangeLight.h">
+      <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1069,6 +1072,9 @@
     </ClCompile>
     <ClCompile Include="MonsterDeathPuffParticle.cpp">
       <Filter>Actor\Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterHitOrangeLight.cpp">
+      <Filter>Actor\Effect\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

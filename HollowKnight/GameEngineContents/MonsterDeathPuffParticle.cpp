@@ -17,7 +17,7 @@ MonsterDeathPuffParticle::~MonsterDeathPuffParticle()
 
 void MonsterDeathPuffParticle::Start()
 {
-	for (int i = 0; i < 70; ++i)
+	for (int i = 0; i < 75; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
 		ParticleList_.back()->SetTexture("orange_puff_animated.png");

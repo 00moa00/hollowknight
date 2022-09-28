@@ -4,6 +4,7 @@
 #include "MonsterHitParticle.h"
 #include "MonsterHitPuffEffect.h"
 #include "MonsterDeathPuffParticle.h"
+#include "MonsterHitOrangeLight.h"
 
 // Ό³Έν :
 class Monster : public MasterActor
@@ -35,11 +36,13 @@ private:
 
 	int HitParticleCount_;
 	int HitParticlePuffCount_;
+	int HitLightCount_;
 
 	MonsterDeathPuffParticle* MonsterDeathPuffParticle_;
 
 	std::vector<MonsterHitParticle*>MonsterHitParticleList_;
 	std::vector<MonsterHitPuffEffect*>MonsterHitPuffEffectList_;
+	std::vector<MonsterHitOrangeLight*> MonsterHitOrangeLightList_;
 
 protected:
 	void SetMonsterDirection();
@@ -50,6 +53,28 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void CreateMonsterHitLight(int _i)
+	{
+		for (int i = 0; i < _i; ++i)
+		{
+			MonsterHitOrangeLightList_.push_back(GetLevel()->CreateActor<MonsterHitOrangeLight>());
+			MonsterHitOrangeLightList_.back()->GetTransform().SetWorldScale({GetRenderer()->GetTransform().GetWorldScale().x * 2.5f, GetRenderer()->GetTransform().GetWorldScale().x * 2.5f });
+			MonsterHitOrangeLightList_.back()->Off();
+		}
+	}
+
+	void SetMonsterHitLightOn()
+	{
+		if (HitLightCount_ < MonsterHitOrangeLightList_.size())
+		{
+			MonsterHitOrangeLightList_[HitLightCount_]->On();
+			MonsterHitOrangeLightList_[HitLightCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x , GetTransform().GetWorldPosition().y  });
+
+			++HitLightCount_;
+		}
+	}
+
+
 	void CreateMonsterDeathPuffParticle();
 
 	void SetMonsterDeathPuffParticleOn();

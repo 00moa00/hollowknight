@@ -101,6 +101,7 @@ void Crawlid::Start()
 	SetHP(2);
 	CreateMonsterHitParticle(2);
 	CreateMonsterHitPuffParticle(2);
+	CreateMonsterHitLight(2);
 	CreateMonsterDeathPuffParticle();
 
 	SetMoveDirection(float4::RIGHT);
@@ -117,6 +118,7 @@ void Crawlid::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 	SubHP(_Damage);
 	SetCreateMonsterHitParticleOn(_KnightDir, float4{ 280, 177});
 	SetCreateMonsterHitPuffParticleOn(_KnightDir, float4{ 280, 177 });
+	SetMonsterHitLightOn();
 
 	if (_StunDir.CompareInt2D(float4::RIGHT))
 	{

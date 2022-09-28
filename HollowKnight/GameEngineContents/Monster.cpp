@@ -6,7 +6,8 @@ Monster::Monster()
 	:
 	isMonsterDeath_(false),
 	HitParticleCount_(0),
-	HitParticlePuffCount_(0)
+	HitParticlePuffCount_(0),
+	HitLightCount_(0)
 
 {
 }
