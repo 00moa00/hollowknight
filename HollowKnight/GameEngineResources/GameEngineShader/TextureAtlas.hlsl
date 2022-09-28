@@ -16,6 +16,7 @@ struct Input
     
     // 인스턴싱 데이터
     uint Index : ROWINDEX;
+    // float4x4 WVP : 
 };
 
 struct Output

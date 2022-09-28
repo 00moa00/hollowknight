@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngineTransformComponent.h"
 #include "GameEngineLevel.h"
-
+#include "GameEngineCamera.h"
 struct RenderOption 
 {
 	float DeltaTime = 0.0f;
@@ -21,6 +21,8 @@ struct RenderOption
 //
 //};
 
+// 추상클래스
+// 강제 내 자식들을 하나의 인터페이스로 묶는 역할입니다.
 // 설명 :
 class GameEngineRenderingPipeLine;
 class GameEngineRenderer : public GameEngineTransformComponent
@@ -55,8 +57,14 @@ public:
 
 	virtual void InstancingOn()
 	{
-		IsInstancing = true;
+		IsInstancing_ = true;
 	};
+
+	bool IsInstancing()
+	{
+		return IsInstancing_;
+	}
+
 protected:
 	virtual void Start();
 	virtual void Update(float _DeltaTime) {}
@@ -67,9 +75,10 @@ protected:
 
 
     class GameEngineCamera* Camera;
+private:
 	CAMERAORDER CameraOrder;
     int RenderingOrder;
-	bool IsInstancing;
+	bool IsInstancing_;
 
 private:
 	virtual void Render(float _DeltaTime) = 0;
