@@ -316,7 +316,6 @@ protected:
 
 	void Update(float _Delta) override;
 
-	void InstancingDataSetting() override;
 
 protected:
 	PIVOTMODE PivotMode;
