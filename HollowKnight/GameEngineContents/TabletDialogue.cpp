@@ -75,6 +75,7 @@ void TabletDialogue::Update(float _DeltaTime)
 
 void TabletDialogue::DialougeIdleStart(const StateInfo& _Info)
 {
+	
 }
 
 void TabletDialogue::DialougeIdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -124,6 +125,17 @@ void TabletDialogue::DialougeCloseUpdate(float _DeltaTime, const StateInfo& _Inf
 	Back_->GetPixelData().MulColor.a = Alpha_;
 	if (Alpha_ <= 0.f)
 	{
+		Back_->Off();
+		DialogueBack_->Off();
+
+
+
+		Alpha_ = 0.f;
+
+		Back_->GetPixelData().MulColor.a = Alpha_;
+		DialogueBack_->GetTransform().SetLocalScale(DialogueBack_->GetCurTexture()->GetScale() * 1.6f);
+		DialogueBack_->GetPixelData().MulColor.a = 0.3f;
+
 		TabletDoalogueManager_.ChangeState("IDLE");
 		return;
 	}
@@ -138,7 +150,6 @@ void TabletDialogue::DialougeCloseUpdate(float _DeltaTime, const StateInfo& _Inf
 
 void TabletDialogue::DialougeCloseEnd(const StateInfo& _Info)
 {
-	this->Off();
-	Back_->Off();
-	DialogueBack_->Off();
+
+
 }

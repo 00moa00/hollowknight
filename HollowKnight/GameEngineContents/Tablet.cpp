@@ -95,6 +95,7 @@ void Tablet::CreateTablet(std::string _BackFilePath, std::string _LightFilePath,
 
 void Tablet::TabletDialogueOn()
 {
+	TabletDialogue_->On();
 	TabletDialogue_->SetDialogueOn();
 
 	if (SpellFocusInfo_ != nullptr)
@@ -109,6 +110,8 @@ void Tablet::TabletDialogueOn()
 
 void Tablet::TabletDialogueOff()
 {
+	TabletDialogue_->Off();
+
 	TabletDialogue_->SetDialogueOff();
 	if (SpellFocusInfo_ != nullptr)
 	{

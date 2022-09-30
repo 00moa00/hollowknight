@@ -1012,7 +1012,7 @@ bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineColli
 	Tablet* Tablet_ = dynamic_cast<Tablet*>(_Other->GetActor());
 	if (Tablet_ != nullptr)
 	{
-		if (Tablet_->GetisOpenDialogue() == false)
+		if (Tablet_->GetisOpenDialogue() == false && KnightManager_.GetCurStateStateName() != "SEE")
 		{
 			if (GameEngineInput::GetInst()->IsDown("KnightUp") == true)
 			{
@@ -1021,7 +1021,7 @@ bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineColli
 			}
 		}
 
-		if (Tablet_->GetisOpenDialogue() == true)
+		if (Tablet_->GetisOpenDialogue() == true && KnightManager_.GetCurStateStateName() == "SEE")
 		{
 			if (GameEngineInput::GetInst()->IsDown("KnightUp") == true)
 			{

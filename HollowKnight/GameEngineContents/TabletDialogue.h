@@ -80,7 +80,14 @@ public:
 	void SetDialogueOff()
 	{
 		CurrentDialoguePage_ = 0;
-		isDialougueFull_ = false;
+		if (DialogueList_.size() == 1)
+		{
+			isDialougueFull_ = true;
+		}
+		else
+		{
+			isDialougueFull_ = false;
+		}
 
 		for (int i = 0; i < DialogueList_.size(); ++i)
 		{
@@ -110,6 +117,14 @@ public:
 		DialogueList_.back()->Off();
 		DialogueList_.back()->GetFontRenderer()->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 
+		if (DialogueList_.size() == 1)
+		{
+			isDialougueFull_ = true;
+		}
+		else
+		{
+			isDialougueFull_ = false;
+		}
 
 	}
 
@@ -129,6 +144,7 @@ public:
 
 			if (CurrentDialoguePage_ == DialogueList_.size()-1 )
 			{
+				CurrentDialoguePage_ = DialogueList_.size() - 1;
 				isDialougueFull_ = true;
 				NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
 				NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
@@ -136,13 +152,8 @@ public:
 				//return;
 
 			}
-			else
-			{
-				NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
-				NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
-
-
-			}
+			NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
+			NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
 
 			for (int i = 0; i < DialogueList_.size(); ++i)
 			{
@@ -155,6 +166,8 @@ public:
 
 			DialogueList_[CurrentDialoguePage_]->GetFontRenderer()->On();
 			DialogueList_[CurrentDialoguePage_]->FontOn();
+
+
 
 		}
 	}

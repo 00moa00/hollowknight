@@ -95,7 +95,7 @@ public:
 			{
 				isDialougueFull_ = true;
 				NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
-				//return;
+				return;
 			}
 
 			else
