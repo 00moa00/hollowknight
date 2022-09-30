@@ -80,6 +80,7 @@ private:
 	bool isDashStartEnd_;
 	bool isDashUpEnd_;
 	bool isStunHitEnd_;
+	bool isAirDashLandEnd_;
 
 	bool isHitWhiteEffect_;
 
@@ -96,6 +97,8 @@ private:
 	float FireCreateTimer_;
 	float BirdCreateTimer_;
 	float FireFlameCreateTimer_;
+	float AirDashGroundDelayTiemr_;
+
 
 	float4 AirDashDest_;
 	float4 BirdDir_;

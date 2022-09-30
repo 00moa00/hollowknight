@@ -17,7 +17,7 @@ GrimmDeathExplosionParticle::~GrimmDeathExplosionParticle()
 
 void GrimmDeathExplosionParticle::Start()
 {
-	for (int i = 0; i < 70; ++i)
+	for (int i = 0; i < 50; ++i)
 	{
 		//ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
@@ -58,28 +58,64 @@ void GrimmDeathExplosionParticle::Start()
 void GrimmDeathExplosionParticle::Update(float _DeltaTime)
 {
 
-	Alpha_ -= 0.5f * _DeltaTime;
 
-	if (Alpha_ <= 0)
+
+
+	if (GetAccTime() > 1.5f)
 	{
-		Alpha_ = 0.f;
+		Alpha_ -= 1.5f * _DeltaTime;
+
+		if (Alpha_ <= 0)
+		{
+			Alpha_ = 0.f;
+		}
+
+		for (int i = 0; i < ParticleList_.size(); ++i)
+		{
+		//	float4 Move = Dir_[i].NormalizeReturn() * 2500.f * _DeltaTime;
+
+		//	ParticleList_[i]->GetTransform().SetLocalMove(Move);
+			ParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
+
+
+		}
+		//this->Death();
 	}
-	for (int i = 0; i < ParticleList_.size(); ++i)
-	{
-		float4 Move = Dir_[i].NormalizeReturn() * GameEngineRandom::MainRandom.RandomFloat(20.f, 70.f) * _DeltaTime;
 
-		ParticleList_[i]->GetTransform().SetLocalMove(Move);
-		ParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
-	}
-
-	if (GetAccTime() > 2.0f)
+	else
 	{
-		this->Death();
+		Alpha_ -= 0.5f * _DeltaTime;
+
+		if (Alpha_ <= 0)
+		{
+			Alpha_ = 0.f;
+		}
+
+		for (int i = 0; i < ParticleList_.size(); ++i)
+		{
+			float4 Move = Dir_[i].NormalizeReturn() * GameEngineRandom::MainRandom.RandomFloat(20.f, 70.f) * _DeltaTime;
+
+			ParticleList_[i]->GetTransform().SetLocalMove(Move);
+			ParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
+		}
 	}
 }
 
 void GrimmDeathExplosionParticle::ParticleOn()
 {
 	On();
+}
+
+void GrimmDeathExplosionParticle::MoveFast()
+{
+	for (int i = 0; i < ParticleList_.size(); ++i)
+	{
+		float4 Move = Dir_[i].NormalizeReturn() * 2500.f * GameEngineTime::GetInst()->GetDeltaTime();
+
+		ParticleList_[i]->GetTransform().SetLocalMove(Move);
+		//GrimmDeathExplosionParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
+
+
+	}
 }
 

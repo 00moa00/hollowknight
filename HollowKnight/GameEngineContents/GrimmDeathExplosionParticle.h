@@ -30,6 +30,7 @@ private:
 
 public:
 	void ParticleOn();
+	void MoveFast();
 
 };
 

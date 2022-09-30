@@ -129,10 +129,9 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 	if (isTeleportAppearEnd_ == true)
 	{
 		isTeleportAppearEnd_ = false;
+		GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE1");
 
-
-
-		GrimmBattleManager_.ChangeState(ChangeState_);
+		//GrimmBattleManager_.ChangeState(ChangeState_);
 		return;
 	}
 }
@@ -453,6 +452,7 @@ void Grimm::GrimmBattleAirDashStart(const StateInfo& _Info)
 
 	GrimmAirDashEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x + Xmagin,  GetTransform().GetWorldPosition() .y - 50.f, static_cast<float>(Z_ORDER::Effect)});
 	GrimmAirDashEffect_ ->GetRenderer()->GetTransform().SetWorldRotation({ 0,0,AirDashRotation_ });
+	AirDashGroundDelayTiemr_ = 0.f;
 
 
 }
@@ -462,21 +462,48 @@ void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	//float4 CurrentPos = GetTransform().GetWorldPosition();
 
-	float4 Move = AirDashDest_ * 2000.f * _DeltaTime;
 
-	GetTransform().SetWorldMove(Move);
-	this->isPixelCheck(_DeltaTime, float4::ZERO);
-
-	if (GetisOnGround() == true)
+	if (GetisOnGround() != true)
 	{
-		//int a = 0;
-		GrimmBattleManager_.ChangeState("BATTLE_AIR_DASH_END");
-		return;
+		float4 Move = AirDashDest_ * 2000.f * _DeltaTime;
+
+		GetTransform().SetWorldMove(Move);
+		this->isPixelCheck(_DeltaTime, float4::ZERO);
+
 	}
+
+	else
+	{
+		if (isAirDashLandEnd_ == false)
+		{
+			GetRenderer()->ChangeFrameAnimation("AIR_DASH_LAND_ANIMATION");
+
+		}
+
+
+		if (isAirDashLandEnd_ == true)
+		{
+			AirDashGroundDelayTiemr_ += _DeltaTime;
+
+			if (AirDashGroundDelayTiemr_ > 0.2f)
+			{
+				AirDashGroundDelayTiemr_ = 0.0f;
+
+					isAirDashLandEnd_ = false;
+				GrimmBattleManager_.ChangeState("BATTLE_AIR_DASH_END");
+				return;
+
+			}
+
+		}
+	}
+
 }
 
 void Grimm::GrimmBattleAirDashEnd(const StateInfo& _Info)
 {
+	AirDashGroundDelayTiemr_ = 0.f;
+
 	GetRenderer()->GetTransform().SetWorldRotation({ 0,0,0 });
 }
 
@@ -485,8 +512,8 @@ void Grimm::GrimmBattleAirDashEndtStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_END_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
-	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.5f, GetRenderer()->GetTransform().GetLocalScale().y * 0.3f });
-	GetCollision()->GetTransform().SetLocalPosition({ 50, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y * 0.2f });
+	GetCollision()->GetTransform().SetLocalPosition({ 50, 120.f });
 
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
@@ -789,7 +816,7 @@ void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 	GetCollision()->On();
 
-	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y *2.0f });
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y *5.f });
 	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
 
 
@@ -797,7 +824,7 @@ void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 
 void Grimm::GrimmBattleSpikeUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (_Info.StateTime > 2.0f)
+	if (_Info.StateTime > 1.5f)
 	{
 		SetRamdomPattern();
 		return;
@@ -1157,6 +1184,8 @@ void Grimm::GrimmDeathScene1Start(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
+	GetCollision()->Off();
+
 }
 
 void Grimm::GrimmDeathScene1Update(float _DeltaTime, const StateInfo& _Info)
@@ -1167,10 +1196,10 @@ void Grimm::GrimmDeathScene1Update(float _DeltaTime, const StateInfo& _Info)
 	{
 		ReSetAccTime();
 		GrimmDeathCircleParticleList_[Count]->ParticleOn();
-		GrimmDeathCircleParticleList_[Count]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50 });
+		GrimmDeathCircleParticleList_[Count]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 200.f, -50 });
 
 		GrimmDeathSmallParticleList_[Count]->ParticleOn();
-		GrimmDeathSmallParticleList_[Count]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50 });
+		GrimmDeathSmallParticleList_[Count]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 200.f, -50 });
 
 
 		++Count;
@@ -1198,7 +1227,7 @@ void Grimm::GrimmDeathScene2Update(float _DeltaTime, const StateInfo& _Info)
 {
 	static int Count = 0;
 
-	if (GetAccTime() > 0.1f)
+	if (GetAccTime() > 0.05f)
 	{
 		ReSetAccTime();
 		GrimmDeathExplosionParticleList_[Count]->ParticleOn();
@@ -1221,10 +1250,25 @@ void Grimm::GrimmDeathScene2End(const StateInfo& _Info)
 
 void Grimm::GrimmDeathScene3Start(const StateInfo& _Info)
 {
+	GetRenderer()->Off();
 }
 
 void Grimm::GrimmDeathScene3Update(float _DeltaTime, const StateInfo& _Info)
 {
+
+
+	for (int i = 0; i < GrimmDeathExplosionParticleList_.size(); ++i)
+	{
+		//float4 Move = Dir_[i].NormalizeReturn() * 2500.f * _DeltaTime;
+
+		GrimmDeathExplosionParticleList_[i]->MoveFast();
+		//GrimmDeathExplosionParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
+
+
+	}
+
+
+
 }
 
 void Grimm::GrimmDeathScene3End(const StateInfo& _Info)

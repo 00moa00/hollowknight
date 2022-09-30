@@ -29,6 +29,7 @@ Grimm::Grimm()
 	isBllonStartEnd_(false),
 	isCastStartEnd_(false),
 	isSprikeStartEnd_(false),
+	isAirDashLandEnd_(false),
 
 	isHitWhiteEffect_(false),
 
@@ -171,7 +172,10 @@ void Grimm::Start()
 
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.030f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 5, 7, 0.050f, true));
-	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 15, 0.050f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_LAND_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 11, 0.050f, false));
+
+	
+	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 12, 15, 0.050f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash_antic0000-Sheet.png", 0, 3, 0.030f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_SLASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_slash0000-Sheet.png", 0, 3, 0.060f, false));
@@ -249,6 +253,15 @@ void Grimm::Start()
 	//======================================
 	//    Create Bind Animation | Battle
 	//======================================
+
+	GetRenderer()->AnimationBindEnd("AIR_DASH_LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			
+			isAirDashLandEnd_ = true;
+
+			//GetRenderer()->ChangeFrameAnimation("BAT_FLY_ANIMATION");
+
+		});
 
 	GetRenderer()->AnimationBindEnd("BAT_APPEAR_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
