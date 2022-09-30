@@ -21,7 +21,7 @@ void UIPoint::Start()
 	LeftPoint_->CreateFrameAnimationCutTexture("POINTER_UPDATE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 0, 10, 0.070f));
 	LeftPoint_->CreateFrameAnimationCutTexture("POINTER_IDLE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 10, 10, 0.f));
 
-	LeftPoint_->GetTransform().SetLocalScale(PointScale_);
+	LeftPoint_->GetTransform().SetLocalScale(PointScale_ * 0.8f);
 	LeftPoint_->ChangeFrameAnimation("POINTER_UPDATE_ANIMATION");
 	LeftPoint_->GetTransform().SetLocalPosition({ -120, 0, 0 });
 
@@ -40,7 +40,7 @@ void UIPoint::Start()
 	RightPoint_->CreateFrameAnimationCutTexture("POINTER_UPDATE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 0, 10, 0.070f));
 	RightPoint_->CreateFrameAnimationCutTexture("POINTER_IDLE_ANIMATION", FrameAnimation_DESC("main_menu_pointer_anim0000-Sheet.png", 10, 10, 0.f));
 
-	RightPoint_->GetTransform().SetLocalScale(PointScale_);
+	RightPoint_->GetTransform().SetLocalScale(PointScale_ * 0.8f);
 	RightPoint_->ChangeFrameAnimation("POINTER_UPDATE_ANIMATION");
 	RightPoint_->GetTransform().SetLocalPosition({ 120, 0, 0 });
 	RightPoint_->GetTransform().PixLocalNegativeX();

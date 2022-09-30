@@ -3,7 +3,9 @@
 #include "HollowKnightLevel.h"
 #include "RendererActor.h"
 #include "AllTitleUI.h"
-// 설명 :
+
+// 설명 : 랜더러 액터 왜 만들었담...
+
 class TitleLevel : public HollowKnightLevel
 {
 public:

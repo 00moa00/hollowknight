@@ -1,14 +1,17 @@
 #include "PreCompile.h"
 #include "TitleLevel.h"
-#include "Enums.h"
 #include <GameEngineCore/GEngine.h>
 #include <GameEngineCore/GameEngineCameraActor.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineRandom.h>
+
+#include "TitleCircleParticle.h"
 
 TitleLevel::TitleLevel()
 	:
 	Background_(nullptr),
-	LogoRenderer_(nullptr)
+	LogoRenderer_(nullptr),
+	MasterTitleUI_(nullptr)
 {
 }
 
@@ -26,6 +29,7 @@ void TitleLevel::Start()
 
 	Background_ = CreateActor<RendererActor>();
 	Background_->CreateRenderer("Title.png");
+	Background_->GetTransform().SetWorldPosition({0,0,50});
 
 	LogoRenderer_ = CreateActor<RendererActor>();
 	LogoRenderer_->CreateRenderer("TitleLogo.png");
@@ -41,10 +45,14 @@ void TitleLevel::Start()
 
 void TitleLevel::Update(float _DeltaTime)
 {
-	//if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
-	//{
-	//	GEngine::ChangeLevel("KingsPassLevel1");
-	//}
+	if (GetAccTime() > 0.5f)
+	{
+		TitleCircleParticle* TitleCircleParticle_ = CreateActor<TitleCircleParticle>();
+		TitleCircleParticle_->GetTransform().SetWorldPosition({ GameEngineRandom::MainRandom.RandomFloat(-GameEngineWindow::GetInst()->GetScale().hx(), GameEngineWindow::GetInst()->GetScale().hx())
+			, -GameEngineWindow::GetInst()->GetScale().hy(),10});
+
+		ReSetAccTime();
+	}
 }
 
 void TitleLevel::End()

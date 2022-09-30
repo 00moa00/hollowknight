@@ -1397,6 +1397,29 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Kinght");
+		Dir.Move("Effect");
+		Dir.Move("Particle");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		//GameEngineTexture::Cut("Spell Effects_focus_effect0000-Sheet.png", 9, 1);
+		//GameEngineTexture::Cut("Spell Effects_focus_appear0000-Sheet.png", 7, 1);
+		//GameEngineTexture::Cut("Spell Effects_burst_effect0000-Sheet.png", 8, 1);
+
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Kinght");
 		Dir.Move("Shadow");
 
 		std::vector<GameEngineFile> Texture = Dir.GetAllFile();

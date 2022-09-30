@@ -650,6 +650,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TitleCircleParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TitleSmokeParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TutorialBreakDoor.h">
       <SubType>
       </SubType>
@@ -1252,6 +1260,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TabletDialogue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleCircleParticle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleSmokeParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>

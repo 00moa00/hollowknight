@@ -35,7 +35,7 @@ void AllTitleUI::Start()
 	GameStartFont_->SetText("게임 시작", "Noto Serif KR");
 	GameStartFont_->SetColor({ 1.0f, 1.0f, 1.0f });
 	GameStartFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 100.0f)});
-	GameStartFont_->SetSize(35);
+	GameStartFont_->SetSize(30);
 	GameStartFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 	GameStartFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
@@ -44,7 +44,7 @@ void AllTitleUI::Start()
 	MapEditorFont_->SetText("멥 에디터", "Noto Serif KR");
 	MapEditorFont_->SetColor({ 1.0f, 1.0f, 1.0f });
 	MapEditorFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 200.0f) });
-	MapEditorFont_->SetSize(35);
+	MapEditorFont_->SetSize(30);
 	MapEditorFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 	MapEditorFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
@@ -54,7 +54,7 @@ void AllTitleUI::Start()
 	GameExitFont_->SetText("게임 종료", "Noto Serif KR");
 	GameExitFont_->SetColor({ 1.0f, 1.0f, 1.0f });
 	GameExitFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 300.0f) });
-	GameExitFont_->SetSize(35);
+	GameExitFont_->SetSize(30);
 	GameExitFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 	GameExitFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
