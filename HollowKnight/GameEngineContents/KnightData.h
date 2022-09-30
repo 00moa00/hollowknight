@@ -145,6 +145,7 @@ private:
 	bool isEffectGUI_;
 	bool isRevive_;		//플레이어가 다시 태어난당		: 비네팅에 사용중
 	bool isBossBattle_;
+	bool isIntroFallEvent_;
 
 	float4 KnightPosition_;
 	//float4 CurDir_;
@@ -205,6 +206,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisIntroFallEvent()
+	{
+		return isIntroFallEvent_;
+	}
+
 	bool GetisBossBattle() const
 	{
 		return isBossBattle_;
@@ -404,6 +410,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetisIntroFallEvent(bool _b)
+	{
+		isIntroFallEvent_ = _b;
+	}
+
 	void SetisBossBattle(bool _b)
 	{
 		isBossBattle_ = _b;

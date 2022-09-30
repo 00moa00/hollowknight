@@ -38,7 +38,7 @@ void KingsPassLevel1::Start()
 	CreateKingsPass1Monster();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-	GetKnight()->GetTransform().SetLocalPosition({ 928.f, -2063.f, static_cast<float>(Z_ORDER::Knight) });
+	GetKnight()->GetTransform().SetLocalPosition({ 928.f, -1503.f, static_cast<float>(Z_ORDER::Knight) });
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	
 	SetMapSize({ 7099, 4889 });

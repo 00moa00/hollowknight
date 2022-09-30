@@ -58,6 +58,7 @@ private:
 	bool isSitEnd_;
 	bool isDoorEnd_;
 	bool isReturnToIdle_;
+	bool isIntroLandEnd_;
 
 	bool isRunTurnEnd_;
 
@@ -68,10 +69,14 @@ private:
 	bool isPossibleDoubleSlash_;
 	bool isPossibleDoubleJump_;
 
+	bool isKingsPass_;
+
 	bool isLookMap_;
 	bool isRunMode_;
 
 	bool isDeath_;
+
+	
 
 	bool isInvincibility_;
 	bool isKnightBlack_;
@@ -194,6 +199,15 @@ private:
 	void KnightFallStart(const StateInfo& _Info);
 	void KnightFallUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightFallEnd(const StateInfo& _Info);
+
+	void KnightIntroFallStart(const StateInfo& _Info);
+	void KnightIntroFallUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightIntroFallEnd(const StateInfo& _Info);
+
+	void KnightIntroLandStart(const StateInfo& _Info);
+	void KnightIntroLandUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightIntroLandEnd(const StateInfo& _Info);
+
 
 	void KnightDashStart(const StateInfo& _Info);
 	void KnightDashUpdate(float _DeltaTime, const StateInfo& _Info);

@@ -75,7 +75,8 @@ Knight::Knight()
 	isMapWalkTurnEnd_(false),
 	isKnightPotal_(false),
 	isGroundWakeUpEnd_(false),
-
+	isKingsPass_(false),
+	isIntroLandEnd_(false),
 
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
@@ -147,9 +148,6 @@ void Knight::Start()
 	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
 	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
 	KnightSiblingLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
-
-
-
 	KnightJumpPower_ = 120.f;
 	KnightDoubleJumpPower_ = 100.f;
 	KnightRunSpeed_ = 400.f;
@@ -199,6 +197,9 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.040f, false));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("FALL_LOOP_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 3, 5, 0.100f, true));
+
+
 	GetRenderer()->CreateFrameAnimationCutTexture("LAND_ANIMATION", FrameAnimation_DESC("Knight_land0000-Sheet.png", 0, 2, 0.080f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
@@ -251,7 +252,35 @@ void Knight::Start()
 	// ---- 기상 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_GROUND_ANIMATION", FrameAnimation_DESC("Knight_wake_up_ground0000-Sheet.png", 0, 20, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_ANIMATION", FrameAnimation_DESC("Knight_wake0000-Sheet.png", 0, 4, 0.100f, false));
+	
+	{
 
+
+		std::vector<unsigned int>CustomAni;
+
+
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+		CustomAni.push_back(7);
+
+		for (int i = 7; i < 21; ++i)
+		{
+			CustomAni.push_back(i);
+		}
+
+
+		GetRenderer()->CreateFrameAnimationCutTexture("INTRO_LAND_ANIMATION", FrameAnimation_DESC("Knight_wake_up_ground0000-Sheet.png", CustomAni, 0.120f, false));
+	}
 	// ---- 탈진 ----
 //	GetRenderer()->CreateFrameAnimationCutTexture("LOW_HEALTH_ANIMATION", FrameAnimation_DESC("Knight_idle_low_health000-Sheet.png", 0, 9, 0.100f));
 
@@ -296,6 +325,18 @@ void Knight::Start()
 	//================================
 	//    Create Bind Animation
 	//================================
+	GetRenderer()->AnimationBindEnd("INTRO_LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			
+			isIntroLandEnd_ == true;
+		});
+
+	GetRenderer()->AnimationBindEnd("FALL_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("FALL_LOOP_ANIMATION");
+
+		});
+
 
 	GetRenderer()->AnimationBindEnd("SEE_RETURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -447,12 +488,10 @@ void Knight::Start()
 		, std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
 
-
 	KnightManager_.CreateStateMember("SLASH_JUMP"
 		, std::bind(&Knight::KnightUpSlashJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightUpSlashJumpStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightUpSlashJumpEnd, this, std::placeholders::_1));
-
 
 	KnightManager_.CreateStateMember("JUMP"
 		, std::bind(&Knight::KnightJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -467,17 +506,27 @@ void Knight::Start()
 		, std::bind(&Knight::KnightLandStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightLandEnd, this, std::placeholders::_1));
 
+	KnightManager_.CreateStateMember("INTRO_LAND"
+		, std::bind(&Knight::KnightIntroLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightIntroLandStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightIntroLandEnd, this, std::placeholders::_1));
+
+
 	KnightManager_.CreateStateMember("FALL"
 		, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
 		std::bind(&Knight::KnightFallStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("INTRO_FALL"
+		, std::bind(&Knight::KnightIntroFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
+		std::bind(&Knight::KnightIntroFallStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightIntroFallEnd, this, std::placeholders::_1));
 
 	KnightManager_.CreateStateMember("DASH"
 		, std::bind(&Knight::KnightDashUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightDashStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightDashEnd, this, std::placeholders::_1));
 	
-
 
 	KnightManager_.CreateStateMember("FOCUS_BURST"
 		, std::bind(&Knight::KnightFocusBurstUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -613,44 +662,36 @@ void Knight::Start()
 		, std::bind(&Knight::KnightTabletReturnToIdleStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightTabletReturnToIdleEnd, this, std::placeholders::_1));
 
+
+
 	KnightManager_.ChangeState("STILL");
-
-	//ContentsFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-	//ContentsFontRenderer_->CreateFontRenderer("가나다라마.바사", 24, {500,500}, false, 4);
-	//ContentsFontRenderer_->FontOn();
-
-
-	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
-
-
 }
 
 void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
-
-	//if (KnightMainLightEffect_ != nullptr)
-	//{
-	//	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });	
-	//}
-
-	//if (KnightDonutLightEffect_ != nullptr)
-	//{
-	//	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
-	//}
-
-	//if (KnightSiblingLightEffect_ != nullptr)
-	//{
-	//	KnightSiblingLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });
-	//}
-	//SideDarkEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Side_Dark) });
 }
 
 void Knight::LevelStartEvent()
 {
-	//KnightData::GetInst()->SetCurrentLevel(GetLevel()->GetNameConstRef());
+	if (KnightData::GetInst()->GetisIntroFallEvent() == false)
+	{
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::KingsPassLevel1);
+		EnumString = static_cast<std::string>(PrevName);
 
-	//GetLevel()->Get
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+		if (GetLevel()->GetNameConstRef() == UpperName)
+		{
+			KnightData::GetInst()->SetisIntroFallEvent(true);
+			KnightManager_.ChangeState("INTRO_FALL");
+		}
+
+	}
+
+
+
+
 	isKnightPotal_ = false;
 }
 

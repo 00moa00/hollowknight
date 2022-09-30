@@ -1194,20 +1194,12 @@ void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
 {
-	//isPossibleDoubleJump_ = true;
-
 	JumpAccel_ = 0.f;
-	//GetRenderer()->GetTransform().SetLocalScale({ 349, 186, 1 });
-	//GetRenderer()->SetPivot(PIVOTMODE::BOT);
-	//SetJumpPower({ 0, KnightDoubleJumpPower_ , 0 });
-
-	this->SetisGround(false);
-
+	SetisGround(false);
 }
 
 void Knight::KnightLandStart(const StateInfo& _Info)
 {
-
 	GetRenderer()->ChangeFrameAnimation("LAND_ANIMATION");
 }
 
@@ -1367,6 +1359,8 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 
 	}
+
+	//if(GetLevel()->GetNameConstRef() == "")
 	KnightFallAccel_ += (17.f * _DeltaTime);
 
 
@@ -1455,7 +1449,6 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightManager_.ChangeState("DOUBLE_SLASH");
 		return;
-
 	}
 
 	// 더블 점프
@@ -1477,6 +1470,73 @@ void Knight::KnightFallEnd(const StateInfo& _Info)
 	{
 		SetMoveDirection(ActtingMoveDirection_);
 	}
+}
+
+void Knight::KnightIntroFallStart(const StateInfo& _Info)
+{
+	isKnightActtingMove_ = false;
+
+
+	GetRenderer()->ChangeFrameAnimation("FAll_ANIMATION");
+}
+
+void Knight::KnightIntroFallUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	isDoubleCheckAreaCheck(_DeltaTime);
+	isPixelCheck(_DeltaTime, ActtingMoveDirection_);
+
+	if (GetisOnGround() == true)
+	{
+		KnightManager_.ChangeState("INTRO_LAND");
+		return;
+
+	}
+
+	float4 Move = (float4::DOWN /** GetGravity()  * 0.004f*/);
+
+	float4 CurrentPos = { GetTransform().GetWorldPosition().x
+						,GetTransform().GetWorldPosition().y };
+
+	float4 DestPos = { GetTransform().GetWorldPosition().x
+						,GetTransform().GetWorldPosition().y + Move.y};
+
+	float4 MoveLerp = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() *1300.f);
+
+
+	GetTransform().SetWorldPosition(MoveLerp);
+
+}
+
+void Knight::KnightIntroFallEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightIntroLandStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("INTRO_LAND_ANIMATION");
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
+
+}
+
+void Knight::KnightIntroLandUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+
+	if (GetRenderer()->GetCurFrameAnimation()->GetFrameAnimationDesc().CurFrame == 4)
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
+
+	}
+
+	if (isIntroLandEnd_ == true)
+	{
+		isIntroLandEnd_ = false;
+		KnightManager_.ChangeState("STILL");
+		return;
+	}
+}
+
+void Knight::KnightIntroLandEnd(const StateInfo& _Info)
+{
 }
 
 void Knight::KnightDashStart(const StateInfo& _Info)
