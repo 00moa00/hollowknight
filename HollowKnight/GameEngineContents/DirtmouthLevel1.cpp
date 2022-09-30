@@ -45,6 +45,8 @@ void DirtmouthLevel1::Start()
 	CreateMainCameraManager();
 	CreateEffectGUIActor();
 	CreateSettingPageActor();
+	CreateMapSmokeMaker();
+
 
 	{
 		Potal* KingsPassLevel4Potal_ = CreateActor<Potal>();

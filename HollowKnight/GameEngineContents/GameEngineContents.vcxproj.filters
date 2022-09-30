@@ -636,6 +636,12 @@
     <ClInclude Include="TitleWhitePartlcle.h">
       <Filter>Actor\Title\Particle</Filter>
     </ClInclude>
+    <ClInclude Include="MapSmoke.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapSmokeMaker.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1117,6 +1123,12 @@
     </ClCompile>
     <ClCompile Include="TitleWhitePartlcle.cpp">
       <Filter>Actor\Title\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSmoke.cpp">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSmokeMaker.cpp">
+      <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

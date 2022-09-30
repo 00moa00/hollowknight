@@ -437,6 +437,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MapSmoke.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MapSmokeMaker.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MonsterDeathPuffParticle.h">
       <SubType>
       </SubType>
@@ -1052,6 +1060,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MapShopLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MapSmoke.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MapSmokeMaker.cpp">
       <SubType>
       </SubType>
     </ClCompile>

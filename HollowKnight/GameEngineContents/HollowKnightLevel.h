@@ -13,6 +13,7 @@
 #include "SettingPageInfo.h"
 
 #include "MainCameraManager.h"
+#include "MapSmokeMaker.h"
 
 #include "EffectGUIActor.h"
 
@@ -57,6 +58,8 @@ private:
 
 	MainCameraManager* MainCameraManager_;
 
+	MapSmokeMaker* MapSmokeMaker_;
+
 public:
 	std::map<int, PointActorComponent*> PointActorListCharm;
 	std::map<int, PointActorComponent*> PointActorListMap;
@@ -79,6 +82,9 @@ protected:
 	void CreateForgottenCrossroadMap();
 	void CreateMainCameraManager();
 	void CreateEffectGUIActor();
+	
+
+	void CreateMapSmokeMaker();
 
 public:
 	void CreateCharmPageInfo(GameEngineActor* ParrentPage);

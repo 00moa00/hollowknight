@@ -24,6 +24,7 @@ HollowKnightLevel::HollowKnightLevel()
 	SettingPage_(nullptr),
 	EffectGUIActor_(nullptr),
 	Crawlid_(nullptr),
+	MapSmokeMaker_(nullptr),
 
 	MainCameraManager_(nullptr),
 
@@ -114,6 +115,11 @@ void HollowKnightLevel::CreateEffectGUIActor()
 {
 	
 	EffectGUIActor_ = CreateActor<EffectGUIActor>();
+}
+
+void HollowKnightLevel::CreateMapSmokeMaker()
+{
+	MapSmokeMaker_ = CreateActor<MapSmokeMaker>();
 }
 
 void HollowKnightLevel::CreateCharmPageInfo(GameEngineActor* ParrentPage)
