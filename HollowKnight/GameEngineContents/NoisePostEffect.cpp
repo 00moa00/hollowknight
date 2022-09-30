@@ -30,7 +30,7 @@ void NoisePostEffect::Effect(GameEngineRenderTarget* _Target)
 {
 	CopyTarget->Copy(_Target);
 
-	EffectSet.GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
+	//EffectSet.GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
 	EffectSet.ShaderResources.SetTexture("Tex", CopyTarget->GetRenderTargetTexture(0));
 
 	_Target->Clear();
