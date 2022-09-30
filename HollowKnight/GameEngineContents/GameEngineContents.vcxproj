@@ -658,6 +658,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TitleWhitePartlcle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TutorialBreakDoor.h">
       <SubType>
       </SubType>
@@ -1268,6 +1272,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleSmokeParticle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleWhitePartlcle.cpp">
       <SubType>
       </SubType>
     </ClCompile>

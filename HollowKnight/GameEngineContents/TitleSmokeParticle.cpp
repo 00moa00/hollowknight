@@ -20,14 +20,11 @@ void TitleSmokeParticle::Start()
 	ParticleRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	ParticleRenderer_->SetTexture("wispy_smoke_particle_abyss.png", RamIndex);
 
-
-
 	float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(2.8f, 4.0f);
 	ParticleRenderer_->GetTransform().SetLocalScale({ 102 * RamdomScale, 128 * RamdomScale });
 	ParticleRenderer_->GetPixelData().MulColor.a = 0.8f;
 
-
-	AliveTimer_ = GameEngineRandom::MainRandom.RandomFloat(4.f, 6.f);
+	AliveTimer_ = GameEngineRandom::MainRandom.RandomFloat(5.f, 7.f);
 	Speed_ = GameEngineRandom::MainRandom.RandomFloat(20.f, 100.f);
 }
 
@@ -51,9 +48,6 @@ void TitleSmokeParticle::Update(float _DeltaTime)
 
 		//ParticleRenderer_->GetTransform().SetLocalScale({ ParticleRenderer_->GetTransform().GetLocalScale().x * Scale_,
 		//	ParticleRenderer_->GetTransform().GetLocalScale().y * Scale_ });
-
-
-
 	}
 }
 

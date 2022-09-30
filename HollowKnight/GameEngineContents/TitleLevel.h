@@ -31,5 +31,6 @@ private:
 
 	float CircleParticleCreateTimer_;
 	float SmokeParticleCreateTimer_;
+	float WhiteParticleCreateTimer_;
 };
 

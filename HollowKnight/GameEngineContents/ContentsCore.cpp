@@ -1410,7 +1410,7 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
-		//GameEngineTexture::Cut("Spell Effects_focus_effect0000-Sheet.png", 9, 1);
+		GameEngineTexture::Cut("final_boss_glow_particle.png", 1, 3);
 		//GameEngineTexture::Cut("Spell Effects_focus_appear0000-Sheet.png", 7, 1);
 		//GameEngineTexture::Cut("Spell Effects_burst_effect0000-Sheet.png", 8, 1);
 

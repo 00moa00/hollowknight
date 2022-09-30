@@ -94,9 +94,6 @@
     <Filter Include="Actor\Object">
       <UniqueIdentifier>{c717f5e0-861a-4efd-bc6b-095ed45b18be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\UI\Area TItle">
-      <UniqueIdentifier>{639c4fae-9977-4e34-bd5c-aff10e136806}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Play\UI\Setting\Inventory\Item">
       <UniqueIdentifier>{92448587-8228-4a80-905b-6f0f2390d2dd}</UniqueIdentifier>
     </Filter>
@@ -171,6 +168,9 @@
     </Filter>
     <Filter Include="Actor\Title\Particle">
       <UniqueIdentifier>{52ae6e7b-41ab-4028-af4b-58f492bb9477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Title\All\Area TItle">
+      <UniqueIdentifier>{639c4fae-9977-4e34-bd5c-aff10e136806}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -358,13 +358,13 @@
       <Filter>Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="AreaTitle.h">
-      <Filter>Actor\Play\UI\Area TItle</Filter>
+      <Filter>Actor\Title\All\Area TItle</Filter>
     </ClInclude>
     <ClInclude Include="AreaTitleTop.h">
-      <Filter>Actor\Play\UI\Area TItle</Filter>
+      <Filter>Actor\Title\All\Area TItle</Filter>
     </ClInclude>
     <ClInclude Include="AreaTitleBottom.h">
-      <Filter>Actor\Play\UI\Area TItle</Filter>
+      <Filter>Actor\Title\All\Area TItle</Filter>
     </ClInclude>
     <ClInclude Include="Notches.h">
       <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
@@ -633,6 +633,9 @@
     <ClInclude Include="TitleCircleParticle.h">
       <Filter>Actor\Title\Particle</Filter>
     </ClInclude>
+    <ClInclude Include="TitleWhitePartlcle.h">
+      <Filter>Actor\Title\Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -822,13 +825,13 @@
       <Filter>Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="AreaTitle.cpp">
-      <Filter>Actor\Play\UI\Area TItle</Filter>
+      <Filter>Actor\Title\All\Area TItle</Filter>
     </ClCompile>
     <ClCompile Include="AreaTitleTop.cpp">
-      <Filter>Actor\Play\UI\Area TItle</Filter>
+      <Filter>Actor\Title\All\Area TItle</Filter>
     </ClCompile>
     <ClCompile Include="AreaTitleBottom.cpp">
-      <Filter>Actor\Play\UI\Area TItle</Filter>
+      <Filter>Actor\Title\All\Area TItle</Filter>
     </ClCompile>
     <ClCompile Include="Notches.cpp">
       <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
@@ -1110,6 +1113,9 @@
       <Filter>Actor\Title\Particle</Filter>
     </ClCompile>
     <ClCompile Include="TitleCircleParticle.cpp">
+      <Filter>Actor\Title\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleWhitePartlcle.cpp">
       <Filter>Actor\Title\Particle</Filter>
     </ClCompile>
   </ItemGroup>
