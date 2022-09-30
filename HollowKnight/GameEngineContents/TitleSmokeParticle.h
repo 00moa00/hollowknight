@@ -1,7 +1,7 @@
 #pragma once
 
 // Ό³Έν :
-class TitleSmokeParticle
+class TitleSmokeParticle : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -15,8 +15,16 @@ public:
 	TitleSmokeParticle& operator=(TitleSmokeParticle&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
+
 
 private:
+	float AliveTimer_;
+	float Alpha_;
+	float Speed_;
+
+	GameEngineTextureRenderer* ParticleRenderer_;
 
 };
 

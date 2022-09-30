@@ -234,6 +234,9 @@ void ContentsCore::Start()
 		{
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
+
+		GameEngineTexture::Cut("wispy_smoke_particle_abyss.png", 1, 5);
+
 	}
 
 	//================================

@@ -6,9 +6,13 @@
 #include <GameEngineBase/GameEngineRandom.h>
 
 #include "TitleCircleParticle.h"
+#include "TitleSmokeParticle.h"
 
 TitleLevel::TitleLevel()
 	:
+	CircleParticleCreateTimer_(0.f),
+	SmokeParticleCreateTimer_(0.f),
+
 	Background_(nullptr),
 	LogoRenderer_(nullptr),
 	MasterTitleUI_(nullptr)
@@ -45,14 +49,32 @@ void TitleLevel::Start()
 
 void TitleLevel::Update(float _DeltaTime)
 {
-	if (GetAccTime() > 0.5f)
+	SmokeParticleCreateTimer_ += _DeltaTime;
+	CircleParticleCreateTimer_ += _DeltaTime;
+
+
+	if (CircleParticleCreateTimer_ >= 0.6f)
 	{
 		TitleCircleParticle* TitleCircleParticle_ = CreateActor<TitleCircleParticle>();
 		TitleCircleParticle_->GetTransform().SetWorldPosition({ GameEngineRandom::MainRandom.RandomFloat(-GameEngineWindow::GetInst()->GetScale().hx(), GameEngineWindow::GetInst()->GetScale().hx())
 			, -GameEngineWindow::GetInst()->GetScale().hy(),10});
 
-		ReSetAccTime();
+
+		CircleParticleCreateTimer_ = 0.f;
 	}
+
+
+	if (SmokeParticleCreateTimer_ >= 0.8f)
+	{
+		TitleSmokeParticle* TitleSmokeParticle_ = CreateActor<TitleSmokeParticle>();
+		TitleSmokeParticle_->GetTransform().SetWorldPosition({ GameEngineRandom::MainRandom.RandomFloat(-GameEngineWindow::GetInst()->GetScale().hx(), GameEngineWindow::GetInst()->GetScale().hx())
+			, -(GameEngineWindow::GetInst()->GetScale().hy() + 150 ),10 });
+
+
+		SmokeParticleCreateTimer_ = 0.f;
+	}
+
+
 }
 
 void TitleLevel::End()

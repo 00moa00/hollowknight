@@ -28,5 +28,8 @@ private:
 	RendererActor* Background_;
 	RendererActor* LogoRenderer_;
 	AllTitleUI* MasterTitleUI_;
+
+	float CircleParticleCreateTimer_;
+	float SmokeParticleCreateTimer_;
 };
 
