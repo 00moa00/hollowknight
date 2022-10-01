@@ -15,6 +15,7 @@
 
 
 
+
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
 	isPossibleDoubleJump_ = true;
@@ -1082,6 +1083,7 @@ void Knight::KnightDoubleJumpStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_JUMP_ANIMATION");
 
 	SetJumpPower({ 0, KnightDoubleJumpPower_ , 0 });
+	KnightDoubleJumpEffect_->SetEffectOn();
 }
 
 void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)

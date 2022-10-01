@@ -21,5 +21,7 @@ protected:
 
 private:
 
+public:
+	void SetEffectOn();
 };
 

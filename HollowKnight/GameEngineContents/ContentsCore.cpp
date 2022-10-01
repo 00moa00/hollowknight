@@ -1410,6 +1410,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Spell Effects_focus_effect0000-Sheet.png", 9, 1);
 		GameEngineTexture::Cut("Spell Effects_focus_appear0000-Sheet.png", 7, 1);
 		GameEngineTexture::Cut("Spell Effects_burst_effect0000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("Spell Effects 2_double_jump_wings0000-Sheet.png", 6, 1);
 
 
 	}
@@ -1533,11 +1534,9 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Projectiles_shot_impact0001-Sheet.png", 7, 1);
 		GameEngineTexture::Cut("orange_puff_animated.png", 10, 1);
 
-
-
-
-
 	}
+
+
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
 	{
