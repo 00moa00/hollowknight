@@ -14,6 +14,7 @@
 #include "VignettePostEffect.h"
 
 #include "MapSpike.h"
+#include "WhiteParicleMaker.h"
 
 
 KingsPassLevel4::KingsPassLevel4() 
@@ -133,6 +134,8 @@ void KingsPassLevel4::Start()
 		MapSpike_->GetTransform().SetWorldPosition({ 3500, -3003.f });
 	}
 
+	CreateActor<WhiteParicleMaker>();
+
 	Tablet* Tablet_ = CreateActor<Tablet>();
 	Tablet_->CreateTablet("Mines_Layered_0018_a.png", "lit_tablet_02.png", { 700, 500 }, TabletType::Tu_Story);
 	Tablet_->GetTransform().SetWorldPosition({ 4388,-1169, static_cast<float>(Z_ORDER::Back_Object) });
@@ -182,8 +185,9 @@ void KingsPassLevel4::LevelStartEvent()
 	{
 		GetKnight()->GetTransform().SetLocalPosition({ 5891.f, -1169.f, static_cast<float>(Z_ORDER::Knight) });
 
-
 	}
+
+
 }
 
 void KingsPassLevel4::LevelEndEvent()

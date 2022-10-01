@@ -645,6 +645,12 @@
     <ClInclude Include="MapSpike.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="WhiteParicleMaker.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapWhitParticle.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1135,6 +1141,12 @@
     </ClCompile>
     <ClCompile Include="MapSpike.cpp">
       <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteParicleMaker.cpp">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapWhitParticle.cpp">
+      <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

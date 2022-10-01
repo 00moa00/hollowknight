@@ -63,9 +63,7 @@ void MapSmoke::SetSpeed(float _f)
 	float X = GameEngineRandom::MainRandom.RandomFloat(0, GetLevel<HollowKnightLevel>()->GetMapSize().x );
 	float Y = GameEngineRandom::MainRandom.RandomFloat(-GetLevel<HollowKnightLevel>()->GetMapSize().y, 0 );
 
-	float4 Pos = { X ,Y, static_cast<float>(Z_ORDER::Back_Back_Object)
-
-	 };
+	float4 Pos = { X ,Y, static_cast<float>(Z_ORDER::Back_Back_Object) };
 
 	GetTransform().SetLocalPosition(Pos);
 

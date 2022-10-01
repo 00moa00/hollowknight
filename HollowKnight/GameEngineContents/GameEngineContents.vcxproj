@@ -449,6 +449,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MapWhitParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MonsterDeathPuffParticle.h">
       <SubType>
       </SubType>
@@ -778,6 +782,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="WhiteParicleMaker.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="WorldMap.h">
       <SubType>
       </SubType>
@@ -1076,6 +1084,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MapSpike.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MapWhitParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -1407,6 +1419,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="VignettePostEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="WhiteParicleMaker.cpp">
       <SubType>
       </SubType>
     </ClCompile>
