@@ -23,14 +23,11 @@ void Knight::KnightStillStart(const StateInfo& _Info)
 		if (isLowHealth_ == true)
 		{
 			GetRenderer()->ChangeFrameAnimation("LOW_HEALTH_ANIMATION");
-
-
 		}
 
 		else
 		{
 			GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
-
 		}
 	}
 }
