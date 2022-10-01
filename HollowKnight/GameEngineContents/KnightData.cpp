@@ -23,6 +23,7 @@ KnightData::KnightData()
 	isSitting_(false),
 	isEffectGUI_(false),
 	isIntroFallEvent_(false),
+	isUseSoul_(false),
 
 	MainLightMulColor_({1.0f, 1.0f, 1.0f, 0.7f}),
 	MainLightPlusColor_({ 0.0f, 0.0f, 0.0f, 0.0f }),

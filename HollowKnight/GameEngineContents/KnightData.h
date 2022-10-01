@@ -146,6 +146,7 @@ private:
 	bool isRevive_;		//플레이어가 다시 태어난당		: 비네팅에 사용중
 	bool isBossBattle_;
 	bool isIntroFallEvent_;
+	bool isUseSoul_;
 
 	float4 KnightPosition_;
 	//float4 CurDir_;
@@ -206,6 +207,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisisUseSoul() const
+	{
+		return isUseSoul_;
+	}
+
 	bool GetisIntroFallEvent()
 	{
 		return isIntroFallEvent_;
@@ -410,6 +416,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetisUseSoul(bool _b)
+	{
+		isUseSoul_ = _b;
+	}
+
 	void SetisIntroFallEvent(bool _b)
 	{
 		isIntroFallEvent_ = _b;

@@ -1376,6 +1376,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Knight_slash_left_longer0000-Sheet.png", 11, 1);
 		GameEngineTexture::Cut("Knight_up_slash0000-Sheet.png", 5, 1);
 		GameEngineTexture::Cut("Knight_down_slash_v02000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Knight_cast_v030002-Sheet.png", 12, 1);
 
 		// ¶¥¿¡¼­ ±â»ó
 		GameEngineTexture::Cut("Knight_wake_up_ground0000-Sheet.png", 5, 1);

@@ -66,6 +66,8 @@ Knight::Knight()
 	isSitEnd_(false),
 	isDoorEnd_(false),
 	isRunTurnEnd_(false),
+	isCastEnd_(false),
+
 	isReturnToIdle_(false),
 	isInvincibility_(false),
 	isKnightBlack_(false),
@@ -78,6 +80,7 @@ Knight::Knight()
 	isKingsPass_(false),
 	isIntroLandEnd_(false),
 	isKnightSpikeHit_(false),
+
 
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
@@ -177,6 +180,7 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightLookMap", VK_TAB);
 		GameEngineInput::GetInst()->CreateKey("KnightDash", VK_SHIFT);
 		GameEngineInput::GetInst()->CreateKey("KnightFocus", 'Q');
+		GameEngineInput::GetInst()->CreateKey("KnightCast", 'S');
 
 		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
 		GameEngineInput::GetInst()->CreateKey("KnightTalking", 'Z');
@@ -204,9 +208,7 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_LOOP_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 3, 5, 0.100f, true));
 
-
 	GetRenderer()->CreateFrameAnimationCutTexture("LAND_ANIMATION", FrameAnimation_DESC("Knight_land0000-Sheet.png", 0, 2, 0.080f, false));
-
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
 	
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.080f, false ));
@@ -216,8 +218,7 @@ void Knight::Start()
 
 
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_DOWN_ANIMATION", FrameAnimation_DESC("Knight_look_down0000-Sheet.png", 0, 5, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));
-	
+	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));	
 	GetRenderer()->CreateFrameAnimationCutTexture("DASH_ANIMATION", FrameAnimation_DESC("Knight_dash_v020000-Sheet.png", 0, 11, 0.070f, false));
 
 
@@ -253,7 +254,8 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 6, 10, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("UP_SLASH_ANIMATION", FrameAnimation_DESC("Knight_up_slash0000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH_ANIMATION", FrameAnimation_DESC("Knight_down_slash_v02000-Sheet.png", 0, 4, 0.100f));
-	
+	GetRenderer()->CreateFrameAnimationCutTexture("CAST_ANIMATION", FrameAnimation_DESC("Knight_cast_v030002-Sheet.png", 0, 11, 0.060f, false));
+
 	// ---- 기상 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_GROUND_ANIMATION", FrameAnimation_DESC("Knight_wake_up_ground0000-Sheet.png", 0, 20, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_ANIMATION", FrameAnimation_DESC("Knight_wake0000-Sheet.png", 0, 4, 0.100f, false));
@@ -330,6 +332,13 @@ void Knight::Start()
 	//================================
 	//    Create Bind Animation
 	//================================
+	GetRenderer()->AnimationBindEnd("CAST_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+
+			isCastEnd_ = true;
+		});
+
+
 	GetRenderer()->AnimationBindEnd("INTRO_LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			
@@ -516,7 +525,6 @@ void Knight::Start()
 		, std::bind(&Knight::KnightIntroLandStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightIntroLandEnd, this, std::placeholders::_1));
 
-
 	KnightManager_.CreateStateMember("FALL"
 		, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
 		std::bind(&Knight::KnightFallStart, this, std::placeholders::_1)
@@ -538,7 +546,6 @@ void Knight::Start()
 		, std::bind(&Knight::KnightFocusBurstStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightFocusBurstEnd, this, std::placeholders::_1));
 
-
 	// ---- 공격 ----
 	KnightManager_.CreateStateMember("SLASH"
 		, std::bind(&Knight::KnightSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -559,6 +566,11 @@ void Knight::Start()
 		, std::bind(&Knight::KnightDownSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightDownSlashStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightDownSlashEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("CAST"
+		, std::bind(&Knight::KnightCastUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightCastStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightCastEnd, this, std::placeholders::_1));
 	
 	// ----스턴 ----
 	KnightManager_.CreateStateMember("STUN"

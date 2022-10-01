@@ -1,14 +1,21 @@
 #include "PreCompile.h"
 #include "Soul.h"
+#include "KnightData.h"
 
 Soul::Soul() 
 	:
 	isGrowEnd_(false),
 	isShrinkEnd_(false),
 
+	SoulLevel_(0),
+
+
 	//SoulLevel_(4),
 
-	SoulManager_()
+	SoulManager_(),
+	EyeRenderer_(nullptr),
+	Soul_(nullptr)
+
 {
 }
 
@@ -173,6 +180,8 @@ void Soul::SoulGrowStart(const StateInfo& _Info)
 {
 	SetLevelPosition(SoulLevel_);
 	Soul_->ChangeFrameAnimation("GROW_ANIMATION");
+	KnightData::GetInst()->SetCurSoul(SoulLevel_);
+
 }
 
 void Soul::SoulGrowUpdate(float _DeltaTime, const StateInfo& _Info)

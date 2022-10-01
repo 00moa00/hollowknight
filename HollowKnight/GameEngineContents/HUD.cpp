@@ -265,6 +265,13 @@ void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 		Soul_->GrowSoulLevel();
 	}
 
+	// ¿µÈ¥ »ç¿ë
+	if (KnightData::GetInst()->GetisisUseSoul() == true)
+	{
+		KnightData::GetInst()->SetisUseSoul(false);
+		Soul_->UseSoulLevel();
+	}
+
 }
 
 void HUD::HUDIdleEnd(const StateInfo& _Info)

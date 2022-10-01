@@ -26,6 +26,7 @@ private:
 	int SoulLevel_; // 디폴트 MAK 9 , 꺠졌을때 MAK 6
 
 	GameEngineStateManager SoulManager_;
+
 	GameEngineUIRenderer* EyeRenderer_;
 	MaskRenderer* Soul_;
 public:
@@ -40,6 +41,16 @@ public:
 	//================================
 	//     Setter
 	//================================
+
+	void UseSoulLevel()
+	{
+		if (SoulLevel_ >= 2)
+		{
+			SoulLevel_ -= 2;
+			SoulManager_.ChangeState("GROW");
+		}
+	}
+
 	void GrowSoulLevel()
 	{
 		if (SoulLevel_ < 9)

@@ -60,6 +60,7 @@ private:
 	bool isDoorEnd_;
 	bool isReturnToIdle_;
 	bool isIntroLandEnd_;
+	bool isCastEnd_;
 
 	bool isRunTurnEnd_;
 
@@ -75,9 +76,7 @@ private:
 	bool isLookMap_;
 	bool isRunMode_;
 
-	bool isDeath_;
-
-	
+	bool isDeath_;	
 
 	bool isInvincibility_;
 	bool isKnightBlack_;
@@ -263,6 +262,9 @@ private:
 	void KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightDownSlashEnd(const StateInfo& _Info);
 
+	void KnightCastStart(const StateInfo& _Info);
+	void KnightCastUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightCastEnd(const StateInfo& _Info);
 
 	// ---- 지도 보기 ----
 	void KnightMapStillStart(const StateInfo& _Info);
