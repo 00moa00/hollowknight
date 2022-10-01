@@ -42,18 +42,6 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
 
-	//this->isPixelCheck(_DeltaTime, GetMoveDirection());
-
-	//if (GetisWall() == true)
-	//{
- //		isKnihgtStillWall_ = true;
-	//}
-
-	//else
-	//{
-	//	isKnihgtStillWall_ = false;
-	//}
-
 	// 내가 만약 무적이면 깜빡거린다
 	if (isInvincibility_ == true)
 	{
@@ -91,7 +79,7 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	// ======== Knight VS Monster ========
 	if (GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
-		 )
+		)
 	{
 		KnightManager_.ChangeState("STUN");
 		KnightData::GetInst()->SetisBreak(true);
@@ -182,15 +170,30 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 
 	}
-
-	 if (GetisKnightMove() == true && isRunMode_ == false)
+	if (true == GameEngineInput::GetInst()->IsPress("KnightRight") && true == GameEngineInput::GetInst()->IsFree("KnightLeft"))
 	{
-		KnightManager_.ChangeState("WALK");
+		if (GetisKnightMove() == true && isRunMode_ == false)
+		{
+			KnightManager_.ChangeState("WALK");
+		}
+
+		if (GetisKnightMove() == true && isRunMode_ == true)
+		{
+			KnightManager_.ChangeState("RUN");
+		}
 	}
 
-	if (GetisKnightMove() == true && isRunMode_ == true)
+	if (true == GameEngineInput::GetInst()->IsFree("KnightRight") && true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 	{
-		KnightManager_.ChangeState("RUN");
+		if (GetisKnightMove() == true && isRunMode_ == false)
+		{
+			KnightManager_.ChangeState("WALK");
+		}
+
+		if (GetisKnightMove() == true && isRunMode_ == true)
+		{
+			KnightManager_.ChangeState("RUN");
+		}
 	}
 
 	// 점프
@@ -200,7 +203,6 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 
 	}
-
 	// 위 공격
 	if (GameEngineInput::GetInst()->IsPress("KnightSlash") == true
 		&& GameEngineInput::GetInst()->IsPress("KnightUp") == true)
@@ -339,7 +341,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	else if (GetisOnGround() == true)
 	{
-		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft") && true == GameEngineInput::GetInst()->IsFree("KnightRight"))
 		{
 			if (GetPrevDirection().CompareInt2D(float4::LEFT) == false)
 			{
@@ -355,7 +357,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 
 
-		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight") && true == GameEngineInput::GetInst()->IsFree("KnightLeft"))
 		{
 			if (GetPrevDirection().CompareInt2D(float4::RIGHT) == false)
 			{
@@ -440,6 +442,12 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		isLookMap_ = true;
 		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_WALKING_ANIMATION");
 		KnightManager_.ChangeState("MAP_WALKING");
+		return;
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("KnightRight") && true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+	{
+
+		KnightManager_.ChangeState("STILL");
 		return;
 	}
 
@@ -570,9 +578,6 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	DoubleSlashTimer(_DeltaTime);
 
-	//KnightDirectionCheck();
-
-
 	if (GetisWall() == true || GetisCollWall() == true)
 	{
 		GetTransform().SetWorldMove(float4::ZERO * KnightRunSpeed_ * _DeltaTime);
@@ -582,15 +587,42 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
 		{
+			if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+			{
+				if (GetisKnightMove() == true && isRunMode_ == false)
+				{
+					KnightManager_.ChangeState("WALK");
+				}
 
+				if (GetisKnightMove() == true && isRunMode_ == true)
+				{
+					KnightManager_.ChangeState("RUN");
+				}
+			}
 			GetTransform().SetWorldMove(float4::LEFT * KnightRunSpeed_ * _DeltaTime);
+
+		
+
 		}
 
 
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
+			if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+			{
+				if (GetisKnightMove() == true && isRunMode_ == false)
+				{
+					KnightManager_.ChangeState("WALK");
+				}
 
+				if (GetisKnightMove() == true && isRunMode_ == true)
+				{
+					KnightManager_.ChangeState("RUN");
+				}
+			}
 			GetTransform().SetWorldMove(float4::RIGHT * KnightRunSpeed_ * _DeltaTime);
+
+		
 		}
 	}
 
@@ -1821,6 +1853,11 @@ void Knight::KnightRunStart(const StateInfo& _Info)
 
 void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (true == GameEngineInput::GetInst()->IsPress("KnightRight") && true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+	{
+		KnightManager_.ChangeState("STILL");
+		return;
+	}
 	// 내가 만약 무적이면 깜빡거린다
 	if (isInvincibility_ == true)
 	{
@@ -1856,6 +1893,7 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
 
 
+
 	if (GetisWall() == true || GetisCollWall() == true)
 	{
 		isKnihgtStillWall_ = true;
@@ -1875,7 +1913,7 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	else if (GetisOnGround() == true)
 	{
-		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft") && true == GameEngineInput::GetInst()->IsFree("KnightRight"))
 		{
 			if (GetPrevDirection().CompareInt2D(float4::LEFT) == false)
 			{
@@ -1889,7 +1927,7 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 			SetPrevDirection(float4::LEFT);
 		}
 
-		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+		if (true == GameEngineInput::GetInst()->IsPress("KnightRight") && true == GameEngineInput::GetInst()->IsFree("KnightLeft"))
 		{
 			if (GetPrevDirection().CompareInt2D(float4::RIGHT) == false)
 			{
@@ -1969,6 +2007,8 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("STILL");
 		return;
 	}
+
+
 
 	// 대쉬
 	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
