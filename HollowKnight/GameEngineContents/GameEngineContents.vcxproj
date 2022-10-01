@@ -449,6 +449,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MapWhiteParticleWindMaker.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MapWhitParticle.h">
       <SubType>
       </SubType>
@@ -1084,6 +1088,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MapSpike.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MapWhiteParticleWindMaker.cpp">
       <SubType>
       </SubType>
     </ClCompile>

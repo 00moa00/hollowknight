@@ -102,6 +102,7 @@ void KingsPassLevel2::Start()
 
 		AmblentLife_->SetLimitMove({ 1817.f , -1000.f }, 150);
 	}
+	CreawteMapWhiteParticleMaker();
 
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();

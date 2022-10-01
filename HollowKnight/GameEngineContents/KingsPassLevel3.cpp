@@ -74,6 +74,9 @@ void KingsPassLevel3::Start()
 
 	}
 
+	CreawteMapWhiteParticleMaker();
+
+
 	Tablet* Tablet_ = CreateActor<Tablet>();
 	Tablet_->CreateTablet("Mines_Layered_0017_a.png", "lit_tablet.png", {700, 500}, TabletType::FocusSpell);
 	Tablet_->GetTransform().SetWorldPosition({ 4295,-3259, static_cast<float>(Z_ORDER::Back_Object)});

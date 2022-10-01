@@ -96,6 +96,7 @@ void KingsPassLevel1::Start()
 		TutorialBreakDoor_->GetTransform().SetLocalPosition({ 5265, -4639 , static_cast<float>(Z_ORDER::Object) });
 	}
 
+	CreawteMapWhiteParticleMaker();
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);

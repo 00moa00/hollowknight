@@ -10,6 +10,10 @@ MapWhitParticle::MapWhitParticle()
 	Alpha_(1.0f),
 	Scale_(1.0f),
 	Speed_(0.f),
+	MapMaxX_(0.f),
+
+
+	isWind_(false),
 
 	Dir_(float4::ZERO)
 {
@@ -59,33 +63,61 @@ void MapWhitParticle::Start()
 
 void MapWhitParticle::Update(float _DeltaTime)
 {
-	float4 Move = Dir_ * Speed_ * _DeltaTime;
-
-	GetTransform().SetLocalMove(Move);
-
-	//AliveTimer_ += _DeltaTime;
-
-	if (GetAccTime() >= AliveTimer_)
+	if (isWind_ == false)
 	{
-		Alpha_ -= 0.8f * _DeltaTime;
-		Scale_ -= 0.8f * _DeltaTime;
+		float4 Move = Dir_ * Speed_ * _DeltaTime;
 
-		if (Alpha_ <= 0.0f)
+		GetTransform().SetLocalMove(Move);
+
+		//AliveTimer_ += _DeltaTime;
+
+		if (GetAccTime() >= AliveTimer_)
 		{
-			Alpha_ = 0.f;
-			//this->Death();
+			Alpha_ -= 0.8f * _DeltaTime;
+			Scale_ -= 0.8f * _DeltaTime;
+
+			if (Alpha_ <= 0.0f)
+			{
+				Alpha_ = 0.f;
+				//this->Death();
+			}
+
+			if (Scale_ <= 0.0f)
+			{
+				Scale_ = 0.f;
+				this->Death();
+			}
+
+			ParticleRenderer_->GetPixelData().MulColor.a = Alpha_;
+			//ParticleRenderer_->Set
+			ParticleRenderer_->GetTransform().SetLocalScale({ ParticleRenderer_->GetTransform().GetLocalScale().x * Scale_,
+				ParticleRenderer_->GetTransform().GetLocalScale().y * Scale_ });
 		}
+	}
 
-		if (Scale_ <= 0.0f)
+	else
+	{
+		float4 Move = Dir_ * Speed_ * _DeltaTime;
+
+		GetTransform().SetLocalMove(Move);
+
+		if (GetTransform().GetLocalPosition().x > MapMaxX_ + 300.f)
 		{
-			Scale_ = 0.f;
 			this->Death();
 		}
-
-		ParticleRenderer_->GetPixelData().MulColor.a = Alpha_;
-		//ParticleRenderer_->Set
-		ParticleRenderer_->GetTransform().SetLocalScale({ ParticleRenderer_->GetTransform().GetLocalScale().x * Scale_,
-			ParticleRenderer_->GetTransform().GetLocalScale().y * Scale_ });
 	}
+	
+}
+
+void MapWhitParticle::SetWindMove()
+{
+	Speed_ = GameEngineRandom::MainRandom.RandomFloat(600.f, 800.f);
+	Dir_.x = 1.0f;
+	Dir_.y = GameEngineRandom::MainRandom.RandomFloat(-0.2f, 0.3f);
+	Dir_.Normalize();
+
+	MapMaxX_ = GetLevel<HollowKnightLevel>()->GetMapSize().x;
+
+
 }
 

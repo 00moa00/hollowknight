@@ -27,6 +27,7 @@ HollowKnightLevel::HollowKnightLevel()
 	MapSmokeMaker_(nullptr),
 
 	MainCameraManager_(nullptr),
+	WhiteParicleMaker_(nullptr),
 
 	//EffectGUIActor_(nullptr),
 
@@ -120,6 +121,11 @@ void HollowKnightLevel::CreateEffectGUIActor()
 void HollowKnightLevel::CreateMapSmokeMaker()
 {
 	MapSmokeMaker_ = CreateActor<MapSmokeMaker>();
+}
+
+void HollowKnightLevel::CreawteMapWhiteParticleMaker()
+{
+	WhiteParicleMaker_ = CreateActor<WhiteParicleMaker>();
 }
 
 void HollowKnightLevel::CreateCharmPageInfo(GameEngineActor* ParrentPage)

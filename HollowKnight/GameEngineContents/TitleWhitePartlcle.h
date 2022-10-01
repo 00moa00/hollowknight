@@ -1,4 +1,3 @@
-#pragma once
 #include <GameEngineCore/CoreMinimal.h>
 
 // Ό³Έν :
@@ -24,6 +23,7 @@ private:
 	float Alpha_;
 	float Scale_;
 	float Speed_;
+
 
 	float4 Dir_;
 

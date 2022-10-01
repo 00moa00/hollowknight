@@ -134,7 +134,8 @@ void KingsPassLevel4::Start()
 		MapSpike_->GetTransform().SetWorldPosition({ 3500, -3003.f });
 	}
 
-	CreateActor<WhiteParicleMaker>();
+	
+	CreawteMapWhiteParticleMaker();
 
 	Tablet* Tablet_ = CreateActor<Tablet>();
 	Tablet_->CreateTablet("Mines_Layered_0018_a.png", "lit_tablet_02.png", { 700, 500 }, TabletType::Tu_Story);

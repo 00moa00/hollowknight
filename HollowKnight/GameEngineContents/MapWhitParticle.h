@@ -20,14 +20,25 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	bool isWind_;
+
 	float AliveTimer_;
 	float Alpha_;
 	float Scale_;
 	float Speed_;
 
+	float MapMaxX_;
+
+
 	float4 Dir_;
 
+
+
 	GameEngineTextureRenderer* ParticleRenderer_;
+
+public :
+
+	void SetWindMove();
 
 };
 

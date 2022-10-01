@@ -14,6 +14,7 @@
 
 #include "MainCameraManager.h"
 #include "MapSmokeMaker.h"
+#include "WhiteParicleMaker.h"
 
 #include "EffectGUIActor.h"
 
@@ -59,6 +60,7 @@ private:
 	MainCameraManager* MainCameraManager_;
 
 	MapSmokeMaker* MapSmokeMaker_;
+	WhiteParicleMaker* WhiteParicleMaker_;
 
 public:
 	std::map<int, PointActorComponent*> PointActorListCharm;
@@ -85,6 +87,7 @@ protected:
 	
 
 	void CreateMapSmokeMaker();
+	void CreawteMapWhiteParticleMaker();
 
 public:
 	void CreateCharmPageInfo(GameEngineActor* ParrentPage);

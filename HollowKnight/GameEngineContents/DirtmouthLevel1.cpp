@@ -14,6 +14,8 @@
 #include "VignettePostEffect.h"
 #include "Potal.h"
 
+#include "MapWhiteParticleWindMaker.h"
+
 DirtmouthLevel1::DirtmouthLevel1() 
 {
 }
@@ -80,6 +82,8 @@ void DirtmouthLevel1::Start()
 
 
 	SetMapSize({ 3700, 3418 });
+
+	CreateActor<MapWhiteParticleWindMaker>();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 500, -0, static_cast<float>(Z_ORDER::Knight) });

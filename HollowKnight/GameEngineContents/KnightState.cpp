@@ -2092,9 +2092,10 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightStunEnd(const StateInfo& _Info)
 {
-	GetLevel()->CreateActor<FadeIn>();
 	if (isKnightSpikeHit_ == true)
 	{
+		GetLevel()->CreateActor<FadeIn>();
+
 		GetTransform().SetWorldPosition({ 2167, -2438, static_cast<float>(Z_ORDER::Knight) });
 		isKnightSpikeHit_ = false;
 

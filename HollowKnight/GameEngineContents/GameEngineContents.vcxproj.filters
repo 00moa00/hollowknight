@@ -651,6 +651,9 @@
     <ClInclude Include="MapWhitParticle.h">
       <Filter>Actor\Effect\Map</Filter>
     </ClInclude>
+    <ClInclude Include="MapWhiteParticleWindMaker.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1146,6 +1149,9 @@
       <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="MapWhitParticle.cpp">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapWhiteParticleWindMaker.cpp">
       <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>
