@@ -10,6 +10,11 @@
 #include "KnightFocusEffect.h"
 #include "KnightBurstEffect.h"
 
+#include "FadeIn.h"
+#include "FadeOut.h"
+
+
+
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
 	isPossibleDoubleJump_ = true;
@@ -1974,8 +1979,6 @@ void Knight::KnightRunEnd(const StateInfo& _Info)
 
 void Knight::KnightStunStart(const StateInfo& _Info)
 {
-
-
 	//KnightKnockbackTimer_ = 1.0f;
 	KnightStunEffect_->StunEffectOn();
 	GetRenderer()->ChangeFrameAnimation("STUN_ANIMATION");
@@ -1988,6 +1991,13 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 	{
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Shaking);
 
+	}
+
+	if (isKnightSpikeHit_ == true)
+	{
+		FadeOut* FadeOut_= GetLevel()->CreateActor<FadeOut>();
+		FadeOut_->SetNoCountDeath(true);
+		FadeOut_->SetFadeSpeed(1.5f);
 	}
 
 
@@ -2008,30 +2018,63 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	}
 
-	KnightStunEffect_->GetTransform().SetWorldPosition(this->GetTransform().GetWorldPosition());
+
+
 	KnightKnockbackTimer_ += _DeltaTime;
 
-	if (KnightKnockbackTimer_ > 0.2f)
+
+
+	if (isKnightSpikeHit_ == true)
 	{
-		KnightKnockbackTimer_ = 0.f;
-		if (KnightData::GetInst()->GetCurMask() == -1)
+		if (KnightKnockbackTimer_ > 0.2f)
 		{
-			isLowHealth_ = false;
+			KnightKnockbackTimer_ = 0.f;
+			if (KnightData::GetInst()->GetCurMask() == -1)
+			{
+				isLowHealth_ = false;
 
-			KnightData::GetInst()->SetisDeath(true);
-			KnightData::GetInst()->SetisRevive(true);
+				KnightData::GetInst()->SetisDeath(true);
+				KnightData::GetInst()->SetisRevive(true);
 
-			KnightManager_.ChangeState("DEATH");
+				KnightManager_.ChangeState("DEATH");
+			}
+
+			else
+			{
+				KnightManager_.ChangeState("STILL");
+
+			}
 		}
 
-		else
-		{
-			KnightManager_.ChangeState("STILL");
+		GetTransform().SetWorldMove(float4::UP * GetSpeed() * _DeltaTime);
 
-		}
+
 	}
+	else
+	{
+		if (KnightKnockbackTimer_ > 0.2f)
+		{
+			KnightKnockbackTimer_ = 0.f;
+			if (KnightData::GetInst()->GetCurMask() == -1)
+			{
+				isLowHealth_ = false;
 
-	GetTransform().SetWorldMove(-GetMoveDirection() * GetSpeed() * _DeltaTime);
+				KnightData::GetInst()->SetisDeath(true);
+				KnightData::GetInst()->SetisRevive(true);
+
+				KnightManager_.ChangeState("DEATH");
+			}
+
+			else
+			{
+				KnightManager_.ChangeState("STILL");
+
+			}
+		}
+
+		GetTransform().SetWorldMove(-GetMoveDirection() * GetSpeed() * _DeltaTime);
+
+	}
 
 	// ======== Knight VS WallColl ========
 	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
@@ -2049,6 +2092,16 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightStunEnd(const StateInfo& _Info)
 {
+	GetLevel()->CreateActor<FadeIn>();
+	if (isKnightSpikeHit_ == true)
+	{
+		GetTransform().SetWorldPosition({ 2167, -2438, static_cast<float>(Z_ORDER::Knight) });
+		isKnightSpikeHit_ = false;
+
+
+	}
+
+
 	if (KnightData::GetInst()->GetCurMask() == 0)
 	{
 		isLowHealth_ = true;

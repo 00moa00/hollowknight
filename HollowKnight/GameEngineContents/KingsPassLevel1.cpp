@@ -13,6 +13,7 @@
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "MapSmoke.h"
 
 
 KingsPassLevel1::KingsPassLevel1() 
@@ -47,6 +48,14 @@ void KingsPassLevel1::Start()
 	CreateSettingPageActor();
 	CreateMainCameraManager();
 	CreateEffectGUIActor();
+	//CreateMapSmokeMaker();
+
+	//for (int i = 0; i < 130; ++i)
+	//{
+	//	MapSmoke* MapSmoke_= CreateActor<MapSmoke>();
+	//	MapSmoke_->SetSpeed(0.f);
+	//}
+
 
 	{
 		Potal* Potal_ = CreateActor<Potal>();

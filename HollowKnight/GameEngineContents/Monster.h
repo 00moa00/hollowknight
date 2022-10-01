@@ -6,6 +6,12 @@
 #include "MonsterDeathPuffParticle.h"
 #include "MonsterHitOrangeLight.h"
 
+enum class MonsterType
+{
+	Normal,
+	Spike
+};
+
 // Ό³Έν :
 class Monster : public MasterActor
 {
@@ -38,6 +44,8 @@ private:
 	int HitParticlePuffCount_;
 	int HitLightCount_;
 
+	MonsterType MonsterType_;
+
 	MonsterDeathPuffParticle* MonsterDeathPuffParticle_;
 
 	std::vector<MonsterHitParticle*>MonsterHitParticleList_;
@@ -53,6 +61,9 @@ public:
 	//================================
 	//    Setter
 	//================================
+
+
+
 	void CreateMonsterHitLight(int _i)
 	{
 		for (int i = 0; i < _i; ++i)
@@ -208,6 +219,11 @@ public:
 
 	}
 
+	void SetMonsterType(MonsterType _MonsterType)
+	{
+		MonsterType_ = _MonsterType;
+	}
+
 
 	//================================
 	//     Getter
@@ -221,6 +237,11 @@ public:
 	int GetHP()
 	{
 		return CurHp_;
+	}
+
+	MonsterType GetMonsterType()
+	{
+		return MonsterType_;
 	}
 
 

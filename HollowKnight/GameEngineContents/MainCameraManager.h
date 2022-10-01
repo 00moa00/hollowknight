@@ -57,11 +57,15 @@ private:
 	float4 RoomSize_;
 	float4 RoomPos_;
 
+	float4 CameraPivot_;
+
 public:
 	void MainCameraMoveLimitWindow(float4 _TargetPos, float4 _MapSize);
 	void ChangeCameraMove(CameraMode _Mode);
 
 	void SetRoomCamera(float4 _RoomSize, float4 _RoomPos);
+
+	void SetCameraPivot(float4 _Pivot);
 
 private:
 	//================================

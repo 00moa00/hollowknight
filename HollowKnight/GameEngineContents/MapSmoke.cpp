@@ -34,21 +34,41 @@ void MapSmoke::Start()
 	MapMaxX_ = GetLevel<HollowKnightLevel>()->GetMapSize().x;
 
 	float RamY = GameEngineRandom::MainRandom.RandomFloat(-GetLevel<HollowKnightLevel>()->GetMapSize().y, 0);
-	GetTransform().SetLocalPosition({ -GameEngineWindow::GetInst()->GetScale().hx(), RamY , static_cast<float>(Z_ORDER::Background_Object)});
+	GetTransform().SetLocalPosition({ -GameEngineWindow::GetInst()->GetScale().hx(), RamY , static_cast<float>(Z_ORDER::Back_Back_Object)});
 }
 
 void MapSmoke::Update(float _DeltaTime)
 {
-	float4 Move = float4::RIGHT * Speed_ * _DeltaTime;
-
-	GetTransform().SetLocalMove(Move);
-	GetTransform().SetLocalRotate({0,0, RotatinSpeed_ * _DeltaTime });
-
-
-	if(GetTransform().GetLocalPosition().x > MapMaxX_ + 300.f)
+	if (Speed_ > 0.f)
 	{
-		this->Death();
+		float4 Move = float4::RIGHT * Speed_ * _DeltaTime;
+
+		GetTransform().SetLocalMove(Move);
+		GetTransform().SetLocalRotate({ 0,0, RotatinSpeed_ * _DeltaTime });
+
+
+		if (GetTransform().GetLocalPosition().x > MapMaxX_ + 300.f)
+		{
+			this->Death();
+		}
 	}
+
+
+}
+
+void MapSmoke::SetSpeed(float _f)
+{
+	Speed_ = _f;
+
+	float X = GameEngineRandom::MainRandom.RandomFloat(0, GetLevel<HollowKnightLevel>()->GetMapSize().x );
+	float Y = GameEngineRandom::MainRandom.RandomFloat(-GetLevel<HollowKnightLevel>()->GetMapSize().y, 0 );
+
+	float4 Pos = { X ,Y, static_cast<float>(Z_ORDER::Back_Back_Object)
+
+	 };
+
+	GetTransform().SetLocalPosition(Pos);
+
 
 }
 

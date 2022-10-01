@@ -11,6 +11,7 @@ MainCameraManager::MainCameraManager()
 	seed(0.2f),
 	SeedShiftingFactor(10.00f),
 
+	CameraPivot_(),
 	ReturnLenth_()
 {
 
@@ -22,12 +23,10 @@ MainCameraManager::~MainCameraManager()
 
 void MainCameraManager::Start()
 {
-
 	if (false == GameEngineInput::GetInst()->IsKey("FreeCameraOnOff"))
 	{
 		GameEngineInput::GetInst()->CreateKey("FreeCameraOnOff", 'O');
 	}
-
 
 	GetLevel()->GetMainCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
@@ -36,7 +35,7 @@ void MainCameraManager::Start()
 		,GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y
 		, -1800});
 	
-	
+
 	CameraStateManager_.CreateStateMember("MOVE_TO_TARGET"
 		, std::bind(&MainCameraManager::MoveToTargetUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::MoveToTargetStart, this, std::placeholders::_1)
@@ -87,12 +86,10 @@ void MainCameraManager::Start()
 		, std::bind(&MainCameraManager::ChangePivotStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::ChangePivotEnd, this, std::placeholders::_1));
 
-
 	CameraStateManager_.CreateStateMember("PIVOT_MOVE_TO_TARGET"
 		, std::bind(&MainCameraManager::PivotMoveToTargetUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&MainCameraManager::PivotMoveToTargetStart, this, std::placeholders::_1)
 		, std::bind(&MainCameraManager::PivotMoveToTargetEnd, this, std::placeholders::_1));
-
 
 	CameraStateManager_.CreateStateMember("FREE_CAMERA"
 		, std::bind(&MainCameraManager::FreeCameraUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -107,6 +104,7 @@ void MainCameraManager::Start()
 void MainCameraManager::Update(float _DeltaTime)
 {
 	CameraStateManager_.Update(_DeltaTime);
+
 }
 
 void MainCameraManager::LevelStartEvent()
@@ -162,7 +160,6 @@ void MainCameraManager::ChangeCameraMove(CameraMode _Mode)
 	case CameraMode::PivotTargetMove:
 		CameraStateManager_.ChangeState("CHANGE_PIVOT");
 
-
 		break;
 
 	case CameraMode::Focus:
@@ -193,6 +190,11 @@ void MainCameraManager::SetRoomCamera(float4 _RoomSize, float4 _RoomPos)
 {
 	RoomSize_ = _RoomSize;
 	RoomPos_ = _RoomPos;
+}
+
+void MainCameraManager::SetCameraPivot(float4 _Pivot)
+{
+	CameraPivot_ = _Pivot;
 }
 
 void MainCameraManager::MoveToTargetStart(const StateInfo& _Info)
@@ -235,6 +237,17 @@ void MainCameraManager::MoveToTargetUpdate(float _DeltaTime, const StateInfo& _I
 		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
 		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
 	}
+
+
+	if (KnightData::GetInst()->GetCurrentLevel() == "KINGSPASSLEVEL4")
+	{
+		if (DestPos.x > 3230.f && DestPos.y > -1200)
+		{
+			CameraStateManager_.ChangeState("CHANGE_PIVOT");
+			CameraPivot_ = { 0, 200 };
+		}
+	}
+
 }
 
 void MainCameraManager::MoveToTargetEnd(const StateInfo& _Info)
@@ -629,6 +642,49 @@ void MainCameraManager::ChangePivotStart(const StateInfo& _Info)
 
 void MainCameraManager::ChangePivotUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
+	float4 CurrentPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
+	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() + CameraPivot_;
+	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 0.01f);
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x,MoveCamera.y,  -1800.0f });
+	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
+
+	//카메라의 위치 - 윈도우 사이즈의 x가 0이라면
+	if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (_Info.PrevState == "PIVOT_MOVE_TO_TARGET")
+	{
+		CameraStateManager_.ChangeState("MOVE_TO_TARGET");
+
+	}
+	else
+	{
+		CameraStateManager_.ChangeState("PIVOT_MOVE_TO_TARGET");
+
+	}
 }
 
 void MainCameraManager::ChangePivotEnd(const StateInfo& _Info)
@@ -641,6 +697,45 @@ void MainCameraManager::PivotMoveToTargetStart(const StateInfo& _Info)
 
 void MainCameraManager::PivotMoveToTargetUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
+	float4 CurrentPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
+	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() + CameraPivot_;
+	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 5.f);
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x, MoveCamera.y,  -1800.0f });
+	float4 MainCameraPosition = GetLevel()->GetMainCameraActorTransform().GetLocalPosition();
+
+	//카메라의 위치 - 윈도우 사이즈의 x가 0이라면
+	if (0 > MainCameraPosition.x - GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = 0 + GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (MapSize.x < MainCameraPosition.x + GameEngineWindow::GetInst()->GetScale().hix())
+	{
+		MainCameraPosition.x = MapSize.x - GameEngineWindow::GetInst()->GetScale().hix();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (0 < MainCameraPosition.y + GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = 0 - GameEngineWindow::GetInst()->GetScale().hiy();
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+	if (-MapSize.y > MainCameraPosition.y - GameEngineWindow::GetInst()->GetScale().hiy())
+	{
+		MainCameraPosition.y = -(MapSize.y - (GameEngineWindow::GetInst()->GetScale().hiy()));
+		GetLevel()->GetMainCameraActorTransform().SetWorldPosition(MainCameraPosition);
+	}
+
+
+	if (DestPos.x < 3150.f && DestPos.y > -1200)
+	{
+		CameraStateManager_.ChangeState("CHANGE_PIVOT");
+		CameraPivot_ = { 0, 0 };
+	}
 }
 
 void MainCameraManager::PivotMoveToTargetEnd(const StateInfo& _Info)

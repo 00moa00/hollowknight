@@ -151,6 +151,11 @@ public :
 		return EffectGUIActor_;
 	}
 
+	MapSmokeMaker* GetSmokeMaker()
+	{
+		return MapSmokeMaker_;
+	}
+
 	float4 GetMapSize()
 	{
 		return MapSize_;
@@ -161,7 +166,6 @@ public :
 		MapSize_ = _MapSize;
 
 	}
-
 
 
 };

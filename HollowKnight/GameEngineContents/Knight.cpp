@@ -20,7 +20,7 @@
 #include "MasterNPC.h"
 #include "RoomPotal.h"
 #include "Tablet.h"
-
+#include "Monster.h"
 #include "MonsterHitEffect.h"
 
 
@@ -77,6 +77,7 @@ Knight::Knight()
 	isGroundWakeUpEnd_(false),
 	isKingsPass_(false),
 	isIntroLandEnd_(false),
+	isKnightSpikeHit_(false),
 
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
@@ -328,7 +329,7 @@ void Knight::Start()
 	GetRenderer()->AnimationBindEnd("INTRO_LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			
-			isIntroLandEnd_ == true;
+			isIntroLandEnd_ = true;
 		});
 
 	GetRenderer()->AnimationBindEnd("FALL_ANIMATION", [=](const FrameAnimation_DESC& _Info)
@@ -1003,16 +1004,25 @@ bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineColl
 {
 	if (isInvincibility_ == false)
 	{
-		MasterActor* Monster = dynamic_cast<MasterActor*>(_Other->GetActor());
+		MasterActor* DyMonster_ = dynamic_cast<MasterActor*>(_Other->GetActor());
 		MonsterHitEffect* Effect = GetLevel()->CreateActor<MonsterHitEffect>();
 
-		Effect->GetTransform().SetWorldPosition({ Monster->GetTransform().GetWorldPosition().x,  Monster->GetTransform().GetWorldPosition().y + (Monster->GetRenderer()->GetTransform().GetWorldScale().y / 4) , static_cast<float>(Z_ORDER::Effect) });
+		Effect->GetTransform().SetWorldPosition({ DyMonster_->GetTransform().GetWorldPosition().x,  DyMonster_->GetTransform().GetWorldPosition().y + (DyMonster_->GetRenderer()->GetTransform().GetWorldScale().y / 4) , static_cast<float>(Z_ORDER::Effect) });
 
-		if (Monster != nullptr)
+		if (DyMonster_ != nullptr)
 		{
 
 			//if()
-			KnockbackDirection_ = Monster->GetMoveDirection();
+			KnockbackDirection_ = DyMonster_->GetMoveDirection();
+
+			Monster* Monster_ = dynamic_cast<Monster*>(_Other->GetActor());
+
+			if (Monster_->GetMonsterType() == MonsterType::Spike)
+			{
+				isKnightSpikeHit_ = true;
+
+			}
+
 		}
 
 		return true;
@@ -1034,6 +1044,8 @@ bool Knight::KnightVSMonsterAttackCollision(GameEngineCollision* _This, GameEngi
 			Effect->GetTransform().SetWorldPosition({ _Other->GetTransform().GetWorldPosition().x,  _Other->GetTransform().GetWorldPosition().y + (Attack->GetCollision()->GetTransform().GetWorldScale().y / 4) , static_cast<float>(Z_ORDER::Effect) });
 
 		}
+
+		//if(_This->)
 
 		return true;
 	}

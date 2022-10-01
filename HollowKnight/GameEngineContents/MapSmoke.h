@@ -28,5 +28,9 @@ private:
 	GameEngineTextureRenderer* ParticleRenderer_;
 
 private:
+	
+public:
+	void SetSpeed(float _f);
+
 };
 

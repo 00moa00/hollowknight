@@ -267,7 +267,20 @@ void Crawlid::CrawlidTurnEnd(const StateInfo& _Info)
 
 void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
+	// ======== Knight VS WallColl ========
+	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
+		std::bind(&Crawlid::MonsterVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		SetisCollWall(true);
+	}
+	else
+	{
+		SetisCollWall(false);
+
+	}
 
 	CrawildKnockbackTimer_ += _DeltaTime;
 
@@ -291,18 +304,7 @@ void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldMove(-GetMoveDirection() * (GetSpeed()*7) * _DeltaTime);
 	}
 
-	// ======== Knight VS WallColl ========
-	if (GetWallCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Wall, CollisionType::CT_OBB2D,
-		std::bind(&Crawlid::MonsterVSWallCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
-		)
-	{
-		SetisCollWall(true);
-	}
-	else
-	{
-		SetisCollWall(false);
 
-	}
 }
 
 void Crawlid::CrawlidStunEnd(const StateInfo& _Info)

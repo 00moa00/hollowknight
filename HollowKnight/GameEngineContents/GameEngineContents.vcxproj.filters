@@ -642,6 +642,9 @@
     <ClInclude Include="MapSmokeMaker.h">
       <Filter>Actor\Effect\Map</Filter>
     </ClInclude>
+    <ClInclude Include="MapSpike.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1129,6 +1132,9 @@
     </ClCompile>
     <ClCompile Include="MapSmokeMaker.cpp">
       <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSpike.cpp">
+      <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

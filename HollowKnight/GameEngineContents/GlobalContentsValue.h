@@ -107,7 +107,7 @@ enum class Z_ORDER
 
 	Background_Object = 40 ,
 
-	Back_Back_Object,
+	Back_Back_Object = 100,
 
 	Background = 200,
 

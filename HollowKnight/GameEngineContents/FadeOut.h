@@ -24,7 +24,10 @@ private:
 
 	float Alpha_;
 
+	float FadeSpeed_;
+
 	bool DeathFlag_;
+	bool NoCountDeath_;
 
 
 public:
@@ -33,6 +36,15 @@ public:
 		return DeathFlag_;
 	}
 
+	void SetNoCountDeath(bool _b)
+	{
+		NoCountDeath_ = _b;
+	}
+
+	void SetFadeSpeed(float _f)
+	{
+		FadeSpeed_ = _f;
+	}
 	
 };
 
