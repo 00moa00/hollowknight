@@ -31,14 +31,14 @@ void KnightCast::Start()
 
 	GetRenderer()->AnimationBindEnd("ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
-			//Off();
+			Off();
 			GetRenderer()->ChangeFrameAnimation("IDLE");
 		});
 
 	GetRenderer()->ChangeFrameAnimation("ANIMATION");
 
 	Off();
-	//GetRenderer()->GetTransform().SetWorldPosition({ 0, 186 / 2, 0 });
+	//etRenderer()->GetTransform().SetWorldPosition({ 0, 186 / 2, 0 });
 }
 
 void KnightCast::Update(float _DeltaTime)

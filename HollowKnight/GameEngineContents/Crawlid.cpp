@@ -98,10 +98,10 @@ void Crawlid::Start()
 	SetFallSpeed(2);
 	SetGravity(400.f);
 	SetSpeed(100.f);
-	SetHP(2);
-	CreateMonsterHitParticle(2);
-	CreateMonsterHitPuffParticle(2);
-	CreateMonsterHitLight(2);
+	SetHP(10);
+	CreateMonsterHitParticle(10);
+	CreateMonsterHitPuffParticle(10);
+	CreateMonsterHitLight(10);
 	CreateMonsterDeathPuffParticle();
 
 	SetMoveDirection(float4::RIGHT);

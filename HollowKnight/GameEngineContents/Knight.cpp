@@ -91,6 +91,7 @@ Knight::Knight()
 	KnightFocusEffect_(nullptr),
 	KnightDoubleJumpEffect_(nullptr),
 	KnightCast_(nullptr),
+	KnightCastEffect_(nullptr),
 
 	ChangeLevel_(""),
 
@@ -143,6 +144,7 @@ void Knight::Start()
 
 	KnightDoubleJumpEffect_ = GetLevel()->CreateActor<KnightDoubleJumpEffect>();
 	KnightCast_ = GetLevel()->CreateActor<KnightCast>();
+	KnightCastEffect_ = GetLevel()->CreateActor<KnightCastEffect>();
 
 	KnightDoubleJumpEffect_->Off();
 	KnightSlashEffect_->SetParent(this);
@@ -155,6 +157,7 @@ void Knight::Start()
 	KnightSiblingLightEffect_->SetParent(this);
 	KnightDoubleJumpEffect_->SetParent(this);
 	KnightCast_->SetParent(this);
+	KnightCastEffect_->SetParent(this);
 
 	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
 	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });

@@ -13,6 +13,8 @@
 
 #include "KnightDoubleJumpEffect.h"
 #include "KnightCast.h"
+
+#include "KnightCastEffect.h"
 // 설명 :
 // 이팩트 관리 : 공격 - 이펙트는 온오프
 //				라이트 - 계속 따라다님
@@ -117,6 +119,7 @@ private:
 	KnightDonutLightEffect* KnightDonutLightEffect_;
 	KnightSiblingLightEffect* KnightSiblingLightEffect_;
 	KnightDoubleJumpEffect* KnightDoubleJumpEffect_;
+	KnightCastEffect* KnightCastEffect_;
 	KnightCast* KnightCast_;
 
 	SideDarkEffect* SideDarkEffect_;
