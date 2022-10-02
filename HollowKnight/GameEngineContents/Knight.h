@@ -70,6 +70,7 @@ private:
 	bool isPressJumppingKey_;
 	bool isPossibleDoubleSlash_;
 	bool isPossibleDoubleJump_;
+	bool isPossibleFallJump_;
 
 	bool isKingsPass_;
 

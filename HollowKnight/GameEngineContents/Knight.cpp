@@ -80,7 +80,7 @@ Knight::Knight()
 	isKingsPass_(false),
 	isIntroLandEnd_(false),
 	isKnightSpikeHit_(false),
-
+	isPossibleFallJump_(false),
 
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
@@ -105,8 +105,8 @@ Knight::~Knight()
 
 
 void Knight::Start()
-{	
-	
+{
+
 	//================================
 	//    Initialize
 	//================================
@@ -120,19 +120,19 @@ void Knight::Start()
 
 	KnightData::GetInst()->SetHitDamage(1);
 
-	CreateCollisionComponent(float4{60, 120, 1}, static_cast<int>(COLLISION_ORDER::Knight));
+	CreateCollisionComponent(float4{ 60, 120, 1 }, static_cast<int>(COLLISION_ORDER::Knight));
 	CreateWallCollisionComponent(float4{ 20, 20, 1 });
 
-	GetCollision()->GetTransform().SetWorldPosition({0, 120/2, static_cast<float>(Z_ORDER::Knight) });
+	GetCollision()->GetTransform().SetWorldPosition({ 0, 120 / 2, static_cast<float>(Z_ORDER::Knight) });
 
 	CreateRendererComponent(float4{ 349, 186, 1 }, "Knight_idle_still_020000-Sheet.png", 8, static_cast<int>(RENDERORDER::Knight));
-	
-	   
+
+
 
 	GetRenderer()->GetTransform().PixLocalNegativeX();
 
-	GetTransform().SetWorldPosition({500,-4000,static_cast<float>(Z_ORDER::Knight) });
-	
+	GetTransform().SetWorldPosition({ 500,-4000,static_cast<float>(Z_ORDER::Knight) });
+
 	KnightSlashEffect_ = GetLevel()->CreateActor<KnightSlashEffect>();
 	KnightMainLightEffect_ = GetLevel()->CreateActor<KnightMainLightEffect>();
 	KnightDonutLightEffect_ = GetLevel()->CreateActor<KnightDonutLightEffect>();
@@ -198,32 +198,32 @@ void Knight::Start()
 	//================================
 	//    Create Animation
 	//================================
- 
+
 	// ---- 기본 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
-	
+
 	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.150f, true));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.040f, false));
-	
+
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_LOOP_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 3, 5, 0.100f, true));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("LAND_ANIMATION", FrameAnimation_DESC("Knight_land0000-Sheet.png", 0, 2, 0.080f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_ANIMATION", FrameAnimation_DESC("Knight_walk0000-Sheet.png", 0, 7, 0.100f));
-	
-	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.080f, false ));
+
+	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.080f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.080f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("RUN_TURN_ANIMATION", FrameAnimation_DESC("Knight_idle_to_run0000-Sheet.png", 0, 4, 0.120f, false));
 
 
 
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_DOWN_ANIMATION", FrameAnimation_DESC("Knight_look_down0000-Sheet.png", 0, 5, 0.100f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));	
+	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("DASH_ANIMATION", FrameAnimation_DESC("Knight_dash_v020000-Sheet.png", 0, 11, 0.070f, false));
 
 
 	GetRenderer()->CreateFrameAnimationCutTexture("LOW_HEALTH_ANIMATION", FrameAnimation_DESC("Knight_idle_low_health000-Sheet.png", 0, 9, 0.100f));
-	
+
 	// ---- 스턴 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("STUN_ANIMATION", FrameAnimation_DESC("Knight_stun0000-Sheet.png", 0, 4, 0.070f, false));
 
@@ -239,7 +239,7 @@ void Knight::Start()
 	// ---- 지도 보기 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_OPEN_ANIMATION", FrameAnimation_DESC("Knight_idle_map0000-Sheet.png", 0, 1, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_map0000-Sheet.png", 2, 8, 0.100f));
-	
+
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_OPEN_WALKING_ANIMATION", FrameAnimation_DESC("Knight_walk_map0000-Sheet.png", 0, 1, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("MAP_WALKING_ANIMATION", FrameAnimation_DESC("Knight_walk_map0000-Sheet.png", 2, 9, 0.100f));
 
@@ -259,7 +259,7 @@ void Knight::Start()
 	// ---- 기상 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_GROUND_ANIMATION", FrameAnimation_DESC("Knight_wake_up_ground0000-Sheet.png", 0, 20, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_ANIMATION", FrameAnimation_DESC("Knight_wake0000-Sheet.png", 0, 4, 0.100f, false));
-	
+
 	{
 
 
@@ -300,7 +300,7 @@ void Knight::Start()
 	// ---- 의자 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("SIT_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 0, 4, 0.070f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SIT_IDLE_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 3, 3, 0.100f));
-	
+
 	// ---- 문 들어가기 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("DOOR_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 9, 0.100f, false));
 
@@ -332,354 +332,353 @@ void Knight::Start()
 	//================================
 	//    Create Bind Animation
 	//================================
-	GetRenderer()->AnimationBindEnd("CAST_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
+	{
 
-			isCastEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("CAST_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
 
-
-	GetRenderer()->AnimationBindEnd("INTRO_LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			
-			isIntroLandEnd_ = true;
-		});
-
-	GetRenderer()->AnimationBindEnd("FALL_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			GetRenderer()->ChangeFrameAnimation("FALL_LOOP_ANIMATION");
-
-		});
+				isCastEnd_ = true;
+			});
 
 
-	GetRenderer()->AnimationBindEnd("SEE_RETURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isReturnToIdle_ = true;
+		GetRenderer()->AnimationBindEnd("INTRO_LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
 
-		});
+				isIntroLandEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("RUN_TURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isRunTurnEnd_ = true;
+		GetRenderer()->AnimationBindEnd("FALL_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("FALL_LOOP_ANIMATION");
 
-		});
-
-	GetRenderer()->AnimationBindEnd("SIT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			GetRenderer()->ChangeFrameAnimation("SIT_IDLE_ANIMATION");
-
-		});
+			});
 
 
-	GetRenderer()->AnimationBindEnd("SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isSlashEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("SEE_RETURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isReturnToIdle_ = true;
 
-	GetRenderer()->AnimationBindEnd("DOUBLE_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isDoubleSlashEnd_ = true;
-		});
+			});
 
-	GetRenderer()->AnimationBindEnd("DOUBLE_JUMP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			GetRenderer()->ChangeFrameAnimation("JUMP_ANIMATION");
+		GetRenderer()->AnimationBindEnd("RUN_TURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isRunTurnEnd_ = true;
 
-			isDoubleJumpEnd_ = true;
-		});
+			});
 
-	GetRenderer()->AnimationBindEnd("UP_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isUpSlashEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("SIT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("SIT_IDLE_ANIMATION");
 
-	GetRenderer()->AnimationBindEnd("DOWN_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isDownSlashEnd_ = true;
-		});
+			});
 
-	GetRenderer()->AnimationBindEnd("MAP_OPEN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			GetRenderer()->ChangeFrameAnimation("MAP_STILL_ANIMATION");
-		});
 
-	GetRenderer()->AnimationBindEnd("MAP_OPEN_WALKING_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
-		});
+		GetRenderer()->AnimationBindEnd("SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isSlashEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("MAP_WALKING_TURN_RIGHT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isMapWalkTurnEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("DOUBLE_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isDoubleSlashEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("MAP_WALKING_TURN_LEFT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isMapWalkTurnEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("DOUBLE_JUMP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("JUMP_ANIMATION");
 
-	GetRenderer()->AnimationBindEnd("WALK_TURN_RIGHT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isWalkTurnEnd_ = true;
-		});
+				isDoubleJumpEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("WALK_TURN_LEFT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isWalkTurnEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("UP_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isUpSlashEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("IDLE_TO_RUN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			GetRenderer()->ChangeFrameAnimation("RUN_ANIMATION"); 
-		});
+		GetRenderer()->AnimationBindEnd("DOWN_SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isDownSlashEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("RUN_TO_IDLE_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
-		});
+		GetRenderer()->AnimationBindEnd("MAP_OPEN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("MAP_STILL_ANIMATION");
+			});
 
-	GetRenderer()->AnimationBindEnd("FOCUS_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isFocusEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("MAP_OPEN_WALKING_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
+			});
 
-	GetRenderer()->AnimationBindEnd("LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isLandEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("MAP_WALKING_TURN_RIGHT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isMapWalkTurnEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("STUN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isStunEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("MAP_WALKING_TURN_LEFT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isMapWalkTurnEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("DEATH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isDeathEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("WALK_TURN_RIGHT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isWalkTurnEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("WAKEUP_GROUND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isGroundWakeUpEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("WALK_TURN_LEFT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isWalkTurnEnd_ = true;
+			});
 
-	GetRenderer()->AnimationBindEnd("WAKEUP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isWakeUpEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("IDLE_TO_RUN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("RUN_ANIMATION");
+			});
 
-	GetRenderer()->AnimationBindEnd("DOOR_ANIMATION", [=](const FrameAnimation_DESC& _Info)
-		{
-			isDoorEnd_ = true;
-		});
+		GetRenderer()->AnimationBindEnd("RUN_TO_IDLE_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
+			});
+
+		GetRenderer()->AnimationBindEnd("FOCUS_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isFocusEnd_ = true;
+			});
+
+		GetRenderer()->AnimationBindEnd("LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isLandEnd_ = true;
+			});
+
+		GetRenderer()->AnimationBindEnd("STUN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isStunEnd_ = true;
+			});
+
+		GetRenderer()->AnimationBindEnd("DEATH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isDeathEnd_ = true;
+			});
+
+		GetRenderer()->AnimationBindEnd("WAKEUP_GROUND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isGroundWakeUpEnd_ = true;
+			});
+
+		GetRenderer()->AnimationBindEnd("WAKEUP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isWakeUpEnd_ = true;
+			});
+
+		GetRenderer()->AnimationBindEnd("DOOR_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isDoorEnd_ = true;
+			});
+	}
 	//================================
 	//    Create State
 	//================================
 	 
-	// ---- 기본 ----
-	KnightManager_.CreateStateMember("STILL"
-		, std::bind(&Knight::KnightStillUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightStillStart, this, std::placeholders::_1));
-	
-	KnightManager_.CreateStateMember("WALK"
-		, std::bind(&Knight::KnightWalkUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightWalkStart, this, std::placeholders::_1));
+	{
+		// ---- 기본 ----
+		KnightManager_.CreateStateMember("STILL"
+			, std::bind(&Knight::KnightStillUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightStillStart, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("WALK_TURN"
-		, std::bind(&Knight::KnightWalkTurnUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightWalkTurnStart, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("WALK"
+			, std::bind(&Knight::KnightWalkUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightWalkStart, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("LOOK_UP"
-		, std::bind(&Knight::KnightLookUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightLookUpStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookUpEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("WALK_TURN"
+			, std::bind(&Knight::KnightWalkTurnUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightWalkTurnStart, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("LOOK_DOWN"
-		, std::bind(&Knight::KnightLookDownUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightLookDownStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookDownEnd, this, std::placeholders::_1));
-	
-	KnightManager_.CreateStateMember("FOCUS"
-		, std::bind(&Knight::KnightFocusUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("LOOK_UP"
+			, std::bind(&Knight::KnightLookUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightLookUpStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookUpEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("SLASH_JUMP"
-		, std::bind(&Knight::KnightUpSlashJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightUpSlashJumpStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightUpSlashJumpEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("LOOK_DOWN"
+			, std::bind(&Knight::KnightLookDownUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightLookDownStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookDownEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("JUMP"
-		, std::bind(&Knight::KnightJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightJumpEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("FOCUS"
+			, std::bind(&Knight::KnightFocusUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("DOUBLE_JUMP"
-		, std::bind(&Knight::KnightDoubleJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightDoubleJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightDoubleJumpEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("SLASH_JUMP"
+			, std::bind(&Knight::KnightUpSlashJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightUpSlashJumpStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightUpSlashJumpEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("LAND"
-		, std::bind(&Knight::KnightLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightLandStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightLandEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("JUMP"
+			, std::bind(&Knight::KnightJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightJumpEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("INTRO_LAND"
-		, std::bind(&Knight::KnightIntroLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightIntroLandStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightIntroLandEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("DOUBLE_JUMP"
+			, std::bind(&Knight::KnightDoubleJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightDoubleJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightDoubleJumpEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("FALL"
-		, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
-		std::bind(&Knight::KnightFallStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("LAND"
+			, std::bind(&Knight::KnightLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightLandStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightLandEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("INTRO_FALL"
-		, std::bind(&Knight::KnightIntroFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
-		std::bind(&Knight::KnightIntroFallStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightIntroFallEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("INTRO_LAND"
+			, std::bind(&Knight::KnightIntroLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightIntroLandStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightIntroLandEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("DASH"
-		, std::bind(&Knight::KnightDashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightDashStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightDashEnd, this, std::placeholders::_1));
-	
+		KnightManager_.CreateStateMember("FALL"
+			, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
+			std::bind(&Knight::KnightFallStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("FOCUS_BURST"
-		, std::bind(&Knight::KnightFocusBurstUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightFocusBurstStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightFocusBurstEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("INTRO_FALL"
+			, std::bind(&Knight::KnightIntroFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
+			std::bind(&Knight::KnightIntroFallStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightIntroFallEnd, this, std::placeholders::_1));
 
-	// ---- 공격 ----
-	KnightManager_.CreateStateMember("SLASH"
-		, std::bind(&Knight::KnightSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightSlashStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightSlashEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("DASH"
+			, std::bind(&Knight::KnightDashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightDashStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightDashEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("DOUBLE_SLASH"
-		, std::bind(&Knight::KnightDoubleSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightDoubleSlashStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightDoubleSlashEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("FOCUS_BURST"
+			, std::bind(&Knight::KnightFocusBurstUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightFocusBurstStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightFocusBurstEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("UP_SLASH"
-		, std::bind(&Knight::KnightUpSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightUpSlashStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightUpSlashEnd, this, std::placeholders::_1));
-	
-	KnightManager_.CreateStateMember("DOWN_SLASH"
-		, std::bind(&Knight::KnightDownSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightDownSlashStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightDownSlashEnd, this, std::placeholders::_1));
+		// ---- 공격 ----
+		KnightManager_.CreateStateMember("SLASH"
+			, std::bind(&Knight::KnightSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightSlashStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightSlashEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("CAST"
-		, std::bind(&Knight::KnightCastUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightCastStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightCastEnd, this, std::placeholders::_1));
-	
-	// ----스턴 ----
-	KnightManager_.CreateStateMember("STUN"
-		, std::bind(&Knight::KnightStunUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightStunStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightStunEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("DOUBLE_SLASH"
+			, std::bind(&Knight::KnightDoubleSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightDoubleSlashStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightDoubleSlashEnd, this, std::placeholders::_1));
 
-	// ---- 사망 ----
-	KnightManager_.CreateStateMember("DEATH"
-		, std::bind(&Knight::KnightDeathUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightDeathStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightDeathEnd, this, std::placeholders::_1));
-	
-	KnightManager_.CreateStateMember("WAKE_UP"
-		, std::bind(&Knight::KnightWakeUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightWakeUpStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightWakeUpEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("UP_SLASH"
+			, std::bind(&Knight::KnightUpSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightUpSlashStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightUpSlashEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("GROUND_WAKE_UP"
-		, std::bind(&Knight::KnightWakeUpGroundUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightWakeUpGroundStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightWakeUpGroundEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("DOWN_SLASH"
+			, std::bind(&Knight::KnightDownSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightDownSlashStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightDownSlashEnd, this, std::placeholders::_1));
 
+		KnightManager_.CreateStateMember("CAST"
+			, std::bind(&Knight::KnightCastUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightCastStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightCastEnd, this, std::placeholders::_1));
 
-	// ---- 달리기 ----
-	KnightManager_.CreateStateMember("RUN"
-		, std::bind(&Knight::KnightRunUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightRunStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightRunEnd, this, std::placeholders::_1));
+		// ----스턴 ----
+		KnightManager_.CreateStateMember("STUN"
+			, std::bind(&Knight::KnightStunUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightStunStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightStunEnd, this, std::placeholders::_1));
 
+		// ---- 사망 ----
+		KnightManager_.CreateStateMember("DEATH"
+			, std::bind(&Knight::KnightDeathUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightDeathStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightDeathEnd, this, std::placeholders::_1));
 
-	// ---- 지도 보기 ----
-	KnightManager_.CreateStateMember("MAP_STILL"
-		, std::bind(&Knight::KnightMapStillUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightMapStillStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightMapStillEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("WAKE_UP"
+			, std::bind(&Knight::KnightWakeUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightWakeUpStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightWakeUpEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("MAP_WALKING"
-		, std::bind(&Knight::KnightMapWalkinglUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightMapWalkinglStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightMapWalkinglEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("GROUND_WAKE_UP"
+			, std::bind(&Knight::KnightWakeUpGroundUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightWakeUpGroundStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightWakeUpGroundEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("MAP_WALKING_TURN"
-		, std::bind(&Knight::KnightMapWalkingTurnlUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightMapWalkingTurnlStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightMapWalkingTurnlEnd, this, std::placeholders::_1));
-
-	KnightManager_.CreateStateMember("MAP_SIT_LOOK"
-		, std::bind(&Knight::KnightMapSitLooklUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightMapSitLooklStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightMapSitLooklEnd, this, std::placeholders::_1));
-
-	KnightManager_.CreateStateMember("MAP_SIT_WRITE"
-		, std::bind(&Knight::KnightMapSitWritelUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightMapSitWritelStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightMapSitWritelEnd, this, std::placeholders::_1));
+		// ---- 달리기 ----
+		KnightManager_.CreateStateMember("RUN"
+			, std::bind(&Knight::KnightRunUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightRunStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightRunEnd, this, std::placeholders::_1));
 
 
-	// ---- 슬라이드 ----
-	KnightManager_.CreateStateMember("SLIDE"
-		, std::bind(&Knight::KnightSlideUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightSlideStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightSlideEnd, this, std::placeholders::_1));
+		// ---- 지도 보기 ----
+		KnightManager_.CreateStateMember("MAP_STILL"
+			, std::bind(&Knight::KnightMapStillUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightMapStillStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightMapStillEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("WALL_JUMP"
-		, std::bind(&Knight::KnightWallJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightWallJumpStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightWallJumpEnd, this, std::placeholders::_1));
-	
-	KnightManager_.CreateStateMember("WALL_JUMP_LAND"
-		, std::bind(&Knight::KnightWallJumpLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightWallJumpLandStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightWallJumpLandEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("MAP_WALKING"
+			, std::bind(&Knight::KnightMapWalkinglUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightMapWalkinglStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightMapWalkinglEnd, this, std::placeholders::_1));
 
-	// ---- 의자 ----
-	KnightManager_.CreateStateMember("SIT"
-		, std::bind(&Knight::KnightSitUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightSitStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightSitEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("MAP_WALKING_TURN"
+			, std::bind(&Knight::KnightMapWalkingTurnlUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightMapWalkingTurnlStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightMapWalkingTurnlEnd, this, std::placeholders::_1));
 
+		KnightManager_.CreateStateMember("MAP_SIT_LOOK"
+			, std::bind(&Knight::KnightMapSitLooklUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightMapSitLooklStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightMapSitLooklEnd, this, std::placeholders::_1));
 
-	// ---- NPC 대화 ----
-	KnightManager_.CreateStateMember("TALKING"
-		, std::bind(&Knight::KnightTalkingUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightTalkingStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightTalkingEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("MAP_SIT_WRITE"
+			, std::bind(&Knight::KnightMapSitWritelUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightMapSitWritelStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightMapSitWritelEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("SHOPPING"
-		, std::bind(&Knight::KnightShoppingUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightShoppingStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightShoppingEnd, this, std::placeholders::_1));
+		// ---- 슬라이드 ----
+		KnightManager_.CreateStateMember("SLIDE"
+			, std::bind(&Knight::KnightSlideUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightSlideStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightSlideEnd, this, std::placeholders::_1));
 
-	// ---- 문 들어가기 ----
-	KnightManager_.CreateStateMember("DOOR"
-		, std::bind(&Knight::KnightDoorUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightDoorStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightDoorEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("WALL_JUMP"
+			, std::bind(&Knight::KnightWallJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightWallJumpStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightWallJumpEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("SEE"
-		, std::bind(&Knight::KnightTabletUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightTabletStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightTabletEnd, this, std::placeholders::_1));
+		KnightManager_.CreateStateMember("WALL_JUMP_LAND"
+			, std::bind(&Knight::KnightWallJumpLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightWallJumpLandStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightWallJumpLandEnd, this, std::placeholders::_1));
 
-	KnightManager_.CreateStateMember("SEE_RETURN_TO_IDLE"
-		, std::bind(&Knight::KnightTabletReturnToIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Knight::KnightTabletReturnToIdleStart, this, std::placeholders::_1)
-		, std::bind(&Knight::KnightTabletReturnToIdleEnd, this, std::placeholders::_1));
+		// ---- 의자 ----
+		KnightManager_.CreateStateMember("SIT"
+			, std::bind(&Knight::KnightSitUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightSitStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightSitEnd, this, std::placeholders::_1));
 
+		// ---- NPC 대화 ----
+		KnightManager_.CreateStateMember("TALKING"
+			, std::bind(&Knight::KnightTalkingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightTalkingStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightTalkingEnd, this, std::placeholders::_1));
 
+		KnightManager_.CreateStateMember("SHOPPING"
+			, std::bind(&Knight::KnightShoppingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightShoppingStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightShoppingEnd, this, std::placeholders::_1));
+
+		// ---- 문 들어가기 ----
+		KnightManager_.CreateStateMember("DOOR"
+			, std::bind(&Knight::KnightDoorUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightDoorStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightDoorEnd, this, std::placeholders::_1));
+
+		KnightManager_.CreateStateMember("SEE"
+			, std::bind(&Knight::KnightTabletUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightTabletStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightTabletEnd, this, std::placeholders::_1));
+
+		KnightManager_.CreateStateMember("SEE_RETURN_TO_IDLE"
+			, std::bind(&Knight::KnightTabletReturnToIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+			, std::bind(&Knight::KnightTabletReturnToIdleStart, this, std::placeholders::_1)
+			, std::bind(&Knight::KnightTabletReturnToIdleEnd, this, std::placeholders::_1));
+	}
 
 	KnightManager_.ChangeState("STILL");
 }
@@ -687,6 +686,8 @@ void Knight::Start()
 void Knight::Update(float _DeltaTime)
 {
 	KnightManager_.Update(_DeltaTime);
+	KnightData::GetInst()->SetKnightPosition(this->GetTransform().GetWorldPosition());
+
 }
 
 void Knight::LevelStartEvent()
@@ -703,11 +704,7 @@ void Knight::LevelStartEvent()
 			KnightData::GetInst()->SetisIntroFallEvent(true);
 			KnightManager_.ChangeState("INTRO_FALL");
 		}
-
 	}
-
-
-
 
 	isKnightPotal_ = false;
 }
@@ -819,7 +816,6 @@ void Knight::KnightDirectionCheck()
 
 		//KnightSlashEffect_->GetCollision()->GetTransform().PixLocalNegativeX();
 		GetWallCollision()->GetTransform().SetLocalPosition({ 10, 50 });
-
 
 		this->SetMoveDirection(float4::RIGHT);
 	}
