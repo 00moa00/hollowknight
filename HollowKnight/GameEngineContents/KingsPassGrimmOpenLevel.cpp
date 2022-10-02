@@ -13,6 +13,9 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 #include "MapSmoke.h"
+#include "Sycophant.h"
+
+#include "GrimmCastPillarEffect.h"
 
 KingsPassGrimmOpenLevel::KingsPassGrimmOpenLevel() 
 {
@@ -60,6 +63,12 @@ void KingsPassGrimmOpenLevel::Start()
 		Potal_->GetTransform().SetWorldPosition({ 200.f - 60, -936.f, });
 
 	}
+
+	{
+		Sycophant* Sycophant_ = CreateActor<Sycophant>();
+
+	}
+
 
 
 	CreawteMapWhiteParticleMaker();

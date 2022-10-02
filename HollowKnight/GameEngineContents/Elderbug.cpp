@@ -32,11 +32,11 @@ void Elderbug::Start()
 	CreateDialogueSet();
 	//GetDialogueSet()->SetParent(this);
 	GetDialogueSet()->PushDialogue("이보시오, 여행자.여행자를 맞이할 수 있는 이는 나밖에 안 남은 것 같소.보다시피 마을이 조용해졌소.");
-	//GetDialogueSet()->PushDialogue("다른 주민들은 모두 사라졌소.저 우물을 통해 아래로, 하나씩, 아래에 있는 동굴로.");
-	//GetDialogueSet()->PushDialogue("우리 마을 아래에는 위대한 왕국이 있었소.폐허가 된지 오래지만, 아직도 그 깊은 곳으로 많은 이들을 유인하지.");
-	//GetDialogueSet()->PushDialogue("부와 영광과 깨달음, 저 어둠이 모든 것을 약속하는 것처럼 보이지.분명 당신도 저 아래에 있는 꿈을 쫓고 있겠지.");
-	//GetDialogueSet()->PushDialogue("조심하오.역겨운 공기가 그곳을 채우고 있소.생명체들은 미쳐가고 여행자들은 기억을 빼앗기지.");
-	//GetDialogueSet()->PushDialogue("아마도 꿈은 그렇게 대단한 것이 아닐지도...");
+	GetDialogueSet()->PushDialogue("다른 주민들은 모두 사라졌소.저 우물을 통해 아래로, 하나씩, 아래에 있는 동굴로.");
+	GetDialogueSet()->PushDialogue("우리 마을 아래에는 위대한 왕국이 있었소.폐허가 된지 오래지만, 아직도 그 깊은 곳으로 많은 이들을 유인하지.");
+	GetDialogueSet()->PushDialogue("부와 영광과 깨달음, 저 어둠이 모든 것을 약속하는 것처럼 보이지.분명 당신도 저 아래에 있는 꿈을 쫓고 있겠지.");
+	GetDialogueSet()->PushDialogue("조심하오.역겨운 공기가 그곳을 채우고 있소.생명체들은 미쳐가고 여행자들은 기억을 빼앗기지.");
+	GetDialogueSet()->PushDialogue("아마도 꿈은 그렇게 대단한 것이 아닐지도...");
 
 	GetDialogueSet()->SetDialogueOff();
 

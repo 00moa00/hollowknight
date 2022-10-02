@@ -22,6 +22,7 @@ protected:
 private:
 	std::vector<GameEngineTextureRenderer*> ParticleList_;
 	std::vector<float4> InitPos_;
+	std::vector<float> RamSpeed;
 
 	float a;
 	float r;

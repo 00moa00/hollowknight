@@ -17,7 +17,7 @@ void GrimmCastPillarEffect::Start()
 {
 
 	GetTransform().SetWorldPosition({ 0, -50 });
-	for (int i = 0; i < 50; ++i)
+	for (int i = 0; i < 20; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
 		int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 4);
@@ -133,15 +133,15 @@ void GrimmCastPillarEffect::CastPillarFireUpdate(float _DeltaTime, const StateIn
 
 	for (int i = 0; i < ParticleList_.size(); ++i)
 	{
-		r = GameEngineRandom::MainRandom.RandomFloat(10, 20.f); // angle(degree)
-		a = GameEngineRandom::MainRandom.RandomFloat(10, 20.0f); // angle(degree)
+		r = GameEngineRandom::MainRandom.RandomFloat(30, 40.f); // angle(degree)
+		a = GameEngineRandom::MainRandom.RandomFloat(30, 40.0f); // angle(degree)
 		ParticleList_[i]->GetTransform().SetLocalPosition({ cosf(a * 0.01745f) * r,sinf(a * 0.01745f) * r });
 		float4 MoveUp;
 		MoveUp.y = GameEngineRandom::MainRandom.RandomFloat(200.f, 500.f);
 
 	}
 
-	if (_Info.StateTime > 0.1f)
+	if (_Info.StateTime > 0.2f)
 	{
 		CastPillarManager_.ChangeState("DISAPPEAR");
 		return;

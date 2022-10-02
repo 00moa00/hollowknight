@@ -16,7 +16,7 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 #include "BloomPostEffect.h"
-
+#include "GrimmCastPillarEffect.h"
 DirtmouthLevel2::DirtmouthLevel2() 
 	:
 	Elderbug_(nullptr)
@@ -85,6 +85,15 @@ void DirtmouthLevel2::Start()
 void DirtmouthLevel2::Update(float _DeltaTime)
 {
 	//GetMainCameraManager()->MainCameraMoveLimitWindow(GetKnight()->GetTransform().GetWorldPosition(), GetMapSize());
+	
+	if (GetAccTime() > 2.f)
+	{
+
+		ReSetAccTime();
+		GrimmCastPillarEffect* GrimmCastPillarEffect_ = CreateActor<GrimmCastPillarEffect>();
+
+		GrimmCastPillarEffect_->GetTransform().SetWorldPosition({ 500, -3000 });
+	}
 
 }
 

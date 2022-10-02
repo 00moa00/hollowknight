@@ -15,6 +15,7 @@
 #include "MapSmoke.h"
 
 
+
 KingsPassLevel1::KingsPassLevel1() 
 {
 }
@@ -102,6 +103,7 @@ void KingsPassLevel1::Start()
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
+
 
 
 	//GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);

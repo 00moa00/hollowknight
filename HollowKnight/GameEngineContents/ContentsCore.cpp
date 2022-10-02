@@ -575,6 +575,25 @@ void ContentsCore::Start()
 
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Npc");
+		Dir.Move("Sycophant");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+
+
+	}
+
 
 	//================================
 	//    ÅØ½ºÃ³ / Setting
@@ -924,6 +943,8 @@ void ContentsCore::Start()
 
 		GameEngineTexture::Cut("Grimm Cln_Flame_bat0000-Sheet.png", 5, 1);
 		GameEngineTexture::Cut("Grimm Cln_Flame_Pillar_flash0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Grimm Cln_Flame_Pillar_flash0000-Sheet2.png", 6, 1);
+
 		GameEngineTexture::Cut("Grimm Cln_ground_dash_effect0000-Sheet.png", 6, 1);
 		GameEngineTexture::Cut("Grimmkin Cln_grimm_fireball0000-Sheet.png", 8, 1);
 		GameEngineTexture::Cut("Grimmkin Cln_grimm_fireball0000-Sheet2.png", 8, 1);
