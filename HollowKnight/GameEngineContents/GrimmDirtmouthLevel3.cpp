@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "DirtmouthLevel3.h"
+#include "GrimmDirtmouthLevel3.h"
 
 #include <GameEngineCore/GameEngineCameraActor.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -12,16 +12,15 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 
-
-DirtmouthLevel3::DirtmouthLevel3() 
+GrimmDirtmouthLevel3::GrimmDirtmouthLevel3() 
 {
 }
 
-DirtmouthLevel3::~DirtmouthLevel3() 
+GrimmDirtmouthLevel3::~GrimmDirtmouthLevel3() 
 {
 }
 
-void DirtmouthLevel3::Start()
+void GrimmDirtmouthLevel3::Start()
 {
 	CraateMasterMapActor();
 
@@ -59,22 +58,18 @@ void DirtmouthLevel3::Start()
 
 }
 
-void DirtmouthLevel3::Update(float _DeltaTime)
+void GrimmDirtmouthLevel3::Update(float _DeltaTime)
 {
 }
 
-void DirtmouthLevel3::End()
+void GrimmDirtmouthLevel3::End()
 {
 }
 
-void DirtmouthLevel3::LevelStartEvent()
+void GrimmDirtmouthLevel3::LevelStartEvent()
 {
-	CreateActor<FadeIn>();
-
-
 }
 
-void DirtmouthLevel3::LevelEndEvent()
+void GrimmDirtmouthLevel3::LevelEndEvent()
 {
-
 }

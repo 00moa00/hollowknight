@@ -29,6 +29,10 @@ enum class LevelList
 	DirtmouthLevel2,
 	DirtmouthLevel3,
 
+	GrimmDirtmouthLevel1,
+	GrimmDirtmouthLevel2,
+	GrimmDirtmouthLevel3,
+
 	GrimmmLevel,
 
 
@@ -149,6 +153,8 @@ private:
 	bool isUseSoul_;
 	bool isDeathLevelChange_;
 
+	bool isGrimmOpen_;
+
 	float4 KnightPosition_;
 	//float4 CurDir_;
 
@@ -208,6 +214,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisGrimmOpen() const
+	{
+		return isGrimmOpen_;
+	}
+
 	bool GetisDeathLevelChange() const
 	{
 		return isDeathLevelChange_;
@@ -422,6 +433,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetisGrimmOpen(bool _b)
+	{
+		isGrimmOpen_ = _b;
+	}
+
 	void SetisDeathLevelChange(bool _b)
 	{
 		isDeathLevelChange_ = _b;

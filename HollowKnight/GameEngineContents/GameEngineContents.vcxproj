@@ -357,6 +357,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GrimmDirtmouthLevel1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmDirtmouthLevel2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GrimmDirtmouthLevel3.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GrimmFire.h">
       <SubType>
       </SubType>
@@ -406,6 +418,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Iselda.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KingsPassGrimmOpenLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -1035,6 +1051,18 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GrimmDirtmouthLevel1.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmDirtmouthLevel2.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GrimmDirtmouthLevel3.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GrimmFire.cpp">
       <SubType>
       </SubType>
@@ -1084,6 +1112,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Iselda.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KingsPassGrimmOpenLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

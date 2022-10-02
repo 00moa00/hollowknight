@@ -172,6 +172,12 @@
     <Filter Include="Actor\Title\All\Area TItle">
       <UniqueIdentifier>{639c4fae-9977-4e34-bd5c-aff10e136806}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\Levels\Dirtmouth\Normal">
+      <UniqueIdentifier>{b46da67b-97fb-4c53-b5e1-5aec99f04a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Levels\Dirtmouth\Grimm">
+      <UniqueIdentifier>{df90c685-495a-4290-8605-b8d2d620adc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -267,12 +273,6 @@
     <ClInclude Include="KingsPassLevel4.h">
       <Filter>Level\Levels\KingsPass</Filter>
     </ClInclude>
-    <ClInclude Include="DirtmouthLevel1.h">
-      <Filter>Level\Levels\Dirtmouth</Filter>
-    </ClInclude>
-    <ClInclude Include="DirtmouthLevel2.h">
-      <Filter>Level\Levels\Dirtmouth</Filter>
-    </ClInclude>
     <ClInclude Include="RendererActor.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -347,9 +347,6 @@
     </ClInclude>
     <ClInclude Include="Charm.h">
       <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
-    </ClInclude>
-    <ClInclude Include="DirtmouthLevel3.h">
-      <Filter>Level\Levels\Dirtmouth</Filter>
     </ClInclude>
     <ClInclude Include="MasterObject.h">
       <Filter>Actor\Master</Filter>
@@ -681,6 +678,27 @@
     <ClInclude Include="KnightCastImpactEffect.h">
       <Filter>Actor\Effect\Knight</Filter>
     </ClInclude>
+    <ClInclude Include="KingsPassGrimmOpenLevel.h">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClInclude>
+    <ClInclude Include="DirtmouthLevel1.h">
+      <Filter>Level\Levels\Dirtmouth\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="DirtmouthLevel2.h">
+      <Filter>Level\Levels\Dirtmouth\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="DirtmouthLevel3.h">
+      <Filter>Level\Levels\Dirtmouth\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmDirtmouthLevel1.h">
+      <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmDirtmouthLevel2.h">
+      <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmDirtmouthLevel3.h">
+      <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -782,12 +800,6 @@
     <ClCompile Include="KingsPassLevel4.cpp">
       <Filter>Level\Levels\KingsPass</Filter>
     </ClCompile>
-    <ClCompile Include="DirtmouthLevel1.cpp">
-      <Filter>Level\Levels\Dirtmouth</Filter>
-    </ClCompile>
-    <ClCompile Include="DirtmouthLevel2.cpp">
-      <Filter>Level\Levels\Dirtmouth</Filter>
-    </ClCompile>
     <ClCompile Include="RendererActor.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -859,9 +871,6 @@
     </ClCompile>
     <ClCompile Include="Charm.cpp">
       <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
-    </ClCompile>
-    <ClCompile Include="DirtmouthLevel3.cpp">
-      <Filter>Level\Levels\Dirtmouth</Filter>
     </ClCompile>
     <ClCompile Include="MasterObject.cpp">
       <Filter>Actor\Master</Filter>
@@ -1207,6 +1216,27 @@
     </ClCompile>
     <ClCompile Include="KnightCastImpactEffect.cpp">
       <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KingsPassGrimmOpenLevel.cpp">
+      <Filter>Level\Levels\KingsPass</Filter>
+    </ClCompile>
+    <ClCompile Include="DirtmouthLevel1.cpp">
+      <Filter>Level\Levels\Dirtmouth\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="DirtmouthLevel2.cpp">
+      <Filter>Level\Levels\Dirtmouth\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="DirtmouthLevel3.cpp">
+      <Filter>Level\Levels\Dirtmouth\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmDirtmouthLevel1.cpp">
+      <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmDirtmouthLevel2.cpp">
+      <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmDirtmouthLevel3.cpp">
+      <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

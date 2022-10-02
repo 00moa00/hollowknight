@@ -70,6 +70,11 @@ void KingsPassLevel4::Start()
 
 		std::string EnumString;
 		auto PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel1);
+		if (KnightData::GetInst()->GetisGrimmOpen() == true)
+		{
+			PrevName = magic_enum::enum_name(LevelList::GrimmDirtmouthLevel1);
+		}
+
 		EnumString = static_cast<std::string>(PrevName);
 
 		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);

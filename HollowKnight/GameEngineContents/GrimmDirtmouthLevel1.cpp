@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "DirtmouthLevel1.h"
+#include "GrimmDirtmouthLevel1.h"
 #include <GameEngineCore/GameEngineCameraActor.h>
 
 #include "Knight.h"
@@ -14,21 +14,20 @@
 #include "Potal.h"
 
 #include "MapWhiteParticleWindMaker.h"
-
-DirtmouthLevel1::DirtmouthLevel1() 
+GrimmDirtmouthLevel1::GrimmDirtmouthLevel1() 
 {
 }
 
-DirtmouthLevel1::~DirtmouthLevel1() 
+GrimmDirtmouthLevel1::~GrimmDirtmouthLevel1() 
 {
 }
 
-void DirtmouthLevel1::Start()
+void GrimmDirtmouthLevel1::Start()
 {
 	CraateMasterMapActor();
 
 	GetMasterMap()->CreateBackGround("Dirtmouth_BackGround_1.png");
-	GetMasterMap()->CreateBackGroundObject("Dirtmouth_BackGround_Obj_1.png");
+	GetMasterMap()->CreateBackGroundObject("Dirtmouth_BackGround_Obj_GrimmBoss_1.png");
 	GetMasterMap()->CreateMapCollision("Dirtmouth_1_Coll.png");
 
 	if (GetKnight() == nullptr)
@@ -91,16 +90,15 @@ void DirtmouthLevel1::Start()
 
 }
 
-void DirtmouthLevel1::Update(float _DeltaTime)
-{
-
-}
-
-void DirtmouthLevel1::End()
+void GrimmDirtmouthLevel1::Update(float _DeltaTime)
 {
 }
 
-void DirtmouthLevel1::LevelStartEvent()
+void GrimmDirtmouthLevel1::End()
+{
+}
+
+void GrimmDirtmouthLevel1::LevelStartEvent()
 {
 	CreateActor<FadeIn>();
 
@@ -119,7 +117,7 @@ void DirtmouthLevel1::LevelStartEvent()
 
 	}
 
-	 PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel2);
+	PrevName = magic_enum::enum_name(LevelList::GrimmDirtmouthLevel2);
 	EnumString = static_cast<std::string>(PrevName);
 
 	UpperName = GameEngineString::ToUpperReturn(EnumString);
@@ -130,12 +128,8 @@ void DirtmouthLevel1::LevelStartEvent()
 		GetKnight()->SetDirInit(float4::LEFT);
 
 	}
-
 }
 
-void DirtmouthLevel1::LevelEndEvent()
+void GrimmDirtmouthLevel1::LevelEndEvent()
 {
-
-
-
 }

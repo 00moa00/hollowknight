@@ -14,6 +14,9 @@
 #include "DirtmouthLevel1.h"
 #include "DirtmouthLevel2.h"
 
+#include "GrimmDirtmouthLevel1.h"
+#include "GrimmDirtmouthLevel2.h"
+
 #include "GrimmLevel.h"
 
 #include "MapShopLevel.h"
@@ -1577,6 +1580,9 @@ void ContentsCore::Start()
 
 	CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");
 	CreateLevel<DirtmouthLevel2>("DirtmouthLevel2");
+
+	CreateLevel<DirtmouthLevel1>("GrimmDirtmouthLevel1");
+	CreateLevel<DirtmouthLevel2>("GrimmDirtmouthLevel2");
 
 	CreateLevel<MapShopLevel>("MapShopLevel");
 	CreateLevel<SlyShopLevel>("SlyShopLevel");
