@@ -654,6 +654,30 @@
     <ClInclude Include="MapWhiteParticleWindMaker.h">
       <Filter>Actor\Effect\Map</Filter>
     </ClInclude>
+    <ClInclude Include="KnightJumpDustEffect.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightSlashAttackEffect.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightDashEffect.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightCastEffect.h">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightCast.h">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightDoubleJumpParticle.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightJumpDustParticle.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightWalkDustParticle.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1153,6 +1177,30 @@
     </ClCompile>
     <ClCompile Include="MapWhiteParticleWindMaker.cpp">
       <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightJumpDustEffect.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightSlashAttackEffect.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightDashEffect.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightCastEffect.cpp">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightCast.cpp">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightDoubleJumpParticle.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightJumpDustParticle.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightWalkDustParticle.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

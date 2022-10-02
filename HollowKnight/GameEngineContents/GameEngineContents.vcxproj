@@ -413,7 +413,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="KnightCast.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightCastEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightDashEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="KnightDoubleJumpEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightDoubleJumpParticle.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -421,7 +437,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="KnightJumpDustEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightJumpDustParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightSlashAttackEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="KnightStunEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KnightWalkDustParticle.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -1055,7 +1087,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="KnightCast.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightCastEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightDashEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="KnightDoubleJumpEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightDoubleJumpParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -1063,7 +1111,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="KnightJumpDustEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightJumpDustParticle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightSlashAttackEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="KnightStunEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KnightWalkDustParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>

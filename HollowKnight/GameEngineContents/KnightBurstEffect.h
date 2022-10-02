@@ -1,7 +1,7 @@
 #pragma once
 #include "MasterEffect.h"
 
-// 설명 :
+// 설명 : 집중했을때
 class KnightBurstEffect : public MasterEffect
 {
 public:
