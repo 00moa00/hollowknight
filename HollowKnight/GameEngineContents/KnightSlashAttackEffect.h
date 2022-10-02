@@ -1,7 +1,8 @@
 #pragma once
+#include "MasterEffect.h"
 
 // 설명 : 공격 성공했을때 빠칭 하는거
-class KnightSlashAttackEffect
+class KnightSlashAttackEffect : public MasterEffect
 {
 public:
 	// constrcuter destructer
@@ -15,8 +16,11 @@ public:
 	KnightSlashAttackEffect& operator=(KnightSlashAttackEffect&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
-private:
+public:
+	void EffectOn();
 
 };
 

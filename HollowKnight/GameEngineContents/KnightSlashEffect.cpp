@@ -9,7 +9,9 @@ KnightSlashEffect::KnightSlashEffect()
 	isSlashEnd_(false),
 	isColl_(false),
 
-	Dir_(float4::ZERO)
+	Dir_(float4::ZERO),
+
+	KnightSlashAttackEffect_(nullptr)
 {
 }
 
@@ -35,7 +37,9 @@ void KnightSlashEffect::Start()
 
 	GetRenderer()->ChangeFrameAnimation("STILL");
 
-
+	KnightSlashAttackEffect_ = GetLevel()->CreateActor<KnightSlashAttackEffect>();
+	//KnightSlashAttackEffect_->SetParent(this);
+	KnightSlashAttackEffect_->Off();
 
 	GetRenderer()->AnimationBindEnd("SLASH", [=](const FrameAnimation_DESC& _Info)
 		{
@@ -134,7 +138,6 @@ void KnightSlashEffect::SlashHitEnemyUpdate(float _DeltaTime, const StateInfo& _
 void KnightSlashEffect::SlashHitEnemyEnd(const StateInfo& _Info)
 {
 	isColl_ = false;
-
 }
 
 void KnightSlashEffect::SetAnimationSlash()
@@ -142,6 +145,8 @@ void KnightSlashEffect::SetAnimationSlash()
 	GetRenderer()->ChangeFrameAnimation("SLASH");
 	KnightSlashEffectManager_.ChangeState("IDLE");
 	Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetMoveDirection();
+	GetTransform().SetLocalPosition({ 0,-0 });
+
 }
 
 void KnightSlashEffect::SetAnimationDoubleSlash()
@@ -149,6 +154,7 @@ void KnightSlashEffect::SetAnimationDoubleSlash()
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH");
 	KnightSlashEffectManager_.ChangeState("IDLE");
 	Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetMoveDirection();
+	GetTransform().SetLocalPosition({ 0,-0 });
 
 }
 
@@ -157,6 +163,8 @@ void KnightSlashEffect::SetAnimationUpSlash()
 	GetRenderer()->ChangeFrameAnimation("UP_SLASH");
 	KnightSlashEffectManager_.ChangeState("IDLE");
 	Dir_ = float4::UP;
+	GetTransform().SetLocalPosition({ 0,-0 });
+
 }
 
 void KnightSlashEffect::SetAnimationDownSlash()
@@ -164,6 +172,7 @@ void KnightSlashEffect::SetAnimationDownSlash()
 	GetRenderer()->ChangeFrameAnimation("DOWN_SLASH");
 	KnightSlashEffectManager_.ChangeState("IDLE");
 	Dir_ = float4::DOWN;
+	GetTransform().SetLocalPosition({0,-80});
 
 }
 
@@ -171,6 +180,7 @@ void KnightSlashEffect::SetAnimationStill()
 {
 	GetRenderer()->ChangeFrameAnimation("STILL");
 	KnightSlashEffectManager_.ChangeState("IDLE");
+	GetTransform().SetLocalPosition({ 0,-0 });
 
 }
 
@@ -181,6 +191,32 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 		Monster* Monster_ = dynamic_cast<Monster*>(_Other->GetActor());
 		Monster_->SetMonsterHit(KnightData::GetInst()->GetHitDamage(), GetEffectDirection(), Dir_);
 		KnightData::GetInst()->SetisSoulGrow(true);
+		KnightSlashAttackEffect_->EffectOn();
+
+		if (Dir_.CompareInt2D(float4::RIGHT))
+		{
+			KnightSlashAttackEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x + 120.f,
+			GetTransform().GetWorldPosition().y - 50.f  , static_cast<float>(Z_ORDER::Effect) });
+		}
+		if (Dir_.CompareInt2D(float4::LEFT))
+		{
+			KnightSlashAttackEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x - 120.f,
+			GetTransform().GetWorldPosition().y - 50.f  , static_cast<float>(Z_ORDER::Effect) });
+		}
+
+		if (Dir_.CompareInt2D(float4::DOWN))
+		{
+			KnightSlashAttackEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x ,
+			GetTransform().GetWorldPosition().y - 50.f  , static_cast<float>(Z_ORDER::Effect) });
+		}
+
+		if (Dir_.CompareInt2D(float4::UP))
+		{
+			KnightSlashAttackEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x ,
+			GetTransform().GetWorldPosition().y + 50.f  , static_cast<float>(Z_ORDER::Effect) });
+		}
+
+
 
 		isColl_ = true;
 		KnightSlashEffectManager_.ChangeState("HIT_ENEMY");

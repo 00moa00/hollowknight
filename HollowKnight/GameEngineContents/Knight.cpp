@@ -140,6 +140,7 @@ void Knight::Start()
 	KnightDonutLightEffect_ = GetLevel()->CreateActor<KnightDonutLightEffect>();
 	KnightSiblingLightEffect_ = GetLevel()->CreateActor<KnightSiblingLightEffect>();
 	KnightStunEffect_ = GetLevel()->CreateActor<KnightStunEffect>();
+
 	KnightStunEffect_->StunEffectOff();
 
 	KnightDoubleJumpEffect_ = GetLevel()->CreateActor<KnightDoubleJumpEffect>();
@@ -158,7 +159,7 @@ void Knight::Start()
 	KnightDoubleJumpEffect_->SetParent(this);
 	KnightCast_->SetParent(this);
 	KnightCastEffect_->SetParent(this);
-
+	KnightStunEffect_->SetParent(this);
 	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
 	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
 	KnightSiblingLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Small_Light) });

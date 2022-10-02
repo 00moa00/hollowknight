@@ -1,5 +1,6 @@
 #pragma once
 #include "MasterEffect.h"
+#include "KnightSlashAttackEffect.h"
 
 // Ό³Έν :
 class KnightSlashEffect : public MasterEffect
@@ -28,6 +29,7 @@ private:
 
 	GameEngineStateManager KnightSlashEffectManager_;
 
+	KnightSlashAttackEffect* KnightSlashAttackEffect_;
 private:
 
 	//================================

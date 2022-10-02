@@ -2801,7 +2801,7 @@ void Knight::KnightDownSlashStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("DOWN_SLASH_ANIMATION");
 	KnightSlashEffect_->GetCollision()->On();
 	KnightSlashEffect_->SetAnimationDownSlash();
-	KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 0, -10, 0 });
+	KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 0, 30, 0 });
 
 }
 
