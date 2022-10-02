@@ -699,6 +699,9 @@
     <ClInclude Include="GrimmDirtmouthLevel3.h">
       <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
     </ClInclude>
+    <ClInclude Include="Sycophant.h">
+      <Filter>Actor\Play\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1237,6 +1240,9 @@
     </ClCompile>
     <ClCompile Include="GrimmDirtmouthLevel3.cpp">
       <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="Sycophant.cpp">
+      <Filter>Actor\Play\Npc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
