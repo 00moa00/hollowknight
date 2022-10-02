@@ -111,7 +111,7 @@ void MapWhitParticle::Update(float _DeltaTime)
 
 void MapWhitParticle::SetWindMove()
 {
-	Speed_ = GameEngineRandom::MainRandom.RandomFloat(600.f, 800.f);
+	Speed_ = GameEngineRandom::MainRandom.RandomFloat(500.f, 650.f);
 	Dir_.x = 1.0f;
 	Dir_.y = GameEngineRandom::MainRandom.RandomFloat(-0.2f, 0.3f);
 	Dir_.Normalize();

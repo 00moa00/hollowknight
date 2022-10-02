@@ -17,7 +17,7 @@ KnightCast::~KnightCast()
 
 void KnightCast::Start()
 {
-	CreateCollisionComponent(float4{ 180.f, 123.f, 1 }, static_cast<int>(COLLISION_ORDER::Knight_Slash));
+	CreateCollisionComponent(float4{ 317.f * 2.f, 143.f * 2.0f, 1 }, static_cast<int>(COLLISION_ORDER::Knight_Slash));
 	CreateRendererComponent("Spell Effects_fireball_v020000-Sheet.png");
 
 	GetRenderer()->GetTransform().SetLocalScale({317.f * 3.0f, 143.f * 3.0f });
@@ -78,6 +78,7 @@ void KnightCast::EffectOn(float4 _Dir)
 	GetTransform().SetLocalPosition({ 0, 0, 0 });
 	On();
 	GetCollision()->On();
+	GetRenderer()->On();
 
 	ReSetAccTime();
 }
@@ -102,6 +103,7 @@ bool KnightCast::EffectVSMonsterCollision(GameEngineCollision* _This, GameEngine
 
 		//Off();
 		GetRenderer()->ChangeFrameAnimation("IDLE");
+		GetRenderer()->Off();
 		GetCollision()->Off();
 
 		return true;

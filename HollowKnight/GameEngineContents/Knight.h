@@ -16,6 +16,9 @@
 #include "KnightJumpDustEffect.h"
 
 #include "KnightCastEffect.h"
+#include "KnightDashEffect.h"
+#include "KnightDoubleJumpParticle.h"
+
 // 설명 :
 // 이팩트 관리 : 공격 - 이펙트는 온오프
 //				라이트 - 계속 따라다님
@@ -123,7 +126,9 @@ private:
 	KnightCastEffect* KnightCastEffect_;
 	KnightCast* KnightCast_;
 	KnightJumpDustEffect* KnightJumpDustEffect_;
-
+	KnightDashEffect* KnightDashEffect_;
+	KnightDoubleJumpParticle* KnightDoubleJumpParticle_;
+	
 	SideDarkEffect* SideDarkEffect_;
 
 	KnightStunEffect* KnightStunEffect_;

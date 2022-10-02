@@ -1419,6 +1419,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Spell Effects_fireball_wall_impact_effect0000-Sheet.png", 7, 1);
 		GameEngineTexture::Cut("Spell Effects_sharp_flash0000-Sheet.png", 4, 1);
 
+		GameEngineTexture::Cut("moth_feather_particle.png", 1, 3);
 
 	}
 
@@ -1518,6 +1519,7 @@ void ContentsCore::Start()
 		//¸ÕÁö
 		GameEngineTexture::Cut("Dust Effects_jump_puff0001-Sheet.png", 4, 1);
 
+		GameEngineTexture::Cut("Knight_dash_effect0000-Sheet.png", 8, 1);
 
 	}
 

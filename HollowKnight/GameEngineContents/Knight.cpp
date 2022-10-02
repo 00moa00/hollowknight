@@ -93,6 +93,8 @@ Knight::Knight()
 	KnightCast_(nullptr),
 	KnightCastEffect_(nullptr),
 	KnightJumpDustEffect_(nullptr),
+	KnightDashEffect_(nullptr),
+	KnightDoubleJumpParticle_(nullptr),
 
 	ChangeLevel_(""),
 
@@ -148,6 +150,8 @@ void Knight::Start()
 	KnightCast_ = GetLevel()->CreateActor<KnightCast>();
 	KnightCastEffect_ = GetLevel()->CreateActor<KnightCastEffect>();
 	KnightJumpDustEffect_ = GetLevel()->CreateActor<KnightJumpDustEffect>();
+	KnightDashEffect_ = GetLevel()->CreateActor<KnightDashEffect>();
+	KnightDoubleJumpParticle_ = GetLevel()->CreateActor<KnightDoubleJumpParticle>();
 
 	KnightDoubleJumpEffect_->Off();
 	KnightSlashEffect_->SetParent(this);
@@ -163,7 +167,8 @@ void Knight::Start()
 	KnightCastEffect_->SetParent(this);
 	KnightStunEffect_->SetParent(this);
 	//KnightJumpDustEffect_->SetParent(this);
-
+	KnightDashEffect_->SetParent(this);
+	//KnightDoubleJumpParticle_->SetParent(this);
 
 	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
 	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });

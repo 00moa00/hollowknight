@@ -474,6 +474,9 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 {
+	isPossibleDoubleJump_ = true;
+
+
 	if (GetPrevDirection().CompareInt2D(float4::LEFT) == true)
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
@@ -946,7 +949,7 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 		KnightJumpDustEffect_->EffectOn(float4::ZERO);
 	}
 	KnightJumpDustEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,
-	GetTransform().GetWorldPosition().y,
+	GetTransform().GetWorldPosition().y - 35.f,
 	static_cast<float>(Z_ORDER::Effect) });
 
 	//KnightJumpDustEffect_->EffectOn();
@@ -1142,6 +1145,9 @@ void Knight::KnightDoubleJumpStart(const StateInfo& _Info)
 
 	SetJumpPower({ 0, KnightDoubleJumpPower_ , 0 });
 	KnightDoubleJumpEffect_->SetEffectOn();
+
+	KnightDoubleJumpParticle_->ParticleOn();
+	KnightDoubleJumpParticle_->GetTransform().SetWorldPosition({GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 180.f, static_cast<float>(Z_ORDER::Effect)});
 }
 
 void Knight::KnightDoubleJumpUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -1266,6 +1272,8 @@ void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
 
 void Knight::KnightLandStart(const StateInfo& _Info)
 {
+	isPossibleDoubleJump_ = true;
+
 	GetRenderer()->ChangeFrameAnimation("LAND_ANIMATION");
 }
 
@@ -1631,6 +1639,7 @@ void Knight::KnightDashStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("DASH_ANIMATION");
 	KnightDashTimer_ = 0.f;
 	SetSpeed(1200.f);
+	KnightDashEffect_->EffectOn(GetMoveDirection());
 
 }
 
