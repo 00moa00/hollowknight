@@ -147,6 +147,7 @@ private:
 	bool isBossBattle_;
 	bool isIntroFallEvent_;
 	bool isUseSoul_;
+	bool isDeathLevelChange_;
 
 	float4 KnightPosition_;
 	//float4 CurDir_;
@@ -207,6 +208,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisDeathLevelChange() const
+	{
+		return isDeathLevelChange_;
+	}
+
 	bool GetisisUseSoul() const
 	{
 		return isUseSoul_;
@@ -416,6 +422,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetisDeathLevelChange(bool _b)
+	{
+		isDeathLevelChange_ = _b;
+	}
+
 	void SetisUseSoul(bool _b)
 	{
 		isUseSoul_ = _b;

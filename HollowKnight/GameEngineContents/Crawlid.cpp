@@ -72,7 +72,7 @@ void Crawlid::Start()
 
 	GetRenderer()->AnimationBindEnd("TURN_RIGHT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
-			isDeathEnd_ = true;
+			isTurnEnd_ = true;
 
 		});
 

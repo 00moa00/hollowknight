@@ -2199,6 +2199,12 @@ void Knight::KnightDeathStart(const StateInfo& _Info)
 	isInvincibility_ = false;
 
 	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
+	if (DeathLevelChangeFadeOut_ == nullptr)
+	{
+		DeathLevelChangeFadeOut_ = GetLevel()->CreateActor<FadeOut>();
+	}
+	//FadeOut_->SetNoCountDeath(true);
+	//FadeOut_->SetFadeSpeed(0.7f);
 }
 
 void Knight::KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -2212,14 +2218,20 @@ void Knight::KnightDeathUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (isDeathEnd_ == true)
 	{
 		isDeathEnd_ = false;
-		KnightShadow* Shadow = GetLevel()->CreateActor<KnightShadow>();
-		Shadow->GetTransform().SetWorldPosition({this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, 0});
-		
-		KnightData::GetInst()->SetisShadow(true);
+		//KnightShadow* Shadow = GetLevel()->CreateActor<KnightShadow>();
+		//Shadow->GetTransform().SetWorldPosition({this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, 0});
+		//
+		//KnightData::GetInst()->SetisShadow(true);
 		KnightData::GetInst()->SetisRevive(false);
+		KnightData::GetInst()->SetisDeathLevelChange(true);
 
-		KnightShadowData::GetInst()->SetShadowPosition({ this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Shadow) });
-		KnightManager_.ChangeState("GROUND_WAKE_UP");
+	//	KnightShadowData::GetInst()->SetShadowPosition({ this->GetTransform().GetWorldPosition().x + 400.f, this->GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Knight_Shadow) });
+		//KnightManager_.ChangeState("SIT");
+
+		GEngine::ChangeLevel("DIRTMOUTHLEVEL2");
+
+
+
 		return;
 	}
 }

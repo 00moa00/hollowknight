@@ -18,6 +18,7 @@
 #include "KnightCastEffect.h"
 #include "KnightDashEffect.h"
 #include "KnightDoubleJumpParticle.h"
+#include "FadeOut.h"
 
 // 설명 :
 // 이팩트 관리 : 공격 - 이펙트는 온오프
@@ -128,6 +129,8 @@ private:
 	KnightJumpDustEffect* KnightJumpDustEffect_;
 	KnightDashEffect* KnightDashEffect_;
 	KnightDoubleJumpParticle* KnightDoubleJumpParticle_;
+
+	FadeOut* DeathLevelChangeFadeOut_;
 	
 	SideDarkEffect* SideDarkEffect_;
 

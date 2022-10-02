@@ -95,6 +95,7 @@ Knight::Knight()
 	KnightJumpDustEffect_(nullptr),
 	KnightDashEffect_(nullptr),
 	KnightDoubleJumpParticle_(nullptr),
+	DeathLevelChangeFadeOut_(nullptr),
 
 	ChangeLevel_(""),
 
@@ -245,7 +246,7 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("STUN_ANIMATION", FrameAnimation_DESC("Knight_stun0000-Sheet.png", 0, 4, 0.070f, false));
 
 	// ---- Á×À½ ----
-	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Knight_death_anim0000-Sheet.png", 0, 13, 0.070f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Knight_death_anim0000-Sheet.png", 0, 13, 0.100f, false));
 
 
 	// ---- ´Þ¸®±â ----
@@ -723,7 +724,31 @@ void Knight::LevelStartEvent()
 		}
 	}
 
+	if (KnightData::GetInst()->GetisDeathLevelChange() == true)
+	{
+		KnightData::GetInst()->SetisDeathLevelChange(false);
+		GetTransform().SetLocalPosition({ 4611, -3127, static_cast<float>(Z_ORDER::Knight) });
+		KnightManager_.ChangeState("SIT");
+
+
+
+	}
+	else
+	{
+		KnightManager_.ChangeState("STILL");
+	}
+
+
 	isKnightPotal_ = false;
+
+	if (DeathLevelChangeFadeOut_ != nullptr)
+	{
+		if (DeathLevelChangeFadeOut_->GetDeathflag() == true)
+		{
+			DeathLevelChangeFadeOut_->Death();
+			DeathLevelChangeFadeOut_ = nullptr;
+		}
+	}
 }
 
 void Knight::LevelEndEvent()

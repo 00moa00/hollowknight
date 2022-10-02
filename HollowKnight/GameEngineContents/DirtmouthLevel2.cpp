@@ -98,6 +98,8 @@ void DirtmouthLevel2::LevelStartEvent()
 
 
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
+
+
 	std::string EnumString;
 	auto PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel3);
 	EnumString = static_cast<std::string>(PrevName);
@@ -123,6 +125,9 @@ void DirtmouthLevel2::LevelStartEvent()
 		GetKnight()->SetDirInit(float4::RIGHT);
 
 	}
+
+
+	
 }
 
 void DirtmouthLevel2::LevelEndEvent()
