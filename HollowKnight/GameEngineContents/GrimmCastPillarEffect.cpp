@@ -17,7 +17,7 @@ void GrimmCastPillarEffect::Start()
 {
 
 	GetTransform().SetWorldPosition({ 0, -50 });
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 75; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
 		int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 4);
@@ -37,28 +37,28 @@ void GrimmCastPillarEffect::Start()
 
 		int Ram = GameEngineRandom::MainRandom.RandomInt(0, 2);
 
-		if (Ram == 0)
+		if (i == 0)
 		{
 			Move.x = { GameEngineRandom::MainRandom.RandomFloat(-50.f, 50.f) };
 			Move.y = { GameEngineRandom::MainRandom.RandomFloat(100.f, 400.f) };
 			//ParticleList_.back()->GetPixelData().PlusColor.r = 1.0f;
 			//ParticleList_.back()->GetPixelData().MulColor.r = 1.0f;
-			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.7f, 0.9f);
-			ParticleList_.back()->GetClonePipeLine()->SetOutputMergerBlend("Overlay");
-			//ParticleList_.back()->SetTexture("grimm_smoke2.png");
+			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.3f, 0.5f);
+		//	ParticleList_.back()->GetClonePipeLine()->SetOutputMergerBlend("Overlay");
+			ParticleList_.back()->SetTexture("grimm_smoke2.png");
 
 		}
 
-		else if (Ram == 2)
+		else if (i == 2)
 		{
 			Move.x = { GameEngineRandom::MainRandom.RandomFloat(-50.f, 50.f) };
 			Move.y = { GameEngineRandom::MainRandom.RandomFloat(-300.f, -100.f) };
 			//ParticleList_.back()->GetPixelData().PlusColor.r = 1.0f;
 			//ParticleList_.back()->GetPixelData().MulColor.r = 1.0f;
-			ParticleList_.back()->GetClonePipeLine()->SetOutputMergerBlend("Overlay");
-			//ParticleList_.back()->SetTexture("grimm_smoke2.png");
+			//ParticleList_.back()->GetClonePipeLine()->SetOutputMergerBlend("Overlay");
+			ParticleList_.back()->SetTexture("grimm_smoke2.png");
 
-			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.7f, 0.9f);
+			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.3f, 0.5f);
 
 		}
 		else
@@ -72,11 +72,20 @@ void GrimmCastPillarEffect::Start()
 			 100.f + GameEngineRandom::MainRandom.RandomFloat(-10.f, 10.f)
 			,550.f + GameEngineRandom::MainRandom.RandomFloat(-50.f, 50.f) }
 			);
+
+			if (i > 10)
+			{
+				ParticleList_.back()->GetTransform().SetWorldScale({
+				 50.f 
+				,300.f }
+				);
+
+			}
 			//ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.2f, 0.7f);
 
 		}
 
-		ParticleList_.back()->GetTransform().SetLocalMove(Move);
+		//ParticleList_.back()->GetTransform().SetLocalMove(Move);
 		//ParticleList_.back()->InstancingOn();
 		InitPos_.push_back(ParticleList_.back()->GetTransform().GetLocalPosition());
 	}
@@ -141,7 +150,7 @@ void GrimmCastPillarEffect::CastPillarFireUpdate(float _DeltaTime, const StateIn
 
 	}
 
-	if (_Info.StateTime > 0.2f)
+	if (_Info.StateTime > 0.1f)
 	{
 		CastPillarManager_.ChangeState("DISAPPEAR");
 		return;
