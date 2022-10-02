@@ -1360,6 +1360,7 @@ void ContentsCore::Start()
 
 		// 사망
 		GameEngineTexture::Cut("Knight_death_anim0000-Sheet.png", 14, 1);
+		GameEngineTexture::Cut("Knight_spike_death000-Sheet.png", 8, 1);
 
 		// 지도보기
 		GameEngineTexture::Cut("Knight_sit_map_look0026-Sheet.png", 4, 1);

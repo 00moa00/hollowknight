@@ -2065,7 +2065,6 @@ void Knight::KnightRunEnd(const StateInfo& _Info)
 void Knight::KnightStunStart(const StateInfo& _Info)
 {
 	KnightStunEffect_->StunEffectOn();
-	GetRenderer()->ChangeFrameAnimation("STUN_ANIMATION");
 	if (KnightData::GetInst()->GetisBossBattle() == true)
 	{
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Battle_Shaking);
@@ -2081,6 +2080,15 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 		FadeOut* FadeOut_= GetLevel()->CreateActor<FadeOut>();
 		FadeOut_->SetNoCountDeath(true);
 		FadeOut_->SetFadeSpeed(1.5f);
+
+		GetRenderer()->ChangeFrameAnimation("SPIKE_STUN_ANIMATION");
+
+	}
+
+	else
+	{
+		GetRenderer()->ChangeFrameAnimation("STUN_ANIMATION");
+
 	}
 
 }

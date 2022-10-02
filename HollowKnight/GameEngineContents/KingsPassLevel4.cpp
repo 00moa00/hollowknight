@@ -76,12 +76,10 @@ void KingsPassLevel4::Start()
 
 		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
 		Potal_->GetTransform().SetWorldPosition({ 5891.f + 60, -1169.f });
-
 	}
 
 	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
-
 		MapSpike_->GetTransform().SetWorldPosition({ 2700, -3003.f });
 	}
 
@@ -93,13 +91,11 @@ void KingsPassLevel4::Start()
 
 	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
-
 		MapSpike_->GetTransform().SetWorldPosition({ 2910, -3003.f });
 	}
 
 	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
-
 		MapSpike_->GetTransform().SetWorldPosition({ 3050, -3003.f });
 	}
 
@@ -111,26 +107,22 @@ void KingsPassLevel4::Start()
 
 	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
-
 		MapSpike_->GetTransform().SetWorldPosition({ 3250, -3003.f });
 	}
 
 	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
-
 		MapSpike_->GetTransform().SetWorldPosition({ 3340, -3003.f });
 	}
 
 
 	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
-
 		MapSpike_->GetTransform().SetWorldPosition({ 3410, -3003.f });
 	}
 
 	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
-
 		MapSpike_->GetTransform().SetWorldPosition({ 3500, -3003.f });
 	}
 

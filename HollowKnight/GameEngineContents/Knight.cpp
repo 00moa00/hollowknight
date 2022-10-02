@@ -67,6 +67,7 @@ Knight::Knight()
 	isDoorEnd_(false),
 	isRunTurnEnd_(false),
 	isCastEnd_(false),
+	isSpikeStunEnd_(false),
 
 	isReturnToIdle_(false),
 	isInvincibility_(false),
@@ -244,6 +245,7 @@ void Knight::Start()
 
 	// ---- ½ºÅÏ ----
 	GetRenderer()->CreateFrameAnimationCutTexture("STUN_ANIMATION", FrameAnimation_DESC("Knight_stun0000-Sheet.png", 0, 4, 0.070f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SPIKE_STUN_ANIMATION", FrameAnimation_DESC("Knight_spike_death000-Sheet.png", 0, 7, 0.070f, false));
 
 	// ---- Á×À½ ----
 	GetRenderer()->CreateFrameAnimationCutTexture("DEATH_ANIMATION", FrameAnimation_DESC("Knight_death_anim0000-Sheet.png", 0, 13, 0.100f, false));
@@ -279,10 +281,7 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_ANIMATION", FrameAnimation_DESC("Knight_wake0000-Sheet.png", 0, 4, 0.100f, false));
 
 	{
-
-
 		std::vector<unsigned int>CustomAni;
-
 
 		CustomAni.push_back(7);
 		CustomAni.push_back(7);
@@ -345,12 +344,18 @@ void Knight::Start()
 
 
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
-	//GetRenderer()->GetPipeLine()->SetOutputMergerBlend("LightenBlend");
 
 	//================================
 	//    Create Bind Animation
 	//================================
 	{
+		GetRenderer()->AnimationBindEnd("SPIKE_STUN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+
+				isSpikeStunEnd_ = true;
+			});
+
+
 
 		GetRenderer()->AnimationBindEnd("CAST_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{

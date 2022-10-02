@@ -69,6 +69,7 @@ private:
 	bool isReturnToIdle_;
 	bool isIntroLandEnd_;
 	bool isCastEnd_;
+	bool isSpikeStunEnd_;
 
 	bool isRunTurnEnd_;
 
