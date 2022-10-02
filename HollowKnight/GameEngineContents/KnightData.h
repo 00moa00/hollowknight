@@ -39,9 +39,9 @@ enum class LevelList
 	SlyShopLevel,
 	MapShopLevel,
 
-	DirtmouthStationLevel
+	DirtmouthStationLevel,
 
-
+	KingsPassGrimmOpenLevel
 
 };
 

@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "KingsPassLevel1.h"
-#include "GlobalContentsValue.h"
 #include <GameEngineCore/GameEngineCameraActor.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include "Knight.h"

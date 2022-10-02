@@ -17,6 +17,8 @@
 #include "GrimmDirtmouthLevel1.h"
 #include "GrimmDirtmouthLevel2.h"
 
+#include "KingsPassGrimmOpenLevel.h"
+
 #include "GrimmLevel.h"
 
 #include "MapShopLevel.h"
@@ -1011,6 +1013,23 @@ void ContentsCore::Start()
 		}
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Map");
+		Dir.Move("KingsPass");
+		Dir.Move("Grimm");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+	}
+
 	//================================
 	//    ÅØ½ºÃ³ / ¸Ê / KingsPass
 	//================================
@@ -1047,6 +1066,7 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 	}
+
 
 	//================================
 	//    ÅØ½ºÃ³ / ¸Ê / DirtmouthMap
@@ -1581,11 +1601,13 @@ void ContentsCore::Start()
 	CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");
 	CreateLevel<DirtmouthLevel2>("DirtmouthLevel2");
 
-	CreateLevel<DirtmouthLevel1>("GrimmDirtmouthLevel1");
-	CreateLevel<DirtmouthLevel2>("GrimmDirtmouthLevel2");
+	CreateLevel<GrimmDirtmouthLevel1>("GrimmDirtmouthLevel1");
+	CreateLevel<GrimmDirtmouthLevel2>("GrimmDirtmouthLevel2");
 
 	CreateLevel<MapShopLevel>("MapShopLevel");
 	CreateLevel<SlyShopLevel>("SlyShopLevel");
+
+	CreateLevel<KingsPassGrimmOpenLevel>("KingsPassGrimmOpenLevel");
 
 	
 

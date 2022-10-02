@@ -84,6 +84,21 @@ void KingsPassLevel4::Start()
 	}
 
 	{
+		Potal* Potal_ = CreateActor<Potal>();
+
+		std::string EnumString;
+		auto PrevName = magic_enum::enum_name(LevelList::KingsPassGrimmOpenLevel);
+
+		EnumString = static_cast<std::string>(PrevName);
+
+		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
+		Potal_->GetTransform().SetWorldPosition({4900.f + 60, -2959.f });
+	}
+
+
+	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
 		MapSpike_->GetTransform().SetWorldPosition({ 2700, -3003.f });
 	}
@@ -171,6 +186,7 @@ void KingsPassLevel4::LevelStartEvent()
 	if (KnightData::GetInst()->GetPreLevel() == UpperName)
 	{
 		GetKnight()->GetTransform().SetLocalPosition({ 3492.f, -3119.f, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::LEFT);
 
 	}
 
@@ -182,8 +198,22 @@ void KingsPassLevel4::LevelStartEvent()
 	if (KnightData::GetInst()->GetPreLevel() == UpperName)
 	{
 		GetKnight()->GetTransform().SetLocalPosition({ 5891.f, -1169.f, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::LEFT);
 
 	}
+
+	PrevName = magic_enum::enum_name(LevelList::KingsPassGrimmOpenLevel);
+	EnumString = static_cast<std::string>(PrevName);
+
+	UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+	if (KnightData::GetInst()->GetPreLevel() == UpperName)
+	{
+		GetKnight()->GetTransform().SetLocalPosition({ 4850.f - 60.f, -2959.f, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::LEFT);
+
+	}
+
 
 
 }
