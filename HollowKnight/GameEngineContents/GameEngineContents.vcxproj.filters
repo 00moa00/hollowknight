@@ -678,6 +678,9 @@
     <ClInclude Include="KnightWalkDustParticle.h">
       <Filter>Actor\Effect\Knight</Filter>
     </ClInclude>
+    <ClInclude Include="KnightCastImpactEffect.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1200,6 +1203,9 @@
       <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightWalkDustParticle.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightCastImpactEffect.cpp">
       <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
   </ItemGroup>

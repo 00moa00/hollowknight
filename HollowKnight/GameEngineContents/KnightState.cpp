@@ -2950,6 +2950,7 @@ void Knight::KnightCastStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("CAST_ANIMATION");
 	KnightData::GetInst()->SetisUseSoul(true);
+	KnightCast_->EffectOn(GetMoveDirection());
 }
 
 void Knight::KnightCastUpdate(float _DeltaTime, const StateInfo& _Info)

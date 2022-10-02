@@ -1411,7 +1411,13 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Spell Effects_focus_effect0000-Sheet.png", 9, 1);
 		GameEngineTexture::Cut("Spell Effects_focus_appear0000-Sheet.png", 7, 1);
 		GameEngineTexture::Cut("Spell Effects_burst_effect0000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("Spell Effects_burst0000-Sheet.png", 7, 1);
+
 		GameEngineTexture::Cut("Spell Effects 2_double_jump_wings0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Spell Effects_blast_effect_v020000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("Spell Effects_fireball_v020000-Sheet.png", 10, 1);
+		GameEngineTexture::Cut("Spell Effects_fireball_wall_impact_effect0000-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Spell Effects_sharp_flash0000-Sheet.png", 4, 1);
 
 
 	}
