@@ -1,7 +1,8 @@
 #pragma once
+#include "MasterEffect.h"
 
 // Ό³Έν :
-class KnightJumpDustEffect
+class KnightJumpDustEffect : public MasterEffect
 {
 public:
 	// constrcuter destructer
@@ -15,8 +16,12 @@ public:
 	KnightJumpDustEffect& operator=(KnightJumpDustEffect&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 private:
 
+public:
+	void EffectOn(float4 _Dir);
 };
 

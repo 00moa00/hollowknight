@@ -935,7 +935,21 @@ void Knight::KnightJumpStart(const StateInfo& _Info)
 	ActtingMoveDirection_ = float4::ZERO;
 	isPressJumppingKey_ = true;
 
-	//SetisGround(false);
+	if (_Info.PrevState == "RUN" || _Info.PrevState == "WALK_TURN" || _Info.PrevState == "DOUBLE_JUMP" || _Info.PrevState == "FALL")
+	{
+		KnightJumpDustEffect_->EffectOn(GetMoveDirection());
+
+
+	}
+	else
+	{
+		KnightJumpDustEffect_->EffectOn(float4::ZERO);
+	}
+	KnightJumpDustEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,
+	GetTransform().GetWorldPosition().y,
+	static_cast<float>(Z_ORDER::Effect) });
+
+	//KnightJumpDustEffect_->EffectOn();
 
 	SetJumpPower({ 0, KnightJumpPower_, 0 });
 }
@@ -2041,18 +2055,16 @@ void Knight::KnightRunEnd(const StateInfo& _Info)
 
 void Knight::KnightStunStart(const StateInfo& _Info)
 {
-	//KnightKnockbackTimer_ = 1.0f;
 	KnightStunEffect_->StunEffectOn();
 	GetRenderer()->ChangeFrameAnimation("STUN_ANIMATION");
 	if (KnightData::GetInst()->GetisBossBattle() == true)
 	{
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Battle_Shaking);
-
 	}
+
 	else
 	{
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Shaking);
-
 	}
 
 	if (isKnightSpikeHit_ == true)
@@ -2062,29 +2074,21 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 		FadeOut_->SetFadeSpeed(1.5f);
 	}
 
-
 }
 
 void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	if (KnightKnockbackTimer_ > 0.04f)
 	{
 		GameEngineTime::GetInst()->SetTimeScale(0, 1.0f);
-
 	}
 
 	else
 	{
 		GameEngineTime::GetInst()->SetTimeScale(0, 0.1f);
-
 	}
 
-
-
 	KnightKnockbackTimer_ += _DeltaTime;
-
-
 
 	if (isKnightSpikeHit_ == true)
 	{
@@ -2104,14 +2108,12 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 			else
 			{
 				KnightManager_.ChangeState("STILL");
-
 			}
 		}
 
 		GetTransform().SetWorldMove(float4::UP * GetSpeed() * _DeltaTime);
-
-
 	}
+
 	else
 	{
 		if (KnightKnockbackTimer_ > 0.2f)
@@ -2130,7 +2132,6 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 			else
 			{
 				KnightManager_.ChangeState("STILL");
-
 			}
 		}
 
@@ -2148,7 +2149,6 @@ void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 	else
 	{
 		SetisCollWall(false);
-
 	}
 }
 
@@ -2160,8 +2160,6 @@ void Knight::KnightStunEnd(const StateInfo& _Info)
 
 		GetTransform().SetWorldPosition({ 2167, -2438, static_cast<float>(Z_ORDER::Knight) });
 		isKnightSpikeHit_ = false;
-
-
 	}
 
 
@@ -2173,13 +2171,11 @@ void Knight::KnightStunEnd(const StateInfo& _Info)
 	if (KnightData::GetInst()->GetisBossBattle() == true)
 	{
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
-
 	}
 
 	else
 	{
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
-
 	}
 
 	GameEngineTime::GetInst()->SetTimeScale(0, 1.0f);
@@ -2269,7 +2265,6 @@ void Knight::KnightSlashStart(const StateInfo& _Info)
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 80, 50, 0 });
-
 	}
 
 	else if (GetMoveDirection().CompareInt2D(float4::LEFT))

@@ -1515,6 +1515,10 @@ void ContentsCore::Start()
 
 		GameEngineTexture::Cut("Switches and gates_gate_effect0000-Sheet.png", 4, 1);
 
+		//¸ÕÁö
+		GameEngineTexture::Cut("Dust Effects_jump_puff0001-Sheet.png", 4, 1);
+
+
 	}
 
 

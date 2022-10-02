@@ -13,6 +13,7 @@
 
 #include "KnightDoubleJumpEffect.h"
 #include "KnightCast.h"
+#include "KnightJumpDustEffect.h"
 
 #include "KnightCastEffect.h"
 // Ό³Έν :
@@ -121,6 +122,7 @@ private:
 	KnightDoubleJumpEffect* KnightDoubleJumpEffect_;
 	KnightCastEffect* KnightCastEffect_;
 	KnightCast* KnightCast_;
+	KnightJumpDustEffect* KnightJumpDustEffect_;
 
 	SideDarkEffect* SideDarkEffect_;
 
