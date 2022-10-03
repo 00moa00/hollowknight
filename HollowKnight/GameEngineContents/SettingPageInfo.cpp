@@ -23,7 +23,7 @@ void SettingPageInfo::Start()
 		, { 0, 0, static_cast<float>(Z_ORDER::UI) }
 	, false
 	, false);
-	InfoName_->GetTransform().SetWorldPosition({ 500, 200, static_cast<float>(Z_ORDER::UI) });
+	InfoName_->GetTransform().SetWorldPosition({ 580, 250, static_cast<float>(Z_ORDER::UI) });
 	InfoName_->SetScreenMove();
 	InfoName_->GetFontRenderer()->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 	//InfoName_->GetFontRenderer()->SetTopAndBotSort(TopAndBotSort::VCENTER);
@@ -37,7 +37,7 @@ void SettingPageInfo::Start()
 		, { 0, 0, static_cast<float>(Z_ORDER::UI) }
 		, true
 		, false);
-	Info_->GetTransform().SetWorldPosition({ 500, 0, static_cast<float>(Z_ORDER::UI) });
+	Info_->GetTransform().SetWorldPosition({ 580, 100, static_cast<float>(Z_ORDER::UI) });
 	Info_->SetScreenMove();
 	Info_->GetFontRenderer()->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 	//Info_->GetFontRenderer()->SetTopAndBotSort(TopAndBotSort::VCENTER);

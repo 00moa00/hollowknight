@@ -21,7 +21,7 @@ void SettingPointer::PointerInventoryPageMoveUpdate(float _DeltaTime, const Stat
 	float Lenth = MoveDir.Length();
 
 	MoveDir.Normalize();
-	if (Lenth <= 3.f)
+	if (Lenth <= PointerMoveSpeed_ * _DeltaTime)
 	{
 		SettingPointerBox_->GetTransform().SetWorldPosition({ MoveState_.Dir_.x, MoveState_.Dir_.y , -100 });
 		SettingPointerInventoryPageManager_.ChangeState(MoveState_.NextMoveStateName_);
