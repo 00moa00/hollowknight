@@ -86,6 +86,9 @@ public:
 		ShopTopRenderer_->ChangeFrameAnimation("POPUP_ANIMATION");
 		ShopBottomRenderer_->ChangeFrameAnimation("POPUP_ANIMATION");
 		FigureheadRenderer_->ChangeFrameAnimation("POPUP_ANIMATION");
+
+		ShopManager_.ChangeState("SHOP_IDLE");
+
 	}
 
 	void SetShopPopDown()

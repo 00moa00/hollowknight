@@ -406,6 +406,13 @@ void Shop::ShopStillEnd(const StateInfo& _Info)
 
 void Shop::ShopIdleStart(const StateInfo& _Info)
 {
+
+	if (ShopItemList_.size() > 0)
+	{
+		ItemName_->SetText(ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetItemName(), 0);
+		ItemInfo_->SetText(ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetItemInfo(), 13);
+	}
+
 }
 
 void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -475,6 +482,17 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
 
 				ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
+
+				if (ShopItemList_.size() == 0)
+				{
+					SetShopPopDown();
+
+					//ShopManager_.ChangeState("SHOP_POP_DOWN");
+					return;
+
+
+				}
+
 				ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() - 1);
 				ShopManager_.ChangeState("BUY_ITEM_MOVE_DOWN");
 				return;
@@ -505,7 +523,12 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 				}
 				ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
 
-
+				if (ShopItemList_.size() == 0)
+				{
+					//ShopManager_.ChangeState("SHOP_POP_DOWN");
+					SetShopPopDown();
+					return;
+				}
 
 				ShopManager_.ChangeState("BUY_ITEM_MOVE_UP");
 				return;
