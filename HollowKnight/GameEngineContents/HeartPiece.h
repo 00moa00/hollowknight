@@ -46,6 +46,7 @@ private:
 	GameEngineUIRenderer* FlashRenderer_;
 
 	GameEngineUIRenderer* CompleteMaskRenderer_;
+	GameEngineUIRenderer* BackBoardRenderer_;
 
 	GameEngineStateManager HeartManager_;
 

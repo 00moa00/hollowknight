@@ -2892,7 +2892,6 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		if (ActtingMoveDirection_.CompareInt2D(float4::ZERO) || isKnihgtStillWall_ == true || GetisWall() == true || GetisCollWall() == true)
 		{
-
 			this->isPixelCheck(_DeltaTime, float4::DOWN);
 			float4 Move = (float4::DOWN * GetGravity() * _DeltaTime);
 
@@ -2938,7 +2937,6 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		isPressJumppingKey_ = false;
 	}
 
-
 	//애니메이션이 끝나면 
 	if (isDownSlashEnd_ == true)
 	{
@@ -2959,7 +2957,6 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
-
 	}
 }
 
@@ -2990,9 +2987,10 @@ void Knight::KnightCastUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("FALL");
 			return;
-
 		}
+
 		isCastEnd_ = false;
+
 		if (_Info.PrevState == "RUN" || isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
@@ -3008,7 +3006,6 @@ void Knight::KnightCastUpdate(float _DeltaTime, const StateInfo& _Info)
 			KnightManager_.ChangeState("WALK");
 		}
 	}
-
 }
 
 void Knight::KnightCastEnd(const StateInfo& _Info)
@@ -3020,7 +3017,6 @@ void Knight::KnightMapStillStart(const StateInfo& _Info)
 	if (_Info.PrevState == "STILL")
 	{
 		GetRenderer()->ChangeFrameAnimation("MAP_OPEN_ANIMATION");
-
 	}
 
 	if (_Info.PrevState == "MAP_WALKING")
@@ -3039,13 +3035,13 @@ void Knight::KnightMapStillUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisKnightMove() == true)
 	{
-		//GetRenderer()->ChangeFrameAnimation("MAP_WALKING_ANIMATION");
 		KnightManager_.ChangeState("MAP_WALKING");
 	}
 }
 
 void Knight::KnightMapStillEnd(const StateInfo& _Info)
 {
+
 }
 
 void Knight::KnightMapWalkinglStart(const StateInfo& _Info)
@@ -3084,7 +3080,6 @@ void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 				//PrevDirection_ = float4::LEFT;
 				KnightManager_.ChangeState("WALK_TURN");
 				return;
-
 			}
 
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
@@ -3099,7 +3094,6 @@ void Knight::KnightMapWalkinglUpdate(float _DeltaTime, const StateInfo& _Info)
 				SetPrevDirection(float4::RIGHT);
 				KnightManager_.ChangeState("WALK_TURN");
 				return;
-
 			}
 
 			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
@@ -3186,18 +3180,13 @@ void Knight::KnightMapSitWritelEnd(const StateInfo& _Info)
 
 void Knight::KnightSlideStart(const StateInfo& _Info)
 {
-
-
 	GetRenderer()->ChangeFrameAnimation("SLIDE_ANIMATION");
 }
 
 void Knight::KnightSlideUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	GetTransform().SetWorldMove(float4::DOWN * GetGravity() * GetFallSpeed() * _DeltaTime);
-
 	this->isPixelCheck(_DeltaTime, GetMoveDirection());
-	//	isWallCheck(_DeltaTime, GetMoveDirection());
-
 
 	if (GetisOnGround() == true)
 	{
@@ -3418,11 +3407,35 @@ void Knight::KnightTabletReturnToIdleUpdate(float _DeltaTime, const StateInfo& _
 	{
 		isReturnToIdle_ = false;
 		KnightManager_.ChangeState("STILL");
-
 	}
 }
 
 void Knight::KnightTabletReturnToIdleEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightNewMaskEventStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("NEW_MASK_START_ANIMATION");
+	KnightHatchlingBurst_->EffectOn();
+	KnightHatchlingBurst_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x,  this->GetTransform().GetWorldPosition().y, -150.f});
+}
+
+void Knight::KnightNewMaskEventUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (_Info.StateTime > 2.5f)
+	{
+		GetRenderer()->ChangeFrameAnimation("NEW_MASK_END_ANIMATION");
+
+		if (isNewMaskEnd_ == true)
+		{
+			isNewMaskEnd_ = false;
+			KnightManager_.ChangeState("STILL");
+		}
+	}
+}
+
+void Knight::KnightNewMaskEventEnd(const StateInfo& _Info)
 {
 }
 

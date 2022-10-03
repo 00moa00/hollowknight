@@ -18,10 +18,6 @@ void KnightDashEffect::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("Knight_dash_effect0000-Sheet.png", 0, 7, 0.050f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("IDLE", FrameAnimation_DESC("Knight_dash_effect0000-Sheet.png", 7, 7, 0.010f, false));
 
-	//GetRenderer()->SetScaleModeImage();
-
-	//SetBlendMode(BlendMode::Add);
-
 	GetRenderer()->AnimationBindEnd("ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			Off();
@@ -29,7 +25,6 @@ void KnightDashEffect::Start()
 		});
 
 	GetRenderer()->ChangeFrameAnimation("ANIMATION");
-	//GetRenderer()->GetTransform().SetLocalPosition({ 0, 175.f / 2, 0 });
 
 	Off();
 }

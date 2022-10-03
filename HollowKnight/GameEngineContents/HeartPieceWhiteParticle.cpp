@@ -22,7 +22,7 @@ void HeartPieceWhiteParticle::Start()
 		ParticleList_.back()->SetTexture("final_boss_glow_particle.png", 1);
 
 
-		float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(4.5f, 5.0f);
+		float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(4.3f, 5.2f);
 
 		ParticleList_.back()->GetTransform().SetLocalScale({
 		37.f * RamdomScale,
@@ -94,7 +94,6 @@ void HeartPieceWhiteParticle::Update(float _DeltaTime)
 
 			ParticleList_[i]->GetTransform().SetLocalMove(Move);
 			ParticleList_[i]->GetTransform().SetLocalScale({ InitScale_[i].x * Scale_, InitScale_[i].y * Scale_ });
-
 		}
 	}
 }

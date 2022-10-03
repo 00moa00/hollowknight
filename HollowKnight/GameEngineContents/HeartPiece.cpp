@@ -28,7 +28,8 @@ HeartPiece::HeartPiece()
 	FleurRenderer_(nullptr),
 	MaskRenderer_(nullptr),
 	FlashRenderer_(nullptr),
-	CompleteMaskRenderer_(nullptr)
+	CompleteMaskRenderer_(nullptr),
+	BackBoardRenderer_(nullptr)
 {
 }
 
@@ -38,6 +39,11 @@ HeartPiece::~HeartPiece()
 
 void HeartPiece::Start()
 {
+	BackBoardRenderer_ = CreateComponent<GameEngineUIRenderer>();
+	BackBoardRenderer_->SetTexture("BlackBoard.png");
+	BackBoardRenderer_->GetTransform().SetLocalScale({ 1920.f, 1080.f });
+	BackBoardRenderer_->GetPixelData().MulColor.a = 0.5f;
+
 	FleurRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	FleurRenderer_->SetTexture("Heart Piece UI Cln_HP_UI_Fleur_appear0000-Sheet.png");
 	FleurRenderer_->GetTransform().SetLocalScale({753.f, 733.f});
@@ -209,6 +215,7 @@ void HeartPiece::SetNewMaskPiece()
 	CompleteMaskRenderer_->GetTransform().SetLocalScale({ 395.f * 1.3f, 537.f * 1.3f });
 	CompleteMaskRenderer_->GetPixelData().MulColor.a = 0.f;
 
+	BackBoardRenderer_->GetPixelData().MulColor.a = 0.f;
 	GetTransform().SetWorldPosition({0,0, -200});
 
 	ReSetAccTime();
@@ -256,7 +263,7 @@ void HeartPiece::HeartIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 				MaskRenderer_->ChangeFrameAnimation("MASK_LEVEL4_APPEAR");
 				isCompleteMask_ = true;
 			}
-
+			//GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
 			ReSetAccTime();
 		}
 	}
@@ -271,6 +278,13 @@ void HeartPiece::HeartIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		}
 		MaskRenderer_->GetPixelData().MulColor.a = Alpha_;
+
+		if (Alpha_ <= 0.5f)
+		{
+			BackBoardRenderer_->GetPixelData().MulColor.a = Alpha_;
+
+		}
+
 	}
 
 	else if (isNewMask_ == true)
@@ -287,7 +301,17 @@ void HeartPiece::HeartIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 			FleurRenderer_->GetPixelData().MulColor.a = Alpha_;
 			MaskRenderer_->GetPixelData().MulColor.a = Alpha_;
+
+			if (Alpha_ <= 0.5f)
+			{
+				BackBoardRenderer_->GetPixelData().MulColor.a = Alpha_;
+			}
 		}
+		//if (GetAccTime() > 1.0f)
+		//{
+		//	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
+		//	ReSetAccTime();
+		//}
 	}
 
 	if (isCompleteMask_ == true)
@@ -374,12 +398,26 @@ void HeartPiece::HeartNewMaskStart(const StateInfo& _Info)
 	KnightData::GetInst()->SetisAddNewMask(true);
 	HeartPieceWhiteParticle* HeartPieceWhiteParticle_ = GetLevel()->CreateActor<HeartPieceWhiteParticle>();
 	HeartPieceWhiteParticle_->GetTransform().SetWorldPosition({ -550, 420.f, 0});
+//	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
 
+	Alpha_ = 0.5f;
 
 }
 
 void HeartPiece::HeartNewMaskUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (GetAccTime() > 2.0f)
+	{
+		Off();
+	}
+
+	Alpha_ -= 0.7f * _DeltaTime;
+
+	if (Alpha_ <= 0.f)
+	{
+		Alpha_ = 0.f;
+	}
+	BackBoardRenderer_->GetPixelData().MulColor.a = Alpha_;
 }
 
 void HeartPiece::HeartNewMaskEnd(const StateInfo& _Info)

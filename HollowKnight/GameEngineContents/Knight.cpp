@@ -82,6 +82,7 @@ Knight::Knight()
 	isIntroLandEnd_(false),
 	isKnightSpikeHit_(false),
 	isPossibleFallJump_(false),
+	isNewMaskEnd_(false),
 
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
@@ -97,6 +98,7 @@ Knight::Knight()
 	KnightDashEffect_(nullptr),
 	KnightDoubleJumpParticle_(nullptr),
 	DeathLevelChangeFadeOut_(nullptr),
+	KnightHatchlingBurst_(nullptr),
 
 	ChangeLevel_(""),
 
@@ -154,10 +156,11 @@ void Knight::Start()
 	KnightJumpDustEffect_ = GetLevel()->CreateActor<KnightJumpDustEffect>();
 	KnightDashEffect_ = GetLevel()->CreateActor<KnightDashEffect>();
 	KnightDoubleJumpParticle_ = GetLevel()->CreateActor<KnightDoubleJumpParticle>();
+	KnightHatchlingBurst_ = GetLevel()->CreateActor<KnightHatchlingBurst>();
 
 	KnightDoubleJumpEffect_->Off();
+
 	KnightSlashEffect_->SetParent(this);
-	//SideDarkEffect_ = GetLevel()->CreateActor<SideDarkEffect>();
 	KnightSlashEffect_->SetAnimationStill();
 
 	KnightSlashEffect_->GetCollision()->Off();
@@ -168,9 +171,8 @@ void Knight::Start()
 	KnightCast_->SetParent(this);
 	KnightCastEffect_->SetParent(this);
 	KnightStunEffect_->SetParent(this);
-	//KnightJumpDustEffect_->SetParent(this);
 	KnightDashEffect_->SetParent(this);
-	//KnightDoubleJumpParticle_->SetParent(this);
+	//KnightHatchlingBurst_->SetParent(this);
 
 	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
 	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
@@ -210,7 +212,6 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
 
 		GameEngineInput::GetInst()->CreateKey("OnOffSettingPage", 'I');
-
 	}
 
 
@@ -233,8 +234,6 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_LEFT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.080f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("WALK_TURN_RIGHT_ANIMATION", FrameAnimation_DESC("Knight_turn000-Sheet.png", 0, 1, 0.080f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("RUN_TURN_ANIMATION", FrameAnimation_DESC("Knight_idle_to_run0000-Sheet.png", 0, 4, 0.120f, false));
-
-
 
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_DOWN_ANIMATION", FrameAnimation_DESC("Knight_look_down0000-Sheet.png", 0, 5, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("LOOK_UP_ANIMATION", FrameAnimation_DESC("Knight_look_up0000-Sheet.png", 0, 5, 0.100f, false));
@@ -275,6 +274,12 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("UP_SLASH_ANIMATION", FrameAnimation_DESC("Knight_up_slash0000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH_ANIMATION", FrameAnimation_DESC("Knight_down_slash_v02000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("CAST_ANIMATION", FrameAnimation_DESC("Knight_cast_v030002-Sheet.png", 0, 11, 0.060f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SCREAM_CAST_ANIMATION", FrameAnimation_DESC("Knight_cast0003-Sheet.png", 0, 9, 0.060f, false));
+
+	// ---- 새로운 마스크 ----
+	GetRenderer()->CreateFrameAnimationCutTexture("NEW_MASK_START_ANIMATION", FrameAnimation_DESC("Knight_cast0003-Sheet.png", 0, 2, 0.060f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("NEW_MASK_CAST_ANIMATION", FrameAnimation_DESC("Knight_cast0003-Sheet.png", 3, 8, 0.060f, true));
+	GetRenderer()->CreateFrameAnimationCutTexture("NEW_MASK_END_ANIMATION", FrameAnimation_DESC("Knight_cast0003-Sheet.png", 9, 9, 0.100f, false));
 
 	// ---- 기상 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("WAKEUP_GROUND_ANIMATION", FrameAnimation_DESC("Knight_wake_up_ground0000-Sheet.png", 0, 20, 0.100f, false));
@@ -306,9 +311,7 @@ void Knight::Start()
 		GetRenderer()->CreateFrameAnimationCutTexture("INTRO_LAND_ANIMATION", FrameAnimation_DESC("Knight_wake_up_ground0000-Sheet.png", CustomAni, 0.120f, false));
 	}
 	// ---- 탈진 ----
-//	GetRenderer()->CreateFrameAnimationCutTexture("LOW_HEALTH_ANIMATION", FrameAnimation_DESC("Knight_idle_low_health000-Sheet.png", 0, 9, 0.100f));
-
-
+	//GetRenderer()->CreateFrameAnimationCutTexture("LOW_HEALTH_ANIMATION", FrameAnimation_DESC("Knight_idle_low_health000-Sheet.png", 0, 9, 0.100f));
 
 	// ---- 슬라이드 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("SLIDE_ANIMATION", FrameAnimation_DESC("Knight_wall_slide0000-Sheet.png", 0, 3, 0.100f));
@@ -349,52 +352,51 @@ void Knight::Start()
 	//    Create Bind Animation
 	//================================
 	{
+
+		GetRenderer()->AnimationBindEnd("NEW_MASK_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("NEW_MASK_CAST_ANIMATION");
+			});
+
+		GetRenderer()->AnimationBindEnd("NEW_MASK_END_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isNewMaskEnd_ = true;
+			});
+
 		GetRenderer()->AnimationBindEnd("SPIKE_STUN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
-
 				isSpikeStunEnd_ = true;
 			});
 
-
-
 		GetRenderer()->AnimationBindEnd("CAST_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
-
 				isCastEnd_ = true;
 			});
 
-
 		GetRenderer()->AnimationBindEnd("INTRO_LAND_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
-
 				isIntroLandEnd_ = true;
 			});
 
 		GetRenderer()->AnimationBindEnd("FALL_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
 				GetRenderer()->ChangeFrameAnimation("FALL_LOOP_ANIMATION");
-
 			});
-
 
 		GetRenderer()->AnimationBindEnd("SEE_RETURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
 				isReturnToIdle_ = true;
-
 			});
 
 		GetRenderer()->AnimationBindEnd("RUN_TURN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
 				isRunTurnEnd_ = true;
-
 			});
 
 		GetRenderer()->AnimationBindEnd("SIT_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
 				GetRenderer()->ChangeFrameAnimation("SIT_IDLE_ANIMATION");
-
 			});
-
 
 		GetRenderer()->AnimationBindEnd("SLASH_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
@@ -409,7 +411,6 @@ void Knight::Start()
 		GetRenderer()->AnimationBindEnd("DOUBLE_JUMP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
 				GetRenderer()->ChangeFrameAnimation("JUMP_ANIMATION");
-
 				isDoubleJumpEnd_ = true;
 			});
 
@@ -701,6 +702,11 @@ void Knight::Start()
 		, std::bind(&Knight::KnightTabletReturnToIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightTabletReturnToIdleStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightTabletReturnToIdleEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("NEW_MASK"
+		, std::bind(&Knight::KnightNewMaskEventUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightNewMaskEventStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightNewMaskEventEnd, this, std::placeholders::_1));
 
 	KnightManager_.ChangeState("STILL");
 }
@@ -1151,7 +1157,6 @@ bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineColli
 				{
 					Tablet_->GetTabletDialogue()->SetNextDialogue();
 				}
-
 			}
 		}
 	}
@@ -1161,7 +1166,6 @@ bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineColli
 
 bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-
 	MasterNPC* NPC = dynamic_cast<MasterNPC*>(_Other->GetActor());
 
 	if (NPC != nullptr)
@@ -1217,13 +1221,11 @@ bool Knight::NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineColl
 				KnightManager_.ChangeState("STILL");
 				//return;
 			}
-
 			else
 			{
 				NPC->GetDialogueSet()->SetNextDialogue();
 
 			}
-
 		}
 	}
 
@@ -1232,14 +1234,12 @@ bool Knight::NPCNextDialogueCollision(GameEngineCollision* _This, GameEngineColl
 
 bool Knight::ShopCloseCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-
 	if (GameEngineInput::GetInst()->IsDown("KnightClose") == true)
 	{
 		MasterNPC* NPC = dynamic_cast<MasterNPC*>(_Other->GetActor());
 
 		if (NPC != nullptr)
 		{
-
 			NPC->SetisShop(false);
 			KnightManager_.ChangeState("STILL");
 		}
@@ -1250,7 +1250,6 @@ bool Knight::ShopCloseCollision(GameEngineCollision* _This, GameEngineCollision*
 
 bool Knight::KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-
 	if (GameEngineInput::GetInst()->IsDown("KnightUp") == true)
 	{
 		RoomPotal* Potal = dynamic_cast<RoomPotal*>(_Other->GetActor());

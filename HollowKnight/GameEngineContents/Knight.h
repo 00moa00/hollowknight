@@ -19,6 +19,7 @@
 #include "KnightDashEffect.h"
 #include "KnightDoubleJumpParticle.h"
 #include "FadeOut.h"
+#include "KnightHatchlingBurst.h"
 
 // 설명 :
 // 이팩트 관리 : 공격 - 이펙트는 온오프
@@ -70,6 +71,7 @@ private:
 	bool isIntroLandEnd_;
 	bool isCastEnd_;
 	bool isSpikeStunEnd_;
+	bool isNewMaskEnd_;
 
 	bool isRunTurnEnd_;
 
@@ -130,6 +132,7 @@ private:
 	KnightJumpDustEffect* KnightJumpDustEffect_;
 	KnightDashEffect* KnightDashEffect_;
 	KnightDoubleJumpParticle* KnightDoubleJumpParticle_;
+	KnightHatchlingBurst* KnightHatchlingBurst_;
 
 	FadeOut* DeathLevelChangeFadeOut_;
 	
@@ -228,7 +231,6 @@ private:
 	void KnightIntroLandUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightIntroLandEnd(const StateInfo& _Info);
 
-
 	void KnightDashStart(const StateInfo& _Info);
 	void KnightDashUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightDashEnd(const StateInfo& _Info);
@@ -241,7 +243,6 @@ private:
 	void KnightFocusBurstStart(const StateInfo& _Info);
 	void KnightFocusBurstUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightFocusBurstEnd(const StateInfo& _Info);
-
 
 	// ---- 스턴 ----
 	void KnightStunStart(const StateInfo& _Info);
@@ -315,7 +316,6 @@ private:
 	void KnightWallJumpUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightWallJumpEnd(const StateInfo& _Info);
 
-
 	void KnightWallJumpLandStart(const StateInfo& _Info);
 	void KnightWallJumpLandUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightWallJumpLandEnd(const StateInfo& _Info);
@@ -339,20 +339,21 @@ private:
 	void KnightDoorUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightDoorEnd(const StateInfo& _Info);
 
-
 	// ----  타블렛 본당 ----
 	void KnightTabletStart(const StateInfo& _Info);
 	void KnightTabletUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightTabletEnd(const StateInfo& _Info);
 
 	// ----  타블렛에서 대기로 간다 ----
-
 	void KnightTabletReturnToIdleStart(const StateInfo& _Info);
 	void KnightTabletReturnToIdleUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightTabletReturnToIdleEnd(const StateInfo& _Info);
-
-
-	 
+	
+	// ---- 마스크 ----
+	void KnightNewMaskEventStart(const StateInfo& _Info);
+	void KnightNewMaskEventUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightNewMaskEventEnd(const StateInfo& _Info);
+ 
 	//================================
 	//    Bind 
 	//================================
@@ -391,8 +392,6 @@ private:
 	{
 		return 	KnightSiblingLightEffect_;
 	}
-	
-
 
 }; 
 

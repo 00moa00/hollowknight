@@ -1444,14 +1444,15 @@ void ContentsCore::Start()
 		// 기상
 		GameEngineTexture::Cut("Knight_wake_up_ground0000-Sheet.png", 21, 1);
 		GameEngineTexture::Cut("Knight_wake0000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Knight Hatchling Cln_burst0000-Sheet.png", 6, 1);
 
 		//의자
 		GameEngineTexture::Cut("Knight_sit0000-Sheet.png", 5, 1);
 
 		GameEngineTexture::Cut("Knight_into_door0000-Sheet.png", 10, 1);
-
-
+		GameEngineTexture::Cut("Knight_cast0003-Sheet.png", 10, 1);
 	}
+
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -1585,6 +1586,9 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Ambient Life_bug_glow0000-Sheet2.png", 6, 1);
 		GameEngineTexture::Cut("shop_lamp_bug0001-Sheet.png", 7, 1);
 
+		GameEngineTexture::Cut("stun_impact_effect0000-Sheet.png", 7, 1);
+
+
 	}
 
 
@@ -1604,15 +1608,12 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
-
 		GameEngineTexture::Cut("white_hit_particle_Orange.png", 1, 3);
 		GameEngineTexture::Cut("white_hit_particle.png", 1, 3);
 
 		GameEngineTexture::Cut("Projectiles_shot_impact0001-Sheet.png", 7, 1);
 		GameEngineTexture::Cut("orange_puff_animated.png", 10, 1);
-
 	}
-
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChangeKey"))
@@ -1653,7 +1654,6 @@ void ContentsCore::Start()
 
 	ChangeLevel("TitleLevel");
 	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);
-
 }
 
 void ContentsCore::Update(float _DeltaTime)
@@ -1665,5 +1665,4 @@ void ContentsCore::End()
 {
 	KnightData::Destroy();
 	KnightShadowData::Destroy();
-
 }

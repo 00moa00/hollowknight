@@ -484,7 +484,7 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 				if (Item == ITEM_LIST::Heart_Piece)
 				{
 					GetLevel<HollowKnightLevel>()->GetHeartPiece()->SetNewMaskPiece();
-					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
+					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("NEW_MASK");
 					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
 
 				//	SetShopPopDown();
@@ -527,7 +527,7 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 				if (Item == ITEM_LIST::Heart_Piece)
 				{
-					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
+					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("NEW_MASK");
 					GetLevel<HollowKnightLevel>()->GetHeartPiece()->SetNewMaskPiece();
 					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
 					//return;

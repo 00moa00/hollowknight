@@ -720,6 +720,9 @@
     <ClInclude Include="HeartPieceWhiteParticle.h">
       <Filter>Actor\Effect\UI</Filter>
     </ClInclude>
+    <ClInclude Include="KnightHatchlingBurst.h">
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1273,6 +1276,9 @@
     </ClCompile>
     <ClCompile Include="HeartPieceWhiteParticle.cpp">
       <Filter>Actor\Effect\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightHatchlingBurst.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
