@@ -344,17 +344,19 @@ void HeartPiece::HeartMovingUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	CompletScale_ -= 1.0f * _DeltaTime;
 
-	if (CompletScale_ <= 0.3f)
+	if (CompletScale_ <= 0.0f)
 	{
-		CompletScale_ = 0.3f;
+		CompletScale_ = 0.0f;
 	}
 
 	GetTransform().SetWorldMove(Dir * 1000.f * _DeltaTime);
 	CompleteMaskRenderer_->GetTransform().SetLocalScale({ CompleteInitScale_.x * CompletScale_, CompleteInitScale_.y * CompletScale_ });
 
+	float4 Lenth = Dest - MyPos;
 
-	if (Dir.Length() < 1000.f * _DeltaTime)
+	if (Lenth.Length() < 1000.f * _DeltaTime)
 	{
+		CompleteMaskRenderer_->Off();
 		HeartManager_.ChangeState("NEW_MASK");
 	}
 
