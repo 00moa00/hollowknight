@@ -28,6 +28,7 @@ private:
 	std::vector<GameEngineUIRenderer*> ParticleList_;
 	std::vector<float4> Dir_;
 	std::vector<float4> InitScale_;
+	std::vector<float4> RamSpeed_;
 
 public:
 	void ParticleOn();

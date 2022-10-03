@@ -149,6 +149,8 @@ void HeartPiece::Start()
 	CompleteMaskRenderer_->Off();
 	CompleteMaskRenderer_->GetClonePipeLine()->SetOutputMergerBlend("AddBlend");
 
+	GetTransform().SetWorldPosition({ 0,0, - static_cast<float>(Z_ORDER::UI_HeartPeice) });
+
 	//================================
 	//    Create State
 	//================================
@@ -207,7 +209,7 @@ void HeartPiece::SetNewMaskPiece()
 	CompleteMaskRenderer_->GetTransform().SetLocalScale({ 395.f * 1.3f, 537.f * 1.3f });
 	CompleteMaskRenderer_->GetPixelData().MulColor.a = 0.f;
 
-	GetTransform().SetWorldPosition({0,0});
+	GetTransform().SetWorldPosition({0,0, -200});
 
 	ReSetAccTime();
 }
@@ -371,7 +373,7 @@ void HeartPiece::HeartNewMaskStart(const StateInfo& _Info)
 	GetLevel<HollowKnightLevel>()->GetHUD()->NewMask();
 	KnightData::GetInst()->SetisAddNewMask(true);
 	HeartPieceWhiteParticle* HeartPieceWhiteParticle_ = GetLevel()->CreateActor<HeartPieceWhiteParticle>();
-	//HeartPieceWhiteParticle_->GetTransform().SetWorldPosition({600, -500.f, -500.f });
+	HeartPieceWhiteParticle_->GetTransform().SetWorldPosition({ -550, 420.f, 0});
 
 
 }
