@@ -36,12 +36,12 @@ protected:
 			MapShop_->SetShopPopDown();
 
 			IseldaManager_.ChangeState("IDLE");
-
 		}
-
 	}
 
 private:
+	int ShopIndexCount_;
+
 	Shop* MapShop_;
 
 	GameEngineStateManager IseldaManager_;

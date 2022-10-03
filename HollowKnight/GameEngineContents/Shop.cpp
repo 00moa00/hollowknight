@@ -331,6 +331,11 @@ void Shop::SetItemListPosition()
 			ShopItemList_[i]->GetTransform().SetWorldPosition({ 200, -280 });
 			ShopItemList_[i]->SetFontRendererMove();
 		}
+		if (ShopItemList_[i]->GetSlideItemIndex() > static_cast<int>(SlideItemIndex::Sixth))
+		{
+			ShopItemList_[i]->GetTransform().SetWorldPosition({ 200, -380 });
+			ShopItemList_[i]->SetFontRendererMove();
+		}
 	}
 }
 
@@ -388,7 +393,6 @@ void Shop::SetItemListUpdatePosition()
 	{
 		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 1]->GetTransform().SetWorldPosition({ 200, -80 });
 		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() + 1]->SetFontRendererMove();
-
 	}
 }
 
@@ -417,7 +421,6 @@ void Shop::ShopIdleStart(const StateInfo& _Info)
 
 void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
 	if (GetAccTime() > 0.5f)
 	{
 		if (true == GameEngineInput::GetInst()->IsDown("ItemSlideUp"))
@@ -437,7 +440,6 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 				ShopManager_.ChangeState("MOVE_LIMIT");
 				return;
 			}
-
 		}
 
 		if (true == GameEngineInput::GetInst()->IsDown("ItemSlideDown"))
@@ -486,11 +488,7 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 				if (ShopItemList_.size() == 0)
 				{
 					SetShopPopDown();
-
-					//ShopManager_.ChangeState("SHOP_POP_DOWN");
 					return;
-
-
 				}
 
 				ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() - 1);
@@ -510,9 +508,7 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 				if (Item != ITEM_LIST::NONE)
 				{
-
 					KnightData::GetInst()->PushKnihgtItemList(Item);
-
 				}
 
 				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
@@ -525,7 +521,6 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 				if (ShopItemList_.size() == 0)
 				{
-					//ShopManager_.ChangeState("SHOP_POP_DOWN");
 					SetShopPopDown();
 					return;
 				}

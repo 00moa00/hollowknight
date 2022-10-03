@@ -2,6 +2,9 @@
 #include "Iselda.h"
 
 Iselda::Iselda()
+	:
+	ShopIndexCount_(0),
+	MapShop_(nullptr)
 {
 }
 
@@ -42,15 +45,15 @@ void Iselda::Start()
 	MapShop_->GetTransform().SetWorldPosition({400, 0});
 
 	MapShop_->GetShopItemList().push_back(GetLevel()->CreateActor<ShopItem>());
-	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::Crosslaod_Map);
+	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::MaskPiece);
 	MapShop_->GetShopItemList().back()->SetParent(MapShop_);
 	MapShop_->GetShopItemList().back()->SetSlideItemIndex(0);
 
+
 	MapShop_->GetShopItemList().push_back(GetLevel()->CreateActor<ShopItem>());
-	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::Mark_of_Pride);
+	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::MaskPiece);
 	MapShop_->GetShopItemList().back()->SetParent(MapShop_);
 	MapShop_->GetShopItemList().back()->SetSlideItemIndex(1);
-
 
 	MapShop_->GetShopItemList().push_back(GetLevel()->CreateActor<ShopItem>());
 	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::MaskPiece);
@@ -58,12 +61,12 @@ void Iselda::Start()
 	MapShop_->GetShopItemList().back()->SetSlideItemIndex(2);
 
 	MapShop_->GetShopItemList().push_back(GetLevel()->CreateActor<ShopItem>());
-	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::Wayward_Compass);
+	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::MaskPiece);
 	MapShop_->GetShopItemList().back()->SetParent(MapShop_);
 	MapShop_->GetShopItemList().back()->SetSlideItemIndex(3);
 
 	MapShop_->GetShopItemList().push_back(GetLevel()->CreateActor<ShopItem>());
-	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::Wayward_Compass);
+	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::Crosslaod_Map);
 	MapShop_->GetShopItemList().back()->SetParent(MapShop_);
 	MapShop_->GetShopItemList().back()->SetSlideItemIndex(4);
 
@@ -71,6 +74,12 @@ void Iselda::Start()
 	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::Wayward_Compass);
 	MapShop_->GetShopItemList().back()->SetParent(MapShop_);
 	MapShop_->GetShopItemList().back()->SetSlideItemIndex(5);
+
+	MapShop_->GetShopItemList().push_back(GetLevel()->CreateActor<ShopItem>());
+	MapShop_->GetShopItemList().back()->CreateShopItem(SHOP_ITEM::Dreamshield);
+	MapShop_->GetShopItemList().back()->SetParent(MapShop_);
+	MapShop_->GetShopItemList().back()->SetSlideItemIndex(6);
+
 
 	MapShop_->SetItemListPosition();
 	MapShop_->Off();
