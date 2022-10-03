@@ -144,6 +144,7 @@ public:
 
 	void SetDirInit(float4 _Dir);					// 레벨 세팅때 텍스처 반전
 	void SetKnightisPotal(bool _b);
+	void SetKnightState(std::string _StateName);
 
 private:
 

@@ -178,6 +178,9 @@
     <Filter Include="Level\Levels\Dirtmouth\Grimm">
       <UniqueIdentifier>{df90c685-495a-4290-8605-b8d2d620adc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\UI\HeartPiece">
+      <UniqueIdentifier>{76c99eef-001e-4fe7-84db-05f47326106d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -707,6 +710,9 @@
     </ClInclude>
     <ClInclude Include="GrimmFlameParticle.h">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartPiece.h">
+      <Filter>Actor\Play\UI\HeartPiece</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1255,6 +1261,9 @@
     </ClCompile>
     <ClCompile Include="GrimmFlameParticle.cpp">
       <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartPiece.cpp">
+      <Filter>Actor\Play\UI\HeartPiece</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

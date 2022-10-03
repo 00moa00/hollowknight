@@ -343,7 +343,6 @@ void Shop::SetItemListUpdatePosition()
 {
 	if (ShopArrow_->GetCurrentPointItemIndex() == 1)
 	{
-
 		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() - 1]->GetTransform().SetWorldPosition({ 200, 120 });
 		ShopItemList_[ShopArrow_->GetCurrentPointItemIndex() - 1]->SetFontRendererMove();
 
@@ -481,15 +480,30 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 					KnightData::GetInst()->PushKnihgtItemList(Item);
 				}
 
+
+				if (Item == ITEM_LIST::Heart_Piece)
+				{
+					GetLevel<HollowKnightLevel>()->GetHeartPiece()->SetNewMaskPiece();
+					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
+					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
+
+				//	SetShopPopDown();
+
+					//return;
+				}
+
+
 				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
 
 				ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
 
 				if (ShopItemList_.size() == 0)
 				{
-					SetShopPopDown();
+					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
+					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
 					return;
 				}
+
 
 				ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() - 1);
 				ShopManager_.ChangeState("BUY_ITEM_MOVE_DOWN");
@@ -511,6 +525,15 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 					KnightData::GetInst()->PushKnihgtItemList(Item);
 				}
 
+				if (Item == ITEM_LIST::Heart_Piece)
+				{
+					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
+					GetLevel<HollowKnightLevel>()->GetHeartPiece()->SetNewMaskPiece();
+					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
+					//return;
+				}
+
+
 				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
 
 				for (int i = ShopArrow_->GetCurrentPointItemIndex() + 1; i < ShopItemList_.size(); ++i)
@@ -521,7 +544,8 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 				if (ShopItemList_.size() == 0)
 				{
-					SetShopPopDown();
+					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
+					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
 					return;
 				}
 

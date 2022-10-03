@@ -1,9 +1,14 @@
 #include "PreCompile.h"
 #include "Iselda.h"
 
+#include "HollowKnightLevel.h"
+
 Iselda::Iselda()
 	:
 	ShopIndexCount_(0),
+
+	PrevDir_(),
+
 	MapShop_(nullptr)
 {
 }
@@ -26,6 +31,12 @@ void Iselda::Start()
 
 	CreateRendererComponent("Iselda Cln_idle0013-Sheet.png", 0);
 	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("CHANGE_DIR_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("TALK_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("SHOP_IDLE_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_TO_SHOP_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("SHOP_TO_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
+
 	GetRenderer()->SetScaleModeImage();
 	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
 	//GetRenderer()->GetPixelData().MulColor = { 1,1,1,1 };
@@ -114,8 +125,28 @@ void Iselda::Start()
 
 void Iselda::Update(float _DeltaTime)
 {
-	CheckDirToKnight();
+	//CheckDirToKnight();
 	IseldaManager_.Update(_DeltaTime);
+}
+
+void Iselda::CheckDirToKnight()
+{
+	float4 KnightPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	float4 DirPos = KnightPos - this->GetTransform().GetWorldPosition();
+	DirPos.Normalize();
+
+	SetMoveDirection(DirPos);
+
+	if (DirPos.x > 0.0f)
+	{
+		//GetRenderer()->GetTransform().PixLocalNegativeX();
+	}
+
+	else if (DirPos.x < 0.0f)
+	{
+		//GetRenderer()->GetTransform().PixLocalPositiveX();
+	}
+
 }
 
 bool Iselda::ThisVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other)

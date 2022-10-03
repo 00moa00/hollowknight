@@ -16,7 +16,11 @@
 #include "MapSmokeMaker.h"
 #include "WhiteParicleMaker.h"
 
+#include "HeartPiece.h"
+
 #include "EffectGUIActor.h"
+
+#include "MasterNPC.h"
 
 class GameEngineTextureRenderer;
 class PointActorComponent;
@@ -62,6 +66,10 @@ private:
 	MapSmokeMaker* MapSmokeMaker_;
 	WhiteParicleMaker* WhiteParicleMaker_;
 
+	HeartPiece* HeartPiece_;
+
+	MasterNPC* ShopNPC_;
+
 public:
 	std::map<int, PointActorComponent*> PointActorListCharm;
 	std::map<int, PointActorComponent*> PointActorListMap;
@@ -84,10 +92,12 @@ protected:
 	void CreateForgottenCrossroadMap();
 	void CreateMainCameraManager();
 	void CreateEffectGUIActor();
-	
+	void CreateIselda();
 
 	void CreateMapSmokeMaker();
 	void CreawteMapWhiteParticleMaker();
+
+	void CreateHeartPiece();
 
 public:
 	void CreateCharmPageInfo(GameEngineActor* ParrentPage);
@@ -97,7 +107,7 @@ protected:
 	//void CameraMoveWindowLimit();
 	//void CameraMoveKnightLimit();
 
-	void SetMainMapSize(float4 _MapSize);
+	//void SetMainMapSize(float4 _MapSize);
 
 public :
 	void PushPointActorCharm(int _Order, PointActorComponent* _PointActorComponent);
@@ -157,6 +167,16 @@ public :
 	MapSmokeMaker* GetSmokeMaker()
 	{
 		return MapSmokeMaker_;
+	}
+
+	HeartPiece* GetHeartPiece()
+	{
+		return HeartPiece_;
+	}
+
+	MasterNPC* GetShopNPC()
+	{
+		return ShopNPC_;
 	}
 
 	float4 GetMapSize()

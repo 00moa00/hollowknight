@@ -397,8 +397,17 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
+		GameEngineTexture::Cut("Heart Piece UI Cln_moving_health0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Heart Piece UI Cln_HP_UI_010000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Heart Piece UI Cln_HP_UI_020000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Heart Piece UI Cln_HP_UI_030000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Heart Piece UI Cln_HP_UI_040000-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Heart Piece UI Cln_HP_UI_Fleur_appear0000-Sheet.png", 7, 1);
+		GameEngineTexture::Cut("Heart Piece UI Cln_HP_UI_fuse0000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("white_servant_death_flash0000-Sheet.png", 4, 1);
 
 	}
+
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");

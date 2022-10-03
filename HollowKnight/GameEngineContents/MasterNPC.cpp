@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "MasterNPC.h"
 #include "KnightData.h"
+#include "HollowKnightLevel.h"
 
 MasterNPC::MasterNPC() 
 	:
@@ -14,7 +15,6 @@ MasterNPC::~MasterNPC()
 
 void MasterNPC::CreateNameFontRenderer()
 {
-
 	//GetRenderer()->Get
 	NPCNameFontRenderer_;
 	NPCNameFontRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
@@ -41,18 +41,18 @@ void MasterNPC::CreateDialogueSet()
 
 void MasterNPC::CheckDirToKnight()
 {
-	float4 KnightPos = KnightData::GetInst()->GetKnightPosition();
+	float4 KnightPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
 	float4 DirPos = KnightPos - this->GetTransform().GetWorldPosition();
 	DirPos.Normalize();
 
 	SetMoveDirection(DirPos);
 
-	if (DirPos.CompareInt2D(float4::RIGHT))
+	if (DirPos.x > 0.0f)
 	{
 		GetRenderer()->GetTransform().PixLocalNegativeX();
 	}
 
-	else if (DirPos.CompareInt2D(float4::LEFT))
+	else if (DirPos.x < 0.0f)
 	{
 		GetRenderer()->GetTransform().PixLocalPositiveX();
 	}

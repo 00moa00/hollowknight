@@ -102,6 +102,8 @@ private:
 
 	int HitDamage_;							// 공격 데미지
 
+	int MaskPieceCount_;					// 가면 조각 갯수
+
 	std::vector<KnightCharmData> CharmList_;
 	std::vector<KnightItemData> ItemList_;
 
@@ -214,6 +216,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	int GetMaskPieceCount() const
+	{
+		return MaskPieceCount_;
+	}
+
 	bool GetisGrimmOpen() const
 	{
 		return isGrimmOpen_;
@@ -433,6 +440,22 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void AddMaskPieceCount()
+	{
+		++MaskPieceCount_;
+		if (MaskPieceCount_ > 4)
+		{
+			MaskPieceCount_ = 0;
+		}
+	}
+
+
+
+	void SetMaskPieceCount(int _i)
+	{
+		MaskPieceCount_ = _i;
+	}
+
 	void SetisGrimmOpen(bool _b)
 	{
 		isGrimmOpen_ = _b;

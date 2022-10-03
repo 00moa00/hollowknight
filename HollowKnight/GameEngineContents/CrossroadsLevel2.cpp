@@ -48,7 +48,7 @@ void CrossroadsLevel2::Start()
 
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
-	SetMainMapSize({ 5580, 1080 });
+	SetMapSize({ 5580, 1080 });
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);

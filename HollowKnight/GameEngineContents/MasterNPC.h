@@ -28,6 +28,9 @@ public:
 	MasterNPC& operator=(MasterNPC&& _Other) noexcept = delete;
 
 protected:
+	virtual void CheckDirToKnight();
+
+protected:
 	//float4 NPCDir_;
 
 	DialogueSet* DialogueSet_;
@@ -40,6 +43,7 @@ private:
 
 	bool isTalking_;
 	bool isOpenShop_;
+
 
 public:
 
@@ -108,7 +112,7 @@ public:
 	void CreatePromptSet();
 	void CreateDialogueSet();
 	
-	void CheckDirToKnight();
+
 
 };
 

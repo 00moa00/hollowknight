@@ -22,7 +22,6 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-
 	float Alpha_;
 
 	GameEngineUIRenderer* SpellTexture;

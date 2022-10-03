@@ -44,6 +44,7 @@ void MapShopLevel::Start()
 	CreateForgottenCrossroadMap();
 	CreateMainCameraManager();
 	CreateEffectGUIActor();
+	CreateHeartPiece();
 
 	SetMapSize({ 1920, 1080 });
 
@@ -54,7 +55,7 @@ void MapShopLevel::Start()
 	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Dirt, false);
 	DirtmouthPotal_->GetTransform().SetWorldPosition({ 400, -870.f });
 
-	Iselda_ = CreateActor<Iselda>();
+	CreateIselda();
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
@@ -63,6 +64,8 @@ void MapShopLevel::Start()
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
+
+	
 }
 
 void MapShopLevel::Update(float _DeltaTime)

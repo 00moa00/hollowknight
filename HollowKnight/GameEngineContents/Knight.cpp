@@ -795,6 +795,11 @@ void Knight::SetKnightisPotal(bool _b)
 	isKnightPotal_ = _b;
 }
 
+void Knight::SetKnightState(std::string _StateName)
+{
+	KnightManager_.ChangeState(_StateName);
+}
+
 bool Knight::GetisKnightMove()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))

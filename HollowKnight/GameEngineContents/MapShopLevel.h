@@ -29,6 +29,7 @@ protected:
 
 private:
 	RoomPotal* DirtmouthPotal_;
-	Iselda* Iselda_;
+
+
 };
 

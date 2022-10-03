@@ -6,6 +6,7 @@
 #include "PointActorComponent.h"
 #include "KnightData.h"
 #include "ItemSlot.h"
+#include "Iselda.h"
 
 HollowKnightLevel::HollowKnightLevel() 
 	:
@@ -28,6 +29,8 @@ HollowKnightLevel::HollowKnightLevel()
 
 	MainCameraManager_(nullptr),
 	WhiteParicleMaker_(nullptr),
+
+	HeartPiece_(nullptr),
 
 	//EffectGUIActor_(nullptr),
 
@@ -118,6 +121,11 @@ void HollowKnightLevel::CreateEffectGUIActor()
 	EffectGUIActor_ = CreateActor<EffectGUIActor>();
 }
 
+void HollowKnightLevel::CreateIselda()
+{
+	ShopNPC_ = CreateActor<Iselda>();
+}
+
 void HollowKnightLevel::CreateMapSmokeMaker()
 {
 	MapSmokeMaker_ = CreateActor<MapSmokeMaker>();
@@ -126,6 +134,11 @@ void HollowKnightLevel::CreateMapSmokeMaker()
 void HollowKnightLevel::CreawteMapWhiteParticleMaker()
 {
 	WhiteParicleMaker_ = CreateActor<WhiteParicleMaker>();
+}
+
+void HollowKnightLevel::CreateHeartPiece()
+{
+	HeartPiece_ = CreateActor<HeartPiece>();
 }
 
 void HollowKnightLevel::CreateCharmPageInfo(GameEngineActor* ParrentPage)

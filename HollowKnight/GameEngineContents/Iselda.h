@@ -22,6 +22,9 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+	void CheckDirToKnight() override;
+
+public:
 	void SetisShop(bool b) override
 	{
 		if (b == true)
@@ -41,6 +44,8 @@ protected:
 
 private:
 	int ShopIndexCount_;
+	
+	float4 PrevDir_;
 
 	Shop* MapShop_;
 
