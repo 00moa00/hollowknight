@@ -574,7 +574,6 @@ void ContentsCore::Start()
 		}
 
 		GameEngineTexture::Cut("Iselda Cln_idle_to_Shop0000-Sheet.png", 6, 1);
-		GameEngineTexture::Cut("Iselda Cln_idle0001-Sheet.png", 3, 1);
 		GameEngineTexture::Cut("Iselda Cln_idle0013-Sheet.png", 5, 1);
 		GameEngineTexture::Cut("Iselda Cln_Shop_0006-Sheet.png", 6, 1);
 		GameEngineTexture::Cut("Iselda Cln_Shop_to_idle0000-Sheet.png", 5, 1);

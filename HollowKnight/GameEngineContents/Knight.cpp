@@ -1173,14 +1173,14 @@ bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollisio
 			if (NPC->GetNPCType() == NPC_TYPE::Shop)
 			{
 				NPC->GetMoveDirection().Normalize();
-				if (NPC->GetMoveDirection().y < 0)
+				if (NPC->GetMoveDirection().x < 0)
 				{
 					NPC->SetisShop(true);
 					KnightManager_.ChangeState("SHOPPING");
 					//NPC->SetisShop(true);
 				}
 
-				else if (NPC->GetMoveDirection().y > 0)
+				else if (NPC->GetMoveDirection().x > 0)
 				{
 					NPC->SetisTalking(true);
 					NPC->GetDialogueSet()->SetDialogueOn();

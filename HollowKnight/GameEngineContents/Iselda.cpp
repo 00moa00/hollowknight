@@ -5,6 +5,9 @@
 
 Iselda::Iselda()
 	:
+	ShopToIdleEnd_(false),
+	OpenShop_(false),
+
 	ShopIndexCount_(0),
 
 	PrevDir_(),
@@ -22,20 +25,88 @@ void Iselda::Start()
 	SetNPCName("¿Ãºø¥Ÿ");
 	SetNPCType(NPC_TYPE::Shop);
 
-	GetTransform().SetWorldPosition({ 1040, -760.f, static_cast<int>(Z_ORDER::NPC) });
+	GetTransform().SetWorldPosition({ 1100, -730.f, static_cast<int>(Z_ORDER::NPC) });
 	CreateNameFontRenderer();
 	CreatePromptSet();
-	//GetPromptSet()->GetTransform().SetLocalPosition({0, 150.f});
-	//GetPromptSet()->GetCollision()->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
+
+	PromptSet* ShopPromptSet_ = GetLevel()->CreateActor<PromptSet>();
+	ShopPromptSet_->CreatePrompSet(PromptSetType::TALK);
+	ShopPromptSet_->SetParent(this);
+	ShopPromptSet_->GetTransform().SetLocalPosition({ -220.f, 220.f });
+	ShopPromptSet_->GetCollision()->GetTransform().SetLocalPosition({ 0.f, -300.f });
+	ShopPromptSet_->GetCollision()->GetTransform().SetLocalScale({ 200.f, 100.f });
+
+
+	GetPromptSet()->GetTransform().SetLocalPosition({50.f, 220.f});
+	GetPromptSet()->GetCollision()->GetTransform().SetLocalPosition({ 0, -300.f });
+	GetPromptSet()->GetCollision()->GetTransform().SetLocalScale({ 280.f, 100.f });
 	//GetPromptSet()->SetParent(this);
 
 	CreateRendererComponent("Iselda Cln_idle0013-Sheet.png", 0);
 	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("CHANGE_DIR_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("TALK_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("SHOP_IDLE_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_TO_SHOP_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
-	GetRenderer()->CreateFrameAnimationCutTexture("SHOP_TO_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle0013-Sheet.png", 0, 4, 0.100f));
+	
+	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_RIGHT_ANIMATION", FrameAnimation_DESC("Iselda Cln_turn0001-Sheet.png", 4, 4, 0.100f));
+
+	
+	GetRenderer()->CreateFrameAnimationCutTexture("CHANGE_DIR_ANIMATION", FrameAnimation_DESC("Iselda Cln_turn0001-Sheet.png", 0, 4, 0.100f, false));
+	
+	{
+		std::vector<unsigned int> CustomAni;
+
+		for (int i = 4; i > -1 ; --i)
+		{
+			CustomAni.push_back(i);
+		}
+
+		GetRenderer()->CreateFrameAnimationCutTexture("CHANGE_RETURN_DIR_ANIMATION", FrameAnimation_DESC("Iselda Cln_turn0001-Sheet.png", CustomAni, 0.100f, false));
+	}
+	
+	
+	
+	GetRenderer()->CreateFrameAnimationCutTexture("TALK_START_ANIMATION", FrameAnimation_DESC("Iselda Cln_talk_right0000-Sheet.png", 0, 1, 0.100f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("TALK_ANIMATION", FrameAnimation_DESC("Iselda Cln_talk_right0000-Sheet.png", 2, 7, 0.100f, true));
+
+	
+	GetRenderer()->CreateFrameAnimationCutTexture("SHOP_IDLE_ANIMATION", FrameAnimation_DESC("Iselda Cln_Shop_0006-Sheet.png", 0, 5, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("IDLE_TO_SHOP_ANIMATION", FrameAnimation_DESC("Iselda Cln_idle_to_Shop0000-Sheet.png", 0, 5, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("SHOP_TO_IDLE_ANIMATION", FrameAnimation_DESC("Iselda Cln_Shop_to_idle0000-Sheet.png", 0, 4, 0.100f));
+
+	GetRenderer()->AnimationBindEnd("IDLE_TO_SHOP_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("SHOP_IDLE_ANIMATION");
+
+		});
+
+	GetRenderer()->AnimationBindEnd("SHOP_TO_IDLE_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			ShopToIdleEnd_ = true;
+
+			//GetRenderer()->ChangeFrameAnimation("SHOP_IDLE_ANIMATION");
+
+		});
+
+	GetRenderer()->AnimationBindEnd("TALK_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("TALK_ANIMATION");
+
+			//GetRenderer()->ChangeFrameAnimation("SHOP_IDLE_ANIMATION");
+
+		});
+
+
+	GetRenderer()->AnimationBindEnd("CHANGE_DIR_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+
+		
+			GetRenderer()->ChangeFrameAnimation("IDLE_RIGHT_ANIMATION");
+
+		});
+
+	GetRenderer()->AnimationBindEnd("CHANGE_RETURN_DIR_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
+
+		});
 
 	GetRenderer()->SetScaleModeImage();
 	GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
@@ -108,10 +179,11 @@ void Iselda::Start()
 		, std::bind(&Iselda::IseldaChangeDirStart, this, std::placeholders::_1)
 		, std::bind(&Iselda::IseldaChangeDirEnd, this, std::placeholders::_1));
 
-	IseldaManager_.CreateStateMember("LEAVE"
-		, std::bind(&Iselda::IseldaChangeLeaveUpdate, this, std::placeholders::_1, std::placeholders::_2)
-		, std::bind(&Iselda::IseldaChangeLeaveStart, this, std::placeholders::_1)
-		, std::bind(&Iselda::IseldaChangeLeaveEnd, this, std::placeholders::_1));
+	IseldaManager_.CreateStateMember("TALKING"
+		, std::bind(&Iselda::IseldaTalkingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Iselda::IseldaTalkingStart, this, std::placeholders::_1)
+		, std::bind(&Iselda::IseldaTalkingEnd, this, std::placeholders::_1));
+
 
 	IseldaManager_.CreateStateMember("OPEN_SHOP"
 		, std::bind(&Iselda::IseldaShopOpenUpdate, this, std::placeholders::_1, std::placeholders::_2)
@@ -125,7 +197,7 @@ void Iselda::Start()
 
 void Iselda::Update(float _DeltaTime)
 {
-	//CheckDirToKnight();
+	CheckDirToKnight();
 	IseldaManager_.Update(_DeltaTime);
 }
 
@@ -135,16 +207,38 @@ void Iselda::CheckDirToKnight()
 	float4 DirPos = KnightPos - this->GetTransform().GetWorldPosition();
 	DirPos.Normalize();
 
-	SetMoveDirection(DirPos);
+
 
 	if (DirPos.x > 0.0f)
 	{
+		SetMoveDirection(float4::RIGHT);
+
+		if (PrevDir_.CompareInt2D(float4::RIGHT) == false)
+		{
+			GetRenderer()->ChangeFrameAnimation("CHANGE_DIR_ANIMATION");
+
+			//IseldaManager_.ChangeState("CHANGE_DIR");
+			//return;
+		}
+
+		PrevDir_ = float4::RIGHT;
+
 		//GetRenderer()->GetTransform().PixLocalNegativeX();
 	}
 
 	else if (DirPos.x < 0.0f)
 	{
-		//GetRenderer()->GetTransform().PixLocalPositiveX();
+		SetMoveDirection(float4::LEFT);
+		
+		if (PrevDir_.CompareInt2D(float4::LEFT) == false)
+		{
+			GetRenderer()->ChangeFrameAnimation("CHANGE_RETURN_DIR_ANIMATION");
+
+			//IseldaManager_.ChangeState("CHANGE_DIR");
+			//return;
+		}
+
+		PrevDir_ = float4::LEFT;
 	}
 
 }
@@ -173,10 +267,21 @@ void Iselda::IseldaWaitEnd(const StateInfo& _Info)
 
 void Iselda::IseldaIdleStart(const StateInfo& _Info)
 {
+	if (_Info.PrevState != "TALKING")
+	{
+		GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
+
+	}
+
 }
 
 void Iselda::IseldaIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (isTalking() == true)
+	{
+		IseldaManager_.ChangeState("TALKING");
+
+	}
 }
 
 void Iselda::IseldaIdleEnd(const StateInfo& _Info)
@@ -185,36 +290,75 @@ void Iselda::IseldaIdleEnd(const StateInfo& _Info)
 
 void Iselda::IseldaChangeDirStart(const StateInfo& _Info)
 {
+//	GetRenderer()->ChangeFrameAnimation("CHANGE_DIR_ANIMATION");
+
+	if (_Info.PrevState == "IDLE")
+	{
+		if (GetMoveDirection().CompareInt2D(float4::RIGHT))
+		{
+			GetRenderer()->ChangeFrameAnimation("CHANGE_DIR_ANIMATION");
+
+		}
+		else
+		{
+			GetRenderer()->ChangeFrameAnimation("CHANGE_RETURN_DIR_ANIMATION");
+
+		}
+	}
+	{
+		GetRenderer()->ChangeFrameAnimation("TALK_ANIMATION");
+
+	}
+
 }
 
 void Iselda::IseldaChangeDirUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
 }
 
 void Iselda::IseldaChangeDirEnd(const StateInfo& _Info)
 {
 }
 
-void Iselda::IseldaChangeLeaveStart(const StateInfo& _Info)
-{
-}
 
-void Iselda::IseldaChangeLeaveUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-}
-
-void Iselda::IseldaChangeLeaveEnd(const StateInfo& _Info)
-{
-}
 
 void Iselda::IseldaShopOpenStart(const StateInfo& _Info)
 {
+	GetRenderer()->ChangeFrameAnimation("IDLE_TO_SHOP_ANIMATION");
+
 }
 
 void Iselda::IseldaShopOpenUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+	if (ShopToIdleEnd_ == true)
+	{
+		ShopToIdleEnd_ = false;
+		IseldaManager_.ChangeState("IDLE");
+	}
+	//GetiShop
 }
 
 void Iselda::IseldaShopOpenEnd(const StateInfo& _Info)
+{
+
+}
+
+void Iselda::IseldaTalkingStart(const StateInfo& _Info)
+{
+	GetRenderer()->ChangeFrameAnimation("TALK_START_ANIMATION");
+
+}
+
+void Iselda::IseldaTalkingUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isTalking() == false)
+	{
+		IseldaManager_.ChangeState("IDLE");
+		GetRenderer()->ChangeFrameAnimation("TALK_ANIMATION");
+	}
+}
+
+void Iselda::IseldaTalkingEnd(const StateInfo& _Info)
 {
 }

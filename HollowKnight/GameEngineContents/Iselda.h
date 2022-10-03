@@ -29,6 +29,7 @@ public:
 	{
 		if (b == true)
 		{
+			OpenShop_ = true;
 			MapShop_->On();
 			MapShop_->SetShopPopup();
 			IseldaManager_.ChangeState("OPEN_SHOP");
@@ -36,13 +37,20 @@ public:
 
 		else if (b == false)
 		{
-			MapShop_->SetShopPopDown();
+			OpenShop_ = false;
 
-			IseldaManager_.ChangeState("IDLE");
+			MapShop_->SetShopPopDown();
+			GetRenderer()->ChangeFrameAnimation("SHOP_TO_IDLE_ANIMATION");
+
+			//IseldaManager_.ChangeState("IDLE");
 		}
 	}
 
 private:
+
+	bool ShopToIdleEnd_;
+	bool OpenShop_;
+
 	int ShopIndexCount_;
 	
 	float4 PrevDir_;
@@ -70,13 +78,15 @@ private:
 	void IseldaChangeDirUpdate(float _DeltaTime, const StateInfo& _Info);
 	void IseldaChangeDirEnd(const StateInfo& _Info);
 
-	void IseldaChangeLeaveStart(const StateInfo& _Info);
-	void IseldaChangeLeaveUpdate(float _DeltaTime, const StateInfo& _Info);
-	void IseldaChangeLeaveEnd(const StateInfo& _Info);
 
 	void IseldaShopOpenStart(const StateInfo& _Info);
 	void IseldaShopOpenUpdate(float _DeltaTime, const StateInfo& _Info);
 	void IseldaShopOpenEnd(const StateInfo& _Info);
+
+	void IseldaTalkingStart(const StateInfo& _Info);
+	void IseldaTalkingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void IseldaTalkingEnd(const StateInfo& _Info);
+
 
 };
 
