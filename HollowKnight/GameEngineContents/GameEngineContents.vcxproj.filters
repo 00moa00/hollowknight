@@ -181,6 +181,9 @@
     <Filter Include="Actor\Play\UI\HeartPiece">
       <UniqueIdentifier>{76c99eef-001e-4fe7-84db-05f47326106d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Effect\UI">
+      <UniqueIdentifier>{999f82bb-65b6-4cae-b7f5-d5dc7f9c9af2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -713,6 +716,9 @@
     </ClInclude>
     <ClInclude Include="HeartPiece.h">
       <Filter>Actor\Play\UI\HeartPiece</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartPieceWhiteParticle.h">
+      <Filter>Actor\Effect\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1264,6 +1270,9 @@
     </ClCompile>
     <ClCompile Include="HeartPiece.cpp">
       <Filter>Actor\Play\UI\HeartPiece</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartPieceWhiteParticle.cpp">
+      <Filter>Actor\Effect\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

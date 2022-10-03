@@ -2,6 +2,7 @@
 #include "HeartPiece.h"
 #include "KnightData.h"
 #include "HollowKnightLevel.h"
+#include "HeartPieceWhiteParticle.h"
 
 HeartPiece::HeartPiece()
 	:
@@ -309,9 +310,8 @@ void HeartPiece::HeartWhiteStart(const StateInfo& _Info)
 	CompletAlpha_ = 0.0f;
 	CompleteMaskRenderer_->On();
 	CompleteMaskRenderer_->GetPixelData().MulColor.a =0.f;
-
-
 }
+
 void HeartPiece::HeartWhiteUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
@@ -370,6 +370,10 @@ void HeartPiece::HeartNewMaskStart(const StateInfo& _Info)
 {
 	GetLevel<HollowKnightLevel>()->GetHUD()->NewMask();
 	KnightData::GetInst()->SetisAddNewMask(true);
+	HeartPieceWhiteParticle* HeartPieceWhiteParticle_ = GetLevel()->CreateActor<HeartPieceWhiteParticle>();
+	//HeartPieceWhiteParticle_->GetTransform().SetWorldPosition({600, -500.f, -500.f });
+
+
 }
 
 void HeartPiece::HeartNewMaskUpdate(float _DeltaTime, const StateInfo& _Info)

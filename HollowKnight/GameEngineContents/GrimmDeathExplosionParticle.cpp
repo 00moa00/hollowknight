@@ -57,10 +57,6 @@ void GrimmDeathExplosionParticle::Start()
 
 void GrimmDeathExplosionParticle::Update(float _DeltaTime)
 {
-
-
-
-
 	if (GetAccTime() > 1.5f)
 	{
 		Alpha_ -= 1.5f * _DeltaTime;
@@ -76,8 +72,6 @@ void GrimmDeathExplosionParticle::Update(float _DeltaTime)
 
 		//	ParticleList_[i]->GetTransform().SetLocalMove(Move);
 			ParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
-
-
 		}
 		//this->Death();
 	}
@@ -114,8 +108,6 @@ void GrimmDeathExplosionParticle::MoveFast()
 
 		ParticleList_[i]->GetTransform().SetLocalMove(Move);
 		//GrimmDeathExplosionParticleList_[i]->GetPixelData().MulColor.a = Alpha_;
-
-
 	}
 }
 
