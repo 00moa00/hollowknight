@@ -702,6 +702,12 @@
     <ClInclude Include="Sycophant.h">
       <Filter>Actor\Play\Npc</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmFlameEffect.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
+    <ClInclude Include="GrimmFlameParticle.h">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1243,6 +1249,12 @@
     </ClCompile>
     <ClCompile Include="Sycophant.cpp">
       <Filter>Actor\Play\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmFlameEffect.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmFlameParticle.cpp">
+      <Filter>Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -39,7 +39,6 @@ void MasterMap::CreateBackGroundObject(std::string _FileName)
 	BackGroundObjectRenderer_->SetPivot(PIVOTMODE::LEFTTOP);
 	BackGroundObjectRenderer_->GetTransform().SetWorldPosition({0, 0, static_cast<float>(Z_ORDER::Background_Object) });
 	BackGroundObjectRenderer_->SetSamplingModePoint();
-
 }
 
 

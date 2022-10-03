@@ -17,6 +17,10 @@
 
 #include "GrimmCastPillarEffect.h"
 
+#include "GrimmFlameEffect.h"
+#include "GrimmFlameParticle.h"
+
+
 KingsPassGrimmOpenLevel::KingsPassGrimmOpenLevel() 
 {
 }
@@ -61,14 +65,31 @@ void KingsPassGrimmOpenLevel::Start()
 
 		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
 		Potal_->GetTransform().SetWorldPosition({ 200.f - 60, -936.f, });
-
 	}
 
 	{
 		Sycophant* Sycophant_ = CreateActor<Sycophant>();
-
 	}
 
+	{
+		GrimmFlameEffect* GrimmFlameEffect_ = CreateActor<GrimmFlameEffect>();
+		GrimmFlameEffect_->GetTransform().SetWorldPosition({ 290.f, -600.f, 41 });
+	}
+
+	{
+		GrimmFlameEffect* GrimmFlameEffect_ = CreateActor<GrimmFlameEffect>();
+		GrimmFlameEffect_->GetTransform().SetWorldPosition({ 2190.f, -600.f , 41 });
+	}
+
+	{
+		GrimmFlameEffect* GrimmFlameEffect_ = CreateActor<GrimmFlameEffect>();
+		GrimmFlameEffect_->GetTransform().SetWorldPosition({ 4210.f, -600.f , 41 });
+	}
+
+	{
+		GrimmFlameParticle* GrimmFlameParticle_ = CreateActor<GrimmFlameParticle>();
+		GrimmFlameParticle_->GetTransform().SetWorldPosition({ 2507.f, -300.f , 41 });
+	}
 
 
 	CreawteMapWhiteParticleMaker();

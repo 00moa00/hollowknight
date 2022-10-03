@@ -16,6 +16,7 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 #include "BloomPostEffect.h"
+#include "GrimmFlameEffect.h"
 
 GrimmDirtmouthLevel2::GrimmDirtmouthLevel2() 
 	:
@@ -70,6 +71,21 @@ void GrimmDirtmouthLevel2::Start()
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetWorldPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
 
+	{
+		GrimmFlameEffect* GrimmFlameEffect_ = CreateActor<GrimmFlameEffect>();
+		GrimmFlameEffect_->GetTransform().SetWorldPosition({ 285.f, -2587.f , 41 });
+	}
+
+	{
+		GrimmFlameEffect* GrimmFlameEffect_ = CreateActor<GrimmFlameEffect>();
+		GrimmFlameEffect_->GetTransform().SetWorldPosition({ 2700.f, -2587.f , 41 });
+	}
+
+	{
+		GrimmFlameEffect* GrimmFlameEffect_ = CreateActor<GrimmFlameEffect>();
+		GrimmFlameEffect_->GetTransform().SetWorldPosition({ 4192.f, -2587.f , 41 });
+	}
+
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
@@ -113,6 +129,8 @@ void GrimmDirtmouthLevel2::LevelStartEvent()
 		GetKnight()->GetTransform().SetLocalPosition({ 252, -3127, static_cast<float>(Z_ORDER::Knight) });
 		GetKnight()->SetDirInit(float4::RIGHT);
 	}
+
+
 }
 
 void GrimmDirtmouthLevel2::LevelEndEvent()

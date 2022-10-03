@@ -957,8 +957,15 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("grimm_smoke2.png", 1, 5);
 
 		GameEngineTexture::Cut("Grimm_flame_ball_particle.png", 3, 1);
+
 		GameEngineTexture::Cut("grimm_particle_flame.png", 9, 1);
+		GameEngineTexture::Cut("grimm_particle_flame2.png", 9, 1);
+
+
 		GameEngineTexture::Cut("white_hit_particle_Pink.png", 1, 3);
+
+		GameEngineTexture::Cut("Grimmflame0000-Sheet.png", 14, 1);
+
 	}
 
 	//================================
@@ -1565,6 +1572,10 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Dust Effects_jump_puff0001-Sheet.png", 4, 1);
 
 		GameEngineTexture::Cut("Knight_dash_effect0000-Sheet.png", 8, 1);
+
+		GameEngineTexture::Cut("Ambient Life_bug_glow0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Ambient Life_bug_glow0000-Sheet2.png", 6, 1);
+		GameEngineTexture::Cut("shop_lamp_bug0001-Sheet.png", 7, 1);
 
 	}
 

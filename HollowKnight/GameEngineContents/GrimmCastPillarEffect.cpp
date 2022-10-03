@@ -59,8 +59,8 @@ void GrimmCastPillarEffect::Start()
 			ParticleList_.back()->SetTexture("grimm_smoke2.png");
 
 			ParticleList_.back()->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.3f, 0.5f);
-
 		}
+
 		else
 		{
 			Move.x = { GameEngineRandom::MainRandom.RandomFloat(-20.f, 20.f) };
@@ -145,8 +145,8 @@ void GrimmCastPillarEffect::CastPillarFireUpdate(float _DeltaTime, const StateIn
 		r = GameEngineRandom::MainRandom.RandomFloat(30, 40.f); // angle(degree)
 		a = GameEngineRandom::MainRandom.RandomFloat(30, 40.0f); // angle(degree)
 		ParticleList_[i]->GetTransform().SetLocalPosition({ cosf(a * 0.01745f) * r,sinf(a * 0.01745f) * r });
-		float4 MoveUp;
-		MoveUp.y = GameEngineRandom::MainRandom.RandomFloat(200.f, 500.f);
+		//float4 MoveUp;
+		//MoveUp.y = GameEngineRandom::MainRandom.RandomFloat(200.f, 500.f);
 
 	}
 
