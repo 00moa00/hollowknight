@@ -220,17 +220,17 @@ void SettingPointer::Update(float _DeltaTime)
 
 void SettingPointer::SetCharmPageActorMax()
 {
-	CharmPageActorCount = GetLevel<HollowKnightLevel>()->PointActorListCharm.size()-3 ;
+	CharmPageActorCount = static_cast<int>(GetLevel<HollowKnightLevel>()->PointActorListCharm.size()-3) ;
 }
 
 void SettingPointer::SetMapPageActorMax()
 {
-	MapPageActorCount = GetLevel<HollowKnightLevel>()->PointActorListMap.size(); 
+	MapPageActorCount = static_cast<int>(GetLevel<HollowKnightLevel>()->PointActorListMap.size());
 }
 
 void SettingPointer::SetMonsterBookActorMax()
 {
-	MonsterPageActorCount = GetLevel<HollowKnightLevel>()->PointActorListMonsterBook.size() ;
+	MonsterPageActorCount = static_cast<int>(GetLevel<HollowKnightLevel>()->PointActorListMonsterBook.size());
 }
 
 void SettingPointer::PointerBoxRenderOn()

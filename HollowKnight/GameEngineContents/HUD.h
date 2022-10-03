@@ -28,7 +28,7 @@ protected:
 private:
 	bool MaskesAppearEnd_;
 
-	int MaskesSize_;
+	//int Maskes_.size();
 	int MakesAppearCount_;
 	int CurMask_;
 
@@ -49,6 +49,14 @@ public:
 	void AllRefillMask();
 	void SetAppearAnimation();
 
+	float4 GetMaskPosition()
+	{
+		int Size = static_cast<int>(Maskes_.size() - 1);
+		
+		float4 Pos  = Maskes_[Size]->GetTransform().GetWorldPosition();
+		return Pos;
+	}
+
 private:
 
 	//================================
@@ -67,5 +75,8 @@ private:
 	void HUDHideUpdate(float _DeltaTime, const StateInfo& _Info);
 	void HUDHideEnd(const StateInfo& _Info);
 
+	void HUDNewMaskStart(const StateInfo& _Info);
+	void HUDNewMaskUpdate(float _DeltaTime, const StateInfo& _Info);
+	void HUDNewMaskEnd(const StateInfo& _Info);
 };
 

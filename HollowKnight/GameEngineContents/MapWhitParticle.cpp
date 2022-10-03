@@ -26,7 +26,7 @@ MapWhitParticle::~MapWhitParticle()
 void MapWhitParticle::Start()
 {
 	ParticleRenderer_ = CreateComponent<GameEngineTextureRenderer>();
-	int RamTex = GameEngineRandom::MainRandom.RandomFloat(0, 1);
+	int RamTex = GameEngineRandom::MainRandom.RandomInt(0, 1);
 
 	if (RamTex == 0)
 	{
@@ -40,9 +40,9 @@ void MapWhitParticle::Start()
 	}
 
 
-	float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(0.4f, 2.5f);
+	float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(0.4f, 1.2f);
 	ParticleRenderer_->GetTransform().SetLocalScale({ 37.f * RamdomScale, 37.f * RamdomScale });
-	Alpha_ = GameEngineRandom::MainRandom.RandomFloat(0.5f, 1.0f);
+	Alpha_ = GameEngineRandom::MainRandom.RandomFloat(0.2f, 0.8f);
 
 	ParticleRenderer_->GetPixelData().MulColor.a = Alpha_;
 

@@ -498,210 +498,209 @@ void Knight::Start()
 				isDoorEnd_ = true;
 			});
 	}
+
 	//================================
 	//    Create State
 	//================================
 	 
-	{
-		// ---- 기본 ----
-		KnightManager_.CreateStateMember("STILL"
-			, std::bind(&Knight::KnightStillUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightStillStart, this, std::placeholders::_1));
+	// ---- 기본 ----
+	KnightManager_.CreateStateMember("STILL"
+		, std::bind(&Knight::KnightStillUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightStillStart, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("WALK"
-			, std::bind(&Knight::KnightWalkUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightWalkStart, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("WALK"
+		, std::bind(&Knight::KnightWalkUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightWalkStart, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("WALK_TURN"
-			, std::bind(&Knight::KnightWalkTurnUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightWalkTurnStart, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("WALK_TURN"
+		, std::bind(&Knight::KnightWalkTurnUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightWalkTurnStart, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("LOOK_UP"
-			, std::bind(&Knight::KnightLookUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightLookUpStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookUpEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("LOOK_UP"
+		, std::bind(&Knight::KnightLookUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightLookUpStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookUpEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("LOOK_DOWN"
-			, std::bind(&Knight::KnightLookDownUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightLookDownStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookDownEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("LOOK_DOWN"
+		, std::bind(&Knight::KnightLookDownUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightLookDownStart, this, std::placeholders::_1), std::bind(&Knight::KnightLookDownEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("FOCUS"
-			, std::bind(&Knight::KnightFocusUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("FOCUS"
+		, std::bind(&Knight::KnightFocusUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightFocusStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightFocusEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("SLASH_JUMP"
-			, std::bind(&Knight::KnightUpSlashJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightUpSlashJumpStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightUpSlashJumpEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("SLASH_JUMP"
+		, std::bind(&Knight::KnightUpSlashJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightUpSlashJumpStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightUpSlashJumpEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("JUMP"
-			, std::bind(&Knight::KnightJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightJumpEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("JUMP"
+		, std::bind(&Knight::KnightJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightJumpEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("DOUBLE_JUMP"
-			, std::bind(&Knight::KnightDoubleJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightDoubleJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightDoubleJumpEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("DOUBLE_JUMP"
+		, std::bind(&Knight::KnightDoubleJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightDoubleJumpStart, this, std::placeholders::_1), std::bind(&Knight::KnightDoubleJumpEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("LAND"
-			, std::bind(&Knight::KnightLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightLandStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightLandEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("LAND"
+		, std::bind(&Knight::KnightLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightLandStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightLandEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("INTRO_LAND"
-			, std::bind(&Knight::KnightIntroLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightIntroLandStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightIntroLandEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("INTRO_LAND"
+		, std::bind(&Knight::KnightIntroLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightIntroLandStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightIntroLandEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("FALL"
-			, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
-			std::bind(&Knight::KnightFallStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("FALL"
+		, std::bind(&Knight::KnightFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
+		std::bind(&Knight::KnightFallStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightFallEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("INTRO_FALL"
-			, std::bind(&Knight::KnightIntroFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
-			std::bind(&Knight::KnightIntroFallStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightIntroFallEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("INTRO_FALL"
+		, std::bind(&Knight::KnightIntroFallUpdate, this, std::placeholders::_1, std::placeholders::_2),
+		std::bind(&Knight::KnightIntroFallStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightIntroFallEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("DASH"
-			, std::bind(&Knight::KnightDashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightDashStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightDashEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("DASH"
+		, std::bind(&Knight::KnightDashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightDashStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightDashEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("FOCUS_BURST"
-			, std::bind(&Knight::KnightFocusBurstUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightFocusBurstStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightFocusBurstEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("FOCUS_BURST"
+		, std::bind(&Knight::KnightFocusBurstUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightFocusBurstStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightFocusBurstEnd, this, std::placeholders::_1));
 
-		// ---- 공격 ----
-		KnightManager_.CreateStateMember("SLASH"
-			, std::bind(&Knight::KnightSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightSlashStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightSlashEnd, this, std::placeholders::_1));
+	// ---- 공격 ----
+	KnightManager_.CreateStateMember("SLASH"
+		, std::bind(&Knight::KnightSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightSlashStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightSlashEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("DOUBLE_SLASH"
-			, std::bind(&Knight::KnightDoubleSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightDoubleSlashStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightDoubleSlashEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("DOUBLE_SLASH"
+		, std::bind(&Knight::KnightDoubleSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightDoubleSlashStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightDoubleSlashEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("UP_SLASH"
-			, std::bind(&Knight::KnightUpSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightUpSlashStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightUpSlashEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("UP_SLASH"
+		, std::bind(&Knight::KnightUpSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightUpSlashStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightUpSlashEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("DOWN_SLASH"
-			, std::bind(&Knight::KnightDownSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightDownSlashStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightDownSlashEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("DOWN_SLASH"
+		, std::bind(&Knight::KnightDownSlashUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightDownSlashStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightDownSlashEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("CAST"
-			, std::bind(&Knight::KnightCastUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightCastStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightCastEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("CAST"
+		, std::bind(&Knight::KnightCastUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightCastStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightCastEnd, this, std::placeholders::_1));
 
-		// ----스턴 ----
-		KnightManager_.CreateStateMember("STUN"
-			, std::bind(&Knight::KnightStunUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightStunStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightStunEnd, this, std::placeholders::_1));
+	// ----스턴 ----
+	KnightManager_.CreateStateMember("STUN"
+		, std::bind(&Knight::KnightStunUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightStunStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightStunEnd, this, std::placeholders::_1));
 
-		// ---- 사망 ----
-		KnightManager_.CreateStateMember("DEATH"
-			, std::bind(&Knight::KnightDeathUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightDeathStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightDeathEnd, this, std::placeholders::_1));
+	// ---- 사망 ----
+	KnightManager_.CreateStateMember("DEATH"
+		, std::bind(&Knight::KnightDeathUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightDeathStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightDeathEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("WAKE_UP"
-			, std::bind(&Knight::KnightWakeUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightWakeUpStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightWakeUpEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("WAKE_UP"
+		, std::bind(&Knight::KnightWakeUpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightWakeUpStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightWakeUpEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("GROUND_WAKE_UP"
-			, std::bind(&Knight::KnightWakeUpGroundUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightWakeUpGroundStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightWakeUpGroundEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("GROUND_WAKE_UP"
+		, std::bind(&Knight::KnightWakeUpGroundUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightWakeUpGroundStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightWakeUpGroundEnd, this, std::placeholders::_1));
 
-		// ---- 달리기 ----
-		KnightManager_.CreateStateMember("RUN"
-			, std::bind(&Knight::KnightRunUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightRunStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightRunEnd, this, std::placeholders::_1));
+	// ---- 달리기 ----
+	KnightManager_.CreateStateMember("RUN"
+		, std::bind(&Knight::KnightRunUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightRunStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightRunEnd, this, std::placeholders::_1));
 
 
-		// ---- 지도 보기 ----
-		KnightManager_.CreateStateMember("MAP_STILL"
-			, std::bind(&Knight::KnightMapStillUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightMapStillStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightMapStillEnd, this, std::placeholders::_1));
+	// ---- 지도 보기 ----
+	KnightManager_.CreateStateMember("MAP_STILL"
+		, std::bind(&Knight::KnightMapStillUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightMapStillStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightMapStillEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("MAP_WALKING"
-			, std::bind(&Knight::KnightMapWalkinglUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightMapWalkinglStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightMapWalkinglEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("MAP_WALKING"
+		, std::bind(&Knight::KnightMapWalkinglUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightMapWalkinglStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightMapWalkinglEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("MAP_WALKING_TURN"
-			, std::bind(&Knight::KnightMapWalkingTurnlUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightMapWalkingTurnlStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightMapWalkingTurnlEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("MAP_WALKING_TURN"
+		, std::bind(&Knight::KnightMapWalkingTurnlUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightMapWalkingTurnlStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightMapWalkingTurnlEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("MAP_SIT_LOOK"
-			, std::bind(&Knight::KnightMapSitLooklUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightMapSitLooklStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightMapSitLooklEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("MAP_SIT_LOOK"
+		, std::bind(&Knight::KnightMapSitLooklUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightMapSitLooklStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightMapSitLooklEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("MAP_SIT_WRITE"
-			, std::bind(&Knight::KnightMapSitWritelUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightMapSitWritelStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightMapSitWritelEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("MAP_SIT_WRITE"
+		, std::bind(&Knight::KnightMapSitWritelUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightMapSitWritelStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightMapSitWritelEnd, this, std::placeholders::_1));
 
-		// ---- 슬라이드 ----
-		KnightManager_.CreateStateMember("SLIDE"
-			, std::bind(&Knight::KnightSlideUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightSlideStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightSlideEnd, this, std::placeholders::_1));
+	// ---- 슬라이드 ----
+	KnightManager_.CreateStateMember("SLIDE"
+		, std::bind(&Knight::KnightSlideUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightSlideStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightSlideEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("WALL_JUMP"
-			, std::bind(&Knight::KnightWallJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightWallJumpStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightWallJumpEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("WALL_JUMP"
+		, std::bind(&Knight::KnightWallJumpUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightWallJumpStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightWallJumpEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("WALL_JUMP_LAND"
-			, std::bind(&Knight::KnightWallJumpLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightWallJumpLandStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightWallJumpLandEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("WALL_JUMP_LAND"
+		, std::bind(&Knight::KnightWallJumpLandUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightWallJumpLandStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightWallJumpLandEnd, this, std::placeholders::_1));
 
-		// ---- 의자 ----
-		KnightManager_.CreateStateMember("SIT"
-			, std::bind(&Knight::KnightSitUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightSitStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightSitEnd, this, std::placeholders::_1));
+	// ---- 의자 ----
+	KnightManager_.CreateStateMember("SIT"
+		, std::bind(&Knight::KnightSitUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightSitStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightSitEnd, this, std::placeholders::_1));
 
-		// ---- NPC 대화 ----
-		KnightManager_.CreateStateMember("TALKING"
-			, std::bind(&Knight::KnightTalkingUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightTalkingStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightTalkingEnd, this, std::placeholders::_1));
+	// ---- NPC 대화 ----
+	KnightManager_.CreateStateMember("TALKING"
+		, std::bind(&Knight::KnightTalkingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightTalkingStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightTalkingEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("SHOPPING"
-			, std::bind(&Knight::KnightShoppingUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightShoppingStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightShoppingEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("SHOPPING"
+		, std::bind(&Knight::KnightShoppingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightShoppingStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightShoppingEnd, this, std::placeholders::_1));
 
-		// ---- 문 들어가기 ----
-		KnightManager_.CreateStateMember("DOOR"
-			, std::bind(&Knight::KnightDoorUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightDoorStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightDoorEnd, this, std::placeholders::_1));
+	// ---- 문 들어가기 ----
+	KnightManager_.CreateStateMember("DOOR"
+		, std::bind(&Knight::KnightDoorUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightDoorStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightDoorEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("SEE"
-			, std::bind(&Knight::KnightTabletUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightTabletStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightTabletEnd, this, std::placeholders::_1));
+	KnightManager_.CreateStateMember("SEE"
+		, std::bind(&Knight::KnightTabletUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightTabletStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightTabletEnd, this, std::placeholders::_1));
 
-		KnightManager_.CreateStateMember("SEE_RETURN_TO_IDLE"
-			, std::bind(&Knight::KnightTabletReturnToIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
-			, std::bind(&Knight::KnightTabletReturnToIdleStart, this, std::placeholders::_1)
-			, std::bind(&Knight::KnightTabletReturnToIdleEnd, this, std::placeholders::_1));
-	}
+	KnightManager_.CreateStateMember("SEE_RETURN_TO_IDLE"
+		, std::bind(&Knight::KnightTabletReturnToIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightTabletReturnToIdleStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightTabletReturnToIdleEnd, this, std::placeholders::_1));
 
 	KnightManager_.ChangeState("STILL");
 }

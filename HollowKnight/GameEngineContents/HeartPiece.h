@@ -36,12 +36,38 @@ private:
 
 	float Alpha_;
 
+	float CompletAlpha_;
+	float CompletScale_;
+
+	float4 CompleteInitScale_;
+
 	GameEngineUIRenderer* FleurRenderer_;
 	GameEngineUIRenderer* MaskRenderer_;
 	GameEngineUIRenderer* FlashRenderer_;
 
+	GameEngineUIRenderer* CompleteMaskRenderer_;
+
+	GameEngineStateManager HeartManager_;
+
+
 public:
 	void SetNewMaskPiece();
 
+private:
+	void HeartIdleStart(const StateInfo& _Info);
+	void HeartIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void HeartIdleEnd(const StateInfo& _Info);
+
+	void HeartWhiteStart(const StateInfo& _Info);
+	void HeartWhiteUpdate(float _DeltaTime, const StateInfo& _Info);
+	void HeartWhiteEnd(const StateInfo& _Info);
+
+	void HeartMovingStart(const StateInfo& _Info);
+	void HeartMovingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void HeartMovingEnd(const StateInfo& _Info);
+
+	void HeartNewMaskStart(const StateInfo& _Info);
+	void HeartNewMaskUpdate(float _DeltaTime, const StateInfo& _Info);
+	void HeartNewMaskEnd(const StateInfo& _Info);
 };
 

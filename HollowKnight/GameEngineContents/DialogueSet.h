@@ -109,7 +109,7 @@ public:
 
 			if (CurrentDialoguePage_ == DialogueList_.size() - 1)
 			{
-				CurrentDialoguePage_ = DialogueList_.size() - 1;
+				CurrentDialoguePage_ = static_cast<int>(DialogueList_.size() - 1);
 				isDialougueFull_ = true;
 				NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
 				NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));

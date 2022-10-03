@@ -11,7 +11,7 @@ HUD::HUD()
 
 	MaskesAppearEnd_(false),
 
-	MaskesSize_(0),
+	//Maskes_.size()(0),
 	CurMask_(4),
 	MakesAppearCount_(0),
 	MaskAppearTimer_(0.f),
@@ -29,7 +29,6 @@ void HUD::Start()
 	Geo_ = GetLevel()->CreateActor<Geo>();
 	Geo_->GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 220.f), GameEngineWindow::GetInst()->GetScale().hy() - 160.f, -100 });
 	
-
 	VesselFrame_ = GetLevel() ->CreateActor<VesselFrame>();
 	VesselFrame_ -> GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 70.f), GameEngineWindow::GetInst()->GetScale().hy() - 50.f, -100 });
 	
@@ -52,7 +51,7 @@ void HUD::Start()
 
 	//CurMask_ = Maskes_.size() - 1;
 
-	//KnightData::GetInst()->SetAllMask(CurMask_);
+	KnightData::GetInst()->SetAllMask(Maskes_.size()-1);
 //	KnightData::GetInst()->SetCurMask(CurMask_);
 	CurMask_ = KnightData::GetInst()->GetAllMask();
 
@@ -71,6 +70,10 @@ void HUD::Start()
 		, std::bind(&HUD::HUDHideStart, this, std::placeholders::_1)
 		, std::bind(&HUD::HUDHideEnd, this, std::placeholders::_1));
 
+	HUDManager_.CreateStateMember("NEW_MASK"
+		, std::bind(&HUD::HUDNewMaskUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&HUD::HUDNewMaskStart, this, std::placeholders::_1)
+		, std::bind(&HUD::HUDNewMaskEnd, this, std::placeholders::_1));
 
 
 	HUDManager_.ChangeState("MASK_APPEAR");
@@ -85,6 +88,27 @@ void HUD::Update(float _DeltaTime)
 void HUD::LevelStartEvent()
 {
 
+
+
+
+
+
+
+	if (Maskes_.size() - 1 != KnightData::GetInst()->GetAllMask())
+	{
+		Maskes_.push_back(GetLevel()->CreateActor<Mask>());
+		Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size() - 1.f) * 60.f)), GameEngineWindow::GetInst()->GetScale().hy() - 55.f, -100.f });
+	//	Maskes_[Maskes_.size() - 1]->SetIdleState();
+
+		CurMask_ = KnightData::GetInst()->GetCurMask();
+
+		for (int i = 0; i < Maskes_.size(); ++i)
+		{
+			Maskes_[i]->SetisIdle();
+			Maskes_[i]->SetIdleState();
+		}
+	}
+
 	if (KnightData::GetInst()->GetisHUD() == true)
 	{
 		HUDManager_.ChangeState("IDLE");
@@ -92,26 +116,27 @@ void HUD::LevelStartEvent()
 		VesselFrame_->SetIdleAnimation();
 		Geo_->SetIdleState();
 
-		for (int i = 0; i < MaskesSize_  ; ++i)
+		int count = 0;
+
+
+		for (; count <= CurMask_; ++count)
 		{
-			
-
-			if (i > CurMask_)
-			{
-				Maskes_[i]->SetisBroken();
-				Maskes_[i]->SetBrokenAnimation();
-
-			}
-
-			else
-			{
-				Maskes_[i]->SetisIdle();
-			}
-
+			Maskes_[count]->SetisIdle();
+			Maskes_[count]->SetIdleState();
 		}
+
+		//++count;
+
+		for (; count < Maskes_.size(); ++count)
+		{
+			Maskes_[count]->SetisBroken();
+			Maskes_[count]->SetBrokenAnimation();
+		}
+
 	}
+
 	KnightData::GetInst()->SetisHUD(true);
-	Soul_ -> SetSoul(KnightData::GetInst()->GetCurSoul());
+	Soul_->SetSoul(KnightData::GetInst()->GetCurSoul());
 }
 
 void HUD::LevelEndEvent()
@@ -124,17 +149,34 @@ void HUD::NewMask()
 {
 	Maskes_.push_back(GetLevel()->CreateActor<Mask>());
 	Maskes_.back()->GetTransform().SetWorldPosition({ -((GameEngineWindow::GetInst()->GetScale().hx() - 200.f) - ((Maskes_.size() - 1.f) * 60.f)), GameEngineWindow::GetInst()->GetScale().hy() - 55.f, -100.f });
-	MaskesSize_ = Maskes_.size();
 
 	
-	Maskes_[MaskesSize_-1]->SetNewAppearState();
-	KnightData::GetInst()->SetAllMask(MaskesSize_);
+	Maskes_[Maskes_.size()-1]->SetNewAppearState();
+	KnightData::GetInst()->SetAddAllMask();
+
+	CurMask_ = Maskes_.size() - 1;
+
+	KnightData::GetInst()->SetCurMask(CurMask_);
+
+
+	HUDManager_.ChangeState("NEW_MASK");
+
+	for (int i = 0; i < Maskes_.size(); ++i)
+	{
+		if (Maskes_[i]->GetisBroken() == true)
+		{
+			Maskes_[i]->SetisRefill();
+	
+		}
+	}
+
+	//AllRefillMask();
 }
 
 void HUD::RefillMask()
 {
 	// 가장 앞 + 이미 채워진 가면 뒤에것 먼저 채운다
-	for (int i = 0; i < MaskesSize_; ++i)
+	for (int i = 0; i < Maskes_.size(); ++i)
 	{
 		if (Maskes_[i]->GetisBroken() == true)
 		{
@@ -165,11 +207,11 @@ void HUD::BreakMask()
 
 void HUD::AllRefillMask()
 {
-	for (int   i = 0; i < MaskesSize_; ++i)
+	for (int   i = 0; i < Maskes_.size(); ++i)
 	{
 		Maskes_[i]->SetisRefill();
 	}
-	KnightData::GetInst()->SetCurMask(MaskesSize_);
+	KnightData::GetInst()->SetCurMask(Maskes_.size());
 }
 
 void HUD::SetAppearAnimation()
@@ -181,7 +223,7 @@ void HUD::SetAppearAnimation()
 
 void HUD::MaskAppearStart(const StateInfo& _Info)
 {
-	MaskesSize_ = static_cast<int>(Maskes_.size());
+	//Maskes_.size() = static_cast<int>(Maskes_.size());
 }
 
 void HUD::MaskAppearUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -210,7 +252,7 @@ void HUD::MaskAppearEnd(const StateInfo& _Info)
 {
 	MakesAppearCount_ = 0;
 
-	for (int i = 0; i < MaskesSize_; ++i)
+	for (int i = 0; i < Maskes_.size(); ++i)
 	{
 		//Maskes_[i]->SetisIdle();
 		Maskes_[i]->SetIdleState();
@@ -249,12 +291,12 @@ void HUD::HUDIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightData::GetInst()->SetisDeath(false);
 
-		for (int i = 0; i < MaskesSize_; ++i)
+		for (int i = 0; i < Maskes_.size(); ++i)
 		{
 			Maskes_[i]->SetIdleState();
 		}
-		KnightData::GetInst()->SetCurMask(MaskesSize_-1);
-		CurMask_ = MaskesSize_ - 1;
+		KnightData::GetInst()->SetCurMask(Maskes_.size()-1);
+		CurMask_ = Maskes_.size() - 1;
 		Geo_->SetBreakState();
 	}
 
@@ -311,6 +353,30 @@ void HUD::HUDHideEnd(const StateInfo& _Info)
 	for (int i = 0; i < Maskes_.size(); ++i)
 	{
 		Maskes_[i]->On();
+	}
+}
+
+void HUD::HUDNewMaskStart(const StateInfo& _Info)
+{
+}
+
+void HUD::HUDNewMaskUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (_Info.StateTime > 1.0f)
+	{
+		HUDManager_.ChangeState("IDLE");
+
+	}
+}
+
+void HUD::HUDNewMaskEnd(const StateInfo& _Info)
+{
+
+	for (int i = 0; i < Maskes_.size(); ++i)
+	{
+
+		Maskes_[i]->SetisIdle();
+		Maskes_[i]->SetIdleState();
 	}
 }
 

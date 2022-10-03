@@ -179,6 +179,11 @@ public :
 		return ShopNPC_;
 	}
 
+	HUD* GetHUD()
+	{
+		return HUD_;
+	}
+
 	float4 GetMapSize()
 	{
 		return MapSize_;

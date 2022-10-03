@@ -157,6 +157,8 @@ private:
 
 	bool isGrimmOpen_;
 
+	bool isAddNewMask_;	// 가면 해금됐다.
+
 	float4 KnightPosition_;
 	//float4 CurDir_;
 
@@ -216,6 +218,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisAddNewMask() const
+	{
+		return isAddNewMask_;
+	}
+
 	int GetMaskPieceCount() const
 	{
 		return MaskPieceCount_;
@@ -449,7 +456,10 @@ public:
 		}
 	}
 
-
+	void SetisAddNewMask(bool _b)
+	{
+		isAddNewMask_ = _b;
+	}
 
 	void SetMaskPieceCount(int _i)
 	{
@@ -655,6 +665,11 @@ public:
 	void SetAllMask(int _i)
 	{
 		AllMask_ = _i;
+	}
+
+	void SetAddAllMask()
+	{
+		++AllMask_;
 	}
 
 	void SetCurMask(int _i)
