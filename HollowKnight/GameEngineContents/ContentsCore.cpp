@@ -1500,6 +1500,10 @@ void ContentsCore::Start()
 
 		GameEngineTexture::Cut("moth_feather_particle.png", 1, 3);
 
+		GameEngineTexture::Cut("Spell Effects 2_scream_effect0000-Sheet.png", 13, 1);
+		GameEngineTexture::Cut("Spell Effects Neutral_scream_blast_level_020000-Sheet.png", 13, 1);
+
+
 	}
 
 	{

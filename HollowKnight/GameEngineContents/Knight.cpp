@@ -100,6 +100,7 @@ Knight::Knight()
 	KnightDoubleJumpParticle_(nullptr),
 	DeathLevelChangeFadeOut_(nullptr),
 	KnightHatchlingBurst_(nullptr),
+	KnightScreamCastEffect_(nullptr),
 
 	ChangeLevel_(""),
 
@@ -158,6 +159,7 @@ void Knight::Start()
 	KnightDashEffect_ = GetLevel()->CreateActor<KnightDashEffect>();
 	KnightDoubleJumpParticle_ = GetLevel()->CreateActor<KnightDoubleJumpParticle>();
 	KnightHatchlingBurst_ = GetLevel()->CreateActor<KnightHatchlingBurst>();
+	KnightScreamCastEffect_ = GetLevel()->CreateActor<KnightScreamCastEffect>();
 
 	KnightDoubleJumpEffect_->Off();
 
@@ -173,6 +175,7 @@ void Knight::Start()
 	KnightCastEffect_->SetParent(this);
 	KnightStunEffect_->SetParent(this);
 	KnightDashEffect_->SetParent(this);
+	KnightScreamCastEffect_->SetParent(this);
 	//KnightHatchlingBurst_->SetParent(this);
 
 	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
@@ -203,6 +206,7 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightDash", VK_SHIFT);
 		GameEngineInput::GetInst()->CreateKey("KnightFocus", 'Q');
 		GameEngineInput::GetInst()->CreateKey("KnightCast", 'S');
+		GameEngineInput::GetInst()->CreateKey("KnightScreamCast", 'A');
 
 		GameEngineInput::GetInst()->CreateKey("KnightSlash", 'C');
 		GameEngineInput::GetInst()->CreateKey("KnightTalking", 'Z');
@@ -213,6 +217,8 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightJump", VK_SPACE);
 
 		GameEngineInput::GetInst()->CreateKey("OnOffSettingPage", 'I');
+
+
 	}
 
 
@@ -598,6 +604,11 @@ void Knight::Start()
 		, std::bind(&Knight::KnightCastUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&Knight::KnightCastStart, this, std::placeholders::_1)
 		, std::bind(&Knight::KnightCastEnd, this, std::placeholders::_1));
+
+	KnightManager_.CreateStateMember("SCREAM_CAST"
+		, std::bind(&Knight::KnightScreamCastUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Knight::KnightScreamCastStart, this, std::placeholders::_1)
+		, std::bind(&Knight::KnightScreamCastEnd, this, std::placeholders::_1));
 
 	// ----Ω∫≈œ ----
 	KnightManager_.CreateStateMember("STUN"

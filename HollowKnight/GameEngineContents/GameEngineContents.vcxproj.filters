@@ -729,6 +729,9 @@
     <ClInclude Include="Sly.h">
       <Filter>Actor\Play\Npc</Filter>
     </ClInclude>
+    <ClInclude Include="KnightScreamCastEffect.h">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1291,6 +1294,9 @@
     </ClCompile>
     <ClCompile Include="Sly.cpp">
       <Filter>Actor\Play\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightScreamCastEffect.cpp">
+      <Filter>Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

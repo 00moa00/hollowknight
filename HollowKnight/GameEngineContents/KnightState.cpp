@@ -159,9 +159,16 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	// ==================================
 	// ========== Change State ==========
 	// ==================================
+	
 	if (GameEngineInput::GetInst()->IsDown("KnightCast") == true && KnightData::GetInst()->GetCurSoul() >= 2)
 	{
 		KnightManager_.ChangeState("CAST");
+		return;
+	}
+
+	if (GameEngineInput::GetInst()->IsDown("KnightScreamCast") == true && KnightData::GetInst()->GetCurSoul() >= 2)
+	{
+		KnightManager_.ChangeState("SCREAM_CAST");
 		return;
 	}
 
@@ -406,6 +413,11 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
+	if (GameEngineInput::GetInst()->IsDown("KnightScreamCast") == true && KnightData::GetInst()->GetCurSoul() >= 2)
+	{
+		KnightManager_.ChangeState("SCREAM_CAST");
+		return;
+	}
 
 	if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Potal, CollisionType::CT_OBB2D,
 		std::bind(&Knight::KnightVSPotalCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
@@ -1075,6 +1087,13 @@ void Knight::KnightJumpUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("CAST");
 		return;
 	}
+
+	if (GameEngineInput::GetInst()->IsDown("KnightScreamCast") == true && KnightData::GetInst()->GetCurSoul() >= 2)
+	{
+		KnightManager_.ChangeState("SCREAM_CAST");
+		return;
+	}
+
 	if (GameEngineInput::GetInst()->IsDown("KnightDash") == true)
 	{
 		KnightManager_.ChangeState("DASH");
@@ -1555,6 +1574,13 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightManager_.ChangeState("CAST");
 		return;
 	}
+
+	if (GameEngineInput::GetInst()->IsDown("KnightScreamCast") == true && KnightData::GetInst()->GetCurSoul() >= 2)
+	{
+		KnightManager_.ChangeState("SCREAM_CAST");
+		return;
+	}
+
 }
 
 void Knight::KnightFallEnd(const StateInfo& _Info)
@@ -1988,19 +2014,26 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
-
 	if (GameEngineInput::GetInst()->IsDown("KnightRunMode") == true)
 	{
 		isRunMode_ = !isRunMode_;
 	}
+
 	if (true == GameEngineInput::GetInst()->IsFree("KnightJump"))
 	{
 		isPressJumppingKey_ = false;
 	}
+
 	// ========== 스테이트 변경 ==========
-	if (GameEngineInput::GetInst()->IsDown("KnightCast") == true)
+	if (GameEngineInput::GetInst()->IsDown("KnightCast") == true && KnightData::GetInst()->GetCurSoul() >= 2)
 	{
 		KnightManager_.ChangeState("CAST");
+		return;
+	}
+
+	if (GameEngineInput::GetInst()->IsDown("KnightScreamCast") == true && KnightData::GetInst()->GetCurSoul() >= 2)
+	{
+		KnightManager_.ChangeState("SCREAM_CAST");
 		return;
 	}
 
@@ -3009,6 +3042,49 @@ void Knight::KnightCastUpdate(float _DeltaTime, const StateInfo& _Info)
 }
 
 void Knight::KnightCastEnd(const StateInfo& _Info)
+{
+}
+
+void Knight::KnightScreamCastStart(const StateInfo& _Info)
+{
+	KnightScreamCastEffect_->EffectOn();
+
+	GetRenderer()->ChangeFrameAnimation("SCREAM_CAST_ANIMATION");
+	KnightData::GetInst()->SetisUseSoul(true);
+}
+
+
+void Knight::KnightScreamCastUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (isScreamEnd_ == true)
+	{
+		isScreamEnd_ = false;
+		if (GetisOnGround() == false)
+		{
+			KnightManager_.ChangeState("FALL");
+			return;
+		}
+
+		isCastEnd_ = false;
+
+		if (_Info.PrevState == "RUN" || isRunMode_ == true)
+		{
+			KnightManager_.ChangeState("RUN");
+		}
+
+		if (_Info.PrevState == "STILL")
+		{
+			KnightManager_.ChangeState("STILL");
+		}
+
+		if (_Info.PrevState == "WALK")
+		{
+			KnightManager_.ChangeState("WALK");
+		}
+	}
+}
+
+void Knight::KnightScreamCastEnd(const StateInfo& _Info)
 {
 }
 
