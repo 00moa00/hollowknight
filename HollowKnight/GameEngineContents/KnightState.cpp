@@ -2213,12 +2213,12 @@ void Knight::KnightStunEnd(const StateInfo& _Info)
 		isKnightSpikeHit_ = false;
 	}
 
-
 	if (KnightData::GetInst()->GetCurMask() == 0)
 	{
 		isLowHealth_ = true;
 		LowHealth* LowHealth_ = GetLevel()->CreateActor<LowHealth>();
 	}
+
 	if (KnightData::GetInst()->GetisBossBattle() == true)
 	{
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
@@ -3055,6 +3055,19 @@ void Knight::KnightScreamCastStart(const StateInfo& _Info)
 
 	KnightRoarEffect* KnightRoarEffect_ = GetLevel()->CreateActor<KnightRoarEffect>();
 	KnightRoarEffect_->SetParent(this);
+
+	KnightScreamParticle_->GetTransform().SetWorldPosition({GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 300.f, static_cast<float>(Z_ORDER::Effect)});
+	KnightScreamParticle_->ParticleOn();
+
+	if (KnightData::GetInst()->GetisBossBattle() == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Battle_Shaking);
+	}
+
+	else
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::Shaking);
+	}
 }
 
 
@@ -3090,6 +3103,15 @@ void Knight::KnightScreamCastUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightScreamCastEnd(const StateInfo& _Info)
 {
+	if (KnightData::GetInst()->GetisBossBattle() == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
+	}
+
+	else
+	{
+		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
+	}
 }
 
 void Knight::KnightMapStillStart(const StateInfo& _Info)

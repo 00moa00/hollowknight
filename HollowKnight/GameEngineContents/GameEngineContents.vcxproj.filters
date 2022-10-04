@@ -733,7 +733,10 @@
       <Filter>Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
     <ClInclude Include="KnightRoarEffect.h">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightScreamParticle.h">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1302,7 +1305,10 @@
       <Filter>Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
     <ClCompile Include="KnightRoarEffect.cpp">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightScreamParticle.cpp">
+      <Filter>Actor\Effect\Knight</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

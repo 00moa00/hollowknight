@@ -21,6 +21,7 @@
 #include "FadeOut.h"
 #include "KnightHatchlingBurst.h"
 #include "KnightScreamCastEffect.h"
+#include "KnightScreamParticle.h"
 
 // 설명 :
 // 이팩트 관리 : 공격 - 이펙트는 온오프
@@ -136,6 +137,7 @@ private:
 	KnightDoubleJumpParticle* KnightDoubleJumpParticle_;
 	KnightHatchlingBurst* KnightHatchlingBurst_;
 	KnightScreamCastEffect* KnightScreamCastEffect_;
+	KnightScreamParticle* KnightScreamParticle_;
 
 	FadeOut* DeathLevelChangeFadeOut_;
 	

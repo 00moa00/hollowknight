@@ -160,8 +160,10 @@ void Knight::Start()
 	KnightDoubleJumpParticle_ = GetLevel()->CreateActor<KnightDoubleJumpParticle>();
 	KnightHatchlingBurst_ = GetLevel()->CreateActor<KnightHatchlingBurst>();
 	KnightScreamCastEffect_ = GetLevel()->CreateActor<KnightScreamCastEffect>();
+	KnightScreamParticle_ = GetLevel()->CreateActor<KnightScreamParticle>();
 
 	KnightDoubleJumpEffect_->Off();
+	KnightScreamParticle_->Off();
 
 	KnightSlashEffect_->SetParent(this);
 	KnightSlashEffect_->SetAnimationStill();
