@@ -54,6 +54,7 @@ void GrimmDirtmouthLevel2::Start()
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
 	CreateMainCameraManager();
+	CreateMapCameraManager();
 	CreateEffectGUIActor();
 
 	SetMapSize({ 6646, 3418 });

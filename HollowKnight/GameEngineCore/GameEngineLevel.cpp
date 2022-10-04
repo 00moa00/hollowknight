@@ -27,6 +27,8 @@ GameEngineLevel::GameEngineLevel()
 		CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
 		CameraActor->GetCameraComponent()->SetCameraOrder(CAMERAORDER::UICAMERA);
 	}
+
+
 }
 
 GameEngineLevel::~GameEngineLevel()

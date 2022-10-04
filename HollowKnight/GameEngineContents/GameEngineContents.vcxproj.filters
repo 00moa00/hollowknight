@@ -723,6 +723,9 @@
     <ClInclude Include="KnightHatchlingBurst.h">
       <Filter>Actor\Effect\Knight</Filter>
     </ClInclude>
+    <ClInclude Include="MapCameraManager.h">
+      <Filter>Actor\Cameara</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1279,6 +1282,9 @@
     </ClCompile>
     <ClCompile Include="KnightHatchlingBurst.cpp">
       <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="MapCameraManager.cpp">
+      <Filter>Actor\Cameara</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

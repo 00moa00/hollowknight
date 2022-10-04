@@ -242,7 +242,7 @@ void SettingPointer::PointerMapPageWideMapStart(const StateInfo& _Info)
 		FindMap->Off();
 	}
 
-	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->On();
+	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->MapOn();
 }
 
 void SettingPointer::PointerMapPageWideMapUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -263,6 +263,6 @@ void SettingPointer::PointerMapPageWideMapEnd(const StateInfo& _Info)
 		FindMap->On();
 	}
 
-	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->Off();
+	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->MapOff();
 
 }

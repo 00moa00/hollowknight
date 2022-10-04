@@ -28,6 +28,8 @@ HollowKnightLevel::HollowKnightLevel()
 	MapSmokeMaker_(nullptr),
 
 	MainCameraManager_(nullptr),
+	MapCameraManager_(nullptr),
+
 	WhiteParicleMaker_(nullptr),
 
 	HeartPiece_(nullptr),
@@ -69,7 +71,6 @@ HollowKnightLevel::~HollowKnightLevel()
 void HollowKnightLevel::CraateMasterMapActor()
 {
 	MasterMap_ = CreateActor<MasterMap>();
-
 }
 
 void HollowKnightLevel::CreateKnightActor()
@@ -114,6 +115,12 @@ void HollowKnightLevel::CreateMainCameraManager()
 {
 	MainCameraManager_ = CreateActor<MainCameraManager>(static_cast<int>(UPDATE_ORDER::CAMERA));
 }
+
+void HollowKnightLevel::CreateMapCameraManager()
+{
+	MapCameraManager_ = CreateActor<MapCameraManager>(static_cast<int>(UPDATE_ORDER::CAMERA));
+}
+
 
 void HollowKnightLevel::CreateEffectGUIActor()
 {

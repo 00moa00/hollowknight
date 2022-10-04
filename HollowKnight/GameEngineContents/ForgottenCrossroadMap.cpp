@@ -61,7 +61,17 @@ void ForgottenCrossroadMap::Start()
 	MapPosition_.push_back({ -103, -166 , -10 });
 	//MapPosition_.push_back({ 630, -286 , -1000 });
 
+		//================================
+	//    CreateKey
+	//================================
 
+	if (false == GameEngineInput::GetInst()->IsKey("MapMoveLeft"))
+	{
+		GameEngineInput::GetInst()->CreateKey("MapMoveLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("MapMoveRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("MapMoveUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("MapMoveDown", VK_DOWN);
+	}
 
 	for (int i = 1; i < 45; ++i)
 	{
@@ -79,7 +89,41 @@ void ForgottenCrossroadMap::Start()
 
 void ForgottenCrossroadMap::Update(float _DeltaTime)
 {
-	GetLevel<HollowKnightLevel>()->GetMapCameraActorTransform().SetLocalPosition({0, 0, -2000.f});
+	//GetLevel<HollowKnightLevel>()->GetMapCameraActorTransform().SetLocalPosition({0, 0, -2000.f});
+	if (GameEngineInput::GetInst()->IsPress("MapMoveLeft") == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapMoveLeft();
 
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("MapMoveRight") == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapMoveRight();
+
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("MapMoveUp") == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapMoveTop();
+
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("MapMoveDown") == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapMoveDown();
+
+	}
+
+}
+
+void ForgottenCrossroadMap::MapOn()
+{
+	On();
+	GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapCameraWide();
+}
+
+void ForgottenCrossroadMap::MapOff()
+{
+	GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapCameraNarrow();
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Map.h"
 #include <GameEngineCore/CoreMinimal.h>
-#include <GameEngineCore/GameEngineCollision.h>
+
 
 // Ό³Έν :
 class ForgottenCrossroadMap : public GameEngineActor
@@ -21,10 +21,14 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
-	
-
 private:
 	std::map<int, Map*> ForgottenCrossroadMap_;
 	std::vector<float4> MapPosition_;
+
+public:
+	void MapOn();
+	void MapOff();
+
+
 };
 

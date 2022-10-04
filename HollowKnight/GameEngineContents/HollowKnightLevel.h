@@ -13,6 +13,8 @@
 #include "SettingPageInfo.h"
 
 #include "MainCameraManager.h"
+#include "MapCameraManager.h"
+
 #include "MapSmokeMaker.h"
 #include "WhiteParicleMaker.h"
 
@@ -62,6 +64,7 @@ private:
 	EffectGUIActor* EffectGUIActor_;
 
 	MainCameraManager* MainCameraManager_;
+	MapCameraManager* MapCameraManager_;
 
 	MapSmokeMaker* MapSmokeMaker_;
 	WhiteParicleMaker* WhiteParicleMaker_;
@@ -89,8 +92,12 @@ protected:
 	void CreateUIActor();
 	void CreateKnightShadowActor();
 	void CreateSettingPageActor();
+
 	void CreateForgottenCrossroadMap();
+
 	void CreateMainCameraManager();
+	void CreateMapCameraManager();
+
 	void CreateEffectGUIActor();
 	void CreateIselda();
 
@@ -122,6 +129,16 @@ public :
 
 	GameEngineCameraActor* GetMapCameraActor();
 	GameEngineTransform& GetMapCameraActorTransform();
+
+	MapCameraManager* GetMapCameraManager()
+	{
+		return MapCameraManager_;
+	}
+
+	GameEngineCamera* GetMapCamera()
+	{
+		return Cameras[static_cast<int>(CAMERAORDER::MAPCAMERA)];
+	}
 
 	MainCameraManager* GetMainCameraManager()
 	{
