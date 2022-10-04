@@ -26,6 +26,5 @@ private:
 
 public:
 	void SetLimitMove(float4 _CurrentPos, float4 _LimitSize);
-
 };
 

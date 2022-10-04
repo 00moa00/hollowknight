@@ -741,6 +741,9 @@
     <ClInclude Include="Brummm.h">
       <Filter>Actor\Play\Npc</Filter>
     </ClInclude>
+    <ClInclude Include="LampBug.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1315,6 +1318,9 @@
     </ClCompile>
     <ClCompile Include="Brummm.cpp">
       <Filter>Actor\Play\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="LampBug.cpp">
+      <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

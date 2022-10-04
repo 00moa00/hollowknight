@@ -1353,6 +1353,27 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Object");
+		Dir.Move("lamp_bug");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+
+		GameEngineTexture::Cut("shop_lamp_bug0000-Sheet.png", 8, 1);
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Object");
 		Dir.Move("door");
 		Dir.Move("Tute Great Door");
 
