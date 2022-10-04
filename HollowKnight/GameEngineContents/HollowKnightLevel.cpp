@@ -26,7 +26,7 @@ HollowKnightLevel::HollowKnightLevel()
 	EffectGUIActor_(nullptr),
 	Crawlid_(nullptr),
 	MapSmokeMaker_(nullptr),
-
+	DirtmouthMap_(nullptr),
 	MainCameraManager_(nullptr),
 	MapCameraManager_(nullptr),
 
@@ -67,6 +67,16 @@ HollowKnightLevel::~HollowKnightLevel()
 {
 }
 
+void HollowKnightLevel::CreateDirtmouthMap()
+{
+	DirtmouthMap_ = CreateActor<DirtmouthMap>();
+}
+
+void HollowKnightLevel::CreateAllLocalMap()
+{
+	AllLocalMap_ = CreateActor<AllLocalMap>();
+
+}
 
 void HollowKnightLevel::CraateMasterMapActor()
 {

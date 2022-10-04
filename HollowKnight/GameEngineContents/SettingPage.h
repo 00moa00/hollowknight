@@ -12,7 +12,6 @@
 #include "CharmPage.h"
 #include "InventoryPage.h"
 #include "MapPage.h"
-
 class GameEngineTextureRenderer;
 class SettingPage : public GameEngineActor
 {
@@ -58,6 +57,17 @@ private:
 	
 	GameEngineStateManager SettingPageManager_;
 
+public:
+	void SetBackGroundOn()
+	{
+		BackGround_->On();
+
+	}
+
+	void SetBackGroundOff()
+	{
+		BackGround_->Off();
+	}
 
 private:
 	void OnOffPage();

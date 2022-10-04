@@ -2,6 +2,7 @@
 #include "MasterUI.h"
 #include "SettingUIMaster.h"
 #include "SettingPointerBox.h"
+#include "MapRenderer.h"
 
 struct MoveState
 {
@@ -58,6 +59,8 @@ private:
 	float PointerMoveSpeed_;
 
 	SettingPointerBox* SettingPointerBox_;
+
+	MapRenderer* BackGround_;
 
 	PAGE_TYPE CurrentPage_; //현재 페이지
 	PAGE_TYPE PrevPage_; // 페이지 저장용

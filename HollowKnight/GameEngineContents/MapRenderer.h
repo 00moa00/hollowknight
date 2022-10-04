@@ -22,7 +22,7 @@ protected:
 
 	void Update(float _Delta) override;
 
-	PixelData PixelDataInst;
+	//PixelData PixelDataInst;
 	AtlasData AtlasDataInst;
 	FrameAnimation* CurAni;
 

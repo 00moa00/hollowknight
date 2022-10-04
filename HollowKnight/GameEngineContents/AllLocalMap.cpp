@@ -12,20 +12,58 @@ AllLocalMap::~AllLocalMap()
 
 void AllLocalMap::Start()
 {
-	//GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->GetTransform().SetWorldRotation({0, -100.f});
+	//================================
+	//    CreateKey
+	//================================
+
+	if (false == GameEngineInput::GetInst()->IsKey("MapMoveLeft"))
+	{
+		GameEngineInput::GetInst()->CreateKey("MapMoveLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("MapMoveRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("MapMoveUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("MapMoveDown", VK_DOWN);
+	}
 }
 
 void AllLocalMap::Update(float _DeltaTime)
 {
+	if (GameEngineInput::GetInst()->IsPress("MapMoveLeft") == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapMoveLeft();
+
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("MapMoveRight") == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapMoveRight();
+
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("MapMoveUp") == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapMoveTop();
+
+	}
+
+	if (GameEngineInput::GetInst()->IsPress("MapMoveDown") == true)
+	{
+		GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapMoveDown();
+
+	}
 }
 
-void AllLocalMap::OpenAllLocalMap()
+void AllLocalMap::OpenAllLocalMap(float4 _Pivot)
 {
 	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->On();
+	GetLevel<HollowKnightLevel>()->GetDirtmouthMap()->On();
+	GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetWidePivot(_Pivot);
+	GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapCameraWide();
+
 }
 
 void AllLocalMap::CloseAllLocalMap()
 {
-	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->Off();
+	GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapCameraNarrow();
+	//GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->Off();
 }
 

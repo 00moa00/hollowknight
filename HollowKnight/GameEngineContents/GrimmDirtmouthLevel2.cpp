@@ -53,6 +53,9 @@ void GrimmDirtmouthLevel2::Start()
 
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
+	CreateDirtmouthMap();
+
+	CreateAllLocalMap();
 	CreateMainCameraManager();
 	CreateMapCameraManager();
 	CreateEffectGUIActor();

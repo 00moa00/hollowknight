@@ -22,7 +22,7 @@ protected:
 
 private:
 public:
-	void OpenAllLocalMap();
+	void OpenAllLocalMap(float4 _Pivot);
 	void CloseAllLocalMap();
 };
 

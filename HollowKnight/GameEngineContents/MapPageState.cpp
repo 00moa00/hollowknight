@@ -27,10 +27,42 @@ void SettingPointer::PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo&
 
 	if (true == GameEngineInput::GetInst()->IsDown("MoveUp"))
 	{
+		CurrentPosInMapPage = 0;
+
+		for (int i = 0; i < 2; ++i)
+		{
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(i)->second;
+			WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+			if (CurrentPosInMapPage == i)
+			{
+				FindMap->ChangeTextureSelect();
+			}
+			else
+			{
+				FindMap->ChangeTextureIdle();
+			}
+		}
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("MoveDown"))
 	{
+		CurrentPosInMapPage = 1;
+
+		for (int i = 0; i < 2; ++i)
+		{
+			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(i)->second;
+			WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+			if (CurrentPosInMapPage == i)
+			{
+				FindMap->ChangeTextureSelect();
+			}
+			else
+			{
+				FindMap->ChangeTextureIdle();
+			}
+		}
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("Select"))
@@ -242,7 +274,33 @@ void SettingPointer::PointerMapPageWideMapStart(const StateInfo& _Info)
 		FindMap->Off();
 	}
 
-	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->MapOn();
+
+
+	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListMap.find(CurrentPosInMapPage)->second;
+	WorldMap* FindMap = dynamic_cast<WorldMap*>(PointActorComponent_->GetPointActor());
+
+	float4 Pivot = { 0,0,0,0 };
+
+	MAP_LIST MapType = FindMap->GetMapType();
+	switch (MapType)
+	{
+
+	case MAP_LIST::DIRTMOUTH:
+		Pivot = { -200, 200 };
+
+		break;
+	case MAP_LIST::CORSSROAD:
+
+		break;
+
+	default:
+		break;
+	}
+
+	//BackGround_->Off();
+	GetLevel<HollowKnightLevel>()->GetAllLocalMap()->OpenAllLocalMap(Pivot);
+	GetLevel<HollowKnightLevel>()->GetSettingPage()->SetBackGroundOff();
+	BackGround_->On();
 }
 
 void SettingPointer::PointerMapPageWideMapUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -263,6 +321,10 @@ void SettingPointer::PointerMapPageWideMapEnd(const StateInfo& _Info)
 		FindMap->On();
 	}
 
-	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->MapOff();
+
+
+	GetLevel<HollowKnightLevel>()->GetAllLocalMap()->CloseAllLocalMap();
+	GetLevel<HollowKnightLevel>()->GetSettingPage()->SetBackGroundOn();
+	BackGround_->Off();
 
 }

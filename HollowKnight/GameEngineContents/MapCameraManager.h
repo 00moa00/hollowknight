@@ -27,6 +27,8 @@ private:
 
 	float WideSpeed_;
 
+	float4 WidePivot_;
+
 private:
 	//================================
 	//    Bind State
@@ -56,5 +58,10 @@ public:
 
 	void SetMapCameraWide();
 	void SetMapCameraNarrow();
+
+	void SetWidePivot(float4 _pivot)
+	{
+		WidePivot_ = _pivot;
+	}
 };
 

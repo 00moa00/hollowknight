@@ -4,7 +4,8 @@
 
 MapCameraManager::MapCameraManager() 
 	:
-	WideSpeed_(0.f)
+	WideSpeed_(0.f),
+	WidePivot_()
 {
 }
 
@@ -15,7 +16,10 @@ MapCameraManager::~MapCameraManager()
 void MapCameraManager::Start()
 {
 	//GetLevel<HollowKnightLevel>()->GetMapCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
-
+	GetLevel<HollowKnightLevel>()->GetMapCameraActorTransform().SetLocalPosition({
+	0
+	,0
+	, -2000 });
 
 
 
@@ -42,6 +46,7 @@ void MapCameraManager::Start()
 	CameraStateManager_.ChangeState("IDLE");
 
 	WideSpeed_ = 1600.f;
+	WidePivot_ = { 0,0,0,0 };
 }
 
 void MapCameraManager::Update(float _DeltaTime)
@@ -59,6 +64,10 @@ void MapCameraManager::LevelEndEvent()
 
 void MapCameraManager::WideStart(const StateInfo& _Info)
 {
+	GetLevel<HollowKnightLevel>()->GetMapCameraActorTransform().SetLocalPosition({
+	WidePivot_.x
+	,WidePivot_.y
+	, -2000 });
 }
 
 void MapCameraManager::WideUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -70,7 +79,7 @@ void MapCameraManager::WideUpdate(float _DeltaTime, const StateInfo& _Info)
 	,0
 	, Move.z });
 
-	float4 Dest = { 0,0,-1000 };
+	float4 Dest = { 0,0,-1200 };
 
 	if (GetLevel<HollowKnightLevel>()->GetMapCameraActorTransform().GetLocalPosition().z > Dest.z)
 	{
@@ -86,9 +95,9 @@ void MapCameraManager::WideEnd(const StateInfo& _Info)
 void MapCameraManager::WideIdleStart(const StateInfo& _Info)
 {
 	GetLevel<HollowKnightLevel>()->GetMapCameraActorTransform().SetLocalPosition({
-	0
-	,0
-	, -1000 });
+	WidePivot_.x
+	,WidePivot_.y
+	, -1200 });
 }
 
 void MapCameraManager::WideIdleUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -128,6 +137,7 @@ void MapCameraManager::WideIdleEnd(const StateInfo& _Info)
 }
 void MapCameraManager::NarrowStart(const StateInfo& _Info)
 {
+
 }
 
 void MapCameraManager::NarrowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -161,6 +171,7 @@ void MapCameraManager::IdleStart(const StateInfo& _Info)
 	, -2000 });
 
 	GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->Off();
+	GetLevel<HollowKnightLevel>()->GetDirtmouthMap()->Off();
 
 }
 

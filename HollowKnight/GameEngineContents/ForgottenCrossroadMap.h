@@ -25,9 +25,9 @@ private:
 	std::map<int, Map*> ForgottenCrossroadMap_;
 	std::vector<float4> MapPosition_;
 
-public:
-	void MapOn();
-	void MapOff();
+//public:
+//	void MapOn();
+//	void MapOff();
 
 
 };

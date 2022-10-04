@@ -10,6 +10,9 @@
 #include "ItemSlot.h"
 #include "Item.h"
 #include "ForgottenCrossroadMap.h"
+#include "DirtmouthMap.h"
+#include "AllLocalMap.h"
+
 #include "SettingPageInfo.h"
 
 #include "MainCameraManager.h"
@@ -57,6 +60,9 @@ private:
 
 	SettingPage* SettingPage_;
 	ForgottenCrossroadMap* ForgottenCrossroadMap_;
+	DirtmouthMap* DirtmouthMap_;
+
+	AllLocalMap* AllLocalMap_;
 
 	SettingPageInfo* CharmPageInfo_;
 	SettingPageInfo* InventoryPageInfo_;
@@ -94,6 +100,9 @@ protected:
 	void CreateSettingPageActor();
 
 	void CreateForgottenCrossroadMap();
+	void CreateDirtmouthMap();
+
+	void CreateAllLocalMap();
 
 	void CreateMainCameraManager();
 	void CreateMapCameraManager();
@@ -145,9 +154,19 @@ public :
 		return MainCameraManager_;
 	}
 
+	AllLocalMap* GetAllLocalMap()
+	{
+		return AllLocalMap_;
+	}
+
 	ForgottenCrossroadMap* GetForgottenCrossroadMap()
 	{
 		return ForgottenCrossroadMap_;
+	}
+
+	DirtmouthMap* GetDirtmouthMap()
+	{
+		return DirtmouthMap_;
 	}
 
 	MasterMap* GetMasterMap() const
@@ -173,6 +192,10 @@ public :
 	SettingPageInfo* GetInventoryPageInfo()
 	{
 		return 	InventoryPageInfo_;
+	}
+	SettingPage* GetSettingPage()
+	{
+		return SettingPage_;
 	}
 
 

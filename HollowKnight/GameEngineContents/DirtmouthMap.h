@@ -1,7 +1,9 @@
 #pragma once
+#include "Map.h"
+#include <GameEngineCore/CoreMinimal.h>
 
 // Ό³Έν :
-class DirtmouthMap
+class DirtmouthMap : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -15,8 +17,11 @@ public:
 	DirtmouthMap& operator=(DirtmouthMap&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
 
 private:
+	std::map<int, Map*> DirtmouthMap_;
 
 };
 

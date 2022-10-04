@@ -52,8 +52,11 @@ void DirtmouthLevel2::Start()
 
 	CreateSettingPageActor();
 	CreateForgottenCrossroadMap();
+	CreateDirtmouthMap();
+
 	CreateMainCameraManager();
 	CreateMapCameraManager();
+	CreateAllLocalMap();
 
 	CreateEffectGUIActor();
 

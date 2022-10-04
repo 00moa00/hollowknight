@@ -26,7 +26,8 @@ SettingPointer::SettingPointer()
 	CurrentPosInMonsterPage(0),
 	PointerMoveSpeed_(750.f),
 
-	CharmMovePointer_(nullptr)
+	CharmMovePointer_(nullptr),
+	BackGround_(nullptr)
 
 {
 }
@@ -38,6 +39,14 @@ SettingPointer::~SettingPointer()
 void SettingPointer::Start()
 {
 	SettingPointerBox_ = GetLevel()->CreateActor<SettingPointerBox>();
+
+	BackGround_ = CreateComponent<MapRenderer>();
+	BackGround_->SetTexture("Black2.png");
+	//BackGround_->ScaleToTexture();
+	BackGround_->GetTransform().SetLocalScale({1920.f * 3.0f, 1080.f * 3.0f });
+	BackGround_->GetPixelData().MulColor.a = 0.2f;
+	BackGround_->GetTransform().SetLocalPosition({ 0,0, 100 });
+	BackGround_->Off();
 
 	//=========================================
 	//    CreateKey
