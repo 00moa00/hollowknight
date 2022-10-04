@@ -2,18 +2,18 @@
 #include "MasterNPC.h"
 
 // Ό³Έν :
-class Sycophant : public MasterNPC
+class Brummm : public MasterNPC
 {
 public:
 	// constrcuter destructer
-	Sycophant();
-	~Sycophant();
+	Brummm();
+	~Brummm();
 
 	// delete Function
-	Sycophant(const Sycophant& _Other) = delete;
-	Sycophant(Sycophant&& _Other) noexcept = delete;
-	Sycophant& operator=(const Sycophant& _Other) = delete;
-	Sycophant& operator=(Sycophant&& _Other) noexcept = delete;
+	Brummm(const Brummm& _Other) = delete;
+	Brummm(Brummm&& _Other) noexcept = delete;
+	Brummm& operator=(const Brummm& _Other) = delete;
+	Brummm& operator=(Brummm&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;

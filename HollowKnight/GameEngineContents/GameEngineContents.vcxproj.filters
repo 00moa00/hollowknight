@@ -738,6 +738,9 @@
     <ClInclude Include="KnightScreamParticle.h">
       <Filter>Actor\Effect\Knight</Filter>
     </ClInclude>
+    <ClInclude Include="Brummm.h">
+      <Filter>Actor\Play\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1309,6 +1312,9 @@
     </ClCompile>
     <ClCompile Include="KnightScreamParticle.cpp">
       <Filter>Actor\Effect\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="Brummm.cpp">
+      <Filter>Actor\Play\Npc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

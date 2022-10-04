@@ -221,6 +221,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Brummm.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="CameraGUI.h">
       <SubType>
       </SubType>
@@ -953,6 +957,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="BossRoomGate.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Brummm.cpp">
       <SubType>
       </SubType>
     </ClCompile>

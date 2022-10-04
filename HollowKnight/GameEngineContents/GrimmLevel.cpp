@@ -16,6 +16,8 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 
+#include "Brummm.h"
+
 
 
 GrimmLevel::GrimmLevel() 
@@ -76,6 +78,8 @@ void GrimmLevel::Start()
 
 	GrimmCrowds_ = CreateActor<GrimmCrowds>();
 	GrimmCrowds_->Off();
+
+	CreateActor<Brummm>();
 
 	//{
 	//	GrimmCrowd* GrimmCrowd_ = CreateActor<GrimmCrowd>();
