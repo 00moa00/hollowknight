@@ -13,6 +13,7 @@
 #include "FadeIn.h"
 #include "FadeOut.h"
 
+#include "KnightRoarEffect.h"
 
 
 
@@ -3051,6 +3052,9 @@ void Knight::KnightScreamCastStart(const StateInfo& _Info)
 
 	GetRenderer()->ChangeFrameAnimation("SCREAM_CAST_ANIMATION");
 	KnightData::GetInst()->SetisUseSoul(true);
+
+	KnightRoarEffect* KnightRoarEffect_ = GetLevel()->CreateActor<KnightRoarEffect>();
+	KnightRoarEffect_->SetParent(this);
 }
 
 

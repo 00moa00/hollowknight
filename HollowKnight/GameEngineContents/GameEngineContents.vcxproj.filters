@@ -732,6 +732,9 @@
     <ClInclude Include="KnightScreamCastEffect.h">
       <Filter>Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
+    <ClInclude Include="KnightRoarEffect.h">
+      <Filter>Actor\Effect\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1297,6 +1300,9 @@
     </ClCompile>
     <ClCompile Include="KnightScreamCastEffect.cpp">
       <Filter>Actor\Effect\Knight\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightRoarEffect.cpp">
+      <Filter>Actor\Effect\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
