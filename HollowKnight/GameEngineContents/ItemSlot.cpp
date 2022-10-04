@@ -197,8 +197,8 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		break;
 	case ITEM_LIST::Rancid_Egg:
 
-		SetInfoName(" ");
-		SetInfo(" ");
+		SetInfoName("썩은 알");
+		SetInfo("알려지지 않은 생명체의 즙이 많고 썩은 알. 강력한 부패의 악취를 냅니다. 일반적으로 먹거리로 간주되지 않습니다.");
 
 		break;
 	case ITEM_LIST::Wanderers_Journal:
@@ -268,8 +268,8 @@ void ItemSlot::CreateItemSlot(std::string _Name, int _ItemNum, ITEM_LIST _Item)
 		break;
 	case ITEM_LIST::Acid_armour:
 
-		SetInfoName(" ");
-		SetInfo(" ");
+		SetInfoName("아스마의 눈물");
+		SetInfo("눈물 하나가 굳어서 형성된 과일. 섭취하면 신성둥지의 특정 부분에서 발견되는 타는 듯한 산성 웅덩이로부터 보호합니다.");
 
 		break;
 	case ITEM_LIST::Crystal_heart:

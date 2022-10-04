@@ -224,8 +224,8 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 		PriceRenderer_->SetScreenMove();
 		PriceRenderer_->GetFontRenderer()->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
-		ShopItemState_.ItemName_ = "썩은 알";
-		ShopItemState_.ItemInfo_ = "카운터 아래에서 이것을 발견했어요. 내가 아래 폐허에 갇혀 있을 때 어떤 생명체가 그것을 여기에 낳은 게 분명해요.";
+		ShopItemState_.ItemName_ = "아스마의 눈물";
+		ShopItemState_.ItemInfo_ = "눈물 하나가 굳어서 형성된 과일. 섭취하면 신성둥지의 특정 부분에서 발견되는 타는 듯한 산성 웅덩이로부터 보호합니다.";
 		ShopItemState_.Item_ = ITEM_LIST::Acid_armour;
 
 		break;
