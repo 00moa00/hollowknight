@@ -245,12 +245,8 @@ void SettingPage::OnOffPage()
 
 void SettingPage::AllOff()
 {
-
 	AllPage_[0]->SetCurrentPage(CURRENT_PAGE_INDEX::CurrentPage);
-
-
 	AllPage_[1]->SetCurrentPage(CURRENT_PAGE_INDEX::NextPage);
-
 	AllPage_[2]->SetCurrentPage(CURRENT_PAGE_INDEX::SincePage);
 
 	SettingPointer_->SetFirstPosCharmPage();
@@ -274,9 +270,6 @@ void SettingPage::AllOff()
 		}
 	}
 
-
-
-
 	BackGround_->Off();
 	//CharmPage_->Off();
 	BorderCornerLeftTop_->Off();
@@ -294,9 +287,6 @@ void SettingPage::AllOff()
 	{
 		AllPage_[i]->AllOff();
 	}
-
-
-
 }
 
 void SettingPage::AllOn()

@@ -83,6 +83,7 @@ Knight::Knight()
 	isKnightSpikeHit_(false),
 	isPossibleFallJump_(false),
 	isNewMaskEnd_(false),
+	isScreamEnd_(false),
 
 	KnightSlashEffect_(nullptr),
 	KnightStunEffect_(nullptr),
@@ -274,7 +275,7 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("UP_SLASH_ANIMATION", FrameAnimation_DESC("Knight_up_slash0000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH_ANIMATION", FrameAnimation_DESC("Knight_down_slash_v02000-Sheet.png", 0, 4, 0.100f));
 	GetRenderer()->CreateFrameAnimationCutTexture("CAST_ANIMATION", FrameAnimation_DESC("Knight_cast_v030002-Sheet.png", 0, 11, 0.060f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("SCREAM_CAST_ANIMATION", FrameAnimation_DESC("Knight_cast0003-Sheet.png", 0, 9, 0.060f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("SCREAM_CAST_ANIMATION", FrameAnimation_DESC("Knight_scream_cast_lvl_020000-Sheet.png", 0, 8, 0.060f, false));
 
 	// ---- 새로운 마스크 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("NEW_MASK_START_ANIMATION", FrameAnimation_DESC("Knight_cast0003-Sheet.png", 0, 2, 0.060f, false));
@@ -323,7 +324,6 @@ void Knight::Start()
 
 	// ---- 문 들어가기 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("DOOR_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 9, 0.100f, false));
-
 	GetRenderer()->CreateFrameAnimationCutTexture("SEE_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 2, 0.100f, false));
 
 	{
@@ -335,10 +335,6 @@ void Knight::Start()
 		}
 		GetRenderer()->CreateFrameAnimationCutTexture("SEE_RETURN_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", BackAni, 0.070f, false));
 	}
-
-
-	//GetRenderer()->CreateFrameAnimationCutTexture("SEE_RETURN_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 2, 0.100f, false));
-
 
 	// ---- 집중 ----
 
@@ -352,6 +348,10 @@ void Knight::Start()
 	//    Create Bind Animation
 	//================================
 	{
+		GetRenderer()->AnimationBindEnd("SCREAM_CAST_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isScreamEnd_ = true;
+			});
 
 		GetRenderer()->AnimationBindEnd("NEW_MASK_START_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{

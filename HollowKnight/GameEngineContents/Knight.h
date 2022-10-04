@@ -72,6 +72,7 @@ private:
 	bool isCastEnd_;
 	bool isSpikeStunEnd_;
 	bool isNewMaskEnd_;
+	bool isScreamEnd_;
 
 	bool isRunTurnEnd_;
 
@@ -284,6 +285,10 @@ private:
 	void KnightCastStart(const StateInfo& _Info);
 	void KnightCastUpdate(float _DeltaTime, const StateInfo& _Info);
 	void KnightCastEnd(const StateInfo& _Info);
+
+	void KnightScreamCastStart(const StateInfo& _Info);
+	void KnightScreamCastUpdate(float _DeltaTime, const StateInfo& _Info);
+	void KnightScreamCastEnd(const StateInfo& _Info);
 
 	// ---- 지도 보기 ----
 	void KnightMapStillStart(const StateInfo& _Info);

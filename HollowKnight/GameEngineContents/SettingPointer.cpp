@@ -256,11 +256,6 @@ void SettingPointer::AllOn()
 {
 	this->On();
 	SettingPointerBox_->On();
-
-
-
-
-
 }
 
 void SettingPointer::AllOff()
@@ -283,6 +278,10 @@ void SettingPointer::SetFirstPosCharmPage()
 	SettingPointerCharmPageManager_.ChangeState("IDLE");
 	SettingPointerInventoryPageManager_.ChangeState("WAIT");
 	SettingPointerMapPageManager_.ChangeState("WAIT");
+
+	CurrentPosInCharmPage = 0;
+
+
 
 	CurrentPage_ = PAGE_TYPE::Charm;
 
@@ -387,8 +386,6 @@ void SettingPointer::SetCurrentPage(PAGE_TYPE _PageType)
 
 		}
 
-
-	
 
 		break;
 	case PAGE_TYPE::Map:

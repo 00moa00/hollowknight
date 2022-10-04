@@ -22,7 +22,6 @@ void InventoryPage::Start()
 	SetPageName("소지품");
 
 	//스펠 아이템 등록
-
 	{
 		int SlotNum = 0;
 
@@ -36,13 +35,9 @@ void InventoryPage::Start()
 			auto Name = magic_enum::enum_name(ItemEnum.value());
 			EnumString = static_cast<std::string>(Name);
 
-
 			AllItem_.insert({ SlotNum, GetLevel()->CreateActor<ItemSlot>() });
 			AllItem_[SlotNum]->CreateItemSlot(EnumString, SlotNum, ItemEnum.value());
-
 			AllItem_[SlotNum]->SetParent(this);
-
-
 
 			PointActorComponent* Component_ = CreateComponent<PointActorComponent>();
 			Component_->PushPointerActor(ValueNum, PAGE_TYPE::Inventory, AllItem_[ValueNum]);
@@ -52,7 +47,6 @@ void InventoryPage::Start()
 	}
 
 	// 일반 아이템 등록
-
 	{
 		float MaginX = 0.0f;
 		float MaginY = 0.f;
@@ -90,8 +84,6 @@ void InventoryPage::Start()
 			MaginY -= 120.f;
 		}
 	}
-
-
 
 
 	//소비 아이템 등록
