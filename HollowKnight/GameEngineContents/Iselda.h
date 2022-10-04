@@ -47,7 +47,6 @@ public:
 	}
 
 private:
-
 	bool ShopToIdleEnd_;
 	bool OpenShop_;
 

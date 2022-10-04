@@ -598,10 +598,27 @@ void ContentsCore::Start()
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
 
-
-
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Npc");
+		Dir.Move("Sly");
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Sly_town_idle0000-Sheet.png", 6, 1);
+		GameEngineTexture::Cut("Sly_turn_left_to_right0000-Sheet.png", 3, 1);
+
+	}
 
 	//================================
 	//    ÅØ½ºÃ³ / Setting

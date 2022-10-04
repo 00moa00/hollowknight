@@ -104,6 +104,10 @@ void KingsPassLevel2::Start()
 	}
 	CreawteMapWhiteParticleMaker();
 
+	PustItemInventroy(ITEM_LIST::Shade_Cloak);
+	PustItemInventroy(ITEM_LIST::Mantis_Cloak);
+
+
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);

@@ -114,5 +114,9 @@ public:
 		SlideItemIndex_ = _index;
 	}
 
+	void SetItemInfo(std::string _info)
+	{
+		ShopItemState_.ItemInfo_ = _info;
+	}
 };
 

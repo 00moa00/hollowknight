@@ -28,7 +28,6 @@ void MapShopLevel::Start()
 	CraateMasterMapActor();
 
 	GetMasterMap()->CreateBackGround("MapShop_Background.png");
-	//GetMasterMap()->CreateBackGroundObject("Dirtmouth_BackGround_Obj_2.png");
 	GetMasterMap()->CreateMapCollision("MapShop_Coll.png");
 
 	CreateKnightActor(); // 플레이어
@@ -62,8 +61,6 @@ void MapShopLevel::Start()
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
-
-	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
 	
 }

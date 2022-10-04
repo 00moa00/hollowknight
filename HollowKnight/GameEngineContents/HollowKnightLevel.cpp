@@ -7,6 +7,7 @@
 #include "KnightData.h"
 #include "ItemSlot.h"
 #include "Iselda.h"
+#include "Sly.h"
 
 HollowKnightLevel::HollowKnightLevel() 
 	:
@@ -143,6 +144,12 @@ void HollowKnightLevel::CreateIselda()
 	ShopNPC_ = CreateActor<Iselda>();
 }
 
+void HollowKnightLevel::CreateSly()
+{
+	ShopNPC_ = CreateActor<Sly>();
+
+}
+
 void HollowKnightLevel::CreateMapSmokeMaker()
 {
 	MapSmokeMaker_ = CreateActor<MapSmokeMaker>();
@@ -211,12 +218,45 @@ void HollowKnightLevel::PustItemInventroy(ITEM_LIST _Item)
 		if (slot->GetisItem() == false)
 		{
 			slot->PustItem(i, _Item);
+
+			KnightData::GetInst()->PushKnihgtItemList(_Item);
+
 			break;
 		}
 	}
 
+}
+
+void HollowKnightLevel::RePustItemInventroy(ITEM_LIST _Item)
+{
+	for (int i = 10; i < 22; ++i)
+	{
+		PointActorComponent* findComponent = PointActorListInventory.find(i)->second;
 
 
+		ItemSlot* slot = dynamic_cast<ItemSlot*>(findComponent->GetPointActor());
+		if (slot->GetisItem() == false)
+		{
+			slot->PustItem(i, _Item);
+			break;
+		}
+	}
+}
+
+void HollowKnightLevel::PustDefultItemInventroy(ITEM_LIST _Item)
+{
+	for (int i = 10; i < 22; ++i)
+	{
+		PointActorComponent* findComponent = PointActorListInventory.find(i)->second;
+
+
+		ItemSlot* slot = dynamic_cast<ItemSlot*>(findComponent->GetPointActor());
+		if (slot->GetisItem() == false)
+		{
+			slot->PustItem(i, _Item);
+			break;
+		}
+	}
 }
 
 void HollowKnightLevel::AllPopItemInventory()
@@ -231,8 +271,11 @@ void HollowKnightLevel::AllPopItemInventory()
 		{
 			slot->SetisItem(false);
 			slot->GetItem()->Death();
+			//PointActorListInventory.erase(i);
 		}
 	}
+
+	//KnightData::GetInst()->GetKnightItemData().clear();
 
 }
 

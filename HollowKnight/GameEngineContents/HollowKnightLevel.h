@@ -109,6 +109,7 @@ protected:
 
 	void CreateEffectGUIActor();
 	void CreateIselda();
+	void CreateSly();
 
 	void CreateMapSmokeMaker();
 	void CreawteMapWhiteParticleMaker();
@@ -133,7 +134,10 @@ public :
 
 	void PushNotches(Notches* _Notches, float4 _Position);
 
+	void RePustItemInventroy(ITEM_LIST _Item);
 	void PustItemInventroy(ITEM_LIST _Item);
+	void PustDefultItemInventroy(ITEM_LIST _Item);
+
 	void AllPopItemInventory();
 
 	GameEngineCameraActor* GetMapCameraActor();

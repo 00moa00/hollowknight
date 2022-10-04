@@ -218,6 +218,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+
+	std::vector<KnightItemData> GetKnightItemData()
+	{
+		return ItemList_;
+	}
 	bool GetisAddNewMask() const
 	{
 		return isAddNewMask_;

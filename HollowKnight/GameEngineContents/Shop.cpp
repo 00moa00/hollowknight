@@ -475,10 +475,6 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 					KnightData::GetInst()->PushKnihgtCharList(Charm);
 				}
 
-				if (Item != ITEM_LIST::NONE)
-				{
-					KnightData::GetInst()->PushKnihgtItemList(Item);
-				}
 
 
 				if (Item == ITEM_LIST::Heart_Piece)
@@ -491,7 +487,17 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 					//return;
 				}
+				else
+				{
+					if (Item != ITEM_LIST::NONE)
+					{
 
+						GetLevel<HollowKnightLevel>()->PustItemInventroy(Item);
+
+						//KnightData::GetInst()->PushKnihgtItemList(Item);
+					}
+
+				}
 
 				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
 
@@ -520,11 +526,6 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 					KnightData::GetInst()->PushKnihgtCharList(Charm);
 				}
 
-				if (Item != ITEM_LIST::NONE)
-				{
-					KnightData::GetInst()->PushKnihgtItemList(Item);
-				}
-
 				if (Item == ITEM_LIST::Heart_Piece)
 				{
 					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("NEW_MASK");
@@ -533,7 +534,17 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 					//return;
 				}
 
+				else
+				{
+					if (Item != ITEM_LIST::NONE)
+					{
 
+						GetLevel<HollowKnightLevel>()->PustItemInventroy(Item);
+
+						//KnightData::GetInst()->PushKnihgtItemList(Item);
+					}
+
+				}
 				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
 
 				for (int i = ShopArrow_->GetCurrentPointItemIndex() + 1; i < ShopItemList_.size(); ++i)

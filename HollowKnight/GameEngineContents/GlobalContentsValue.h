@@ -195,7 +195,6 @@ enum class ITEM_LIST
 
 	NORMAL_MAX,
 
-
 	Map_and_Quill,
 	Rancid_Egg,
 	Shade_Cloak,
@@ -230,8 +229,9 @@ enum class ITEM_TYPE
 enum class SHOP_ITEM
 {
 	Crosslaod_Map,
-	Rancid_Egg,
 
+	Rancid_Egg,
+	Acid_armour,
 
 	MaskPiece,		// 가면조각
 	Wayward_Compass, //나침반

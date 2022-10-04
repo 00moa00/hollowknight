@@ -726,6 +726,9 @@
     <ClInclude Include="MapCameraManager.h">
       <Filter>Actor\Cameara</Filter>
     </ClInclude>
+    <ClInclude Include="Sly.h">
+      <Filter>Actor\Play\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1285,6 +1288,9 @@
     </ClCompile>
     <ClCompile Include="MapCameraManager.cpp">
       <Filter>Actor\Cameara</Filter>
+    </ClCompile>
+    <ClCompile Include="Sly.cpp">
+      <Filter>Actor\Play\Npc</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

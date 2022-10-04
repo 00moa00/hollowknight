@@ -168,8 +168,68 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 		ShopItemState_.ItemInfo_ = "이 낡은 물건이요? 그냥 어떤 것의 파편이에요. 그래도 어쩌면 당신에게 유용할지도요?";
 		ShopItemState_.Item_ = ITEM_LIST::Heart_Piece;
 		//ShopItemState_.InInventory_ = true;
+		break;
+
+	case SHOP_ITEM::Rancid_Egg:
+		ItemRenderer_ = CreateComponent<GameEngineUIRenderer>();
+
+		ItemRenderer_->SetTexture("Rancid_egg.png");
+
+		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale() * 0.6f);
+
+		GeoRenderer_ = CreateComponent<GameEngineUIRenderer>();
+		GeoRenderer_->SetTexture("Item_Geo.png");
+		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
+
+		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
+		PriceRenderer_->CreateFontRenderer("300",
+			28,
+			{ 0,0 },
+			false,
+			false, 4);
+
+		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
+		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
+		PriceRenderer_->GetTransform().SetLocalPosition({ 50,0 });
+		PriceRenderer_->SetScreenMove();
+		PriceRenderer_->GetFontRenderer()->SetTopAndBotSort(TopAndBotSort::VCENTER);
+
+		ShopItemState_.ItemName_ = "썩은 알";
+		ShopItemState_.ItemInfo_ = "카운터 아래에서 이것을 발견했어요. 내가 아래 폐허에 갇혀 있을 때 어떤 생명체가 그것을 여기에 낳은 게 분명해요.";
+		ShopItemState_.Item_ = ITEM_LIST::Rancid_Egg;
 
 		break;
+
+	case SHOP_ITEM::Acid_armour:
+		ItemRenderer_ = CreateComponent<GameEngineUIRenderer>();
+
+		ItemRenderer_->SetTexture("Acid_armour.png");
+
+		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale() * 0.6f);
+
+		GeoRenderer_ = CreateComponent<GameEngineUIRenderer>();
+		GeoRenderer_->SetTexture("Item_Geo.png");
+		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
+
+		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
+		PriceRenderer_->CreateFontRenderer("300",
+			28,
+			{ 0,0 },
+			false,
+			false, 4);
+
+		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
+		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
+		PriceRenderer_->GetTransform().SetLocalPosition({ 50,0 });
+		PriceRenderer_->SetScreenMove();
+		PriceRenderer_->GetFontRenderer()->SetTopAndBotSort(TopAndBotSort::VCENTER);
+
+		ShopItemState_.ItemName_ = "썩은 알";
+		ShopItemState_.ItemInfo_ = "카운터 아래에서 이것을 발견했어요. 내가 아래 폐허에 갇혀 있을 때 어떤 생명체가 그것을 여기에 낳은 게 분명해요.";
+		ShopItemState_.Item_ = ITEM_LIST::Acid_armour;
+
+		break;
+
 	default:
 		break;
 	}
