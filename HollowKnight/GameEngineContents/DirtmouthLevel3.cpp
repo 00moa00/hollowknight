@@ -11,6 +11,7 @@
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "BloomPostEffect.h"
 
 
 DirtmouthLevel3::DirtmouthLevel3() 
@@ -52,11 +53,14 @@ void DirtmouthLevel3::Start()
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ -1330.f, -490.f, static_cast<float>(Z_ORDER::Knight) });
 
+	//BloomPostEffect* BloomPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
+	//BloomPostEffect_->SetHollowKnightLevel(this);
+
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
-
+	NoisePostEffect* NoisePostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect_->SetHollowKnightLevel(this);
 }
 
 void DirtmouthLevel3::Update(float _DeltaTime)

@@ -57,5 +57,7 @@ void OverlayPostEffect::Effect(GameEngineRenderTarget* _Target)
 	_Target->Setting();
 	_Target->Effect(EffectSet);
 
+	
+
 }
 

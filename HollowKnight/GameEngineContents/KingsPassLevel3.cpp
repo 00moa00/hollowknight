@@ -6,9 +6,12 @@
 #include "Knight.h"
 #include "Monster.h"
 #include "KnightData.h"
+
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "BloomPostEffect.h"
+
 #include "Potal.h"
 #include "Tablet.h"
 
@@ -82,10 +85,16 @@ void KingsPassLevel3::Start()
 	Tablet_->GetTransform().SetWorldPosition({ 4295,-3259, static_cast<float>(Z_ORDER::Back_Object)});
 	Tablet_->GetTabletDialogue()->SetOnePage();
 
+	//BloomPostEffect* BloomPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
+	//BloomPostEffect_->SetHollowKnightLevel(this);
+
+
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect* NoisePostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect_->SetHollowKnightLevel(this);
+
 	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 

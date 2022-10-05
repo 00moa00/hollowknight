@@ -10,8 +10,7 @@ struct NoiseData
 	float Dummy2;
 };
 
-
-// Ό³Έν :
+class HollowKnightLevel;
 class NoisePostEffect : public GameEnginePostEffect
 {
 public:
@@ -33,7 +32,20 @@ protected:
 	GameEngineRenderTarget* CopyTarget;
 	GameEngineRenderSet EffectSet;
 
+	HollowKnightLevel* HollowKnightLevel_;
+
 private:
 	NoiseData NoiseData_;
+
+public:
+	HollowKnightLevel* GetHollowKnightLevel()
+	{
+		return HollowKnightLevel_;
+	}
+
+	void SetHollowKnightLevel(HollowKnightLevel* _level)
+	{
+		HollowKnightLevel_ = _level;
+	}
 };
 

@@ -1,8 +1,14 @@
 #include "PreCompile.h"
 
-#include "NoisePostEffect.h"
 #include <GameEngineBase/GameEngineWindow.h>
+
+#include "NoisePostEffect.h"
+#include "HollowKnightLevel.h"
+
+
 NoisePostEffect::NoisePostEffect() 
+	:
+	HollowKnightLevel_(nullptr)
 {
 }
 
@@ -28,16 +34,25 @@ void NoisePostEffect::EffectInit()
 
 void NoisePostEffect::Effect(GameEngineRenderTarget* _Target)
 {
-	CopyTarget->Copy(_Target);
+	if (HollowKnightLevel_->GetEffectGUIActor()->GetNoiseFlag() == true)
+	{
 
-	//EffectSet.GetPipeLine()->SetOutputMergerBlend("TransparentBlend");
-	EffectSet.ShaderResources.SetTexture("Tex", CopyTarget->GetRenderTargetTexture(0));
+		CopyTarget->Copy(_Target);
 
-	_Target->Clear();
-	_Target->Setting();
-	_Target->Effect(EffectSet);
-	_Target->SetName("Noise");
+		EffectSet.ShaderResources.SetTexture("Tex", CopyTarget->GetRenderTargetTexture(0));
 
-	NoiseData_.Time = GameEngineTime::GetInst()->GetDeltaTime();
+		_Target->Clear();
+		_Target->Setting();
+		_Target->Effect(EffectSet);
+		_Target->SetName("Noise");
+
+		NoiseData_.Time = GameEngineTime::GetInst()->GetDeltaTime();
+	}
+
+	else
+	{
+		//Off();
+	}
 }
+
 

@@ -1,7 +1,9 @@
 #pragma once
 #include <GameEngineCore/GameEngineGUI.h>
 #include "KnightData.h"
-// 설명 :
+
+//  변수 이름 규칙 통일하기
+
 class EffectGUI : public GameEngineGUIWindow
 {
 public:
@@ -25,6 +27,8 @@ private:
 	bool isBlendClick_;
 
 	bool overlay_flag;
+	bool NoiseFlag_;
+	bool BloomFlag_;
 
 	//bool saved_palette_init;
 
@@ -107,6 +111,16 @@ public:
 	bool GetOverlayFlag()
 	{
 		return overlay_flag;
+	}
+
+	bool GetNoiseFlag()
+	{
+		return NoiseFlag_;
+	}
+
+	bool GetBloomFlag()
+	{
+		return BloomFlag_;
 	}
 
 	void EffectGUIDeath()

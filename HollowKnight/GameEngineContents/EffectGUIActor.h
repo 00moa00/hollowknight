@@ -43,8 +43,6 @@ public:
 		return EffectGUI_->GetisDonutLightOnOff();
 	}
 
-
-
 	float4 GetOverlayColor()
 	{
 		return EffectGUI_->GetColor();
@@ -54,6 +52,18 @@ public:
 	{
 		return EffectGUI_->GetOverlayFlag();
 	}
+
+
+	bool GetNoiseFlag()
+	{
+		return EffectGUI_->GetNoiseFlag();
+	}
+
+	bool GetBloomFlag()
+	{
+		return EffectGUI_->GetBloomFlag();
+	}
+
 
 	float4 GetMainLightMulColor()
 	{

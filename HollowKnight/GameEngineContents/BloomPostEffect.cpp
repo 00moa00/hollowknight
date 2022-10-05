@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "BloomPostEffect.h"
 #include <GameEngineBase/GameEngineWindow.h>
+
+#include "HollowKnightLevel.h"
+
 BloomPostEffect::BloomPostEffect() 
 {
 }
@@ -63,35 +66,47 @@ void BloomPostEffect::EffectInit()
 
 void BloomPostEffect::Effect(GameEngineRenderTarget* _Target)
 {
-	// Èò»ö Àß¶ó³¿
-	CopyTargetBloom->Copy(_Target);
 
-	//OriTex -> Copy(_Target);
+	if (HollowKnightLevel_->GetEffectGUIActor()->GetBloomFlag() == true)
+	{
+		// Èò»ö Àß¶ó³¿
 
-	CopyTargetWhiteCut->Copy(_Target);
-	EffectSetWhiteCut.ShaderResources.SetTexture("Tex", CopyTargetWhiteCut->GetRenderTargetTexture(0));
+		CopyTargetBloom->Copy(_Target);
 
-	// Àß¶ó³½ Èò»ö¿¡ ºí·¯ Àû¿ë
-	CopyTargetWhiteCutBlur->Clear();
-	CopyTargetWhiteCutBlur->Setting();
-	CopyTargetWhiteCutBlur->Effect(EffectSetWhiteCut);
+		//OriTex -> Copy(_Target);
 
-	EffectSetWhiteCutBlur.ShaderResources.SetTexture("Tex", CopyTargetWhiteCutBlur->GetRenderTargetTexture(0));
+		CopyTargetWhiteCut->Copy(_Target);
+		EffectSetWhiteCut.ShaderResources.SetTexture("Tex", CopyTargetWhiteCut->GetRenderTargetTexture(0));
 
+		// Àß¶ó³½ Èò»ö¿¡ ºí·¯ Àû¿ë
+		CopyTargetWhiteCutBlur->Clear();
+		CopyTargetWhiteCutBlur->Setting();
+		CopyTargetWhiteCutBlur->Effect(EffectSetWhiteCut);
 
-	//CopyTargetBloom->Clear();
-	//CopyTargetBloom->Setting();
-	//CopyTargetBloom->Effect(EffectSetWhiteCutBlur);
-
+		EffectSetWhiteCutBlur.ShaderResources.SetTexture("Tex", CopyTargetWhiteCutBlur->GetRenderTargetTexture(0));
 
 
-	EffectSetBloom.ShaderResources.SetTexture("OriTexture", CopyTargetBloom->GetRenderTargetTexture(0));
-	EffectSetBloom.ShaderResources.SetTexture("BloomTex", CopyTargetWhiteCutBlur->GetRenderTargetTexture(0));
-	EffectSetBloom.ShaderResources.SetTexture("BloomOriTex", CopyTargetWhiteCut->GetRenderTargetTexture(0));
+		//CopyTargetBloom->Clear();
+		//CopyTargetBloom->Setting();
+		//CopyTargetBloom->Effect(EffectSetWhiteCutBlur);
 
 
-	_Target->Clear();
-	_Target->Setting();
-	_Target->Effect(EffectSetBloom);
+		EffectSetBloom.ShaderResources.SetTexture("OriTexture", CopyTargetBloom->GetRenderTargetTexture(0));
+		EffectSetBloom.ShaderResources.SetTexture("BloomTex", CopyTargetWhiteCutBlur->GetRenderTargetTexture(0));
+		EffectSetBloom.ShaderResources.SetTexture("BloomOriTex", CopyTargetWhiteCut->GetRenderTargetTexture(0));
+
+
+		_Target->Clear();
+		_Target->Setting();
+		_Target->Effect(EffectSetBloom);
+
+
+	}
+	else
+	{
+		
+	}
+
+
 }
 

@@ -12,6 +12,9 @@
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "BloomPostEffect.h"
+
+
 #include "MapSmoke.h"
 #include "Sycophant.h"
 
@@ -94,10 +97,15 @@ void KingsPassGrimmOpenLevel::Start()
 
 	CreawteMapWhiteParticleMaker();
 
+	//BloomPostEffect* BloomPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
+	//BloomPostEffect_->SetHollowKnightLevel(this);
+
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect* NoisePostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect_->SetHollowKnightLevel(this);
+
 	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 }

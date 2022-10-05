@@ -27,6 +27,8 @@ KnightData::KnightData()
 	isDeathLevelChange_(false),
 	isGrimmOpen_(false),
 	isAddNewMask_(false),
+	isBloomFlag_(true),
+	isNoiseflag_(true),
 
 	MainLightMulColor_({1.0f, 1.0f, 1.0f, 0.7f}),
 	MainLightPlusColor_({ 0.0f, 0.0f, 0.0f, 0.0f }),

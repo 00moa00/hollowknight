@@ -12,6 +12,8 @@
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "BloomPostEffect.h"
+
 
 #include "MapSpike.h"
 #include "WhiteParicleMaker.h"
@@ -153,11 +155,15 @@ void KingsPassLevel4::Start()
 	Tablet_->CreateTablet("Mines_Layered_0018_a.png", "lit_tablet_02.png", { 700, 500 }, TabletType::Tu_Story);
 	Tablet_->GetTransform().SetWorldPosition({ 4388,-1169, static_cast<float>(Z_ORDER::Back_Object) });
 
+	//BloomPostEffect* BloomPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
+	//BloomPostEffect_->SetHollowKnightLevel(this);
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect* NoisePostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect_->SetHollowKnightLevel(this);
+
 	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
 
 }

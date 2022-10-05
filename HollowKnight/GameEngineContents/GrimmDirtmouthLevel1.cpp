@@ -11,9 +11,9 @@
 #include "OverlayPostEffect.h"
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
+#include "BloomPostEffect.h"
+
 #include "Potal.h"
-
-
 
 #include "MapWhiteParticleWindMaker.h"
 
@@ -86,10 +86,17 @@ void GrimmDirtmouthLevel1::Start()
 	GetKnight()->GetTransform().SetLocalPosition({ 500, -0, static_cast<float>(Z_ORDER::Knight) });
 	GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 
+	//BloomPostEffect* BloomPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
+	//BloomPostEffect_->SetHollowKnightLevel(this);
+
+
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect* NoisePostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
+	NoisePostEffect_->SetHollowKnightLevel(this);
+
+
 
 }
 

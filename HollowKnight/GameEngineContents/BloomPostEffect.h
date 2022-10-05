@@ -9,8 +9,9 @@
 //
 //}
 
+// 
 
-// Ό³Έν :
+class HollowKnightLevel;
 class BloomPostEffect : public GameEnginePostEffect
 {
 public:
@@ -44,7 +45,19 @@ public:
 	GameEngineRenderTarget* CopyTargetBloom;
 	GameEngineRenderSet EffectSetBloom;
 
+	HollowKnightLevel* HollowKnightLevel_;
+
 private:
-	//BloomData BloomData_;
+
+public:
+	HollowKnightLevel* GetHollowKnightLevel()
+	{
+		return HollowKnightLevel_;
+	}
+
+	void SetHollowKnightLevel(HollowKnightLevel* _level)
+	{
+		HollowKnightLevel_ = _level;
+	}
 };
 

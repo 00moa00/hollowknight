@@ -9,6 +9,9 @@ EffectGUI::EffectGUI()
     isBlendClick_(false),
 
     overlay_flag(true),
+    NoiseFlag_(true),
+    BloomFlag_(true),
+
     isMainLightOnOff_(true),
     isSiblingLightOnOff_(true),
     isDonutLightOnOff_(true),
@@ -49,6 +52,8 @@ void EffectGUI::Initialize(GameEngineLevel* _Level)
     Overlaycolor.w = KnightData::GetInst()->GetOverlayColor().w;
 
     overlay_flag = KnightData::GetInst()->GetOverlayFlag();
+    NoiseFlag_ = KnightData::GetInst()->GetNoiseFlag();
+    BloomFlag_ = KnightData::GetInst()->GetBloomFlag();
 
     //Overlaycolor = KnightData::GetInst()->GetOverlayColor();
     Overlaycolor = ConvertFromFloat4(Overlaycolor, KnightData::GetInst()->GetOverlayColor());
@@ -89,6 +94,9 @@ void EffectGUI::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 
 
     ImGui::Checkbox("OverlayFlag", &overlay_flag);
+    ImGui::Checkbox("NosieFlag", &NoiseFlag_);
+   // ImGui::Checkbox("BloomFlag", &BloomFlag_);
+
 
     ImGui::Separator();
 

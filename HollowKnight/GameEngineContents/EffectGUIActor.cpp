@@ -18,6 +18,11 @@ void EffectGUIActor::Start()
 
 void EffectGUIActor::Update(float _DeltaTime)
 {
+	//KnightData::GetInst()->SetOverlayflag(EffectGUI_->GetOverlayFlag());
+
+	//KnightData::GetInst()->SetNoiseFlag(EffectGUI_->GetNoiseFlag());
+	//KnightData::GetInst()->SetBloomFlag(EffectGUI_->GetBloomFlag());
+
 }
 
 void EffectGUIActor::LevelStartEvent()
@@ -28,6 +33,10 @@ void EffectGUIActor::LevelStartEvent()
 void EffectGUIActor::LevelEndEvent()
 {
 	KnightData::GetInst()->SetOverlayflag(EffectGUI_->GetOverlayFlag());
+	KnightData::GetInst()->SetNoiseFlag(EffectGUI_->GetNoiseFlag());
+	KnightData::GetInst()->SetBloomFlag(EffectGUI_->GetBloomFlag());
+
+
 	KnightData::GetInst()->SetOverlayColor(EffectGUI_->GetoverlayColor());
 
 	KnightData::GetInst()->SetKnihgtMainLightMulColor(EffectGUI_->GetMainLightMulColor());

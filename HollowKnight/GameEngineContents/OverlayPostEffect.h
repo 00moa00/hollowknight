@@ -10,8 +10,6 @@ struct OverlayColorData
 };
 
 class HollowKnightLevel;
-
-// Ό³Έν :
 class OverlayPostEffect : public GameEnginePostEffect
 {
 public:

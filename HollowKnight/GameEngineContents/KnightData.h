@@ -116,6 +116,10 @@ private:
 	float SeedShiftingFactor;
 
 	bool isOverlayflag_;					//오버레이 플러그
+	bool isNoiseflag_;						//오버레이 플러그
+	bool isBloomFlag_;
+	
+	
 	bool SavedPaletteInit_;					//팔레트...인데 사용 고민중
 
 	float4 OverlayColor_;					//오버레이 컬러
@@ -335,6 +339,16 @@ public:
 		return isOverlayflag_;
 	}
 
+	bool GetNoiseFlag()const
+	{
+		return isNoiseflag_;
+	}
+
+	bool GetBloomFlag() const
+	{
+		return isBloomFlag_;
+	}
+
 	float4 GetOverlayColor()
 	{
 		return OverlayColor_;
@@ -458,6 +472,17 @@ public:
 	//================================
 	//    Setter
 	//================================
+
+	void SetBloomFlag(bool _b)
+	{
+		isBloomFlag_ = _b;
+	}
+
+	void SetNoiseFlag(bool _b)
+	{
+		isNoiseflag_ = _b;
+	}
+
 	void SetCurrentGeo(int _Geo)
 	{
 		CurrentGeo_ = _Geo;
