@@ -4,6 +4,7 @@
 #include "Mask.h"
 #include "Geo.h"
 #include "Soul.h"
+#include "GeoCountFont.h"
 
 // Ό³Έν :
 class HUD : public GameEngineActor
@@ -37,6 +38,7 @@ private:
 	VesselFrame* VesselFrame_;
 	Geo* Geo_;
 	Soul* Soul_;
+	GeoCountFont* GeoCountFont_;
 
 	std::vector<Mask*> Maskes_;
 
@@ -55,6 +57,11 @@ public:
 		
 		float4 Pos  = Maskes_[Size]->GetTransform().GetWorldPosition();
 		return Pos;
+	}
+
+	GeoCountFont* GetGeoCountFont()
+	{
+		return GeoCountFont_;
 	}
 
 private:

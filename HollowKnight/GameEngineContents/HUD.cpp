@@ -7,6 +7,8 @@ HUD::HUD()
 	VesselFrame_(nullptr),
 	Soul_(nullptr),
 	Geo_(nullptr),
+	GeoCountFont_(nullptr),
+
 	Maskes_(),
 
 	MaskesAppearEnd_(false),
@@ -28,7 +30,10 @@ void HUD::Start()
 {
 	Geo_ = GetLevel()->CreateActor<Geo>();
 	Geo_->GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 220.f), GameEngineWindow::GetInst()->GetScale().hy() - 160.f, -100 });
-	
+
+	GeoCountFont_ = GetLevel()->CreateActor<GeoCountFont>();
+	GeoCountFont_->CreateFontRenderer(0, 30, { 300, 180 });
+
 	VesselFrame_ = GetLevel() ->CreateActor<VesselFrame>();
 	VesselFrame_ -> GetTransform().SetLocalPosition({ -(GameEngineWindow::GetInst()->GetScale().hx() - 70.f), GameEngineWindow::GetInst()->GetScale().hy() - 50.f, -100 });
 	

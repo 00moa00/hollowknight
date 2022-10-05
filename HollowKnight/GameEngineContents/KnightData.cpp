@@ -48,6 +48,7 @@ KnightData::KnightData()
 	UsingCharmNotches_(0),
 	HitDamage_(0),
 	MaskPieceCount_(0),
+	CurrentGeo_(0),
 
 	OverlayColor_(0.499f, 0.592f, 0.726f, 1.0f),
 

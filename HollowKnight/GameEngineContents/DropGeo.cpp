@@ -76,6 +76,20 @@ void DropGeo::Start()
 
 void DropGeo::Update(float _DeltaTime)
 {
+	if (MainCollision_->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight, CollisionType::CT_OBB2D,
+		std::bind(&DropGeo::ThisVSKnightCollision, this, std::placeholders::_1, std::placeholders::_2)) == true
+		)
+	{
+		if (GetLevel<HollowKnightLevel>()->GetHUD()->GetGeoCountFont()->SetPossibleCounting() == true)
+		{
+			GetLevel<HollowKnightLevel>()->GetHUD()->GetGeoCountFont()->SetCountingFont(1);
+			this->Death();
+		}
+
+	}
+
+
+
 	DropGeoManager_.Update(_DeltaTime);
 }
 
@@ -261,6 +275,6 @@ void DropGeo::DropDeoOnGroundEnd(const StateInfo& _Info)
 
 bool DropGeo::ThisVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
-	return false;
+	return true;
 }
 

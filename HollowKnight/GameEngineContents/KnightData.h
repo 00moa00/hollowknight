@@ -98,11 +98,12 @@ private:
 	int CurMask_;							//나의 현재 가면
 	int CurSoul_;							//현재 영혼
 	int CharmNotches_;						//가능한 부적 칸 수
-	int UsingCharmNotches_;					// 현재 사용중인 부적 칸 수
+	int UsingCharmNotches_;					//현재 사용중인 부적 칸 수
 
-	int HitDamage_;							// 공격 데미지
+	int HitDamage_;							//공격 데미지
 
-	int MaskPieceCount_;					// 가면 조각 갯수
+	int MaskPieceCount_;					//가면 조각 갯수
+	int CurrentGeo_;						//현재 지오 갯수
 
 	std::vector<KnightCharmData> CharmList_;
 	std::vector<KnightItemData> ItemList_;
@@ -218,6 +219,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	int GetCurrentGeo() const
+	{
+		return CurrentGeo_;
+	}
+
 
 	std::vector<KnightItemData> GetKnightItemData()
 	{
@@ -452,6 +458,12 @@ public:
 	//================================
 	//    Setter
 	//================================
+	void SetCurrentGeo(int _Geo)
+	{
+		CurrentGeo_ = _Geo;
+	}
+
+
 	void AddMaskPieceCount()
 	{
 		++MaskPieceCount_;

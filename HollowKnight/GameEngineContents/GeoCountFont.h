@@ -18,10 +18,15 @@ public:
 protected:
 	void Start()override;
 	void Update(float _DeltatTime)override;
+	void LevelStartEvent() override;
+	void LevelEndEvent() override;
 
 private:
 
+	bool isPossibleCounting_;
+
 	int CurrentNum_;		// 현재숫자
+	int PrevNum_;			// 현재숫자 + 카운팅 할 숫자 < 로 계산하기 떄문에 현재 저장용
 	int CountingNum_;		// 카운팅 할
 
 
@@ -29,17 +34,40 @@ private:
 
 	GameEngineFontRenderer* GameEngineFontRenderer_;
 
-
-private:
-	void CreateFontRenderer(std::string _Text, float _FontSize, float4 _Position, bool _isdotLineBreak, bool _isTyping, int _LineBreak = 0);
+	GameEngineStateManager FontStateManager_;
 
 public:
+	void CreateFontRenderer(int _Num, float _FontSize, float4 _Position);
+
+public:
+	//================================
+	//    Setter
+	//================================
+	void SetCountingFont(int _CoutingNum);
+
 	//================================
 	//    Getter
 	//================================
 	GameEngineFontRenderer* GetFontRenderer()
 	{
 		return GameEngineFontRenderer_;
+	}
+
+	bool SetPossibleCounting()
+	{
+		if (FontStateManager_.GetCurStateStateName() == "COUNTUING_IDLE")
+		{
+			isPossibleCounting_ = true;
+
+		}
+
+		else
+		{
+			isPossibleCounting_ = false;
+
+		}
+
+		return isPossibleCounting_;
 	}
 
 	//================================
