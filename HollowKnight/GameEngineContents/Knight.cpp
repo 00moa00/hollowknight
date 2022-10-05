@@ -747,7 +747,7 @@ void Knight::LevelStartEvent()
 		}
 	}
 
-	if (KnightData::GetInst()->GetisDeathLevelChange() == true)
+	else if (KnightData::GetInst()->GetisDeathLevelChange() == true)
 	{
 		KnightData::GetInst()->SetisDeathLevelChange(false);
 		GetTransform().SetLocalPosition({ 4611, -3127, static_cast<float>(Z_ORDER::Knight) });

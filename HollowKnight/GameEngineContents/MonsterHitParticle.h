@@ -33,6 +33,7 @@ private:
 	std::vector<float4> DirList_;
 	std::vector<float4> InitDir_;
 	std::vector<float4> InitScale_;
+
 	std::vector<bool> isEndMove_;
 
 	std::vector<float4> StartDirList_;

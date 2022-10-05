@@ -753,6 +753,9 @@
     <ClInclude Include="ShopLampBug.h">
       <Filter>Actor\Effect\Map</Filter>
     </ClInclude>
+    <ClInclude Include="DoorStoneParticle.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1338,6 +1341,9 @@
       <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="ShopLampBug.cpp">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorStoneParticle.cpp">
       <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>

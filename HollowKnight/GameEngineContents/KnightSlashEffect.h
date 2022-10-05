@@ -51,6 +51,11 @@ public:
 		return isColl_;
 	}
 
+	float4 GetDir()
+	{
+		return Dir_;
+	}
+
 	
 	void SetAnimationSlash();
 	void SetAnimationDoubleSlash();

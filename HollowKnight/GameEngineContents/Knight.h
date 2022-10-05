@@ -401,6 +401,13 @@ private:
 	{
 		return 	KnightSiblingLightEffect_;
 	}
+	
+public:
+
+	KnightSlashEffect* GetKnightSlashEffect() const
+	{
+		return KnightSlashEffect_;
+	}
 
 }; 
 

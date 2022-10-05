@@ -180,11 +180,7 @@ void MonsterHitParticle::isPixelCheck(float _DeltaTime)
 		{
 			//	SetisUpBlock(false);
 		}
-
 	}
-
-
-
 	
 }
 

@@ -64,10 +64,10 @@ float4 Blur_PS(Output _Input) : SV_Target0
     //Texture.rgb += float3(noise, noise, noise);
     //return Texture;
     //
-    float2 PixelUVSize = float2(1.0f / 1920.0f, 1.0f / 1080.0f);
-    float2 PixelUVCenter = _Input.Tex.xy;
-    float2 StartUV = PixelUVCenter + (-PixelUVSize * 2);
-    float2 CurUV = StartUV;
+    //float2 PixelUVSize = float2(1.0f / 1920.0f, 1.0f / 1080.0f);
+    //float2 PixelUVCenter = _Input.Tex.xy;
+    //float2 StartUV = PixelUVCenter + (-PixelUVSize * 2);
+    float2 CurUV = _Input.Tex.xy;
 
 
     float4 Texture = Tex.Sample(Smp, CurUV);

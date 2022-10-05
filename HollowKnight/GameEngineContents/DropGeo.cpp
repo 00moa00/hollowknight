@@ -18,8 +18,7 @@ DropGeo::~DropGeo()
 
 void DropGeo::Start()
 {
-	//CreateRendererComponent(float4{ 62, 62, 1 }, "HUD Cln_HUD_coin_v020000-Sheet.png", 4, static_cast<int>(RENDERORDER::UI));
-	
+	//CreateRendererComponent(float4{ 62, 62, 1 }, "HUD Cln_HUD_coin_v020000-Sheet.png", 4, static_cast<int>(RENDERORDER::UI));	
 	MainRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	MainRenderer_->SetTexture("HUD Cln_HUD_coin_v020000-Sheet.png", 0);
 	MainRenderer_->GetTransform().SetLocalScale({ 30.f * 1.3f ,30.f * 1.3f, 1 });

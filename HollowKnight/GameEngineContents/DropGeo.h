@@ -21,7 +21,6 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
-
 	float Speed_;
 
 	float4 Dir_;
@@ -53,8 +52,6 @@ private:
 	void DropDeoOnGroundEnd(const StateInfo& _Info);
 
 
-
-	bool ThisVSWallCollision(GameEngineCollision* _This, GameEngineCollision* _Other);	//º®
 	bool ThisVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 public:

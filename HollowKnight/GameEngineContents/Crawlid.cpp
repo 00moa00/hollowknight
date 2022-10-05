@@ -325,7 +325,7 @@ void Crawlid::CrawlidStunEnd(const StateInfo& _Info)
 void Crawlid::CrawlidDeathStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
-	//GetCollision()->Off();
+	GetCollision()->Off();
 }
 
 void Crawlid::CrawlidDeathUpdate(float _DeltaTime, const StateInfo& _Info)
