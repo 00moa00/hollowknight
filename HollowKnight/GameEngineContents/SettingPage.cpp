@@ -7,6 +7,8 @@
 
 SettingPage::SettingPage() 
 	:
+	PageSpeed_(0.f),
+
 	BackGround_(nullptr),
 
 	//CharmPage_(nullptr),
@@ -229,6 +231,8 @@ void SettingPage::Start()
 		, std::bind(&SettingPage::SettingMoveLeftEnd, this, std::placeholders::_1));
 
 	SettingPageManager_.ChangeState("OFF");
+
+	PageSpeed_ = 1500.f;
 
 }
 
@@ -464,7 +468,7 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 		GetLevel<HollowKnightLevel>()->GetInventoryPageInfo()->SetFontMove();
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetFontMove();
 
-		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * 700.f);
+		AllPage_[i]->GetTransform().SetWorldMove(float4::LEFT * _DeltaTime * PageSpeed_);
 	}
 
 	//if()
@@ -522,7 +526,7 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 
 		GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetFontMove();
 		GetLevel<HollowKnightLevel>()->GetInventoryPageInfo()->SetFontMove();
-		AllPage_[i]->GetTransform().SetWorldMove(float4::RIGHT * _DeltaTime * 700.f);
+		AllPage_[i]->GetTransform().SetWorldMove(float4::RIGHT * _DeltaTime * PageSpeed_);
 	}
 }
 

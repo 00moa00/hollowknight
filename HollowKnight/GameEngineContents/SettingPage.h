@@ -33,6 +33,8 @@ protected:
 private:
 	bool OnOffPage_;
 
+	float PageSpeed_;
+
 	BorderCorner* BorderCornerLeftTop_;
 	BorderCorner* BorderCornerRightTop_;
 	BorderCorner* BorderCornerLeftBottom_;
