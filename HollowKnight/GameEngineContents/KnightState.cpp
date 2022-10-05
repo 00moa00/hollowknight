@@ -2389,15 +2389,32 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	else if (GetisOnGround() == true)
 	{
-		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+
+		if (isRunMode_ == true)
 		{
-			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+			if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+			{
+				GetTransform().SetWorldMove(float4::LEFT * KnightRunSpeed_ * _DeltaTime);
+			}
+
+			if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+			{
+				GetTransform().SetWorldMove(float4::RIGHT * KnightRunSpeed_ * _DeltaTime);
+			}
+		}
+		else
+		{
+			if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+			{
+				GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+			}
+
+			if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+			{
+				GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+			}
 		}
 
-		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
-		{
-			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
-		}
 	}
 
 	// 낙하중에 공격한다면 애니메이션이 끝날 떄까지 낙하 스테이트로 이동하면 안된다. => 이유 : 애니메이션 처리
@@ -2510,16 +2527,12 @@ void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
 	if (GetMoveDirection().CompareInt2D(float4::RIGHT))
 	{
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ 80, 50, 0 });
-
 	}
 
 	else if (GetMoveDirection().CompareInt2D(float4::LEFT))
 	{
 		KnightSlashEffect_->GetCollision()->GetTransform().SetLocalPosition({ -80, 50, 0 });
-
 	}
-
-
 }
 
 void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -2576,18 +2589,35 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		//KnightManager_.ChangeState("FALL");
 	}
 
+
 	else if (GetisOnGround() == true)
 	{
-		if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+
+		if (isRunMode_ == true)
 		{
-			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+			if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+			{
+				GetTransform().SetWorldMove(float4::LEFT * KnightRunSpeed_ * _DeltaTime);
+			}
+
+			if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+			{
+				GetTransform().SetWorldMove(float4::RIGHT * KnightRunSpeed_ * _DeltaTime);
+			}
+		}
+		else
+		{
+			if (true == GameEngineInput::GetInst()->IsPress("KnightLeft"))
+			{
+				GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
+			}
+
+			if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
+			{
+				GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
+			}
 		}
 
-
-		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
-		{
-			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
-		}
 	}
 
 
