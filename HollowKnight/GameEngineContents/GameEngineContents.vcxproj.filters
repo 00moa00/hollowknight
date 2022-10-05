@@ -750,6 +750,9 @@
     <ClInclude Include="LampBugGrow.h">
       <Filter>Actor\Effect\Map</Filter>
     </ClInclude>
+    <ClInclude Include="ShopLampBug.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1332,6 +1335,9 @@
       <Filter>Actor\Font</Filter>
     </ClCompile>
     <ClCompile Include="LampBugGrow.cpp">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopLampBug.cpp">
       <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>

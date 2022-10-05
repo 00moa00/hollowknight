@@ -22,9 +22,9 @@ void LampBug::Start()
 	CreateRendererComponent("shop_lamp_bug0000-Sheet.png");
 
 	GetRenderer()->CreateFrameAnimationCutTexture("FLY", FrameAnimation_DESC("shop_lamp_bug0000-Sheet.png", 0, 7, 0.100f, true));
-	GetRenderer()->SetScaleModeImage();
+//	GetRenderer()->SetScaleModeImage();
 	
-	float RamScale = GameEngineRandom::MainRandom.RandomFloat(0.1f, 0.5f);
+	float RamScale = GameEngineRandom::MainRandom.RandomFloat(0.3f, 0.7f);
 
 	GetRenderer()->GetTransform().SetWorldScale({ 105.f * RamScale, 105.f * RamScale });
 	GetRenderer()->GetTransform().SetWorldPosition({ 0, 105.f * 3});

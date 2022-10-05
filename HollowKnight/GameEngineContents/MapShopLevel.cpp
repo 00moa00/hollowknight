@@ -12,6 +12,8 @@
 #include "NoisePostEffect.h"
 #include "VignettePostEffect.h"
 
+#include "ShopLampBug.h"
+
 
 MapShopLevel::MapShopLevel() 
 	:
@@ -53,6 +55,12 @@ void MapShopLevel::Start()
 	DirtmouthPotal_ = CreateActor<RoomPotal>();
 	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Dirt, false);
 	DirtmouthPotal_->GetTransform().SetWorldPosition({ 400, -870.f });
+
+	{
+		ShopLampBug* ShopLampBug_ = CreateActor<ShopLampBug>();
+		ShopLampBug_->GetTransform().SetWorldPosition({ 959.f, -602.f });
+		ShopLampBug_->GetRenderer()->GetTransform().SetWorldScale({ 105.f * 0.8f , 105.f * 0.8f });
+	}
 
 	CreateIselda();
 

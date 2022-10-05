@@ -11,6 +11,8 @@
 #include "VignettePostEffect.h"
 #include "RoomPotal.h"
 
+#include "ShopLampBug.h"
+
 
 SlyShopLevel::SlyShopLevel() 
 {
@@ -47,6 +49,12 @@ void SlyShopLevel::Start()
 	RoomPotal* DirtmouthPotal_ = CreateActor<RoomPotal>();
 	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Dirt, false);
 	DirtmouthPotal_->GetTransform().SetWorldPosition({ 400, -870.f });
+
+	{
+		ShopLampBug* ShopLampBug_ = CreateActor<ShopLampBug>();
+		ShopLampBug_->GetTransform().SetWorldPosition({1075, -590.f});
+
+	}
 
 	SetMapSize({ 1920, 1080 });
 
