@@ -54,7 +54,7 @@ float4 Blur_PS(Output _Input) : SV_Target0
     float4 BloomTexture = BloomTex.Sample(Smp, CurUV);
     float4 BloomOriTexture = BloomOriTex.Sample(Smp, CurUV);
     
-    float4 Bloom = pow(pow(abs(BloomTexture), 2.2f) + pow(abs(BloomOriTexture), 2.2f), 1.f / 2.2f);
+    float4 Bloom = pow(pow(abs(BloomTexture), 1.8f) + pow(abs(BloomOriTexture), 1.8f), 1.f / 1.8f);
     
     float4 Out = Texture;
     

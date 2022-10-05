@@ -30,7 +30,7 @@ void LampBug::Start()
 	GetRenderer()->GetTransform().SetWorldPosition({ 0, 105.f * 3});
 
 	GetRenderer()->ChangeFrameAnimation("FLY");
-
+//	SetBlendMode(BlendMode::Add);
 	Dir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 	Dir_.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 	Dir_.Normalize();
