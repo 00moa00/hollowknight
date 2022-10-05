@@ -66,6 +66,7 @@ void DialogueSet::Start()
 	NextArrow_->CreateFrameAnimationCutTexture("ARROW_NEXT_ANIMATION", FrameAnimation_DESC("Dialogue Cln_arrow_down0000-Sheet.png", 0, 5, 0.050f));
 	NextArrow_->CreateFrameAnimationCutTexture("ARROW_FULL_ANIMATION", FrameAnimation_DESC("Dialogue Cln_fullstop0000-Sheet.png", 0, 3, 0.050f));
 	NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
+	NextArrow_->GetTransform().SetLocalPosition({ 0, 70 });
 
 
 }

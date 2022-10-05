@@ -152,8 +152,13 @@ public:
 				//return;
 
 			}
-			NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
-			NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
+
+			else
+			{
+				NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
+				NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
+			}
+
 
 			for (int i = 0; i < DialogueList_.size(); ++i)
 			{
