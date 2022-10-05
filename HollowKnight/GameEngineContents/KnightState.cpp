@@ -3433,6 +3433,12 @@ void Knight::KnightSitUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (true == GameEngineInput::GetInst()->IsDown("KnightUp") && KnightData::GetInst()->GetisSetting() == false)
 	{
+		GetRenderer()->ChangeFrameAnimation("SIT_BACK_ANIMATION");
+	}
+
+	if (isSitBackEnd_ == true)
+	{
+		isSitBackEnd_ = false;
 		KnightManager_.ChangeState("STILL");
 
 	}

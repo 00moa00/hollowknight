@@ -75,6 +75,7 @@ private:
 	bool isSpikeStunEnd_;
 	bool isNewMaskEnd_;
 	bool isScreamEnd_;
+	bool isSitBackEnd_;
 
 	bool isRunTurnEnd_;
 

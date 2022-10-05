@@ -68,6 +68,7 @@ Knight::Knight()
 	isRunTurnEnd_(false),
 	isCastEnd_(false),
 	isSpikeStunEnd_(false),
+	isSitBackEnd_(false),
 
 	isReturnToIdle_(false),
 	isInvincibility_(false),
@@ -330,6 +331,17 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("SIT_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 0, 4, 0.070f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SIT_IDLE_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", 3, 3, 0.100f));
 
+	{
+		std::vector<unsigned int>BackAni;
+
+		for (int i = 4; i > -1; --i)
+		{
+			BackAni.push_back(i);
+		}
+
+		GetRenderer()->CreateFrameAnimationCutTexture("SIT_BACK_ANIMATION", FrameAnimation_DESC("Knight_sit0000-Sheet.png", BackAni, 0.070f, false));
+	}
+
 	// ---- 문 들어가기 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("DOOR_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 9, 0.100f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SEE_ANIMATION", FrameAnimation_DESC("Knight_into_door0000-Sheet.png", 0, 2, 0.100f, false));
@@ -356,6 +368,11 @@ void Knight::Start()
 	//    Create Bind Animation
 	//================================
 	{
+		GetRenderer()->AnimationBindEnd("SIT_BACK_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				isSitBackEnd_ = true;
+			});
+
 		GetRenderer()->AnimationBindEnd("SCREAM_CAST_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
 				isScreamEnd_ = true;
