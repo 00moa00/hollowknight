@@ -465,105 +465,101 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 
 			if (ShopArrow_->GetCurrentPointItemIndex() == ShopItemList_.size() - 1)
-			{
-				
-				CHARM_SLOT Charm =  ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopCharm();
-				ITEM_LIST Item = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopItem();
+			{			
 
-				if (Charm != CHARM_SLOT::None)
+				if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetItemPrice() < KnightData::GetInst()->GetCurrentGeo())
 				{
-					KnightData::GetInst()->PushKnihgtCharList(Charm);
-				}
+					CHARM_SLOT Charm = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopCharm();
+					ITEM_LIST Item = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopItem();
 
-
-
-				if (Item == ITEM_LIST::Heart_Piece)
-				{
-					GetLevel<HollowKnightLevel>()->GetHeartPiece()->SetNewMaskPiece();
-					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("NEW_MASK");
-					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
-
-				//	SetShopPopDown();
-
-					//return;
-				}
-				else
-				{
-					if (Item != ITEM_LIST::NONE)
+					if (Charm != CHARM_SLOT::None)
 					{
-
-						GetLevel<HollowKnightLevel>()->PustItemInventroy(Item);
-
-						//KnightData::GetInst()->PushKnihgtItemList(Item);
+						KnightData::GetInst()->PushKnihgtCharList(Charm);
 					}
 
-				}
+					if (Item == ITEM_LIST::Heart_Piece)
+					{
+						GetLevel<HollowKnightLevel>()->GetHeartPiece()->SetNewMaskPiece();
+						GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("NEW_MASK");
+						GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
+					}
+					else
+					{
+						if (Item != ITEM_LIST::NONE)
+						{
+							GetLevel<HollowKnightLevel>()->PustItemInventroy(Item);
+						}
+					}
 
-				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
+					GetLevel<HollowKnightLevel>()->GetHUD()->GetGeoCountFont()->SetDisCountingFont(ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetItemPrice());
 
-				ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
+					ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
+					ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
 
-				if (ShopItemList_.size() == 0)
-				{
-					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
-					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
+					if (ShopItemList_.size() == 0)
+					{
+						GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
+						GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
+						return;
+					}
+
+					ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() - 1);
+					ShopManager_.ChangeState("BUY_ITEM_MOVE_DOWN");
 					return;
 				}
-
-
-				ShopArrow_->SetCurrentPointItemIndex(ShopArrow_->GetCurrentPointItemIndex() - 1);
-				ShopManager_.ChangeState("BUY_ITEM_MOVE_DOWN");
-				return;
+				
 			}
 
 			else
 			{
-				CHARM_SLOT Charm = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopCharm();
-				ITEM_LIST Item = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopItem();
+				if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetItemPrice() < KnightData::GetInst()->GetCurrentGeo())
 
-				if (Charm != CHARM_SLOT::None)
 				{
-					KnightData::GetInst()->PushKnihgtCharList(Charm);
-				}
+					CHARM_SLOT Charm = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopCharm();
+					ITEM_LIST Item = ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetShopItem();
 
-				if (Item == ITEM_LIST::Heart_Piece)
-				{
-					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("NEW_MASK");
-					GetLevel<HollowKnightLevel>()->GetHeartPiece()->SetNewMaskPiece();
-					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
-					//return;
-				}
-
-				else
-				{
-					if (Item != ITEM_LIST::NONE)
+					if (Charm != CHARM_SLOT::None)
 					{
-
-						GetLevel<HollowKnightLevel>()->PustItemInventroy(Item);
-
-						//KnightData::GetInst()->PushKnihgtItemList(Item);
+						KnightData::GetInst()->PushKnihgtCharList(Charm);
 					}
 
-				}
-				ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
+					if (Item == ITEM_LIST::Heart_Piece)
+					{
+						GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("NEW_MASK");
+						GetLevel<HollowKnightLevel>()->GetHeartPiece()->SetNewMaskPiece();
+						GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
+					}
 
-				for (int i = ShopArrow_->GetCurrentPointItemIndex() + 1; i < ShopItemList_.size(); ++i)
-				{
-					ShopItemList_[i]->SetSlideItemIndex(i - 1);
-				}
-				ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
+					else
+					{
+						if (Item != ITEM_LIST::NONE)
+						{
+							GetLevel<HollowKnightLevel>()->PustItemInventroy(Item);
+						}
+					}
 
-				if (ShopItemList_.size() == 0)
-				{
-					GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
-					GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
+					GetLevel<HollowKnightLevel>()->GetHUD()->GetGeoCountFont()->SetDisCountingFont(ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetItemPrice());
+
+					ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->Death();
+
+					for (int i = ShopArrow_->GetCurrentPointItemIndex() + 1; i < ShopItemList_.size(); ++i)
+					{
+						ShopItemList_[i]->SetSlideItemIndex(i - 1);
+					}
+					ShopItemList_.erase(ShopItemList_.begin() + ShopArrow_->GetCurrentPointItemIndex());
+
+					if (ShopItemList_.size() == 0)
+					{
+						GetLevel<HollowKnightLevel>()->GetKnight()->SetKnightState("STILL");
+						GetLevel<HollowKnightLevel>()->GetShopNPC()->SetisShop(false);
+						return;
+					}
+
+					ShopManager_.ChangeState("BUY_ITEM_MOVE_UP");
 					return;
 				}
-
-				ShopManager_.ChangeState("BUY_ITEM_MOVE_UP");
-				return;
-			}
-			
+				
+			}			
 
 		}
 	}

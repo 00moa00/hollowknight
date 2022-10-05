@@ -33,6 +33,11 @@ void GeoCountFont::Start()
 		, std::bind(&GeoCountFont::FontCountingStart, this, std::placeholders::_1)
 		, std::bind(&GeoCountFont::FontCountingEnd, this, std::placeholders::_1));
 
+	FontStateManager_.CreateStateMember("DISCOUNTUING_UPDATE"
+		, std::bind(&GeoCountFont::FontDisCountingUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&GeoCountFont::FontDisCountingStart, this, std::placeholders::_1)
+		, std::bind(&GeoCountFont::FontDisCountingEnd, this, std::placeholders::_1));
+
 	FontStateManager_.CreateStateMember("COUNTUING_IDLE"
 		, std::bind(&GeoCountFont::FontIdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
 		, std::bind(&GeoCountFont::FontIdleStart, this, std::placeholders::_1)
@@ -90,6 +95,13 @@ void GeoCountFont::SetCountingFont(int _CoutingNum)
 	}
 }
 
+void GeoCountFont::SetDisCountingFont(int _CoutingNum)
+{
+	PrevNum_ = CurrentNum_;
+	CountingNum_ = _CoutingNum;
+	FontStateManager_.ChangeState("DISCOUNTUING_UPDATE");
+}
+
 void GeoCountFont::FontCountingStart(const StateInfo& _Info)
 {
 	ReSetAccTime();
@@ -126,6 +138,45 @@ void GeoCountFont::FontCountingUpdate(float _DeltaTime, const StateInfo& _Info)
 void GeoCountFont::FontCountingEnd(const StateInfo& _Info)
 {
 	//PrevNum_ = 0;
+	CountingNum_ = 0;
+}
+
+void GeoCountFont::FontDisCountingStart(const StateInfo& _Info)
+{
+	ReSetAccTime();
+
+}
+
+void GeoCountFont::FontDisCountingUpdate(float _DeltaTime, const StateInfo& _Info)
+{
+	if (GetAccTime() > CountingTimer_)
+	{
+		ReSetAccTime();
+		CurrentNum_ -= (CountingNum_ / 5);
+
+		std::stringstream ssInt;
+		ssInt << CurrentNum_;
+		GameEngineFontRenderer_->SetText(ssInt.str(), "Noto Serif KR");
+
+
+		if (CurrentNum_ <= PrevNum_ - CountingNum_)
+		{
+			CurrentNum_ = PrevNum_ - CountingNum_;
+
+
+			std::stringstream ssInt;
+			ssInt << CurrentNum_;
+			GameEngineFontRenderer_->SetText(ssInt.str(), "Noto Serif KR");
+
+			FontStateManager_.ChangeState("COUNTUING_IDLE");
+			return;
+		}
+
+	}
+}
+
+void GeoCountFont::FontDisCountingEnd(const StateInfo& _Info)
+{
 	CountingNum_ = 0;
 }
 

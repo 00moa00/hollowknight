@@ -44,6 +44,7 @@ public:
 	//    Setter
 	//================================
 	void SetCountingFont(int _CoutingNum);
+	void SetDisCountingFont(int _CoutingNum);
 
 	//================================
 	//    Getter
@@ -76,6 +77,10 @@ public:
 	void FontCountingStart(const StateInfo& _Info);
 	void FontCountingUpdate(float _DeltaTime, const StateInfo& _Info);
 	void FontCountingEnd(const StateInfo& _Info);
+
+	void FontDisCountingStart(const StateInfo& _Info);
+	void FontDisCountingUpdate(float _DeltaTime, const StateInfo& _Info);
+	void FontDisCountingEnd(const StateInfo& _Info);
 
 	void FontIdleStart(const StateInfo& _Info);
 	void FontIdleUpdate(float _DeltaTime, const StateInfo& _Info);

@@ -32,26 +32,34 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 
 		ItemRenderer_ = CreateComponent<GameEngineUIRenderer>();
 		ItemRenderer_->SetTexture("Area_map.png");
-		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale()*0.6f);
+		ItemRenderer_->GetTransform().SetLocalScale(ItemRenderer_->GetCurTexture()->GetScale() * 0.6f);
 
 		GeoRenderer_ = CreateComponent<GameEngineUIRenderer>();
 		GeoRenderer_->SetTexture("Item_Geo.png");
-		GeoRenderer_->GetTransform().SetLocalScale({35,35});
+		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
 
 		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-		PriceRenderer_->CreateFontRenderer("200", 
-			28, 
-			{ 0,0 }, 
-			false,
-			false, 
-			4);
+		{
+			ShopItemState_.ItemPrice_ = 50;
+			std::stringstream ssInt;
+			ssInt << ShopItemState_.ItemPrice_;
+
+
+			PriceRenderer_->CreateFontRenderer(ssInt.str(),
+				28,
+				{ 0,0 },
+				false,
+				false,
+				4);
+		}
 
 		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
 		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
-		PriceRenderer_->GetTransform().SetLocalPosition({50,0});
+		PriceRenderer_->GetTransform().SetLocalPosition({ 50,0 });
 		PriceRenderer_->SetScreenMove();
 		PriceRenderer_->GetFontRenderer()->SetTopAndBotSort(TopAndBotSort::VCENTER);
 		//PriceRenderer_->GetFontRenderer()->SetLeftAndRightSort(LeftAndRightSort::CENTER);
+
 		ShopItemState_.ItemName_ = "잊혀진 교차로";
 		ShopItemState_.ItemInfo_ = "흙의 마을 바로 아래에 있는 지역인 잊혀진 교차로의 지도. 코니퍼가 한 번 나를 거기 아래로 끌고간 적이 있어요. 그곳은 공허하고 외로운 장소였지만 여전히 인상적이었어요.";
 
@@ -68,11 +76,19 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
 
 		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-		PriceRenderer_->CreateFontRenderer("200",
-			28,
-			{ 0,0 },
-			false,
-			false, 4);
+
+		{
+			ShopItemState_.ItemPrice_ = 50;
+			std::stringstream ssInt;
+			ssInt << ShopItemState_.ItemPrice_;
+
+			PriceRenderer_->CreateFontRenderer(ssInt.str(),
+				28,
+				{ 0,0 },
+				false,
+				false, 4);
+		}
+
 		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
 		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
 		PriceRenderer_->GetTransform().SetLocalPosition({ 50,0 });
@@ -95,12 +111,18 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
 
 		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-		PriceRenderer_->CreateFontRenderer("200",
-			28,
-			{ 0,0 },
-			false,
-			false, 4);
+		{
+			ShopItemState_.ItemPrice_ = 50;
+			std::stringstream ssInt;
+			ssInt << ShopItemState_.ItemPrice_;
 
+
+			PriceRenderer_->CreateFontRenderer(ssInt.str(),
+				28,
+				{ 0,0 },
+				false,
+				false, 4);
+		}
 		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
 		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
 		PriceRenderer_->GetTransform().SetLocalPosition({ 50,0 });
@@ -122,11 +144,17 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
 
 		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-		PriceRenderer_->CreateFontRenderer("240",
-			28,
-			{ 0,0 },
-			false,
-			false, 4);
+		{
+			ShopItemState_.ItemPrice_ = 70;
+			std::stringstream ssInt;
+			ssInt << ShopItemState_.ItemPrice_;
+
+			PriceRenderer_->CreateFontRenderer(ssInt.str(),
+				28,
+				{ 0,0 },
+				false,
+				false, 4);
+		}
 
 		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
 		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
@@ -152,11 +180,18 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
 
 		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-		PriceRenderer_->CreateFontRenderer("300",
-			28,
-			{ 0,0 },
-			false,
-			false, 4);
+
+		{
+			ShopItemState_.ItemPrice_ = 80;
+			std::stringstream ssInt;
+			ssInt << ShopItemState_.ItemPrice_;
+
+			PriceRenderer_->CreateFontRenderer(ssInt.str(),
+				28,
+				{ 0,0 },
+				false,
+				false, 4);
+		}
 
 		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
 		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
@@ -182,11 +217,17 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
 
 		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-		PriceRenderer_->CreateFontRenderer("300",
-			28,
-			{ 0,0 },
-			false,
-			false, 4);
+		{
+			ShopItemState_.ItemPrice_ = 80;
+			std::stringstream ssInt;
+			ssInt << ShopItemState_.ItemPrice_;
+
+			PriceRenderer_->CreateFontRenderer(ssInt.str(),
+				28,
+				{ 0,0 },
+				false,
+				false, 4);
+		}
 
 		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
 		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
@@ -212,11 +253,18 @@ void ShopItem::CreateShopItem(SHOP_ITEM _Item)
 		GeoRenderer_->GetTransform().SetLocalScale({ 35,35 });
 
 		PriceRenderer_ = GetLevel()->CreateActor<ContentsFontRenderer>();
-		PriceRenderer_->CreateFontRenderer("300",
-			28,
-			{ 0,0 },
-			false,
-			false, 4);
+
+		{
+			ShopItemState_.ItemPrice_ = 80;
+			std::stringstream ssInt;
+			ssInt << ShopItemState_.ItemPrice_;
+
+			PriceRenderer_->CreateFontRenderer(ssInt.str(),
+				28,
+				{ 0,0 },
+				false,
+				false, 4);
+		}
 
 		ItemRenderer_->GetTransform().SetLocalPosition({ -55,0,0 });
 		GeoRenderer_->GetTransform().SetLocalPosition({ 25,0,0 });
