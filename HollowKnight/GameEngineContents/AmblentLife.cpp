@@ -19,7 +19,8 @@ void AmblentLife::Start()
 	CreateRendererComponent("Ambient Life_cave_glow_bug0000-Sheet.png");
 
 	GetRenderer()->CreateFrameAnimationCutTexture("FLY", FrameAnimation_DESC("Ambient Life_cave_glow_bug0000-Sheet.png", 0, 3, 0.100f, true));
-	GetRenderer()->SetScaleModeImage();
+	//GetRenderer()->SetScaleModeImage();
+	GetRenderer()->GetTransform().SetLocalScale({184,181});
 	GetRenderer()->ChangeFrameAnimation("FLY");
 	Dir_.x = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 	Dir_.y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
@@ -93,5 +94,13 @@ void AmblentLife::SetLimitMove(float4 _CurrentPos, float4 _LimitSize)
 	PivotPos_ = _CurrentPos;
 	LimitMoveSize_ = _LimitSize;
 	GetTransform().SetWorldPosition({ _CurrentPos.x ,_CurrentPos.y, static_cast<float>(Z_ORDER::Object) });
+}
+
+void AmblentLife::SetRamScale()
+{
+	float RamScale = GameEngineRandom::MainRandom.RandomFloat(0.5f, 1.0f);
+
+	GetRenderer()->GetTransform().SetLocalScale({ 184 * RamScale, 181* RamScale });
+
 }
 

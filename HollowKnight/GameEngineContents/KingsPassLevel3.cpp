@@ -15,6 +15,8 @@
 #include "Potal.h"
 #include "Tablet.h"
 
+#include "AmblentLife.h"
+
 
 KingsPassLevel3::KingsPassLevel3() 
 {
@@ -75,6 +77,104 @@ void KingsPassLevel3::Start()
 		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
 		Potal_->GetTransform().SetWorldPosition({ 3435.f + 60, -1169.f });
 
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 2570.f , -2479.f }, 150);
+		AmblentLife_->SetRamScale();
+
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 2870.f , -2479.f }, 150);
+		AmblentLife_->SetRamScale();
+
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 2900.f , -2079.f }, 150);
+		AmblentLife_->SetRamScale();
+
+	}
+
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 1800.f , -1900.f }, 150);
+		AmblentLife_->SetRamScale();
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 1700.f , -1200.f }, 150);
+		AmblentLife_->SetRamScale();
+
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 2000.f , -1364.f }, 150);
+		AmblentLife_->SetRamScale();
+
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 2100.f , -1064.f }, 200);
+		AmblentLife_->SetRamScale();
+
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 2500.f , -964.f }, 200);
+		AmblentLife_->SetRamScale();
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 1514.f , -1400.f }, 200);
+		AmblentLife_->SetRamScale();
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 1700.f , -1600.f }, 200);
+		AmblentLife_->SetRamScale();
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 2203.f , -2000.f }, 200);
+		AmblentLife_->SetRamScale();
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 3000.f , -2500.f }, 200);
+		//AmblentLife_->SetRamScale();
+	}
+
+	{
+		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
+
+		AmblentLife_->SetLimitMove({ 2500.f , -1200.f }, 200);
+		AmblentLife_->SetRamScale();
 	}
 
 	CreawteMapWhiteParticleMaker();

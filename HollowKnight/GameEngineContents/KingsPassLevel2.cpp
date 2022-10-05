@@ -103,6 +103,7 @@ void KingsPassLevel2::Start()
 
 		AmblentLife_->SetLimitMove({ 1817.f , -1000.f }, 150);
 	}
+
 	CreawteMapWhiteParticleMaker();
 
 	PustItemInventroy(ITEM_LIST::Shade_Cloak);
