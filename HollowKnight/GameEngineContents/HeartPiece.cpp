@@ -41,7 +41,7 @@ void HeartPiece::Start()
 {
 	BackBoardRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	BackBoardRenderer_->SetTexture("BlackBoard.png");
-	BackBoardRenderer_->GetTransform().SetLocalScale({ 1920.f, 1080.f });
+	BackBoardRenderer_->GetTransform().SetLocalScale({ 1920.f * 2.f , 1080.f * 2.f });
 	BackBoardRenderer_->GetPixelData().MulColor.a = 0.5f;
 
 	FleurRenderer_ = CreateComponent<GameEngineUIRenderer>();
@@ -216,6 +216,8 @@ void HeartPiece::SetNewMaskPiece()
 	CompleteMaskRenderer_->GetPixelData().MulColor.a = 0.f;
 
 	BackBoardRenderer_->GetPixelData().MulColor.a = 0.f;
+	BackBoardRenderer_->GetTransform().SetWorldPosition({ 0,0 });
+
 	GetTransform().SetWorldPosition({0,0, -200});
 
 	ReSetAccTime();
@@ -377,7 +379,7 @@ void HeartPiece::HeartMovingUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	GetTransform().SetWorldMove(Dir * 1000.f * _DeltaTime);
 	CompleteMaskRenderer_->GetTransform().SetLocalScale({ CompleteInitScale_.x * CompletScale_, CompleteInitScale_.y * CompletScale_ });
-
+	BackBoardRenderer_->GetTransform().SetWorldPosition({0,0});
 	float4 Lenth = Dest - MyPos;
 
 	if (Lenth.Length() < 1000.f * _DeltaTime)
