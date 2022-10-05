@@ -3,6 +3,9 @@
 #include "HollowKnightLevel.h"
 #include "KnightSlashEffect.h"
 
+#include "DoorStoneParticle.h"
+#include "LargeStoneParticle.h"
+
 TutorialGate::TutorialGate()
 	:
 	isColl_(false),
@@ -111,6 +114,24 @@ void TutorialGate::SetHitCollision()
 
 		isColl_ = true;
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
+
+		for (int i = 0; i < 4; ++i)
+		{
+			DoorStoneParticle* DoorStoneParticle_ = GetLevel()->CreateActor<DoorStoneParticle>();
+			DoorStoneParticle_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x , GetTransform().GetWorldPosition().y + 1061.f / 2 });
+			DoorStoneParticle_->SetDir(float4::LEFT);
+			DoorStoneParticle_->SetRamPos(0, 1061.f );
+			DoorStoneParticle_->SetSpeed(2500.f);
+		}
+
+		for (int i = 0; i < 2; ++i)
+		{
+			LargeStoneParticle* LargeStoneParticle_ = GetLevel()->CreateActor<LargeStoneParticle>();
+			LargeStoneParticle_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x  , GetTransform().GetWorldPosition().y + 1061.f / 2 });
+			LargeStoneParticle_->SetDir(float4::LEFT);
+			LargeStoneParticle_->SetRamPos(0, 1061.f);
+
+		}
 
 	}
 

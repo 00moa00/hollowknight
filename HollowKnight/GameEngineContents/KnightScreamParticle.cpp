@@ -35,8 +35,6 @@ void KnightScreamParticle::Start()
 
 		}
 
-
-
 		float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(0.7f,1.0f);
 
 		ParticleList_.back()->GetTransform().SetLocalScale({
@@ -97,13 +95,11 @@ void KnightScreamParticle::Update(float _DeltaTime)
 			ParticleList_[i]->GetTransform().SetLocalMove(Move);
 			ParticleList_[i]->GetTransform().SetLocalScale({ InitScale_[i].x * Scale_, InitScale_[i].y * Scale_ });
 			ParticleList_[i]->GetPixelData().MulColor.a = InitAlpha_[i] * Alpha_;
-
 		}
 
 		if (GetAccTime() > 1.5f)
 		{
 			Off();
-
 		}
 	}
 

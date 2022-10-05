@@ -1,91 +1,109 @@
 #include "PreCompile.h"
-#include "DoorStoneParticle.h"
+#include "LargeStoneParticle.h"
 #include <GameEngineBase/GameEngineRandom.h>
 #include "HollowKnightLevel.h"
 
-DoorStoneParticle::DoorStoneParticle() 
+
+LargeStoneParticle::LargeStoneParticle() 
 	:
 	Speed_(0.f)
-
 {
 }
 
-DoorStoneParticle::~DoorStoneParticle() 
+LargeStoneParticle::~LargeStoneParticle() 
 {
 }
 
-void DoorStoneParticle::Start()
+void LargeStoneParticle::Start()
 {
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
-		int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 7);
+		int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 9);
+
+		float ScaleSize = 0.5f;
 
 		if (RamdomIndex == 0)
 		{
-			ParticleList_.back()->SetTexture("rock_01.png");
-			ParticleList_.back()->GetTransform().SetWorldScale({23, 18});
+			ParticleList_.back()->SetTexture("boss_door_chunks_0003_1.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 108 * ScaleSize, 222 * ScaleSize });
 		}
 
 		else if (RamdomIndex == 1)
 		{
-			ParticleList_.back()->SetTexture("rock_01_b.png");
-			ParticleList_.back()->GetTransform().SetWorldScale({ 43, 35 });
+			ParticleList_.back()->SetTexture("break_door_large_piece_02.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 124 * ScaleSize, 116 * ScaleSize });
 
 		}
 		else if (RamdomIndex == 2)
 		{
-			ParticleList_.back()->SetTexture("rock_02.png");
-			ParticleList_.back()->GetTransform().SetWorldScale({ 15, 16 });
+			ParticleList_.back()->SetTexture("break_door_large_piece_03.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 136 * ScaleSize, 169 * ScaleSize });
 
 		}
 		else if (RamdomIndex == 3)
 		{
-			ParticleList_.back()->SetTexture("rock_02_b.png");
-			ParticleList_.back()->GetTransform().SetWorldScale({ 32, 28 });
+			ParticleList_.back()->SetTexture("break_door_large_piece_04.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 246 * ScaleSize, 338 * ScaleSize });
 
 		}
 
 		else if (RamdomIndex == 4)
 		{
-			ParticleList_.back()->SetTexture("rock_03.png");
-			ParticleList_.back()->GetTransform().SetWorldScale({ 18, 14 });
+			ParticleList_.back()->SetTexture("break_door_large_piece_05.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 229 * ScaleSize, 353 * ScaleSize });
 
 		}
 
 		else if (RamdomIndex == 5)
 		{
-			ParticleList_.back()->SetTexture("rock_03_b.png");
-			ParticleList_.back()->GetTransform().SetWorldScale({ 30, 31 });
+			ParticleList_.back()->SetTexture("break_door_large_piece_06.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 258 * ScaleSize, 410 * ScaleSize });
 
 		}
 
 		else if (RamdomIndex == 6)
 		{
-			ParticleList_.back()->SetTexture("rock_04.png");
-			ParticleList_.back()->GetTransform().SetWorldScale({ 14, 13 });
+			ParticleList_.back()->SetTexture("break_door_large_piece_07.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 182 * ScaleSize, 235 * ScaleSize });
 
 		}
 
 		else if (RamdomIndex == 7)
 		{
-			ParticleList_.back()->SetTexture("rock_04_b.png");
-			ParticleList_.back()->GetTransform().SetWorldScale({ 36, 21 });
+			ParticleList_.back()->SetTexture("Tute Great Door_additional_destruction_0000_a.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 103 * ScaleSize, 121 * ScaleSize });
 
 		}
+
+		else if (RamdomIndex == 8)
+		{
+			ParticleList_.back()->SetTexture("Tute Great Door_additional_destruction_0001_a.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 154 * ScaleSize, 159 * ScaleSize });
+
+		}
+
+
+		else if (RamdomIndex == 9)
+		{
+			ParticleList_.back()->SetTexture("Tute Great Door_additional_destruction_0002_a.png");
+			ParticleList_.back()->GetTransform().SetWorldScale({ 154 * ScaleSize, 159 * ScaleSize });
+
+		}
+
 
 
 		//ParticleList_.back()->SetScaleModeImage();
 		isEndMove_.push_back(false);
 
 		float RamdomRo = GameEngineRandom::MainRandom.RandomFloat(-30.f, 30.f);
-		ParticleList_.back()->GetTransform().SetWorldRotation({0,0,RamdomRo });
+		ParticleList_.back()->GetTransform().SetWorldRotation({ 0,0,RamdomRo });
 	}
 
-	Speed_ = 1600.f;
+	Speed_ = 2700.f;
 }
 
-void DoorStoneParticle::Update(float _DeltaTime)
+void LargeStoneParticle::Update(float _DeltaTime)
 {
 	for (int i = 0; i < ParticleList_.size(); ++i)
 	{
@@ -116,7 +134,7 @@ void DoorStoneParticle::Update(float _DeltaTime)
 	}
 }
 
-void DoorStoneParticle::isPixelDownCheck(float _DeltaTime)
+void LargeStoneParticle::isPixelDownCheck(float _DeltaTime)
 {
 	for (int i = 0; i < ParticleList_.size(); ++i)
 	{
@@ -133,11 +151,12 @@ void DoorStoneParticle::isPixelDownCheck(float _DeltaTime)
 		}
 		else
 		{
+
 		}
 	}
 }
 
-void DoorStoneParticle::SetDir(float4 _Dir)
+void LargeStoneParticle::SetDir(float4 _Dir)
 {
 	for (int i = 0; i < ParticleList_.size(); ++i)
 	{
@@ -175,18 +194,11 @@ void DoorStoneParticle::SetDir(float4 _Dir)
 	}
 }
 
-void DoorStoneParticle::SetRamPos(float MinY, float MaxY)
+void LargeStoneParticle::SetRamPos(float MinY, float MaxY)
 {
 	float RamdomPosY = GameEngineRandom::MainRandom.RandomFloat(MinY, MaxY);
 	for (int i = 0; i < ParticleList_.size(); ++i)
 	{
-		ParticleList_[i]->GetTransform().SetWorldMove({0,RamdomPosY });
+		ParticleList_[i]->GetTransform().SetWorldMove({ 0,RamdomPosY });
 	}
-
-
-}
-
-void DoorStoneParticle::SetSpeed(float _Speed)
-{
-	Speed_ = _Speed;
 }

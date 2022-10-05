@@ -759,6 +759,9 @@
     <ClInclude Include="HealthBug.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="LargeStoneParticle.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1351,6 +1354,9 @@
     </ClCompile>
     <ClCompile Include="HealthBug.cpp">
       <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="LargeStoneParticle.cpp">
+      <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -533,6 +533,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LargeStoneParticle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="LowHealth.h">
       <SubType>
       </SubType>
@@ -1296,6 +1300,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LampBugGrow.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="LargeStoneParticle.cpp">
       <SubType>
       </SubType>
     </ClCompile>

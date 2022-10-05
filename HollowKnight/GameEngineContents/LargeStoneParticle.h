@@ -1,20 +1,20 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
-#include <GameEngineCore/GameEngineCollision.h>
+
 
 // Ό³Έν :
-class DoorStoneParticle : public GameEngineActor
+class LargeStoneParticle : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	DoorStoneParticle();
-	~DoorStoneParticle();
+	LargeStoneParticle();
+	~LargeStoneParticle();
 
 	// delete Function
-	DoorStoneParticle(const DoorStoneParticle& _Other) = delete;
-	DoorStoneParticle(DoorStoneParticle&& _Other) noexcept = delete;
-	DoorStoneParticle& operator=(const DoorStoneParticle& _Other) = delete;
-	DoorStoneParticle& operator=(DoorStoneParticle&& _Other) noexcept = delete;
+	LargeStoneParticle(const LargeStoneParticle& _Other) = delete;
+	LargeStoneParticle(LargeStoneParticle&& _Other) noexcept = delete;
+	LargeStoneParticle& operator=(const LargeStoneParticle& _Other) = delete;
+	LargeStoneParticle& operator=(LargeStoneParticle&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;
@@ -37,6 +37,5 @@ private:
 public:
 	void SetDir(float4 _Dir);
 	void SetRamPos(float MinY, float MaxY);
-	void SetSpeed(float _Speed);
 };
 
