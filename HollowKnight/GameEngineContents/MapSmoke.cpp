@@ -23,9 +23,9 @@ void MapSmoke::Start()
 	ParticleRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	ParticleRenderer_->SetTexture("hot_spring_smoke.png");
 
-	float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(5.0f,7.0f);
+	float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(5.5f, 7.3f);
 	ParticleRenderer_->GetTransform().SetLocalScale({ 118.f * RamdomScale, 109.f * RamdomScale });
-	ParticleRenderer_->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.1f, 0.5f);
+	ParticleRenderer_->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.1f, 0.3f);
 
 	Speed_ = GameEngineRandom::MainRandom.RandomFloat(300.f, 500.f);
 	RotatinSpeed_ = GameEngineRandom::MainRandom.RandomFloat(-50.f, 50.f);
@@ -35,6 +35,15 @@ void MapSmoke::Start()
 
 	float RamY = GameEngineRandom::MainRandom.RandomFloat(-GetLevel<HollowKnightLevel>()->GetMapSize().y, 0);
 	GetTransform().SetLocalPosition({ -GameEngineWindow::GetInst()->GetScale().hx(), RamY , static_cast<float>(Z_ORDER::Back_Back_Object)});
+
+	int RamZ = GameEngineRandom::MainRandom.RandomInt(0, 2);
+
+	if (RamZ == 0)
+	{
+		GetTransform().SetLocalMove({0, 0, -500});
+
+	}
+
 }
 
 void MapSmoke::Update(float _DeltaTime)
@@ -64,6 +73,13 @@ void MapSmoke::SetSpeed(float _f)
 	float Y = GameEngineRandom::MainRandom.RandomFloat(-GetLevel<HollowKnightLevel>()->GetMapSize().y, 0 );
 
 	float4 Pos = { X ,Y, static_cast<float>(Z_ORDER::Back_Back_Object) };
+
+	int RamZ = GameEngineRandom::MainRandom.RandomInt(0,3);
+
+	if (RamZ == 0)
+	{
+		Pos.z = -300;
+	}
 
 	GetTransform().SetLocalPosition(Pos);
 

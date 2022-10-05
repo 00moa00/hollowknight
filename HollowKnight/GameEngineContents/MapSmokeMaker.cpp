@@ -13,7 +13,7 @@ MapSmokeMaker::~MapSmokeMaker()
 
 void MapSmokeMaker::Start()
 {
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
 		/*MapSmoke* MapSmoke_ = */GetLevel()->CreateActor<MapSmoke>();
 	}
@@ -23,7 +23,7 @@ void MapSmokeMaker::Start()
 void MapSmokeMaker::Update(float _DeltaTime)
 {
 
-	if (GetAccTime() > 1.0f)
+	if (GetAccTime() > 0.8f)
 	{
 		ReSetAccTime();
 		/*MapSmoke* MapSmoke_ = */GetLevel()->CreateActor<MapSmoke>();

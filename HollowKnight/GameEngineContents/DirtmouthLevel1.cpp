@@ -41,11 +41,12 @@ void DirtmouthLevel1::Start()
 	GetMasterMap()->CreateTerrain("Dirtmouth_Terrian_1.png");
 	GetMasterMap()->CreateFrontObject("Dirtmouth_MapObject_1.png");
 
+	SetMapSize({ 3700, 3418 });
+
 	CreateUIActor();
 	CreateMainCameraManager();
 	CreateEffectGUIActor();
 	CreateSettingPageActor();
-	CreateMapSmokeMaker();
 
 
 	{
@@ -77,8 +78,7 @@ void DirtmouthLevel1::Start()
 	}
 
 
-	SetMapSize({ 3700, 3418 });
-
+	CreateMapSmokeMaker();
 	CreateActor<MapWhiteParticleWindMaker>();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());

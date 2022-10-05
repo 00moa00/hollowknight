@@ -80,6 +80,8 @@ void GrimmDirtmouthLevel1::Start()
 
 	SetMapSize({ 3700, 3418 });
 
+	CreateMapSmokeMaker();
+	//CreateActor<MapWhiteParticleWindMaker>();
 	CreateActor<MapWhiteParticleWindMaker>();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());

@@ -21,6 +21,8 @@
 #include "LampBugGrow.h"
 #include "LampBug.h"
 
+#include "MapWhiteParticleWindMaker.h"
+
 DirtmouthLevel2::DirtmouthLevel2() 
 	:
 	Elderbug_(nullptr)
@@ -149,6 +151,8 @@ void DirtmouthLevel2::Start()
 		}
 	}
 
+	CreateMapSmokeMaker();
+	CreateActor<MapWhiteParticleWindMaker>();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetWorldPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });

@@ -21,6 +21,9 @@
 #include "LampBugGrow.h"
 #include "LampBug.h"
 
+#include "MapWhiteParticleWindMaker.h"
+
+
 GrimmDirtmouthLevel2::GrimmDirtmouthLevel2() 
 	:
 	Elderbug_(nullptr)
@@ -171,6 +174,8 @@ void GrimmDirtmouthLevel2::Start()
 	//BloomPostEffect* BloomPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
 	//BloomPostEffect_->SetHollowKnightLevel(this);
 
+	CreateMapSmokeMaker();
+	CreateActor<MapWhiteParticleWindMaker>();
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);

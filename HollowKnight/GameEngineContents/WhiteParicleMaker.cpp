@@ -26,7 +26,7 @@ void WhiteParicleMaker::Update(float _DeltaTime)
 	if (GetAccTime() > 6.0f)
 	{
 		ReSetAccTime();
-		for (int i = 0; i < 30; ++i)
+		for (int i = 0; i < 35; ++i)
 		{
 			GetLevel()->CreateActor<MapWhitParticle>();
 
