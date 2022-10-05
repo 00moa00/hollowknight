@@ -30,8 +30,19 @@ public:
 
 
 public:
-	GameEngineRenderTarget* CopyTarget;
-	GameEngineRenderSet EffectSet;
+
+	GameEngineRenderTarget* OriTex;
+
+	GameEngineRenderTarget* CopyTargetWhiteCut;
+	GameEngineRenderSet EffectSetWhiteCut;
+
+
+	GameEngineRenderTarget* CopyTargetWhiteCutBlur;
+	GameEngineRenderSet EffectSetWhiteCutBlur;
+
+
+	GameEngineRenderTarget* CopyTargetBloom;
+	GameEngineRenderSet EffectSetBloom;
 
 private:
 	//BloomData BloomData_;

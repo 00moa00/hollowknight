@@ -23,6 +23,8 @@
     <FxCompile Include="TextureAtlas_Inst.hlsl" />
     <FxCompile Include="ITextureAtlas.hlsl" />
     <FxCompile Include="YEffect.hlsl" />
+    <FxCompile Include="WhiteCutPostEffect.hlsl" />
+    <FxCompile Include="Bloom.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">

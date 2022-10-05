@@ -75,12 +75,14 @@ void DirtmouthLevel2::Start()
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetWorldPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
 	
+	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
+	
+	
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
 	GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
-	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
 
 	//GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 

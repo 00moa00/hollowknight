@@ -47,37 +47,16 @@ Texture2D Tex : register(t0);
 SamplerState Smp : register(s0);
 float4 Blur_PS(Output _Input) : SV_Target0
 {
-    // 파란색
+
+   
+    float4 Texture = Tex.Sample(Smp, _Input.Tex.xy);
+    float4 BrightColor = 0.f;
     
-    float2 PixelUVSize = float2(1.0f / 1920.0f, 1.0f / 1080.0f);
-    float2 PixelUVCenter = _Input.Tex.xy;
-    float2 StartUV = PixelUVCenter + (-PixelUVSize * 2);
-    float2 CurUV = StartUV;
+    float Brightness = dot(Texture.rgb, float3(0.2126F, 0.7152f, 0.0722f));
+    if (Brightness > 0.99)
+        BrightColor = float4(Texture.rgb, 1.0);
     
-    
-    float4 Result = (float4) 0.0f;
-    
-    for (int y = 0; y < 5; ++y)
-    {
-        for (int x = 0; x < 5; ++x)
-        {
-            Result += Tex.Sample(Smp, CurUV) /* * Gau[y][x]*/;
-            CurUV.x += PixelUVSize.x;
-        }
-        
-        CurUV.x = StartUV.x;
-        CurUV.y += PixelUVSize.y;
-    }
-    
-    Result /= 25.0f;
-    
-    // Color
-    // 지금 이 색깔은?
-    
-    if (Result.a <= 0.0f)
-    {
-        clip(-1);
-    }
-    
-    return Result;
+    return BrightColor;
+
+
 }

@@ -7,37 +7,91 @@ BloomPostEffect::BloomPostEffect()
 
 BloomPostEffect::~BloomPostEffect() 
 {
-	if (nullptr != CopyTarget)
+	if (nullptr != CopyTargetWhiteCut)
 	{
-		delete CopyTarget;
-		CopyTarget = nullptr;
+		delete CopyTargetWhiteCut;
+		CopyTargetWhiteCut = nullptr;
+	}
+
+	if (nullptr != CopyTargetWhiteCutBlur)
+	{
+		delete CopyTargetWhiteCutBlur;
+		CopyTargetWhiteCutBlur = nullptr;
+	}
+
+
+	if (nullptr != CopyTargetBloom)
+	{
+		delete CopyTargetBloom;
+		CopyTargetBloom = nullptr;
+	}
+
+
+	if (nullptr != OriTex)
+	{
+		delete OriTex;
+		OriTex = nullptr;
 	}
 }
 
 void BloomPostEffect::EffectInit()
 {
 	
-	CopyTarget = new GameEngineRenderTarget();
-	CopyTarget->CreateRenderTargetTexture(GameEngineWindow::GetScale(), DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, float4::ZERO);
-	//BloomData_.iMouse.x = 1.0f;
-	//BloomData_.iMouse.y = 1.0f;
-	//BloomData_.iResolution. x = 1.0f;
-	//BloomData_.iResolution.y = 1.0f;
+	CopyTargetWhiteCut = new GameEngineRenderTarget();
+	CopyTargetWhiteCut->CreateRenderTargetTexture(GameEngineWindow::GetScale(), DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, float4::ZERO);
+
+	EffectSetWhiteCut.SetPipeLine("WhiteCutPostEffect");
+
+	CopyTargetWhiteCutBlur = new GameEngineRenderTarget();
+	CopyTargetWhiteCutBlur->CreateRenderTargetTexture(GameEngineWindow::GetScale(), DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, float4::ZERO);
+
+	EffectSetWhiteCutBlur.SetPipeLine("Blur");
 
 
-	//EffectSet.ShaderResources.SetConstantBufferLink("BloomData", BloomData_);
+	CopyTargetBloom = new GameEngineRenderTarget();
+	CopyTargetBloom->CreateRenderTargetTexture(GameEngineWindow::GetScale(), DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, float4::ZERO);
 
-	EffectSet.SetPipeLine("Bloom");
+	EffectSetBloom.SetPipeLine("Bloom");
+
+
+
+	//EffectSetBloom.ShaderResources.SetTexture("BloomOriTex", CopyTargetWhiteCut->GetRenderTargetTexture(0));
+	//EffectSetBloom.ShaderResources.SetTexture("BloomTex", CopyTargetWhiteCutBlur->GetRenderTargetTexture(0));
+	//EffectSetBloom.ShaderResources.SetTexture("OriTexture", CopyTargetWhiteCut->GetRenderTargetTexture(0));
+
 }
 
 void BloomPostEffect::Effect(GameEngineRenderTarget* _Target)
 {
-	CopyTarget->Copy(_Target);
+	// Èò»ö Àß¶ó³¿
+	CopyTargetBloom->Copy(_Target);
 
-	EffectSet.ShaderResources.SetTexture("Tex", CopyTarget->GetRenderTargetTexture(0));
+	//OriTex -> Copy(_Target);
+
+	CopyTargetWhiteCut->Copy(_Target);
+	EffectSetWhiteCut.ShaderResources.SetTexture("Tex", CopyTargetWhiteCut->GetRenderTargetTexture(0));
+
+	// Àß¶ó³½ Èò»ö¿¡ ºí·¯ Àû¿ë
+	CopyTargetWhiteCutBlur->Clear();
+	CopyTargetWhiteCutBlur->Setting();
+	CopyTargetWhiteCutBlur->Effect(EffectSetWhiteCut);
+
+	EffectSetWhiteCutBlur.ShaderResources.SetTexture("Tex", CopyTargetWhiteCutBlur->GetRenderTargetTexture(0));
+
+
+	//CopyTargetBloom->Clear();
+	//CopyTargetBloom->Setting();
+	//CopyTargetBloom->Effect(EffectSetWhiteCutBlur);
+
+
+
+	EffectSetBloom.ShaderResources.SetTexture("OriTexture", CopyTargetBloom->GetRenderTargetTexture(0));
+	EffectSetBloom.ShaderResources.SetTexture("BloomTex", CopyTargetWhiteCutBlur->GetRenderTargetTexture(0));
+	EffectSetBloom.ShaderResources.SetTexture("BloomOriTex", CopyTargetWhiteCut->GetRenderTargetTexture(0));
+
 
 	_Target->Clear();
 	_Target->Setting();
-	_Target->Effect(EffectSet);
+	_Target->Effect(EffectSetBloom);
 }
 

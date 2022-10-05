@@ -3,19 +3,21 @@
 // SV_POSITION 시맨틱
 // 그래픽카드에게 이녀석은 이런 부류니까 니가 자동으로 처리하는 녀석이 있으면 하고.
 
-
-
 struct Input
 {
     float4 Pos : POSITION;
-    float4 Tex : TEXCOORD;
+    float4 Tex : TEXCOORD;  
 };
 
 
 struct Output
 {
     float4 Pos : SV_POSITION;
+    
     float4 Tex : TEXCOORD;
+
+
+
 };
 
 
@@ -24,60 +26,47 @@ Output Blur_VS(Input _Input)
 {
     Output NewOutPut = (Output) 0;
     NewOutPut.Pos = _Input.Pos;
+    
     NewOutPut.Tex = _Input.Tex;
+
+
+    
     return NewOutPut;
 }
 
-// 1000
-// 0100
-// 2010
-// 0301
 
-// 1020
-// 0103
-// 0010
-// 0001
 
-//static float Gau[5][5] =
-//{
-//    {  }
-//};
-
-Texture2D Tex : register(t0);
 SamplerState Smp : register(s0);
+Texture2D OriTexture : register(t0);
+
+Texture2D BloomTex : register(t1);
+Texture2D BloomOriTex : register(t2);
+
 float4 Blur_PS(Output _Input) : SV_Target0
 {
-    // 파란색
-    
     float2 PixelUVSize = float2(1.0f / 1920.0f, 1.0f / 1080.0f);
     float2 PixelUVCenter = _Input.Tex.xy;
     float2 StartUV = PixelUVCenter + (-PixelUVSize * 2);
     float2 CurUV = StartUV;
     
     
-    float4 Result = (float4) 0.0f;
+    float4 Texture = OriTexture.Sample(Smp, CurUV);
+    float4 BloomTexture = BloomTex.Sample(Smp, CurUV);
+    float4 BloomOriTexture = BloomOriTex.Sample(Smp, CurUV);
     
-    for (int y = 0; y < 5; ++y)
-    {
-        for (int x = 0; x < 5; ++x)
-        {
-            Result += Tex.Sample(Smp, CurUV) /* * Gau[y][x]*/;
-            CurUV.x += PixelUVSize.x;
-        }
-        
-        CurUV.x = StartUV.x;
-        CurUV.y += PixelUVSize.y;
-    }
+    float4 Bloom = pow(pow(abs(BloomTexture), 2.2f) + pow(abs(BloomOriTexture), 2.2f), 1.f / 2.2f);
     
-    Result /= 25.0f;
+    float4 Out = Texture;
     
-    // Color
-    // 지금 이 색깔은?
+    Out = pow(abs(Out), 2.2f);
+
+    Bloom = pow(abs(Bloom), 2.2f);
     
-    if (Result.a <= 0.0f)
-    {
-        clip(-1);
-    }
     
-    return Result;
+    Out += Bloom;
+    
+    return pow(abs(Out), 1 / 2.2f);
+    
+    //return Texture;
+
 }

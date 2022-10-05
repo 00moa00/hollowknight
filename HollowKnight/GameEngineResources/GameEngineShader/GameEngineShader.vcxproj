@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <FxCompile Include="AtlasBlur.hlsl" />
+    <FxCompile Include="Bloom.hlsl" />
     <FxCompile Include="Blur.hlsl" />
     <FxCompile Include="Color.hlsl" />
     <FxCompile Include="Debug3D.hlsl" />
@@ -145,6 +146,7 @@
     <FxCompile Include="TextureAtlas_Inst.hlsl" />
     <FxCompile Include="TransformHeader.fx" />
     <FxCompile Include="Vignette.hlsl" />
+    <FxCompile Include="WhiteCutPostEffect.hlsl" />
     <FxCompile Include="YEffect.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
