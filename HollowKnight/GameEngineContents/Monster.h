@@ -40,6 +40,8 @@ private:
 	int AllHP_;
 	int CurHp_;
 
+	int DropGeo_;
+
 	int HitParticleCount_;
 	int HitParticlePuffCount_;
 	int HitLightCount_;
@@ -224,6 +226,11 @@ public:
 		MonsterType_ = _MonsterType;
 	}
 
+	void SetDropGeo(int _Count)
+	{
+		DropGeo_ = _Count;
+	}
+
 
 	//================================
 	//     Getter
@@ -244,7 +251,10 @@ public:
 		return MonsterType_;
 	}
 
-
+	int GetDropGeo()
+	{
+		return DropGeo_;
+	}
 
 };
 

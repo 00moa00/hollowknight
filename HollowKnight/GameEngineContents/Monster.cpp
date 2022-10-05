@@ -8,6 +8,7 @@ Monster::Monster()
 	HitParticleCount_(0),
 	HitParticlePuffCount_(0),
 	HitLightCount_(0),
+	DropGeo_(0),
 	MonsterType_(MonsterType::Normal)
 
 {

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Crawlid.h"
 #include "KnightData.h"
+#include "DropGeo.h"
 
 Crawlid::Crawlid() 
 	:
@@ -98,11 +99,12 @@ void Crawlid::Start()
 	SetFallSpeed(2);
 	SetGravity(400.f);
 	SetSpeed(100.f);
-	SetHP(10);
-	CreateMonsterHitParticle(10);
-	CreateMonsterHitPuffParticle(10);
-	CreateMonsterHitLight(10);
+	SetHP(2);
+	CreateMonsterHitParticle(2);
+	CreateMonsterHitPuffParticle(2);
+	CreateMonsterHitLight(2);
 	CreateMonsterDeathPuffParticle();
+	SetDropGeo(5);
 
 	SetMoveDirection(float4::RIGHT);
 
@@ -290,6 +292,15 @@ void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
 		if (GetisMonsterDeath() == true)
 		{
 			SetMonsterDeathPuffParticleOn();
+
+			for (int i = 0; i < GetDropGeo(); ++i)
+			{
+
+				DropGeo* DropGeo_ = GetLevel()->CreateActor<DropGeo>();
+				DropGeo_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,
+					GetTransform().GetWorldPosition().y + 50.f });
+			}
+
 			CrawlidManager_.ChangeState("DEATH");
 		}
 
@@ -314,17 +325,17 @@ void Crawlid::CrawlidStunEnd(const StateInfo& _Info)
 void Crawlid::CrawlidDeathStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
-
+	//GetCollision()->Off();
 }
 
 void Crawlid::CrawlidDeathUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (isDeathEnd_ == true)
-	{
-		isDeathEnd_ = false;
-		this->Death();
+	//if (isDeathEnd_ == true)
+	//{
+	//	isDeathEnd_ = false;
+	//	this->Death();
 
-	}
+	//}
 }
 
 void Crawlid::CrawlidDeathEnd(const StateInfo& _Info)

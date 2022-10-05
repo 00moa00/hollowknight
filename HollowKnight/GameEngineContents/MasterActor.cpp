@@ -85,9 +85,6 @@ void MasterActor::isPixelCheck(float _DeltaTime, float4 _CheckDir)
 	-(GetTransform().GetLocalPosition().y - 2.f ) };
 
 
-
-
-
 	float4 WallPoint = float4::ZERO;
 	_CheckDir.Normalize();
 
