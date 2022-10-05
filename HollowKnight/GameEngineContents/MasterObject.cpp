@@ -3,6 +3,8 @@
 
 MasterObject::MasterObject() 
 	:
+	HitCount_(0),
+
 	Renderer_(nullptr),
 	Collision_(nullptr),
 	WallCollision_(nullptr)

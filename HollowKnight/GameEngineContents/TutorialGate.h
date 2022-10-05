@@ -18,6 +18,15 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
+	void LevelEndEvent() override;
+
+	void SetHitCollision() override;
+
+private:
+	bool isColl_;
+	bool isGateDeath_;
+
+	GameEngineTextureRenderer* BlackRenderer_;
 
 private:
 	bool ObjectVSEffectCollision(GameEngineCollision* _This, GameEngineCollision* _Other);

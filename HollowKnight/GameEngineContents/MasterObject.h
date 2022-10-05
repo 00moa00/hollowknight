@@ -16,10 +16,16 @@ public:
 	MasterObject& operator=(const MasterObject& _Other) = delete;
 	MasterObject& operator=(MasterObject&& _Other) noexcept = delete;
 
+public:
+	virtual void SetHitCollision(){};
+
 private:
 	GameEngineTextureRenderer* Renderer_;
 	GameEngineCollision* Collision_;
 	GameEngineCollision* WallCollision_;
+
+	int HitCount_;
+
 
 
 protected:
@@ -42,6 +48,11 @@ protected:
 		return WallCollision_;
 	}
 
+	int GetHitCount()
+	{
+		return HitCount_;
+	}
+
 	//================================
 	//    Setter
 	//================================
@@ -51,6 +62,19 @@ protected:
 	void CreateCollisionComponent(float4 _LocalScale, int _Order);
 	void CreateWallCollisionComponent(float4 _LocalScale);
 
+	void SetHitCount(int _i)
+	{
+		HitCount_ = _i;
+	}
+
+	void SubHitCount()
+	{
+		--HitCount_;
+		if (HitCount_ <= 0)
+		{
+			HitCount_ = 0;
+		}
+	}
 
 };
 

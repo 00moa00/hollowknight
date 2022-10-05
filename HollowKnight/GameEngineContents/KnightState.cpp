@@ -2129,6 +2129,8 @@ void Knight::KnightStunStart(const StateInfo& _Info)
 
 void Knight::KnightStunUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	_Info.PrevState;
 	if (KnightKnockbackTimer_ > 0.04f)
 	{
 		GameEngineTime::GetInst()->SetTimeScale(0, 1.0f);

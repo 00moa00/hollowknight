@@ -513,9 +513,6 @@
     <ClInclude Include="TutorialBreakDoor.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialBreakLargeDoor.h">
-      <Filter>Actor\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Potal.h">
       <Filter>Actor\Object</Filter>
     </ClInclude>
@@ -1101,9 +1098,6 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBreakDoor.cpp">
-      <Filter>Actor\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialBreakLargeDoor.cpp">
       <Filter>Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="Potal.cpp">

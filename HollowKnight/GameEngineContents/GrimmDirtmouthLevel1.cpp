@@ -123,7 +123,7 @@ void GrimmDirtmouthLevel1::LevelStartEvent()
 	if (KnightData::GetInst()->GetPreLevel() == UpperName)
 	{
 		GetKnight()->GetTransform().SetLocalPosition({ 252, -973, static_cast<float>(Z_ORDER::Knight) });
-		GetKnight()->SetDirInit(float4::LEFT);
+		GetKnight()->SetDirInit(float4::RIGHT);
 
 	}
 

@@ -3,6 +3,7 @@
 #include "KnightData.h"
 #include "Monster.h"
 #include "HollowKnightLevel.h"
+#include "MasterObject.h"
 
 KnightSlashEffect::KnightSlashEffect()
 	:
@@ -100,6 +101,11 @@ void KnightSlashEffect::SlashIdleUpdate(float _DeltaTime, const StateInfo& _Info
 {
 	GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Monster, CollisionType::CT_OBB2D,
 		std::bind(&KnightSlashEffect::EffectVSMonsterCollision, this, std::placeholders::_1, std::placeholders::_2));
+
+	GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Object, CollisionType::CT_OBB2D,
+		std::bind(&KnightSlashEffect::EffectVSObjectCollision, this, std::placeholders::_1, std::placeholders::_2));
+
+
 }
 
 void KnightSlashEffect::SlashIdleEnd(const StateInfo& _Info)
@@ -228,6 +234,20 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 		return false;
 	}
 
+}
+
+bool KnightSlashEffect::EffectVSObjectCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
+{
+	isColl_ = true;
+	MasterObject* MasterObject_ = dynamic_cast<MasterObject*>(_Other->GetActor());
+	if (MasterObject_ != nullptr)
+	{
+		MasterObject_->SetHitCollision();
+
+	}
+	KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
+
+	return true;
 }
 
 bool KnightSlashEffect::EffectVSWallFalseCheckCollision(GameEngineCollision* _This, GameEngineCollision* _Other)

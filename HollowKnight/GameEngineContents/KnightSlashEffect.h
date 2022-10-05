@@ -56,6 +56,12 @@ public:
 		return Dir_;
 	}
 
+	void SetColl()
+	{
+		isColl_ = true;
+		KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
+
+	}
 	
 	void SetAnimationSlash();
 	void SetAnimationDoubleSlash();
@@ -65,6 +71,8 @@ public:
 
 
 	bool EffectVSMonsterCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+	bool EffectVSObjectCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
+
 	bool EffectVSWallFalseCheckCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 };

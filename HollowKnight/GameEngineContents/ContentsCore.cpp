@@ -1363,6 +1363,7 @@ void ContentsCore::Start()
 		}
 	}
 
+
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -1383,6 +1384,7 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("shop_lamp_bug0000-Sheet.png", 8, 1);
 
 	}
+
 
 	{
 		GameEngineDirectory Dir;

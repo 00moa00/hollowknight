@@ -810,10 +810,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TutorialBreakLargeDoor.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="TutorialGate.h">
       <SubType>
       </SubType>
@@ -1576,10 +1572,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TutorialBreakDoor.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TutorialBreakLargeDoor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

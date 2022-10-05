@@ -18,6 +18,7 @@
 #include "MapSpike.h"
 #include "WhiteParicleMaker.h"
 
+#include "TutorialGate.h"
 
 KingsPassLevel4::KingsPassLevel4() 
 {
@@ -64,7 +65,6 @@ void KingsPassLevel4::Start()
 
 		Potal_->CreatePotal(UpperName, FadeMode::FadeOut);
 		Potal_->GetTransform().SetWorldPosition({ 3492.f - 60, -3119.f });
-
 	}
 
 	{
@@ -145,7 +145,12 @@ void KingsPassLevel4::Start()
 
 	{
 		MapSpike* MapSpike_ = CreateActor<MapSpike>();
-		MapSpike_->GetTransform().SetWorldPosition({ 3500, -3003.f });
+		MapSpike_->GetTransform().SetWorldPosition({ 3550, -3003.f });
+	}
+
+	{
+		TutorialGate* TutorialGate_ = CreateActor<TutorialGate>();
+		TutorialGate_->GetTransform().SetWorldPosition({5550.f, -1250.f});
 	}
 
 	
@@ -191,8 +196,8 @@ void KingsPassLevel4::LevelStartEvent()
 
 	if (KnightData::GetInst()->GetPreLevel() == UpperName)
 	{
-		GetKnight()->GetTransform().SetLocalPosition({ 3492.f, -3119.f, static_cast<float>(Z_ORDER::Knight) });
-		GetKnight()->SetDirInit(float4::LEFT);
+		GetKnight()->GetTransform().SetLocalPosition({ 163.f, -1169.f, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::RIGHT);
 
 	}
 
