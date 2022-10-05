@@ -271,7 +271,9 @@ void Knight::KnightStillUpdate(float _DeltaTime, const StateInfo& _Info)
 	}
 
 	// С§Сп
-	if (GameEngineInput::GetInst()->IsDown("KnightFocus") == true)
+	if (GameEngineInput::GetInst()->IsDown("KnightFocus") == true 
+		&& GetLevel<HollowKnightLevel>()->GetHUD()->GetSoul()->GetSoulLevel() > 1
+		&& KnightData::GetInst()->GetCurMask() != KnightData::GetInst()->GetAllMask())
 	{
 		KnightManager_.ChangeState("FOCUS");
 		return;
@@ -1858,14 +1860,14 @@ void Knight::KnightFocusBurstUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (isInvincibility_ == true)
 	{
 		KnightInvincibiliting(_DeltaTime);
-
 	}
-
 
 	if (isFocusEnd_ == true)
 	{
 		isFocusEnd_ = false;
 		KnightData::GetInst()->SetisRefill(true);
+		KnightData::GetInst()->SetisFoucus(true);
+		KnightData::GetInst()->SetisUseSoul(true);
 		KnightManager_.ChangeState("STILL"); 
 		return;
 	}

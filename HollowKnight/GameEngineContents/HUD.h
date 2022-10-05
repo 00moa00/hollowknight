@@ -64,6 +64,11 @@ public:
 		return GeoCountFont_;
 	}
 
+	Soul* GetSoul()
+	{
+		return Soul_;
+	}
+
 private:
 
 	//================================

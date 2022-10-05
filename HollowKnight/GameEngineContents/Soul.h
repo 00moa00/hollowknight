@@ -1,6 +1,8 @@
 #pragma once
 #include "MasterUI.h"
 #include "MaskRenderer.h"
+#include "KnightData.h"
+
 // Ό³Έν :
 class Soul : public MasterUI
 {
@@ -44,11 +46,25 @@ public:
 
 	void UseSoulLevel()
 	{
-		if (SoulLevel_ >= 2)
+		if (KnightData::GetInst()->GetisFoucus() == true)
 		{
-			SoulLevel_ -= 2;
-			SoulManager_.ChangeState("GROW");
+			KnightData::GetInst()->SetisFoucus(false);
+
+			if (SoulLevel_ >= 1)
+			{
+				SoulLevel_ -= 1;
+				SoulManager_.ChangeState("GROW");
+			}
 		}
+		else
+		{
+			if (SoulLevel_ >= 2)
+			{
+				SoulLevel_ -= 2;
+				SoulManager_.ChangeState("GROW");
+			}
+		}
+
 	}
 
 	void GrowSoulLevel()

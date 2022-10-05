@@ -29,6 +29,7 @@ KnightData::KnightData()
 	isAddNewMask_(false),
 	isBloomFlag_(true),
 	isNoiseflag_(true),
+	isFoucus_(false),
 
 	MainLightMulColor_({1.0f, 1.0f, 1.0f, 0.7f}),
 	MainLightPlusColor_({ 0.0f, 0.0f, 0.0f, 0.0f }),

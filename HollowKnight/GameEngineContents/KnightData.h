@@ -158,6 +158,7 @@ private:
 	bool isBossBattle_;
 	bool isIntroFallEvent_;
 	bool isUseSoul_;
+	bool isFoucus_;
 	bool isDeathLevelChange_;
 
 	bool isGrimmOpen_;
@@ -223,6 +224,11 @@ public:
 	//================================
 	//    Getter
 	//================================
+	bool GetisFoucus() const
+	{
+		return isFoucus_;
+	}
+
 	int GetCurrentGeo() const
 	{
 		return CurrentGeo_;
@@ -472,6 +478,11 @@ public:
 	//================================
 	//    Setter
 	//================================
+
+	void SetisFoucus(bool _b)
+	{
+		isFoucus_ = _b;
+	}
 
 	void SetBloomFlag(bool _b)
 	{
