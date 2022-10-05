@@ -40,6 +40,11 @@ public:
 		return SoulLevel_;
 	}
 
+	GameEngineUIRenderer* GetEyeRenderer()
+	{
+		return EyeRenderer_;
+	}
+
 	//================================
 	//     Setter
 	//================================

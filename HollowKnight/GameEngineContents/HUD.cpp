@@ -92,13 +92,6 @@ void HUD::Update(float _DeltaTime)
 
 void HUD::LevelStartEvent()
 {
-
-
-
-
-
-
-
 	if (Maskes_.size() - 1 != KnightData::GetInst()->GetAllMask())
 	{
 		Maskes_.push_back(GetLevel()->CreateActor<Mask>());
@@ -142,6 +135,8 @@ void HUD::LevelStartEvent()
 
 	KnightData::GetInst()->SetisHUD(true);
 	Soul_->SetSoul(KnightData::GetInst()->GetCurSoul());
+
+
 }
 
 void HUD::LevelEndEvent()

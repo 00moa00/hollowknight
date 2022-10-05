@@ -112,8 +112,21 @@ void Soul::Update(float _DeltaTime)
 
 void Soul::SetSoul(int _Level)
 {
-
 	SoulLevel_ = _Level;
+	//SetLevelPosition(SoulLevel_);
+
+	if (SoulLevel_ == 9)
+	{
+		EyeRenderer_->On();
+		Soul_->ChangeFrameAnimation("FULL_ANIMATION");
+	}
+	else
+	{
+		EyeRenderer_->Off();
+
+		Soul_->ChangeFrameAnimation("IDLE_ANIMATION");
+	}
+
 	SetLevelPosition(SoulLevel_);
 
 }
@@ -200,6 +213,7 @@ void Soul::SoulGrowEnd(const StateInfo& _Info)
 
 void Soul::SoulIdleStart(const StateInfo& _Info)
 {
+
 	if (SoulLevel_ == 9)
 	{
 		EyeRenderer_->On();
