@@ -75,7 +75,7 @@ void DirtmouthLevel2::Start()
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetWorldPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });
 	
-	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
+	GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
 	
 	
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();

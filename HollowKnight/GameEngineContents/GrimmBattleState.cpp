@@ -129,9 +129,9 @@ void Grimm::GrimmBattleTeleportAppearUpdate(float _DeltaTime, const StateInfo& _
 	if (isTeleportAppearEnd_ == true)
 	{
 		isTeleportAppearEnd_ = false;
-		GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE1");
+		//GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE1");
 
-		//GrimmBattleManager_.ChangeState(ChangeState_);
+		GrimmBattleManager_.ChangeState(ChangeState_);
 		return;
 	}
 }

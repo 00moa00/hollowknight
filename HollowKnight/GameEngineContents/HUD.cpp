@@ -332,6 +332,7 @@ void HUD::HUDHideStart(const StateInfo& _Info)
 	Geo_->Off();
 	VesselFrame_->Off();
 	Soul_->Off();
+	GeoCountFont_->Off();
 
 	for (int i = 0; i < Maskes_.size(); ++i)
 	{
@@ -354,7 +355,7 @@ void HUD::HUDHideEnd(const StateInfo& _Info)
 	Geo_->On();
 	VesselFrame_->On();
 	Soul_->On();
-
+	GeoCountFont_->On();
 	for (int i = 0; i < Maskes_.size(); ++i)
 	{
 		Maskes_[i]->On();
