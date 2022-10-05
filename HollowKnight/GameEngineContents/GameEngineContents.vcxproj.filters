@@ -756,6 +756,12 @@
     <ClInclude Include="DoorStoneParticle.h">
       <Filter>Actor\Effect\Map</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialGate.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBug.h">
+      <Filter>Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1345,6 +1351,12 @@
     </ClCompile>
     <ClCompile Include="DoorStoneParticle.cpp">
       <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialGate.cpp">
+      <Filter>Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBug.cpp">
+      <Filter>Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

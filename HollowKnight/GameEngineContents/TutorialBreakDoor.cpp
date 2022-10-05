@@ -40,7 +40,7 @@ void TutorialBreakDoor::Update(float _DeltaTime)
 }
 
 bool TutorialBreakDoor::ObjectVSEffectCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
-{
+{  
 
 	return true;
 }

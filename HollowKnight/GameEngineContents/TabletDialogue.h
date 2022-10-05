@@ -97,7 +97,6 @@ public:
 		NextArrow_->Off();
 		TabletDoalogueManager_.ChangeState("CLOSE");
 
-
 	}
 
 
@@ -148,8 +147,6 @@ public:
 				isDialougueFull_ = true;
 				NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
 				NextArrow_->GetTransform().SetLocalScale(NextArrow_->GetCurTexture()->GetCutScale(0));
-
-				//return;
 
 			}
 
