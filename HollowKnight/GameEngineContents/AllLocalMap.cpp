@@ -3,6 +3,8 @@
 #include "HollowKnightLevel.h"
 
 AllLocalMap::AllLocalMap() 
+	:
+	MapBack_(nullptr)
 {
 }
 
@@ -12,6 +14,12 @@ AllLocalMap::~AllLocalMap()
 
 void AllLocalMap::Start()
 {
+	MapBack_ = GetLevel()->CreateActor<Map>();
+
+	MapBack_->CreateRendererComponent("black2.png");
+	MapBack_->GetTransform().SetWorldScale({3000.f, 3000.f});
+	MapBack_->GetRenderer()->GetPixelData().MulColor.a = 0.8f;
+	MapBack_->Off();
 	//================================
 	//    CreateKey
 	//================================
@@ -58,12 +66,15 @@ void AllLocalMap::OpenAllLocalMap(float4 _Pivot)
 	GetLevel<HollowKnightLevel>()->GetDirtmouthMap()->On();
 	GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetWidePivot(_Pivot);
 	GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapCameraWide();
+	MapBack_->On();
+
 
 }
 
 void AllLocalMap::CloseAllLocalMap()
 {
 	GetLevel<HollowKnightLevel>()->GetMapCameraManager()->SetMapCameraNarrow();
+	MapBack_->Off();
 	//GetLevel<HollowKnightLevel>()->GetForgottenCrossroadMap()->Off();
 }
 

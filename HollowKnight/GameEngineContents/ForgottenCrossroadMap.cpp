@@ -15,8 +15,8 @@ ForgottenCrossroadMap::~ForgottenCrossroadMap()
 void ForgottenCrossroadMap::Start()
 {
 
-	MapPosition_.push_back({ -219, 200,0 });
-	MapPosition_.push_back({ -73, 199,0 });
+	MapPosition_.push_back({ -219, 200, -10 });
+	MapPosition_.push_back({ -73, 199, -10 });
 	MapPosition_.push_back({ 96, 34, -10 });
 	MapPosition_.push_back({ 267, -116, -10 });
 	MapPosition_.push_back({ -233, 127 , -10 });
@@ -70,10 +70,10 @@ void ForgottenCrossroadMap::Start()
 		ForgottenCrossroadMap_[i]->CreateRendererComponent("Crossroads_" + ssInt.str() + ".png");
 		ForgottenCrossroadMap_[i]->GetTransform().SetWorldPosition(MapPosition_[i-1]);
 		ForgottenCrossroadMap_[i]->SetParent(this);
-		ForgottenCrossroadMap_[i]->GetRenderer()->GetPixelData().MulColor.r = 0.2f;
-		ForgottenCrossroadMap_[i]->GetRenderer()->GetPixelData().MulColor.g = 0.4f;
-
-		ForgottenCrossroadMap_[i]->GetRenderer()->GetPixelData().MulColor.b = 1.0f;
+		ForgottenCrossroadMap_[i]->GetRenderer()->GetPixelData().MulColor.r = 0.4f;
+		ForgottenCrossroadMap_[i]->GetRenderer()->GetPixelData().MulColor.g = 0.5f;
+		ForgottenCrossroadMap_[i]->GetRenderer()->GetPixelData().MulColor.b = 0.7f;
+		//ForgottenCrossroadMap_[i]->GetRenderer()->GetPixelData().MulColor.a = 0.3f;
 
 	}
 

@@ -324,6 +324,7 @@ void SettingPage::AllOn()
 	{
 		AllPage_[i]->AllOn();
 	}
+	SettingPointer_->SetFirstPosCharmPage();
 
 }
 

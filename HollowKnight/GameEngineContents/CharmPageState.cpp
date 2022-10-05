@@ -53,6 +53,7 @@ void SettingPointer::PointerCharmPageIdleStart(const StateInfo& _Info)
 {
 
 	//GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoImage(findSlot->GetFilePath());
+	//CurrentPosInCharmPage = 0;
 
 	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfo(" ", 21);
 	GetLevel<HollowKnightLevel>()->GetCharmPageInfo()->SetInfoName(" ");

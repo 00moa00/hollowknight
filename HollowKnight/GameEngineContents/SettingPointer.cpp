@@ -274,14 +274,11 @@ void SettingPointer::SetFirstPosCharmPage()
 
 	SettingPointerBox_->SetBoxSize({ PointActorComponent_->GetPointActor()->GetPointerSize()/2 });
 
+	CurrentPosInCharmPage = 0;
 
 	SettingPointerCharmPageManager_.ChangeState("IDLE");
 	SettingPointerInventoryPageManager_.ChangeState("WAIT");
 	SettingPointerMapPageManager_.ChangeState("WAIT");
-
-	CurrentPosInCharmPage = 0;
-
-
 
 	CurrentPage_ = PAGE_TYPE::Charm;
 

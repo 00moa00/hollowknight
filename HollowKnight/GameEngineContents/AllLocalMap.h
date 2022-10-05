@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
-#include <GameEngineCore/GameEngineCollision.h>
+
+#include "Map.h"
 
 // Ό³Έν :
 class AllLocalMap : public GameEngineActor
@@ -21,6 +22,7 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	Map* MapBack_;
 public:
 	void OpenAllLocalMap(float4 _Pivot);
 	void CloseAllLocalMap();
