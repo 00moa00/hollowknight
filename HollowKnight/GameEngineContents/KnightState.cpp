@@ -2394,7 +2394,6 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 			GetTransform().SetWorldMove(float4::LEFT * GetSpeed() * _DeltaTime);
 		}
 
-
 		if (true == GameEngineInput::GetInst()->IsPress("KnightRight"))
 		{
 			GetTransform().SetWorldMove(float4::RIGHT * GetSpeed() * _DeltaTime);
@@ -2426,8 +2425,8 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 
 		this->isPixelCheck(_DeltaTime, float4::DOWN);
-		float4 Move = (float4::DOWN * GetGravity()  * _DeltaTime);
 
+		float4 Move = (float4::DOWN * GetGravity()  * _DeltaTime);
 		Move.y -= KnightFallAccel_;
 
 		GetTransform().SetWorldMove(Move );
@@ -2442,14 +2441,11 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		Move.y -= KnightFallAccel_;
 
 		GetTransform().SetWorldMove(Move);
-
-
 	}
 
 		if (isSlashEnd_ == true)
 		{
 			KnightManager_.ChangeState("FALL");
-
 		}
 
 	}
@@ -2460,6 +2456,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		SetisCollWall(true);
 	}
+
 	else
 	{
 		SetisCollWall(false);

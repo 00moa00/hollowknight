@@ -93,11 +93,32 @@ public:
 	void SetisTalking(bool b)
 	{
 		isTalking_ = b;
+
+		if (b == true)
+		{
+			NPCNameFontRenderer_->On();
+		}
+
+		else
+		{
+			NPCNameFontRenderer_->Off();
+		}
+
 	}
 
 	virtual void SetisShop(bool b)
 	{
 		isOpenShop_ = b;
+
+		if (b == true)
+		{
+			NPCNameFontRenderer_->On();
+		}
+
+		else
+		{
+			NPCNameFontRenderer_->Off();
+		}
 	}
 
 	void SetNPCType(NPC_TYPE _Type)

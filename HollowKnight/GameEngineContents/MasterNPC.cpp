@@ -25,6 +25,7 @@ void MasterNPC::CreateNameFontRenderer()
 		, false);
 
 	NPCNameFontRenderer_->SetParent(this);
+	NPCNameFontRenderer_->Off();
 }
 
 void MasterNPC::CreatePromptSet()

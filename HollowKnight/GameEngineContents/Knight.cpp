@@ -1093,8 +1093,6 @@ bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineColl
 
 		if (DyMonster_ != nullptr)
 		{
-
-			//if()
 			KnockbackDirection_ = DyMonster_->GetMoveDirection();
 
 			Monster* Monster_ = dynamic_cast<Monster*>(_Other->GetActor());
@@ -1102,13 +1100,13 @@ bool Knight::KnightVSMonsterCollision(GameEngineCollision* _This, GameEngineColl
 			if (Monster_->GetMonsterType() == MonsterType::Spike)
 			{
 				isKnightSpikeHit_ = true;
-
 			}
 
 		}
 
 		return true;
 	}
+
 	else
 	{
 		return false;
@@ -1124,7 +1122,6 @@ bool Knight::KnightVSMonsterAttackCollision(GameEngineCollision* _This, GameEngi
 		if (Effect != nullptr && Attack != nullptr )
 		{
 			Effect->GetTransform().SetWorldPosition({ _Other->GetTransform().GetWorldPosition().x,  _Other->GetTransform().GetWorldPosition().y + (Attack->GetCollision()->GetTransform().GetWorldScale().y / 4) , static_cast<float>(Z_ORDER::Effect) });
-
 		}
 
 		//if(_This->)
@@ -1166,6 +1163,7 @@ bool Knight::KnihgtVSTabletCollision(GameEngineCollision* _This, GameEngineColli
 					Tablet_->TabletDialogueOff();
 					KnightManager_.ChangeState("SEE_RETURN_TO_IDLE");
 				}
+
 				else 
 				{
 					Tablet_->GetTabletDialogue()->SetNextDialogue();
@@ -1211,7 +1209,6 @@ bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollisio
 				NPC->SetisTalking(true);
 				NPC->GetDialogueSet()->SetDialogueOn();
 				isTalkingNPC_ = true;
-
 			}
 		}
 	}
