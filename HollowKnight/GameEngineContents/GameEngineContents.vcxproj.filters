@@ -747,6 +747,9 @@
     <ClInclude Include="GeoCountFont.h">
       <Filter>Actor\Font</Filter>
     </ClInclude>
+    <ClInclude Include="LampBugGrow.h">
+      <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1327,6 +1330,9 @@
     </ClCompile>
     <ClCompile Include="GeoCountFont.cpp">
       <Filter>Actor\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="LampBugGrow.cpp">
+      <Filter>Actor\Effect\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

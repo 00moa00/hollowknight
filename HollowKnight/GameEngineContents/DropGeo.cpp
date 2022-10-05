@@ -103,7 +103,6 @@ void DropGeo::isPixelCheck(float _DeltaTime)
 	if (DownColor.CompareInt4D(float4(0, 0, 1, 1)) == true/* && DirColor.CompareInt2D(float4(1.f, 0, 0, 1.f)) == true*/)
 	{
 		DropGeoManager_.ChangeState("DROP");
-
 	}
 	else
 	{

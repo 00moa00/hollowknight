@@ -18,6 +18,9 @@
 #include "BloomPostEffect.h"
 #include "GrimmFlameEffect.h"
 
+#include "LampBugGrow.h"
+#include "LampBug.h"
+
 GrimmDirtmouthLevel2::GrimmDirtmouthLevel2() 
 	:
 	Elderbug_(nullptr)
@@ -88,6 +91,81 @@ void GrimmDirtmouthLevel2::Start()
 	{
 		GrimmFlameEffect* GrimmFlameEffect_ = CreateActor<GrimmFlameEffect>();
 		GrimmFlameEffect_->GetTransform().SetWorldPosition({ 4192.f, -2587.f , 41 });
+	}
+
+
+
+	{
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 414.f, -3010.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 414.f, -3010.f }, { 10,10 });
+		}
+
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 414.f + 221.f, -2880.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 414.f + 221.f, -2880.f }, { 10,10 });
+		}
+	}
+
+	{
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 2181.f, -3010.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 2181.f, -3010.f }, { 10,10 });
+		}
+
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 2181.f + 221.f, -2880.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 2181.f + 221.f, -2880.f }, { 10,10 });
+		}
+	}
+
+
+	{
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 4338.f, -3010.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 4338.f, -3010.f }, { 10,10 });
+		}
+
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 4338.f + 221.f, -2880.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 4338.f + 221.f, -2880.f }, { 10,10 });
+		}
 	}
 
 	OverlayPostEffect* OverlayPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<OverlayPostEffect>();

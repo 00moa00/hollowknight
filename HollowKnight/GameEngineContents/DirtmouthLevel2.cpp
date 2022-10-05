@@ -17,6 +17,10 @@
 #include "VignettePostEffect.h"
 #include "BloomPostEffect.h"
 #include "GrimmFlameParticle.h"
+
+#include "LampBugGrow.h"
+#include "LampBug.h"
+
 DirtmouthLevel2::DirtmouthLevel2() 
 	:
 	Elderbug_(nullptr)
@@ -68,9 +72,83 @@ void DirtmouthLevel2::Start()
 
 	MapShopPotal_ = CreateActor<RoomPotal>();
 	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop, true);
-	MapShopPotal_->GetTransform().SetWorldPosition({3840, -3045.f });
+	MapShopPotal_->GetTransform().SetWorldPosition({ 3840, -3045.f });
 
 	Elderbug_ = CreateActor<Elderbug>();
+
+	{
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 414.f, -3010.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 414.f, -3010.f }, { 10,10 });
+		}
+
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 414.f + 221.f, -2880.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 414.f + 221.f, -2880.f }, { 10,10 });
+		}
+	}
+
+	{
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 2181.f, -3010.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 2181.f, -3010.f }, { 10,10 });
+		}
+
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 2181.f + 221.f, -2880.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 2181.f + 221.f, -2880.f }, { 10,10 });
+		}
+	}
+
+
+	{
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 4338.f, -3010.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 4338.f, -3010.f }, { 10,10 });
+		}
+
+		{
+			LampBugGrow* LampBugGrow_ = CreateActor<LampBugGrow>();
+			LampBugGrow_->GetTransform().SetWorldPosition({ 4338.f + 221.f, -2880.f });
+		}
+
+		for (int i = 0; i < 3; ++i)
+		{
+			LampBug* LampBug_ = CreateActor<LampBug>();
+			LampBug_->SetLimitMove({ 4338.f + 221.f, -2880.f }, { 10,10 });
+		}
+	}
+
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetWorldPosition({ 500.f, -2500.f, static_cast<float>(Z_ORDER::Knight) });

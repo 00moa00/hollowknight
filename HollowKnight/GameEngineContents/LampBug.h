@@ -26,8 +26,29 @@ private:
 
 	float Alpha_;
 
+	float AlphaTImer_;
+
+	GameEngineStateManager BugManager_;
+
+
 public:
 	void SetLimitMove(float4 _CurrentPos, float4 _LimitSize);
+
+	void MovingBug();
+
+private:
+	//================================
+	//    Bind State
+	//================================
+
+	void LmapBugIdleStart(const StateInfo& _Info);
+	void LmapBugIdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void LmapBugIdleEnd(const StateInfo& _Info);
+
+	void LmapBugHideStart(const StateInfo& _Info);
+	void LmapBugHideUpdate(float _DeltaTime, const StateInfo& _Info);
+	void LmapBugHideEnd(const StateInfo& _Info);
+
 
 };
 
