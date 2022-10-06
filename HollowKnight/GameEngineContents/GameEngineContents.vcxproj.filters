@@ -7,9 +7,6 @@
     <Filter Include="Actor">
       <UniqueIdentifier>{1c74ed1c-9761-412c-93d3-abef363512d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play">
-      <UniqueIdentifier>{f046c344-41c5-461f-9a13-3bf9f04d9882}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Title">
       <UniqueIdentifier>{804cf31e-d3ed-4dc6-9803-e76637ce47a4}</UniqueIdentifier>
     </Filter>
@@ -19,38 +16,14 @@
     <Filter Include="Level\Levels">
       <UniqueIdentifier>{ea4cb837-0eaf-4be6-a86c-eb638d05e597}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Master">
-      <UniqueIdentifier>{3d44b222-4a41-4fe3-ac20-705f50ec38b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Knight">
-      <UniqueIdentifier>{008b30a6-3400-49c4-8aab-0cb852ec74ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect">
-      <UniqueIdentifier>{4c71ab7d-c0fd-407f-b3ac-e6f1e4e001d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{e2ff85b3-9293-4a0a-82c4-e32bd43c091b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Master\GUI">
-      <UniqueIdentifier>{832742dc-683a-462e-a703-d1595718022d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI">
-      <UniqueIdentifier>{bd5fa08a-ac72-4750-9a42-fda6d042ed25}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Title\All">
       <UniqueIdentifier>{db04565f-0888-427e-8040-edbc5cd38744}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Meta">
       <UniqueIdentifier>{6a832eb0-51cc-4dfd-87cc-b23217dd9d0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Knight Shadow">
-      <UniqueIdentifier>{004b92a2-1adc-41bf-a2f2-80514cf1a5bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Monster">
-      <UniqueIdentifier>{e71467e9-a601-4aab-ae6c-9e383ede19dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\MapItem">
-      <UniqueIdentifier>{4a25f608-3033-4907-b564-b00995befe1a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level\Levels\KingsPass">
       <UniqueIdentifier>{4bfdf699-bde7-4275-ab67-6ba7507ecc22}</UniqueIdentifier>
@@ -67,71 +40,11 @@
     <Filter Include="GlobalData">
       <UniqueIdentifier>{5c0d327c-f680-4cd4-a5c1-9a7caec22b46}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\UI\HUD">
-      <UniqueIdentifier>{0d50eb08-1054-4415-a021-cf107a19dae8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting">
-      <UniqueIdentifier>{bcc22d23-a7f1-492f-949c-4a58ef738460}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Map">
-      <UniqueIdentifier>{59c1c169-8aec-4cf3-b750-e7d76c8cf682}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Inventory">
-      <UniqueIdentifier>{693cceb4-4958-49d5-8bfd-6fa2927314ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Charm">
-      <UniqueIdentifier>{a987c965-5ef4-4faa-baf9-2b341d4ee51d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Border">
-      <UniqueIdentifier>{78f046b0-91ef-4189-81a1-d826d20810de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Light">
-      <UniqueIdentifier>{e01c558b-bd75-49d3-a46b-a899b618eb1d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Charm\Charm">
-      <UniqueIdentifier>{84458e18-3f02-4cbf-b2c0-5a1d9ea15138}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Object">
-      <UniqueIdentifier>{c717f5e0-861a-4efd-bc6b-095ed45b18be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Inventory\Item">
-      <UniqueIdentifier>{92448587-8228-4a80-905b-6f0f2390d2dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Pointer">
-      <UniqueIdentifier>{63a6e59e-b57c-4cd0-b95f-9fa00e0f30da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Pointer\PointerState">
-      <UniqueIdentifier>{b20ed465-c032-4dbd-966e-803629137879}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Setting\Map\LocalMaps">
-      <UniqueIdentifier>{e1cd26ab-883b-487d-9e85-fdd9f47d2e64}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Font">
       <UniqueIdentifier>{a65209a9-80ee-4374-b387-ae1b7ed23732}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\Npc">
-      <UniqueIdentifier>{178f3818-a43e-46d1-9974-cc38ba3be7fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level\Levels\Dirtmouth\Room">
       <UniqueIdentifier>{a5254e96-a9ca-4069-b8d8-8e87b186c0b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Knight">
-      <UniqueIdentifier>{53e1d123-3a3e-43a2-9d3d-d0265b2ed185}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\PostEffect">
-      <UniqueIdentifier>{bc835f29-28ac-4303-97f5-917e9ac03a05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Dialogue">
-      <UniqueIdentifier>{6f31a5fe-47ec-4b01-99f9-ae26b2aecf9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Npc\Shop">
-      <UniqueIdentifier>{abe4ffdc-a5bb-4841-a9cd-4b2eee6f1bb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\PromptSet">
-      <UniqueIdentifier>{c37ca923-d779-47d1-a913-ae2aca7e6fdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Monster">
-      <UniqueIdentifier>{4981cceb-2983-4f74-89e0-9008b985e1f9}</UniqueIdentifier>
     </Filter>
     <Filter Include="ThirdParty">
       <UniqueIdentifier>{090a9462-fa81-4df1-88d9-6b50cefbb760}</UniqueIdentifier>
@@ -141,30 +54,6 @@
     </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{6133c054-d615-4921-a6b6-17b34b0553df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Knight\Spell">
-      <UniqueIdentifier>{f2b9da81-f6a2-4fa5-b60a-8eacb4bf8d95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Etc">
-      <UniqueIdentifier>{0ea2b947-c34d-4f71-b5cd-2b6ffcccfbe3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Map">
-      <UniqueIdentifier>{cea18bcf-d031-48bf-827b-e5b1759807fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\UI\Tablet">
-      <UniqueIdentifier>{121b324e-625d-4fa6-adc6-8c18392b050f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Monster\Boss">
-      <UniqueIdentifier>{19190a24-b197-4d62-bce6-446ff9cb8440}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Object">
-      <UniqueIdentifier>{fef8bef6-e9bd-4cfd-864a-937bf5e596c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Monster\Grimm">
-      <UniqueIdentifier>{397f0ed2-1964-4657-8adc-b4c599abaef3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\Monster\Grimm\Death">
-      <UniqueIdentifier>{4665597b-2af8-461d-8df4-e9754acdd754}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Title\Particle">
       <UniqueIdentifier>{52ae6e7b-41ab-4028-af4b-58f492bb9477}</UniqueIdentifier>
@@ -178,14 +67,125 @@
     <Filter Include="Level\Levels\Dirtmouth\Grimm">
       <UniqueIdentifier>{df90c685-495a-4290-8605-b8d2d620adc7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\UI\HeartPiece">
-      <UniqueIdentifier>{76c99eef-001e-4fe7-84db-05f47326106d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect\UI">
-      <UniqueIdentifier>{999f82bb-65b6-4cae-b7f5-d5dc7f9c9af2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level\Levels\Prompt">
       <UniqueIdentifier>{87860a90-6014-4f21-b9eb-86d4e080ff99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor">
+      <UniqueIdentifier>{f046c344-41c5-461f-9a13-3bf9f04d9882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Knight">
+      <UniqueIdentifier>{008b30a6-3400-49c4-8aab-0cb852ec74ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI">
+      <UniqueIdentifier>{bd5fa08a-ac72-4750-9a42-fda6d042ed25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\HUD">
+      <UniqueIdentifier>{0d50eb08-1054-4415-a021-cf107a19dae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting">
+      <UniqueIdentifier>{bcc22d23-a7f1-492f-949c-4a58ef738460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Map">
+      <UniqueIdentifier>{59c1c169-8aec-4cf3-b750-e7d76c8cf682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Map\LocalMaps">
+      <UniqueIdentifier>{e1cd26ab-883b-487d-9e85-fdd9f47d2e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Inventory">
+      <UniqueIdentifier>{693cceb4-4958-49d5-8bfd-6fa2927314ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Inventory\Item">
+      <UniqueIdentifier>{92448587-8228-4a80-905b-6f0f2390d2dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Charm">
+      <UniqueIdentifier>{a987c965-5ef4-4faa-baf9-2b341d4ee51d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Charm\Charm">
+      <UniqueIdentifier>{84458e18-3f02-4cbf-b2c0-5a1d9ea15138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Border">
+      <UniqueIdentifier>{78f046b0-91ef-4189-81a1-d826d20810de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Pointer">
+      <UniqueIdentifier>{63a6e59e-b57c-4cd0-b95f-9fa00e0f30da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Setting\Pointer\PointerState">
+      <UniqueIdentifier>{b20ed465-c032-4dbd-966e-803629137879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Dialogue">
+      <UniqueIdentifier>{6f31a5fe-47ec-4b01-99f9-ae26b2aecf9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\PromptSet">
+      <UniqueIdentifier>{c37ca923-d779-47d1-a913-ae2aca7e6fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\Tablet">
+      <UniqueIdentifier>{121b324e-625d-4fa6-adc6-8c18392b050f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\UI\HeartPiece">
+      <UniqueIdentifier>{76c99eef-001e-4fe7-84db-05f47326106d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Knight Shadow">
+      <UniqueIdentifier>{004b92a2-1adc-41bf-a2f2-80514cf1a5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Monster">
+      <UniqueIdentifier>{e71467e9-a601-4aab-ae6c-9e383ede19dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Monster\Boss">
+      <UniqueIdentifier>{19190a24-b197-4d62-bce6-446ff9cb8440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Npc">
+      <UniqueIdentifier>{178f3818-a43e-46d1-9974-cc38ba3be7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Npc\Shop">
+      <UniqueIdentifier>{abe4ffdc-a5bb-4841-a9cd-4b2eee6f1bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Object">
+      <UniqueIdentifier>{c717f5e0-861a-4efd-bc6b-095ed45b18be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\MasterActor">
+      <UniqueIdentifier>{3d44b222-4a41-4fe3-ac20-705f50ec38b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\MasterActor\GUI">
+      <UniqueIdentifier>{832742dc-683a-462e-a703-d1595718022d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\MapItem">
+      <UniqueIdentifier>{4a25f608-3033-4907-b564-b00995befe1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect">
+      <UniqueIdentifier>{4c71ab7d-c0fd-407f-b3ac-e6f1e4e001d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Light">
+      <UniqueIdentifier>{e01c558b-bd75-49d3-a46b-a899b618eb1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Knight">
+      <UniqueIdentifier>{53e1d123-3a3e-43a2-9d3d-d0265b2ed185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Knight\Spell">
+      <UniqueIdentifier>{f2b9da81-f6a2-4fa5-b60a-8eacb4bf8d95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\PostEffect">
+      <UniqueIdentifier>{bc835f29-28ac-4303-97f5-917e9ac03a05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Monster">
+      <UniqueIdentifier>{4981cceb-2983-4f74-89e0-9008b985e1f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Monster\Grimm">
+      <UniqueIdentifier>{397f0ed2-1964-4657-8adc-b4c599abaef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Monster\Grimm\Death">
+      <UniqueIdentifier>{4665597b-2af8-461d-8df4-e9754acdd754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Etc">
+      <UniqueIdentifier>{0ea2b947-c34d-4f71-b5cd-2b6ffcccfbe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Map">
+      <UniqueIdentifier>{cea18bcf-d031-48bf-827b-e5b1759807fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\Object">
+      <UniqueIdentifier>{fef8bef6-e9bd-4cfd-864a-937bf5e596c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Actor\Effect\UI">
+      <UniqueIdentifier>{999f82bb-65b6-4cae-b7f5-d5dc7f9c9af2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -205,28 +205,28 @@
       <Filter>Level\Levels</Filter>
     </ClInclude>
     <ClInclude Include="MasterActor.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="MasterMap.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="UIPoint.h">
       <Filter>Actor\Title</Filter>
     </ClInclude>
     <ClInclude Include="Knight.h">
-      <Filter>Actor\Play\Knight</Filter>
+      <Filter>Actor\Actor\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnightData.h">
-      <Filter>Actor\Play\Knight</Filter>
+      <Filter>Actor\Actor\Knight</Filter>
     </ClInclude>
     <ClInclude Include="Crawlid.h">
-      <Filter>Actor\Play\Monster</Filter>
+      <Filter>Actor\Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Vengefly.h">
-      <Filter>Actor\Play\Monster</Filter>
+      <Filter>Actor\Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="MasterEffect.h">
-      <Filter>Actor\Effect</Filter>
+      <Filter>Actor\Actor\Effect</Filter>
     </ClInclude>
     <ClInclude Include="TileMapRenderer.h">
       <Filter>Renderer</Filter>
@@ -235,34 +235,34 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="TileMapActor.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="MapEditorWindow.h">
-      <Filter>Actor\Master\GUI</Filter>
+      <Filter>Actor\MasterActor\GUI</Filter>
     </ClInclude>
     <ClInclude Include="MasterUI.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="AllTitleUI.h">
       <Filter>Actor\Title\All</Filter>
     </ClInclude>
     <ClInclude Include="MetaSpriteWindow.h">
-      <Filter>Actor\Master\GUI</Filter>
+      <Filter>Actor\MasterActor\GUI</Filter>
     </ClInclude>
     <ClInclude Include="MetaLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="KnightShadowData.h">
-      <Filter>Actor\Play\Knight Shadow</Filter>
+      <Filter>Actor\Actor\Knight Shadow</Filter>
     </ClInclude>
     <ClInclude Include="KnightShadow.h">
-      <Filter>Actor\Play\Knight Shadow</Filter>
+      <Filter>Actor\Actor\Knight Shadow</Filter>
     </ClInclude>
     <ClInclude Include="MasterMapItem.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="DropGeo.h">
-      <Filter>Actor\MapItem</Filter>
+      <Filter>Actor\Actor\MapItem</Filter>
     </ClInclude>
     <ClInclude Include="KingsPassLevel1.h">
       <Filter>Level\Levels\KingsPass</Filter>
@@ -289,79 +289,79 @@
       <Filter>GlobalData</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="MaskRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Geo.h">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="HUD.h">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="Mask.h">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="Soul.h">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="VesselFrame.h">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="MapPage.h">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map</Filter>
     </ClInclude>
     <ClInclude Include="InventoryPage.h">
-      <Filter>Actor\Play\UI\Setting\Inventory</Filter>
+      <Filter>Actor\Actor\UI\Setting\Inventory</Filter>
     </ClInclude>
     <ClInclude Include="CharmPage.h">
-      <Filter>Actor\Play\UI\Setting\Charm</Filter>
+      <Filter>Actor\Actor\UI\Setting\Charm</Filter>
     </ClInclude>
     <ClInclude Include="BorderArrow.h">
-      <Filter>Actor\Play\UI\Setting\Border</Filter>
+      <Filter>Actor\Actor\UI\Setting\Border</Filter>
     </ClInclude>
     <ClInclude Include="BorderBottom.h">
-      <Filter>Actor\Play\UI\Setting\Border</Filter>
+      <Filter>Actor\Actor\UI\Setting\Border</Filter>
     </ClInclude>
     <ClInclude Include="BorderCorner.h">
-      <Filter>Actor\Play\UI\Setting\Border</Filter>
+      <Filter>Actor\Actor\UI\Setting\Border</Filter>
     </ClInclude>
     <ClInclude Include="BorderTop.h">
-      <Filter>Actor\Play\UI\Setting\Border</Filter>
+      <Filter>Actor\Actor\UI\Setting\Border</Filter>
     </ClInclude>
     <ClInclude Include="KnightDonutLightEffect.h">
-      <Filter>Actor\Effect\Light</Filter>
+      <Filter>Actor\Actor\Effect\Light</Filter>
     </ClInclude>
     <ClInclude Include="KnightMainLightEffect.h">
-      <Filter>Actor\Effect\Light</Filter>
+      <Filter>Actor\Actor\Effect\Light</Filter>
     </ClInclude>
     <ClInclude Include="KnightSiblingLightEffect.h">
-      <Filter>Actor\Effect\Light</Filter>
+      <Filter>Actor\Actor\Effect\Light</Filter>
     </ClInclude>
     <ClInclude Include="SideDarkEffect.h">
-      <Filter>Actor\Effect\Light</Filter>
+      <Filter>Actor\Actor\Effect\Light</Filter>
     </ClInclude>
     <ClInclude Include="SettingPage.h">
-      <Filter>Actor\Play\UI\Setting</Filter>
+      <Filter>Actor\Actor\UI\Setting</Filter>
     </ClInclude>
     <ClInclude Include="PointActorComponent.h">
-      <Filter>Actor\Play\UI\Setting</Filter>
+      <Filter>Actor\Actor\UI\Setting</Filter>
     </ClInclude>
     <ClInclude Include="SettingUIMaster.h">
-      <Filter>Actor\Play\UI</Filter>
+      <Filter>Actor\Actor\UI</Filter>
     </ClInclude>
     <ClInclude Include="CharmSlot.h">
-      <Filter>Actor\Play\UI\Setting\Charm</Filter>
+      <Filter>Actor\Actor\UI\Setting\Charm</Filter>
     </ClInclude>
     <ClInclude Include="Charm.h">
-      <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
+      <Filter>Actor\Actor\UI\Setting\Charm\Charm</Filter>
     </ClInclude>
     <ClInclude Include="MasterObject.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="Bench.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="AreaTitle.h">
       <Filter>Actor\Title\All\Area TItle</Filter>
@@ -373,43 +373,43 @@
       <Filter>Actor\Title\All\Area TItle</Filter>
     </ClInclude>
     <ClInclude Include="Notches.h">
-      <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
+      <Filter>Actor\Actor\UI\Setting\Charm\Charm</Filter>
     </ClInclude>
     <ClInclude Include="MasterPage.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="MasterItem.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
+      <Filter>Actor\Actor\UI\Setting\Inventory\Item</Filter>
     </ClInclude>
     <ClInclude Include="ItemSlot.h">
-      <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
+      <Filter>Actor\Actor\UI\Setting\Inventory\Item</Filter>
     </ClInclude>
     <ClInclude Include="SettingPointerBox.h">
-      <Filter>Actor\Play\UI\Setting\Pointer</Filter>
+      <Filter>Actor\Actor\UI\Setting\Pointer</Filter>
     </ClInclude>
     <ClInclude Include="SettingPointer.h">
-      <Filter>Actor\Play\UI\Setting\Pointer</Filter>
+      <Filter>Actor\Actor\UI\Setting\Pointer</Filter>
     </ClInclude>
     <ClInclude Include="WorldMap.h">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map</Filter>
     </ClInclude>
     <ClInclude Include="AllLocalMap.h">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map</Filter>
     </ClInclude>
     <ClInclude Include="DirtmouthMap.h">
-      <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map\LocalMaps</Filter>
     </ClInclude>
     <ClInclude Include="ForgottenCrossroadMap.h">
-      <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map\LocalMaps</Filter>
     </ClInclude>
     <ClInclude Include="MapRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map</Filter>
     </ClInclude>
     <ClInclude Include="ContentsFontRenderer.h">
       <Filter>Actor\Font</Filter>
@@ -418,19 +418,19 @@
       <Filter>Actor\Font</Filter>
     </ClInclude>
     <ClInclude Include="SettingPageInfo.h">
-      <Filter>Actor\Play\UI\Setting</Filter>
+      <Filter>Actor\Actor\UI\Setting</Filter>
     </ClInclude>
     <ClInclude Include="MasterNPC.h">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClInclude>
     <ClInclude Include="DialogueSet.h">
-      <Filter>Actor\Play\UI\Dialogue</Filter>
+      <Filter>Actor\Actor\UI\Dialogue</Filter>
     </ClInclude>
     <ClInclude Include="Elderbug.h">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClInclude>
     <ClInclude Include="PromptSet.h">
-      <Filter>Actor\Play\UI\PromptSet</Filter>
+      <Filter>Actor\Actor\UI\PromptSet</Filter>
     </ClInclude>
     <ClInclude Include="DirtmouthStationLevel.h">
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
@@ -442,43 +442,43 @@
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
     </ClInclude>
     <ClInclude Include="RoomPotal.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="KnightSlashEffect.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnihgtShadowSlashEffect.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="OverlayPostEffect.h">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="NoisePostEffect.h">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="OverlayBlend.h">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="VignettePostEffect.h">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="Iselda.h">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClInclude>
     <ClInclude Include="Shop.h">
-      <Filter>Actor\Play\Npc\Shop</Filter>
+      <Filter>Actor\Actor\Npc\Shop</Filter>
     </ClInclude>
     <ClInclude Include="ShopItem.h">
-      <Filter>Actor\Play\Npc\Shop</Filter>
+      <Filter>Actor\Actor\Npc\Shop</Filter>
     </ClInclude>
     <ClInclude Include="ShopArrow.h">
-      <Filter>Actor\Play\Npc\Shop</Filter>
+      <Filter>Actor\Actor\Npc\Shop</Filter>
     </ClInclude>
     <ClInclude Include="KnightStunEffect.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="MonsterHitEffect.h">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClInclude>
     <ClInclude Include="PerlinNoise.h">
       <Filter>ThirdParty</Filter>
@@ -490,7 +490,7 @@
       <Filter>Debug</Filter>
     </ClInclude>
     <ClInclude Include="LowHealth.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="EffectGUI.h">
       <Filter>Debug</Filter>
@@ -499,136 +499,136 @@
       <Filter>Debug</Filter>
     </ClInclude>
     <ClInclude Include="KnightBurstEffect.h">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
     <ClInclude Include="KnightDoubleJumpEffect.h">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
     <ClInclude Include="KnightFocusEffect.h">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
     <ClInclude Include="BloomPostEffect.h">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="BloomRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="TutorialBreakDoor.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="Potal.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="FadeIn.h">
-      <Filter>Actor\Effect\Etc</Filter>
+      <Filter>Actor\Actor\Effect\Etc</Filter>
     </ClInclude>
     <ClInclude Include="FadeOut.h">
-      <Filter>Actor\Effect\Etc</Filter>
+      <Filter>Actor\Actor\Effect\Etc</Filter>
     </ClInclude>
     <ClInclude Include="AmblentLife.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="Tablet.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="TabletDialogue.h">
-      <Filter>Actor\Play\UI\Tablet</Filter>
+      <Filter>Actor\Actor\UI\Tablet</Filter>
     </ClInclude>
     <ClInclude Include="SpellFocusInfo.h">
-      <Filter>Actor\Play\UI\Tablet</Filter>
+      <Filter>Actor\Actor\UI\Tablet</Filter>
     </ClInclude>
     <ClInclude Include="GrimmLevel.h">
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
     </ClInclude>
     <ClInclude Include="Grimm.h">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="FadePink.h">
-      <Filter>Actor\Effect\Etc</Filter>
+      <Filter>Actor\Actor\Effect\Etc</Filter>
     </ClInclude>
     <ClInclude Include="BossRoarEffect.h">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClInclude>
     <ClInclude Include="BossRoarRingEffect.h">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClInclude>
     <ClInclude Include="GrimmCrowd.h">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="GrimmCrowds.h">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="GrimmSpotLight.h">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="GrimmBeam.h">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="BossRoomGate.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="BossGateEffect.h">
-      <Filter>Actor\Effect\Object</Filter>
+      <Filter>Actor\Actor\Effect\Object</Filter>
     </ClInclude>
     <ClInclude Include="GrimmFire.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmFireBallSpectrum.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmFireBallSpectrumActor.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmBird.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmSpike.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmStunBat.h">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClInclude>
     <ClInclude Include="GrimmGroundDashEffect.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmAirDashEffect.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmFlamePillarEffect.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmSmoke.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmFlameBallparticle.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmCastPillarEffect.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmHitEffect.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="MonsterHitParticle.h">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClInclude>
     <ClInclude Include="MonsterHitPuffEffect.h">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClInclude>
     <ClInclude Include="MonsterDeathPuffParticle.h">
-      <Filter>Actor\Play\Monster</Filter>
+      <Filter>Actor\Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="MonsterHitOrangeLight.h">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClInclude>
     <ClInclude Include="GrimmDeathCircleParticle.h">
-      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm\Death</Filter>
     </ClInclude>
     <ClInclude Include="GrimmDeathSmallParticle.h">
-      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm\Death</Filter>
     </ClInclude>
     <ClInclude Include="GrimmDeathExplosionParticle.h">
-      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm\Death</Filter>
     </ClInclude>
     <ClInclude Include="TitleSmokeParticle.h">
       <Filter>Actor\Title\Particle</Filter>
@@ -640,49 +640,49 @@
       <Filter>Actor\Title\Particle</Filter>
     </ClInclude>
     <ClInclude Include="MapSmoke.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="MapSmokeMaker.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="MapSpike.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="WhiteParicleMaker.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="MapWhitParticle.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="MapWhiteParticleWindMaker.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="KnightJumpDustEffect.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnightSlashAttackEffect.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnightDashEffect.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnightCastEffect.h">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
     <ClInclude Include="KnightCast.h">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
     <ClInclude Include="KnightDoubleJumpParticle.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnightJumpDustParticle.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnightWalkDustParticle.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnightCastImpactEffect.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KingsPassGrimmOpenLevel.h">
       <Filter>Level\Levels\KingsPass</Filter>
@@ -706,64 +706,64 @@
       <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="Sycophant.h">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClInclude>
     <ClInclude Include="GrimmFlameEffect.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="GrimmFlameParticle.h">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClInclude>
     <ClInclude Include="HeartPiece.h">
-      <Filter>Actor\Play\UI\HeartPiece</Filter>
+      <Filter>Actor\Actor\UI\HeartPiece</Filter>
     </ClInclude>
     <ClInclude Include="HeartPieceWhiteParticle.h">
-      <Filter>Actor\Effect\UI</Filter>
+      <Filter>Actor\Actor\Effect\UI</Filter>
     </ClInclude>
     <ClInclude Include="KnightHatchlingBurst.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="MapCameraManager.h">
       <Filter>Actor\Cameara</Filter>
     </ClInclude>
     <ClInclude Include="Sly.h">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClInclude>
     <ClInclude Include="KnightScreamCastEffect.h">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
     <ClInclude Include="KnightRoarEffect.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="KnightScreamParticle.h">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClInclude>
     <ClInclude Include="Brummm.h">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClInclude>
     <ClInclude Include="LampBug.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="GeoCountFont.h">
       <Filter>Actor\Font</Filter>
     </ClInclude>
     <ClInclude Include="LampBugGrow.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="ShopLampBug.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="DoorStoneParticle.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="TutorialGate.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="HealthBug.h">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
     <ClInclude Include="LargeStoneParticle.h">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClInclude>
     <ClInclude Include="ScreamPromptLevel.h">
       <Filter>Level\Levels\Prompt</Filter>
@@ -772,10 +772,13 @@
       <Filter>Level\Levels\Prompt</Filter>
     </ClInclude>
     <ClInclude Include="SpellFireballInfo.h">
-      <Filter>Actor\Play\UI\Tablet</Filter>
+      <Filter>Actor\Actor\UI\Tablet</Filter>
     </ClInclude>
     <ClInclude Include="SpellScreamInfo.h">
-      <Filter>Actor\Play\UI\Tablet</Filter>
+      <Filter>Actor\Actor\UI\Tablet</Filter>
+    </ClInclude>
+    <ClInclude Include="Buzzer.h">
+      <Filter>Actor\Actor\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -795,31 +798,31 @@
       <Filter>Level\Levels</Filter>
     </ClCompile>
     <ClCompile Include="MasterActor.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="MasterMap.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="UIPoint.cpp">
       <Filter>Actor\Title</Filter>
     </ClCompile>
     <ClCompile Include="Knight.cpp">
-      <Filter>Actor\Play\Knight</Filter>
+      <Filter>Actor\Actor\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightState.cpp">
-      <Filter>Actor\Play\Knight</Filter>
+      <Filter>Actor\Actor\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightData.cpp">
-      <Filter>Actor\Play\Knight</Filter>
+      <Filter>Actor\Actor\Knight</Filter>
     </ClCompile>
     <ClCompile Include="Crawlid.cpp">
-      <Filter>Actor\Play\Monster</Filter>
+      <Filter>Actor\Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Vengefly.cpp">
-      <Filter>Actor\Play\Monster</Filter>
+      <Filter>Actor\Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="MasterEffect.cpp">
-      <Filter>Actor\Effect</Filter>
+      <Filter>Actor\Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="TileMapRenderer.cpp">
       <Filter>Renderer</Filter>
@@ -828,37 +831,37 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="TileMapActor.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="MapEditorWindow.cpp">
-      <Filter>Actor\Master\GUI</Filter>
+      <Filter>Actor\MasterActor\GUI</Filter>
     </ClCompile>
     <ClCompile Include="MasterUI.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="AllTitleUI.cpp">
       <Filter>Actor\Title\All</Filter>
     </ClCompile>
     <ClCompile Include="MetaSpriteWindow.cpp">
-      <Filter>Actor\Master\GUI</Filter>
+      <Filter>Actor\MasterActor\GUI</Filter>
     </ClCompile>
     <ClCompile Include="MetaLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="KnightShadowData.cpp">
-      <Filter>Actor\Play\Knight Shadow</Filter>
+      <Filter>Actor\Actor\Knight Shadow</Filter>
     </ClCompile>
     <ClCompile Include="KnightShadow.cpp">
-      <Filter>Actor\Play\Knight Shadow</Filter>
+      <Filter>Actor\Actor\Knight Shadow</Filter>
     </ClCompile>
     <ClCompile Include="KnightShadowState.cpp">
-      <Filter>Actor\Play\Knight Shadow</Filter>
+      <Filter>Actor\Actor\Knight Shadow</Filter>
     </ClCompile>
     <ClCompile Include="MasterMapItem.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="DropGeo.cpp">
-      <Filter>Actor\MapItem</Filter>
+      <Filter>Actor\Actor\MapItem</Filter>
     </ClCompile>
     <ClCompile Include="KingsPassLevel1.cpp">
       <Filter>Level\Levels\KingsPass</Filter>
@@ -882,79 +885,79 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="MaskRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Geo.cpp">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="HUD.cpp">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Mask.cpp">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Soul.cpp">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="VesselFrame.cpp">
-      <Filter>Actor\Play\UI\HUD</Filter>
+      <Filter>Actor\Actor\UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="MapPage.cpp">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map</Filter>
     </ClCompile>
     <ClCompile Include="InventoryPage.cpp">
-      <Filter>Actor\Play\UI\Setting\Inventory</Filter>
+      <Filter>Actor\Actor\UI\Setting\Inventory</Filter>
     </ClCompile>
     <ClCompile Include="CharmPage.cpp">
-      <Filter>Actor\Play\UI\Setting\Charm</Filter>
+      <Filter>Actor\Actor\UI\Setting\Charm</Filter>
     </ClCompile>
     <ClCompile Include="BorderArrow.cpp">
-      <Filter>Actor\Play\UI\Setting\Border</Filter>
+      <Filter>Actor\Actor\UI\Setting\Border</Filter>
     </ClCompile>
     <ClCompile Include="BorderBottom.cpp">
-      <Filter>Actor\Play\UI\Setting\Border</Filter>
+      <Filter>Actor\Actor\UI\Setting\Border</Filter>
     </ClCompile>
     <ClCompile Include="BorderCorner.cpp">
-      <Filter>Actor\Play\UI\Setting\Border</Filter>
+      <Filter>Actor\Actor\UI\Setting\Border</Filter>
     </ClCompile>
     <ClCompile Include="BorderTop.cpp">
-      <Filter>Actor\Play\UI\Setting\Border</Filter>
+      <Filter>Actor\Actor\UI\Setting\Border</Filter>
     </ClCompile>
     <ClCompile Include="KnightDonutLightEffect.cpp">
-      <Filter>Actor\Effect\Light</Filter>
+      <Filter>Actor\Actor\Effect\Light</Filter>
     </ClCompile>
     <ClCompile Include="KnightMainLightEffect.cpp">
-      <Filter>Actor\Effect\Light</Filter>
+      <Filter>Actor\Actor\Effect\Light</Filter>
     </ClCompile>
     <ClCompile Include="KnightSiblingLightEffect.cpp">
-      <Filter>Actor\Effect\Light</Filter>
+      <Filter>Actor\Actor\Effect\Light</Filter>
     </ClCompile>
     <ClCompile Include="SideDarkEffect.cpp">
-      <Filter>Actor\Effect\Light</Filter>
+      <Filter>Actor\Actor\Effect\Light</Filter>
     </ClCompile>
     <ClCompile Include="SettingPage.cpp">
-      <Filter>Actor\Play\UI\Setting</Filter>
+      <Filter>Actor\Actor\UI\Setting</Filter>
     </ClCompile>
     <ClCompile Include="PointActorComponent.cpp">
-      <Filter>Actor\Play\UI\Setting</Filter>
+      <Filter>Actor\Actor\UI\Setting</Filter>
     </ClCompile>
     <ClCompile Include="SettingUIMaster.cpp">
-      <Filter>Actor\Play\UI</Filter>
+      <Filter>Actor\Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="CharmSlot.cpp">
-      <Filter>Actor\Play\UI\Setting\Charm</Filter>
+      <Filter>Actor\Actor\UI\Setting\Charm</Filter>
     </ClCompile>
     <ClCompile Include="Charm.cpp">
-      <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
+      <Filter>Actor\Actor\UI\Setting\Charm\Charm</Filter>
     </ClCompile>
     <ClCompile Include="MasterObject.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="Bench.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="AreaTitle.cpp">
       <Filter>Actor\Title\All\Area TItle</Filter>
@@ -966,52 +969,52 @@
       <Filter>Actor\Title\All\Area TItle</Filter>
     </ClCompile>
     <ClCompile Include="Notches.cpp">
-      <Filter>Actor\Play\UI\Setting\Charm\Charm</Filter>
+      <Filter>Actor\Actor\UI\Setting\Charm\Charm</Filter>
     </ClCompile>
     <ClCompile Include="MasterPage.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="MasterItem.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
+      <Filter>Actor\Actor\UI\Setting\Inventory\Item</Filter>
     </ClCompile>
     <ClCompile Include="ItemSlot.cpp">
-      <Filter>Actor\Play\UI\Setting\Inventory\Item</Filter>
+      <Filter>Actor\Actor\UI\Setting\Inventory\Item</Filter>
     </ClCompile>
     <ClCompile Include="SettingPointer.cpp">
-      <Filter>Actor\Play\UI\Setting\Pointer</Filter>
+      <Filter>Actor\Actor\UI\Setting\Pointer</Filter>
     </ClCompile>
     <ClCompile Include="SettingPointerBox.cpp">
-      <Filter>Actor\Play\UI\Setting\Pointer</Filter>
+      <Filter>Actor\Actor\UI\Setting\Pointer</Filter>
     </ClCompile>
     <ClCompile Include="CharmPageState.cpp">
-      <Filter>Actor\Play\UI\Setting\Pointer\PointerState</Filter>
+      <Filter>Actor\Actor\UI\Setting\Pointer\PointerState</Filter>
     </ClCompile>
     <ClCompile Include="InventoryPageStatecpp.cpp">
-      <Filter>Actor\Play\UI\Setting\Pointer\PointerState</Filter>
+      <Filter>Actor\Actor\UI\Setting\Pointer\PointerState</Filter>
     </ClCompile>
     <ClCompile Include="WorldMap.cpp">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map</Filter>
     </ClCompile>
     <ClCompile Include="AllLocalMap.cpp">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map</Filter>
     </ClCompile>
     <ClCompile Include="DirtmouthMap.cpp">
-      <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map\LocalMaps</Filter>
     </ClCompile>
     <ClCompile Include="ForgottenCrossroadMap.cpp">
-      <Filter>Actor\Play\UI\Setting\Map\LocalMaps</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map\LocalMaps</Filter>
     </ClCompile>
     <ClCompile Include="MapRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="MapPageState.cpp">
-      <Filter>Actor\Play\UI\Setting\Pointer\PointerState</Filter>
+      <Filter>Actor\Actor\UI\Setting\Pointer\PointerState</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Actor\Play\UI\Setting\Map</Filter>
+      <Filter>Actor\Actor\UI\Setting\Map</Filter>
     </ClCompile>
     <ClCompile Include="ContentsFontRenderer.cpp">
       <Filter>Actor\Font</Filter>
@@ -1020,19 +1023,19 @@
       <Filter>Actor\Font</Filter>
     </ClCompile>
     <ClCompile Include="SettingPageInfo.cpp">
-      <Filter>Actor\Play\UI\Setting</Filter>
+      <Filter>Actor\Actor\UI\Setting</Filter>
     </ClCompile>
     <ClCompile Include="MasterNPC.cpp">
-      <Filter>Actor\Master</Filter>
+      <Filter>Actor\MasterActor</Filter>
     </ClCompile>
     <ClCompile Include="DialogueSet.cpp">
-      <Filter>Actor\Play\UI\Dialogue</Filter>
+      <Filter>Actor\Actor\UI\Dialogue</Filter>
     </ClCompile>
     <ClCompile Include="Elderbug.cpp">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClCompile>
     <ClCompile Include="PromptSet.cpp">
-      <Filter>Actor\Play\UI\PromptSet</Filter>
+      <Filter>Actor\Actor\UI\PromptSet</Filter>
     </ClCompile>
     <ClCompile Include="DirtmouthStationLevel.cpp">
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
@@ -1044,43 +1047,43 @@
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
     </ClCompile>
     <ClCompile Include="RoomPotal.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="KnightSlashEffect.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnihgtShadowSlashEffect.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="NoisePostEffect.cpp">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="OverlayBlend.cpp">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="OverlayPostEffect.cpp">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="VignettePostEffect.cpp">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="Iselda.cpp">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClCompile>
     <ClCompile Include="Shop.cpp">
-      <Filter>Actor\Play\Npc\Shop</Filter>
+      <Filter>Actor\Actor\Npc\Shop</Filter>
     </ClCompile>
     <ClCompile Include="ShopItem.cpp">
-      <Filter>Actor\Play\Npc\Shop</Filter>
+      <Filter>Actor\Actor\Npc\Shop</Filter>
     </ClCompile>
     <ClCompile Include="ShopArrow.cpp">
-      <Filter>Actor\Play\Npc\Shop</Filter>
+      <Filter>Actor\Actor\Npc\Shop</Filter>
     </ClCompile>
     <ClCompile Include="KnightStunEffect.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="MonsterHitEffect.cpp">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClCompile>
     <ClCompile Include="PerlinNoise.cpp">
       <Filter>ThirdParty</Filter>
@@ -1092,7 +1095,7 @@
       <Filter>Debug</Filter>
     </ClCompile>
     <ClCompile Include="LowHealth.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="EffectGUI.cpp">
       <Filter>Debug</Filter>
@@ -1101,142 +1104,142 @@
       <Filter>Debug</Filter>
     </ClCompile>
     <ClCompile Include="KnightBurstEffect.cpp">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
     <ClCompile Include="KnightDoubleJumpEffect.cpp">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
     <ClCompile Include="KnightFocusEffect.cpp">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
     <ClCompile Include="BloomPostEffect.cpp">
-      <Filter>Actor\Effect\PostEffect</Filter>
+      <Filter>Actor\Actor\Effect\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="BloomRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="TutorialBreakDoor.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="Potal.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="FadeIn.cpp">
-      <Filter>Actor\Effect\Etc</Filter>
+      <Filter>Actor\Actor\Effect\Etc</Filter>
     </ClCompile>
     <ClCompile Include="FadeOut.cpp">
-      <Filter>Actor\Effect\Etc</Filter>
+      <Filter>Actor\Actor\Effect\Etc</Filter>
     </ClCompile>
     <ClCompile Include="AmblentLife.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="Tablet.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="TabletDialogue.cpp">
-      <Filter>Actor\Play\UI\Tablet</Filter>
+      <Filter>Actor\Actor\UI\Tablet</Filter>
     </ClCompile>
     <ClCompile Include="SpellFocusInfo.cpp">
-      <Filter>Actor\Play\UI\Tablet</Filter>
+      <Filter>Actor\Actor\UI\Tablet</Filter>
     </ClCompile>
     <ClCompile Include="GrimmLevel.cpp">
       <Filter>Level\Levels\Dirtmouth\Room</Filter>
     </ClCompile>
     <ClCompile Include="Grimm.cpp">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="FadePink.cpp">
-      <Filter>Actor\Effect\Etc</Filter>
+      <Filter>Actor\Actor\Effect\Etc</Filter>
     </ClCompile>
     <ClCompile Include="BossRoarEffect.cpp">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClCompile>
     <ClCompile Include="BossRoarRingEffect.cpp">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClCompile>
     <ClCompile Include="GrimmCrowd.cpp">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="GrimmAppearState.cpp">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="GrimmCrowds.cpp">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="GrimmSpotLight.cpp">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="GrimmBeam.cpp">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="BossRoomGate.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="BossGateEffect.cpp">
-      <Filter>Actor\Effect\Object</Filter>
+      <Filter>Actor\Actor\Effect\Object</Filter>
     </ClCompile>
     <ClCompile Include="GrimmBattleState.cpp">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFire.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFireBallSpectrum.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFireBallSpectrumActor.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmBird.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmSpike.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmStunBat.cpp">
-      <Filter>Actor\Play\Monster\Boss</Filter>
+      <Filter>Actor\Actor\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="GrimmGroundDashEffect.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmAirDashEffect.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFlamePillarEffect.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmSmoke.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFlameBallparticle.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmCastPillarEffect.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmHitEffect.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="MonsterHitParticle.cpp">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClCompile>
     <ClCompile Include="MonsterHitPuffEffect.cpp">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClCompile>
     <ClCompile Include="MonsterDeathPuffParticle.cpp">
-      <Filter>Actor\Play\Monster</Filter>
+      <Filter>Actor\Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="MonsterHitOrangeLight.cpp">
-      <Filter>Actor\Effect\Monster</Filter>
+      <Filter>Actor\Actor\Effect\Monster</Filter>
     </ClCompile>
     <ClCompile Include="GrimmDeathCircleParticle.cpp">
-      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm\Death</Filter>
     </ClCompile>
     <ClCompile Include="GrimmDeathSmallParticle.cpp">
-      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm\Death</Filter>
     </ClCompile>
     <ClCompile Include="GrimmDeathExplosionParticle.cpp">
-      <Filter>Actor\Effect\Monster\Grimm\Death</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm\Death</Filter>
     </ClCompile>
     <ClCompile Include="TitleSmokeParticle.cpp">
       <Filter>Actor\Title\Particle</Filter>
@@ -1248,49 +1251,49 @@
       <Filter>Actor\Title\Particle</Filter>
     </ClCompile>
     <ClCompile Include="MapSmoke.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="MapSmokeMaker.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="MapSpike.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="WhiteParicleMaker.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="MapWhitParticle.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="MapWhiteParticleWindMaker.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="KnightJumpDustEffect.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightSlashAttackEffect.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightDashEffect.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightCastEffect.cpp">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
     <ClCompile Include="KnightCast.cpp">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
     <ClCompile Include="KnightDoubleJumpParticle.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightJumpDustParticle.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightWalkDustParticle.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightCastImpactEffect.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KingsPassGrimmOpenLevel.cpp">
       <Filter>Level\Levels\KingsPass</Filter>
@@ -1314,64 +1317,64 @@
       <Filter>Level\Levels\Dirtmouth\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="Sycophant.cpp">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFlameEffect.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="GrimmFlameParticle.cpp">
-      <Filter>Actor\Effect\Monster\Grimm</Filter>
+      <Filter>Actor\Actor\Effect\Monster\Grimm</Filter>
     </ClCompile>
     <ClCompile Include="HeartPiece.cpp">
-      <Filter>Actor\Play\UI\HeartPiece</Filter>
+      <Filter>Actor\Actor\UI\HeartPiece</Filter>
     </ClCompile>
     <ClCompile Include="HeartPieceWhiteParticle.cpp">
-      <Filter>Actor\Effect\UI</Filter>
+      <Filter>Actor\Actor\Effect\UI</Filter>
     </ClCompile>
     <ClCompile Include="KnightHatchlingBurst.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="MapCameraManager.cpp">
       <Filter>Actor\Cameara</Filter>
     </ClCompile>
     <ClCompile Include="Sly.cpp">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClCompile>
     <ClCompile Include="KnightScreamCastEffect.cpp">
-      <Filter>Actor\Effect\Knight\Spell</Filter>
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
     <ClCompile Include="KnightRoarEffect.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="KnightScreamParticle.cpp">
-      <Filter>Actor\Effect\Knight</Filter>
+      <Filter>Actor\Actor\Effect\Knight</Filter>
     </ClCompile>
     <ClCompile Include="Brummm.cpp">
-      <Filter>Actor\Play\Npc</Filter>
+      <Filter>Actor\Actor\Npc</Filter>
     </ClCompile>
     <ClCompile Include="LampBug.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="GeoCountFont.cpp">
       <Filter>Actor\Font</Filter>
     </ClCompile>
     <ClCompile Include="LampBugGrow.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="ShopLampBug.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="DoorStoneParticle.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="TutorialGate.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="HealthBug.cpp">
-      <Filter>Actor\Object</Filter>
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="LargeStoneParticle.cpp">
-      <Filter>Actor\Effect\Map</Filter>
+      <Filter>Actor\Actor\Effect\Map</Filter>
     </ClCompile>
     <ClCompile Include="ScreamPromptLevel.cpp">
       <Filter>Level\Levels\Prompt</Filter>
@@ -1380,10 +1383,13 @@
       <Filter>Level\Levels\Prompt</Filter>
     </ClCompile>
     <ClCompile Include="SpellFireballInfo.cpp">
-      <Filter>Actor\Play\UI\Tablet</Filter>
+      <Filter>Actor\Actor\UI\Tablet</Filter>
     </ClCompile>
     <ClCompile Include="SpellScreamInfo.cpp">
-      <Filter>Actor\Play\UI\Tablet</Filter>
+      <Filter>Actor\Actor\UI\Tablet</Filter>
+    </ClCompile>
+    <ClCompile Include="Buzzer.cpp">
+      <Filter>Actor\Actor\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

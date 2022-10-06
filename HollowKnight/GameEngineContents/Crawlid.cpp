@@ -99,10 +99,10 @@ void Crawlid::Start()
 	SetFallSpeed(2);
 	SetGravity(400.f);
 	SetSpeed(100.f);
-	SetHP(10);
-	CreateMonsterHitParticle(10);
-	CreateMonsterHitPuffParticle(10);
-	CreateMonsterHitLight(10);
+	SetHP(3);
+	CreateMonsterHitParticle(3);
+	CreateMonsterHitPuffParticle(3);
+	CreateMonsterHitLight(3);
 	CreateMonsterDeathPuffParticle();
 	SetDropGeo(5);
 
@@ -135,8 +135,6 @@ void Crawlid::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 	SetMonsterDirection();
 	KnightData::GetInst()->SetisSoulGrow(true);
 	CrawlidManager_.ChangeState("STUN");
-
-
 }
 
 
@@ -171,10 +169,10 @@ void Crawlid::CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		SetisCollWall(true);
 	}
+
 	else
 	{
 		SetisCollWall(false);
-
 	}
 
 	if (GetisWall() == true || GetisOnGround() == false || GetisCollWall() == true)
@@ -185,7 +183,6 @@ void Crawlid::CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 			GetRenderer()->ChangeFrameAnimation("TURN_RIGHT_ANIMATION");
 			CrawlidManager_.ChangeState("TURN");
 			return;
-
 		}
 
 		if (GetMoveDirection().CompareInt2D(float4::RIGHT))
@@ -193,7 +190,6 @@ void Crawlid::CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 			GetRenderer()->ChangeFrameAnimation("TURN_LEFT_ANIMATION");
 			CrawlidManager_.ChangeState("TURN");
 			return;
-
 		}
 	}
 
@@ -201,10 +197,6 @@ void Crawlid::CrawlidWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		GetTransform().SetWorldMove(GetMoveDirection() * GetSpeed() * _DeltaTime);
 	}
-
-
-
-	
 
 }
 
@@ -245,6 +237,7 @@ void Crawlid::CrawlidTurnStart(const StateInfo& _Info)
 	{
 		SetMoveDirection(float4::LEFT);
 	}
+
 	SetMonsterDirection();
 	GetTransform().SetWorldMove(GetMoveDirection() * 2 );
 
@@ -252,8 +245,6 @@ void Crawlid::CrawlidTurnStart(const StateInfo& _Info)
 
 void Crawlid::CrawlidTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
-
 	if (isTurnEnd_ == true)
 	{
 		isTurnEnd_ = false;
@@ -281,7 +272,6 @@ void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
 	else
 	{
 		SetisCollWall(false);
-
 	}
 
 	CrawildKnockbackTimer_ += _DeltaTime;
@@ -307,15 +297,12 @@ void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
 		else
 		{
 			CrawlidManager_.ChangeState("WALK");
-
 		}
 	}
 	if (GetisOnGround() == true && GetisCollWall() == false)
 	{
 		GetTransform().SetWorldMove(-GetMoveDirection() * (GetSpeed()*7) * _DeltaTime);
 	}
-
-
 }
 
 void Crawlid::CrawlidStunEnd(const StateInfo& _Info)

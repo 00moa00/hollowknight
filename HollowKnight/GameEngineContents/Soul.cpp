@@ -136,7 +136,7 @@ void Soul::SetLevelPosition(int _Level)
 	switch (_Level)
 	{
 	case 0:
-		Soul_->GetUVData().OffsetY = -0.9f;
+		Soul_->GetUVData().OffsetY = -0.85f;
 
 		break;
 

@@ -68,7 +68,6 @@ void KnightShadow::ShadowIdleEnd(const StateInfo& _Info)
 void KnightShadow::ShadowStartleStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("STARTLE_ANIMATION");
-
 }
 
 void KnightShadow::ShadowStartleUpdate(float _DeltaTime, const StateInfo& _Info)
