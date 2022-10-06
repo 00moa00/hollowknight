@@ -11,6 +11,8 @@
 void SettingPointer::PointerMapPageIdleStart(const StateInfo& _Info)
 {
 	SettingPointerBox_->AllPointerOff();
+	GameEngineSound::SoundPlayOneShot("ui_change_selection.ogg");
+
 }
 
 void SettingPointer::PointerMapPageIdleUpdate(float _DeltaTime, const StateInfo& _Info)

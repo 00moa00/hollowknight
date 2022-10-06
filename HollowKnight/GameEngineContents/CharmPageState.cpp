@@ -10,6 +10,7 @@
 
 void SettingPointer::PointerCharmPageMoveStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("ui_change_selection.ogg");
 
 }
 
@@ -272,6 +273,7 @@ void SettingPointer::PointerCharmPageIdleEnd(const StateInfo& _Info)
 
 void SettingPointer::PointerCharmPageMoveLeftStart(const StateInfo& _Info)
 {
+
 	if (true == GameEngineInput::GetInst()->IsDown("MoveLeft") && inLeftArrow_ == false)
 	{
 		inRightArrow_ = false;

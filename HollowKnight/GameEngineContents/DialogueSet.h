@@ -103,6 +103,7 @@ public:
 	{
 		if (isDialougueFull_ == false)
 		{
+			GameEngineSound::SoundPlayOneShot("button.ogg");
 
 			//if (CurrentDialoguePage_ == DialogueList_.size() - 1)
 			//{

@@ -221,6 +221,9 @@ void HeartPiece::SetNewMaskPiece()
 	GetTransform().SetWorldPosition({0,0, -200});
 
 	ReSetAccTime();
+
+	GameEngineSound::SoundPlayOneShot("heartpiece_collect.ogg");
+
 }
 
 void HeartPiece::HeartIdleStart(const StateInfo& _Info)
@@ -265,6 +268,8 @@ void HeartPiece::HeartIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 				MaskRenderer_->ChangeFrameAnimation("MASK_LEVEL4_APPEAR");
 				isCompleteMask_ = true;
 			}
+			GameEngineSound::SoundPlayOneShot("new_heartpiece_puzzle_bit.ogg");
+
 			//GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
 			ReSetAccTime();
 		}
@@ -335,6 +340,9 @@ void HeartPiece::HeartIdleEnd(const StateInfo& _Info)
 
 void HeartPiece::HeartWhiteStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("final_heart_piece.ogg");
+	GameEngineSound::SoundPlayOneShot("heartpiece_decorative_ui.ogg");
+
 	CompletAlpha_ = 0.0f;
 	CompleteMaskRenderer_->On();
 	CompleteMaskRenderer_->GetPixelData().MulColor.a =0.f;
@@ -401,6 +409,7 @@ void HeartPiece::HeartNewMaskStart(const StateInfo& _Info)
 	HeartPieceWhiteParticle* HeartPieceWhiteParticle_ = GetLevel()->CreateActor<HeartPieceWhiteParticle>();
 	HeartPieceWhiteParticle_->GetTransform().SetWorldPosition({ -550, 420.f, 0});
 //	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
+	GameEngineSound::SoundPlayOneShot("heartpiece_collect.ogg");
 
 	Alpha_ = 0.5f;
 

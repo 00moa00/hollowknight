@@ -9,6 +9,8 @@
 
 void SettingPointer::PointerInventoryPageMoveStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("ui_change_selection.ogg");
+
 }
 
 void SettingPointer::PointerInventoryPageMoveUpdate(float _DeltaTime, const StateInfo& _Info)

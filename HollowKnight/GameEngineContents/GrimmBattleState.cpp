@@ -18,6 +18,9 @@
 
 void Grimm::GrimmBattleTeleportAppearStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("grimm_teleport_out.ogg");
+
+
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
@@ -143,6 +146,9 @@ void Grimm::GrimmBattleTeleportAppearEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleTeleportDisappearStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("grimm_teleport_in.ogg");
+
+
 	GetRenderer()->ChangeFrameAnimation("TELEPORT_DISAPPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 	GetCollision()->Off();
@@ -177,10 +183,11 @@ void Grimm::GrimmBattleTeleportDisappearEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleBalloonStartStart(const StateInfo& _Info)
 {
+	//GameEngineSound::SoundPlayOneShot("grimm_teleport_in.ogg");
+	GameEngineSound::SoundPlayOneShot("grimm_balloon_deflate.ogg");
+
 	GetRenderer()->ChangeFrameAnimation("BALLON_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
-
-
 
 }
 
@@ -195,11 +202,15 @@ void Grimm::GrimmBattleBalloonStartUpdate(float _DeltaTime, const StateInfo& _In
 
 void Grimm::GrimmBattleBalloonStartEnd(const StateInfo& _Info)
 {
+
 }
 
 
 void Grimm::GrimmBattleBalloonStart(const StateInfo& _Info)
 {
+	BloonSound_ = GameEngineSound::SoundPlayControl("grimm_balloon_shooting_fireballs_loop.ogg", 100);
+
+
 	GetCollision()->On();
 	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.5f, GetRenderer()->GetTransform().GetLocalScale().y * 0.5f });
 	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
@@ -365,6 +376,8 @@ void Grimm::GrimmBattleBalloonUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmBattleBalloonEnd(const StateInfo& _Info)
 {
+	BloonSound_.Stop();
+
 	GetCollision()->Off();
 
 	GrimmFlameBallparticleCount_ = 0;
@@ -427,6 +440,7 @@ void Grimm::GrimmBattleAirDashStartEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleAirDashStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("Grimm_attack_03.ogg");
 
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
@@ -507,6 +521,8 @@ void Grimm::GrimmBattleAirDashEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleAirDashEndtStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("sword_4.ogg");
+
 	GetRenderer()->ChangeFrameAnimation("AIR_DASH_END_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
@@ -551,18 +567,21 @@ void Grimm::GrimmBattleAirDashEndtUpdate(float _DeltaTime, const StateInfo& _Inf
 
 	if (GetisWall() == false)
 	{
-		GetTransform().SetWorldMove(GetMoveDirection() * 1600.f * _DeltaTime);
+		GetTransform().SetWorldMove(GetMoveDirection() * 2000.f * _DeltaTime);
 
 	}
 
 	else
 	{
 		GetTransform().SetWorldMove(float4::ZERO * 1000.f * _DeltaTime);
+		SetRamdomPattern();
+
+		return;
 
 	}
 
 
-	if (_Info.StateTime > 2.0f)
+	if (_Info.StateTime > 0.8f)
 	{
 		SetRamdomPattern();
 
@@ -604,7 +623,7 @@ void Grimm::GrimmBattleSlashStart(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.5f, GetRenderer()->GetTransform().GetLocalScale().y * 0.3f });
 	GetCollision()->GetTransform().SetLocalPosition({ 50, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
-
+	GameEngineSound::SoundPlayOneShot("Grimm_attack_03.ogg");
 }
 
 void Grimm::GrimmBattleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -663,6 +682,9 @@ void Grimm::GrimmBattleSlashEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleSlashUpStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("sword_3.ogg");
+
+
 	GetRenderer()->ChangeFrameAnimation("SLASH_UP_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
@@ -735,6 +757,14 @@ void Grimm::GrimmBattleFireEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleSpikeStartStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("grimm_spikes_pt_1_grounded.ogg");
+
+	GetCollision()->On();
+
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.4f, GetRenderer()->GetTransform().GetLocalScale().y * 0.8f });
+	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
+
+
 	GetRenderer()->ChangeFrameAnimation("SPRIKE_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
@@ -836,11 +866,13 @@ void Grimm::GrimmBattleSpikeStartEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattleSpikeStart(const StateInfo& _Info)
 {
+
+
 	GetRenderer()->ChangeFrameAnimation("SPRIKE_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 	GetCollision()->On();
 
-	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.7f, GetRenderer()->GetTransform().GetLocalScale().y *5.f });
+	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.4f, GetRenderer()->GetTransform().GetLocalScale().y *5.f });
 	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
 
 
@@ -850,6 +882,8 @@ void Grimm::GrimmBattleSpikeUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (_Info.StateTime > 1.5f)
 	{
+		GameEngineSound::SoundPlayOneShot("grimm_spikes_pt_3_shrivel_back.ogg");
+
 		SetRamdomPattern();
 		return;
 	}
@@ -863,6 +897,8 @@ void Grimm::GrimmBattlCastStartStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("CASTS_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+
 }
 
 void Grimm::GrimmBattlCastStartUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -881,6 +917,20 @@ void Grimm::GrimmBattlCastStartEnd(const StateInfo& _Info)
 
 void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("grimm_cape_open_for_cast.ogg");
+
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 1);
+
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("Grimm_cast_02.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("Grimm_cast_01.ogg");
+
+	}
+
 	GetRenderer()->ChangeFrameAnimation("CAST_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
@@ -902,6 +952,7 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 
 	GrimmBird* GrimmBird_ = GetLevel()->CreateActor<GrimmBird>();
 	GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y , -20 });
+	GameEngineSound::SoundPlayOneShot("grimm_fireball_cast.ogg");
 
 	float4 Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
 	GrimmBird_->SetMoveDir(Dir_.NormalizeReturn());
@@ -931,6 +982,7 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (BirdCreateTimer_ > 0.5f)
 	{
+
 		BirdCreateTimer_ = 0.0f;
 		if (GrimmCastPillarEffectCount_ >= GrimmCastPillarEffectList_.size())
 		{
@@ -941,10 +993,11 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 		GrimmBird* GrimmBird_ = GetLevel()->CreateActor<GrimmBird>();
 		GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, -20 });
 		GrimmBird_->SetMoveDir(BirdDir_.NormalizeReturn());
+		GameEngineSound::SoundPlayOneShot("grimm_fireball_cast.ogg");
 
 		GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
 		GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 200.f, static_cast<float>(Z_ORDER::Effect) });
-
+		
 
 		//GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 350.f, static_cast<float>(Z_ORDER::Back_Effect) });
 		//GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->CastPillarEffectOn();
@@ -987,6 +1040,7 @@ void Grimm::GrimmBattlCastEndEnd(const StateInfo& _Info)
 void Grimm::GrimmBattlStunStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("STUN_HIT_ANIMATION");
+	GameEngineSound::SoundPlayOneShot("boss_stun.ogg");
 
 }
 
@@ -1012,6 +1066,7 @@ void Grimm::GrimmBattlStunBatStart(const StateInfo& _Info)
 
 	GetCollision()->GetTransform().SetLocalScale({ GetRenderer()->GetTransform().GetLocalScale().x * 0.2f, GetRenderer()->GetTransform().GetLocalScale().y * 0.2f });
 	GetCollision()->GetTransform().SetLocalPosition({ 0, (GetRenderer()->GetTransform().GetLocalScale().y) / 3 });
+	GetCollision()->On();
 
 	for (int i = 0; i < 10; ++i)
 	{
@@ -1022,6 +1077,8 @@ void Grimm::GrimmBattlStunBatStart(const StateInfo& _Info)
 
 		GrimmStunBatList_.back()->GetTransform().SetWorldPosition({ X, Y, static_cast<float>(Z_ORDER::Monster)});
 	}
+
+	BatSound_ = GameEngineSound::SoundPlayControl("grimm_bats_circling.ogg", 20);
 }
 
 void Grimm::GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -1132,6 +1189,7 @@ void Grimm::GrimmBattlStunBatUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmBattlStunBatEnd(const StateInfo& _Info)
 {
+	BatSound_.Stop();
 }
 
 void Grimm::GrimmBattlStunBatEndStart(const StateInfo& _Info)
@@ -1156,6 +1214,7 @@ void Grimm::GrimmBattlStunBatEndStart(const StateInfo& _Info)
 		GrimmStunBatList_[i]->SetMoveToGrimm({ MapCenterX_ + 400.f, -950.f, 0 });
 	}
 
+	GameEngineSound::SoundPlayOneShot("drum_roll.ogg");
 }
 
 void Grimm::GrimmBattlStunBatEndUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -1215,6 +1274,9 @@ void Grimm::GrimmDeathScene1Start(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 
 	GetCollision()->Off();
+	KnightSoundManager::GetInst()->BgmOff();
+
+	DeathSound_ = GameEngineSound::SoundPlayControl("Grimmkin_big_death.ogg", 100);
 
 }
 
@@ -1247,10 +1309,14 @@ void Grimm::GrimmDeathScene1Update(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmDeathScene1End(const StateInfo& _Info)
 {
+	DeathSound_.Stop();
 }
 
 void Grimm::GrimmDeathScene2Start(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("boss_explode.ogg");
+	GameEngineSound::SoundPlayOneShot("S87-168 Nightmare Grimm Optional Ending.ogg");
+
 }
 
 void Grimm::GrimmDeathScene2Update(float _DeltaTime, const StateInfo& _Info)
@@ -1281,6 +1347,9 @@ void Grimm::GrimmDeathScene2End(const StateInfo& _Info)
 void Grimm::GrimmDeathScene3Start(const StateInfo& _Info)
 {
 	GetRenderer()->Off();
+	GameEngineSound::SoundPlayOneShot("boss_explode_clean.ogg");
+
+
 }
 
 void Grimm::GrimmDeathScene3Update(float _DeltaTime, const StateInfo& _Info)
@@ -1296,7 +1365,12 @@ void Grimm::GrimmDeathScene3Update(float _DeltaTime, const StateInfo& _Info)
 
 
 	}
+	if (_Info.StateTime > 1.5f)
+	{
+		Death();
+		GameEngineSound::SoundPlayOneShot("crowd_applause_loop.ogg");
 
+	}
 
 
 }

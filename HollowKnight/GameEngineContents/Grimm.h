@@ -129,6 +129,9 @@ private:
 	GameEngineStateManager GrimmManager_;
 
 	GameEngineSoundPlayer WindSound_;
+	GameEngineSoundPlayer BloonSound_;
+	GameEngineSoundPlayer BatSound_;
+	GameEngineSoundPlayer DeathSound_;
 
 	std::vector<GrimmCastPillarEffect*> GrimmCastPillarEffectList_;
 	std::vector<GrimmStunBat*> GrimmStunBatList_;

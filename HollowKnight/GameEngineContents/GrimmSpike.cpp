@@ -100,6 +100,9 @@ void GrimmSpike::SpikeMoveUpStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("GROW_UP");
 	GetCollision()->On();
 	GetCollision()->GetTransform().SetLocalPosition({0, -1500/2});
+	GameEngineSoundPlayer GameEngineSoundPlayer_ = GameEngineSound::SoundPlayControl("grimm_spikes_pt_2_shoot_up.ogg");
+	GameEngineSoundPlayer_.Volume(0.2f);
+
 }
 
 void GrimmSpike::SpikeMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)

@@ -137,6 +137,7 @@ public:
 			//	isDialougueFull_ = true;
 			//	return;
 			//}
+			GameEngineSound::SoundPlayOneShot("button.ogg");
 
 			++CurrentDialoguePage_;
 

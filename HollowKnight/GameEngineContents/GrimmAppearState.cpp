@@ -65,8 +65,6 @@ void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
 
 void Grimm::GrimmAppearTeleportUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-
-
 	if (_Info.StateTime > 2.0f)
 	{
 		GrimmAppearManager_.ChangeState("APPEAR_IDLE1");
@@ -221,7 +219,7 @@ void Grimm::GrimmAppearChangeMapStart(const StateInfo& _Info)
 
 void Grimm::GrimmAppearChangeMapUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (GetAccTime() > 2.0f)
+	if (GetAccTime() > 2.5f)
 	{
 		GrimmAppearManager_.ChangeState("APPEAR_BOW");
 		return;
@@ -243,10 +241,14 @@ void Grimm::GrimmAppearBowStart(const StateInfo& _Info)
 
 void Grimm::GrimmAppearBowUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (isBowEnd_ == true)
+	if (_Info.StateTime > 1.0f)
 	{
 		isBowEnd_ = false;
 		GrimmAppearManager_.ChangeState("APPEAR_ROAR");
+	}
+	if (isBowEnd_ == true)
+	{
+
 
 	}
 }

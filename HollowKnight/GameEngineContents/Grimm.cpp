@@ -227,6 +227,13 @@ void Grimm::Start()
 	//    Create Bind Animation | Commomn
 	//====================================
 
+	GetRenderer()->AnimationBindEnd("TELEPORT_NONLOOP_APPEAR_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			GetRenderer()->ChangeFrameAnimation("IDLE_ANIMATION");
+
+		});
+
+
 	GetRenderer()->AnimationBindEnd("TELEPORT_APPEAR_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isTeleportAppearEnd_ = true;
