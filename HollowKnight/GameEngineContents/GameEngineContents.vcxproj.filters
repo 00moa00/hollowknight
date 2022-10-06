@@ -798,6 +798,9 @@
     <ClInclude Include="HealthBugPlant2.h">
       <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="KnightSoundManager.h">
+      <Filter>Actor\Actor\Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1426,6 +1429,9 @@
     </ClCompile>
     <ClCompile Include="HealthBugPlant2.cpp">
       <Filter>Actor\Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightSoundManager.cpp">
+      <Filter>Actor\Actor\Knight</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

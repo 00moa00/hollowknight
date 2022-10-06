@@ -29,3 +29,5 @@
 #include <GameEngineCore/GEngine.h>
 
 #include "GlobalContentsValue.h"
+
+#include "KnightSoundManager.h"

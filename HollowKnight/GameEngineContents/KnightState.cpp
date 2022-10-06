@@ -20,6 +20,8 @@
 
 void Knight::KnightStillStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
  	isPossibleDoubleJump_ = true;
 	isPossibleFallJump_ = true;
 	if (_Info.PrevState == "RUN")
@@ -521,6 +523,7 @@ void Knight::KnightWalkUpdate(float _DeltaTime, const StateInfo& _Info)
 void Knight::KnightWalkTurnStart(const StateInfo& _Info)
 {
 	isPossibleDoubleJump_ = true;
+	KnightSoundManager::GetInst()->KnightFootStepBgmOn("hero_walk_footsteps_stone.ogg", 200);
 
 
 	if (GetPrevDirection().CompareInt2D(float4::LEFT) == true)
@@ -757,6 +760,8 @@ void Knight::KnightWalkTurnUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightLookDownStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	GetRenderer()->ChangeFrameAnimation("LOOK_DOWN_ANIMATION");
 }
 
@@ -826,6 +831,8 @@ void Knight::KnightLookDownEnd(const StateInfo& _Info)
 
 void Knight::KnightLookUpStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	GetRenderer()->ChangeFrameAnimation("LOOK_UP_ANIMATION");
 
 }
@@ -894,6 +901,8 @@ void Knight::KnightLookUpEnd(const StateInfo& _Info)
 
 void Knight::KnightUpSlashJumpStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	isDoubleJumpEnd_ = false;
 	SetJumpPower({ 0, KnightDoubleJumpPower_ , 0 });
 }
@@ -1010,6 +1019,9 @@ void Knight::KnightUpSlashJumpEnd(const StateInfo& _Info)
 
 void Knight::KnightJumpStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+	GameEngineSound::SoundPlayOneShot("hero_jump.ogg");
+
 	GetRenderer()->ChangeFrameAnimation("JUMP_ANIMATION");
 
 	isKnightActtingMove_ = false;
@@ -1241,6 +1253,8 @@ void Knight::KnightJumpEnd(const StateInfo& _Info)
 
 void Knight::KnightDoubleJumpStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+	GameEngineSound::SoundPlayOneShot("hero_wings.ogg");
 	//isPossibleDoubleJump_ = false;
 	isDoubleJumpEnd_ = false;
 
@@ -1381,6 +1395,9 @@ void Knight::KnightDoubleJumpEnd(const StateInfo& _Info)
 
 void Knight::KnightLandStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+	GameEngineSound::SoundPlayOneShot("hero_land_soft.ogg");
+
 	isPossibleDoubleJump_ = true;
 
 	GetRenderer()->ChangeFrameAnimation("LAND_ANIMATION");
@@ -1457,6 +1474,9 @@ void Knight::KnightLandEnd(const StateInfo& _Info)
 
 void Knight::KnightFallStart(const StateInfo& _Info)
 {
+	//KnightSoundManager::GetInst()->KnightFallBgmOn("hero_falling.ogg", 10);
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	KnightFallAccel_ = 0.0f;
 
 	isKnightActtingMove_ = false;
@@ -1698,6 +1718,7 @@ void Knight::KnightFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightFallEnd(const StateInfo& _Info)
 {
+	//KnightSoundManager::GetInst()->KnightFallBgmOff();
 
 	KnightFallAccel_ = 0.0f;
 
@@ -1709,6 +1730,9 @@ void Knight::KnightFallEnd(const StateInfo& _Info)
 
 void Knight::KnightIntroFallStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFallBgmOn("hero_falling.ogg", 10);
+
+
 	isKnightActtingMove_ = false;
 
 
@@ -1743,12 +1767,16 @@ void Knight::KnightIntroFallUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightIntroFallEnd(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFallBgmOff();
+
 }
 
 void Knight::KnightIntroLandStart(const StateInfo& _Info)
 {
 	GetRenderer()->ChangeFrameAnimation("INTRO_LAND_ANIMATION");
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
+	GameEngineSound::SoundPlayOneShot("false_knight_strike_ground.ogg");
+	//GameEngineSound::SoundPlayOneShot("pigeon_fly_away_3.ogg");
 
 }
 
@@ -1758,11 +1786,14 @@ void Knight::KnightIntroLandUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GetRenderer()->GetCurFrameAnimation()->GetFrameAnimationDesc().CurFrame == 4)
 	{
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
-
 	}
 
 	if (isIntroLandEnd_ == true)
 	{
+		GameEngineSound::SoundPlayOneShot("pigeon_fly_away_3.ogg");
+		GameEngineSound::SoundPlayOneShot("S75 Opening Sting-08.ogg");
+		GameEngineSound::SoundPlayOneShot("cave_noises.ogg");
+
 		isIntroLandEnd_ = false;
 		KnightManager_.ChangeState("STILL");
 		return;
@@ -1775,6 +1806,9 @@ void Knight::KnightIntroLandEnd(const StateInfo& _Info)
 
 void Knight::KnightDashStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+	GameEngineSound::SoundPlayOneShot("hero_dash.ogg");
+
 	GetRenderer()->ChangeFrameAnimation("DASH_ANIMATION");
 	KnightDashTimer_ = 0.f;
 	SetSpeed(1200.f);
@@ -1872,6 +1906,10 @@ void Knight::KnightDashEnd(const StateInfo& _Info)
 
 void Knight::KnightFocusStart(const StateInfo& _Info)
 {
+
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	isLowHealth_ = false;
 	GetRenderer()->ChangeFrameAnimation("FOCUS_ANIMATION");
 	KnightFocusEffect_ = GetLevel()->CreateActor<KnightFocusEffect>();
@@ -2047,6 +2085,8 @@ void Knight::KnightFocusBurstEnd(const StateInfo& _Info)
 
 void Knight::KnightRunStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOn("hero_walk_footsteps_stone.ogg", 200);
+
 	isPossibleDoubleJump_ = true;
 	isPossibleFallJump_ = true;
 
@@ -2238,19 +2278,23 @@ void Knight::KnightRunUpdate(float _DeltaTime, const StateInfo& _Info)
 		return;
 	}
 
-	if (isRunMode_ == true)
-	{
-		KnightManager_.ChangeState("RUN");
-		return;
-	}
+	//if (isRunMode_ == true)
+	//{
+	//	KnightManager_.ChangeState("RUN");
+	//	return;
+	//}
 }
 
 void Knight::KnightRunEnd(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
 }
 
 void Knight::KnightStunStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	KnightStunEffect_->StunEffectOn();
 	if (KnightData::GetInst()->GetisBossBattle() == true)
 	{
@@ -2393,6 +2437,9 @@ void Knight::KnightStunEnd(const StateInfo& _Info)
 
 void Knight::KnightDeathStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	isInvincibility_ = false;
 
 	GetRenderer()->ChangeFrameAnimation("DEATH_ANIMATION");
@@ -2439,6 +2486,9 @@ void Knight::KnightDeathEnd(const StateInfo& _Info)
 
 void Knight::KnightWakeUpGroundStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	GetRenderer()->ChangeFrameAnimation("WAKEUP_GROUND_ANIMATION");
 }
 
@@ -2457,6 +2507,8 @@ void Knight::KnightWakeUpGroundEnd(const StateInfo& _Info)
 
 void Knight::KnightWakeUpStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	GetRenderer()->ChangeFrameAnimation("WAKEUP_ANIMATION");
 }
 
@@ -2476,6 +2528,9 @@ void Knight::KnightSlashStart(const StateInfo& _Info)
 {
 	//isPossibleDoubleSlash_ = false;
 	//KnightSlashTimer_ = 0.f;
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	GetRenderer()->ChangeFrameAnimation("SLASH_ANIMATION");
 	KnightSlashEffect_->GetCollision()->On();
 	KnightSlashEffect_->SetAnimationSlash();
@@ -2678,6 +2733,9 @@ void Knight::KnightSlashEnd(const StateInfo& _Info)
 
 void Knight::KnightDoubleSlashStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	GetRenderer()->ChangeFrameAnimation("DOUBLE_SLASH_ANIMATION");
 
 	KnightSlashEffect_->GetCollision()->On();
@@ -2892,6 +2950,9 @@ void Knight::KnightDoubleSlashEnd(const StateInfo& _Info)
 
 void Knight::KnightUpSlashStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	GetRenderer()->ChangeFrameAnimation("UP_SLASH_ANIMATION");
 
 	KnightSlashEffect_->GetCollision()->On();
@@ -3069,6 +3130,9 @@ void Knight::KnightUpSlashEnd(const StateInfo& _Info)
 
 void Knight::KnightDownSlashStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	GetRenderer()->ChangeFrameAnimation("DOWN_SLASH_ANIMATION");
 	KnightSlashEffect_->GetCollision()->On();
 	KnightSlashEffect_->SetAnimationDownSlash();
@@ -3235,6 +3299,9 @@ void Knight::KnightDownSlashEnd(const StateInfo& _Info)
 
 void Knight::KnightCastStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	GetRenderer()->ChangeFrameAnimation("CAST_ANIMATION");
 	KnightData::GetInst()->SetisUseSoul(true);
 	KnightCast_->EffectOn(GetMoveDirection());
@@ -3280,6 +3347,9 @@ void Knight::KnightCastEnd(const StateInfo& _Info)
 
 void Knight::KnightScreamCastStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
+
 	KnightScreamCastEffect_->EffectOn();
 
 	GetRenderer()->ChangeFrameAnimation("SCREAM_CAST_ANIMATION");
@@ -3619,6 +3689,8 @@ void Knight::KnightWallJumpLandEnd(const StateInfo& _Info)
 
 void Knight::KnightSitStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	GetRenderer()->ChangeFrameAnimation("SIT_ANIMATION");
 	GetTransform().SetLocalMove({0, 10.f});
 	KnightData::GetInst()->SetisSitting(true);
@@ -3656,6 +3728,8 @@ void Knight::KnightSitEnd(const StateInfo& _Info)
 
 void Knight::KnightTalkingStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 }
 
 void Knight::KnightTalkingUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -3675,6 +3749,8 @@ void Knight::KnightTalkingEnd(const StateInfo& _Info)
 
 void Knight::KnightShoppingStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 }
 
 void Knight::KnightShoppingUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -3693,6 +3769,8 @@ void Knight::KnightShoppingEnd(const StateInfo& _Info)
 
 void Knight::KnightDoorStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	GetRenderer()->ChangeFrameAnimation("DOOR_ANIMATION");
 
 }
@@ -3714,6 +3792,8 @@ void Knight::KnightDoorEnd(const StateInfo& _Info)
 
 void Knight::KnightTabletStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	GetRenderer()->ChangeFrameAnimation("SEE_ANIMATION");
 
 }
@@ -3756,6 +3836,8 @@ void Knight::KnightTabletReturnToIdleEnd(const StateInfo& _Info)
 
 void Knight::KnightNewMaskEventStart(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	GetRenderer()->ChangeFrameAnimation("NEW_MASK_START_ANIMATION");
 	KnightHatchlingBurst_->EffectOn();
 	KnightHatchlingBurst_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x,  this->GetTransform().GetWorldPosition().y, -150.f});

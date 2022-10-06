@@ -763,6 +763,9 @@ void Knight::Update(float _DeltaTime)
 
 void Knight::LevelStartEvent()
 {
+	KnightManager_.ChangeState("STILL");
+
+
 	if (KnightData::GetInst()->GetisIntroFallEvent() == false)
 	{
 		std::string EnumString;
@@ -772,13 +775,8 @@ void Knight::LevelStartEvent()
 		std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
 		if (GetLevel()->GetNameConstRef() == UpperName)
 		{
-			KnightData::GetInst()->SetisIntroFallEvent(true);
 			KnightManager_.ChangeState("INTRO_FALL");
 		}
-	}
-	else
-	{
-		KnightManager_.ChangeState("STILL");
 	}
 
 	if (KnightData::GetInst()->GetisDeathLevelChange() == true)
@@ -787,14 +785,7 @@ void Knight::LevelStartEvent()
 		GetTransform().SetLocalPosition({ 4611, -3127, static_cast<float>(Z_ORDER::Knight) });
 		KnightManager_.ChangeState("SIT");
 
-
-
 	}
-	else
-	{
-		KnightManager_.ChangeState("STILL");
-	}
-
 
 	isKnightPotal_ = false;
 
@@ -806,6 +797,9 @@ void Knight::LevelStartEvent()
 			DeathLevelChangeFadeOut_ = nullptr;
 		}
 	}
+
+	KnightData::GetInst()->SetisIntroFallEvent(true);
+
 }
 
 void Knight::LevelEndEvent()

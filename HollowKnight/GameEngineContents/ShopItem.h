@@ -18,8 +18,6 @@ struct ShopItemState
 };
 
 
-
-
 class GameEngineUIRenderer;
 class ShopItem : public GameEngineActor
 {

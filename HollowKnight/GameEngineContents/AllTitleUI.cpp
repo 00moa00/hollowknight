@@ -4,10 +4,10 @@
 AllTitleUI::AllTitleUI() 
 	:
 	UIPointGameStart_(nullptr),
-	UIPointMapEditor_(nullptr),
+	//UIPointMapEditor_(nullptr),
 	UIPointGameExit_(nullptr),
 	GameStartFont_(nullptr),
-	MapEditorFont_(nullptr),
+	//MapEditorFont_(nullptr),
 	GameExitFont_(nullptr)
 {
 }
@@ -20,11 +20,11 @@ void AllTitleUI::Start()
 {
 
 	UIPointGameStart_ = GetLevel()->CreateActor<UIPoint>();
-	UIPointGameStart_->GetTransform().SetLocalPosition({ 0, -100, 0 });
+	UIPointGameStart_->GetTransform().SetLocalPosition({ 0, -200, 0 });
 
-	UIPointMapEditor_ = GetLevel()->CreateActor<UIPoint>();
-	UIPointMapEditor_->GetTransform().SetLocalPosition({ 0, -200, 0 });
-	UIPointMapEditor_->SetPointChangeIdleAnimation();
+	//UIPointMapEditor_ = GetLevel()->CreateActor<UIPoint>();
+	//UIPointMapEditor_->GetTransform().SetLocalPosition({ 0, -200, 0 });
+	//UIPointMapEditor_->SetPointChangeIdleAnimation();
 
 	UIPointGameExit_ = GetLevel()->CreateActor<UIPoint>();
 	UIPointGameExit_->GetTransform().SetLocalPosition({ 0, -300, 0 });
@@ -34,19 +34,19 @@ void AllTitleUI::Start()
 	
 	GameStartFont_->SetText("게임 시작", "Noto Serif KR");
 	GameStartFont_->SetColor({ 1.0f, 1.0f, 1.0f });
-	GameStartFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 100.0f)});
+	GameStartFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 200.0f)});
 	GameStartFont_->SetSize(30);
 	GameStartFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
 	GameStartFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
-	MapEditorFont_ = CreateComponent<GameEngineFontRenderer>();
+	//MapEditorFont_ = CreateComponent<GameEngineFontRenderer>();
 
-	MapEditorFont_->SetText("멥 에디터", "Noto Serif KR");
-	MapEditorFont_->SetColor({ 1.0f, 1.0f, 1.0f });
-	MapEditorFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 200.0f) });
-	MapEditorFont_->SetSize(30);
-	MapEditorFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
-	MapEditorFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
+	//MapEditorFont_->SetText("멥 에디터", "Noto Serif KR");
+	//MapEditorFont_->SetColor({ 1.0f, 1.0f, 1.0f });
+	//MapEditorFont_->SetScreenPostion({ GameEngineWindow::GetInst()->GetScale().hx(), (GameEngineWindow::GetInst()->GetScale().hy() + 200.0f) });
+	//MapEditorFont_->SetSize(30);
+	//MapEditorFont_->SetLeftAndRightSort(LeftAndRightSort::CENTER);
+	//MapEditorFont_->SetTopAndBotSort(TopAndBotSort::VCENTER);
 
 
 	GameExitFont_ = CreateComponent<GameEngineFontRenderer>();
@@ -65,8 +65,8 @@ void AllTitleUI::Start()
 	TitleStateManager_.CreateStateMember("GameStart"
 		, std::bind(&AllTitleUI::GameStartUpdate, this, std::placeholders::_1, std::placeholders::_2));
 
-	TitleStateManager_.CreateStateMember("MapEditor"
-		, std::bind(&AllTitleUI::MapEditorUpdate, this, std::placeholders::_1, std::placeholders::_2));
+	//TitleStateManager_.CreateStateMember("MapEditor"
+	//	, std::bind(&AllTitleUI::MapEditorUpdate, this, std::placeholders::_1, std::placeholders::_2));
 
 
 	TitleStateManager_.CreateStateMember("GameExit"
@@ -108,32 +108,22 @@ void AllTitleUI::GameStartUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		UIPointGameExit_->SetPointChangeUpdateAnimation();
 		TitleStateManager_.ChangeState("GameExit");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsDown("PressDown"))
-	{
-		UIPointMapEditor_->SetPointChangeUpdateAnimation();
-		TitleStateManager_.ChangeState("MapEditor");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsDown("PressEnter"))
-	{
-		GEngine::ChangeLevel("DirtmouthLevel2");
-	}
-}
-
-void AllTitleUI::MapEditorUpdate(float _DeltaTime, const StateInfo& _Info)
-{
-	if (true == GameEngineInput::GetInst()->IsDown("PressUp"))
-	{
-		UIPointGameStart_->SetPointChangeUpdateAnimation();
-		TitleStateManager_.ChangeState("GameStart");
+		GameEngineSound::SoundPlayOneShot("ui_change_selection.ogg");
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("PressDown"))
 	{
 		UIPointGameExit_->SetPointChangeUpdateAnimation();
 		TitleStateManager_.ChangeState("GameExit");
+		GameEngineSound::SoundPlayOneShot("ui_change_selection.ogg");
+
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("PressEnter"))
+	{
+		GameEngineSound::SoundPlayOneShot("ui_save.ogg");
+
+		GEngine::ChangeLevel("KingsPassLevel1");
 	}
 }
 
@@ -141,13 +131,18 @@ void AllTitleUI::GameExitUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("PressUp"))
 	{
-		UIPointMapEditor_->SetPointChangeUpdateAnimation();
-		TitleStateManager_.ChangeState("MapEditor");
+		UIPointGameStart_->SetPointChangeUpdateAnimation();
+		TitleStateManager_.ChangeState("GameStart");
+		GameEngineSound::SoundPlayOneShot("ui_change_selection.ogg");
+
+
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("PressDown"))
 	{
 		UIPointGameStart_->SetPointChangeUpdateAnimation();
 		TitleStateManager_.ChangeState("GameStart");
+		GameEngineSound::SoundPlayOneShot("ui_change_selection.ogg");
+
 	}
 }

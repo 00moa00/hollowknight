@@ -9,6 +9,7 @@
 #include "TitleSmokeParticle.h"
 #include "VignettePostEffect.h"
 #include "TitleWhitePartlcle.h"
+#include "KnightSoundManager.h"
 
 TitleLevel::TitleLevel()
 	:
@@ -85,7 +86,28 @@ void TitleLevel::Start()
 			 LogoRenderer_->GetRenderer()->GetTransform().GetLocalPosition().y + (GameEngineRandom::MainRandom.RandomFloat(-150.f, 150.f)) });
 	}
 
-	
+
+	{
+		TitleCircleParticle* TitleCircleParticle_ = CreateActor<TitleCircleParticle>();
+		TitleCircleParticle_->GetTransform().SetWorldPosition({ GameEngineRandom::MainRandom.RandomFloat(-GameEngineWindow::GetInst()->GetScale().hx(), GameEngineWindow::GetInst()->GetScale().hx())
+			, -GameEngineWindow::GetInst()->GetScale().hy(),10 });
+	}
+
+	{
+		TitleSmokeParticle* TitleSmokeParticle_ = CreateActor<TitleSmokeParticle>();
+		TitleSmokeParticle_->GetTransform().SetWorldPosition({ GameEngineRandom::MainRandom.RandomFloat(-GameEngineWindow::GetInst()->GetScale().hx(), GameEngineWindow::GetInst()->GetScale().hx())
+			, -(GameEngineWindow::GetInst()->GetScale().hy() + 150),10 });
+
+	}
+
+	{
+		TitleWhitePartlcle* TitleWhitePartlcle_ = CreateActor<TitleWhitePartlcle>();
+		TitleWhitePartlcle_->GetTransform().SetWorldPosition({ LogoRenderer_->GetRenderer()->GetTransform().GetLocalPosition().x + (GameEngineRandom::MainRandom.RandomFloat(-600.f, 600.f)),
+			 LogoRenderer_->GetRenderer()->GetTransform().GetLocalPosition().y + (GameEngineRandom::MainRandom.RandomFloat(-150.f, 150.f)) });
+	}
+
+	KnightSoundManager::GetInst()->BgmOn("Title.ogg", 5);
+
 }
 
 void TitleLevel::Update(float _DeltaTime)

@@ -14,6 +14,7 @@
 #include "VignettePostEffect.h"
 #include "BloomPostEffect.h"
 
+#include "KnightSoundManager.h"
 
 #include "MapSmoke.h"
 
@@ -108,13 +109,9 @@ void KingsPassLevel1::Start()
 	OverlayPostEffect_->SetHollowKnightLevel(this);
 
 	NoisePostEffect* NoisePostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
-	NoisePostEffect_->SetHollowKnightLevel(this);
+	NoisePostEffect_->SetHollowKnightLevel(this);	
+	
 
-	//GetMainCamera()->GetCameraRenderTarget()->AddEffect<VignettePostEffect>();
-
-
-
-	//GetMainCameraActor()->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 }
 void KingsPassLevel1::Update(float _DeltaTime) 
 {
@@ -125,6 +122,11 @@ void KingsPassLevel1::End() {}
 
 void KingsPassLevel1::LevelStartEvent()
 {
+
+	KnightSoundManager::GetInst()->BgmOff();
+	KnightSoundManager::GetInst()->BgmOn("cave_wind_loop.ogg", 300);
+
+
 	CreateActor<FadeIn>();
 
 	GetKnight()->SetDirInit(float4::RIGHT);

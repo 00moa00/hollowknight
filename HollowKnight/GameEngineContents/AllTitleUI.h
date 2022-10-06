@@ -27,11 +27,11 @@ protected:
 
 private:
 	UIPoint* UIPointGameStart_;
-	UIPoint* UIPointMapEditor_;
+	//UIPoint* UIPointMapEditor_;
 	UIPoint* UIPointGameExit_;
 
 	GameEngineFontRenderer* GameStartFont_;
-	GameEngineFontRenderer* MapEditorFont_;
+	//GameEngineFontRenderer* MapEditorFont_;
 	GameEngineFontRenderer* GameExitFont_;
 
 
@@ -46,7 +46,7 @@ private:
 	//void GameStartAnimationEnd(const FrameAnimation_DESC& _Info);
 
 	void GameStartUpdate(float _DeltaTime, const StateInfo& _Info);
-	void MapEditorUpdate(float _DeltaTime, const StateInfo& _Info);
+	//void MapEditorUpdate(float _DeltaTime, const StateInfo& _Info);
 	void GameExitUpdate(float _DeltaTime, const StateInfo& _Info);
 
 };

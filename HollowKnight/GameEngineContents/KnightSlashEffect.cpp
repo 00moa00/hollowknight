@@ -4,6 +4,7 @@
 #include "Monster.h"
 #include "HollowKnightLevel.h"
 #include "MasterObject.h"
+#include <GameEngineBase/GameEngineRandom.h>
 
 KnightSlashEffect::KnightSlashEffect()
 	:
@@ -153,6 +154,27 @@ void KnightSlashEffect::SetAnimationSlash()
 	Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetMoveDirection();
 	GetTransform().SetLocalPosition({ 0,-0 });
 
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0,3);
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_1.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_2.ogg");
+
+	}
+
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_3.ogg");
+
+	}
+
+	else if (RamSound == 3)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_4.ogg");
+	}
 }
 
 void KnightSlashEffect::SetAnimationDoubleSlash()
@@ -162,6 +184,28 @@ void KnightSlashEffect::SetAnimationDoubleSlash()
 	Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetMoveDirection();
 	GetTransform().SetLocalPosition({ 0,-0 });
 
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 3);
+
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_1.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_2.ogg");
+
+	}
+
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_3.ogg");
+
+	}
+
+	else if (RamSound == 3)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_4.ogg");
+	}
 }
 
 void KnightSlashEffect::SetAnimationUpSlash()
@@ -171,6 +215,27 @@ void KnightSlashEffect::SetAnimationUpSlash()
 	Dir_ = float4::UP;
 	GetTransform().SetLocalPosition({ 0,-0 });
 
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 3);
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_1.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_2.ogg");
+
+	}
+
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_3.ogg");
+
+	}
+
+	else if (RamSound == 3)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_4.ogg");
+	}
 }
 
 void KnightSlashEffect::SetAnimationDownSlash()
@@ -180,6 +245,27 @@ void KnightSlashEffect::SetAnimationDownSlash()
 	Dir_ = float4::DOWN;
 	GetTransform().SetLocalPosition({0,-80});
 
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 3);
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_1.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_2.ogg");
+
+	}
+
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_3.ogg");
+
+	}
+
+	else if (RamSound == 3)
+	{
+		GameEngineSound::SoundPlayOneShot("sword_4.ogg");
+	}
 }
 
 void KnightSlashEffect::SetAnimationStill()
