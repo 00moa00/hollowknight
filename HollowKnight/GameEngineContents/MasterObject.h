@@ -18,6 +18,7 @@ public:
 
 public:
 	virtual void SetHitCollision(){};
+	virtual void SetKnightCollision() {};
 
 private:
 	GameEngineTextureRenderer* Renderer_;
@@ -28,7 +29,7 @@ private:
 
 
 
-protected:
+public:
 	//================================
 	//     Getter
 	//================================
@@ -37,6 +38,7 @@ protected:
 		return Renderer_;
 	}
 
+protected:
 	GameEngineCollision* GetCollision() const
 	{
 		return Collision_;

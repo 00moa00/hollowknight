@@ -29,7 +29,7 @@ void GeoGetEffect::Start()
 		});
 
 	GetRenderer()->ChangeFrameAnimation("ANIMATION");
-	GetRenderer()->GetTransform().SetLocalPosition({ 0, 10.f, 0 });
+	GetRenderer()->GetTransform().SetLocalPosition({ 0, 15.f, -100});
 
 	float RamRo = GameEngineRandom::MainRandom.RandomFloat(-30, 30);
 	GetRenderer()->GetTransform().SetLocalRotation({ 0, 0, RamRo });

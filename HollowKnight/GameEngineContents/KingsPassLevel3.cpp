@@ -21,6 +21,9 @@
 #include "Crawlid.h"
 #include "HealthBug.h"
 
+#include "HealthBugPlant.h"
+
+
 KingsPassLevel3::KingsPassLevel3() 
 {
 }
@@ -178,11 +181,29 @@ void KingsPassLevel3::Start()
 	Crawlid_->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	Buzzer* Buzzer_ = CreateActor<Buzzer>();
-	Buzzer_->GetTransform().SetWorldPosition({ 2700, -3000 });
+	Buzzer_->GetTransform().SetWorldPosition({ 2700, -2900 });
 	Buzzer_->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	HealthBug* HealthBug_ = CreateActor<HealthBug>();
-	HealthBug_->GetTransform().SetWorldPosition({ 699, -1200 });
+	HealthBug_->GetTransform().SetWorldPosition({ 699, -1500 });
+
+	{
+		HealthBugPlant* HealthBugPlant_ = CreateActor<HealthBugPlant>();
+		HealthBugPlant_->GetTransform().SetWorldPosition({ 570, -1650 });
+		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.9f, 331 * 0.9f });
+	}
+
+	{
+		HealthBugPlant* HealthBugPlant_ = CreateActor<HealthBugPlant>();
+		HealthBugPlant_->GetTransform().SetWorldPosition({ 600, -1600 });
+	}
+
+	{
+		HealthBugPlant* HealthBugPlant_ = CreateActor<HealthBugPlant>();
+		HealthBugPlant_->GetTransform().SetWorldPosition({ 800, -1600 });
+		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.8f, 331 * 0.8f });
+	}
+
 
 
 	CreawteMapWhiteParticleMaker();

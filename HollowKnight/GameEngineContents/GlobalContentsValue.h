@@ -33,6 +33,7 @@ enum class COLLISION_ORDER
 	Wall_Actor,
 	Prompt,
 	Object,
+	NotAttack_Object,
 	Bench,
 	Geo,
 	Knight_Slash,

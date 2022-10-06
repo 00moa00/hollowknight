@@ -133,6 +133,7 @@ void MonsterHitParticle::Update(float _DeltaTime)
 				ParticleList_[i]->Off();
 				Scale_ = 0.f;
 				this->Death();
+				return;
 			}
 
 			ParticleList_[i]->GetTransform().SetLocalScale(InitScale_[i] * Scale_);
@@ -148,6 +149,7 @@ void MonsterHitParticle::Update(float _DeltaTime)
 	{
 		isPixelCheck(_DeltaTime);
 	}
+
 }
 
 void MonsterHitParticle::isPixelCheck(float _DeltaTime)
@@ -255,9 +257,12 @@ void MonsterHitParticle::SetDir(float4 _Dir)
 		else
 		{
 
-			StartDirList_.push_back(float4::ZERO);
+			Dir.x = GameEngineRandom::MainRandom.RandomFloat(-1.0f, 1.0f);
+			Dir.y = GameEngineRandom::MainRandom.RandomFloat(0.f, 1.0f);
 
-			DirList_.push_back(float4::ZERO);
+			StartDirList_.push_back(float4::UP);
+
+			DirList_.push_back(Dir);
 
 		}
 

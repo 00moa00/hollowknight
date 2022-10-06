@@ -80,7 +80,6 @@ void GrimmDirtmouthLevel2::Start()
 	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop, true);
 	MapShopPotal_->GetTransform().SetWorldPosition({ 6008, -2955.f });
 
-
 	Elderbug_ = CreateActor<Elderbug>();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());

@@ -795,6 +795,9 @@
     <ClInclude Include="HealthBugPlant.h">
       <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="HealthBugPlant2.h">
+      <Filter>Actor\Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1419,6 +1422,9 @@
       <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
     <ClCompile Include="HealthBugPlant.cpp">
+      <Filter>Actor\Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBugPlant2.cpp">
       <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
