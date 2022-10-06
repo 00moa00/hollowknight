@@ -146,7 +146,7 @@ void DoorStoneParticle::SetDir(float4 _Dir)
 
 		if (_Dir.x > 0.f)
 		{
-			Dir.x = GameEngineRandom::MainRandom.RandomFloat(0.f, 0.4f);
+			Dir.x = GameEngineRandom::MainRandom.RandomFloat(0.f, 0.5f);
 			Dir.y = GameEngineRandom::MainRandom.RandomFloat(-0.6f, 0.3f);
 
 			DirList_.push_back(Dir);
@@ -155,7 +155,7 @@ void DoorStoneParticle::SetDir(float4 _Dir)
 
 		else if (_Dir.x < 0.f)
 		{
-			Dir.x = GameEngineRandom::MainRandom.RandomFloat(-0.4f, 0.f);
+			Dir.x = GameEngineRandom::MainRandom.RandomFloat(-0.5f, 0.f);
 			Dir.y = GameEngineRandom::MainRandom.RandomFloat(-0.6f, 0.3f);
 
 			DirList_.push_back(Dir);
@@ -182,8 +182,6 @@ void DoorStoneParticle::SetRamPos(float MinY, float MaxY)
 	{
 		ParticleList_[i]->GetTransform().SetWorldMove({0,RamdomPosY });
 	}
-
-
 }
 
 void DoorStoneParticle::SetSpeed(float _Speed)
