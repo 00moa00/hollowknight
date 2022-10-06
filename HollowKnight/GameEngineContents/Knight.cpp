@@ -776,8 +776,12 @@ void Knight::LevelStartEvent()
 			KnightManager_.ChangeState("INTRO_FALL");
 		}
 	}
+	else
+	{
+		KnightManager_.ChangeState("STILL");
+	}
 
-	else if (KnightData::GetInst()->GetisDeathLevelChange() == true)
+	if (KnightData::GetInst()->GetisDeathLevelChange() == true)
 	{
 		KnightData::GetInst()->SetisDeathLevelChange(false);
 		GetTransform().SetLocalPosition({ 4611, -3127, static_cast<float>(Z_ORDER::Knight) });
