@@ -11,7 +11,7 @@ MapWhiteParticleWindMaker::~MapWhiteParticleWindMaker()
 
 void MapWhiteParticleWindMaker::Start()
 {
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 50; ++i)
 	{
 		MapWhitParticle* MapWhitParticle_ = GetLevel()->CreateActor<MapWhitParticle>();
 		MapWhitParticle_->SetWindMove();
@@ -20,10 +20,10 @@ void MapWhiteParticleWindMaker::Start()
 
 void MapWhiteParticleWindMaker::Update(float _DeltaTime)
 {
-	if (GetAccTime() > 2.0f)
+	if (GetAccTime() > 4.0f)
 	{
 		ReSetAccTime();
-		for (int i = 0; i < 60; ++i)
+		for (int i = 0; i < 40; ++i)
 		{
 			MapWhitParticle* MapWhitParticle_ = GetLevel()->CreateActor<MapWhitParticle>();
 			MapWhitParticle_->SetWindMove();

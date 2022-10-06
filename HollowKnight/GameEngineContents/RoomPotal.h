@@ -1,6 +1,8 @@
 #pragma once
 #include "MasterObject.h"
 #include "PromptSet.h"
+#include "FadeOut.h"
+#include "FadeIn.h"
 
 enum class POTAL_TYPE
 {
@@ -27,10 +29,16 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+	void LevelStartEvent() override;
+	void LevelEndEvent() override;
+
 private:
 	PromptSet* PromptSet_;
 
 	POTAL_TYPE PotalType_;
+
+	FadeOut* FadeOut_;
+	FadeIn* FadeIn_;
 
 public:
 	void CreatePotal(POTAL_TYPE _Type, bool isPromt);
@@ -39,6 +47,9 @@ public:
 	{
 		return PotalType_;
 	}
+
+private:
+	bool PotalVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 
 };
 

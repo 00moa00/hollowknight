@@ -72,9 +72,13 @@ void DirtmouthLevel2::Start()
 	Bench* Test_ = CreateActor<Bench>();
 	AreaTitle* AreaTitle_ = CreateActor<AreaTitle>();
 
+	SlyShopPotal_ = CreateActor<RoomPotal>();
+	SlyShopPotal_->CreatePotal(POTAL_TYPE::Sly_Shop, true);
+	SlyShopPotal_->GetTransform().SetWorldPosition({ 3840, -3045.f });
+
 	MapShopPotal_ = CreateActor<RoomPotal>();
 	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop, true);
-	MapShopPotal_->GetTransform().SetWorldPosition({ 3840, -3045.f });
+	MapShopPotal_->GetTransform().SetWorldPosition({ 6008, -3127.f });
 
 	Elderbug_ = CreateActor<Elderbug>();
 
