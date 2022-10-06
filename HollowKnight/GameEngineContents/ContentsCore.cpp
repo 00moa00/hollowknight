@@ -27,6 +27,9 @@
 #include "KnightData.h"
 #include "KnightShadowData.h"
 
+#include "FireballPromptLevel.h"
+#include "ScreamPromptLevel.h"
+
 #include <GameEngineCore/GameEngineBlend.h>
 #include "CameraGUI.h"
 
@@ -1730,9 +1733,10 @@ void ContentsCore::Start()
 
 	CreateLevel<GrimmLevel>("GrimmmLevel");
 
-
-	
+	CreateLevel<FireballPromptLevel>("FireballPromptLevel");
 	//CreateLevel<CrossroadsLevel2>("CrossroadsLevel2");
+	CreateLevel<ScreamPromptLevel>("ScreamPromptLevel");
+
 
 	CreateLevel<DirtmouthLevel1>("DirtmouthLevel1");
 	CreateLevel<DirtmouthLevel2>("DirtmouthLevel2");

@@ -67,7 +67,7 @@ void TutorialGate::Update(float _DeltaTime)
 	{
 		if (GetAccTime() > 1.0f)
 		{
-			GEngine::ChangeLevel("DirtmouthLevel1");
+			GEngine::ChangeLevel("FireballPromptLevel");
 			return;
 
 		}

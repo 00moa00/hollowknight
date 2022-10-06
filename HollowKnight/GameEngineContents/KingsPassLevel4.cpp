@@ -222,10 +222,7 @@ void KingsPassLevel4::LevelStartEvent()
 	{
 		GetKnight()->GetTransform().SetLocalPosition({ 4850.f - 60.f, -2959.f, static_cast<float>(Z_ORDER::Knight) });
 		GetKnight()->SetDirInit(float4::LEFT);
-
 	}
-
-
 
 }
 

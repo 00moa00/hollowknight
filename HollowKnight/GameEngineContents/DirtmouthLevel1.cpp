@@ -107,6 +107,8 @@ void DirtmouthLevel1::End()
 
 void DirtmouthLevel1::LevelStartEvent()
 {
+	GetKnight()->GetTransform().SetLocalPosition({ 252, -973, static_cast<float>(Z_ORDER::Knight) });
+	GetKnight()->SetDirInit(float4::RIGHT);
 	CreateActor<FadeIn>();
 
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());

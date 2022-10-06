@@ -184,6 +184,9 @@
     <Filter Include="Actor\Effect\UI">
       <UniqueIdentifier>{999f82bb-65b6-4cae-b7f5-d5dc7f9c9af2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\Levels\Prompt">
+      <UniqueIdentifier>{87860a90-6014-4f21-b9eb-86d4e080ff99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -761,6 +764,18 @@
     </ClInclude>
     <ClInclude Include="LargeStoneParticle.h">
       <Filter>Actor\Effect\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreamPromptLevel.h">
+      <Filter>Level\Levels\Prompt</Filter>
+    </ClInclude>
+    <ClInclude Include="FireballPromptLevel.h">
+      <Filter>Level\Levels\Prompt</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellFireballInfo.h">
+      <Filter>Actor\Play\UI\Tablet</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellScreamInfo.h">
+      <Filter>Actor\Play\UI\Tablet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1357,6 +1372,18 @@
     </ClCompile>
     <ClCompile Include="LargeStoneParticle.cpp">
       <Filter>Actor\Effect\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreamPromptLevel.cpp">
+      <Filter>Level\Levels\Prompt</Filter>
+    </ClCompile>
+    <ClCompile Include="FireballPromptLevel.cpp">
+      <Filter>Level\Levels\Prompt</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellFireballInfo.cpp">
+      <Filter>Actor\Play\UI\Tablet</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellScreamInfo.cpp">
+      <Filter>Actor\Play\UI\Tablet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
