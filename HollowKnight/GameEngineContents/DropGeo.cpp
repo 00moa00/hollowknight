@@ -2,6 +2,7 @@
 #include "DropGeo.h"
 #include <GameEngineBase/GameEngineRandom.h>
 #include "HollowKnightLevel.h"
+#include "GeoGetEffect.h"
 
 DropGeo::DropGeo() 
 	:
@@ -82,6 +83,9 @@ void DropGeo::Update(float _DeltaTime)
 		if (GetLevel<HollowKnightLevel>()->GetHUD()->GetGeoCountFont()->SetPossibleCounting() == true)
 		{
 			GetLevel<HollowKnightLevel>()->GetHUD()->GetGeoCountFont()->SetCountingFont(1);
+			GeoGetEffect* GeoGetEffect_ = GetLevel()->CreateActor<GeoGetEffect>();
+			GeoGetEffect_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
+			//KnightSlashAttackEffect_->SetParent(this);
 			this->Death();
 		}
 

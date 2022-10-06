@@ -40,9 +40,9 @@ void KingsPassLevel2::Start()
 	CreateKnightActor(); // 플레이어
 	CreateKingsPass2Monster();
 
-
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 	GetKnight()->GetTransform().SetLocalPosition({ 509.f, -1826.f, static_cast<float>(Z_ORDER::Knight) });
+	
 	GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	SetMapSize({ 3888, 2546 });

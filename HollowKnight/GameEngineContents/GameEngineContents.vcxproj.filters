@@ -780,6 +780,9 @@
     <ClInclude Include="Buzzer.h">
       <Filter>Actor\Actor\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="GeoGetEffect.h">
+      <Filter>Actor\Actor\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1390,6 +1393,9 @@
     </ClCompile>
     <ClCompile Include="Buzzer.cpp">
       <Filter>Actor\Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="GeoGetEffect.cpp">
+      <Filter>Actor\Actor\Effect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -44,6 +44,7 @@ Knight::Knight()
 	KnightActtingMoveDirPower_(1.0f),
 	JumpAccel_(0.0f),
 	KnightDoubleJumpPower_(0.0f),
+	KnightFallAccelPower_(0.0f),
 
 	isPossibleDoubleSlash_(false),
 	isKnightActtingMove_(false),
@@ -231,8 +232,12 @@ void Knight::Start()
 
 	// ---- 기본 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f));
+	GetRenderer()->CreateFrameAnimationCutTexture("SLAH_STILL_ANIMATION", FrameAnimation_DESC("Knight_idle_still_020000-Sheet.png", 0, 8, 0.100f, false));
 
-	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.150f, true));
+	GetRenderer()->CreateFrameAnimationCutTexture("JUMP_ANIMATION", FrameAnimation_DESC("Knight_jump_01-Sheet.png", 0, 5, 0.120f, true));
+	
+
+	
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_JUMP_ANIMATION", FrameAnimation_DESC("Knight_double_jump_v020000-Sheet.png", 0, 7, 0.040f, false));
 
 	GetRenderer()->CreateFrameAnimationCutTexture("FALL_ANIMATION", FrameAnimation_DESC("Knight_fall_01-Sheet.png", 0, 5, 0.100f, false));
@@ -281,8 +286,8 @@ void Knight::Start()
 	// ---- 공격 ----
 	GetRenderer()->CreateFrameAnimationCutTexture("SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 0, 5, 0.07f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("DOUBLE_SLASH_ANIMATION", FrameAnimation_DESC("Knight_slash_left_longer0000-Sheet.png", 6, 10, 0.07f, false));
-	GetRenderer()->CreateFrameAnimationCutTexture("UP_SLASH_ANIMATION", FrameAnimation_DESC("Knight_up_slash0000-Sheet.png", 0, 4, 0.07f));
-	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH_ANIMATION", FrameAnimation_DESC("Knight_down_slash_v02000-Sheet.png", 0, 4, 0.07f));
+	GetRenderer()->CreateFrameAnimationCutTexture("UP_SLASH_ANIMATION", FrameAnimation_DESC("Knight_up_slash0000-Sheet.png", 0, 4, 0.07f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("DOWN_SLASH_ANIMATION", FrameAnimation_DESC("Knight_down_slash_v02000-Sheet.png", 0, 4, 0.07f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("CAST_ANIMATION", FrameAnimation_DESC("Knight_cast_v030002-Sheet.png", 0, 11, 0.060f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("SCREAM_CAST_ANIMATION", FrameAnimation_DESC("Knight_scream_cast_lvl_020000-Sheet.png", 0, 8, 0.060f, false));
 
@@ -361,13 +366,17 @@ void Knight::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("FOCUS_ANIMATION", FrameAnimation_DESC("Knight_focus_v020000-Sheet.png", 0, 11, 0.140f, false));
 
 
-
 	GetRenderer()->ChangeFrameAnimation("STILL_ANIMATION");
-
 	//================================
 	//    Create Bind Animation
 	//================================
 	{
+
+		GetRenderer()->AnimationBindEnd("SLAH_STILL_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+			{
+				GetRenderer()->ChangeFrameAnimation("FAll_ANIMATION");
+			});
+
 		GetRenderer()->AnimationBindEnd("SIT_BACK_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 			{
 				isSitBackEnd_ = true;

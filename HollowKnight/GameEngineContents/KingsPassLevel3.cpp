@@ -17,6 +17,8 @@
 
 #include "AmblentLife.h"
 
+#include "Buzzer.h"
+#include "Crawlid.h"
 
 KingsPassLevel3::KingsPassLevel3() 
 {
@@ -92,7 +94,6 @@ void KingsPassLevel3::Start()
 
 		AmblentLife_->SetLimitMove({ 2870.f , -2479.f }, 150);
 		AmblentLife_->SetRamScale();
-
 	}
 
 	{
@@ -100,9 +101,7 @@ void KingsPassLevel3::Start()
 
 		AmblentLife_->SetLimitMove({ 2900.f , -2079.f }, 150);
 		AmblentLife_->SetRamScale();
-
 	}
-
 
 	{
 		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
@@ -110,13 +109,11 @@ void KingsPassLevel3::Start()
 		AmblentLife_->SetLimitMove({ 1800.f , -1900.f }, 150);
 		AmblentLife_->SetRamScale();
 	}
-
 	{
 		AmblentLife* AmblentLife_ = CreateActor<AmblentLife>();
 
 		AmblentLife_->SetLimitMove({ 1700.f , -1200.f }, 150);
 		AmblentLife_->SetRamScale();
-
 	}
 
 	{
@@ -124,7 +121,6 @@ void KingsPassLevel3::Start()
 
 		AmblentLife_->SetLimitMove({ 2000.f , -1364.f }, 150);
 		AmblentLife_->SetRamScale();
-
 	}
 
 	{
@@ -132,7 +128,6 @@ void KingsPassLevel3::Start()
 
 		AmblentLife_->SetLimitMove({ 2100.f , -1064.f }, 200);
 		AmblentLife_->SetRamScale();
-
 	}
 
 	{
@@ -176,6 +171,15 @@ void KingsPassLevel3::Start()
 		AmblentLife_->SetLimitMove({ 2500.f , -1200.f }, 200);
 		AmblentLife_->SetRamScale();
 	}
+
+	Crawlid* Crawlid_ = CreateActor<Crawlid>();
+	Crawlid_->GetTransform().SetWorldPosition({ 2683, -3574 });
+	Crawlid_->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+
+	Buzzer* Buzzer_ = CreateActor<Buzzer>();
+	Buzzer_->GetTransform().SetWorldPosition({ 2700, -3000 });
+	Buzzer_->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+
 
 	CreawteMapWhiteParticleMaker();
 
