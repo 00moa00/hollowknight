@@ -17,7 +17,7 @@ void KnightBurstPlusEffect::Start()
 	GetRenderer()->CreateFrameAnimationCutTexture("IDLE", FrameAnimation_DESC("Spell Effects_burst0000-Sheet.png", 6, 6, 0.050f, false));
 
 	GetRenderer()->GetTransform().SetWorldScale({ 266 * 3.0f,	257 * 3.0f });
-	GetRenderer()->GetTransform().SetLocalPosition({ ((266.f) / 3) + 60.f , -50.f });
+	GetRenderer()->GetTransform().SetLocalPosition({ ((266.f) / 3) + 70.f , -50.f });
 	//GetRenderer()->GetPixelData().MulColor.a = 0.5f;
 	SetBlendMode(BlendMode::Add);
 	//================================

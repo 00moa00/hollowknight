@@ -489,7 +489,7 @@ void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 			{
 				AirDashGroundDelayTiemr_ = 0.0f;
 
-					isAirDashLandEnd_ = false;
+				isAirDashLandEnd_ = false;
 				GrimmBattleManager_.ChangeState("BATTLE_AIR_DASH_END");
 				return;
 
@@ -698,8 +698,8 @@ void Grimm::GrimmBattleSlashUpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (GetisWall() == true)
 	{
-		//int a = 0;
-		GrimmBattleManager_.ChangeState("BATTLE_FIRE");
+		isSlashEndEnd_ = false;
+		SetRamdomPattern();
 		return;
 	}
 

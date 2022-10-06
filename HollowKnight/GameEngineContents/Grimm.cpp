@@ -75,7 +75,10 @@ void Grimm::Start()
 	GetRenderer()->GetTransform().SetLocalPosition({0,-50});
 	GetTransform().SetLocalPosition({ 300,-500, static_cast<float>(Z_ORDER::Monster) });
 	SetHP(30);
-	CreateMonsterHitParticle(30);
+	//CreateMonsterHitParticle(30);
+
+	CreateGrimmHitParticle(30);
+
 	SetMonsterHitEffectWhiteTex();
 	SetMonsterHitEffectisImpact();
 
@@ -99,10 +102,6 @@ void Grimm::Start()
 		GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
 	}
 
-	MonsterHitParticle* MonsterHitParticle_ = GetLevel()->CreateActor<MonsterHitParticle>();
-	MonsterHitParticle_->GetTransform().SetWorldPosition({ 500, -700 });
-
-	MonsterHitParticle_->SetDir(float4::RIGHT);
 
 
 	for (int i = 0; i < 30; ++i)
@@ -518,40 +517,35 @@ void Grimm::Update(float _DeltaTime)
 
 void Grimm::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 {
-	if (isHitWhiteEffect_ == false)
+	SubHP(_Damage);
+	SetCreateGrimmHitParticleOn(_KnightDir, float4{ 309.f, 508.f });
+
+	if (GetHP() == 3)
 	{
-		SubHP(_Damage);
-		SetCreateMonsterHitParticleOn(_KnightDir, float4{ 309.f, 508.f });
+		GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE1");
+		return;
 
-		if (GetHP() == 3)
-		{
-			GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE1");
-			return;
+	}
+	else if (GetHP() == 14)
+	{
+		GrimmBattleManager_.ChangeState("BATTLE_STUN");
+		return;
 
-		}
-		else if (GetHP() == 14)
-		{
-			GrimmBattleManager_.ChangeState("BATTLE_STUN");
-			return;
+	}
+	else if (GetHP() == 7)
+	{
+		GrimmBattleManager_.ChangeState("BATTLE_STUN");
+		return;
 
-		}
-		else if (GetHP() == 7)
-		{
-			GrimmBattleManager_.ChangeState("BATTLE_STUN");
-			return;
+	}
+	else
+	{
+		GetRenderer()->GetPixelData().PlusColor.r = 1.f;
+		GetRenderer()->GetPixelData().PlusColor.g = 1.f;
+		GetRenderer()->GetPixelData().PlusColor.b = 1.f;
 
-		}
-		else
-		{
-			GetRenderer()->GetPixelData().PlusColor.r = 1.f;
-			GetRenderer()->GetPixelData().PlusColor.g = 1.f;
-			GetRenderer()->GetPixelData().PlusColor.b = 1.f;
-
-			isHitWhiteEffect_ = true;
-			SubHitWhiteColor_ = 1.0f;
-		}
-
-
+		isHitWhiteEffect_ = true;
+		SubHitWhiteColor_ = 1.0f;
 	}
 }
 

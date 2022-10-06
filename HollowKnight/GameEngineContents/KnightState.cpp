@@ -2861,7 +2861,6 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightFallAccel_ = 0.0f;
 
-		isDoubleSlashEnd_ = false;
 
 		if (_Info.PrevState == "RUN" || isRunMode_ == true)
 		{
@@ -2877,6 +2876,7 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
+		isDoubleSlashEnd_ = false;
 
 		//KnightSlashEffect_->Off();
 	}
@@ -3041,8 +3041,6 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		KnightFallAccel_ = 0.0f;
 
-		isUpSlashEnd_ = false;
-
 		if (_Info.PrevState == "RUN" || isRunMode_ == true)
 		{
 			KnightManager_.ChangeState("RUN");
@@ -3057,6 +3055,8 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
+		isUpSlashEnd_ = false;
+
 	}
 }
 
@@ -3205,7 +3205,6 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	//애니메이션이 끝나면 
 	if (isDownSlashEnd_ == true)
 	{
-		isDownSlashEnd_ = false;
 		KnightFallAccel_ = 0.0f;
 
 		if (_Info.PrevState == "RUN" || isRunMode_ == true)
@@ -3222,6 +3221,8 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 			KnightManager_.ChangeState("WALK");
 		}
+		isDownSlashEnd_ = false;
+
 	}
 }
 

@@ -127,7 +127,7 @@ void MonsterHitParticle::Update(float _DeltaTime)
 
 		if (isImpact_ == false)
 		{
-			Scale_ -= 0.12f * _DeltaTime;
+			Scale_ -= 0.08f * _DeltaTime;
 			if (Scale_ <= 0.f)
 			{
 				ParticleList_[i]->Off();
@@ -275,6 +275,6 @@ void MonsterHitParticle::SetTexWhite()
 
 void MonsterHitParticle::SetisImpact(bool _b)
 {
-	isImpact_ = _b;
+	//isImpact_ = _b;
 }
 

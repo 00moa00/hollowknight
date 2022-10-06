@@ -5,6 +5,7 @@
 #include "MonsterHitPuffEffect.h"
 #include "MonsterDeathPuffParticle.h"
 #include "MonsterHitOrangeLight.h"
+#include "GrimmHitEffect.h"
 
 enum class MonsterType
 {
@@ -53,6 +54,7 @@ private:
 	std::vector<MonsterHitParticle*>MonsterHitParticleList_;
 	std::vector<MonsterHitPuffEffect*>MonsterHitPuffEffectList_;
 	std::vector<MonsterHitOrangeLight*> MonsterHitOrangeLightList_;
+	std::vector<GrimmHitEffect*> GrimmHitEffectList_;
 
 protected:
 	void SetMonsterDirection();
@@ -150,6 +152,16 @@ public:
 		}
 	}
 
+	void CreateGrimmHitParticle(int _i)
+	{
+		for (int i = 0; i < _i; ++i)
+		{
+			GrimmHitEffectList_.push_back(GetLevel()->CreateActor<GrimmHitEffect>());
+			//MonsterHitParticleList_.back()->SetParent(this);
+			GrimmHitEffectList_.back()->Off();
+		}
+	}
+
 	void SetMonsterHitEffectWhiteTex()
 	{
 		for (int i = 0; i < MonsterHitParticleList_.size(); ++i)
@@ -203,6 +215,45 @@ public:
 			++HitParticleCount_;
 		}
 	}
+
+	void SetCreateGrimmHitParticleOn(float4 _Dir, float4 _Scale)
+	{
+		if (HitParticleCount_ < GrimmHitEffectList_.size())
+		{
+			GrimmHitEffectList_[HitParticleCount_]->On();
+			GrimmHitEffectList_[HitParticleCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, -50 });
+			GrimmHitEffectList_[HitParticleCount_]->SetDir(_Dir);
+
+			if (_Dir.CompareInt2D(float4::RIGHT))
+			{
+				GrimmHitEffectList_[HitParticleCount_]->GetTransform().SetWorldMove({
+					_Scale.x / 4,
+					_Scale.y / 4, });
+			}
+			else if (_Dir.CompareInt2D(float4::LEFT))
+			{
+				GrimmHitEffectList_[HitParticleCount_]->GetTransform().SetWorldMove({
+					-_Scale.x / 4,
+					_Scale.y / 4, });
+			}
+			else if (_Dir.CompareInt2D(float4::UP))
+			{
+				GrimmHitEffectList_[HitParticleCount_]->GetTransform().SetWorldMove({
+					0,
+					+_Scale.y / 4, });
+			}
+			else if (_Dir.CompareInt2D(float4::DOWN))
+			{
+				GrimmHitEffectList_[HitParticleCount_]->GetTransform().SetWorldMove({
+					0,
+					+_Scale.y / 4, });
+			}
+
+
+			++HitParticleCount_;
+		}
+	}
+
 
 	void SubHP(int _i)
 	{
