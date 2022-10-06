@@ -671,6 +671,7 @@ void Shop::ShopMoveDownEnd(const StateInfo& _Info)
 
 void Shop::ShopBuyItemMoveUpStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("geo_deplete_count_down.ogg");
 
 }
 
@@ -718,6 +719,8 @@ void Shop::ShopBuyItemMoveUpEnd(const StateInfo& _Info)
 
 void Shop::ShopBuyItemMoveDownStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("geo_deplete_count_down.ogg");
+
 }
 
 void Shop::ShopBuyItemMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -743,7 +746,7 @@ void Shop::ShopBuyItemMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
 		}
 
 		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-		float4 Move = float4::DOWN * _DeltaTime * 700.f;
+		float4 Move = float4::DOWN * _DeltaTime * 1500.f;
 		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
 		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
 

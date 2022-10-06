@@ -27,10 +27,11 @@ protected:
 	void LevelEndEvent() override;
 
 private:
+
+	bool isFirst_;
+
 	Elderbug* Elderbug_;
 	RoomPotal* MapShopPotal_;
 	RoomPotal* SlyShopPotal_;
-
-	GameEnginePostEffect* GameEnginePostEffect_;
 };
 

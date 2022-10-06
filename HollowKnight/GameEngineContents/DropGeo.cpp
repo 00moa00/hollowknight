@@ -83,6 +83,30 @@ void DropGeo::Update(float _DeltaTime)
 		if (GetLevel<HollowKnightLevel>()->GetHUD()->GetGeoCountFont()->SetPossibleCounting() == true)
 		{
 			GetLevel<HollowKnightLevel>()->GetHUD()->GetGeoCountFont()->SetCountingFont(1);
+
+			int RamSound = GameEngineRandom::MainRandom.RandomInt(0,3);
+			if (RamSound == 0)
+			{
+				GameEngineSound::SoundPlayOneShot("geo_small_collect_1.ogg");
+
+			}
+			else if (RamSound == 1)
+			{
+				GameEngineSound::SoundPlayOneShot("geo_small_collect_1_0.ogg");
+
+			}
+
+			else if (RamSound == 2)
+			{
+				GameEngineSound::SoundPlayOneShot("geo_small_collect_2.ogg");
+
+			}
+
+			else if (RamSound == 3)
+			{
+				GameEngineSound::SoundPlayOneShot("geo_small_collect_2_0.ogg");
+			}
+
 			GeoGetEffect* GeoGetEffect_ = GetLevel()->CreateActor<GeoGetEffect>();
 			GeoGetEffect_->GetTransform().SetWorldPosition(GetTransform().GetWorldPosition());
 			//KnightSlashAttackEffect_->SetParent(this);
@@ -109,6 +133,7 @@ void DropGeo::isPixelCheck(float _DeltaTime)
 	}
 	else
 	{
+
 	}
 
 	while (true)

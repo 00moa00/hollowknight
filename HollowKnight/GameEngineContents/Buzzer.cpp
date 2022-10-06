@@ -3,6 +3,7 @@
 #include "KnightData.h"
 #include "HollowKnightLevel.h"
 #include "DropGeo.h"
+#include <GameEngineBase/GameEngineRandom.h>
 
 Buzzer::Buzzer() 
 	:
@@ -154,6 +155,22 @@ void Buzzer::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 
 void Buzzer::BuzzerStatleStart(const StateInfo& _Info)
 {
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 2);
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("buzzer_startle_01.ogg");
+
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("buzzer_startle_02.ogg");
+	}
+
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("buzzer_startle_03.ogg");
+	}
+
 	GetRenderer()->ChangeFrameAnimation("STATLE_ANIMATION");
 }
 
@@ -272,6 +289,7 @@ void Buzzer::BuzzerHitUpdate(float _DeltaTime, const StateInfo& _Info)
 					GetTransform().GetWorldPosition().y + 50.f });
 			}
 
+			GameEngineSound::SoundPlayOneShot("enemy_death_sword.ogg");
 			BuzzerManager_.ChangeState("DEATH");
 		}
 

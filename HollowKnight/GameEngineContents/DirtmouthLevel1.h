@@ -25,6 +25,7 @@ protected:
 	void LevelEndEvent() override;
 
 private:
+	bool isFirst_;
 
 };
 

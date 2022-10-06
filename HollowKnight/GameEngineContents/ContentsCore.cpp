@@ -237,7 +237,20 @@ void ContentsCore::Start()
 
 		GameEngineBlend::Create("DarkenBlend", Desc);
 	}
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Sound");
+		Dir.Move("Object");
 
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineSound::LoadRessource(Shaders[i].GetFullPath());
+		}
+	}
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");

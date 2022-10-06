@@ -290,7 +290,7 @@ void Crawlid::CrawlidStunUpdate(float _DeltaTime, const StateInfo& _Info)
 				DropGeo_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,
 					GetTransform().GetWorldPosition().y + 50.f });
 			}
-
+			GameEngineSound::SoundPlayOneShot("enemy_death_sword.ogg");
 			CrawlidManager_.ChangeState("DEATH");
 		}
 

@@ -6,6 +6,8 @@
 #include "DoorStoneParticle.h"
 #include "LargeStoneParticle.h"
 
+#include <GameEngineBase/GameEngineRandom.h>
+
 TutorialGate::TutorialGate()
 	:
 	isColl_(false),
@@ -87,6 +89,20 @@ void TutorialGate::SetHitCollision()
 	if (isGateDeath_ == false)
 	{
 		SubHitCount();
+		int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 1);
+
+		if (RamSound == 0)
+		{
+			GameEngineSound::SoundPlayOneShot("breakable_wall_hit_2.ogg");
+
+		}
+
+		else if (RamSound == 1)
+		{
+			GameEngineSound::SoundPlayOneShot("breakable_wall_hit_1.ogg");
+		}
+
+		GameEngineSound::SoundPlayOneShot("breakable_wall_death.ogg");
 
 		if (GetHitCount() == 6)
 		{
@@ -108,7 +124,7 @@ void TutorialGate::SetHitCollision()
 			float4 Pos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
 
 			BlackRenderer_->GetTransform().SetWorldPosition({ Pos.x, Pos.y, -1000 });
-
+			GameEngineSound::SoundPlayOneShot("breakable_wall_death.ogg");
 			return;
 		}
 

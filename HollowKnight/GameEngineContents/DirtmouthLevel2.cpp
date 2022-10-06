@@ -23,8 +23,15 @@
 
 #include "MapWhiteParticleWindMaker.h"
 
+
+
 DirtmouthLevel2::DirtmouthLevel2() 
 	:
+	isFirst_(false),
+
+	MapShopPotal_(nullptr),
+	SlyShopPotal_(nullptr),
+
 	Elderbug_(nullptr)
 {
 }
@@ -201,7 +208,6 @@ void DirtmouthLevel2::End()
 void DirtmouthLevel2::LevelStartEvent()
 {
 	CreateActor<FadeIn>();
-
 
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 

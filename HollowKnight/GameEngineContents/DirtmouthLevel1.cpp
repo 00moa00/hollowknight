@@ -16,7 +16,12 @@
 
 #include "MapWhiteParticleWindMaker.h"
 
+#include "DoorStoneParticle.h"
+#include "LargeStoneParticle.h"
+
 DirtmouthLevel1::DirtmouthLevel1() 
+	:
+	isFirst_(false)
 {
 }
 
@@ -107,6 +112,31 @@ void DirtmouthLevel1::End()
 
 void DirtmouthLevel1::LevelStartEvent()
 {
+	if (isFirst_ == false)
+	{
+		isFirst_ = true;
+		GameEngineSound::SoundPlayOneShot("break_wall_after_tutorial_area.ogg");
+
+
+		for (int i = 0; i < 4; ++i)
+		{
+			DoorStoneParticle* DoorStoneParticle_ = CreateActor<DoorStoneParticle>();
+			DoorStoneParticle_->GetTransform().SetWorldPosition({ 252, -973 + 1061.f / 2 });
+			DoorStoneParticle_->SetDir(float4::RIGHT);
+			DoorStoneParticle_->SetRamPos(0, 1061.f);
+			DoorStoneParticle_->SetSpeed(2500.f);
+		}
+
+		for (int i = 0; i < 2; ++i)
+		{
+			LargeStoneParticle* LargeStoneParticle_ = CreateActor<LargeStoneParticle>();
+			LargeStoneParticle_->GetTransform().SetWorldPosition({ 252  , -973 + 1061.f / 2 });
+			LargeStoneParticle_->SetDir(float4::RIGHT);
+			LargeStoneParticle_->SetRamPos(0, 1061.f);
+
+		}
+	}
+
 	GetKnight()->GetTransform().SetLocalPosition({ 252, -973, static_cast<float>(Z_ORDER::Knight) });
 	GetKnight()->SetDirInit(float4::RIGHT);
 	CreateActor<FadeIn>();

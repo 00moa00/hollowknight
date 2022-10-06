@@ -197,6 +197,9 @@ void GrimmDirtmouthLevel2::End()
 
 void GrimmDirtmouthLevel2::LevelStartEvent()
 {
+
+
+
 	CreateActor<FadeIn>();
 
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());

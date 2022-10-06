@@ -105,6 +105,7 @@ void Tablet::TabletDialogueOn()
 
 	isOpenDialogue_ = true;
 	PromptSet_->Off();
+	GameEngineSound::SoundPlayOneShot("Lore_Tablet_activate_temp.ogg");
 }
 
 void Tablet::TabletDialogueOff()
@@ -151,10 +152,13 @@ void Tablet::TabletIdleEnd(const StateInfo& _Info)
 void Tablet::TabletAppearStart(const StateInfo& _Info)
 {
 	LightRenderer_->On();
+	//GameEngineSound::SoundPlayOneShot("ui_button_confirm.ogg", 0.1f);
+
 }
 
 void Tablet::TabletAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
 	Alpha_ += _DeltaTime * 0.7f;
 	LightRenderer_->GetPixelData().MulColor.a = Alpha_;
 

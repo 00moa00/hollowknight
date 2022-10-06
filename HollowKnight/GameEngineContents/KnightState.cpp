@@ -2295,6 +2295,7 @@ void Knight::KnightRunEnd(const StateInfo& _Info)
 void Knight::KnightStunStart(const StateInfo& _Info)
 {
 	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+	GameEngineSound::SoundPlayOneShot("hero_damage.ogg");
 
 
 	KnightStunEffect_->StunEffectOn();
@@ -3302,6 +3303,7 @@ void Knight::KnightDownSlashEnd(const StateInfo& _Info)
 void Knight::KnightCastStart(const StateInfo& _Info)
 {
 	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+	GameEngineSound::SoundPlayOneShot("hero_fireball.ogg");
 
 
 	GetRenderer()->ChangeFrameAnimation("CAST_ANIMATION");
@@ -3350,6 +3352,7 @@ void Knight::KnightCastEnd(const StateInfo& _Info)
 void Knight::KnightScreamCastStart(const StateInfo& _Info)
 {
 	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+	GameEngineSound::SoundPlayOneShot("hero_void_scream_spell.ogg");
 
 
 	KnightScreamCastEffect_->EffectOn();

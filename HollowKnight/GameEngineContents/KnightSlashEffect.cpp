@@ -309,6 +309,7 @@ bool KnightSlashEffect::EffectVSMonsterCollision(GameEngineCollision* _This, Gam
 		}
 
 
+		GameEngineSound::SoundPlayOneShot("enemy_damage.ogg");
 
 		isColl_ = true;
 		KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
@@ -331,6 +332,8 @@ bool KnightSlashEffect::EffectVSObjectCollision(GameEngineCollision* _This, Game
 		MasterObject_->SetHitCollision();
 
 	}
+	GameEngineSound::SoundPlayOneShot("enemy_damage.ogg");
+
 	KnightSlashEffectManager_.ChangeState("HIT_ENEMY");
 
 	return true;
