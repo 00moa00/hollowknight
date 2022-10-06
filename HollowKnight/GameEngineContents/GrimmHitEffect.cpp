@@ -48,8 +48,8 @@ void GrimmHitEffect::Update(float _DeltaTime)
 	{
 		if (StartDirList_[i].CompareInt2D(float4::RIGHT))
 		{
-			DirList_[i].x += 0.001f;
-			DirList_[i].y -= 0.01f;
+			DirList_[i].x += 0.001f * _DeltaTime * 100.f;
+			DirList_[i].y -= 0.01f * _DeltaTime * 100.f;
 
 			if (isEndMove_[i] == false)
 			{
@@ -59,9 +59,9 @@ void GrimmHitEffect::Update(float _DeltaTime)
 
 		if (StartDirList_[i].CompareInt2D(float4::LEFT))
 		{
-			DirList_[i].x -= 0.001f;
+			DirList_[i].x -= 0.001f * _DeltaTime * 100.f;
 
-			DirList_[i].y -= 0.01f;
+			DirList_[i].y -= 0.01f * _DeltaTime * 100.f;
 			if (isEndMove_[i] == false)
 			{
 				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);
@@ -72,14 +72,14 @@ void GrimmHitEffect::Update(float _DeltaTime)
 		{
 			if (InitDir_[i].x >= 0.f)
 			{
-				DirList_[i].x += 0.01f;
+				DirList_[i].x += 0.01f * _DeltaTime * 100.f;
 			}
 
 			else
 			{
-				DirList_[i].x -= 0.01f;
+				DirList_[i].x -= 0.01f * _DeltaTime * 100.f;
 			}
-			DirList_[i].y -= 0.01f;
+			DirList_[i].y -= 0.01f * _DeltaTime * 100.f;
 			if (isEndMove_[i] == false)
 			{
 				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);
@@ -91,15 +91,15 @@ void GrimmHitEffect::Update(float _DeltaTime)
 
 			if (InitDir_[i].x >= 0.f)
 			{
-				DirList_[i].x += 0.01f;
+				DirList_[i].x += 0.01f * _DeltaTime * 100.f;
 			}
 
 			else
 			{
-				DirList_[i].x -= 0.01f;
+				DirList_[i].x -= 0.01f * _DeltaTime * 100.f;
 			}
 
-			DirList_[i].y += -0.01f;
+			DirList_[i].y += -0.01f * _DeltaTime * 100.f;
 			if (isEndMove_[i] == false)
 			{
 				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);

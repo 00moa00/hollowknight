@@ -22,7 +22,8 @@ protected:
 
 	void SetKnightCollision() override;
 
-private:
+public:
+	void SetScaleXNegative();
 
 };
 

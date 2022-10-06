@@ -117,17 +117,17 @@ void LargeStoneParticle::Update(float _DeltaTime)
 
 			if (InitDir_[i].CompareInt2D(float4::RIGHT))
 			{
-				DirList_[i].x += 0.0001f;
-				DirList_[i].y -= 0.01f;
+				DirList_[i].x += 0.0001f * _DeltaTime * 100.f;
+				DirList_[i].y -= 0.01f * _DeltaTime * 100.f;
 
 				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);
 			}
 
 			if (InitDir_[i].CompareInt2D(float4::LEFT))
 			{
-				DirList_[i].x -= 0.0001f;
+				DirList_[i].x -= 0.0001f * _DeltaTime * 100.f;
 
-				DirList_[i].y -= 0.01f;
+				DirList_[i].y -= 0.01f * _DeltaTime * 100.f;
 				ParticleList_[i]->GetTransform().SetWorldMove(DirList_[i] * Speed_ * _DeltaTime);
 			}
 		}

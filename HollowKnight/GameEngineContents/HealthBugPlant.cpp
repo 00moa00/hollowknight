@@ -29,3 +29,8 @@ void HealthBugPlant::Update(float _DeltaTime)
 void HealthBugPlant::SetKnightCollision()
 {
 }
+
+void HealthBugPlant::SetScaleXNegative()
+{
+	GetRenderer()->GetTransform().PixLocalNegativeX();
+}

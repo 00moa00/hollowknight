@@ -189,22 +189,38 @@ void KingsPassLevel3::Start()
 
 	{
 		HealthBugPlant* HealthBugPlant_ = CreateActor<HealthBugPlant>();
-		HealthBugPlant_->GetTransform().SetWorldPosition({ 570, -1650 });
-		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.9f, 331 * 0.9f });
+		HealthBugPlant_->GetTransform().SetWorldPosition({ 540, -1650 });
+		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.7f, 331 * 0.7f });
 	}
 
 	{
 		HealthBugPlant* HealthBugPlant_ = CreateActor<HealthBugPlant>();
 		HealthBugPlant_->GetTransform().SetWorldPosition({ 600, -1600 });
+		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.8f, 331 * 0.8f });
+
+	}
+	{
+		HealthBugPlant* HealthBugPlant_ = CreateActor<HealthBugPlant>();
+
+		HealthBugPlant_->GetTransform().SetWorldPosition({ 700, -1700 });
+		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.3f, 331 * 0.3f });
+		HealthBugPlant_->SetScaleXNegative();
 	}
 
 	{
 		HealthBugPlant* HealthBugPlant_ = CreateActor<HealthBugPlant>();
 		HealthBugPlant_->GetTransform().SetWorldPosition({ 800, -1600 });
-		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.8f, 331 * 0.8f });
+		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.5f, 331 * 0.5f });
+		HealthBugPlant_->SetScaleXNegative();
 	}
 
+	{
+		HealthBugPlant* HealthBugPlant_ = CreateActor<HealthBugPlant>();
 
+		HealthBugPlant_->GetTransform().SetWorldPosition({ 950, -1600 });
+		HealthBugPlant_->GetRenderer()->GetTransform().SetLocalScale({ 223 * 0.5f, 331 * 0.5f });
+		HealthBugPlant_->SetScaleXNegative();
+	}
 
 	CreawteMapWhiteParticleMaker();
 
