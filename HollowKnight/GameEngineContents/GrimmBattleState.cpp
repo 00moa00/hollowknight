@@ -461,14 +461,14 @@ void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
 	//float4 CurrentPos = GetTransform().GetWorldPosition();
-
+	this->isPixelCheck(_DeltaTime, float4::DOWN);
 
 	if (GetisOnGround() != true)
 	{
 		float4 Move = AirDashDest_ * 2000.f * _DeltaTime;
 
 		GetTransform().SetWorldMove(Move);
-		this->isPixelCheck(_DeltaTime, float4::ZERO);
+		//this->isPixelCheck(_DeltaTime, float4::ZERO);
 
 	}
 
@@ -477,9 +477,7 @@ void Grimm::GrimmBattleAirDashUpdate(float _DeltaTime, const StateInfo& _Info)
 		if (isAirDashLandEnd_ == false)
 		{
 			GetRenderer()->ChangeFrameAnimation("AIR_DASH_LAND_ANIMATION");
-
 		}
-
 
 		if (isAirDashLandEnd_ == true)
 		{
@@ -740,6 +738,12 @@ void Grimm::GrimmBattleSpikeStartStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("SPRIKE_START_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 5850,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
 	{
 		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
 		GrimmSpike_->GetTransform().SetWorldPosition({ 5700,-1000,static_cast<float>(Z_ORDER::Object) });
@@ -798,6 +802,16 @@ void Grimm::GrimmBattleSpikeStartStart(const StateInfo& _Info)
 	{
 		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
 		GrimmSpike_->GetTransform().SetWorldPosition({ 4000,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 3850,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 3700,-1000,static_cast<float>(Z_ORDER::Object) });
 	}
 }
 
@@ -887,7 +901,7 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 	
 
 	GrimmBird* GrimmBird_ = GetLevel()->CreateActor<GrimmBird>();
-	GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, -20 });
+	GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y , -20 });
 
 	float4 Dir_ = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() - GetTransform().GetWorldPosition();
 	GrimmBird_->SetMoveDir(Dir_.NormalizeReturn());
@@ -895,10 +909,14 @@ void Grimm::GrimmBattlCastStart(const StateInfo& _Info)
 	GrimmCastPillarEffectCount_ = 0;
 	BirdCreateTimer_ = 0.f;
 
-	for (int i = 0; i < GrimmCastPillarEffectList_.size(); ++i)
-	{
-		GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
-	}
+	//for (int i = 0; i < GrimmCastPillarEffectList_.size(); ++i)
+	//{
+	//	GrimmCastPillarEffectList_[i]->CaetPillarEffectOff();
+	//}
+
+	GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
+	GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 200.f, static_cast<float>(Z_ORDER::Effect) });
+
 }
 
 void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -924,10 +942,12 @@ void Grimm::GrimmBattlCastUpdate(float _DeltaTime, const StateInfo& _Info)
 		GrimmBird_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y, -20 });
 		GrimmBird_->SetMoveDir(BirdDir_.NormalizeReturn());
 
-	
+		GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
+		GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y + 200.f, static_cast<float>(Z_ORDER::Effect) });
 
-		GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 350.f, static_cast<float>(Z_ORDER::Back_Effect) });
-		GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->CastPillarEffectOn();
+
+		//GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y + 350.f, static_cast<float>(Z_ORDER::Back_Effect) });
+		//GrimmCastPillarEffectList_[GrimmCastPillarEffectCount_]->CastPillarEffectOn();
 
 
 		++GrimmCastPillarEffectCount_;

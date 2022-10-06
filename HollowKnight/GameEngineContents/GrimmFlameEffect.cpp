@@ -15,9 +15,9 @@ void GrimmFlameEffect::Start()
 {
 	CreateRendererComponent("grimm_particle_flame.png");
 	GetRenderer()->ScaleToCutTexture(0);
-	GetRenderer()->GetTransform().SetLocalScale({ 87.f * 2.f, 82.f * 2.f });
+	GetRenderer()->GetTransform().SetLocalScale({ 87.f * 1.8f, 82.f * 1.8f });
 
-	GetRenderer()->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("grimm_particle_flame.png", 4, 7, 0.100f, true));
+	GetRenderer()->CreateFrameAnimationCutTexture("ANIMATION", FrameAnimation_DESC("grimm_particle_flame.png", 4, 7, 0.080f, true));
 
 	GetRenderer()->ChangeFrameAnimation("ANIMATION");
 	GetRenderer()->GetTransform().SetLocalPosition({ 0, 0, 0 });

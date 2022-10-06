@@ -89,7 +89,7 @@ void Grimm::Start()
 	GrimmSmoke_ = GetLevel()->CreateActor<GrimmSmoke>();
 	GrimmSmoke_->Off();
 
-	for (int i = 0; i < 60; ++i)
+	for (int i = 0; i < 65; ++i)
 	{
 		GrimmFlameBallparticleList_.push_back(GetLevel()->CreateActor<GrimmFlameBallparticle>());
 
@@ -169,7 +169,7 @@ void Grimm::Start()
 		GetRenderer()->CreateFrameAnimationCutTexture("CAST_END_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_cast0000-Sheet.png", BackAni, 0.050f, false));
 	}
 
-	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.030f, false));
+	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_START_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 0, 4, 0.020f, false));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 5, 7, 0.050f, true));
 	GetRenderer()->CreateFrameAnimationCutTexture("AIR_DASH_LAND_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_air_dash0000-Sheet.png", 8, 11, 0.050f, false));
 

@@ -2602,7 +2602,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		this->isPixelCheck(_DeltaTime, float4::DOWN);
 
-		float4 Move = (float4::DOWN * GetGravity()  * _DeltaTime);
+		float4 Move = (float4::DOWN * GetGravity() * 1.5f  * _DeltaTime);
 		Move.y -= KnightFallAccel_;
 
 		GetTransform().SetWorldMove(Move );
@@ -2611,7 +2611,7 @@ void Knight::KnightSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 	else
 	{
 		this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
-   		float4 Move = float4::DOWN * GetGravity() * _DeltaTime;
+   		float4 Move = float4::DOWN * GetGravity() * 1.5f * _DeltaTime;
 
 		Move.x += KnightActtingMoveDirPower_ * ActtingMoveDirection_.x;
 		Move.y -= KnightFallAccel_;
@@ -2810,7 +2810,7 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		{
 
 			this->isPixelCheck(_DeltaTime, float4::DOWN);
-			float4 Move = (float4::DOWN * GetGravity() * _DeltaTime);
+			float4 Move = (float4::DOWN * GetGravity() * 1.5f * _DeltaTime);
 
 			Move.y -= KnightFallAccel_;
 
@@ -2820,7 +2820,7 @@ void Knight::KnightDoubleSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		else
 		{
 			this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
-			float4 Move = float4::DOWN * GetGravity() * _DeltaTime;
+			float4 Move = float4::DOWN * GetGravity() * 1.5f * _DeltaTime;
 
 			Move.x += KnightActtingMoveDirPower_ * ActtingMoveDirection_.x;
 			Move.y -= KnightFallAccel_;
@@ -3001,7 +3001,7 @@ void Knight::KnightUpSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		//if (ActtingMoveDirection_.CompareInt2D(float4::ZERO) || isKnihgtStillWall_ == true || GetisWall() == true || GetisCollWall() == true)
 		//{
 			this->isPixelCheck(_DeltaTime, float4::DOWN);
-			float4 Move = (float4::DOWN * GetGravity() * _DeltaTime);
+			float4 Move = (float4::DOWN * GetGravity() * 1.5f * _DeltaTime);
 
 		//	Move.y -= KnightFallAccel_;
 
@@ -3140,7 +3140,7 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		if (ActtingMoveDirection_.CompareInt2D(float4::ZERO) || isKnihgtStillWall_ == true || GetisWall() == true || GetisCollWall() == true)
 		{
 			this->isPixelCheck(_DeltaTime, float4::DOWN);
-			float4 Move = (float4::DOWN * GetGravity() * _DeltaTime);
+			float4 Move = (float4::DOWN * GetGravity() * 1.5f * _DeltaTime);
 
 			Move.y -= KnightFallAccel_;
 
@@ -3150,7 +3150,7 @@ void Knight::KnightDownSlashUpdate(float _DeltaTime, const StateInfo& _Info)
 		else
 		{
 			this->isPixelCheck(_DeltaTime, ActtingMoveDirection_);
-			float4 Move = float4::DOWN * GetGravity() * _DeltaTime;
+			float4 Move = float4::DOWN * GetGravity() * 1.5f * _DeltaTime;
 
 			Move.x += KnightActtingMoveDirPower_ * ActtingMoveDirection_.x;
 			Move.y -= KnightFallAccel_;

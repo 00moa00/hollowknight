@@ -18,7 +18,7 @@ GrimmHitEffect::~GrimmHitEffect()
 
 void GrimmHitEffect::Start()
 {
-	Speed_ = 1500.f;
+	Speed_ = 1700.f;
 
 	for (int i = 0; i < 40; ++i)
 	{
@@ -29,8 +29,8 @@ void GrimmHitEffect::Start()
 
 
 		ParticleList_.back()->GetTransform().SetLocalScale({
-		ParticleList_.back()->GetTransform().GetLocalScale().x * 0.65f
-		,	ParticleList_.back()->GetTransform().GetLocalScale().y * 0.65f }
+		ParticleList_.back()->GetTransform().GetLocalScale().x * 0.5f
+		,	ParticleList_.back()->GetTransform().GetLocalScale().y * 0.5f }
 		);
 
 

@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 
 #include "Bench.h"
-#include "GlobalContentsValue.h"
+
 
 Bench::Bench() 
 {

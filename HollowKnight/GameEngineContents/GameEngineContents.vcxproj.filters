@@ -789,6 +789,9 @@
     <ClInclude Include="KnightBurstPlusEffect.h">
       <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClInclude>
+    <ClInclude Include="GrimmLantern.h">
+      <Filter>Actor\Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1408,6 +1411,9 @@
     </ClCompile>
     <ClCompile Include="KnightBurstPlusEffect.cpp">
       <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="GrimmLantern.cpp">
+      <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

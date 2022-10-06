@@ -17,6 +17,8 @@
 #include "VignettePostEffect.h"
 #include "BloomPostEffect.h"
 
+#include "GrimmLantern.h"
+
 #include "Brummm.h"
 
 
@@ -81,6 +83,20 @@ void GrimmLevel::Start()
 	GrimmCrowds_->Off();
 
 	CreateActor<Brummm>();
+	{
+		GrimmLantern* GrimmLantern_ = CreateActor<GrimmLantern>();
+		GrimmLantern_->GetTransform().SetWorldPosition({ 4430, -100 });
+	}
+
+	{
+		GrimmLantern* GrimmLantern_ = CreateActor<GrimmLantern>();
+		GrimmLantern_->GetTransform().SetWorldPosition({ 4100, -200 });
+	}
+
+	{
+		GrimmLantern* GrimmLantern_ = CreateActor<GrimmLantern>();
+		GrimmLantern_->GetTransform().SetWorldPosition({ 5200, -250 });
+	}
 
 	//{
 	//	GrimmCrowd* GrimmCrowd_ = CreateActor<GrimmCrowd>();
