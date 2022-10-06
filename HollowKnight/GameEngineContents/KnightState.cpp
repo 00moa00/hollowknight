@@ -1806,8 +1806,10 @@ void Knight::KnightIntroLandEnd(const StateInfo& _Info)
 
 void Knight::KnightDashStart(const StateInfo& _Info)
 {
-	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
 	GameEngineSound::SoundPlayOneShot("hero_dash.ogg");
+
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+	//GameEngineSound::SoundPlayOneShot("hero_dash.ogg");
 
 	GetRenderer()->ChangeFrameAnimation("DASH_ANIMATION");
 	KnightDashTimer_ = 0.f;

@@ -25,6 +25,7 @@
 #include "SlyShopLevel.h"
 
 #include "KnightData.h"
+#include "KnightSoundManager.h"
 #include "KnightShadowData.h"
 
 #include "FireballPromptLevel.h"
@@ -1879,4 +1880,5 @@ void ContentsCore::End()
 {
 	KnightData::Destroy();
 	KnightShadowData::Destroy();
+	KnightSoundManager::Destroy();
 }
