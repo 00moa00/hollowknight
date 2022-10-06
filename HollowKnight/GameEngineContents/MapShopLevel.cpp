@@ -92,6 +92,7 @@ void MapShopLevel::End()
 void MapShopLevel::LevelStartEvent()
 {
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
+	GetKnight()->GetTransform().SetLocalPosition({ 530 , -874.f, static_cast<float>(Z_ORDER::Knight) });
 
 }
 

@@ -87,6 +87,7 @@ void SlyShopLevel::End()
 void SlyShopLevel::LevelStartEvent()
 {
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
+	GetKnight()->GetTransform().SetLocalPosition({ 622, -863.f, static_cast<float>(Z_ORDER::Knight) });
 
 }
 

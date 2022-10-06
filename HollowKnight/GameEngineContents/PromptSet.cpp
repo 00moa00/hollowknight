@@ -120,6 +120,13 @@ void PromptSet::CreatePrompSet(PromptSetType _Type)
 
 		break;
 
+	case PromptSetType::SHOP:
+		PromptName_->SetTexture("Shop.png");
+		PromptName_->GetTransform().SetLocalScale(PromptName_->GetCurTexture()->GetScale());
+		PromptSetType_ = _Type;
+
+		break;
+
 	default:
 		break;
 	}

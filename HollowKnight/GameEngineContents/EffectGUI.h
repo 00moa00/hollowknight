@@ -23,7 +23,7 @@ protected:
 
 private:
 	ImVec4 Overlaycolor;
-	 
+
 	bool isBlendClick_;
 
 	bool overlay_flag;
@@ -74,6 +74,42 @@ private:
 	}
 
 public:
+	void SetisMainLightOnOff(bool _b)
+	{
+		isMainLightOnOff_ = _b;
+	}
+
+	void SetisSiblingLightOnOff(bool _b)
+	{
+		isSiblingLightOnOff_ = _b;
+	}
+
+	void SetisDonutLightOnOff(bool _b)
+	{
+		isDonutLightOnOff_ = _b;
+	}
+
+	void SetOverlayColor(float4 _Color)
+	{
+		//ConvertFromFloat4(Overlaycolor, _Color);
+		Overlaycolor.x = _Color.x;
+		Overlaycolor.y = _Color.y;
+		Overlaycolor.z = _Color.z;
+		Overlaycolor.w = _Color.w;
+
+
+
+
+	}
+
+	void SetSlibingLightColor(float4 _Color)
+	{
+		//ConvertFromFloat4(SlibingLightMulColor_, _Color);
+		SlibingLightMulColor_.x = _Color.x;
+		SlibingLightMulColor_.y = _Color.y;
+		SlibingLightMulColor_.z = _Color.z;
+		SlibingLightMulColor_.w = _Color.w;
+	}
 
 	bool GetisMainLightOnOff() const
 	{
@@ -139,6 +175,8 @@ public:
 		return ConvertToFloat4(ReturnColor, Overlaycolor);
 
 	}
+
+
 
 	BlendMode GetMainLightitemsCurrent()
 	{

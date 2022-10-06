@@ -30,7 +30,7 @@ void Iselda::Start()
 	CreatePromptSet();
 
 	PromptSet* ShopPromptSet_ = GetLevel()->CreateActor<PromptSet>();
-	ShopPromptSet_->CreatePrompSet(PromptSetType::TALK);
+	ShopPromptSet_->CreatePrompSet(PromptSetType::SHOP);
 	ShopPromptSet_->SetParent(this);
 	ShopPromptSet_->GetTransform().SetLocalPosition({ -220.f, 220.f });
 	ShopPromptSet_->GetCollision()->GetTransform().SetLocalPosition({ 0.f, -300.f });
