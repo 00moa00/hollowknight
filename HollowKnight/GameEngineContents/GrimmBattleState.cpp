@@ -1365,7 +1365,7 @@ void Grimm::GrimmDeathScene3Update(float _DeltaTime, const StateInfo& _Info)
 
 
 	}
-	if (_Info.StateTime > 1.5f)
+	if (_Info.StateTime > 2.5f)
 	{
 		Death();
 		GameEngineSound::SoundPlayOneShot("crowd_applause_loop.ogg");
