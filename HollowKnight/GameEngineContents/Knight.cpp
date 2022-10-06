@@ -1312,6 +1312,11 @@ bool Knight::KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollis
 			ChangeLevel_ = "DirtmouthLevel2";
 
 			break;
+
+		case POTAL_TYPE::Grimm_Dirt:
+			ChangeLevel_ = "GrimmDirtmouthLevel2";
+
+			break;
 		default:
 			break;
 		}

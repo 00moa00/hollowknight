@@ -78,16 +78,19 @@ void MasterMap::CreateMapCollision(std::string _FileName)
 
 void MasterMap::ChangeGrimmMap()
 {
-
 	FrontObjectRenderer_->SetTexture("Grimm_FrontObject_Change.png");
 	//TerrainRenderer_->SetTexture(_FileName);
 	BackGroundObjectRenderer_->SetTexture("Grimm_Background_Object_Change.png");
 	BackGroundRenderer_->SetTexture("Grimm_Background_Change.png");
 
+}
 
-
-
-
+void MasterMap::ChangeGrimmRoomMap(std::string _Front, std::string _Back, std::string _BackObject)
+{
+	FrontObjectRenderer_->SetTexture(_Front);
+	//TerrainRenderer_->SetTexture(_FileName);
+	BackGroundObjectRenderer_->SetTexture(_Back);
+	BackGroundRenderer_->SetTexture(_BackObject);
 }
 
 //void MasterMap::CreateBackGround(std::string _FileName, float4 _MapSize, int _indexX, int _indexY)

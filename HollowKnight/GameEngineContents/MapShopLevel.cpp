@@ -91,6 +91,7 @@ void MapShopLevel::End()
 
 void MapShopLevel::LevelStartEvent()
 {
+	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 
 }
 

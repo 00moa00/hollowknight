@@ -134,6 +134,13 @@ public:
 		EventState_ = _State;
 	}
 
+	void GrimmDeath()
+	{
+		BossRoomGate_->Death();
+		BossRoomRightGate_->Death();
+		Death();
+	}
+
 private:
 	void SetChangeStateString(PatternType _type);
 	void SetRamdomPattern();

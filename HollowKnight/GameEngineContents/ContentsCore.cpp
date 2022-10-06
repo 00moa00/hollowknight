@@ -1330,6 +1330,28 @@ void ContentsCore::Start()
 		Dir.Move("ConstantResources");
 		Dir.Move("Texture");
 		Dir.Move("Object");
+		Dir.Move("HealthBug");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+		GameEngineTexture::Cut("Health Bugs_health_cocoon_top0000-Sheet.png", 23, 1);
+		GameEngineTexture::Cut("Health Bugs_health_plant_010013-Sheet.png", 5, 1);
+		GameEngineTexture::Cut("Health Bugs_health_plant_020007-Sheet.png", 16, 1);
+
+	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("Object");
 		Dir.Move("door");
 		Dir.Move("tu");
 

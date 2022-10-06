@@ -1,7 +1,8 @@
 #pragma once
+#include "MasterObject.h"
 
 // Ό³Έν :
-class HealthBug
+class HealthBug : public MasterObject
 {
 public:
 	// constrcuter destructer
@@ -15,6 +16,12 @@ public:
 	HealthBug& operator=(HealthBug&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
+
+	void SetHitCollision() override;
+
+	int HitCount_;
 
 private:
 

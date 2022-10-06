@@ -86,6 +86,7 @@ void SlyShopLevel::End()
 
 void SlyShopLevel::LevelStartEvent()
 {
+	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
 
 }
 

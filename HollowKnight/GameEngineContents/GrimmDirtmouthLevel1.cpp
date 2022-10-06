@@ -140,6 +140,8 @@ void GrimmDirtmouthLevel1::LevelStartEvent()
 		GetKnight()->SetDirInit(float4::LEFT);
 
 	}
+
+
 }
 
 void GrimmDirtmouthLevel1::LevelEndEvent()

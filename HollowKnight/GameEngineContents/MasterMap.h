@@ -53,6 +53,7 @@ public:
 	}
 
 	void ChangeGrimmMap();
+	void ChangeGrimmRoomMap(std::string _Front, std::string _Back, std::string _BackObject);
 
 
 

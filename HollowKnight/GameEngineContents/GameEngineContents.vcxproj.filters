@@ -792,6 +792,9 @@
     <ClInclude Include="GrimmLantern.h">
       <Filter>Actor\Actor\Object</Filter>
     </ClInclude>
+    <ClInclude Include="HealthBugPlant.h">
+      <Filter>Actor\Actor\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1413,6 +1416,9 @@
       <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
     <ClCompile Include="GrimmLantern.cpp">
+      <Filter>Actor\Actor\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBugPlant.cpp">
       <Filter>Actor\Actor\Object</Filter>
     </ClCompile>
   </ItemGroup>

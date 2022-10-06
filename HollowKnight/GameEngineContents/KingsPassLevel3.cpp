@@ -19,6 +19,7 @@
 
 #include "Buzzer.h"
 #include "Crawlid.h"
+#include "HealthBug.h"
 
 KingsPassLevel3::KingsPassLevel3() 
 {
@@ -179,6 +180,9 @@ void KingsPassLevel3::Start()
 	Buzzer* Buzzer_ = CreateActor<Buzzer>();
 	Buzzer_->GetTransform().SetWorldPosition({ 2700, -3000 });
 	Buzzer_->SetCollisionMap(GetMasterMap()->GetCollisionMap());
+
+	HealthBug* HealthBug_ = CreateActor<HealthBug>();
+	HealthBug_->GetTransform().SetWorldPosition({ 699, -1200 });
 
 
 	CreawteMapWhiteParticleMaker();

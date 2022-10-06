@@ -74,11 +74,11 @@ void GrimmDirtmouthLevel2::Start()
 
 	SlyShopPotal_ = CreateActor<RoomPotal>();
 	SlyShopPotal_->CreatePotal(POTAL_TYPE::Sly_Shop, true);
-	SlyShopPotal_->GetTransform().SetWorldPosition({ 3840, -3045.f });
+	SlyShopPotal_->GetTransform().SetWorldPosition({ 3840, -2955.f });
 
 	MapShopPotal_ = CreateActor<RoomPotal>();
 	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop, true);
-	MapShopPotal_->GetTransform().SetWorldPosition({ 6008, -3127.f });
+	MapShopPotal_->GetTransform().SetWorldPosition({ 6008, -2955.f });
 
 
 	Elderbug_ = CreateActor<Elderbug>();
@@ -100,8 +100,6 @@ void GrimmDirtmouthLevel2::Start()
 		GrimmFlameEffect* GrimmFlameEffect_ = CreateActor<GrimmFlameEffect>();
 		GrimmFlameEffect_->GetTransform().SetWorldPosition({ 4192.f, -2587.f , 41 });
 	}
-
-
 
 	{
 		{
@@ -228,7 +226,27 @@ void GrimmDirtmouthLevel2::LevelStartEvent()
 		GetKnight()->SetDirInit(float4::RIGHT);
 	}
 
+	PrevName = magic_enum::enum_name(LevelList::SlyShopLevel);
+	EnumString = static_cast<std::string>(PrevName);
 
+	UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+	if (KnightData::GetInst()->GetPreLevel() == UpperName)
+	{
+		GetKnight()->GetTransform().SetLocalPosition({ 3840, -3045.f, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::RIGHT);
+	}
+
+	PrevName = magic_enum::enum_name(LevelList::MapShopLevel);
+	EnumString = static_cast<std::string>(PrevName);
+
+	UpperName = GameEngineString::ToUpperReturn(EnumString);
+
+	if (KnightData::GetInst()->GetPreLevel() == UpperName)
+	{
+		GetKnight()->GetTransform().SetLocalPosition({ 6008, -3127.f, static_cast<float>(Z_ORDER::Knight) });
+		GetKnight()->SetDirInit(float4::RIGHT);
+	}
 }
 
 void GrimmDirtmouthLevel2::LevelEndEvent()

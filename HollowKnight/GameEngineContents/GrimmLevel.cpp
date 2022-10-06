@@ -21,6 +21,7 @@
 
 #include "Brummm.h"
 
+#include "RoomPotal.h"
 
 
 GrimmLevel::GrimmLevel() 
@@ -65,7 +66,7 @@ void GrimmLevel::Start()
 	//CreateKingsPass1Monster();
 
 	GetKnight()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
-	GetKnight()->GetTransform().SetLocalPosition({ 100, -500.f, static_cast<float>(Z_ORDER::Knight) });
+	GetKnight()->GetTransform().SetLocalPosition({ 200, -500.f, static_cast<float>(Z_ORDER::Knight) });
 	//GetCrawlid()->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	SetMapSize({ 6092, 1079 });
@@ -97,6 +98,11 @@ void GrimmLevel::Start()
 		GrimmLantern* GrimmLantern_ = CreateActor<GrimmLantern>();
 		GrimmLantern_->GetTransform().SetWorldPosition({ 5200, -250 });
 	}
+
+	RoomPotal* DirtmouthPotal_ = CreateActor<RoomPotal>();
+	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Grimm_Dirt, false);
+	DirtmouthPotal_->GetTransform().SetWorldPosition({ 100, -870.f });
+
 
 	//{
 	//	GrimmCrowd* GrimmCrowd_ = CreateActor<GrimmCrowd>();
@@ -145,6 +151,8 @@ void GrimmLevel::End()
 
 void GrimmLevel::LevelStartEvent()
 {
+	GetKnight()->GetTransform().SetLocalPosition({ 200, -500.f, static_cast<float>(Z_ORDER::Knight) });
+
 	CreateActor<FadeIn>();
 
 	GetKnight()->SetDirInit(float4::RIGHT);
