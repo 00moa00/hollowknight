@@ -184,6 +184,8 @@ void KingsPassLevel3::Start()
 	Tablet_->CreateTablet("Mines_Layered_0017_a.png", "lit_tablet.png", {700, 500}, TabletType::FocusSpell);
 	Tablet_->GetTransform().SetWorldPosition({ 4295,-3259, static_cast<float>(Z_ORDER::Back_Object)});
 	Tablet_->GetTabletDialogue()->SetOnePage();
+	Tablet_->GetTabletDialogue()->GetArrow()->GetTransform().SetLocalPosition({0, -400.f});
+	Tablet_->GetPromptSet()->GetTransform().SetLocalPosition({0, 400.f});
 
 	//BloomPostEffect* BloomPostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<BloomPostEffect>();
 	//BloomPostEffect_->SetHollowKnightLevel(this);

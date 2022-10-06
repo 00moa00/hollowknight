@@ -25,6 +25,7 @@ private:
 	float Alpha_;
 
 	GameEngineUIRenderer* SpellTexture;
+	GameEngineUIRenderer* KeyTexture;
 
 	ContentsFontRenderer* FocusInfo1_;
 	ContentsFontRenderer* FocusInfo2_;

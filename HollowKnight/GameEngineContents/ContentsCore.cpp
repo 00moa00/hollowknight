@@ -423,6 +423,23 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("white_servant_death_flash0000-Sheet.png", 4, 1);
 
 	}
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Texture");
+		Dir.Move("UI");
+		Dir.Move("Key");
+
+
+		std::vector<GameEngineFile> Texture = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Texture.size(); i++)
+		{
+			GameEngineTexture::Load(Texture[i].GetFullPath());
+		}
+
+	}
 
 	{
 		GameEngineDirectory Dir;
@@ -438,8 +455,6 @@ void ContentsCore::Start()
 		{
 			GameEngineTexture::Load(Texture[i].GetFullPath());
 		}
-
-
 
 	}
 

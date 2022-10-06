@@ -207,7 +207,9 @@ void MainCameraManager::MoveToTargetUpdate(float _DeltaTime, const StateInfo& _I
 
 	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
 	float4 CurrentPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
-	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition() ;
+	DestPos.y += 160.f;
+
 	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 5.f);
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x,MoveCamera.y,  -1800.0f });
@@ -239,14 +241,14 @@ void MainCameraManager::MoveToTargetUpdate(float _DeltaTime, const StateInfo& _I
 	}
 
 
-	if (KnightData::GetInst()->GetCurrentLevel() == "KINGSPASSLEVEL4")
-	{
-		if (DestPos.x > 3230.f && DestPos.y > -1200)
-		{
-			CameraStateManager_.ChangeState("CHANGE_PIVOT");
-			CameraPivot_ = { 0, 200 };
-		}
-	}
+	//if (KnightData::GetInst()->GetCurrentLevel() == "KINGSPASSLEVEL4")
+	//{
+	//	if (DestPos.x > 3230.f && DestPos.y > -1200)
+	//	{
+	//		CameraStateManager_.ChangeState("CHANGE_PIVOT");
+	//		CameraPivot_ = { 0, 200 };
+	//	}
+	//}
 
 }
 
@@ -263,6 +265,7 @@ void MainCameraManager::MoveToTargetInRoomUpdate(float _DeltaTime, const StateIn
 	float4 MapSize = GetLevel<HollowKnightLevel>()->GetMapSize();
 	float4 CurrentPos = GetLevel()->GetMainCameraActorTransform().GetWorldPosition();
 	float4 DestPos = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	DestPos.y += 160.f;
 	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 5.f);
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ MoveCamera.x,MoveCamera.y,  -1800.0f });
@@ -352,6 +355,7 @@ void MainCameraManager::ShakingUpdate(float _DeltaTime, const StateInfo& _Info)
 	float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew()};
 
 	float4 Knihgt = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	Knihgt.y += 160.f;
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ Knihgt.x, Knihgt .y , -1800});
 	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
@@ -404,6 +408,7 @@ void MainCameraManager::BattleShakingUpdate(float _DeltaTime, const StateInfo& _
 	float4 ShakeRotation = { 0,0, shake * CameraGUI_->GetMaxSkew() };
 
 	float4 Knihgt = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	Knihgt.y += 160.f;
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ Knihgt.x, Knihgt.y , -1800 });
 	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
@@ -550,6 +555,7 @@ void MainCameraManager::BossActtingShakingUpdate(float _DeltaTime, const StateIn
 	float4 ShakeRotation = { 0,0, shake * 0.5f };
 
 	float4 Knihgt = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	Knihgt.y += 160.f;
 
 	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ Knihgt.x, Knihgt.y , -1800 });
 	GetLevel()->GetMainCameraActorTransform().SetWorldMove(ShakePosition);
@@ -759,6 +765,10 @@ void MainCameraManager::FocusUpdate(float _DeltaTime, const StateInfo& _Info)
 		, GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y 
 		, -1700.f };
 
+	CurrentPos.y += 160.f;
+
+	DestPos.y += 160.f;
+
 	
 	float4 MoveCamera = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 0.7f);
 
@@ -826,7 +836,9 @@ void MainCameraManager::FocusReturnUpdate(float _DeltaTime, const StateInfo& _In
 	float4 DestPos = { GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x
 		,GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y 
 		, -1800.f };
+	CurrentPos.y += 160.f;
 
+	DestPos.y += 160.f;
 	
 	float4 Lenth = CurrentPos - DestPos;
 	ReturnLenth_ = Lenth.Length();
@@ -947,7 +959,9 @@ void MainCameraManager::FocusCancleUpdate(float _DeltaTime, const StateInfo& _In
 	float4 DestPos = { GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().x
 		,GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition().y
 		, -1800.f };
+	CurrentPos.y += 160.f;
 
+	DestPos.y += 160.f;
 
 	float4 Lenth = CurrentPos - DestPos;
 	ReturnLenth_ = Lenth.Length();

@@ -35,7 +35,6 @@ void Tablet::Start()
 		, std::bind(&Tablet::TabletAppearEnd, this, std::placeholders::_1));
 
 	TabletManager_.ChangeState("IDLE");
-
 }
 
 void Tablet::Update(float _DeltaTime)

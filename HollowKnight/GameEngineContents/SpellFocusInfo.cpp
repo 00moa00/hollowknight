@@ -2,6 +2,13 @@
 #include "SpellFocusInfo.h"
 
 SpellFocusInfo::SpellFocusInfo() 
+	:
+	KeyTexture(nullptr),
+	SpellTexture(nullptr),
+
+	FocusInfo1_(nullptr),
+	FocusInfo2_(nullptr),
+	FocusInfo3_(nullptr)
 {
 }
 
@@ -30,7 +37,7 @@ void SpellFocusInfo::Start()
 	FocusInfo2_->CreateFontRenderer(
 		"길게 누르기"
 		, 37
-		, { GameEngineWindow::GetInst()->GetScale().hx() , GameEngineWindow::GetInst()->GetScale().hy() + 250.f },
+		, { GameEngineWindow::GetInst()->GetScale().hx() - 80.f , GameEngineWindow::GetInst()->GetScale().hy() + 250.f },
 		false,
 		false
 	);
@@ -57,6 +64,13 @@ void SpellFocusInfo::Start()
 	SpellTexture->GetTransform().SetLocalScale(SpellTexture->GetCurTexture()->GetScale());
 	SpellTexture->GetTransform().SetLocalPosition({0, -40});
 	SpellTexture->Off();
+
+
+	KeyTexture = CreateComponent<GameEngineUIRenderer>();
+	KeyTexture->SetTexture("button_skin_0004_square_arrow_u.png");
+	KeyTexture->GetTransform().SetLocalScale(KeyTexture->GetCurTexture()->GetScale() * 0.6f);
+	KeyTexture->GetTransform().SetLocalPosition({80.f, -280.f });
+	KeyTexture->Off();
 
 
 	SpellFocusInfoManager_.CreateStateMember("IDLE"
@@ -90,7 +104,7 @@ void SpellFocusInfo::SetSpellFocusInfoOn()
 	FocusInfo1_->On();
 	FocusInfo2_->On();
 	FocusInfo3_->On();
-
+	KeyTexture->On();
 	
 }
 
@@ -101,6 +115,8 @@ void SpellFocusInfo::SetSpellFocusInfoOff()
 	FocusInfo1_->Off();
 	FocusInfo2_->Off();
 	FocusInfo3_->Off();
+	KeyTexture->Off();
+
 }
 
 void SpellFocusInfo::SpellFocusInfoIdleStart(const StateInfo& _Info)
