@@ -22,6 +22,8 @@ protected:
 
 	void CheckDirToKnight() override;
 
+	void StartTalking() override;
+
 public:
 	void SetisShop(bool b) override
 	{
@@ -30,6 +32,8 @@ public:
 			OpenShop_ = true;
 			MapShop_->On();
 			MapShop_->SetShopPopup();
+			GameEngineSound::SoundPlayOneShot("Sly_shop_open.ogg");
+
 			SlyManager_.ChangeState("SHOP_OPEN");
 		}
 

@@ -23,6 +23,7 @@ protected:
 	void Update(float _DeltaTime) override;
 
 	void CheckDirToKnight() override;
+	void StartTalking() override;
 
 public:
 	void SetisShop(bool b) override
@@ -32,6 +33,7 @@ public:
 			OpenShop_ = true;
 			MapShop_->On();
 			MapShop_->SetShopPopup();
+			GameEngineSound::SoundPlayOneShot("Iselda_Shop_Open.ogg");
 			IseldaManager_.ChangeState("OPEN_SHOP");
 		}
 

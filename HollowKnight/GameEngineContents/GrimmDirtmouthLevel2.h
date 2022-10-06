@@ -30,6 +30,7 @@ private:
 	Elderbug* Elderbug_;
 	RoomPotal* MapShopPotal_;
 	RoomPotal* SlyShopPotal_;
+	RoomPotal* GrimmTentPotal_;
 
 	GameEnginePostEffect* GameEnginePostEffect_;
 

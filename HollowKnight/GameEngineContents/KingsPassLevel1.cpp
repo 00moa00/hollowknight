@@ -122,11 +122,6 @@ void KingsPassLevel1::End() {}
 
 void KingsPassLevel1::LevelStartEvent()
 {
-
-	KnightSoundManager::GetInst()->BgmOff();
-	KnightSoundManager::GetInst()->BgmOn("cave_wind_loop.ogg", 300);
-
-
 	CreateActor<FadeIn>();
 
 	GetKnight()->SetDirInit(float4::RIGHT);

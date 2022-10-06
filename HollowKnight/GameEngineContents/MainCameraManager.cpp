@@ -250,6 +250,7 @@ void MainCameraManager::MoveToTargetUpdate(float _DeltaTime, const StateInfo& _I
 	//	}
 	//}
 
+
 }
 
 void MainCameraManager::MoveToTargetEnd(const StateInfo& _Info)
@@ -495,6 +496,10 @@ void MainCameraManager::BattleShakingEnd(const StateInfo& _Info)
 
 void MainCameraManager::BossShakingStart(const StateInfo& _Info)
 {
+	float4 Knihgt = GetLevel<HollowKnightLevel>()->GetKnight()->GetTransform().GetWorldPosition();
+	Knihgt.y += 160.f;
+
+	GetLevel()->GetMainCameraActorTransform().SetWorldPosition({ Knihgt.x, Knihgt.y , -1800 });
 }
 
 void MainCameraManager::BossShakingUpdate(float _DeltaTime, const StateInfo& _Info)

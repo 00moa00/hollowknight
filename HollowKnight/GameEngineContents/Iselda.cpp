@@ -242,6 +242,26 @@ void Iselda::CheckDirToKnight()
 
 }
 
+void Iselda::StartTalking()
+{
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 2);
+
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("Iselda_Shop_talk_01.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("Iselda_Shop_talk_02.ogg");
+
+	}
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("Iselda_Shop_talk_03.ogg");
+	}
+
+}
+
 bool Iselda::ThisVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	return true;

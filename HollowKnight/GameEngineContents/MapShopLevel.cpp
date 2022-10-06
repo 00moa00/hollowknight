@@ -54,7 +54,7 @@ void MapShopLevel::Start()
 
 
 	DirtmouthPotal_ = CreateActor<RoomPotal>();
-	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Dirt, false);
+	DirtmouthPotal_->CreatePotal(POTAL_TYPE::Grimm_Dirt, false);
 	DirtmouthPotal_->GetTransform().SetWorldPosition({ 400, -870.f });
 
 	{

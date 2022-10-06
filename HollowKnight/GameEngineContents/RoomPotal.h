@@ -10,6 +10,7 @@ enum class POTAL_TYPE
 	Map_Shop,
 	Dirt,
 	Grimm_Dirt,
+	Grimm_Tent
 };
 
 // Ό³Έν :

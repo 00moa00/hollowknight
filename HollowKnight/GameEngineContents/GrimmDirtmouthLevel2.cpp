@@ -26,6 +26,11 @@
 
 GrimmDirtmouthLevel2::GrimmDirtmouthLevel2() 
 	:
+
+	GrimmTentPotal_(nullptr),
+	MapShopPotal_(nullptr),
+	SlyShopPotal_(nullptr),
+
 	Elderbug_(nullptr)
 {
 }
@@ -70,7 +75,7 @@ void GrimmDirtmouthLevel2::Start()
 
 
 	Bench* Test_ = CreateActor<Bench>();
-	AreaTitle* AreaTitle_ = CreateActor<AreaTitle>();
+	//AreaTitle* AreaTitle_ = CreateActor<AreaTitle>();
 
 	SlyShopPotal_ = CreateActor<RoomPotal>();
 	SlyShopPotal_->CreatePotal(POTAL_TYPE::Sly_Shop, true);
@@ -79,6 +84,10 @@ void GrimmDirtmouthLevel2::Start()
 	MapShopPotal_ = CreateActor<RoomPotal>();
 	MapShopPotal_->CreatePotal(POTAL_TYPE::Map_Shop, true);
 	MapShopPotal_->GetTransform().SetWorldPosition({ 6008, -2955.f });
+
+	GrimmTentPotal_ = CreateActor<RoomPotal>();
+	GrimmTentPotal_->CreatePotal(POTAL_TYPE::Grimm_Tent, true);
+	GrimmTentPotal_->GetTransform().SetWorldPosition({ 1271, -2955.f });
 
 	Elderbug_ = CreateActor<Elderbug>();
 
@@ -185,6 +194,8 @@ void GrimmDirtmouthLevel2::Start()
 	NoisePostEffect* NoisePostEffect_ = GetMainCamera()->GetCameraRenderTarget()->AddEffect<NoisePostEffect>();
 	NoisePostEffect_->SetHollowKnightLevel(this);
 
+
+
 }
 
 void GrimmDirtmouthLevel2::Update(float _DeltaTime)
@@ -198,6 +209,7 @@ void GrimmDirtmouthLevel2::End()
 void GrimmDirtmouthLevel2::LevelStartEvent()
 {
 
+	KnightSoundManager::GetInst()->BgmOn("S89 Accordion Dirtmouth-16.ogg", 5000);
 
 
 	CreateActor<FadeIn>();

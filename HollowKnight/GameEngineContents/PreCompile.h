@@ -23,10 +23,11 @@
 
 // base
 #include <GameEngineBase/GameEngineDebug.h>
-
+#include <GameEngineBase/GameEngineRandom.h>
 // core
 #include <GameEngineCore/CoreMinimal.h>
 #include <GameEngineCore/GEngine.h>
+
 
 #include "GlobalContentsValue.h"
 

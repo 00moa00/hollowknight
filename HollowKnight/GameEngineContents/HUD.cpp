@@ -211,7 +211,9 @@ void HUD::AllRefillMask()
 	{
 		Maskes_[i]->SetisRefill();
 	}
-	KnightData::GetInst()->SetCurMask(Maskes_.size());
+
+	CurMask_ = Maskes_.size() - 1; 
+	KnightData::GetInst()->SetCurMask(CurMask_);
 }
 
 void HUD::SetAppearAnimation()

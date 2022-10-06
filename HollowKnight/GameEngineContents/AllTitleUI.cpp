@@ -122,6 +122,7 @@ void AllTitleUI::GameStartUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (true == GameEngineInput::GetInst()->IsDown("PressEnter"))
 	{
 		GameEngineSound::SoundPlayOneShot("ui_save.ogg");
+		KnightSoundManager::GetInst()->BgmOff();
 
 		GEngine::ChangeLevel("KingsPassLevel1");
 	}

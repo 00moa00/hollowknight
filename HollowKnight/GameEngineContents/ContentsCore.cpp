@@ -251,6 +251,21 @@ void ContentsCore::Start()
 			GameEngineSound::LoadRessource(Shaders[i].GetFullPath());
 		}
 	}
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Sound");
+		Dir.Move("NPC");
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineSound::LoadRessource(Shaders[i].GetFullPath());
+		}
+	}
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -1860,7 +1875,7 @@ void ContentsCore::Start()
 
 	CreateLevel<CrossroadsLevel1>("CrossroadsLevel1");
 
-	CreateLevel<GrimmLevel>("GrimmmLevel");
+	CreateLevel<GrimmLevel>("GrimmLevel");
 
 	CreateLevel<FireballPromptLevel>("FireballPromptLevel");
 	//CreateLevel<CrossroadsLevel2>("CrossroadsLevel2");

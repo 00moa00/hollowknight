@@ -28,7 +28,7 @@ void MapSmoke::Start()
 	ParticleRenderer_->GetPixelData().MulColor.a = GameEngineRandom::MainRandom.RandomFloat(0.1f, 0.3f);
 
 	Speed_ = GameEngineRandom::MainRandom.RandomFloat(300.f, 500.f);
-	RotatinSpeed_ = GameEngineRandom::MainRandom.RandomFloat(-50.f, 50.f);
+	RotatinSpeed_ = GameEngineRandom::MainRandom.RandomFloat(-50.f, 0.f);
 
 
 	MapMaxX_ = GetLevel<HollowKnightLevel>()->GetMapSize().x;

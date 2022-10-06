@@ -53,8 +53,14 @@ public:
 		this->On();
 		DialogueBottom_->ChangeFrameAnimation("BOTTOM_APPEAR_ANIMATION");
 		DialogueTop_->ChangeFrameAnimation("TOP_APPEAR_ANIMATION");
+		NextArrow_->ChangeFrameAnimation("ARROW_NEXT_ANIMATION");
 		DialogueList_.front()->GetFontRenderer()->On();
 		DialogueList_.front()->FontOn();
+
+		if (isDialougueFull_ == true)
+		{
+			NextArrow_->ChangeFrameAnimation("ARROW_FULL_ANIMATION");
+		}
 	}
 
 	void SetDialogueOff()
@@ -86,7 +92,7 @@ public:
 			, {GameEngineWindow::GetInst()->GetScale().hx() - 430, GameEngineWindow::GetInst()->GetScale().hy()-300 },
 			true,
 			true,
-			31
+			29
 			);
 
 		//DialogueList_.back()->Ge SetParent(this);

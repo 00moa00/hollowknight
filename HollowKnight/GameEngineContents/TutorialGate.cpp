@@ -23,15 +23,12 @@ TutorialGate::~TutorialGate()
 
 void TutorialGate::Start()
 {
-
 	BlackRenderer_ = CreateComponent<GameEngineTextureRenderer>();
 	BlackRenderer_->SetTexture("Black.png");
 	BlackRenderer_->GetTransform().SetLocalScale({3000.f, 3000.f});
 	BlackRenderer_->Off();
 
 	CreateRendererComponent({ 964.f, 1061.f, 1 }, "Tute Great Door_door_v01.png");
-	//GetR
-
 	CreateCollisionComponent({ 250.f, 1061.f, 1 }, static_cast<int>(COLLISION_ORDER::Object));
 
 	CreateWallCollisionComponent({ 250.f, 1061.f});
@@ -41,19 +38,10 @@ void TutorialGate::Start()
 	GetRenderer()->GetTransform().SetLocalPosition({ 0,  1061.f / 2 });
 
 	SetHitCount(10);
-
 }
 
 void TutorialGate::Update(float _DeltaTime)
 {
-	//if ((GetCollision()->IsCollision(CollisionType::CT_OBB2D, COLLISION_ORDER::Knight_Slash, CollisionType::CT_OBB2D,
-	//	std::bind(&TutorialGate::ObjectVSEffectCollision, this, std::placeholders::_1, std::placeholders::_2)) == true))
-	//{
-	//	//DoorStoneParticle* DoorStoneParticle_ = GetLevel()->CreateActor<DoorStoneParticle>();
-	//	//DoorStoneParticle_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x, this->GetTransform().GetWorldPosition().y + 100.f });
-	//	//DoorStoneParticle_->SetDir(GetLevel<HollowKnightLevel>()->GetKnight()->GetKnightSlashEffect()->GetDir());
-	//	//this->Death();
-	//}
 	if (isColl_ == true)
 	{
 		if (GetAccTime() > 1.0f)
@@ -61,7 +49,6 @@ void TutorialGate::Update(float _DeltaTime)
 			isColl_ = false;
 			ReSetAccTime();
 			GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
-
 		}
 	}
 
@@ -71,7 +58,6 @@ void TutorialGate::Update(float _DeltaTime)
 		{
 			GEngine::ChangeLevel("FireballPromptLevel");
 			return;
-
 		}
 	}
 }
@@ -94,7 +80,6 @@ void TutorialGate::SetHitCollision()
 		if (RamSound == 0)
 		{
 			GameEngineSound::SoundPlayOneShot("breakable_wall_hit_2.ogg");
-
 		}
 
 		else if (RamSound == 1)
@@ -146,9 +131,7 @@ void TutorialGate::SetHitCollision()
 			LargeStoneParticle_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x  , GetTransform().GetWorldPosition().y + 1061.f / 2 });
 			LargeStoneParticle_->SetDir(float4::LEFT);
 			LargeStoneParticle_->SetRamPos(0, 1061.f);
-
 		}
-
 	}
 
 }

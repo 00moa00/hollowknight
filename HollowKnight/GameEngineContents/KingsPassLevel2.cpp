@@ -133,7 +133,6 @@ void KingsPassLevel2::End()
 
 void KingsPassLevel2::LevelStartEvent()
 {
-
 	CreateActor<FadeIn>();
 
 	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());

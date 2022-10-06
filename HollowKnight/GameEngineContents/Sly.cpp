@@ -201,6 +201,35 @@ void Sly::CheckDirToKnight()
 	}
 }
 
+void Sly::StartTalking()
+{
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 4);
+
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("Sly_talk.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("Sly_talk_02.ogg");
+
+	}
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("Sly_talk_03.ogg");
+	}
+
+	else if (RamSound == 3)
+	{
+		GameEngineSound::SoundPlayOneShot("Sly_talk_04.ogg");
+	}
+
+	else if (RamSound == 4)
+	{
+		GameEngineSound::SoundPlayOneShot("Sly_talk_05.ogg");
+	}
+}
+
 void Sly::SlyIdleStart(const StateInfo& _Info)
 {
 }

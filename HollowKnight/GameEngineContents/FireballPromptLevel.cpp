@@ -31,7 +31,7 @@ void FireballPromptLevel::End()
 
 void FireballPromptLevel::LevelStartEvent() 
 {
-
+	GameEngineSound::SoundPlayOneShot("spell_information_screen.ogg");
 }
 
 void FireballPromptLevel::LevelEndEvent()

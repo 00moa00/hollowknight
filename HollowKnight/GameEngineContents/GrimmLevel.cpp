@@ -151,26 +151,17 @@ void GrimmLevel::End()
 
 void GrimmLevel::LevelStartEvent()
 {
-	GetKnight()->GetTransform().SetLocalPosition({ 200, -500.f, static_cast<float>(Z_ORDER::Knight) });
+	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
+
+	GetKnight()->GetTransform().SetLocalPosition({ 200, -923.f, static_cast<float>(Z_ORDER::Knight) });
 
 	CreateActor<FadeIn>();
 
 	GetKnight()->SetDirInit(float4::RIGHT);
 
-	KnightData::GetInst()->SetCurrentLevel(GetNameConstRef());
-	std::string EnumString;
-	auto PrevName = magic_enum::enum_name(LevelList::DirtmouthLevel2);
-	EnumString = static_cast<std::string>(PrevName);
 
-	std::string UpperName = GameEngineString::ToUpperReturn(EnumString);
+	//GetKnight()->GetTransform().SetLocalPosition({ 100, -500, static_cast<float>(Z_ORDER::Knight) });
 
-
-	if (KnightData::GetInst()->GetPreLevel() == UpperName)
-	{
-		GetKnight()->GetTransform().SetLocalPosition({ 100, -500, static_cast<float>(Z_ORDER::Knight) });
-		GetKnight()->SetDirInit(float4::LEFT);
-
-	}
 }
 
 void GrimmLevel::LevelEndEvent()

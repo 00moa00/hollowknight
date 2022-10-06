@@ -14,7 +14,7 @@ void Elderbug::Start()
 	SetNPCName("Àå·Î¹ú·¹");
 	SetNPCType(NPC_TYPE::Normal);
 
-	GetTransform().SetWorldPosition({ 4400, -3045.f, static_cast<int>(Z_ORDER::NPC)});
+	GetTransform().SetWorldPosition({ 4400, -3050.f, static_cast<int>(Z_ORDER::NPC)});
 	CreateNameFontRenderer();
 	CreatePromptSet();
 	//GetPromptSet()->GetTransform().SetLocalPosition({0, 150.f});
@@ -70,6 +70,35 @@ void Elderbug::Update(float _DeltaTime)
 	ElderManager_.Update(_DeltaTime); 
 }
 
+void Elderbug::StartTalking()
+{
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0,4);
+
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("Elderbug_01.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("Elderbug_02.ogg");
+
+	}
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("Elderbug_03.ogg");
+	}
+	else if (RamSound == 3)
+	{
+		GameEngineSound::SoundPlayOneShot("Elderbug_04.ogg");
+
+	}
+	else if (RamSound == 4)
+	{
+		GameEngineSound::SoundPlayOneShot("Elderbug_05.ogg");
+
+	}
+}
+
 bool Elderbug::ThisVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
 	return true;
@@ -95,6 +124,7 @@ void Elderbug::ElderWaitEnd(const StateInfo& _Info)
 
 void Elderbug::ElderIdleStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("Elderbug_first_call.ogg");
 }
 
 void Elderbug::ElderIdleUpdate(float _DeltaTime, const StateInfo& _Info)

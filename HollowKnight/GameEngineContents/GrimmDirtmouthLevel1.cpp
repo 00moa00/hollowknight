@@ -126,7 +126,8 @@ void GrimmDirtmouthLevel1::LevelStartEvent()
 	{
 		GetKnight()->GetTransform().SetLocalPosition({ 252, -973, static_cast<float>(Z_ORDER::Knight) });
 		GetKnight()->SetDirInit(float4::RIGHT);
-
+		KnightSoundManager::GetInst()->BgmOff();
+		KnightSoundManager::GetInst()->WindBgmOn("dirtmouth_wind_loop_c_gate.ogg", 400);
 	}
 
 	PrevName = magic_enum::enum_name(LevelList::GrimmDirtmouthLevel2);

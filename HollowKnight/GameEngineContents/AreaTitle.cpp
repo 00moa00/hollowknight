@@ -69,7 +69,6 @@ void AreaTitle::Start()
 void AreaTitle::Update(float _DeltaTime)
 {
 	AreaTitleStateManager_.Update(_DeltaTime);
-
 }
 
 void AreaTitle::AreaTitleAppearStart(const StateInfo& _Info)
@@ -91,12 +90,13 @@ void AreaTitle::AreaTitleAppearUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (Alpha_ >= 1.0f)
 	{
 		AreaTitleStateManager_.ChangeState("IDLE");
-
+		return;
 	}
 }
 
 void AreaTitle::AreaTitleAppearEnd(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->BgmOn("Dirtmouth 1.ogg", 400);
 	AlphaTimer_ = 0.f;
 }
 

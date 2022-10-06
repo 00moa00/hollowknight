@@ -1908,9 +1908,8 @@ void Knight::KnightDashEnd(const StateInfo& _Info)
 
 void Knight::KnightFocusStart(const StateInfo& _Info)
 {
-
 	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
-
+	KnightSoundManager::GetInst()->KnightFootStepBgmOn("focus_health_charging.ogg", 10);
 
 	isLowHealth_ = false;
 	GetRenderer()->ChangeFrameAnimation("FOCUS_ANIMATION");
@@ -1931,6 +1930,7 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 		KnightFocusEffect_->Death();
 		KnightFocusEffect_ = nullptr;
 		GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::CancleFocus);
+
 		KnightManager_.ChangeState("STILL");
 		return;
 	}
@@ -1953,6 +1953,7 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 			, this->GetTransform().GetWorldPosition().y
 			, static_cast<float>(Z_ORDER::Effect) });
 
+		GameEngineSound::SoundPlayOneShot("focus_health_heal.ogg");
 		KnightManager_.ChangeState("FOCUS_BURST");
 
 		return;
@@ -2010,6 +2011,8 @@ void Knight::KnightFocusUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Knight::KnightFocusEnd(const StateInfo& _Info)
 {
+	KnightSoundManager::GetInst()->KnightFootStepBgmOff();
+
 	KnihgtFocusTimer_ = 0.f;
 
 	KnightFocusEffect_ = nullptr;
@@ -3699,6 +3702,26 @@ void Knight::KnightSitStart(const StateInfo& _Info)
 	GetRenderer()->ChangeFrameAnimation("SIT_ANIMATION");
 	GetTransform().SetLocalMove({0, 10.f});
 	KnightData::GetInst()->SetisSitting(true);
+
+	KnightBurstEffect* KnightBurstEffect_ = GetLevel()->CreateActor<KnightBurstEffect>();
+
+	KnightBurstEffect_->GetTransform().SetWorldPosition(
+		{ this->GetTransform().GetWorldPosition().x
+		, this->GetTransform().GetWorldPosition().y
+		, static_cast<float>(Z_ORDER::Effect) });
+
+	KnightBurstPlusEffect* KnightBurstPlusEffect_ = GetLevel()->CreateActor<KnightBurstPlusEffect>();
+
+	KnightBurstPlusEffect_->GetTransform().SetWorldPosition(
+		{ this->GetTransform().GetWorldPosition().x
+		, this->GetTransform().GetWorldPosition().y
+		, static_cast<float>(Z_ORDER::Effect) });
+
+	KnightData::GetInst()->SetisRefill(true);
+
+	GetLevel<HollowKnightLevel>()->GetHUD()->AllRefillMask();
+
+	GameEngineSound::SoundPlayOneShot("focus_health_heal.ogg");
 
 }
 

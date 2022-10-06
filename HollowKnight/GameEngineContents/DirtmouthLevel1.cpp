@@ -103,7 +103,13 @@ void DirtmouthLevel1::Start()
 
 void DirtmouthLevel1::Update(float _DeltaTime)
 {
-
+	if (isFirst_ == true)
+	{
+		if (GetAccTime() > 2.0f)
+		{
+			GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetMove);
+		}
+	}
 }
 
 void DirtmouthLevel1::End()
@@ -112,29 +118,39 @@ void DirtmouthLevel1::End()
 
 void DirtmouthLevel1::LevelStartEvent()
 {
+	float4 Knihgt = GetKnight()->GetTransform().GetWorldPosition();
+	Knihgt.y += 160.f;
+
+	GetMainCameraActorTransform().SetWorldPosition({ Knihgt.x, Knihgt.y , -1800 });
+
 	if (isFirst_ == false)
 	{
+		ReSetAccTime();
 		isFirst_ = true;
 		GameEngineSound::SoundPlayOneShot("break_wall_after_tutorial_area.ogg");
+
 
 
 		for (int i = 0; i < 4; ++i)
 		{
 			DoorStoneParticle* DoorStoneParticle_ = CreateActor<DoorStoneParticle>();
-			DoorStoneParticle_->GetTransform().SetWorldPosition({ 252, -973 + 1061.f / 2 });
+			DoorStoneParticle_->GetTransform().SetWorldPosition({ 100, -973 + 1061.f / 2 });
 			DoorStoneParticle_->SetDir(float4::RIGHT);
 			DoorStoneParticle_->SetRamPos(0, 1061.f);
 			DoorStoneParticle_->SetSpeed(2500.f);
 		}
 
-		for (int i = 0; i < 2; ++i)
+		for (int i = 0; i < 3; ++i)
 		{
 			LargeStoneParticle* LargeStoneParticle_ = CreateActor<LargeStoneParticle>();
-			LargeStoneParticle_->GetTransform().SetWorldPosition({ 252  , -973 + 1061.f / 2 });
+			LargeStoneParticle_->GetTransform().SetWorldPosition({ 100  , -973 + 1061.f / 2 });
 			LargeStoneParticle_->SetDir(float4::RIGHT);
 			LargeStoneParticle_->SetRamPos(0, 1061.f);
 
 		}
+
+		GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
+
 	}
 
 	GetKnight()->GetTransform().SetLocalPosition({ 252, -973, static_cast<float>(Z_ORDER::Knight) });
@@ -167,6 +183,8 @@ void DirtmouthLevel1::LevelStartEvent()
 		GetKnight()->SetDirInit(float4::LEFT);
 
 	}
+
+	KnightSoundManager::GetInst()->BgmOn("cave_wind_loop.ogg", 5000);
 
 }
 

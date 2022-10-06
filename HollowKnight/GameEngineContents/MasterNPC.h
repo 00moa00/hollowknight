@@ -30,6 +30,9 @@ public:
 protected:
 	virtual void CheckDirToKnight();
 
+public:
+	virtual void StartTalking() {};
+
 protected:
 	//float4 NPCDir_;
 

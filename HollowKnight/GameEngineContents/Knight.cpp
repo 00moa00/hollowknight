@@ -996,7 +996,6 @@ void Knight::KnightInvincibiliting(float _DeltaTime)
 	KnihgtInvincibilityTimer_ += _DeltaTime;
 
 
-
 	if (KnihgtInvincibilityTimer_ > 1.f)
 	{
 		KnihgtInvincibilityTimer_ = 0.0f;
@@ -1225,6 +1224,7 @@ bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollisio
 				else if (NPC->GetMoveDirection().x > 0)
 				{
 					NPC->SetisTalking(true);
+					NPC->StartTalking();
 					NPC->GetDialogueSet()->SetDialogueOn();
 					KnightManager_.ChangeState("TALKING");
 				}
@@ -1235,6 +1235,7 @@ bool Knight::KnihgtVSNPCCollision(GameEngineCollision* _This, GameEngineCollisio
 			{
 				KnightManager_.ChangeState("TALKING");
 				NPC->SetisTalking(true);
+				NPC->StartTalking();
 				NPC->GetDialogueSet()->SetDialogueOn();
 				isTalkingNPC_ = true;
 			}
@@ -1315,6 +1316,12 @@ bool Knight::KnightVSPotalCollision(GameEngineCollision* _This, GameEngineCollis
 			ChangeLevel_ = "GrimmDirtmouthLevel2";
 
 			break;
+
+		case POTAL_TYPE::Grimm_Tent:
+			ChangeLevel_ = "GrimmLevel";
+
+			break;
+
 		default:
 			break;
 		}
