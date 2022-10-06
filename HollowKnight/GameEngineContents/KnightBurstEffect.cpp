@@ -27,9 +27,6 @@ void KnightBurstEffect::Start()
 
 	GetRenderer()->ChangeFrameAnimation("BURST");
 
-	//GetRenderer()->GetTransform().SetWorldPosition({ 0, 0, 0 });
-	//GetRenderer()->GetTransform().SetWorldScale({ 699 * 1.3f,140 * 1.3f });
-	//GetRenderer()->GetTransform().SetWorldPosition({ 0, 80,  0 });
 }
 
 void KnightBurstEffect::Update(float _DeltaTime)

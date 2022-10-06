@@ -783,6 +783,12 @@
     <ClInclude Include="GeoGetEffect.h">
       <Filter>Actor\Actor\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="KnightInvincibilityEffect.h">
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightBurstPlusEffect.h">
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -1396,6 +1402,12 @@
     </ClCompile>
     <ClCompile Include="GeoGetEffect.cpp">
       <Filter>Actor\Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightInvincibilityEffect.cpp">
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightBurstPlusEffect.cpp">
+      <Filter>Actor\Actor\Effect\Knight\Spell</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

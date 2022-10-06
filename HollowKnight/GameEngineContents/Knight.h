@@ -22,6 +22,7 @@
 #include "KnightHatchlingBurst.h"
 #include "KnightScreamCastEffect.h"
 #include "KnightScreamParticle.h"
+#include "KnightInvincibilityEffect.h"
 
 // 설명 :
 // 이팩트 관리 : 공격 - 이펙트는 온오프
@@ -98,6 +99,7 @@ private:
 	bool isKnightBlack_;
 
 	bool isLowHealth_;					//탈진
+	bool isOnePunchMode_;
 
 	bool isKnihgtStillWall_;
 	bool isKnightSpikeHit_;
@@ -140,6 +142,7 @@ private:
 	KnightHatchlingBurst* KnightHatchlingBurst_;
 	KnightScreamCastEffect* KnightScreamCastEffect_;
 	KnightScreamParticle* KnightScreamParticle_;
+	KnightInvincibilityEffect* KnightInvincibilityEffect_;
 
 	FadeOut* DeathLevelChangeFadeOut_;
 	

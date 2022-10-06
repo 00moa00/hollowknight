@@ -742,6 +742,16 @@ void Grimm::GrimmBattleSpikeStartStart(const StateInfo& _Info)
 
 	{
 		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 5700,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
+		GrimmSpike_->GetTransform().SetWorldPosition({ 5550,-1000,static_cast<float>(Z_ORDER::Object) });
+	}
+
+	{
+		GrimmSpike* GrimmSpike_ = GetLevel()->CreateActor<GrimmSpike>();
 		GrimmSpike_->GetTransform().SetWorldPosition({ 5350,-1000,static_cast<float>(Z_ORDER::Object) });
 	}
 

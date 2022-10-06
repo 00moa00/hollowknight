@@ -24,7 +24,6 @@
 #include "MonsterHitEffect.h"
 
 
-
 Knight::Knight()
 	:
 	KnightManager_(),
@@ -70,6 +69,7 @@ Knight::Knight()
 	isCastEnd_(false),
 	isSpikeStunEnd_(false),
 	isSitBackEnd_(false),
+	isOnePunchMode_(false),
 
 	isReturnToIdle_(false),
 	isInvincibility_(false),
@@ -103,6 +103,7 @@ Knight::Knight()
 	DeathLevelChangeFadeOut_(nullptr),
 	KnightHatchlingBurst_(nullptr),
 	KnightScreamCastEffect_(nullptr),
+	KnightInvincibilityEffect_(nullptr),
 
 	ChangeLevel_(""),
 
@@ -163,6 +164,7 @@ void Knight::Start()
 	KnightHatchlingBurst_ = GetLevel()->CreateActor<KnightHatchlingBurst>();
 	KnightScreamCastEffect_ = GetLevel()->CreateActor<KnightScreamCastEffect>();
 	KnightScreamParticle_ = GetLevel()->CreateActor<KnightScreamParticle>();
+	KnightInvincibilityEffect_ = GetLevel()->CreateActor<KnightInvincibilityEffect>();
 
 	KnightDoubleJumpEffect_->Off();
 	KnightScreamParticle_->Off();
@@ -181,6 +183,7 @@ void Knight::Start()
 	KnightDashEffect_->SetParent(this);
 	KnightScreamCastEffect_->SetParent(this);
 	//KnightHatchlingBurst_->SetParent(this);
+	KnightInvincibilityEffect_->SetParent(this);
 
 	KnightMainLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Light) });
 	KnightDonutLightEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x, GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Dount_Light) });
@@ -205,6 +208,7 @@ void Knight::Start()
 		GameEngineInput::GetInst()->CreateKey("KnightDown", VK_DOWN);
 
 		GameEngineInput::GetInst()->CreateKey("KnightRunMode", 'R');
+		GameEngineInput::GetInst()->CreateKey("KnightOnePunchMode", 'P');
 
 		GameEngineInput::GetInst()->CreateKey("KnightLookMap", VK_TAB);
 		GameEngineInput::GetInst()->CreateKey("KnightDash", VK_SHIFT);
