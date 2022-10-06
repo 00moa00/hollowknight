@@ -42,6 +42,26 @@ void Brummm::Update(float _DeltaTime)
 {
 }
 
+void Brummm::StartTalking()
+{
+	int RamSound = GameEngineRandom::MainRandom.RandomInt(0, 2);
+
+	if (RamSound == 0)
+	{
+		GameEngineSound::SoundPlayOneShot("Brumm_talk_01.ogg");
+	}
+	else if (RamSound == 1)
+	{
+		GameEngineSound::SoundPlayOneShot("Brumm_talk_02.ogg");
+
+	}
+	else if (RamSound == 2)
+	{
+		GameEngineSound::SoundPlayOneShot("Brumm_talk_03.ogg");
+	}
+
+}
+
 bool Brummm::ThisVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other)
 {
     return false;

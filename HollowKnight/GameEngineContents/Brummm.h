@@ -19,6 +19,8 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 
+	void StartTalking() override;
+
 private:
 	bool ThisVSKnightCollision(GameEngineCollision* _This, GameEngineCollision* _Other);
 

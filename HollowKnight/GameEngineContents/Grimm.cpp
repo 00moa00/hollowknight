@@ -50,7 +50,9 @@ Grimm::Grimm()
 
 	GrimmBeam_(nullptr),
 	GrimmSpotLight_(nullptr),
-	BossRoomGate_(nullptr)
+	BossRoomGate_(nullptr),
+	DialogueSet_(nullptr),
+	ArmRenderer_(nullptr)
 {
 }
 
@@ -74,9 +76,18 @@ void Grimm::Start()
 	GetRenderer()->ScaleToCutTexture(0);
 	GetRenderer()->GetTransform().SetLocalPosition({0,-50});
 	GetTransform().SetLocalPosition({ 300,-500, static_cast<float>(Z_ORDER::Monster) });
-	SetHP(30);
-	//CreateMonsterHitParticle(30);
+	
+	ArmRenderer_ = CreateComponent<GameEngineTextureRenderer>();
+	ArmRenderer_->SetTexture("Grimm Cln_Grimm_arm0000-Sheet.png", 0);
+	ArmRenderer_->GetTransform().SetLocalScale({ 353, 296 });
+	ArmRenderer_->SetPivot(PIVOTMODE::BOT);
+	ArmRenderer_->CreateFrameAnimationCutTexture("ARM_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_arm0000-Sheet.png", 0, 9, 0.100f, true));
+	ArmRenderer_->ChangeFrameAnimation("ARM_ANIMATION");
+	ArmRenderer_->Off();
 
+
+
+	SetHP(30);
 	CreateGrimmHitParticle(30);
 
 	SetMonsterHitEffectWhiteTex();
@@ -123,6 +134,8 @@ void Grimm::Start()
 	//================================
 	//    Create Animation | Common
 	//================================
+	GetRenderer()->CreateFrameAnimationCutTexture("TELEPORT_NONLOOP_APPEAR_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_teleport0000-Sheet.png", 0, 6, 0.100f, false));
+
 	GetRenderer()->CreateFrameAnimationCutTexture("TELEPORT_APPEAR_ANIMATION", FrameAnimation_DESC("Grimm Cln_Grimm_teleport0000-Sheet.png", 0, 6, 0.100f, true));
 
 	{
@@ -230,6 +243,15 @@ void Grimm::Start()
 	//======================================
 	//    Create Bind Animation | Appear
 	//======================================
+	ArmRenderer_->AnimationBindEnd("ARM_ANIMATION", [=](const FrameAnimation_DESC& _Info)
+		{
+			//isBowEnd_ = true;
+			GameEngineSound::SoundPlayOneShot("Grimm_click.ogg");
+			ArmRenderer_->Death();
+			ArmRenderer_ = nullptr;
+
+		});
+
 	GetRenderer()->AnimationBindEnd("BOW_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
 			isBowEnd_ = true;
@@ -324,7 +346,11 @@ void Grimm::Start()
 			isSprikeStartEnd_ = true;
 		});
 
+	DialogueSet_ = GetLevel()->CreateActor<DialogueSet>();
+	DialogueSet_->PushDialogue("¸ÚÁö±º.ÈÇ¸¢ÇØ! ³» µ¿Á·µéÀÌ µµÂøÇß°í ¶§°¡ µµ·¡Çß¾î.");
 
+
+	DialogueSet_->SetDialogueOff();
 
 	GetRenderer()->Off();
 

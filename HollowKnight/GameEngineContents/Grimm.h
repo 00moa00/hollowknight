@@ -15,6 +15,9 @@
 
 #include "BossRoarEffect.h"
 
+#include "DialogueSet.h"
+#include "FadePink.h"
+
 enum class PatternType
 {
 	BATTLE_BALLOON_START,
@@ -112,6 +115,11 @@ private:
 	BossRoomGate* BossRoomRightGate_;
 	GrimmSmoke* GrimmSmoke_;
 	BossRoarEffect* BossRoarEffect_;
+	FadePink* StartPink_;
+
+	GameEngineTextureRenderer* ArmRenderer_;
+
+	DialogueSet* DialogueSet_;
 
 	EventState EventState_;
 
@@ -119,6 +127,8 @@ private:
 	GameEngineStateManager GrimmBattleManager_;
 
 	GameEngineStateManager GrimmManager_;
+
+	GameEngineSoundPlayer WindSound_;
 
 	std::vector<GrimmCastPillarEffect*> GrimmCastPillarEffectList_;
 	std::vector<GrimmStunBat*> GrimmStunBatList_;

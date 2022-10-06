@@ -1104,6 +1104,8 @@ void ContentsCore::Start()
 		GameEngineTexture::Cut("Grimm NPC_Grimm_idle0000-Sheet.png", 12, 1);
 		GameEngineTexture::Cut("Grimm NPC_Grimm_teleport0000-Sheet.png", 7, 1);
 		GameEngineTexture::Cut("Grimm_crowd0000-Sheet.png", 8, 1);
+		GameEngineTexture::Cut("Grimm Cln_Grimm_arm0000-Sheet.png", 10, 1);
+
 	}
 
 

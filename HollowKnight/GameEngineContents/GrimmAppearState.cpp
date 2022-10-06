@@ -48,28 +48,28 @@ void Grimm::GrimmAppearTeleportStart(const StateInfo& _Info)
 	GrimmSpotLight_->GetTransform().SetWorldMove({ 0,-40, -100 });
 	GrimmSpotLight_->SetParent(this);
 
-
-
 	GrimmSmoke_->SetSmokeOn();
 	GrimmSmoke_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
 
 
 	GetRenderer()->On();
-	GetRenderer()->ChangeFrameAnimation("TELEPORT_APPEAR_ANIMATION");
+	GetRenderer()->ChangeFrameAnimation("TELEPORT_NONLOOP_APPEAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 
 	ReSetAccTime();
 
+	KnightSoundManager::GetInst()->BgmOff();
+	GameEngineSoundPlayer Effect = GameEngineSound::SoundPlayControl("grimm_explode_into_bats.ogg");
+	Effect.Volume(0.4f);
 }
 
 void Grimm::GrimmAppearTeleportUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	
-	if (isTeleportAppearEnd_ == true)
-	{
-		isTeleportAppearEnd_ = false;
-		GrimmAppearManager_.ChangeState("APPEAR_IDLE1");
 
+
+	if (_Info.StateTime > 2.0f)
+	{
+		GrimmAppearManager_.ChangeState("APPEAR_IDLE1");
 	}
 }
 
@@ -84,11 +84,13 @@ void Grimm::GrimmAppearIdle1Start(const StateInfo& _Info)
 	GetRenderer()->ScaleToCutTexture(0);
 
 	ReSetAccTime();
+
+	DialogueSet_->SetDialogueOn();
 }
 
 void Grimm::GrimmAppearIdle1Update(float _DeltaTime, const StateInfo& _Info)
 {
-	if (GetAccTime() > 2.5f)
+	if (GetAccTime() > 3.0f)
 	{
 		GrimmAppearManager_.ChangeState("APPEAR_PILLAR");
 	}
@@ -96,24 +98,38 @@ void Grimm::GrimmAppearIdle1Update(float _DeltaTime, const StateInfo& _Info)
 
 void Grimm::GrimmAppearIdle1End(const StateInfo& _Info)
 {
+	DialogueSet_->SetDialogueOff();
 }
 
 void Grimm::GrimmAppearPillarStart(const StateInfo& _Info)
 {
 	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
 	GetRenderer()->ChangeFrameAnimation("PILLAR_ANIMATION");
-	FadePink* FadePink_ = GetLevel()->CreateActor<FadePink>();
-	FadePink_->GetTransform().SetWorldPosition({ 5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200 });
 
 
 	GetRenderer()->ScaleToCutTexture(0);
 
 	GrimmFlamePillarEffect* GrimmFlamePillarEffect_ = GetLevel()->CreateActor<GrimmFlamePillarEffect>();
 	GrimmFlamePillarEffect_->GetTransform().SetWorldPosition({ GetTransform().GetWorldPosition().x,  GetTransform().GetWorldPosition().y, static_cast<float>(Z_ORDER::Effect) });
+	
+	GameEngineSound::SoundPlayOneShot("grimm_cape_open_for_cast.ogg");
+
 }
 
 void Grimm::GrimmAppearPillarUpdate(float _DeltaTime, const StateInfo& _Info)
 {
+
+	if (GetRenderer()->GetCurFrameAnimation()->GetFrameAnimationDesc().GetCurFrame() == 10)
+	{
+		if (StartPink_ == nullptr)
+		{
+			StartPink_ = GetLevel()->CreateActor<FadePink>();
+			StartPink_->GetTransform().SetWorldPosition({ 5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200 });
+			GameEngineSound::SoundPlayOneShot("grimm_fireball_cast.ogg");
+
+		}
+	}
+
 	if (isPillarEnd_ == true)
 	{
 		isPillarEnd_ = false;
@@ -134,12 +150,15 @@ void Grimm::GrimmAppearPillarLoopStart(const StateInfo& _Info)
 
 	ReSetAccTime();
 
+	WindSound_ = GameEngineSound::SoundPlayControl("grimm_balloon_shooting_fireballs_loop.ogg", 50);
+	WindSound_.Volume(0.4f);
 }
 
 void Grimm::GrimmAppearPillarLoopUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 	if (GetAccTime() > 2.5f)
 	{
+		WindSound_.Stop();
 		GrimmAppearManager_.ChangeState("APPEAR_IDLE2");
 	}
 }
@@ -161,7 +180,20 @@ void Grimm::GrimmAppearIdle2Update(float _DeltaTime, const StateInfo& _Info)
 {
 	if (GetAccTime() > 1.5f)
 	{
-		GrimmAppearManager_.ChangeState("APPEAR_CHANGE_MAP");
+		if (ArmRenderer_ != nullptr)
+		{
+			ArmRenderer_->On();
+			ReSetAccTime();
+		}
+	}
+
+	if (ArmRenderer_ == nullptr)
+	{
+		if (GetAccTime() > 1.0f)
+		{
+			GrimmAppearManager_.ChangeState("APPEAR_CHANGE_MAP");
+		}
+
 	}
 }
 
@@ -171,6 +203,9 @@ void Grimm::GrimmAppearIdle2End(const StateInfo& _Info)
 
 void Grimm::GrimmAppearChangeMapStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("col_cage_open.ogg");
+	GameEngineSound::SoundPlayOneShot("crowd_murmur_loop.ogg");
+
 	GetLevel<HollowKnightLevel>()->GetMasterMap()->ChangeGrimmMap();
 	FadePink* FadePink_ = GetLevel()->CreateActor<FadePink>();
 	FadePink_->GetTransform().SetWorldPosition({ 5000, -GameEngineWindow::GetInst()->GetScale().hy(), -200 });
@@ -189,6 +224,7 @@ void Grimm::GrimmAppearChangeMapUpdate(float _DeltaTime, const StateInfo& _Info)
 	if (GetAccTime() > 2.0f)
 	{
 		GrimmAppearManager_.ChangeState("APPEAR_BOW");
+		return;
 	}
 }
 
@@ -198,8 +234,11 @@ void Grimm::GrimmAppearChangeMapEnd(const StateInfo& _Info)
 
 void Grimm::GrimmAppearBowStart(const StateInfo& _Info)
 {
+
 	GetRenderer()->ChangeFrameAnimation("BOW_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
+
+	KnightSoundManager::GetInst()->BgmOn("S82-115 Grimm.ogg", 200);
 }
 
 void Grimm::GrimmAppearBowUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -219,6 +258,9 @@ void Grimm::GrimmAppearBowEnd(const StateInfo& _Info)
 
 void Grimm::GrimmAppearRoarStart(const StateInfo& _Info)
 {
+	GameEngineSound::SoundPlayOneShot("grimm_scream.ogg");
+
+
 	GetRenderer()->ChangeFrameAnimation("ROAR_ANIMATION");
 	GetRenderer()->ScaleToCutTexture(0);
 	BossRoarEffect* BossRoarEffect_ = GetLevel()->CreateActor<BossRoarEffect>();
