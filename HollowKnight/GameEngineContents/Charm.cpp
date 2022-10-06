@@ -77,7 +77,7 @@ void Charm::PointerCharmMoveUpdate(float _DeltaTime, const StateInfo& _Info)
 	float Lenth = MoveDir.Length();
 
 	MoveDir.Normalize();
-	if (Lenth <= 2.f)
+	if (Lenth <= 550.f * _DeltaTime)
 	{
 		CharmManager_.ChangeState("IDLE");
 		return;

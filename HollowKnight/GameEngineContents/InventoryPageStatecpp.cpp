@@ -299,10 +299,11 @@ void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
 
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
 
-			SettingPointerInventoryPageManager_.ChangeState("POINTER_MOVE");
 			MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
 			MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
 			MoveState_.NextMoveStateName_ = "IDLE";
+			SettingPointerInventoryPageManager_.ChangeState("POINTER_MOVE");
+			return;
 		}
 
 		else
@@ -321,10 +322,11 @@ void SettingPointer::PointerInventoryPageMoveLeftStart(const StateInfo& _Info)
 
 			PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
 
-			SettingPointerInventoryPageManager_.ChangeState("POINTER_MOVE");
 			MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
 			MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
 			MoveState_.NextMoveStateName_ = "IDLE";
+			SettingPointerInventoryPageManager_.ChangeState("POINTER_MOVE");
+			return;
 		}
 	}
 }
@@ -373,10 +375,11 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 
 				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
 
-				SettingPointerInventoryPageManager_.ChangeState("POINTER_MOVE");
 				MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
 				MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
 				MoveState_.NextMoveStateName_ = "IDLE";
+				SettingPointerInventoryPageManager_.ChangeState("POINTER_MOVE");
+				return;
 			}
 
 		}
@@ -412,10 +415,11 @@ void SettingPointer::PointerInventoryPageMoveRightStart(const StateInfo& _Info)
 
 				PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListInventory.find(CurrentPosInInventoryPage)->second;
 
-				SettingPointerInventoryPageManager_.ChangeState("POINTER_MOVE");
 				MoveState_.Dir_ = PointActorComponent_->GetPointActor()->GetTransform().GetLocalPosition();
 				MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
 				MoveState_.NextMoveStateName_ = "IDLE";
+				SettingPointerInventoryPageManager_.ChangeState("POINTER_MOVE");
+				return;
 			}
 
 		}

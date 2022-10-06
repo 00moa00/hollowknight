@@ -458,10 +458,11 @@ void SettingPage::SettingMoveRightUpdate(float _DeltaTime, const StateInfo& _Inf
 		if (AllPage_[i]->isCurrentPage() == true)
 		{
 
-			if (AllPage_[i]->GetTransform().GetWorldPosition().x < 0)
+			if (AllPage_[i]->GetTransform().GetWorldPosition().x < _DeltaTime * PageSpeed_)
 			{
 				PageName_->SetText(AllPage_[i]->GetPageName(), "Noto Serif KR");
 				SettingPageManager_.ChangeState("IDLE");
+				return;
 			}
 		}
 
@@ -517,10 +518,12 @@ void SettingPage::SettingMoveLeftUpdate(float _DeltaTime, const StateInfo& _Info
 	{
 		if (AllPage_[i]->isCurrentPage() == true)
 		{
-			if (AllPage_[i]->GetTransform().GetWorldPosition().x > 0)
+			if (AllPage_[i]->GetTransform().GetWorldPosition().x > _DeltaTime * PageSpeed_)
 			{
 				PageName_->SetText(AllPage_[i]->GetPageName(), "Noto Serif KR");
 				SettingPageManager_.ChangeState("IDLE");
+				return;
+
 			}
 		}
 
