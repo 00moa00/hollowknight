@@ -1792,7 +1792,8 @@ void Knight::KnightIntroLandUpdate(float _DeltaTime, const StateInfo& _Info)
 	{
 		GameEngineSound::SoundPlayOneShot("pigeon_fly_away_3.ogg");
 		GameEngineSound::SoundPlayOneShot("S75 Opening Sting-08.ogg");
-		GameEngineSound::SoundPlayOneShot("cave_noises.ogg");
+		//GameEngineSound::SoundPlayOneShot("cave_noises.ogg");
+		KnightSoundManager::GetInst()->BgmOn("cave_noises.ogg", 500);
 
 		isIntroLandEnd_ = false;
 		KnightManager_.ChangeState("STILL");
