@@ -1,5 +1,8 @@
 #include "PreCompile.h"
 #include "HealthBug.h"
+#include "KnightData.h"
+#include "KnightHatchlingBurst.h"
+#include "HollowKnightLevel.h"
 
 HealthBug::HealthBug() 
 	:
@@ -32,6 +35,9 @@ void HealthBug::Update(float _DeltaTime)
 
 void HealthBug::SetHitCollision()
 {
-	int a = 0;
+	KnightData::GetInst()->SetisSoulGrow(true);
+	//GetLevel<HollowKnightLevel>()->GetKnight()->SethatchlingEffectOn();
+	//KnightHatchlingBurst* KnightHatchlingBurst_->EffectOn();
+	//KnightHatchlingBurst_->GetTransform().SetWorldPosition({ this->GetTransform().GetWorldPosition().x,  this->GetTransform().GetWorldPosition().y, -150.f });
 }
 

@@ -20,7 +20,7 @@ void GrimmDeathCircleParticle::Start()
 	for (int i = 0; i < 50; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
-		float RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 4);
+		int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 4);
 		ParticleList_.back()->SetTexture("grimm_smoke2.png", RamdomIndex);
 
 		float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(1.5f, 2.5f);

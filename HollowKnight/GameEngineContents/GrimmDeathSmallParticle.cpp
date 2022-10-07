@@ -19,7 +19,7 @@ void GrimmDeathSmallParticle::Start()
 	for (int i = 0; i < 55; ++i)
 	{
 		ParticleList_.push_back(CreateComponent<GameEngineTextureRenderer>());
-		float RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 2);
+		int RamdomIndex = GameEngineRandom::MainRandom.RandomInt(0, 2);
 		ParticleList_.back()->SetTexture("white_hit_particle_Pink.png", RamdomIndex);
 
 		float RamdomScale = GameEngineRandom::MainRandom.RandomFloat(0.2f, 0.4f);
