@@ -177,7 +177,7 @@ void KingsPassLevel3::Start()
 	}
 
 	Crawlid* Crawlid_ = CreateActor<Crawlid>();
-	Crawlid_->GetTransform().SetWorldPosition({ 2683, -3574 });
+	Crawlid_->GetTransform().SetWorldPosition({ 2283, -3574 });
 	Crawlid_->SetCollisionMap(GetMasterMap()->GetCollisionMap());
 
 	Buzzer* Buzzer_ = CreateActor<Buzzer>();

@@ -1277,6 +1277,8 @@ void Grimm::GrimmDeathScene1Start(const StateInfo& _Info)
 	KnightSoundManager::GetInst()->BgmOff();
 
 	DeathSound_ = GameEngineSound::SoundPlayControl("Grimmkin_big_death.ogg", 100);
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::BossShaking);
+
 
 }
 
@@ -1348,6 +1350,7 @@ void Grimm::GrimmDeathScene3Start(const StateInfo& _Info)
 {
 	GetRenderer()->Off();
 	GameEngineSound::SoundPlayOneShot("boss_explode_clean.ogg");
+	GetLevel<HollowKnightLevel>()->GetMainCameraManager()->ChangeCameraMove(CameraMode::TargetInRoomMove);
 
 
 }
