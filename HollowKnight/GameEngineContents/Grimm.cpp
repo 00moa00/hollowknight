@@ -553,7 +553,7 @@ void Grimm::SetMonsterHit(int _Damage, float4 _StunDir, float4 _KnightDir)
 	SubHP(_Damage);
 	SetCreateGrimmHitParticleOn(_KnightDir, float4{ 309.f, 508.f });
 
-	if (GetHP() == 3)
+	if (GetHP() <= 0)
 	{
 		GrimmBattleManager_.ChangeState("BATTLE_DEATH_SCENE1");
 		return;
