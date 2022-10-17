@@ -7,6 +7,14 @@
 Shop::Shop() 
 	:
 
+	LimitMoveTimer_(0.f),
+	MoveSpeed_(0.f),
+	LimitSpeed_(0.f),
+
+	ShopType_(SHOP_TYPE::Map_Shop),
+
+	isLimitMoveUP_(false),
+	isLimitMoveDown_(false),
 
 	ShopBackboardRenderer_ (nullptr) ,
 	ShopTopRenderer_(nullptr),
@@ -24,9 +32,8 @@ Shop::Shop()
 	ItemInfo_(nullptr),
 
 
-	ShopArrow_(nullptr),
-	isLimitMoveUP_(false),
-	isLimitMoveDown_(false)
+	ShopArrow_(nullptr)
+
 {
 }
 
@@ -36,6 +43,11 @@ Shop::~Shop()
 
 void Shop::Start()
 {
+
+	MoveSpeed_ = 500.f;
+	LimitSpeed_ = 400.f;
+
+
 	ShopBackboardRenderer_ = CreateComponent<GameEngineUIRenderer>();
 	ShopBackboardRenderer_->SetTexture("msk_generic_soft.png");
 	ShopBackboardRenderer_->GetTransform().SetLocalScale({750,800});
@@ -43,19 +55,19 @@ void Shop::Start()
 	ShopBackboardRenderer_->GetTransform().SetLocalPosition({ 0, -50 });
 
 	ShopCurrentItemBackboardRenderer_ = CreateComponent<GameEngineUIRenderer>();
-	ShopCurrentItemBackboardRenderer_->SetTexture("itemBack.png");
+	ShopCurrentItemBackboardRenderer_->SetTexture("selector.png");
 	ShopCurrentItemBackboardRenderer_->GetTransform().SetLocalScale(ShopCurrentItemBackboardRenderer_->GetCurTexture()->GetScale());
 	ShopCurrentItemBackboardRenderer_->GetTransform().SetWorldPosition({ -200, 20 });
 
-	ShopTopDividerRenderer_ = CreateComponent<GameEngineUIRenderer>();
-	ShopTopDividerRenderer_->SetTexture("Inv_0017_divider.png");
-	ShopTopDividerRenderer_->GetTransform().SetLocalScale({ ShopCurrentItemBackboardRenderer_->GetCurTexture()->GetScale().x , 3.f});
-	ShopTopDividerRenderer_->GetTransform().SetWorldPosition({ -200, 68 });
+	//ShopTopDividerRenderer_ = CreateComponent<GameEngineUIRenderer>();
+	//ShopTopDividerRenderer_->SetTexture("Inv_0017_divider.png");
+	//ShopTopDividerRenderer_->GetTransform().SetLocalScale({ ShopCurrentItemBackboardRenderer_->GetCurTexture()->GetScale().x , 3.f});
+	//ShopTopDividerRenderer_->GetTransform().SetWorldPosition({ -200, 68 });
 
-	ShopBottomDividerRenderer_ = CreateComponent<GameEngineUIRenderer>();
-	ShopBottomDividerRenderer_->SetTexture("Inv_0017_divider.png");
-	ShopBottomDividerRenderer_->GetTransform().SetLocalScale({ ShopCurrentItemBackboardRenderer_->GetCurTexture()->GetScale().x , 3.f });
-	ShopBottomDividerRenderer_->GetTransform().SetWorldPosition({ -200, -30 });
+	//ShopBottomDividerRenderer_ = CreateComponent<GameEngineUIRenderer>();
+	//ShopBottomDividerRenderer_->SetTexture("Inv_0017_divider.png");
+	//ShopBottomDividerRenderer_->GetTransform().SetLocalScale({ ShopCurrentItemBackboardRenderer_->GetCurTexture()->GetScale().x , 3.f });
+	//ShopBottomDividerRenderer_->GetTransform().SetWorldPosition({ -200, -30 });
 
 	ShopBottomMaskRederer = CreateComponent<GameEngineUIRenderer>();
 	ShopBottomMaskRederer->SetTexture("shop_mask_bottom.png");
@@ -122,10 +134,7 @@ void Shop::Start()
 
 	ShopBottomRenderer_->AnimationBindEnd("POPDOWN_ANIMATION", [=](const FrameAnimation_DESC& _Info)
 		{
-
 			this->Off();
-
-			//ShopBottomRenderer_->ChangeFrameAnimation("IDLE_ANIMATION");
 		});
 
 
@@ -455,6 +464,8 @@ void Shop::ShopIdleUpdate(float _DeltaTime, const StateInfo& _Info)
 			else
 			{
 				isLimitMoveDown_ = true;
+				ShopArrow_->MoveArrowDown();
+
 				ShopManager_.ChangeState("MOVE_LIMIT");
 				return;
 
@@ -586,10 +597,6 @@ void Shop::ShopPopDownEnd(const StateInfo& _Info)
 void Shop::ShopMoveUpStart(const StateInfo& _Info)
 {
 
-
-
-
-//	if(ShopArrow_->GetCurrentPointItemIndex() )
 }
 
 void Shop::ShopMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -604,12 +611,10 @@ void Shop::ShopMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		}
 
-		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-		float4 Move = float4::DOWN  * _DeltaTime * 1500.f ;
-		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
-		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
 
-		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+		float4 Move = float4::DOWN * _DeltaTime * MoveSpeed_;
+		ShopItemList_[i]->GetTransform().SetWorldMove(Move);
+
 		ShopItemList_[i]->SetFontRendererMove();
 
 	}
@@ -633,29 +638,16 @@ void Shop::ShopMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
 	for (int i = 0; i < ShopItemList_.size(); ++i)
 	{
 
-		//if (ShopItemList_[i]->GetTransform().GetWorldPosition().y > 220 || ShopItemList_[i]->GetTransform().GetWorldPosition().y < -280)
-		//{
-		//	ShopItemList_[i]->Off();
-		//}
-
-		//else
-		//{
-		//	ShopItemList_[i]->On();
-		//}
-
-
-		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-		float4 Move = float4::UP * _DeltaTime * 1500.f;
-		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
-		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
-
 		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y > ShopCurrentItemBackboardRenderer_->GetTransform().GetLocalPosition().y)
 		{
 			ShopManager_.ChangeState("SHOP_IDLE");
 			return;
 		}
 
-		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+
+		float4 Move = float4::UP * _DeltaTime * MoveSpeed_;
+		ShopItemList_[i]->GetTransform().SetWorldMove(Move);
+
 		ShopItemList_[i]->SetFontRendererMove();
 
 	}
@@ -681,16 +673,6 @@ void Shop::ShopBuyItemMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 	for (int i = ShopArrow_->GetCurrentPointItemIndex(); i < ShopItemList_.size(); ++i)
 	{
 
-		//if (ShopItemList_[i]->GetTransform().GetWorldPosition().y > 220 || ShopItemList_[i]->GetTransform().GetWorldPosition().y < -280)
-		//{
-		//	ShopItemList_[i]->Off();
-		//}
-
-		//else
-		//{
-		//	ShopItemList_[i]->On();
-		//}
-
 
 		if (ShopItemList_[ShopArrow_->GetCurrentPointItemIndex()]->GetTransform().GetWorldPosition().y > ShopCurrentItemBackboardRenderer_->GetTransform().GetLocalPosition().y)
 		{
@@ -698,14 +680,9 @@ void Shop::ShopBuyItemMoveUpUpdate(float _DeltaTime, const StateInfo& _Info)
 			return;
 		}
 
-		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-		float4 Move = float4::UP * _DeltaTime * 1500.f;
-		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
-		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
+		float4 Move = float4::UP * _DeltaTime * MoveSpeed_;
 
-
-
-		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+		ShopItemList_[i]->GetTransform().SetWorldMove(Move);
 		ShopItemList_[i]->SetFontRendererMove();
 
 	}
@@ -720,7 +697,6 @@ void Shop::ShopBuyItemMoveUpEnd(const StateInfo& _Info)
 void Shop::ShopBuyItemMoveDownStart(const StateInfo& _Info)
 {
 	GameEngineSound::SoundPlayOneShot("geo_deplete_count_down.ogg");
-
 }
 
 void Shop::ShopBuyItemMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -745,12 +721,11 @@ void Shop::ShopBuyItemMoveDownUpdate(float _DeltaTime, const StateInfo& _Info)
 
 		}
 
-		float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-		float4 Move = float4::DOWN * _DeltaTime * 1500.f;
-		float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
-		float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
+	
 
-		ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+		float4 Move = float4::DOWN * _DeltaTime * MoveSpeed_;
+
+		ShopItemList_[i]->GetTransform().SetWorldMove(Move);
 		ShopItemList_[i]->SetFontRendererMove();
 
 	}
@@ -773,13 +748,9 @@ void Shop::ShopItemMoveLimitUpdate(float _DeltaTime, const StateInfo& _Info)
 		for (int i = 0; i < ShopItemList_.size(); ++i)
 		{
 
-	
-			float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-			float4 Move = float4::UP * _DeltaTime * 900.f;
-			float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
-			float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
+			float4 Move = float4::UP * _DeltaTime * LimitSpeed_;
 
-			ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+			ShopItemList_[i]->GetTransform().SetWorldMove(Move);
 			ShopItemList_[i]->SetFontRendererMove();
 
 		}
@@ -790,12 +761,10 @@ void Shop::ShopItemMoveLimitUpdate(float _DeltaTime, const StateInfo& _Info)
 		for (int i = 0; i < ShopItemList_.size(); ++i)
 		{
 
-			float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-			float4 Move = float4::DOWN * _DeltaTime * 900.f;
-			float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
-			float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
 
-			ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+			float4 Move = float4::DOWN * _DeltaTime * LimitSpeed_;
+
+			ShopItemList_[i]->GetTransform().SetWorldMove(Move);
 			ShopItemList_[i]->SetFontRendererMove();
 		}
 	}
@@ -824,14 +793,9 @@ void Shop::ShopItemMoveLimitReturnUpdate(float _DeltaTime, const StateInfo& _Inf
 	{
 		for (int i = 0; i < ShopItemList_.size(); ++i)
 		{
+			float4 Move = float4::DOWN * _DeltaTime * LimitSpeed_;
 
-
-			float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-			float4 Move = float4::DOWN *_DeltaTime * 900.f;
-			float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
-			float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
-
-			ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+			ShopItemList_[i]->GetTransform().SetWorldMove(Move);
 			ShopItemList_[i]->SetFontRendererMove();
 
 		}
@@ -842,12 +806,9 @@ void Shop::ShopItemMoveLimitReturnUpdate(float _DeltaTime, const StateInfo& _Inf
 		for (int i = 0; i < ShopItemList_.size(); ++i)
 		{
 
-			float4 CurrentPos = ShopItemList_[i]->GetTransform().GetWorldPosition();
-			float4 Move = float4::UP * _DeltaTime * 900.f;
-			float4 DestPos = ShopItemList_[i]->GetTransform().GetWorldPosition() + Move;
-			float4 LerpMove = float4::Lerp(CurrentPos, DestPos, GameEngineTime::GetDeltaTime() * 20.f);
+			float4 Move = float4::UP * _DeltaTime * LimitSpeed_;
 
-			ShopItemList_[i]->GetTransform().SetWorldPosition(LerpMove);
+			ShopItemList_[i]->GetTransform().SetWorldMove(Move);
 			ShopItemList_[i]->SetFontRendererMove();
 		}
 	}

@@ -40,6 +40,8 @@ private:
 
 	float LimitMoveTimer_;
 
+	float MoveSpeed_;
+	float LimitSpeed_;
 
 	GameEngineUIRenderer* ShopBackboardRenderer_;
 	GameEngineUIRenderer* ShopTopRenderer_;
