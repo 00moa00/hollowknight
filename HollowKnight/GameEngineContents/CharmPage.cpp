@@ -205,8 +205,6 @@ void CharmPage::AllOn()
 
 		}
 
-
-
 	}
 
 	PointActorComponent* PointActorComponent_ = GetLevel<HollowKnightLevel>()->PointActorListCharm.find(0)->second;

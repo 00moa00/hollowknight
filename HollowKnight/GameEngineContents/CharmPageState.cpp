@@ -121,6 +121,7 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 				MoveState_.Size_ = PointActorComponent_->GetPointActor()->GetPointerSize() / 2;
 				MoveState_.NextMoveStateName_ = "IDLE";
 			}
+
 			else
 			{
 				CurrentPosInCharmPage = PrevCount;
@@ -177,10 +178,12 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 		CharmSlot* slot = dynamic_cast<CharmSlot*>(PointActorComponent_->GetPointActor());
 
 
-		// 부적 장착이 가능한지 && 내가 선택한 부적이 사용중이 아닌건지 && 부적 슬롯이 아니다
+		// 부적 장착이 가능한지 && 내가 선택한 부적이 사용중이 아닌건지 && 부적 슬롯이 아니다 && 내가 가지고 있는 부적이다
 		if (KnightData::GetInst()->SubUsingCharmNotches(slot->GetSlotCount()) == true
 			&& slot->GetisUsing() == false
-			&& slot->GetisEquippedSlot() == false)
+			&& slot->GetisEquippedSlot() == false
+			&& slot->GetKnightHas() == true
+			)
 		{
 			for (int i = 40; i < 50; ++i)
 			{
@@ -220,6 +223,7 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 			}
 		}
 
+		// 사용중인 부적 슬롯을 선택했다면 돌린다
 		else if (slot->GetisEquippedSlotUsing() == true)
 		{
 			{
@@ -229,6 +233,7 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 				if (SearchNextSlot != nullptr && SearchNextSlot->GetisEquippedSlotUsing() == true)
 				{
 					SettingPointerCharmPageManager_.ChangeState("SORT_SLOT");
+					//return;
 				}
 
 				else
@@ -242,6 +247,7 @@ void SettingPointer::PointerCharmPageIdleUpdate(float _DeltaTime, const StateInf
 
 					slot->SetUsingSlotNum(-1);
 					slot->SetisEquippedSlotUsing(false);
+
 
 					Charm* NewCharmRenderer = GetLevel()->CreateActor<Charm>();
 					NewCharmRenderer->CreateCharm(slot->GetCharmName(), slot->GetFilePath(), slot->GetRenderer()->GetCurTexture()->GetScale());
@@ -497,17 +503,20 @@ void SettingPointer::PointerChramPageSortSlotStart(const StateInfo& _Info)
 	Charm* NewCharmRenderer = GetLevel()->CreateActor<Charm>();
 	NewCharmRenderer->CreateCharm(slot->GetCharmName(), slot->GetFilePath(), slot->GetRenderer()->GetCurTexture()->GetScale());
 	NewCharmRenderer->GetTransform().SetWorldPosition({ slot->GetTransform().GetWorldPosition() });
+	NewCharmRenderer->SetCharmPointer(SearchDestCharm->GetCharm());
+
+
 	NewCharmRenderer->SetRenderMove(
 		NewCharmRenderer->GetRenderer()->GetTransform().GetWorldPosition()
 		, SearchDestCharm->GetRenderer()->GetTransform().GetWorldPosition()
 		, true
 		, true);
 
-	NewCharmRenderer->SetCharmPointer(slot->GetCharm());
 
 
 	// 다음 슬롯 복사해서 이동
 	SearchNextSlot->GetCharm()->GetRenderer()->Death();
+
 	NewCharmRenderer = GetLevel()->CreateActor<Charm>();
 	NewCharmRenderer->CreateCharm(SearchNextSlot->GetCharmName(), SearchNextSlot->GetFilePath(), SearchNextSlot->GetRenderer()->GetCurTexture()->GetScale());
 	NewCharmRenderer->GetTransform().SetWorldPosition({ SearchNextSlot->GetTransform().GetWorldPosition() });
