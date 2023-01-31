@@ -68,20 +68,40 @@ float4 Blur_PS(Output _Input) : SV_Target0
     if (isOverlay_ == 1)
     {     
         if (Color1.r < 0.5f)
+        {
             Result.r = Color1.r * Color2.r * 2;
+        }
+           
         else
-            Result.r = 2 * (Color1.r + Color2.r - Color1.r * Color2.r) - 1.0f;
-        if (Color1.g < 0.5f)
-            Result.g = Color1.g * Color2.g * 2;
-        else
-            Result.g = 2 * (Color1.g + Color2.g - Color1.g * Color2.g) - 1.0f;
-        if (Color1.b < 0.5f)
-            Result.b = Color1.b * Color2.b * 2;
-        else
-           Result.b = 2 * (Color1.b + Color2.b - Color1.b * Color2.b) - 1.0f;
+        {
+            //Result.r = 2 * (Color1.r + Color2.r - Color1.r * Color2.r) - 1.0f;
+            Result.r = 1.0f - 2 * ( 1 - Color1.r - Color2.r + Color1.r * Color2.r);
+        }
         
-       // Color2.a = 0.5f;
-            Result.a = Color2.a;
+        if (Color1.g < 0.5f)
+        {
+            Result.g = Color1.g * Color2.g * 2;
+        }
+        
+        else
+        {
+            //Result.g = 2 * (Color1.g + Color2.g - Color1.g * Color2.g) - 1.0f;
+            Result.g = 1.0f - 2 * (1 - Color1.g - Color2.g + Color1.g * Color2.g);
+        }
+        
+        if (Color1.b < 0.5f)
+        {
+            Result.b = Color1.b * Color2.b * 2;
+
+        }
+        else
+        {
+           // Result.b = 2 * (Color1.b + Color2.b - Color1.b * Color2.b) - 1.0f;
+            Result.b = 1.0f - 2 * (1 - Color1.b - Color2.b + Color1.b * Color2.b);
+
+        }
+        
+        Result.a = Color2.a;
         
     }
     else

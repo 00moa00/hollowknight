@@ -4,11 +4,13 @@
 #include <GameEngineBase/magic_enum.hpp>
 #include <GameEngineBase/magic_enum_format.hpp>
 #include <GameEngineBase/magic_enum_fuse.hpp>
+
 // 관리해야하는 데이터 :		HUD 관련(가면, 영혼), 부적, 맵 해금, 아이템
 //							플레이어 - 현재 상태, 비네팅 상태?
 
-// 현재는 레벨마다 생성되는 클래스의 변수에 넣어주고 있지만
-// 애초에 변수를 선언하지 않고 데이터 클래스에서 빼오는게 효율적일거같다.
+// 현재는 레벨마다 생성되는 클래스의 변수에 Get과 Set으로 넣어주고 있지만
+// 애초에 변수를 선언하지 않고 데이터 클래스에서 Get Set 하는게 더 효율적일거같다.
+
 
 enum class LevelList
 {
@@ -207,7 +209,6 @@ public:
 	{
 		KnightItemData ItemData;
 		ItemData.Item_ = _Item;
-		//ItemData.ItemCount_ ;
 
 		ItemList_.push_back(ItemData);
 	}
