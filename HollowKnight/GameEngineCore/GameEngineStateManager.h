@@ -68,9 +68,9 @@ public:
 			MsgBoxAssert("존재하는 이름의 스테이트를 또 만들려고 했습니다.");
 		}
 
-		// 무조건 만들고 find와 참조까지 찾아낸다
 		GameEngineState& NewState = AllState[_StateName];
 		NewState.SetName(_StateName);
+
 		if (nullptr != _Update)
 		{
 			NewState.Update = _Update;

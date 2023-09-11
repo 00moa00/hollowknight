@@ -4,7 +4,7 @@
 
 #include "ContentsFontRenderer.h"
 class GameEngineUIRenderer;
-// 설명 :
+// 설명 : 아이템 설명
 class SettingPageInfo : public GameEngineActor
 {
 public:

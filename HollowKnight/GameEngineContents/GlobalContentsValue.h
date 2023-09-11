@@ -270,7 +270,7 @@ enum class CHARM_SLOT
 	Thorns_of_Agony,	
 	Fury_of_the_Fallen,	
 	Fragile_Heart,		
-	Fragile_Greed		
+	Fragile_Greed	,	
 	Fragile_Strength,	
 	Spell_Twister,		
 	Steady_Body,		
