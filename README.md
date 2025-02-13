@@ -59,4 +59,4 @@ HollowKnight 모작 프로젝트입니다.
 ![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C61.PNG?raw=true)
 ![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C62.PNG?raw=true)
 ![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C63.PNG?raw=true)
-![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C64.PNG?raw=true)
+
