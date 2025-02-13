@@ -20,3 +20,8 @@ HollowKnight 모작 프로젝트입니다.
 
 
 ![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/image4.png?raw=true)
+
+
+# 기술 디테일
+
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C29.PNG?raw=true)
