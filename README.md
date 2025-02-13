@@ -25,3 +25,22 @@ HollowKnight 모작 프로젝트입니다.
 # 기술 디테일
 
 ![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C29.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C30.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C31.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C32.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C33.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C34.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C35.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C36.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C37.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C38.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C39.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C40.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C41.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C42.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C43.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C44.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C45.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C46.PNG?raw=true)
+![4](https://github.com/00moa00/hollowknight/blob/main/HollowKnight/PDF/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C47.PNG?raw=true)
+
